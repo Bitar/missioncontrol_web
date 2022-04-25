@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import Login from './app/auth/Login';
 import { Home } from './app/dashboard/Home';
 import reportWebVitals from './reportWebVitals';
+import { AsideMenu } from './_metronic/layout/components/aside/AsideMenu';
 import { BrowserRouter , useNavigate ,Navigate , Routes, Route } from 'react-router-dom';
 
 
@@ -30,6 +31,7 @@ function App(){
   return (
           <main className='h-full'>
               <Routes>
+            
                   <Route path="/"  element= {<RequireAuth><Home/></RequireAuth>} />
                   <Route path="/home" element={<RequireAuth><Home/></RequireAuth>}  />
                   {/* <Route path="/league/:id"  element= {<RequireAuth><LeagueView/></RequireAuth>}  />  */}

@@ -23,7 +23,7 @@ export interface ILoader {
   }
   
   export interface IAside {
-    display: boolean // Display aside
+    display: boolean // DisplayCould not find required `intl` object. aside
     theme: 'dark' | 'light' // Set aside theme(dark|light)
     menu: 'main' | 'documentation' // Set aside menu(main|documentation)
     fixed: boolean // Enable aside fixed mode

@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState, useEffect} from 'react'
+import React, {createContext, useContext, useState, useEffect, ReactNode} from 'react'
 import { DefaultLayoutConfig } from './DefaultLayoutConfig'
 import {
   getEmptyCssClasses,
@@ -43,7 +43,7 @@ const disableSplashScreen = () => {
   }
 }
 
-const LayoutProvider: React.FC = ({children}) => {
+const LayoutProvider = ({ children }: { children: ReactNode }) => {
   const [config, setConfig] = useState(LayoutSetup.config)
   const [classes, setClasses] = useState(LayoutSetup.classes)
   const [attributes, setAttributes] = useState(LayoutSetup.attributes)
