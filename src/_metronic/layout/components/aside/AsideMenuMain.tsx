@@ -13,7 +13,7 @@ export function AsideMenuMain() {
       <AsideMenuItem
         to='/dashboard'
         icon='/media/icons/duotune/art/art002.svg'
-        title='hi'
+        title='Dashboard'
         // title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
         fontIcon='bi-app-indicator'
       />
@@ -115,7 +115,7 @@ export function AsideMenuMain() {
           <span className='menu-icon'>
             <KTSVG path='/media/icons/duotune/general/gen005.svg' className='svg-icon-2' />
           </span>
-          <span className='menu-title'>Changelogsdfddd {process.env.REACT_APP_VERSION}</span>
+          <span className='menu-title'>Changelogs {process.env.REACT_APP_VERSION}</span>
         </a>
       </div>
     </>

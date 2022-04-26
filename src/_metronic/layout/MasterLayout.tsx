@@ -1,13 +1,12 @@
-import React from "react";
-// import React, {useEffect} from 'react'
-// import {AsideDefault} from './components/aside/AsideDefault'
+import React, { ReactNode ,useEffect} from "react";
+import {AsideDefault} from './components/aside/AsideDefault'
 // import {Footer} from './components/Footer'
 // import {HeaderWrapper} from './components/header/HeaderWrapper'
 // import {Toolbar} from './components/toolbar/Toolbar'
 // import {ScrollTop} from './components/ScrollTop'
-// import {Content} from './components/Content'
-// import {PageDataProvider} from './core'
-// import {useLocation} from 'react-router-dom'
+import {Content} from './components/Content'
+import { PageDataProvider } from "./core/PageData";
+import {useLocation} from 'react-router-dom'
 // import {
 //   DrawerMessenger,
 //   ExploreMain,
@@ -16,53 +15,54 @@ import React from "react";
 //   InviteUsers,
 //   UpgradePlan,
 // } from '../partials'
-// import {MenuComponent} from '../assets/ts/components'
+import { MenuComponent } from "../assets/ts/components/MenuComponent";
 
-// const MasterLayout: React.FC = ({children}) => {
-//   const location = useLocation()
-//   useEffect(() => {
-//     setTimeout(() => {
-//       MenuComponent.reinitialization()
-//     }, 500)
-//   }, [])
 
-//   useEffect(() => {
-//     setTimeout(() => {
-//       MenuComponent.reinitialization()
-//     }, 500)
-//   }, [location.key])
+const MasterLayout = ({ children }: { children: ReactNode }) => {
+  const location = useLocation()
+  useEffect(() => {
+    setTimeout(() => {
+      MenuComponent.reinitialization()
+    }, 500)
+  }, [])
 
-//   return (
-//     <PageDataProvider>
-//       <div className='page d-flex flex-row flex-column-fluid'>
-//         <AsideDefault />
-//         <div className='wrapper d-flex flex-column flex-row-fluid' id='kt_wrapper'>
-//           <HeaderWrapper />
+  useEffect(() => {
+    setTimeout(() => {
+      MenuComponent.reinitialization()
+    }, 500)
+  }, [location.key])
 
-//           <div id='kt_content' className='content d-flex flex-column flex-column-fluid'>
-//             <Toolbar />
-//             <div className='post d-flex flex-column-fluid' id='kt_post'>
-//               <Content>{children}</Content>
-//             </div>
-//           </div>
-//           <Footer />
-//         </div>
-//       </div>
+  return (
+    <PageDataProvider>
+      <div className='page d-flex flex-row flex-column-fluid'>
+        <AsideDefault />
+        <div className='wrapper d-flex flex-column flex-row-fluid' id='kt_wrapper'>
+          {/* <HeaderWrapper /> */}
 
-//       {/* begin:: Drawers */}
-//       <ActivityDrawer />
-//       <ExploreMain />
-//       <DrawerMessenger />
-//       {/* end:: Drawers */}
+          <div id='kt_content' className='content d-flex flex-column flex-column-fluid'>
+            {/* <Toolbar /> */}
+            <div className='post d-flex flex-column-fluid' id='kt_post'>
+              <Content>{children}</Content>
+            </div>
+          </div>
+          {/* <Footer /> */}
+        </div>
+      </div>
 
-//       {/* begin:: Modals */}
-//       <Main />
-//       <InviteUsers />
-//       <UpgradePlan />
-//       {/* end:: Modals */}
-//       <ScrollTop />
-//     </PageDataProvider>
-//   )
-// }
+      {/* begin:: Drawers */}
+      {/* <ActivityDrawer />
+      <ExploreMain />
+      <DrawerMessenger /> */}
+      {/* end:: Drawers */}
 
-// export {MasterLayout}
+      {/* begin:: Modals */}
+      {/* <Main />
+      <InviteUsers />
+      <UpgradePlan /> */}
+      {/* end:: Modals */}
+      {/* <ScrollTop /> */}
+    </PageDataProvider>
+  )
+}
+
+export {MasterLayout}
