@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import Login from './app/auth/Login';
 import { Home } from './app/dashboard/Home';
 import reportWebVitals from './reportWebVitals';
-import { AsideMenu } from './_metronic/layout/components/aside/AsideMenu';
 import { BrowserRouter , useNavigate ,Navigate , Routes, Route } from 'react-router-dom';
+import { MasterLayout } from './_metronic/layout/MasterLayout';
 
 
 function checkToken(){
@@ -31,11 +31,12 @@ function App(){
   return (
           <main className='h-full'>
               <Routes>
-            
+                {/* <MasterLayout> */}
                   <Route path="/"  element= {<RequireAuth><Home/></RequireAuth>} />
                   <Route path="/home" element={<RequireAuth><Home/></RequireAuth>}  />
                   {/* <Route path="/league/:id"  element= {<RequireAuth><LeagueView/></RequireAuth>}  />  */}
                   <Route path="/login" element={checkToken() ? <Navigate to="/" /> : <Login onLogin={(success)=> onLogin(success) } />} />
+                  {/* </MasterLayout> */}
               </Routes>
           </main>
   )

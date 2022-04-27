@@ -1,12 +1,13 @@
 import React, { ReactNode ,useEffect} from "react";
 import {AsideDefault} from './components/aside/AsideDefault'
 // import {Footer} from './components/Footer'
-// import {HeaderWrapper} from './components/header/HeaderWrapper'
+import {HeaderWrapper} from './components/header/HeaderWrapper'
 // import {Toolbar} from './components/toolbar/Toolbar'
 // import {ScrollTop} from './components/ScrollTop'
 import {Content} from './components/Content'
 import { PageDataProvider } from "./core/PageData";
 import {useLocation} from 'react-router-dom'
+import { DashboardWrapper } from "../../app/dashboard/DashboardWrapper";
 // import {
 //   DrawerMessenger,
 //   ExploreMain,
@@ -37,7 +38,7 @@ const MasterLayout = ({ children }: { children: ReactNode }) => {
       <div className='page d-flex flex-row flex-column-fluid'>
         <AsideDefault />
         <div className='wrapper d-flex flex-column flex-row-fluid' id='kt_wrapper'>
-          {/* <HeaderWrapper /> */}
+          <HeaderWrapper />
 
           <div id='kt_content' className='content d-flex flex-column flex-column-fluid'>
             {/* <Toolbar /> */}
