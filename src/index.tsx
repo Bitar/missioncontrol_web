@@ -7,6 +7,7 @@ import { BrowserRouter , useNavigate ,Navigate , Routes, Route } from 'react-rou
 import './_metronic/assets/sass/style.scss'
 import './_metronic/assets/sass/style.react.scss'
 import { MasterLayout } from './_metronic/layout/MasterLayout';
+import { LayoutProvider } from './_metronic/layout/core';
 
 
 function checkToken(){
@@ -48,9 +49,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-   
+   <LayoutProvider>
     <App />
-
+    </LayoutProvider>
 
     </BrowserRouter>
   </React.StrictMode>
