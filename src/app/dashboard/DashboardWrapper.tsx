@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {FC} from 'react'
 //  import {useIntl} from 'react-intl'
-import { MasterLayout } from '../../_metronic/layout/MasterLayout'
-import {PageTitle} from '../../_metronic/layout/core/PageData'
+import {PageTitle} from '../../_metronic/layout/core/'
  import {
 MixedWidget2,
 //   MixedWidget10,
@@ -93,6 +92,7 @@ const DashboardWrapper: FC = () => {
   return (
     <>
        {/* <PageTitle breadcrumbs={[]}>{intl.formatMessage({id: 'MENU.DASHBOARD'})}</PageTitle>  */}
+        <PageTitle breadcrumbs={[]}>Dashboard</PageTitle> 
 
         <DashboardPage />
    

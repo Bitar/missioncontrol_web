@@ -4,6 +4,8 @@ import Login from './app/auth/Login';
 import { Home } from './app/dashboard/Home';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter , useNavigate ,Navigate , Routes, Route } from 'react-router-dom';
+import './_metronic/assets/sass/style.scss'
+import './_metronic/assets/sass/style.react.scss'
 import { MasterLayout } from './_metronic/layout/MasterLayout';
 
 
@@ -31,12 +33,10 @@ function App(){
   return (
           <main className='h-full'>
               <Routes>
-                {/* <MasterLayout> */}
                   <Route path="/"  element= {<RequireAuth><Home/></RequireAuth>} />
                   <Route path="/home" element={<RequireAuth><Home/></RequireAuth>}  />
                   {/* <Route path="/league/:id"  element= {<RequireAuth><LeagueView/></RequireAuth>}  />  */}
                   <Route path="/login" element={checkToken() ? <Navigate to="/" /> : <Login onLogin={(success)=> onLogin(success) } />} />
-                  {/* </MasterLayout> */}
               </Routes>
           </main>
   )
@@ -48,7 +48,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+   
     <App />
+
+
     </BrowserRouter>
   </React.StrictMode>
 );

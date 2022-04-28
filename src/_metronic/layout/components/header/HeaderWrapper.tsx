@@ -1,9 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import clsx from 'clsx'
-import React from 'react'
 import {Link} from 'react-router-dom'
-import { toAbsoluteUrl } from '../../../helpers/AssetHelpers'
-import { KTSVG} from '../../../helpers/components/KTSVG'
+import { toAbsoluteUrl , KTSVG} from '../../../helpers/'
 import {useLayout} from '../../core'
 import {Header} from './Header'
 import {DefaultTitle} from './page-title/DefaultTitle'

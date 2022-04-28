@@ -2,8 +2,8 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {useLocation} from 'react-router'
 import clsx from 'clsx'
-import {checkIsActive} from '../../../helpers/RouterHelpers'
-import { KTSVG} from '../../../helpers/components/KTSVG'
+import {checkIsActive ,KTSVG} from '../../../helpers/'
+
 
 type Props = {
   to: string

@@ -1,9 +1,14 @@
 import React from "react";
+import { MasterLayout } from "../../_metronic/layout/MasterLayout";
 import { DashboardWrapper } from "./DashboardWrapper";
+
 export const Home =()=>{
     return (
     <div>
-    <DashboardWrapper/>
+    <MasterLayout>
+  <DashboardWrapper/>
+  </MasterLayout> 
+ 
     </div>
     )
 }

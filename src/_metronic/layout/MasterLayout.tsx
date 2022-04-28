@@ -7,7 +7,7 @@ import {ScrollTop} from './components/ScrollTop'
 import {Content} from './components/Content'
 import { PageDataProvider } from "./core/PageData";
 import {useLocation} from 'react-router-dom'
-import { DashboardWrapper } from "../../app/dashboard/DashboardWrapper";
+
 // import {
 //   DrawerMessenger,
 //   ExploreMain,
