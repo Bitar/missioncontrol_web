@@ -9,10 +9,14 @@ export function MenuInner() {
   return (
     <>
       {/* <MenuItem title={intl.formatMessage({id: 'MENU.DASHBOARD'})} to='/dashboard' /> */}
+      {/* Top Menu portion  */}
       <MenuItem title='Menu Dashboard' to='/dashboard' />
-      <MenuItem title='Layout Builder' to='/builder' />
+      <MenuItem title='Activities' to='/builder' />
+      <MenuItem title='Marketing' to='/builder' />
+      
+      
       <MenuInnerWithSub
-        title='Crafteddddd'
+        title='Crafted'
         to='/crafted'
         menuPlacement='bottom-start'
         menuTrigger='click'
@@ -115,7 +119,7 @@ export function MenuInner() {
           <MenuItem to='/apps/chat/group-chat' title='Group Chart' hasBullet={true} />
           <MenuItem to='/apps/chat/drawer-chat' title='Drawer Chart' hasBullet={true} />
         </MenuInnerWithSub>
-      </MenuInnerWithSub>
+      </MenuInnerWithSub> 
       <MenuInnerWithSub
         isMega={true}
         title='Mega menu'

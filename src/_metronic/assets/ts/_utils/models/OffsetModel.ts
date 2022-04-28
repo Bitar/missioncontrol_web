@@ -1,5 +1,4 @@
 export interface OffsetModel {
-    top: number
-    left: number
-  }
-  
+  top: number
+  left: number
+}

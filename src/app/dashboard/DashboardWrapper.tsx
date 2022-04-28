@@ -29,9 +29,11 @@ const DashboardPage: FC = () => (
         />
       </div>
       <div className='col-xxl-4'>
+        hhh
         {/* <ListsWidget5 className='card-xxl-stretch' /> */}
       </div>
       <div className='col-xxl-4'>
+        hhhhhh
         {/* <MixedWidget10
           className='card-xxl-stretch-50 mb-5 mb-xl-8'
           chartColor='primary'
