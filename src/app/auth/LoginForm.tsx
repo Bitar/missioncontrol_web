@@ -165,3 +165,36 @@ import React from "react";
 // 		{/* <!--end::Javascript--> */}
 	
 // 	{/* <!--end::Body--> */}
+
+
+
+
+// <div className="bg-indigo-700 flex justify-center items-center h-screen">
+//                     <div className="w-full max-w-xs">
+                        
+//                         <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+//                             <div className="mb-4">
+//                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
+//                                 Username
+//                             </label>
+//                             <input name="username"  onChange={this.handleChange} value={this.state.username} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" />
+//                             </div>
+//                             <div className="mb-6">
+//                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+//                                 Password
+//                             </label>
+//                             <input name="password" onChange={this.handleChange} value={this.state.password} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************"/>
+//                             </div>
+//                             <div className="flex items-center justify-between">
+//                             <button onClick={this.handleSubmit} className="w-full h-12 px-6 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800" type="button">
+//                                 Sign In
+//                             </button>
+//                             </div>
+                            
+//                         </form>
+//                         <p className="text-center text-gray-50 text-xs">
+//                             &copy;2022 Mission Control GG. All rights reserved.
+//                         </p>
+//                     </div>
+//                 </div>
+//     }

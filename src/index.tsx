@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter , useNavigate ,Navigate , Routes, Route } from 'react-router-dom';
 import './_metronic/assets/sass/style.scss'
 import './_metronic/assets/sass/style.react.scss'
-import { MasterLayout } from './_metronic/layout/MasterLayout';
 import { LayoutProvider } from './_metronic/layout/core';
 
 
@@ -52,7 +51,6 @@ root.render(
    <LayoutProvider>
     <App />
     </LayoutProvider>
-
     </BrowserRouter>
   </React.StrictMode>
 );

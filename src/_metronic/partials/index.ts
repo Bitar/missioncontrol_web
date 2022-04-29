@@ -14,8 +14,8 @@ export * from './layout/header-menus/HeaderUserMenu'
 // export * from './layout/create-app/CreateApp'
 
 // dropdpwns
-// export * from './content/dropdown/Dropdown1'
-// export * from './content/dropdown/Dropdown2'
+export * from './content/dropdown/Dropdown1'
+export * from './content/dropdown/Dropdown2'
 
 // editors
 // export * from './content/editor/EditorToolbar'

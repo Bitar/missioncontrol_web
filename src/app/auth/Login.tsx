@@ -1,7 +1,6 @@
 import React from "react";
 import { Component } from "react";
 import LoginApi from "../network/LoginApi"
-// import {Login} from "./Login"
 
 
 type Props = {
@@ -69,33 +68,39 @@ export default class Login extends Component<Props,State>{
     }
 
     showLoginForm(){
-        return <div className="bg-indigo-700 flex justify-center items-center h-screen">
-                    <div className="w-full max-w-xs">
-                        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                            <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-                                Username
-                            </label>
-                            <input name="username"  onChange={this.handleChange} value={this.state.username} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" />
-                            </div>
-                            <div className="mb-6">
-                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                                Password
-                            </label>
-                            <input name="password" onChange={this.handleChange} value={this.state.password} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************"/>
-                            </div>
-                            <div className="flex items-center justify-between">
-                            <button onClick={this.handleSubmit} className="w-full h-12 px-6 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800" type="button">
-                                Sign In
-                            </button>
-                            </div>
+        return <form className="form w-100"> 
+        <div className='text-center mb-10'>
+          <h1 className='text-dark mb-3'>Mission Control Sign In</h1>
+          </div>
+          <div className="fv-row mb-10">
+              <label className="form-label fs-6 fw-bolder text-dark" htmlFor="username">Username</label>
+                
+              <input className="form-control form-control-lg form-control-solid"name="username"  onChange={this.handleChange} value={this.state.username}  id="username" type="text" placeholder="Username" />
+              </div>
+                      
+              <div className="fv-row mb-10">
+                <div className="d-flex flex-stack mb-2">
+                    <label className="form-label fs-6 fw-bolder text-dark" htmlFor="password">Password</label>
+                    </div>      
+                    <input name="password" onChange={this.handleChange} value={this.state.password} className="form-control form-control-lg form-control-solid" id="password" type="password" placeholder="Password"/>
+                  </div>
+
+                  <div className="fv-row mb-10">
+                  <label className="form-check form-check-custom form-check-solid">
+                <input className="form-check-input" type="checkbox" name="remember"/>
+                <span className="form-check-label fw-bold text-gray-700 fs-6">Remember Me
+            </span>
+            </label>
+        </div>
+        <div className="text-center">
+              <button onClick={this.handleSubmit} className="btn btn-lg btn-primary w-100 mb-5" type="button">
+                Sign In                      
+              </button>
+          </div>
                             
-                        </form>
-                        <p className="text-center text-gray-50 text-xs">
-                            &copy;2022 Mission Control GG. All rights reserved.
-                        </p>
-                    </div>
-                </div>
+                   
+                    
+   </form>            
     }
     render(){
            return  this.showLoginForm()
