@@ -11,16 +11,16 @@ export function AsideMenuMain() {
   return (
     <>
       <AsideMenuItem
-        to='/dashboard'
+        to='/home'
         icon='/media/icons/duotune/art/art002.svg'
         title='Dashboard'
         // title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
         fontIcon='bi-app-indicator'
       />
       <AsideMenuItem
-        to='/builder'
+        to='/leagues/:id'
         icon='/media/icons/duotune/general/gen019.svg'
-        title='Layout Builder'
+        title='My Leagues'
         fontIcon='bi-layers'
       />
       <div className='menu-item'>

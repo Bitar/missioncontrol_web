@@ -10,9 +10,9 @@ export function MenuInner() {
     <>
       {/* <MenuItem title={intl.formatMessage({id: 'MENU.DASHBOARD'})} to='/dashboard' /> */}
       {/* Top Menu portion  */}
-      <MenuItem title='Menu Dashboard' to='/dashboard' />
-      <MenuItem title='Activities' to='/builder' />
-      <MenuItem title='Marketing' to='/builder' />
+      <MenuItem title='Dashboard' to='/home' />
+      <MenuItem title='My Leagues' to="/leagues/:id" />
+      <MenuItem title='Marketing' to='/marketing' />
       
       
       <MenuInnerWithSub
