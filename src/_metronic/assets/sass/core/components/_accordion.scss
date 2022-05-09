@@ -20,12 +20,9 @@
       align-items: center;
       justify-content: center;
 
-      i {
-        color: $primary;
-      }
-
+      i,
       .svg-icon {
-        @include svg-icon-color($primary);
+        color: $primary;
       }
     }
 
@@ -35,12 +32,9 @@
         transition: $transition-base;
         transform: rotate(0);
 
-        i {
-          color: $text-muted;
-        }
-
+        i,
         .svg-icon {
-          @include svg-icon-color($text-muted);
+          color: $text-muted;
         }
       }
     }
@@ -60,7 +54,7 @@
     .accordion-item {
       background-color: transparent;
       border: 0;
-      border-radius: none;
+      border-radius: 0;
       padding-left: 0;
       padding-right: 0;
     }

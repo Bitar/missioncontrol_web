@@ -34,12 +34,9 @@ $explore-warning-inverse: $white;
   border: 0;
 
   &:hover {
-    i {
-      color: $explore-primary;
-    }
-
+    i,
     .svg-icon {
-      @include svg-icon-color($explore-primary);
+      color: $explore-primary;
     }
   }
 }
@@ -90,12 +87,10 @@ $explore-warning-inverse: $white;
 
 .explore-icon-success {
   color: $explore-success;
-  @include svg-icon-color($explore-success);
 }
 
 .explore-icon-danger {
   color: $explore-danger;
-  @include svg-icon-color($explore-danger);
 }
 
 .explore-label-free {

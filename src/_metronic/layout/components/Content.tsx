@@ -1,10 +1,10 @@
-import React, {ReactNode, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import {useLocation} from 'react-router'
 import clsx from 'clsx'
 import {useLayout} from '../core'
-import { DrawerComponent } from '../../assets/ts/components/_DrawerComponent'
+import {DrawerComponent} from '../../assets/ts/components'
 
-const Content  = ({ children }: { children: ReactNode }) => {
+const Content: React.FC = ({children}) => {
   const {classes} = useLayout()
   const location = useLocation()
   useEffect(() => {

@@ -83,6 +83,11 @@
   border-color: transparent !important;
 }
 
+// Border body
+.border-body {
+  border-color: $body-bg !important;
+}
+
 // Border radiuses
 .rounded-top-0 {
   border-top-left-radius: 0 !important;

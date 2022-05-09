@@ -29,5 +29,5 @@
 .bullet-line {
   width: get($bullet, line-width);
   height: get($bullet, line-height);
-  border-radius: none;
+  border-radius: 0;
 }

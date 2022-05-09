@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
-import {KTSVG} from '../../../helpers/components/KTSVG'
-import {toAbsoluteUrl} from '../../../helpers/AssetHelpers'
+import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 
 type Props = {
   className: string
@@ -73,7 +72,7 @@ const TablesWidget10: React.FC<Props> = ({className}) => {
                 <td>
                   <div className='d-flex align-items-center'>
                     <div className='symbol symbol-45px me-5'>
-                      <img src={toAbsoluteUrl('/media/avatars/150-11.jpg')} alt='' />
+                      <img src={toAbsoluteUrl('/media/avatars/300-14.jpg')} alt='' />
                     </div>
                     <div className='d-flex justify-content-start flex-column'>
                       <a href='#' className='text-dark fw-bolder text-hover-primary fs-6'>
@@ -145,7 +144,7 @@ const TablesWidget10: React.FC<Props> = ({className}) => {
                 <td>
                   <div className='d-flex align-items-center'>
                     <div className='symbol symbol-45px me-5'>
-                      <img src={toAbsoluteUrl('/media/avatars/150-3.jpg')} alt='' />
+                      <img src={toAbsoluteUrl('/media/avatars/300-2.jpg')} alt='' />
                     </div>
                     <div className='d-flex justify-content-start flex-column'>
                       <a href='#' className='text-dark fw-bolder text-hover-primary fs-6'>
@@ -217,7 +216,7 @@ const TablesWidget10: React.FC<Props> = ({className}) => {
                 <td>
                   <div className='d-flex align-items-center'>
                     <div className='symbol symbol-45px me-5'>
-                      <img src={toAbsoluteUrl('/media/avatars/150-4.jpg')} alt='' />
+                      <img src={toAbsoluteUrl('/media/avatars/300-5.jpg')} alt='' />
                     </div>
                     <div className='d-flex justify-content-start flex-column'>
                       <a href='#' className='text-dark fw-bolder text-hover-primary fs-6'>
@@ -287,7 +286,7 @@ const TablesWidget10: React.FC<Props> = ({className}) => {
                 <td>
                   <div className='d-flex align-items-center'>
                     <div className='symbol symbol-45px me-5'>
-                      <img src={toAbsoluteUrl('/media/avatars/150-5.jpg')} alt='' />
+                      <img src={toAbsoluteUrl('/media/avatars/300-20.jpg')} alt='' />
                     </div>
                     <div className='d-flex justify-content-start flex-column'>
                       <a href='#' className='text-dark fw-bolder text-hover-primary fs-6'>
@@ -357,7 +356,7 @@ const TablesWidget10: React.FC<Props> = ({className}) => {
                 <td>
                   <div className='d-flex align-items-center'>
                     <div className='symbol symbol-45px me-5'>
-                      <img src={toAbsoluteUrl('/media/avatars/150-6.jpg')} alt='' />
+                      <img src={toAbsoluteUrl('/media/avatars/300-23.jpg')} alt='' />
                     </div>
                     <div className='d-flex justify-content-start flex-column'>
                       <a href='#' className='text-dark fw-bolder text-hover-primary fs-6'>

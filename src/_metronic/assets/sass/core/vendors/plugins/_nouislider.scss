@@ -69,6 +69,26 @@
   }
 }
 
+// Theme colors
+@each $name, $value in $theme-colors {
+  // NoUiSlider success color option
+  .noUi-target.noUi-target-#{$name} {
+    .noUi-connects {
+      background-color: theme-light-color($name);
+
+      .noUi-connect {
+        background-color: $value;
+      }
+    }
+
+    .noUi-handle {
+      border: 1px solid $value;
+      box-shadow: 0 3px 6px -3px rgba($value, 0.7);
+      background-color: $value;
+    }
+  }
+}
+
 // Tooltip
 .noUi-tooltip {
   box-shadow: $tooltip-box-shadow;

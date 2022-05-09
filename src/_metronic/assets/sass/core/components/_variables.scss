@@ -17,6 +17,9 @@ $gray-800: if(isDarkMode(), #cdcdde, #3f4254) !default;
 $gray-900: if(isDarkMode(), #ffffff, #181c32) !default;
 $text-muted: $gray-500 !default;
 
+// Dark Mode
+$dark-mode-page-bg-color: #151521 !default;
+
 // Bootstrap gray colors map
 $grays: (
   '100': $gray-100,
@@ -78,8 +81,8 @@ $secondary-light: $gray-100 !default; // Custom variable
 $secondary-inverse: $gray-800 !default; // Custom variable
 
 // Light colors
-$light: $gray-100 !default; // Bootstrap variable
-$light-active: $gray-300 !default; // Custom variable
+$light: if(isDarkMode(), $gray-300, $gray-100) !default; // Bootstrap variable
+$light-active: if(isDarkMode(), $gray-400, $gray-200) !default; // Custom variable
 $light-inverse: if(isDarkMode(), $gray-800, $gray-600) !default; // Custom variable
 $lighten: rgba($light, 0.5); // Custom variable
 
@@ -374,6 +377,7 @@ $container-max-widths: (
 
 $border-width: 1px !default;
 $border-color: $gray-200 !default;
+$border-dashed-color: $gray-300 !default; // Custom variable
 
 $border-widths: (
   0: 0,
@@ -413,9 +417,9 @@ $hover-bg: rgba($gray-100, 0.8) !default; // Custom variable(to remove)
 $active-bg: $hover-bg !default; // Custom variable(to remove)
 
 // Border Radiues
-$border-radius-sm: 0.275rem !default;
+$border-radius-sm: 0.325rem !default;
 $border-radius: 0.475rem !default;
-$border-radius-lg: 0.775rem !default;
+$border-radius-lg: 0.625rem !default;
 $border-radius-xl: 1rem !default; // Custom variable
 
 // Box shadow
@@ -622,8 +626,9 @@ $input-btn-focus-color-opacity: 0.25 !default;
 $input-btn-focus-color: rgba($component-active-bg, $input-btn-focus-color-opacity) !default;
 $input-btn-focus-box-shadow: null !default;
 
+$input-color: $gray-700 !default;
 $input-placeholder-color: $gray-500 !default;
-$input-plaintext-color: $body-color !default;
+$input-plaintext-color: $gray-700 !default;
 
 $input-btn-padding-y-sm: 0.55rem !default;
 $input-btn-padding-x-sm: 0.75rem !default;
@@ -669,8 +674,8 @@ $btn-link-disabled-color: $gray-600 !default;
 
 // Allows for customizing button radius independently from global border radius
 $btn-border-radius: $border-radius !default;
-$btn-border-radius-sm: $border-radius !default;
-$btn-border-radius-lg: $border-radius !default;
+$btn-border-radius-sm: $border-radius-sm !default;
+$btn-border-radius-lg: $border-radius-lg !default;
 
 $btn-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
   border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !default;
@@ -707,6 +712,7 @@ $input-disabled-border-color: null !default;
 $input-color: $body-color !default;
 $input-border-color: $gray-300 !default;
 $input-border-width: $input-btn-border-width !default;
+$input-height-border: $input-border-width * 2 !default;
 
 $input-border-radius: $btn-border-radius !default;
 $input-border-radius-sm: $btn-border-radius-sm !default;
@@ -714,6 +720,9 @@ $input-border-radius-lg: $btn-border-radius-lg !default;
 
 $input-focus-border-color: $gray-400 !default;
 $input-focus-color: $input-color !default;
+
+$form-floating-height: add(3.75rem, $input-height-border) !default;
+$form-floating-input-padding-t: 2.15rem !default;
 
 $form-check-input-width: 1.75rem !default;
 $form-check-input-width-sm: 1.5rem !default;
@@ -778,9 +787,13 @@ $form-switch-checked-bg-position: right center !default;
 $form-check-inline-margin-right: 1rem !default;
 
 $input-group-addon-bg: $gray-100 !default;
+$input-group-addon-color: $gray-800 !default;
 
 $form-select-indicator-color: $gray-600 !default;
 $form-select-border-radius: $border-radius !default;
+
+// Form range
+$form-range-track-border-radius: 0 !default;
 
 // Navs
 $nav-tabs-border-color: $border-color !default;
@@ -790,11 +803,12 @@ $nav-tabs-border-width: $border-width !default;
 $card-bg: $body-bg !default;
 $card-box-shadow: if(isDarkMode(), none, 0px 0px 20px 0px rgba(76, 87, 125, 0.02)) !default;
 $card-border-color: $border-color !default;
+$card-border-style: solid !default; // Custom variable
 $card-border-dashed-color: $border-dashed-color !default;
 $card-cap-bg: $white !default;
 $card-py: 2rem !default;
 $card-px: 2.25rem !default;
-$card-border-radius: $border-radius !default;
+$card-border-radius: $border-radius-lg !default;
 
 $card-header-py: 0.5rem !default; // Custom variable
 $card-header-height: 70px !default; // Custom variable
@@ -869,7 +883,7 @@ $alert-bg-scale: if(isDarkMode(), -60%, -80%) !default;
 $dropdown-box-shadow: if(
   isDarkMode(),
   0px 0px 30px rgba(0, 0, 0, 0.3),
-  0px 0px 50px 0px rgba(82, 63, 105, 0.1)
+  0px 0px 50px 0px rgba(82, 63, 105, 0.15)
 ) !default;
 $dropdown-border-radius: $border-radius !default;
 $dropdown-border-width: 0 !default;
@@ -955,13 +969,13 @@ $tooltip-margin: 0 !default;
 
 // Badges
 $badge-font-size: 0.85rem !default;
-$badge-font-size-sm: 0.85rem !default;
+$badge-font-size-sm: 0.8rem !default;
 $badge-font-size-lg: 1rem !default;
 $badge-font-weight: $font-weight-bolder !default;
 $badge-color: $body-bg !default;
-$badge-padding-y: 0.5em !default;
-$badge-padding-x: 0.85em !default;
-$badge-border-radius: $border-radius !default;
+$badge-padding-y: 0.325rem !default;
+$badge-padding-x: 0.5rem !default;
+$badge-border-radius: $border-radius-sm !default;
 $badge-size: 1.75rem !default; // Custom variable
 $badge-size-sm: 1.5rem !default; // Custom variable
 $badge-size-lg: 2rem !default; // Custom variable
@@ -977,11 +991,17 @@ $code-color: #b93993 !default; // Custom variable
 $code-space: 0.25rem !default; // Custom variable
 
 // Carousel
-$carousel-custom-dots-indicator-default-size: 9px !default;
-$carousel-custom-dots-indicator-active-size: 13px !default;
 $carousel-custom-indicator-transition-speed: 0.3s !default;
 $carousel-custom-indicator-default-bg-color: $gray-200 !default;
-$carousel-custom-indicator-active-bg-color: $gray-300 !default;
+$carousel-custom-indicator-active-bg-color: $gray-400 !default;
+
+$carousel-custom-dots-indicator-default-size: 9px !default;
+$carousel-custom-dots-indicator-active-size: 13px !default;
+
+$carousel-custom-bullet-indicator-default-size: 6px !default;
+$carousel-custom-bullet-indicator-active-width: 16px !default;
+$carousel-custom-bullet-indicator-default-bg-color: $gray-400 !default;
+$carousel-custom-bullet-indicator-active-bg-color: $gray-600 !default;
 
 // Spinners
 
@@ -1055,6 +1075,11 @@ $letter-spacing-values: (
   3: 0.125rem,
   4: 0.25rem,
   5: 0.5rem,
+  n1: -0.1rem,
+  n2: -0.115rem,
+  n3: -0.125rem,
+  n4: -0.25rem,
+  n5: -0.5rem,
 ) !default;
 
 // Custom hight and width sizes
@@ -1157,6 +1182,11 @@ $bullet: (
 
 // Scrolltop
 $scrolltop: (
+  opacity: (
+    default: 0,
+    on: 0.3,
+    hover: 1,
+  ),
   bottom: (
     desktop: 40px,
     tablet-and-mobile: 30px,
@@ -1168,6 +1198,14 @@ $scrolltop: (
   size: (
     desktop: 36px,
     tablet-and-mobile: 30px,
+  ),
+  bg-color: (
+    default: $primary,
+    hover: $primary,
+  ),
+  icon-color: (
+    default: $white,
+    hover: $white,
   ),
 ) !default;
 
@@ -1195,9 +1233,9 @@ $drawer: (
 $menu: (
   dropdown: (
     box-shadow: $dropdown-box-shadow,
-    z-index: 105,
-    background-color: $body-bg,
-    border-radius: $border-radius,
+    z-index: 107,
+    background-color: $dropdown-bg,
+    border-radius: $dropdown-border-radius,
     animation: true,
     animation-speed: 0.3s,
     animation-move-offset: 0.75rem,
@@ -1219,6 +1257,7 @@ $menu: (
       bg-color: (
         hover: $hover-bg,
         show: $hover-bg,
+        here: $hover-bg,
         active: $active-bg,
       ),
     ),
@@ -1255,7 +1294,7 @@ $feedback: (
 
 // Custom scrollbar
 $scrollbar: (
-  space: 0.25rem,
+  space: 0.5rem,
   width: 0.4rem,
   height: 0.4rem,
   color: $gray-200,
@@ -1277,6 +1316,19 @@ $rating: (
   color: (
     default: $gray-400,
     active: #ffad0f,
+  ),
+) !default;
+
+// Sticky
+$fixed: (
+  z-index: 101,
+) !default;
+
+// Container
+$container: (
+  padding: (
+    default: 1.5rem,
+    lg: 2rem,
   ),
 ) !default;
 

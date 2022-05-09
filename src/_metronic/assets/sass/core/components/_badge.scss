@@ -3,6 +3,9 @@
 //
 
 .badge {
+  display: inline-flex;
+  align-items: center;
+
   // Fixed size
   &.badge-circle,
   &.badge-square {
@@ -12,6 +15,7 @@
     height: $badge-size;
     min-width: $badge-size;
     padding: 0 0.1rem;
+    line-height: 0;
   }
 
   // Circle
@@ -27,6 +31,10 @@
     min-width: $badge-size-sm;
     font-size: $badge-font-size-sm;
 
+    &.badge-square {
+      height: $badge-size-sm;
+    }
+
     &.badge-circle {
       width: $badge-size-sm;
       height: $badge-size-sm;
@@ -36,6 +44,10 @@
   &.badge-lg {
     min-width: $badge-size-lg;
     font-size: $badge-font-size-lg;
+
+    &.badge-square {
+      height: $badge-size-lg;
+    }
 
     &.badge-circle {
       width: $badge-size-lg;

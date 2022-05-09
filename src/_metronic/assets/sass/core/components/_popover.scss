@@ -16,15 +16,11 @@
     right: $popover-dissmis-btn-end;
     height: $popover-dissmis-btn-height;
     width: $popover-dissmis-btn-height;
-
-    i {
-      color: $gray-500;
-    }
+    @include svg-bg-icon(close, $gray-500);
+    background-size: 45%;
 
     &:hover {
-      i {
-        color: $primary;
-      }
+      @include svg-bg-icon(close, $primary);
     }
 
     & + .popover-header {

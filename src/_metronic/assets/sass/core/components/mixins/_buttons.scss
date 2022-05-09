@@ -18,12 +18,9 @@
   }
 
   @if ($icon-color != null) {
-    i {
-      color: $icon-color;
-    }
-
+    i,
     .svg-icon {
-      @include svg-icon-color($icon-color);
+      color: $icon-color;
     }
 
     &.dropdown-toggle:after {
@@ -52,12 +49,9 @@
     }
 
     @if ($icon-color-active != null) {
-      i {
-        color: $icon-color-active;
-      }
-
+      i,
       .svg-icon {
-        @include svg-icon-color($icon-color-active);
+        color: $icon-color-active;
       }
 
       &.dropdown-toggle:after {

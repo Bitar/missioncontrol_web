@@ -80,3 +80,15 @@ $kanban-spacer-x: 1.25rem;
     }
   }
 }
+
+// Fixed height
+.kanban-fixed-height {
+  .kanban-container {
+    .kanban-board {
+      .kanban-drag {
+        position: relative;
+        overflow-y: auto;
+      }
+    }
+  }
+}

@@ -192,7 +192,7 @@ class SearchComponent {
   }
 
   private handlers(): void {
-    const context = this;
+    const context = this
 
     // Focus
     this.inputElement.addEventListener('focus', this.focus)
@@ -279,10 +279,7 @@ class SearchComponent {
       if (responsiveFormMode === 'on' && !this.contentElement.contains(this.formElement)) {
         this.contentElement.prepend(this.formElement)
         this.formElement.classList.remove('d-none')
-      } else if (
-        responsiveFormMode === 'off' &&
-        this.contentElement.contains(this.formElement)
-      ) {
+      } else if (responsiveFormMode === 'off' && this.contentElement.contains(this.formElement)) {
         this.element.prepend(this.formElement)
         this.formElement.classList.add('d-none')
       }
@@ -329,7 +326,7 @@ class SearchComponent {
       this.inputElement.focus()
 
       this.processing = true
-      EventHandlerUtil.trigger(this.element, 'kt.search.process', this);
+      EventHandlerUtil.trigger(this.element, 'kt.search.process', this)
     }
   }
 

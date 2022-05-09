@@ -15,7 +15,8 @@
   }
 
   .bg-#{$color} {
-    --bg-color: #{red($value)}, #{green($value)}, #{blue($value)};
+    background-color: $value !important;
+    --bg-color: #{red($value)}, #{green($value)}, #{blue($value)} !important;
 
     &.hoverable:hover {
       background-color: theme-active-color($color) !important;
@@ -68,6 +69,13 @@
   }
 }
 
+// Background gray colors
+@each $color, $value in $grays {
+  .bg-gray-#{$color} {
+    background-color: $value;
+  }
+}
+
 // Opacity
 @each $name, $value in $opacity-values {
   .bg-opacity-#{$name} {
@@ -92,31 +100,31 @@
 
 // Background black color
 .bg-black {
-  background-color: $black !important;
+  background-color: $black;
 }
 
 // Background body color
 .bg-body {
   --bg-color: #{red($body-bg)}, #{green($body-bg)}, #{blue($body-bg)};
-  background-color: $body-bg !important;
+  background-color: $body-bg;
 }
 
 // Lighten bg states
 .bg-lighten {
-  background-color: $lighten !important;
+  background-color: $lighten;
 }
 
 .bg-hover-lighten {
   cursor: pointer;
 
   &:hover {
-    background-color: $lighten !important;
+    background-color: $lighten;
   }
 }
 
 .bg-active-lighten {
   &.active {
-    background-color: $lighten !important;
+    background-color: $lighten;
   }
 }
 
@@ -125,7 +133,7 @@
 
   &.active,
   &:hover {
-    background-color: $lighten !important;
+    background-color: $lighten;
   }
 }
 
@@ -205,8 +213,8 @@
       background-attachment: fixed;
     }
 
-    .bgi-attachment#{$infix}-auto {
-      background-attachment: auto;
+    .bgi-attachment#{$infix}-scroll {
+      background-attachment: scroll;
     }
   }
 }

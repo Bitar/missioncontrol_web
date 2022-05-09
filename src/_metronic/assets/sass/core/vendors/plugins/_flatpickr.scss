@@ -4,22 +4,31 @@
 
 $flatpickr-padding-y: 0.5rem;
 $flatpickr-padding-x: 1rem;
-$flatpickr-width: 315px;
+$flatpickr-width: 280px;
+$flatpickr-width-week-numbers: 325px;
 $flatpickr-day-height: 36px;
+$flatpickr-day-width: 100%;
 $flatpickr-time-height: 46px;
 
 // Container
 .flatpickr-calendar {
+  width: $flatpickr-width !important;
   font-family: inherit;
   border: 0;
+  border-radius: 0;
   box-shadow: $dropdown-box-shadow;
-  border-radius: $dropdown-border-radius;
   background-color: $body-bg;
+  @include border-radius($dropdown-border-radius);
 
   // Remow arrows
   &:before,
   &:after {
     display: none;
+  }
+
+  // Week numbers
+  &.hasWeeks {
+    width: $flatpickr-width-week-numbers !important;
   }
 }
 
@@ -254,9 +263,12 @@ span.flatpickr-weekday {
   @include border-radius($border-radius);
   box-shadow: none !important;
   height: $flatpickr-day-height;
-  max-width: $flatpickr-day-height;
+  width: $flatpickr-day-width;
+  max-width: 100% !important;
+  margin: 0;
   line-height: $flatpickr-day-height;
   color: $gray-600;
+  margin-top: 0 !important;
 
   &.inRange,
   &.prevMonthDay.inRange,
@@ -387,4 +399,9 @@ span.flatpickr-weekday {
     cursor: not-allowed;
     color: $gray-400;
   }
+}
+
+// Week numbers
+.flatpickr-weekwrapper {
+  margin-right: 5px;
 }

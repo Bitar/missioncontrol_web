@@ -3,7 +3,7 @@ import React, {useEffect, useRef} from 'react'
 import ApexCharts, {ApexOptions} from 'apexcharts'
 import {KTSVG} from '../../../helpers'
 import {getCSSVariableValue} from '../../../assets/ts/_utils'
-// import {Dropdown1} from '../../content/dropdown/Dropdown1'
+import {Dropdown1} from '../../content/dropdown/Dropdown1'
 
 type Props = {
   className: string
@@ -52,7 +52,7 @@ const MixedWidget2: React.FC<Props> = ({className, chartColor, chartHeight, stro
           >
             <KTSVG path='/media/icons/duotune/general/gen024.svg' className='svg-icon-2' />
           </button>
-          {/* <Dropdown1 /> */}
+          <Dropdown1 />
           {/* end::Menu */}
         </div>
       </div>
@@ -137,8 +137,7 @@ const chartOptions = (
   const color = getCSSVariableValue('--bs-' + chartColor)
 
   return {
-    series:
-     [
+    series: [
       {
         name: 'Net Profit',
         data: [30, 45, 32, 70, 40, 40, 40],
@@ -246,7 +245,7 @@ const chartOptions = (
         fontSize: '12px',
       },
       y: {
-        formatter: function (val:number) {
+        formatter: function (val) {
           return '$' + val + ' thousands'
         },
       },

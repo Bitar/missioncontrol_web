@@ -46,7 +46,7 @@
 
     // Aside toggle
     .aside-toggle {
-      @include svg-icon-color(#494b74);
+      color: #494b74;
     }
 
     // Separator
@@ -69,8 +69,11 @@
       );
 
       .btn-icon {
-        color: #b5b5c3;
-        @include svg-icon-color(#b5b5c3);
+        &,
+        i,
+        .svg-icon {
+          color: #b5b5c3;
+        }
       }
     }
   }

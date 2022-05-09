@@ -47,6 +47,12 @@
   }
 }
 
+.menu-here-bg {
+  .menu-item {
+    @include menu-link-here-state(null, null, null, null, get($menu, link, self, bg-color, here));
+  }
+}
+
 .menu-show-bg {
   .menu-item {
     @include menu-link-show-state(null, null, null, null, get($menu, link, self, bg-color, show));
@@ -68,6 +74,7 @@
 .menu-state-bg {
   .menu-item {
     @include menu-link-hover-state(null, null, null, null, get($menu, link, self, bg-color, hover));
+    @include menu-link-here-state(null, null, null, null, get($menu, link, self, bg-color, here));
     @include menu-link-show-state(null, null, null, null, get($menu, link, self, bg-color, show));
     @include menu-link-active-state(
       null,
@@ -76,33 +83,6 @@
       null,
       get($menu, link, self, bg-color, active)
     );
-  }
-}
-
-// Primary text states
-.menu-hover-primary {
-  .menu-item {
-    @include menu-link-hover-state($primary, $primary, $primary, $primary, null);
-  }
-}
-
-.menu-show-primary {
-  .menu-item {
-    @include menu-link-show-state($primary, $primary, $primary, $primary, null);
-  }
-}
-
-.menu-active-primary {
-  .menu-item {
-    @include menu-link-active-state($primary, $primary, $primary, $primary, null);
-  }
-}
-
-.menu-state-primary {
-  .menu-item {
-    @include menu-link-hover-state($primary, $primary, $primary, $primary, null);
-    @include menu-link-show-state($primary, $primary, $primary, $primary, null);
-    @include menu-link-active-state($primary, $primary, $primary, $primary, null);
   }
 }
 
@@ -122,6 +102,18 @@
 .menu-show-bg-primary {
   .menu-item {
     @include menu-link-show-state(
+      $primary-inverse,
+      $primary-inverse,
+      $primary-inverse,
+      $primary-inverse,
+      $primary
+    );
+  }
+}
+
+.menu-here-bg-primary {
+  .menu-item {
+    @include menu-link-here-state(
       $primary-inverse,
       $primary-inverse,
       $primary-inverse,
@@ -159,6 +151,13 @@
       $primary-inverse,
       $primary
     );
+    @include menu-link-here-state(
+      $primary-inverse,
+      $primary-inverse,
+      $primary-inverse,
+      $primary-inverse,
+      $primary
+    );
     @include menu-link-active-state(
       $primary-inverse,
       $primary-inverse,
@@ -173,6 +172,12 @@
 .menu-show-bg-light-primary {
   .menu-item {
     @include menu-link-show-state($primary, $primary, $primary, $primary, $primary-light);
+  }
+}
+
+.menu-here-bg-light-primary {
+  .menu-item {
+    @include menu-link-here-state($primary, $primary, $primary, $primary, $primary-light);
   }
 }
 
@@ -191,15 +196,56 @@
 .menu-state-bg-light-primary {
   .menu-item {
     @include menu-link-show-state($primary, $primary, $primary, $primary, $primary-light);
+    @include menu-link-here-state($primary, $primary, $primary, $primary, $primary-light);
     @include menu-link-hover-state($primary, $primary, $primary, $primary, $primary-light);
     @include menu-link-active-state($primary, $primary, $primary, $primary, $primary-light);
   }
 }
 
-// Primary title states
+// Primary color states
+.menu-hover-primary {
+  .menu-item {
+    @include menu-link-hover-state($primary, $primary, $primary, $primary, null);
+  }
+}
+
+.menu-show-primary {
+  .menu-item {
+    @include menu-link-show-state($primary, $primary, $primary, $primary, null);
+  }
+}
+
+.menu-here-primary {
+  .menu-item {
+    @include menu-link-here-state($primary, $primary, $primary, $primary, null);
+  }
+}
+
+.menu-active-primary {
+  .menu-item {
+    @include menu-link-active-state($primary, $primary, $primary, $primary, null);
+  }
+}
+
+.menu-state-primary {
+  .menu-item {
+    @include menu-link-hover-state($primary, $primary, $primary, $primary, null);
+    @include menu-link-show-state($primary, $primary, $primary, $primary, null);
+    @include menu-link-here-state($primary, $primary, $primary, $primary, null);
+    @include menu-link-active-state($primary, $primary, $primary, $primary, null);
+  }
+}
+
+// Primary title color states
 .menu-hover-title-primary {
   .menu-item {
     @include menu-link-hover-state($primary, null, null, null, null);
+  }
+}
+
+.menu-here-title-primary {
+  .menu-item {
+    @include menu-link-here-state($primary, null, null, null, null);
   }
 }
 
@@ -223,11 +269,18 @@
   }
 }
 
-// Primary icon states
+// Primary icon color states
 .menu-hover-icon-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
     @include menu-link-hover-state(null, $primary, null, null, null);
+  }
+}
+
+.menu-here-icon-primary {
+  .menu-item {
+    //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
+    @include menu-link-here-state(null, $primary, null, null, null);
   }
 }
 
@@ -254,7 +307,7 @@
   }
 }
 
-// Primary bullet states
+// Primary bullet color states
 .menu-hover-bullet-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
@@ -266,6 +319,13 @@
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
     @include menu-link-show-state(null, null, $primary, null, null);
+  }
+}
+
+.menu-here-bullet-primary {
+  .menu-item {
+    //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
+    @include menu-link-here-state(null, null, $primary, null, null);
   }
 }
 
@@ -285,11 +345,18 @@
   }
 }
 
-// Primary arrow states
+// Primary arrow color states
 .menu-hover-arrow-primary {
   .menu-item {
     //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
     @include menu-link-hover-state(null, null, null, $primary, null);
+  }
+}
+
+.menu-here-arrow-primary {
+  .menu-item {
+    //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
+    @include menu-link-here-state(null, null, null, $primary, null);
   }
 }
 

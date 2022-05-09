@@ -1,12 +1,10 @@
 import React from 'react'
 import clsx from 'clsx'
 import {useLocation} from 'react-router'
-import { KTSVG } from '../../../helpers/components/KTSVG'
-import { checkIsActive } from '../../../helpers/RouterHelpers'
-import {useLayout} from '../../core/LayoutProvider'
+import {checkIsActive, KTSVG} from '../../../helpers'
+import {useLayout} from '../../core'
 
 type Props = {
-  children?: React.ReactNode
   to: string
   title: string
   icon?: string

@@ -192,7 +192,7 @@ class PasswordMeterComponent {
 
   public check() {
     let score = 0
-    const checkScore = this.checkScore()
+    const checkScore = this.getCheckScore()
     if (this.checkLength()) {
       score = score + checkScore
     }

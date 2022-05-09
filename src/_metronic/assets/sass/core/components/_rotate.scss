@@ -12,9 +12,10 @@ $rotate-transition: transform 0.3s ease;
 @each $value in (90, 180, 270) {
   .rotate-#{$value} {
     transition: $rotate-transition;
-    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 
     .collapsible:not(.collapsed) > &,
+    .show > &,
     .active > & {
       transform: rotateZ(#{$value}deg);
       transition: $rotate-transition;
@@ -27,9 +28,10 @@ $rotate-transition: transform 0.3s ease;
 
   .rotate-n#{$value} {
     transition: $rotate-transition;
-    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 
     .collapsible:not(.collapsed) > &,
+    .show > &,
     .active > & {
       transform: rotateZ(-#{$value}deg);
       transition: $rotate-transition;

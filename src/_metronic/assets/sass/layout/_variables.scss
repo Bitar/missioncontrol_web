@@ -51,7 +51,7 @@ $toolbar-config: (
     desktop: 75px,
     tablet-and-mobile: 60px,
   ),
-  padding: 0.5rem,
+  padding: 0.5rem 0,
   bg-color: if(isDarkMode(), darken(#1e1e2d, 2%), $white),
   box-shadow: if(isDarkMode(), none, 0px 10px 30px 0px rgba(82, 63, 105, 0.05)),
   border-top: if(isDarkMode(), 0, 1px solid $border-color),

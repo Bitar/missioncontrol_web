@@ -1,11 +1,9 @@
 import React, {useRef, useEffect} from 'react'
 import {useLocation} from 'react-router'
 import clsx from 'clsx'
-import {checkIsActive ,KTSVG} from '../../../helpers/'
-
+import {checkIsActive, KTSVG} from '../../../helpers'
 
 type Props = {
-  children?: React.ReactNode;
   to: string
   title: string
   icon?: string

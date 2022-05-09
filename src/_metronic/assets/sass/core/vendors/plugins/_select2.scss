@@ -5,6 +5,7 @@
 $select2-dropdown-padding: 1rem 0;
 $select2-dropdown-option-padding: 0.75rem 1.25rem;
 $select2-dropdown-option-margin: 0 0;
+$select2-dropdown-option-check-padding: 1.25rem;
 
 $select2-dropdown-group-padding: 0 1.25rem 0 1.25rem;
 $select2-dropdown-group-margin: 0 0 0.25rem 0;
@@ -35,7 +36,7 @@ $select2-clear-right: $form-select-indicator-padding; //$form-select-padding-x +
       background-color: $input-solid-bg-focus;
     }
 
-    .form-select:not(.form-select-solid):not(.form-select-white) {
+    .form-select:not(.form-select-solid):not(.form-select-transparent) {
       border-color: $input-focus-border-color;
     }
   }
@@ -75,7 +76,7 @@ $select2-clear-right: $form-select-indicator-padding; //$form-select-padding-x +
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      color: $input-placeholder-color;
+      color: $input-color;
     }
 
     // Placeholder
@@ -93,6 +94,27 @@ $select2-clear-right: $form-select-indicator-padding; //$form-select-padding-x +
       // Placeholder
       .select2-selection__placeholder {
         color: $input-solid-placeholder-color;
+      }
+    }
+
+    // Form select transparent
+    &.form-select-transparent {
+      // Selected
+      .select2-selection__rendered {
+        color: $gray-800;
+      }
+
+      // Placeholder
+      .select2-selection__placeholder {
+        color: $gray-800;
+      }
+    }
+
+    // Form select dark color
+    &.form-select-dark {
+      // Selected
+      .select2-selection__rendered {
+        color: $gray-900;
       }
     }
   }
@@ -200,7 +222,7 @@ $select2-clear-right: $form-select-indicator-padding; //$form-select-padding-x +
     box-shadow: $dropdown-box-shadow;
     border-radius: $dropdown-border-radius;
     padding: $select2-dropdown-padding;
-    background-color: $body-bg;
+    background-color: $dropdown-bg;
 
     // In modal
     .modal-open & {
@@ -230,7 +252,7 @@ $select2-clear-right: $form-select-indicator-padding; //$form-select-padding-x +
 
     // Options
     .select2-results__options {
-      max-height: 200px;
+      max-height: 250px;
       overflow-y: auto;
     }
 
@@ -248,9 +270,17 @@ $select2-clear-right: $form-select-indicator-padding; //$form-select-padding-x +
       }
 
       &.select2-results__option--selected {
+        @include svg-bg-icon(check, $component-active-color);
+
+        background-size: 0.8rem;
+        background-position: center right $select2-dropdown-option-check-padding;
         background-color: $component-active-bg;
         color: $component-active-color;
         transition: $transition-link;
+
+        [dir='rtl'] & {
+          background-position: center left $select2-dropdown-option-check-padding;
+        }
       }
 
       &.select2-results__option--disabled {
@@ -295,6 +325,11 @@ $select2-clear-right: $form-select-indicator-padding; //$form-select-padding-x +
     background-repeat: no-repeat;
     background-position: center;
 
+    [dir='rtl'] & {
+      left: $select2-clear-right;
+      right: auto;
+    }
+
     span {
       display: none;
     }
@@ -302,5 +337,12 @@ $select2-clear-right: $form-select-indicator-padding; //$form-select-padding-x +
     &:hover {
       background-image: escape-svg($select2-clear-bg-hover);
     }
+  }
+}
+
+// Floating label integration
+.form-floating {
+  .form-select {
+    padding-top: $form-floating-input-padding-t;
   }
 }

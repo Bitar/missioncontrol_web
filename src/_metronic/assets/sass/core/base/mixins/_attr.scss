@@ -1,9 +1,9 @@
 //
-// Attr
+// CSS Attribute
 //
 
 @mixin attr($attr, $value, $important: '') {
-  @if $value != null {
+  @if $value != null and $value != false {
     #{$attr}: #{$value} #{$important};
   }
 }

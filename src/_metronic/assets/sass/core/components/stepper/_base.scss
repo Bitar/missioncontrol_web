@@ -72,7 +72,7 @@
     }
 
     [data-kt-stepper-action='submit'] {
-      display: none;
+      display: inline-block;
     }
 
     [data-kt-stepper-action='submit'].btn-flex {

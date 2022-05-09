@@ -2,9 +2,7 @@ import React, {useRef, useEffect} from 'react'
 import {useLocation} from 'react-router'
 import clsx from 'clsx'
 import {AsideMenuMain} from './AsideMenuMain'
-import {DrawerComponent} from '../../../assets/ts/components/_DrawerComponent'
-import {ScrollComponent} from '../../../assets/ts/components/_ScrollComponent'
-import {ToggleComponent} from '../../../assets/ts/components/_ToggleComponent'
+import {DrawerComponent, ScrollComponent, ToggleComponent} from '../../../assets/ts/components'
 
 type Props = {
   asideMenuCSSClasses: string[]

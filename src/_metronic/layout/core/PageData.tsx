@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {FC, createContext, useContext, useEffect, useState, ReactNode} from 'react'
+import React, {FC, createContext, useContext, useEffect, useState} from 'react'
 
 export interface PageLink {
   title: string
@@ -23,7 +23,7 @@ const PageDataContext = createContext<PageDataContextModel>({
   setPageDescription: (_description: string) => {},
 })
 
-const PageDataProvider = ({ children }: { children: ReactNode }) => {
+const PageDataProvider: React.FC = ({children}) => {
   const [pageTitle, setPageTitle] = useState<string>('')
   const [pageDescription, setPageDescription] = useState<string>('')
   const [pageBreadcrumbs, setPageBreadcrumbs] = useState<Array<PageLink>>([])
@@ -43,7 +43,6 @@ function usePageData() {
 }
 
 type Props = {
- children: React.ReactNode   
   description?: string
   breadcrumbs?: Array<PageLink>
 }
@@ -80,7 +79,7 @@ const PageTitle: FC<Props> = ({children, description, breadcrumbs}) => {
   return <></>
 }
 
-const PageDescription = ({ children }: { children: ReactNode }) => {
+const PageDescription: React.FC = ({children}) => {
   const {setPageDescription} = usePageData()
   useEffect(() => {
     if (children) {

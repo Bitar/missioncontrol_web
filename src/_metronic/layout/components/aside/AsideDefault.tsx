@@ -3,9 +3,8 @@
 import React, {FC} from 'react'
 import {Link} from 'react-router-dom'
 import clsx from 'clsx'
-import {useLayout} from '../../core/LayoutProvider'
-import { KTSVG } from '../../../helpers/components/KTSVG'
-import { toAbsoluteUrl } from '../../../helpers/AssetHelpers'
+import {useLayout} from '../../core'
+import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {AsideMenu} from './AsideMenu'
 
 const AsideDefault: FC = () => {

@@ -53,6 +53,7 @@
 
 .ql-container {
   &.ql-snow {
+    background-color: $input-bg;
     border: 1px solid $gray-200;
     border-top: 0;
     @include border-bottom-radius($border-radius);
