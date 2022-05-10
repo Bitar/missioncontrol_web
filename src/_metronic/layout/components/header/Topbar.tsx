@@ -1,15 +1,17 @@
 import clsx from 'clsx'
 import React, {FC} from 'react'
-import {KTSVG, toAbsoluteUrl} from '../../../helpers'
+import {KTSVG} from '../../../helpers'
 import {HeaderUserMenu} from '../../../partials'
 import {CommunityPicker} from "../../../../app/layout/partials/community-picker/CommunityPicker";
 import {useLayout} from '../../core'
+import {useAuth} from "../../../../app/modules/auth";
 
 const toolbarButtonMarginClass = 'ms-1 ms-lg-3',
     toolbarUserAvatarHeightClass = 'symbol-30px symbol-md-40px'
 
 const Topbar: FC = () => {
     const {config} = useLayout()
+    const {currentUser} = useAuth()
 
     return (
         <div className='d-flex align-items-stretch flex-shrink-0'>
@@ -36,7 +38,8 @@ const Topbar: FC = () => {
                     data-kt-menu-placement='bottom-end'
                     data-kt-menu-flip='bottom'
                 >
-                    <img src={toAbsoluteUrl('/media/avatars/300-1.jpg')} alt='metronic'/>
+
+                    <img alt={currentUser?.name + ' image'} src={currentUser?.meta.image}/>
                 </div>
                 <HeaderUserMenu/>
                 {/* end::Toggle */}

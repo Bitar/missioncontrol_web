@@ -49,12 +49,19 @@ export interface UserModel {
   last_name: string
   name: string
   email: string
+  meta: UserMetaModel
   // website?: 'https://keenthemes.com'
   // emailSettings?: UserEmailSettingsModel
   // auth?: AuthModel
   // communication?: UserCommunicationModel
   // address?: UserAddressModel
   // socialNetworks?: UserSocialNetworksModel
+}
+
+export interface UserMetaModel {
+  id: number,
+  user_id: number,
+  image: string
 }
 
 export interface CommunityModel {

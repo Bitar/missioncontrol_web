@@ -2,7 +2,9 @@ import axios, {AxiosResponse} from 'axios'
 import {ID, Response} from '../../../../../../_metronic/helpers'
 import {User, UsersQueryResponse} from './_models'
 
-const API_URL = process.env.REACT_APP_THEME_API_URL
+// const API_URL = process.env.REACT_APP_MC_WEBAPP_THEME_API_URL
+// const API_URL = 'http://dashboard.missioncontrol.test/api-fe'
+const API_URL = 'https://preview.keenthemes.com/theme-api/api'
 const USER_URL = `${API_URL}/user`
 const GET_USERS_URL = `${API_URL}/users/query`
 

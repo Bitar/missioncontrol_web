@@ -2,12 +2,13 @@
 import {FC} from 'react'
 import {Link} from 'react-router-dom'
 import {useAuth} from '../../../../app/modules/auth'
-import {toAbsoluteUrl} from '../../../helpers'
 import {ThemePicker} from "../../../../app/layout/partials/header-menus/ThemePicker";
 
 const HeaderUserMenu: FC = () => {
   const {currentUser, logout} = useAuth()
-  // const contextValue = useContext(AuthContext);
+
+  // console.log(currentUser?.meta.image);
+
   return (
       <div
           className='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px'
@@ -16,7 +17,7 @@ const HeaderUserMenu: FC = () => {
         <div className='menu-item px-3'>
           <div className='menu-content d-flex align-items-center px-3'>
             <div className='symbol symbol-50px me-5'>
-              <img alt='Logo' src={toAbsoluteUrl('/media/avatars/300-1.jpg')}/>
+              <img alt='Logo' src={currentUser?.meta.image}/>
             </div>
 
             <div className='d-flex flex-column'>
