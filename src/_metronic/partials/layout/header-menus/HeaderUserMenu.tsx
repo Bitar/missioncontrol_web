@@ -2,7 +2,6 @@
 import {FC} from 'react'
 import {Link} from 'react-router-dom'
 import {useAuth} from '../../../../app/modules/auth'
-import {Languages} from './Languages'
 import {toAbsoluteUrl} from '../../../helpers'
 import {ThemePicker} from "../../../../app/layout/partials/header-menus/ThemePicker";
 
@@ -32,7 +31,7 @@ const HeaderUserMenu: FC = () => {
           </div>
         </div>
 
-        <div className='separator my-2'></div>
+        <div className='separator my-2'/>
 
         <div className='menu-item px-5'>
           <Link to={'/crafted/pages/profile'} className='menu-link px-5'>
@@ -57,7 +56,7 @@ const HeaderUserMenu: FC = () => {
         >
           <a href='#' className='menu-link px-5'>
             <span className='menu-title'>My Subscription</span>
-            <span className='menu-arrow'></span>
+            <span className='menu-arrow'/>
           </a>
 
           <div className='menu-sub menu-sub-dropdown w-175px py-4'>
@@ -86,11 +85,11 @@ const HeaderUserMenu: FC = () => {
                     className='fas fa-exclamation-circle ms-2 fs-7'
                     data-bs-toggle='tooltip'
                     title='View your statements'
-                ></i>
+                />
               </a>
             </div>
 
-            <div className='separator my-2'></div>
+            <div className='separator my-2'/>
 
             <div className='menu-item px-3'>
               <div className='menu-content px-3'>
@@ -115,9 +114,9 @@ const HeaderUserMenu: FC = () => {
           </a>
         </div>
 
-        <div className='separator my-2'></div>
+        <div className='separator my-2'/>
 
-        <Languages/>
+        {/*<Languages/>*/}
         <ThemePicker/>
 
         <div className='menu-item px-5 my-1'>

@@ -1,6 +1,5 @@
 import axios from 'axios'
 import {AuthModel, UserModel} from './_models'
-import {User} from "../../apps/user-management/users-list/core/_models";
 
 const API_URL = process.env.REACT_APP_API_URL
 
@@ -48,8 +47,7 @@ export function getUserByToken(token: string) {
       Authorization: `Bearer ${token}`
     },
     transformResponse: [function (data) {
-      const returnData = JSON.parse(data);
-      return returnData.data;
+      return JSON.parse(data).data;
     }],
   })
 }

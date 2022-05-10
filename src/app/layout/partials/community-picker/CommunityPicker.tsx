@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom'
 import clsx from "clsx";
 
 const CommunityPicker: FC = () => {
+    // const {communities} = useCommunityAdmin()
+    // console.log(communities)
     const isActive = false;
 
     return (

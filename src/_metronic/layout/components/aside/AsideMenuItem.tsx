@@ -36,7 +36,7 @@ const AsideMenuItem: React.FC<Props> = ({
           )}
           {icon && aside.menuIcon === 'svg' && (
               <span className='menu-icon'>
-            <KTSVG path={icon} className='svg-icon-2'/>
+            <KTSVG path={icon} className='svg-icon-2 svg-icon-white'/>
           </span>
           )}
           {fontIcon && aside.menuIcon === 'font' && <i className={clsx('bi fs-3', fontIcon)}></i>}

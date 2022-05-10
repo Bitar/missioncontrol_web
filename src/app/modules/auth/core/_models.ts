@@ -56,3 +56,12 @@ export interface UserModel {
   // address?: UserAddressModel
   // socialNetworks?: UserSocialNetworksModel
 }
+
+export interface CommunityModel {
+  id: number
+  name: string
+  logo: string
+  description: string
+  slug: string
+  is_featured: boolean
+}

@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx'
 import React, {FC} from 'react'
-import {toAbsoluteUrl} from '../../../../_metronic/helpers'
-import {useLang, setLanguage} from '../../../../_metronic/i18n/Metronici18n'
 
 const themes = [
   {
