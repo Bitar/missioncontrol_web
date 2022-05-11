@@ -5,7 +5,7 @@ import {Permission, PermissionQueryResponse} from "../../../../models/user/Permi
 // import process from "process";
 
 // const API_URL_DK = process.env.REACT_APP_API_URL
-const API_URL = 'http://dashboard.missioncontrol.test/api-fe'
+const API_URL = 'https://v3.staging.missioncontrol.gg/api-fe'
 const GET_PERMISSIONS_URL = `${API_URL}/permissions`
 const PERMISSION_URL = `${API_URL}/permission`
 

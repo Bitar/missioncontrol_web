@@ -3,6 +3,7 @@ import {FC} from 'react'
 import {Link} from 'react-router-dom'
 import {useAuth} from '../../../../app/modules/auth'
 import {ThemePicker} from "../../../../app/layout/partials/header-menus/ThemePicker";
+import {toAbsoluteUrl} from "../../../helpers";
 
 const HeaderUserMenu: FC = () => {
   const {currentUser, logout} = useAuth()
@@ -17,7 +18,7 @@ const HeaderUserMenu: FC = () => {
         <div className='menu-item px-3'>
           <div className='menu-content d-flex align-items-center px-3'>
             <div className='symbol symbol-50px me-5'>
-              <img alt='Logo' src={currentUser?.meta.image}/>
+              <img alt='Logo' src={toAbsoluteUrl("/media/avatars/blank.png")} />
             </div>
 
             <div className='d-flex flex-column'>

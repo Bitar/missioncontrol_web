@@ -3,7 +3,7 @@ import {ActivityQueryResponse} from "../../../models/activity/Activity";
 // import process from "process";
 
 // const API_URL_DK = process.env.REACT_APP_API_URL
-const API_URL = 'http://dashboard.missioncontrol.test/api-fe'
+const API_URL = 'https://v3.staging.missioncontrol.gg/api-fe'
 const ACTIVITIES_URL = `${API_URL}/activities`
 
 const getActivities = (query: string): Promise<ActivityQueryResponse> => {

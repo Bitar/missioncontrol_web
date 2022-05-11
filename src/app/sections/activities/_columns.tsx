@@ -11,7 +11,7 @@ const rolesColumns: ReadonlyArray<Column<Role>> = [
     Header: (props) =>
         <CustomHeader tableProps={props} title='Image' className='min-w-125px'/>,
     id: 'image',
-    Cell: ({...props}) => <ImageCell dObject={props.data[props.row.index].game.image}/>,
+    Cell: ({...props}) => <ImageCell dObject={props.data[props.row.index].game?.image}/>,
   },
   {
     Header: (props) =>

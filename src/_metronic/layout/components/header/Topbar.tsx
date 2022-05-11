@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import React, {FC} from 'react'
-import {KTSVG} from '../../../helpers'
+import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {HeaderUserMenu} from '../../../partials'
 import {CommunityPicker} from "../../../../app/layout/partials/community-picker/CommunityPicker";
 import {useLayout} from '../../core'
@@ -38,8 +38,8 @@ const Topbar: FC = () => {
                     data-kt-menu-placement='bottom-end'
                     data-kt-menu-flip='bottom'
                 >
-
-                    <img alt={currentUser?.name + ' image'} src={currentUser?.meta.image}/>
+                    <img alt={currentUser?.name + ' image'} src={toAbsoluteUrl("/media/avatars/blank.png")} />
+                    {/*<img alt={currentUser?.name + ' image'} src={currentUser?.meta?.image}/>*/}
                 </div>
                 <HeaderUserMenu/>
                 {/* end::Toggle */}
