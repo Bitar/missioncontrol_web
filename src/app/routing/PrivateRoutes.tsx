@@ -9,6 +9,7 @@ import {RolesIndex} from "../sections/user/role/RolesIndex";
 import {PermissionsIndex} from "../sections/user/permission/PermissionsIndex";
 import {PermissionsCreate} from "../sections/user/permission/PermissionsCreate";
 import {RolesCreate} from "../sections/user/role/RolesCreate";
+import {ActivitiesIndex} from "../sections/activities/ActivitiesIndex";
 
 
 const PrivateRoutes = () => {
@@ -27,6 +28,7 @@ const PrivateRoutes = () => {
                 <Route path='dashboard' element={<DashboardWrapper/>}/>
                 <Route path='menu-test' element={<MenuTestPage/>}/>
                 {/* Pages */}
+                <Route path='activities' element={<ActivitiesIndex/>}/>
                 <Route path='roles' element={<RolesIndex/>}/>
 
                 <Route

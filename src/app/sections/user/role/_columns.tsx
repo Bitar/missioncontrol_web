@@ -10,7 +10,7 @@ const rolesColumns: ReadonlyArray<Column<Role>> = [
     Header: (props) =>
         <CustomHeader tableProps={props} title='Name' className='min-w-125px'/>,
     id: 'name',
-    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index]}/>,
+    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].name}/>,
   },
   {
     Header: (props) => (

@@ -30,8 +30,8 @@ const AsideDefault: FC = () => {
           <Link to='/dashboard'>
             <img
               alt='Logo'
-              className='h-25px logo'
-              src={toAbsoluteUrl('/media/logos/logo-1-dark.svg')}
+              className='h-15px logo'
+              src={toAbsoluteUrl('/media/logos/mc_logo_aside.png')}
             />
           </Link>
         )}
@@ -39,8 +39,8 @@ const AsideDefault: FC = () => {
           <Link to='/dashboard'>
             <img
               alt='Logo'
-              className='h-25px logo'
-              src={toAbsoluteUrl('/media/logos/logo-1.svg')}
+              className='h-15px logo'
+              src={toAbsoluteUrl('/media/logos/mc_logo_aside.png')}
             />
           </Link>
         )}

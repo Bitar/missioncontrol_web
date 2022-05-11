@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react'
 import {useIntl} from 'react-intl'
-import {AsideMenuItemWithSub} from './AsideMenuItemWithSub'
 import {AsideMenuItem} from './AsideMenuItem'
 
 export function AsideMenuMain() {
@@ -20,6 +19,13 @@ export function AsideMenuMain() {
                     <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Sections</span>
                 </div>
             </div>
+            <AsideMenuItem
+                to='/activities'
+                title='activities'
+                fontIcon='bi-archive'
+                icon='/media/icons/duotune/general/gen022.svg'
+            >
+            </AsideMenuItem>
             <AsideMenuItem
                 to='/roles'
                 title='roles'
