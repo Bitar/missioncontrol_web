@@ -1,10 +1,5 @@
 import {FC, useState, createContext, useContext} from 'react'
 import {initialQueryRequest, QueryRequestContextProps, QueryState} from "../../../_metronic/helpers";
-// import {
-//   QueryState,
-//   QueryRequestContextProps,
-//   initialQueryRequest,
-// } from '../../../../../../_metronic/helpers'
 
 const QueryRequestContext = createContext<QueryRequestContextProps>(initialQueryRequest)
 

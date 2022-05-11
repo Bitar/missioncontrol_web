@@ -3,31 +3,31 @@ import {PageTitle} from "../../../../_metronic/layout/core";
 import {KTCard, QUERIES} from "../../../../_metronic/helpers";
 import {TableHeader} from "../../../modules/table/TableHeader";
 import {QueryRequestProvider} from "../../../modules/table/QueryRequestProvider";
-import {RolesTable} from "./RolesTable";
+import {PermissionsTable} from "./PermissionsTable";
+import {GET_PERMISSIONS_URL, getPermissions} from "./core/_requests";
 import {QueryResponseProvider} from "../../../modules/table/QueryResponseProvider";
-import {getRoles} from "./core/_requests";
 import {ListViewProvider} from "../../../modules/table/ListViewProvider";
 
-const RolesList = () => {
+const PermissionsList = () => {
     return (
         <>
-            <PageTitle breadcrumbs={[]}>{'Roles'}</PageTitle>
+            <PageTitle breadcrumbs={[]}>{'Permissions'}</PageTitle>
             <KTCard>
-                <TableHeader name='Role' url='/roles'/>
-                <RolesTable/>
+                <TableHeader name='Permission' url="/permissions"/>
+                <PermissionsTable/>
             </KTCard>
         </>
     )
 }
 
-const RolesIndex = () => (
+const PermissionsIndex = () => (
     <QueryRequestProvider>
-        <QueryResponseProvider id={QUERIES.ROLES_LIST} requestFunction={getRoles}>
+        <QueryResponseProvider id={QUERIES.ROLES_LIST} requestFunction={getPermissions}>
             <ListViewProvider>
-                <RolesList/>
+                <PermissionsList/>
             </ListViewProvider>
         </QueryResponseProvider>
     </QueryRequestProvider>
 )
 
-export {RolesIndex}
+export {PermissionsIndex}

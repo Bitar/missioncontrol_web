@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import {initialQueryState, KTSVG, useDebounce} from "../../../_metronic/helpers";
-import {useQueryRequest} from "../apps/user-management/users-list/core/QueryRequestProvider";
+import {useQueryRequest} from "./QueryRequestProvider";
 
 const TableSearchComponent = () => {
     const {updateState} = useQueryRequest()

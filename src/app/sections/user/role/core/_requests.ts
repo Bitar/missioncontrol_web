@@ -22,6 +22,13 @@ const getRoleById = (id: ID): Promise<Role | undefined> => {
         .then((response: Response<Role>) => response.data)
 }
 
+const createRole = (role: Role): Promise<Role | undefined> => {
+    return axios
+        .post(`${GET_ROLES_URL}`, role)
+        .then((response: AxiosResponse<Response<Role>>) => response.data)
+        .then((response: Response<Role>) => response.data)
+}
+
 // const createUser = (user: User): Promise<User | undefined> => {
 //     return axios
 //         .put(ROLE_URL, user)
@@ -45,4 +52,4 @@ const getRoleById = (id: ID): Promise<Role | undefined> => {
 //     return axios.all(requests).then(() => {})
 // }
 
-export {getRoles, getRoleById}
+export {getRoles, getRoleById, createRole, GET_ROLES_URL}

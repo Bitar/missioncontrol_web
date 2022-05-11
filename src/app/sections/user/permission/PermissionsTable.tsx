@@ -1,19 +1,19 @@
 import {useMemo} from 'react'
 import {useTable, ColumnInstance, Row} from 'react-table'
 import {KTCardBody} from "../../../../_metronic/helpers";
-import {rolesColumns} from "./_columns";
-import {Role} from "../../../models/user/Role";
-import {useQueryResponseData, useQueryResponseLoading} from "../../../modules/table/QueryResponseProvider";
 import {CustomHeaderColumn} from "../../../modules/table/columns/CustomHeaderColumn";
 import {CustomRow} from "../../../modules/table/columns/CustomRow";
+import {permissionColumns} from "./_columns";
+import {Permission} from "../../../models/user/Permission";
+import {useQueryResponseData, useQueryResponseLoading} from "../../../modules/table/QueryResponseProvider";
+// import {TableListPagination} from "../../../modules/table/TableListPagination";
 import {TableListLoading} from "../../../modules/table/TableListLoading";
 
-
-const RolesTable = () => {
-    const roles = useQueryResponseData()
+const PermissionsTable = () => {
+    const permissions = useQueryResponseData()
     const isLoading = useQueryResponseLoading()
-    const data = useMemo(() => roles, [roles])
-    const columns = useMemo(() => rolesColumns, [])
+    const data = useMemo(() => permissions, [permissions])
+    const columns = useMemo(() => permissionColumns, [])
     const {getTableProps, getTableBodyProps, headers, rows, prepareRow} = useTable({
         columns,
         data,
@@ -28,14 +28,14 @@ const RolesTable = () => {
                 >
                     <thead>
                     <tr className='text-start text-muted fw-bolder fs-7 text-uppercase gs-0'>
-                        {headers.map((column: ColumnInstance<Role>) => (
+                        {headers.map((column: ColumnInstance<Permission>) => (
                             <CustomHeaderColumn key={column.id} column={column}/>
                         ))}
                     </tr>
                     </thead>
                     <tbody className='text-gray-600 fw-bold' {...getTableBodyProps()}>
                     {rows.length > 0 ? (
-                        rows.map((row: Row<Role>, i) => {
+                        rows.map((row: Row<Permission>, i) => {
                             prepareRow(row)
                             return <CustomRow row={row} key={`row-${i}-${row.id}`}/>
                         })
@@ -57,4 +57,4 @@ const RolesTable = () => {
     )
 }
 
-export {RolesTable}
+export {PermissionsTable}

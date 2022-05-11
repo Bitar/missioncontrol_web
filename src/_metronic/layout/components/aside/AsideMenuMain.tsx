@@ -17,27 +17,34 @@ export function AsideMenuMain() {
             />
             <div className='menu-item'>
                 <div className='menu-content pt-8 pb-2'>
-                    <span className='menu-section text-muted text-uppercase fs-8 ls-1'>-</span>
+                    <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Sections</span>
                 </div>
             </div>
-            <AsideMenuItemWithSub
-                to='/crafted/pages'
-                title='Pages'
+            <AsideMenuItem
+                to='/roles'
+                title='roles'
                 fontIcon='bi-archive'
                 icon='/media/icons/duotune/general/gen022.svg'
             >
-                <AsideMenuItemWithSub to='/crafted/pages/profile' title='Profile' hasBullet={true}>
-                    <AsideMenuItem to='/crafted/pages/profile/overview' title='Overview' hasBullet={true}/>
-                    <AsideMenuItem to='/crafted/pages/profile/projects' title='Projects' hasBullet={true}/>
-                    <AsideMenuItem to='/crafted/pages/profile/campaigns' title='Campaigns' hasBullet={true}/>
-                    <AsideMenuItem to='/crafted/pages/profile/documents' title='Documents' hasBullet={true}/>
-                    <AsideMenuItem
-                        to='/crafted/pages/profile/connections'
-                        title='Connections'
-                        hasBullet={true}
-                    />
-                </AsideMenuItemWithSub>
-            </AsideMenuItemWithSub>
+            </AsideMenuItem>
+
+            <AsideMenuItem
+                to='/permissions'
+                title='permissions'
+                fontIcon='bi-archive'
+                icon='/media/icons/duotune/general/gen022.svg'
+            >
+            </AsideMenuItem>
+
+            {/*<AsideMenuItemWithSub*/}
+            {/*    to=''*/}
+            {/*    title='roles'*/}
+            {/*    fontIcon='bi-archive'*/}
+            {/*    icon='/media/icons/duotune/general/gen022.svg'*/}
+            {/*>*/}
+            {/*    <AsideMenuItem to='/roles/' title='List Roles'/>*/}
+            {/*    <AsideMenuItem to='/roles/create' title='Create Role'/>*/}
+            {/*</AsideMenuItemWithSub>*/}
         </>
     )
 }

@@ -1,30 +1,23 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {FC, useContext, useState, useEffect, useMemo} from 'react'
 import {useQuery} from 'react-query'
-// import {
-//   createResponseContext,
-//   initialQueryResponse,
-//   initialQueryState,
-//   PaginationState,
-//   QUERIES,
-//   stringifyRequestQuery,
-// } from '../../../../../../_metronic/helpers'
-// import {getUsers} from './_requests'
-// import {User} from './_models'
 import {useQueryRequest} from './QueryRequestProvider'
 import {
   createResponseContext,
-  initialQueryResponse, initialQueryState,
+  initialQueryResponse,
+  initialQueryState,
   PaginationState,
-  QUERIES,
   stringifyRequestQuery
 } from "../../../_metronic/helpers";
-import {User} from "../apps/user-management/users-list/core/_models";
-import {getUsers} from "../apps/user-management/users-list/core/_requests";
 
-const QueryResponseContext = createResponseContext<User>(initialQueryResponse)
-const QueryResponseProvider: FC = ({children}) => {
+type Props = {
+  id: string,
+  requestFunction: any
+}
+
+const QueryResponseContext = createResponseContext<any>(initialQueryResponse)
+const QueryResponseProvider: FC<Props> = ({id, requestFunction, children}) => {
   const {state} = useQueryRequest()
+
   const [query, setQuery] = useState<string>(stringifyRequestQuery(state))
   const updatedQuery = useMemo(() => stringifyRequestQuery(state), [state])
 
@@ -32,16 +25,18 @@ const QueryResponseProvider: FC = ({children}) => {
     if (query !== updatedQuery) {
       setQuery(updatedQuery)
     }
-  }, [updatedQuery])
+  }, [query, updatedQuery])
 
   const {
     isFetching,
     refetch,
     data: response,
   } = useQuery(
-      `${QUERIES.USERS_LIST}-${query}`,
+      id,
       () => {
-        return getUsers(query)
+        return requestFunction(query)
+        // var fn = window[requestFunction];
+        // return fn(query)
       },
       {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
   )
@@ -71,11 +66,12 @@ const useQueryResponsePagination = () => {
   }
 
   const {response} = useQueryResponse()
-  if (!response || !response.payload || !response.payload.pagination) {
+
+  if (!response || !response.meta) {
     return defaultPaginationState
   }
 
-  return response.payload.pagination
+  return response.meta
 }
 
 const useQueryResponseLoading = (): boolean => {

@@ -5,7 +5,10 @@ import TopBarProgress from 'react-topbar-progress-indicator'
 import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper'
 import {MenuTestPage} from '../pages/MenuTestPage'
 import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
-import {RolesListWrapper} from "../sections/user/role/RolesIndex";
+import {RolesIndex} from "../sections/user/role/RolesIndex";
+import {PermissionsIndex} from "../sections/user/permission/PermissionsIndex";
+import {PermissionsCreate} from "../sections/user/permission/PermissionsCreate";
+import {RolesCreate} from "../sections/user/role/RolesCreate";
 
 
 const PrivateRoutes = () => {
@@ -14,7 +17,6 @@ const PrivateRoutes = () => {
     const AccountPage = lazy(() => import('../modules/accounts/AccountPage'))
     const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'))
     const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'))
-    const UsersPage = lazy(() => import('../modules/apps/user-management/UsersPage'))
 
     return (
         <Routes>
@@ -25,7 +27,27 @@ const PrivateRoutes = () => {
                 <Route path='dashboard' element={<DashboardWrapper/>}/>
                 <Route path='menu-test' element={<MenuTestPage/>}/>
                 {/* Pages */}
-                <Route path='roles' element={<RolesListWrapper/>}/>
+                <Route path='roles' element={<RolesIndex/>}/>
+
+                <Route
+                    path='roles/create'
+                    element={
+                        <SuspensedView>
+                            <RolesCreate/>
+                        </SuspensedView>
+                    }
+                />
+
+                <Route path='permissions' element={<PermissionsIndex/>}/>
+
+                <Route
+                    path='permissions/create'
+                    element={
+                        <SuspensedView>
+                            <PermissionsCreate/>
+                        </SuspensedView>
+                    }
+                />
 
                 {/* Lazy Modules */}
                 <Route
@@ -65,14 +87,6 @@ const PrivateRoutes = () => {
                     element={
                         <SuspensedView>
                             <ChatPage/>
-                        </SuspensedView>
-                    }
-                />
-                <Route
-                    path='apps/user-management/*'
-                    element={
-                        <SuspensedView>
-                            <UsersPage/>
                         </SuspensedView>
                     }
                 />

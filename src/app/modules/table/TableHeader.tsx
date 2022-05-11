@@ -3,20 +3,28 @@
 // import {UsersListGrouping} from './UsersListGrouping'
 // import {UsersListSearchComponent} from './UsersListSearchComponent'
 
-import {useListView} from "../apps/user-management/users-list/core/ListViewProvider";
-import {TableSearchComponent} from "./TableSearchComponent";
-import {TableListGrouping} from "./TableListGrouping";
+// import {TableSearchComponent} from "./TableSearchComponent";
+// import {TableListGrouping} from "./TableListGrouping";
 import {TableListToolbar} from "./TableListToolbar";
+import {FC} from "react";
+// import {useListView} from "./ListViewProvider";
 
-const TableHeader = () => {
-    const {selected} = useListView()
+type Props = {
+    name: string,
+    url: string
+}
+
+
+const TableHeader: FC<Props> = ({name, url}) => {
+    // const {selected} = useListView()
     return (
         <div className='card-header border-0 pt-6'>
-            <TableSearchComponent/>
+            {/*<TableSearchComponent/>*/}
             {/* begin::Card toolbar */}
             <div className='card-toolbar'>
                 {/* begin::Group actions */}
-                {selected.length > 0 ? <TableListGrouping/> : <TableListToolbar/>}
+                <TableListToolbar name={name} url={url}/>
+                {/*{selected.length > 0 ? <TableListGrouping/> : <TableListToolbar/>}*/}
                 {/* end::Group actions */}
             </div>
             {/* end::Card toolbar */}

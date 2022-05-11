@@ -2,7 +2,7 @@ import {ID, Response} from "../../../_metronic/helpers";
 
 export type Role = {
     id?: ID
-    name?: string
+    name: string
 }
 
 export type RolesQueryResponse = Response<Array<Role>>
