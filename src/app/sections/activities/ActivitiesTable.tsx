@@ -27,7 +27,7 @@ const ActivitiesTable = () => {
                     {...getTableProps()}
                 >
                     <thead>
-                    <tr className='text-start text-muted fw-bolder fs-7 text-uppercase gs-0'>
+                    <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
                         {headers.map((column: ColumnInstance<Role>) => (
                             <CustomHeaderColumn key={column.id} column={column}/>
                         ))}
