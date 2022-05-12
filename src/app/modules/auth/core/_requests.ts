@@ -2,8 +2,8 @@ import axios from 'axios'
 import {AuthModel, UserModel} from './_models'
 // import * as process from "process";
 
-// const API_URL_DK = process.env.REACT_APP_API_URL
-const API_URL = 'https://v3.staging.missioncontrol.gg/api-fe'
+const API_URL = process.env.REACT_APP_API_URL
+// const API_URL = 'https://v3.staging.missioncontrol.gg/api-fe'
 
 export const GET_USER_BY_PROFILE = `${API_URL}/profile`
 export const LOGIN_URL = `${API_URL}/login`

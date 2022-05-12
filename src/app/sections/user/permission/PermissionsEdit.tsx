@@ -1,39 +1,53 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useFormik} from "formik";
 import * as Yup from 'yup'
 import {Permission} from "../../../models/user/Permission";
-import {isNotEmpty, KTCard, KTCardBody} from "../../../../_metronic/helpers";
+import {isNotEmpty, KTCard, KTCardBody, Response} from "../../../../_metronic/helpers";
 import clsx from "clsx";
 import {PageTitle} from "../../../../_metronic/layout/core";
-import {createPermission} from "./core/_requests";
-import {useNavigate} from 'react-router-dom';
+import {GET_PERMISSIONS_URL} from "./core/_requests";
+import {useNavigate, useParams} from 'react-router-dom';
+import axios, {AxiosResponse} from "axios";
 
-const createPermissionSchema = Yup.object().shape({
+const editPermissionSchema = Yup.object().shape({
     name: Yup.string()
         .required('Name is required'),
 })
 
-const PermissionsCreate = () => {
-    const navigate = useNavigate();
+const PermissionsEdit = () => {
+    const [permission, setPermission] = useState<Permission | undefined>();
+    const navigate = useNavigate()
+    const params = useParams();
+    // const permission = await getPermissionById(params.id)
 
     const [permissionForEdit] = useState<Permission>({
-        name: '',
+        name: permission?.name || 'empty',
     })
+
+    // const [permissionForEdit] = useState<Permission>({
+    //     ...permission,
+    //     name: permission.name || '',
+    // })
+
+    // console.log(params.id);
+    //
+    // console.log(permissionForEdit);
 
     const cancel = () => {
         navigate('/permissions')
     }
 
     const formik = useFormik({
+        enableReinitialize: true,
         initialValues: permissionForEdit,
-        validationSchema: createPermissionSchema,
+        validationSchema: editPermissionSchema,
         onSubmit: async (values, {setSubmitting}) => {
             setSubmitting(true)
             try {
                 if (isNotEmpty(values.id)) {
                     // await updateUser(values)
                 } else {
-                    await createPermission(values)
+                    // await updatePermission(values)
                 }
             } catch (ex) {
                 console.error(ex)
@@ -43,6 +57,15 @@ const PermissionsCreate = () => {
             }
         },
     })
+
+    useEffect(() => {
+        axios
+            .get(`${GET_PERMISSIONS_URL}/${params.id}`)
+            .then((response: AxiosResponse<Response<Permission>>) => response.data)
+            .then((response: Response<Permission>) => {
+                setPermission(response.data)
+            })
+    }, []);
 
     return (
         <>
@@ -54,7 +77,7 @@ const PermissionsCreate = () => {
                             <i className="las la-plus fs-2"/>
                         </span>
                         <h3 className="card-label">
-                            Add Permission
+                            Edit Permission
                         </h3>
                     </div>
                 </div>
@@ -142,4 +165,4 @@ const PermissionsCreate = () => {
     )
 }
 
-export {PermissionsCreate}
+export {PermissionsEdit}

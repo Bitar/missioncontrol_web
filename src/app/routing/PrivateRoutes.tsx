@@ -10,6 +10,7 @@ import {PermissionsIndex} from "../sections/user/permission/PermissionsIndex";
 import {PermissionsCreate} from "../sections/user/permission/PermissionsCreate";
 import {RolesCreate} from "../sections/user/role/RolesCreate";
 import {ActivitiesIndex} from "../sections/activities/ActivitiesIndex";
+import {PermissionsEdit} from "../sections/user/permission/PermissionsEdit";
 
 
 const PrivateRoutes = () => {
@@ -47,6 +48,15 @@ const PrivateRoutes = () => {
                     element={
                         <SuspensedView>
                             <PermissionsCreate/>
+                        </SuspensedView>
+                    }
+                />
+
+                <Route
+                    path='permissions/:id/edit'
+                    element={
+                        <SuspensedView>
+                            <PermissionsEdit/>
                         </SuspensedView>
                     }
                 />

@@ -4,8 +4,8 @@ import {ID, Response} from "../../../../../_metronic/helpers";
 import {Role, RolesQueryResponse} from "../../../../models/user/Role";
 // import process from "process";
 
-// const API_URL_DK = process.env.REACT_APP_API_URL
-const API_URL = 'https://v3.staging.missioncontrol.gg/api-fe'
+const API_URL = process.env.REACT_APP_API_URL
+// const API_URL = 'https://v3.staging.missioncontrol.gg/api-fe'
 const ROLE_URL = `${API_URL}/role`
 const GET_ROLES_URL = `${API_URL}/roles`
 

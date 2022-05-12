@@ -17,8 +17,11 @@ const permissionColumns: ReadonlyArray<Column<Permission>> = [
         <CustomHeader tableProps={props} title='Actions' className='text-end min-w-100px'/>
     ),
     id: 'actions',
-    Cell: ({...props}) => <ActionsCell id={props.data[props.row.index].id} path={'permissions'}
-                                       queryKey={QUERIES.PERMISSIONS_LIST}/>,
+    Cell: ({...props}) => <ActionsCell id={props.data[props.row.index].id}
+                                       path={'permissions'}
+                                       queryKey={QUERIES.PERMISSIONS_LIST}
+                                       object={props.data[props.row.index]}
+    />,
   },
 ]
 

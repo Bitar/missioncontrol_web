@@ -4,10 +4,10 @@ import {ID, Response} from "../../../../../_metronic/helpers";
 import {Permission, PermissionQueryResponse} from "../../../../models/user/Permission";
 // import process from "process";
 
-// const API_URL_DK = process.env.REACT_APP_API_URL
-const API_URL = 'https://v3.staging.missioncontrol.gg/api-fe'
+const API_URL = process.env.REACT_APP_API_URL
+// const API_URL = 'https://v3.staging.missioncontrol.gg/api-fe'
 const GET_PERMISSIONS_URL = `${API_URL}/permissions`
-const PERMISSION_URL = `${API_URL}/permission`
+// const PERMISSION_URL = `${API_URL}/permission`
 
 const getPermissions = (query: string): Promise<PermissionQueryResponse> => {
     return axios
@@ -15,9 +15,9 @@ const getPermissions = (query: string): Promise<PermissionQueryResponse> => {
         .then((d: AxiosResponse<PermissionQueryResponse>) => d.data)
 }
 
-const getPermissionById = (id: ID): Promise<Permission | undefined> => {
+const getPermissionById = (id: any): Promise<Permission | undefined> => {
     return axios
-        .get(`${PERMISSION_URL}/${id}`)
+        .get(`${GET_PERMISSIONS_URL}/${id}`)
         .then((response: AxiosResponse<Response<Permission>>) => response.data)
         .then((response: Response<Permission>) => response.data)
 }

@@ -1,8 +1,8 @@
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
-// const API_URL = process.env.REACT_APP_MC_WEBAPP_THEME_API_URL
-const API_URL = 'https://v3.staging.missioncontrol.gg/api-fe'
+const API_URL = process.env.REACT_APP_API_URL
+// const API_URL = 'https://v3.staging.missioncontrol.gg/api-fe'
 
 
 const deleteObject = async (link: string): Promise<void> => {

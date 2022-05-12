@@ -30,8 +30,18 @@ const rolesColumns: ReadonlyArray<Column<Role>> = [
         <CustomHeader tableProps={props} title='Dates' className='min-w-125px'/>,
     id: 'dates',
     Cell: ({...props}) => {
-      var startDate = new Date(props.data[props.row.index].matchplay_dates.start_date).toDateString();
-      var endDate = new Date(props.data[props.row.index].matchplay_dates.end_date).toDateString();
+      const startDate = new Date(props.data[props.row.index].matchplay_dates?.start_date * 1000).toDateString();
+
+      // const startDateFormat = startDate.toLocaleDateString([], {weekday: 'short'}) + " " +
+      //     startDate.toLocaleDateString([], {month: 'short'}) + " " +
+      //     startDate.toLocaleDateString([], {day: '2-digit'}) + " " +
+      //     startDate.toLocaleDateString([], {year: 'numeric'})
+      // ;
+      //
+      // console.log(startDateFormat);
+
+      var endDate = new Date(props.data[props.row.index].matchplay_dates?.end_date * 1000).toDateString();
+
 
       return <TextCell dObject={startDate + " - " + endDate}/>
     },
@@ -41,13 +51,13 @@ const rolesColumns: ReadonlyArray<Column<Role>> = [
         <CustomHeader tableProps={props} title='Fee' className='min-w-125px'/>,
     id: 'fee',
     Cell: ({...props}) => <TextCell
-        dObject={props.data[props.row.index].entry_fee.amount ? ("$" + (props.data[props.row.index].entry_fee.amount / 100)) : 'Free'}/>,
+        dObject={props.data[props.row.index].entry_fee?.amount ? ("$" + (props.data[props.row.index].entry_fee?.amount / 100)) : 'Free'}/>,
   },
   {
     Header: (props) =>
         <CustomHeader tableProps={props} title='Players' className='min-w-125px'/>,
     id: 'players',
-    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].data.players_count}/>,
+    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].data?.players_count}/>,
   },
   {
     Header: (props) => (
