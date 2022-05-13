@@ -9,13 +9,13 @@ import {ImageCell} from "../../modules/table/columns/ImageCell";
 const rolesColumns: ReadonlyArray<Column<Role>> = [
   {
     Header: (props) =>
-        <CustomHeader tableProps={props} title='Image' className='min-w-125px'/>,
+        <CustomHeader tableProps={props} title='' className='min-w-125px'/>,
     id: 'image',
     Cell: ({...props}) => <ImageCell dObject={props.data[props.row.index].game?.image}/>,
   },
   {
     Header: (props) =>
-        <CustomHeader tableProps={props} title='Name' className='min-w-125px'/>,
+        <CustomHeader tableProps={props} title='League Name' className='min-w-125px'/>,
     id: 'name',
     Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].name}/>,
   },
@@ -58,6 +58,12 @@ const rolesColumns: ReadonlyArray<Column<Role>> = [
         <CustomHeader tableProps={props} title='Players' className='min-w-125px'/>,
     id: 'players',
     Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].data?.players_count}/>,
+  },
+  {
+    Header: (props) =>
+        <CustomHeader tableProps={props} title='# of Teams' className='min-w-125px'/>,
+    id: 'teams',
+    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].data?.teams_count}/>,
   },
   {
     Header: (props) => (
