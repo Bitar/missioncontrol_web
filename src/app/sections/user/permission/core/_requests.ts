@@ -1,13 +1,10 @@
 import axios, {AxiosResponse} from 'axios'
 
-import {ID, Response} from "../../../../../_metronic/helpers";
+import {Response} from "../../../../../_metronic/helpers";
 import {Permission, PermissionQueryResponse} from "../../../../models/user/Permission";
-// import process from "process";
 
 const API_URL = process.env.REACT_APP_API_URL
-// const API_URL = 'https://v3.staging.missioncontrol.gg/api-fe'
 const GET_PERMISSIONS_URL = `${API_URL}/permissions`
-// const PERMISSION_URL = `${API_URL}/permission`
 
 const getPermissions = (query: string): Promise<PermissionQueryResponse> => {
     return axios
@@ -36,4 +33,4 @@ const updatePermission = (id: any, permission: Permission): Promise<Permission |
         .then((response: Response<Permission>) => response.data)
 }
 
-export {getPermissions, getPermissionById, createPermission, updatePermission, GET_PERMISSIONS_URL}
+export {getPermissions, getPermissionById, createPermission, updatePermission}

@@ -1,58 +1,58 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState} from "react";
+import {Role} from "../../../models/user/Role";
+import {useNavigate, useParams} from "react-router-dom";
 import {useFormik} from "formik";
-import * as Yup from 'yup'
-import {Permission} from "../../../models/user/Permission";
+import * as Yup from "yup";
+import {getRoleById, updateRole} from "./core/_requests";
+import {PageTitle} from "../../../../_metronic/layout/core";
 import {KTCard, KTCardBody} from "../../../../_metronic/helpers";
 import clsx from "clsx";
-import {PageTitle} from "../../../../_metronic/layout/core";
-import {getPermissionById, updatePermission} from "./core/_requests";
-import {useNavigate, useParams} from 'react-router-dom';
 
-const editPermissionSchema = Yup.object().shape({
+const editRoleSchema = Yup.object().shape({
     name: Yup.string()
         .required('Name is required'),
 })
 
-const PermissionsEdit = () => {
-    const [permission, setPermission] = useState<Permission | undefined>();
+
+const RolesEdit = () => {
+    const [role, setRole] = useState<Role | undefined>()
     const navigate = useNavigate()
-    const params = useParams();
+    const params = useParams()
 
     const initialValues = {
-        name: permission?.name || '',
+        name: role?.name || ''
     }
 
     const cancel = () => {
-        navigate('/permissions')
+        navigate('/roles')
     }
 
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: initialValues,
-        validationSchema: editPermissionSchema,
+        validationSchema: editRoleSchema,
         onSubmit: async (values, {setSubmitting}) => {
             setSubmitting(true)
             try {
-                await updatePermission(params.id, values)
+                await updateRole(params.id, values)
             } catch (ex) {
-                console.error(ex)
+
             } finally {
                 setSubmitting(false)
                 cancel()
             }
-        },
+        }
     })
 
-
     useEffect(() => {
-        getPermissionById(params.id).then(response => {
-            setPermission(response)
+        getRoleById(params.id).then(response => {
+            setRole(response)
         })
-    }, [params.id]);
+    }, [params.id])
 
     return (
         <>
-            <PageTitle breadcrumbs={[]}>{'Permissions'}</PageTitle>
+            <PageTitle breadcrumbs={[]}>{'Roles'}</PageTitle>
             <KTCard>
                 <div className="card-header">
                     <div className="card-title">
@@ -60,7 +60,7 @@ const PermissionsEdit = () => {
                             <i className="las la-plus fs-2"/>
                         </span>
                         <h3 className="card-label">
-                            Edit Permission
+                            Edit Role
                         </h3>
                     </div>
                 </div>
@@ -149,4 +149,4 @@ const PermissionsEdit = () => {
     )
 }
 
-export {PermissionsEdit}
+export {RolesEdit}

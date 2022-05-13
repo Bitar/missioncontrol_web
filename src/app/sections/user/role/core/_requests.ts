@@ -2,11 +2,11 @@ import axios, {AxiosResponse} from 'axios'
 
 import {ID, Response} from "../../../../../_metronic/helpers";
 import {Role, RolesQueryResponse} from "../../../../models/user/Role";
+import {Permission} from "../../../../models/user/Permission";
 // import process from "process";
 
 const API_URL = process.env.REACT_APP_API_URL
 // const API_URL = 'https://v3.staging.missioncontrol.gg/api-fe'
-const ROLE_URL = `${API_URL}/role`
 const GET_ROLES_URL = `${API_URL}/roles`
 
 const getRoles = (query: string): Promise<RolesQueryResponse> => {
@@ -15,9 +15,9 @@ const getRoles = (query: string): Promise<RolesQueryResponse> => {
         .then((d: AxiosResponse<RolesQueryResponse>) => d.data)
 }
 
-const getRoleById = (id: ID): Promise<Role | undefined> => {
+const getRoleById = (id: any): Promise<Role | undefined> => {
     return axios
-        .get(`${ROLE_URL}/${id}`)
+        .get(`${GET_ROLES_URL}/${id}`)
         .then((response: AxiosResponse<Response<Role>>) => response.data)
         .then((response: Response<Role>) => response.data)
 }
@@ -27,6 +27,13 @@ const createRole = (role: Role): Promise<Role | undefined> => {
         .post(`${GET_ROLES_URL}`, role)
         .then((response: AxiosResponse<Response<Role>>) => response.data)
         .then((response: Response<Role>) => response.data)
+}
+
+const updateRole = (id: any, role: Role): Promise<Role | undefined> => {
+    return axios
+        .put(`${GET_ROLES_URL}/${id}`, role)
+        .then((response: AxiosResponse<Response<Permission>>) => response.data)
+        .then((response: Response<Permission>) => response.data)
 }
 
 // const createUser = (user: User): Promise<User | undefined> => {
@@ -52,4 +59,4 @@ const createRole = (role: Role): Promise<Role | undefined> => {
 //     return axios.all(requests).then(() => {})
 // }
 
-export {getRoles, getRoleById, createRole, GET_ROLES_URL}
+export {getRoles, getRoleById, createRole, updateRole}
