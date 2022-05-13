@@ -5,7 +5,7 @@ import {Permission} from "../../../models/user/Permission";
 import {isNotEmpty, KTCard, KTCardBody, Response} from "../../../../_metronic/helpers";
 import clsx from "clsx";
 import {PageTitle} from "../../../../_metronic/layout/core";
-import {GET_PERMISSIONS_URL} from "./core/_requests";
+import {GET_PERMISSIONS_URL, updatePermission} from "./core/_requests";
 import {useNavigate, useParams} from 'react-router-dom';
 import axios, {AxiosResponse} from "axios";
 
@@ -20,17 +20,17 @@ const PermissionsEdit = () => {
     const params = useParams();
     // const permission = await getPermissionById(params.id)
 
-    const [permissionForEdit] = useState<Permission>({
-        name: permission?.name || 'empty',
-    })
-
     // const [permissionForEdit] = useState<Permission>({
-    //     ...permission,
-    //     name: permission.name || '',
+    //     name: permission?.name || 'empty',
+        
     // })
 
+    const [permissionForEdit] = useState<Permission>({
+        name: permission?.name || 'Enter new name',
+    })
+    console.log(permission);
     // console.log(params.id);
-    //
+    
     // console.log(permissionForEdit);
 
     const cancel = () => {
@@ -47,7 +47,8 @@ const PermissionsEdit = () => {
                 if (isNotEmpty(values.id)) {
                     // await updateUser(values)
                 } else {
-                    // await updatePermission(values)
+                     await updatePermission(values)
+                     
                 }
             } catch (ex) {
                 console.error(ex)
@@ -65,6 +66,7 @@ const PermissionsEdit = () => {
             .then((response: Response<Permission>) => {
                 setPermission(response.data)
             })
+           
     }, []);
 
     return (
