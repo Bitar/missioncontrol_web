@@ -35,8 +35,6 @@ const QueryResponseProvider: FC<Props> = ({id, requestFunction, children}) => {
       id,
       () => {
         return requestFunction(query)
-        // var fn = window[requestFunction];
-        // return fn(query)
       },
       {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
   )

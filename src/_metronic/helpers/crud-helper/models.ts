@@ -3,7 +3,7 @@ import {Dispatch, SetStateAction} from 'react'
 export type ID = undefined | null | number
 
 export type PaginationState = {
-  current_page: number
+  page: number
   per_page: 10 | 30 | 50 | 100
   links?: Array<{ label: string; active: boolean; url: string | null; page: number | null }>
 }
@@ -34,7 +34,7 @@ export type QueryRequestContextProps = {
 }
 
 export const initialQueryState: QueryState = {
-  current_page: 1,
+  page: 1,
   per_page: 10,
 }
 
@@ -53,7 +53,9 @@ export type QueryResponseContextProps<T> = {
 
 export const initialQueryResponse = {
   refetch: () => {
-  }, isLoading: false, query: ''
+  },
+  isLoading: false,
+  query: ''
 }
 
 export type ListViewContextProps = {

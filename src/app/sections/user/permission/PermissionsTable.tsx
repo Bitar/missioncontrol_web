@@ -8,6 +8,7 @@ import {Permission} from "../../../models/user/Permission";
 import {useQueryResponseData, useQueryResponseLoading} from "../../../modules/table/QueryResponseProvider";
 // import {TableListPagination} from "../../../modules/table/TableListPagination";
 import {TableListLoading} from "../../../modules/table/TableListLoading";
+import {TableListPagination} from "../../../modules/table/TableListPagination";
 
 const PermissionsTable = () => {
     const permissions = useQueryResponseData()

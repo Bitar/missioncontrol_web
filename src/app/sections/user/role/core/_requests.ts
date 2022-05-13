@@ -1,12 +1,9 @@
 import axios, {AxiosResponse} from 'axios'
-
-import {ID, Response} from "../../../../../_metronic/helpers";
+import {Response} from "../../../../../_metronic/helpers";
 import {Role, RolesQueryResponse} from "../../../../models/user/Role";
 import {Permission} from "../../../../models/user/Permission";
-// import process from "process";
 
 const API_URL = process.env.REACT_APP_API_URL
-// const API_URL = 'https://v3.staging.missioncontrol.gg/api-fe'
 const GET_ROLES_URL = `${API_URL}/roles`
 
 const getRoles = (query: string): Promise<RolesQueryResponse> => {

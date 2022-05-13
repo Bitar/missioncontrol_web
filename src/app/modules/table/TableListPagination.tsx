@@ -4,20 +4,20 @@ import {useQueryRequest} from "./QueryRequestProvider";
 
 const TableListPagination = () => {
     const pagination = useQueryResponsePagination()
-
     const isLoading = useQueryResponseLoading()
     const {updateState} = useQueryRequest()
-    const updatePage = (page: number | null) => {
-        if (!page || isLoading || pagination.current_page === page) {
+
+    const updatePage = (page: number | undefined) => {
+        if (!page || isLoading || pagination.page === page) {
             return
         }
 
-        updateState({current_page: page, per_page: pagination.per_page || 10})
+        updateState({page, per_page: pagination.per_page || 10})
     }
 
     const currentPage = (link: any) => {
         if (link) {
-            return link.url?.substring(link.url?.indexOf('page=') + 5)
+            return parseInt(link.url?.substring(link.url?.indexOf('page=') + 5))
         }
     }
 
@@ -32,7 +32,7 @@ const TableListPagination = () => {
                             <li
                                 key={link.label}
                                 className={clsx('page-item', {
-                                    active: pagination.current_page === currentPage(link),
+                                    active: pagination.page === currentPage(link),
                                     disabled: isLoading,
                                     previous: link.label === '&laquo; Previous',
                                     next: link.label === 'Next &raquo;',
@@ -40,7 +40,9 @@ const TableListPagination = () => {
                             >
 
                                 <a className='page-link'
-                                   onClick={() => updatePage(currentPage(link))}
+                                   onClick={() => {
+                                       updatePage(currentPage(link))
+                                   }}
                                    dangerouslySetInnerHTML={{__html: link.label}}
                                    style={{cursor: 'pointer'}}
                                 />
