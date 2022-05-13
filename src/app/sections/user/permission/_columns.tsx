@@ -20,7 +20,6 @@ const permissionColumns: ReadonlyArray<Column<Permission>> = [
     Cell: ({...props}) => <ActionsCell id={props.data[props.row.index].id}
                                        path={'permissions'}
                                        queryKey={QUERIES.PERMISSIONS_LIST}
-                                       object={props.data[props.row.index]}
     />,
   },
 ]

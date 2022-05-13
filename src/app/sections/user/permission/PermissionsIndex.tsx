@@ -22,7 +22,7 @@ const PermissionsList = () => {
 
 const PermissionsIndex = () => (
     <QueryRequestProvider>
-        <QueryResponseProvider id={QUERIES.ROLES_LIST} requestFunction={getPermissions}>
+        <QueryResponseProvider id={QUERIES.PERMISSIONS_LIST} requestFunction={getPermissions}>
             <ListViewProvider>
                 <PermissionsList/>
             </ListViewProvider>
