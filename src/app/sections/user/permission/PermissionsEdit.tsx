@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react'
 import {useFormik} from "formik";
 import * as Yup from 'yup'
 import {Permission} from "../../../models/user/Permission";
-import {isNotEmpty, KTCard, KTCardBody, Response} from "../../../../_metronic/helpers";
+import {KTCard, KTCardBody, Response} from "../../../../_metronic/helpers";
 import clsx from "clsx";
 import {PageTitle} from "../../../../_metronic/layout/core";
-import {GET_PERMISSIONS_URL} from "./core/_requests";
+import {GET_PERMISSIONS_URL, updatePermission} from "./core/_requests";
 import {useNavigate, useParams} from 'react-router-dom';
 import axios, {AxiosResponse} from "axios";
 
@@ -20,18 +20,9 @@ const PermissionsEdit = () => {
     const params = useParams();
     // const permission = await getPermissionById(params.id)
 
-    const [permissionForEdit] = useState<Permission>({
-        name: permission?.name || 'empty',
-    })
-
-    // const [permissionForEdit] = useState<Permission>({
-    //     ...permission,
-    //     name: permission.name || '',
-    // })
-
-    // console.log(params.id);
-    //
-    // console.log(permissionForEdit);
+    const initialValues = {
+        name: permission?.name || '',
+    }
 
     const cancel = () => {
         navigate('/permissions')
@@ -39,16 +30,17 @@ const PermissionsEdit = () => {
 
     const formik = useFormik({
         enableReinitialize: true,
-        initialValues: permissionForEdit,
+        initialValues: initialValues,
         validationSchema: editPermissionSchema,
         onSubmit: async (values, {setSubmitting}) => {
             setSubmitting(true)
             try {
-                if (isNotEmpty(values.id)) {
-                    // await updateUser(values)
-                } else {
-                    // await updatePermission(values)
-                }
+                await updatePermission(params.id, values)
+                // if (isNotEmpty(values.id)) {
+                //     // await updateUser(values)
+                // } else {
+                //     // await updatePermission(values)
+                // }
             } catch (ex) {
                 console.error(ex)
             } finally {
@@ -58,6 +50,7 @@ const PermissionsEdit = () => {
         },
     })
 
+
     useEffect(() => {
         axios
             .get(`${GET_PERMISSIONS_URL}/${params.id}`)
@@ -65,7 +58,7 @@ const PermissionsEdit = () => {
             .then((response: Response<Permission>) => {
                 setPermission(response.data)
             })
-    }, []);
+    }, [params.id]);
 
     return (
         <>
@@ -101,6 +94,7 @@ const PermissionsEdit = () => {
                                 {/* end::Label */}
 
                                 {/* begin::Input */}
+                                {/*<Field name="name" type="text" className={'form-control form-control-solid mb-3 mb-lg-0' + (formik.touched.name && formik.errors.name ? ' is-invalid' : 'is-valid')} />*/}
                                 <input
                                     placeholder='Name'
                                     {...formik.getFieldProps('name')}

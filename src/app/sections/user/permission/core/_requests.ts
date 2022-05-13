@@ -22,11 +22,18 @@ const getPermissionById = (id: any): Promise<Permission | undefined> => {
         .then((response: Response<Permission>) => response.data)
 }
 
-const createPermission = (permission: Permission) : Promise<Permission | undefined> => {
+const createPermission = (permission: Permission): Promise<Permission | undefined> => {
     return axios
         .post(`${GET_PERMISSIONS_URL}`, permission)
         .then((response: AxiosResponse<Response<Permission>>) => response.data)
         .then((response: Response<Permission>) => response.data)
 }
 
-export {getPermissions, getPermissionById, createPermission, GET_PERMISSIONS_URL}
+const updatePermission = (id: any, permission: Permission): Promise<Permission | undefined> => {
+    return axios
+        .put(`${GET_PERMISSIONS_URL}/${id}`, permission)
+        .then((response: AxiosResponse<Response<Permission>>) => response.data)
+        .then((response: Response<Permission>) => response.data)
+}
+
+export {getPermissions, getPermissionById, createPermission, updatePermission, GET_PERMISSIONS_URL}
