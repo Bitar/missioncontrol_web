@@ -42,6 +42,14 @@ export function AsideMenuMain() {
             >
             </AsideMenuItem>
 
+            <AsideMenuItem
+                to='/games'
+                title='games'
+                fontIcon='bi-archive'
+                icon='/media/icons/duotune/general/gen022.svg'
+            >
+            </AsideMenuItem>
+
             {/*<AsideMenuItemWithSub*/}
             {/*    to=''*/}
             {/*    title='roles'*/}
