@@ -34,7 +34,6 @@ const QueryResponseProvider: FC<Props> = ({id, requestFunction, children}) => {
   } = useQuery(
       `${id}-${query}`,
       () => {
-        console.log('result')
         return requestFunction(query)
       },
       {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}

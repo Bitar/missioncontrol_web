@@ -15,7 +15,7 @@ const rolesColumns: ReadonlyArray<Column<Role>> = [
   },
   {
     Header: (props) =>
-        <CustomHeader tableProps={props} title='' className='min-w-125px'/>,
+        <CustomHeader tableProps={props} title='Cover Image' className='min-w-125px'/>,
     id: 'image',
     Cell: ({...props}) => <ImageCell dObject={props.data[props.row.index].image}/>,
   },
@@ -25,7 +25,7 @@ const rolesColumns: ReadonlyArray<Column<Role>> = [
     id: 'description',
     Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].description}/>,
   },
-  
+
   {
     Header: (props) =>
         <CustomHeader tableProps={props} title='Crossplay' className='min-w-125px'/>,
@@ -36,7 +36,10 @@ const rolesColumns: ReadonlyArray<Column<Role>> = [
     Header: (props) =>
         <CustomHeader tableProps={props} title='Platforms' className='min-w-125px'/>,
     id: 'platforms',
-    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].platforms.map( (platform: { abbreviation: string; }) => {return platform.abbreviation + " "})}/>,
+    Cell: ({...props}) => <TextCell
+        dObject={props.data[props.row.index].platforms.map((platform: { abbreviation: string; }) => {
+          return platform.abbreviation + " "
+        })}/>,
   },
   {
     Header: (props) => (

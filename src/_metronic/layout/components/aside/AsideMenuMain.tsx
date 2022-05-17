@@ -26,6 +26,21 @@ export function AsideMenuMain() {
                 icon='/media/icons/duotune/general/gen022.svg'
             >
             </AsideMenuItem>
+
+            <AsideMenuItem
+                to='/games'
+                title='games'
+                fontIcon='bi-archive'
+                icon='/media/icons/duotune/general/gen022.svg'
+            >
+            </AsideMenuItem>
+
+            <div className='menu-item'>
+                <div className='menu-content pt-8 pb-2'>
+                    <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Settings</span>
+                </div>
+            </div>
+
             <AsideMenuItem
                 to='/roles'
                 title='roles'
@@ -37,14 +52,6 @@ export function AsideMenuMain() {
             <AsideMenuItem
                 to='/permissions'
                 title='permissions'
-                fontIcon='bi-archive'
-                icon='/media/icons/duotune/general/gen022.svg'
-            >
-            </AsideMenuItem>
-
-            <AsideMenuItem
-                to='/games'
-                title='games'
                 fontIcon='bi-archive'
                 icon='/media/icons/duotune/general/gen022.svg'
             >

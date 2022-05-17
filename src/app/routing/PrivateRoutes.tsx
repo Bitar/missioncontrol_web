@@ -32,9 +32,9 @@ const PrivateRoutes = () => {
                 <Route path='menu-test' element={<MenuTestPage/>}/>
                 {/* Pages */}
                 <Route path='activities' element={<ActivitiesIndex/>}/>
-                <Route path='roles' element={<RolesIndex/>}/>
                 <Route path='games' element={<GamesIndex/>}/>
 
+                <Route path='roles' element={<RolesIndex/>}/>
                 <Route
                     path='roles/create'
                     element={
@@ -54,7 +54,6 @@ const PrivateRoutes = () => {
                 />
 
                 <Route path='permissions' element={<PermissionsIndex/>}/>
-
                 <Route
                     path='permissions/create'
                     element={
