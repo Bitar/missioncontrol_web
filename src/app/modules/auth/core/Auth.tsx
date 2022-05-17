@@ -19,7 +19,7 @@ type AuthContextProps = {
   saveAuth: (auth: AuthModel | undefined) => void
   currentUser: UserModel | undefined
   setCurrentUser: Dispatch<SetStateAction<UserModel | undefined>>
-  currentCommunityAdmin: Community | undefined
+  communityAdmin: Community | undefined
   setCommunityAdmin: Dispatch<SetStateAction<Community | undefined>>
   logout: () => void
 }
@@ -31,7 +31,7 @@ const initAuthContextPropsState = {
   currentUser: undefined,
   setCurrentUser: () => {
   },
-  currentCommunityAdmin: undefined,
+  communityAdmin: undefined,
   setCommunityAdmin: () => {
 
   },
@@ -48,7 +48,7 @@ const useAuth = () => {
 const AuthProvider: FC = ({children}) => {
   const [auth, setAuth] = useState<AuthModel | undefined>(authHelper.getAuth())
   const [currentUser, setCurrentUser] = useState<UserModel | undefined>()
-  const [currentCommunityAdmin, setCommunityAdmin] = useState<Community | undefined>()
+  const [communityAdmin, setCommunityAdmin] = useState<Community | undefined>()
   const saveAuth = (auth: AuthModel | undefined) => {
     setAuth(auth)
     if (auth) {
@@ -66,7 +66,7 @@ const AuthProvider: FC = ({children}) => {
 
   return (
       <AuthContext.Provider
-          value={{auth, saveAuth, currentUser, setCurrentUser, currentCommunityAdmin, setCommunityAdmin, logout}}>
+          value={{auth, saveAuth, currentUser, setCurrentUser, communityAdmin, setCommunityAdmin, logout}}>
         {children}
       </AuthContext.Provider>
   )

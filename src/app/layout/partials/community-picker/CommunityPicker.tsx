@@ -6,8 +6,6 @@ import {ID} from "../../../../_metronic/helpers";
 import {useNavigate} from "react-router-dom";
 
 const CommunityPicker: FC = () => {
-    // const {communities} = useCommunityAdmin()
-    // console.log(communities)
     const [communityAdmin, setCommunityAdmin] = useState<Community[] | undefined>();
 
     const isActive = false;
