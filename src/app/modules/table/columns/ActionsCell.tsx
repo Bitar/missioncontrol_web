@@ -32,6 +32,7 @@ const ActionsCell: FC<Props> = ({id, path, queryKey}) => {
                 <i className="fa-solid fa-pencil text-warning"/>
             </Link>
 
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a className='btn btn-icon btn-sm btn-active-light-danger'
                onClick={async () => await deleteItem.mutateAsync()}>
                 <i className="fa-solid fa-trash text-danger"/>

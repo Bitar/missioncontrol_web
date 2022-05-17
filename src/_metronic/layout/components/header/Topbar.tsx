@@ -1,16 +1,14 @@
 import clsx from 'clsx'
 import React, {FC} from 'react'
-import {KTSVG, toAbsoluteUrl} from '../../../helpers'
+import {toAbsoluteUrl} from '../../../helpers'
 import {HeaderUserMenu} from '../../../partials'
 import {CommunityPicker} from "../../../../app/layout/partials/community-picker/CommunityPicker";
-import {useLayout} from '../../core'
 import {useAuth} from "../../../../app/modules/auth";
 
 const toolbarButtonMarginClass = 'ms-1 ms-lg-3',
     toolbarUserAvatarHeightClass = 'symbol-30px symbol-md-40px'
 
 const Topbar: FC = () => {
-    const {config} = useLayout()
     const {currentUser} = useAuth()
 
     return (
@@ -47,16 +45,16 @@ const Topbar: FC = () => {
             {/* end::User */}
 
             {/* begin::Aside Toggler */}
-            {config.header.left === 'menu' && (
-                <div className='d-flex align-items-center d-lg-none ms-2 me-n3' title='Show header menu'>
-                    <div
-                        className='btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px'
-                        id='kt_header_menu_mobile_toggle'
-                    >
-                        <KTSVG path='/media/icons/duotune/text/txt001.svg' className='svg-icon-1'/>
-                    </div>
-                </div>
-            )}
+            {/*{config.header.left === 'menu' && (*/}
+            {/*    <div className='d-flex align-items-center d-lg-none ms-2 me-n3' title='Show header menu'>*/}
+            {/*        <div*/}
+            {/*            className='btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px'*/}
+            {/*            id='kt_header_menu_mobile_toggle'*/}
+            {/*        >*/}
+            {/*            <KTSVG path='/media/icons/duotune/text/txt001.svg' className='svg-icon-1'/>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*)}*/}
         </div>
     )
 }

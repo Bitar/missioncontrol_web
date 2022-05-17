@@ -9,17 +9,18 @@ import {
   SetStateAction,
 } from 'react'
 import {LayoutSplashScreen} from '../../../../_metronic/layout/core'
-import {AuthModel, CommunityModel, UserModel} from './_models'
+import {AuthModel, UserModel} from './_models'
 import * as authHelper from './AuthHelpers'
 import {getUserByToken} from './_requests'
+import {Community} from "../../../models/community/Community";
 
 type AuthContextProps = {
   auth: AuthModel | undefined
   saveAuth: (auth: AuthModel | undefined) => void
   currentUser: UserModel | undefined
   setCurrentUser: Dispatch<SetStateAction<UserModel | undefined>>
-  currentCommunityAdmin: CommunityModel | undefined
-  setCommunityAdmin: Dispatch<SetStateAction<CommunityModel | undefined>>
+  currentCommunityAdmin: Community | undefined
+  setCommunityAdmin: Dispatch<SetStateAction<Community | undefined>>
   logout: () => void
 }
 
@@ -47,7 +48,7 @@ const useAuth = () => {
 const AuthProvider: FC = ({children}) => {
   const [auth, setAuth] = useState<AuthModel | undefined>(authHelper.getAuth())
   const [currentUser, setCurrentUser] = useState<UserModel | undefined>()
-  const [currentCommunityAdmin, setCommunityAdmin] = useState<CommunityModel | undefined>()
+  const [currentCommunityAdmin, setCommunityAdmin] = useState<Community | undefined>()
   const saveAuth = (auth: AuthModel | undefined) => {
     setAuth(auth)
     if (auth) {

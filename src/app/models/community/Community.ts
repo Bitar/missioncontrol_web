@@ -16,7 +16,6 @@ export type Community = {
     contact: CommunityContact,
     access: CommunityAccess,
     games: Game[],
-    data: CommunityData,
     is_follow: boolean
 }
 

@@ -1,6 +1,7 @@
 export interface AuthModel {
   token: string
-  data: UserModel
+  data: UserModel,
+  active_community?: CommunityModel
 }
 
 export interface UserAddressModel {
