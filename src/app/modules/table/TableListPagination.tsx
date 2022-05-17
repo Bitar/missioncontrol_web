@@ -32,7 +32,7 @@ const TableListPagination = () => {
                             <li
                                 key={link.label}
                                 className={clsx('page-item', {
-                                    active: pagination.page === currentPage(link),
+                                    active: pagination.current_page === currentPage(link),
                                     disabled: isLoading,
                                     previous: link.label === '&laquo; Previous',
                                     next: link.label === 'Next &raquo;',

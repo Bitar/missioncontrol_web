@@ -8,7 +8,6 @@ const QueryRequestProvider: FC = ({children}) => {
 
   const updateState = (updates: Partial<QueryState>) => {
     const updatedState = {...state, ...updates} as QueryState
-
     setState(updatedState)
   }
 

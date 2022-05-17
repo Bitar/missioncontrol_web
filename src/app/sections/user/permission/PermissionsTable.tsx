@@ -7,7 +7,7 @@ import {permissionColumns} from "./_columns";
 import {Permission} from "../../../models/user/Permission";
 import {useQueryResponseData, useQueryResponseLoading} from "../../../modules/table/QueryResponseProvider";
 import {TableListLoading} from "../../../modules/table/TableListLoading";
-// import {TableListPagination} from "../../../modules/table/TableListPagination";
+import {TableListPagination} from "../../../modules/table/TableListPagination";
 
 const PermissionsTable = () => {
     const permissions = useQueryResponseData()
@@ -51,7 +51,7 @@ const PermissionsTable = () => {
                     </tbody>
                 </table>
             </div>
-            {/*<TableListPagination/>*/}
+            <TableListPagination/>
             {isLoading && <TableListLoading/>}
         </KTCardBody>
     )

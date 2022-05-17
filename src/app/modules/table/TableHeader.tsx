@@ -7,6 +7,7 @@
 // import {TableListGrouping} from "./TableListGrouping";
 import {TableListToolbar} from "./TableListToolbar";
 import {FC} from "react";
+import {TableSearchComponent} from "./TableSearchComponent";
 // import {useListView} from "./ListViewProvider";
 
 type Props = {
@@ -19,7 +20,7 @@ const TableHeader: FC<Props> = ({name, url}) => {
     // const {selected} = useListView()
     return (
         <div className='card-header border-0 pt-6'>
-            {/*<TableSearchComponent/>*/}
+            <TableSearchComponent/>
             {/* begin::Card toolbar */}
             <div className='card-toolbar'>
                 {/* begin::Group actions */}

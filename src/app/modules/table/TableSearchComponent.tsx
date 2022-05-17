@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useState, useEffect} from 'react'
-import {initialQueryState, KTSVG, useDebounce} from "../../../_metronic/helpers";
+
 import {useQueryRequest} from "./QueryRequestProvider";
+import {initialQueryState, KTSVG, useDebounce} from "../../../_metronic/helpers";
 
 const TableSearchComponent = () => {
     const {updateState} = useQueryRequest()
@@ -9,7 +11,7 @@ const TableSearchComponent = () => {
     // ... if searchTerm has not been updated within last 500ms.
     // The goal is to only have the API call fire when user stops typing ...
     // ... so that we aren't hitting our API rapidly.
-    const debouncedSearchTerm = useDebounce(searchTerm, 150)
+    const debouncedSearchTerm = useDebounce(searchTerm, 250)
     // Effect for API call
     useEffect(
         () => {
@@ -17,7 +19,7 @@ const TableSearchComponent = () => {
                 updateState({search: debouncedSearchTerm, ...initialQueryState})
             }
         },
-        [debouncedSearchTerm, searchTerm, updateState] // Only call effect if debounced search term changes
+        [debouncedSearchTerm] // Only call effect if debounced search term changes
         // More details about useDebounce: https://usehooks.com/useDebounce/
     )
 
