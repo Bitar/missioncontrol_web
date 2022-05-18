@@ -1,8 +1,8 @@
 import {useMemo} from 'react'
 import {useTable, ColumnInstance, Row} from 'react-table'
 import {KTCardBody} from "../../../_metronic/helpers";
-import {rolesColumns} from "./_columns";
-import {Role} from "../../models/user/Role";
+import { gamesColumns } from './_columns';
+import { Game } from '../../models/game/Game';
 import {useQueryResponseData, useQueryResponseLoading} from "../../modules/table/QueryResponseProvider";
 import {CustomHeaderColumn} from "../../modules/table/columns/CustomHeaderColumn";
 import {CustomRow} from "../../modules/table/columns/CustomRow";
@@ -10,10 +10,10 @@ import {TableListLoading} from "../../modules/table/TableListLoading";
 
 
 const GamesTable = () => {
-    const roles = useQueryResponseData()
+    const games = useQueryResponseData()
     const isLoading = useQueryResponseLoading()
-    const data = useMemo(() => roles, [roles])
-    const columns = useMemo(() => rolesColumns, [])
+    const data = useMemo(() => games, [games])
+    const columns = useMemo(() => gamesColumns, [])
     const {getTableProps, getTableBodyProps, headers, rows, prepareRow} = useTable({
         columns,
         data,
@@ -28,14 +28,14 @@ const GamesTable = () => {
                 >
                     <thead>
                     <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
-                        {headers.map((column: ColumnInstance<Role>) => (
+                        {headers.map((column: ColumnInstance<Game>) => (
                             <CustomHeaderColumn key={column.id} column={column}/>
                         ))}
                     </tr>
                     </thead>
                     <tbody className='text-gray-600 fw-bold' {...getTableBodyProps()}>
                     {rows.length > 0 ? (
-                        rows.map((row: Row<Role>, i) => {
+                        rows.map((row: Row<Game>, i) => {
                             prepareRow(row)
                             return <CustomRow row={row} key={`row-${i}-${row.id}`}/>
                         })
