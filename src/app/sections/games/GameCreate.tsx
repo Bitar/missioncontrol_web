@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {useFormik} from "formik";
+import {useFormik , FieldArray, Field ,Form} from "formik";
 import * as Yup from 'yup'
 import { Game } from '../../models/game/Game';
 import { isNotEmpty, KTCard,KTCardBody } from '../../../_metronic/helpers';
@@ -7,20 +7,34 @@ import clsx from "clsx";
 import { PageTitle } from '../../../_metronic/layout/core';
 import {createGame} from "./core/_requests";
 import {useNavigate} from 'react-router-dom';
+import { platform } from 'os';
 
 const createGameSchema = Yup.object().shape({
     title: Yup.string()
-        .required('Name is required'),
+        .required('Title is required'),
     description: Yup.string()
-        .required('Name is required'),
-//    is_featured: Yup.boolean()
-//         .required('Name is required'),
-//     is_crossplay: Yup.boolean()
-//         .required('Name is required'),
-//     image: Yup.string()
-//         .required('Name is required'), 
-//     platforms: Yup.array()
-//         .required("Name is required")  
+        .required('Description is required'),
+    is_featured: Yup.boolean().default(false),
+    is_crossplay: Yup.boolean().default(false),
+    //  image: Yup.mixed()
+    //      .required('You need to provide a file photo')
+    //      .test(
+    //         "fileSize",
+    //         "File size too large, max file size is 1 Mb",
+    //         (file) => {
+    //           console.log("file: ", file);
+    //           if (file) {
+    //             return file.size <= 1100000;
+    //           } else {
+    //             return true;
+    //           }
+    //         }
+    //       ) 
+     platforms: Yup.array().of(
+         Yup.object().shape({
+            abbreviation: Yup.string()
+         })
+     )
 })
 
 const GameCreate = () => {
@@ -99,7 +113,7 @@ const GameCreate = () => {
 
                                 {/* begin::Input */}
                                 <input
-                                    placeholder='New Title'
+                                    placeholder='Title'
                                     {...formik.getFieldProps('title')}
                                     type='text'
                                     name='title'
@@ -130,7 +144,7 @@ const GameCreate = () => {
 
                                 {/* begin::Input */}
                                 <input
-                                    placeholder='New Description'
+                                    placeholder='Description'
                                     {...formik.getFieldProps('description')}
                                     type='text'
                                     name='description'
@@ -153,8 +167,54 @@ const GameCreate = () => {
                                 )}
                                 {/* end::Input */}
                             </div>
+                            
                             {/* end::Input group */}
-                        </div>
+                            </div>
+
+                            
+                            
+                           
+                        
+                            
+                        
+
+                
+                            <div className='fv-row mb-7'>
+                            <div className='form-check form-check-solid fv-row'>
+                                <input
+                                    className='form-check-input'
+                                    type='checkbox'
+                                    {...formik.getFieldProps('is_crossplay')}
+                                />
+                                <label className='form-check-label fw-bold ps-2 fs-6' htmlFor='is_crossplay'>
+                                    Click if game is crossplay compatible
+                                </label>
+                                </div>
+                                {formik.touched.is_crossplay && formik.errors.is_crossplay && (
+                                <div className='fv-plugins-message-container'>
+                                    <div className='fv-help-block'>{formik.errors.is_crossplay}</div>
+                                </div>
+                                )}
+                          </div>
+                          <div className='fv-row mb-7'>
+                             <div className='form-check form-check-solid fv-row'>
+                                <input
+                                    className='form-check-input'
+                                    type='checkbox'
+                                    {...formik.getFieldProps('is_featured')}
+                                />
+                                <label className='form-check-label fw-bold ps-2 fs-6' htmlFor='is_featured'>
+                                   Click if featured game
+                                </label>
+                                </div>
+                                {formik.touched.is_featured && formik.errors.is_featured && (
+                                <div className='fv-plugins-message-container'>
+                                    <div className='fv-help-block'>{formik.errors.is_featured}</div>
+                                </div>
+                               )}
+                               
+                          </div>
+                                    
                         {/* end::Scroll */}
 
                         {/* begin::Actions */}

@@ -9,8 +9,11 @@ import { getGameById,updateGame } from './core/_requests';
 import {useNavigate, useParams} from 'react-router-dom';
 
 const editGamesSchema = Yup.object().shape({
-    name: Yup.string()
-        .required('Name is required'),  
+    title: Yup.string()
+        .required('Name is required'), 
+    description: Yup.string()
+        .required('Name is required'), 
+     
 })
 
 const GamesEdit = () => {
@@ -24,7 +27,7 @@ const GamesEdit = () => {
         is_featured: false,
         is_crossplay: false,
         image: game?.image || '',
-        platforms: []
+        platforms: game?.platforms || []
     }
 
     const cancel = () => {
@@ -109,6 +112,38 @@ const GamesEdit = () => {
                                     <div className='fv-plugins-message-container'>
                                         <div className='fv-help-block'>
                                             <span role='alert'>{formik.errors.title}</span>
+                                        </div>
+                                    </div>
+                                )}
+                                {/* end::Input */}
+                            </div>
+
+                            <div className='fv-row mb-7'>
+                                {/* begin::Label */}
+                                <label className='required fw-bold fs-6 mb-2'>Description</label>
+                                {/* end::Label */}
+
+                                {/* begin::Input */}
+                                {/*<Field name="name" type="text" className={'form-control form-control-solid mb-3 mb-lg-0' + (formik.touched.name && formik.errors.name ? ' is-invalid' : 'is-valid')} />*/}
+                                <input
+                                    placeholder='Name'
+                                    {...formik.getFieldProps('description')}
+                                    type='text'
+                                    name='description'
+                                    className={clsx(
+                                        'form-control form-control-solid mb-3 mb-lg-0',
+                                        {'is-invalid': formik.touched.description && formik.errors.description},
+                                        {
+                                            'is-valid': formik.touched.description && !formik.errors.description,
+                                        }
+                                    )}
+                                    autoComplete='off'
+                                    disabled={formik.isSubmitting}
+                                />
+                                {formik.touched.description && formik.errors.description && (
+                                    <div className='fv-plugins-message-container'>
+                                        <div className='fv-help-block'>
+                                            <span role='alert'>{formik.errors.description}</span>
                                         </div>
                                     </div>
                                 )}
