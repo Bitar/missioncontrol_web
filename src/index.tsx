@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom'
 // Axios
 import axios from 'axios'
-import {Chart, registerables} from 'chart.js'
+// import {Chart, registerables} from 'chart.js'
 import {QueryClient, QueryClientProvider} from 'react-query'
 import {ReactQueryDevtools} from 'react-query/devtools'
 
@@ -34,7 +34,7 @@ import {AuthProvider, setupAxios} from './app/modules/auth'
  */
 setupAxios(axios)
 
-Chart.register(...registerables)
+// Chart.register(...registerables)
 
 const queryClient = new QueryClient()
 
