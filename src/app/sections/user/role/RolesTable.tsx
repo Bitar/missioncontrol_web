@@ -7,6 +7,7 @@ import {useQueryResponseData, useQueryResponseLoading} from "../../../modules/ta
 import {CustomHeaderColumn} from "../../../modules/table/columns/CustomHeaderColumn";
 import {CustomRow} from "../../../modules/table/columns/CustomRow";
 import {TableListLoading} from "../../../modules/table/TableListLoading";
+import {TableListPagination} from "../../../modules/table/TableListPagination";
 
 
 const RolesTable = () => {
@@ -51,7 +52,7 @@ const RolesTable = () => {
                     </tbody>
                 </table>
             </div>
-            {/*<TableListPagination/>*/}
+            <TableListPagination/>
             {isLoading && <TableListLoading/>}
         </KTCardBody>
     )
