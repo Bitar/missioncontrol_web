@@ -62,8 +62,8 @@ export function Registration() {
           values.changepassword
         )
         saveAuth(auth)
-        const {data: user} = await getUserByToken(auth.token)
-        setCurrentUser(user)
+        // const {data: user} = await getUserByToken(auth.token)
+        setCurrentUser(auth.data)
       } catch (error) {
         console.error(error)
         saveAuth(undefined)
@@ -94,7 +94,7 @@ export function Registration() {
         {/* begin::Link */}
         <div className='text-gray-400 fw-bold fs-4'>
           Already have an account?
-          <Link to='/auth/login' className='link-primary fw-bolder' style={{marginLeft: '5px'}}>
+          <Link to='/auth/forgot-password' className='link-primary fw-bolder' style={{marginLeft: '5px'}}>
             Forgot Password ?
           </Link>
         </div>
@@ -102,22 +102,22 @@ export function Registration() {
       </div>
       {/* end::Heading */}
 
-      {/* begin::Action */}
-      <button type='button' className='btn btn-light-primary fw-bolder w-100 mb-10'>
-        <img
-          alt='Logo'
-          src={toAbsoluteUrl('/media/svg/brand-logos/google-icon.svg')}
-          className='h-20px me-3'
-        />
-        Sign in with Google
-      </button>
-      {/* end::Action */}
+      {/*/!* begin::Action *!/*/}
+      {/*<button type='button' className='btn btn-light-primary fw-bolder w-100 mb-10'>*/}
+      {/*  <img*/}
+      {/*    alt='Logo'*/}
+      {/*    src={toAbsoluteUrl('/media/svg/brand-logos/google-icon.svg')}*/}
+      {/*    className='h-20px me-3'*/}
+      {/*  />*/}
+      {/*  Sign in with Google*/}
+      {/*</button>*/}
+      {/*/!* end::Action *!/*/}
 
-      <div className='d-flex align-items-center mb-10'>
-        <div className='border-bottom border-gray-300 mw-50 w-100'></div>
-        <span className='fw-bold text-gray-400 fs-7 mx-2'>OR</span>
-        <div className='border-bottom border-gray-300 mw-50 w-100'></div>
-      </div>
+      {/*<div className='d-flex align-items-center mb-10'>*/}
+      {/*  <div className='border-bottom border-gray-300 mw-50 w-100'></div>*/}
+      {/*  <span className='fw-bold text-gray-400 fs-7 mx-2'>OR</span>*/}
+      {/*  <div className='border-bottom border-gray-300 mw-50 w-100'></div>*/}
+      {/*</div>*/}
 
       {formik.status && (
         <div className='mb-lg-15 alert alert-danger'>
@@ -126,9 +126,9 @@ export function Registration() {
       )}
 
       {/* begin::Form group Firstname */}
-      <div className='row fv-row mb-7'>
+      <div className='row fv-row'>
         <div className='col-xl-6'>
-          <label className='class="form-label fw-bolder text-dark fs-6'>First name</label>
+          <label className='form-label fw-bolder text-dark fs-6'>First name</label>
           <input
             placeholder='First name'
             type='text'
@@ -185,7 +185,7 @@ export function Registration() {
       {/* end::Form group */}
 
       {/* begin::Form group Email */}
-      <div className='fv-row mb-7'>
+      <div className='fv-row mb-5'>
         <label className='form-label fw-bolder text-dark fs-6'>Email</label>
         <input
           placeholder='Email'
@@ -297,7 +297,7 @@ export function Registration() {
             className='form-check-label fw-bold text-gray-700 fs-6'
             htmlFor='kt_login_toc_agree'
           >
-            I Agree the{' '}
+            I agree the{' '}
             <Link to='/auth/terms' className='ms-1 link-primary'>
               terms and conditions
             </Link>
