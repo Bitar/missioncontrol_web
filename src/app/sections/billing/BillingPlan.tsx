@@ -10,7 +10,6 @@ const BillingPlan = () => {
 
     const selectPlan = (planId: number) => {
         setPlan(planId)
-        console.log(planId);
     }
 
     return (
