@@ -2,34 +2,27 @@
 import React, {FC} from 'react'
 import {useIntl} from 'react-intl'
 import {PageTitle} from '../../../_metronic/layout/core'
-// import {
-//   MixedWidget2,
-//   MixedWidget10,
-//   MixedWidget11,
-//   ListsWidget2,
-//   ListsWidget3,
-//   ListsWidget4,
-//   ListsWidget5,
-//   ListsWidget6,
-//   TablesWidget5,
-//   TablesWidget10,
-//   MixedWidget8,
-// } from '../../../_metronic/partials/widgets'
+import {EngageWidget4} from "../../partials/widgets/EngageWidget4";
 
 const DashboardPage: FC = () => (
-  <>
-
-  </>
+    <>
+        <div className='row gy-5 g-xl-8'>
+            <div className='col-xl-12'>
+                <EngageWidget4
+                    bgHex={'#1C325E'}/>
+            </div>
+        </div>
+    </>
 )
 
 const DashboardWrapper: FC = () => {
-  const intl = useIntl()
-  return (
-    <>
-      <PageTitle breadcrumbs={[]}>{intl.formatMessage({id: 'MENU.DASHBOARD'})}</PageTitle>
-      <DashboardPage />
-    </>
-  )
+    const intl = useIntl()
+    return (
+        <>
+            <PageTitle breadcrumbs={[]}>{intl.formatMessage({id: 'MENU.DASHBOARD'})}</PageTitle>
+            <DashboardPage/>
+        </>
+    )
 }
 
 export {DashboardWrapper}

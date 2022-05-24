@@ -12,7 +12,8 @@ import {RolesCreate} from "../sections/user/role/RolesCreate";
 import {ActivitiesIndex} from "../sections/activities/ActivitiesIndex";
 import {PermissionsEdit} from "../sections/user/permission/PermissionsEdit";
 import {RolesEdit} from "../sections/user/role/RolesEdit";
-import { GamesIndex } from '../sections/games/GamesIndex'
+import {GamesIndex} from '../sections/games/GamesIndex'
+import {BillingPlan} from "../sections/billing/BillingPlan";
 
 
 const PrivateRoutes = () => {
@@ -31,6 +32,9 @@ const PrivateRoutes = () => {
                 <Route path='dashboard' element={<DashboardWrapper/>}/>
                 <Route path='menu-test' element={<MenuTestPage/>}/>
                 {/* Pages */}
+
+                <Route path='billing/plan' element={<BillingPlan/>}/>
+
                 <Route path='activities' element={<ActivitiesIndex/>}/>
                 <Route path='games' element={<GamesIndex/>}/>
 
@@ -71,6 +75,9 @@ const PrivateRoutes = () => {
                         </SuspensedView>
                     }
                 />
+
+
+
 
                 {/* Lazy Modules */}
                 <Route
