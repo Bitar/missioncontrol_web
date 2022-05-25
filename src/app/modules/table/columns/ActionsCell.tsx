@@ -1,9 +1,10 @@
-import {FC, useEffect} from 'react'
-import {ID} from "../../../../_metronic/helpers";
+import {FC, useEffect, useState} from 'react'
+import {ID, stringifyRequestQuery} from "../../../../_metronic/helpers";
 import {MenuComponent} from "../../../../_metronic/assets/ts/components";
 import {Link} from "react-router-dom";
 import {useMutation, useQueryClient} from "react-query";
 import {deleteObject} from "../../../requests";
+import {useQueryRequest} from "../QueryRequestProvider";
 
 type Props = {
     id: ID,
@@ -13,16 +14,16 @@ type Props = {
 
 const ActionsCell: FC<Props> = ({id, path, queryKey}) => {
     const queryClient = useQueryClient()
+    const {state} = useQueryRequest()
+    const [query] = useState<string>(stringifyRequestQuery(state))
 
     useEffect(() => {
         MenuComponent.reinitialization()
     }, [])
 
     const deleteItem = useMutation(() => deleteObject(path + '/' + id), {
-        // 💡 response of the mutation is passed to onSuccess
         onSuccess: () => {
-            // ✅ update detail view directly
-            queryClient.invalidateQueries(queryKey)
+            queryClient.invalidateQueries(`${queryKey}-${query}`)
         },
     })
 

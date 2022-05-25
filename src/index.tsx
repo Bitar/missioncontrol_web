@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import axios from 'axios'
 // import {Chart, registerables} from 'chart.js'
 import {QueryClient, QueryClientProvider} from 'react-query'
-import {ReactQueryDevtools} from 'react-query/devtools'
 
 // Apps
 import {MetronicI18nProvider} from './_metronic/i18n/Metronici18n'
@@ -39,13 +38,12 @@ setupAxios(axios)
 const queryClient = new QueryClient()
 
 ReactDOM.render(
-  <QueryClientProvider client={queryClient}>
-    <MetronicI18nProvider>
-      <AuthProvider>
-        <AppRoutes />
-      </AuthProvider>
-    </MetronicI18nProvider>
-    <ReactQueryDevtools initialIsOpen={false} />
-  </QueryClientProvider>,
-  document.getElementById('root')
+    <QueryClientProvider client={queryClient}>
+        <MetronicI18nProvider>
+            <AuthProvider>
+                <AppRoutes/>
+            </AuthProvider>
+        </MetronicI18nProvider>
+    </QueryClientProvider>,
+    document.getElementById('root')
 )

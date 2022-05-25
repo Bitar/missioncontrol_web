@@ -21,7 +21,7 @@ export function AsideMenuMain() {
             </div>
             <AsideMenuItem
                 to='/activities'
-                title='activities'
+                title='Activities'
                 fontIcon='bi-archive'
                 icon='/media/icons/duotune/general/gen022.svg'
             >
@@ -29,7 +29,7 @@ export function AsideMenuMain() {
 
             <AsideMenuItem
                 to='/games'
-                title='games'
+                title='Games'
                 fontIcon='bi-archive'
                 icon='/media/icons/duotune/general/gen022.svg'
             >
@@ -42,8 +42,16 @@ export function AsideMenuMain() {
             </div>
 
             <AsideMenuItem
+                to='/plans'
+                title='Plans'
+                fontIcon='bi-archive'
+                icon='/media/icons/duotune/general/gen022.svg'
+            >
+            </AsideMenuItem>
+
+            <AsideMenuItem
                 to='/roles'
-                title='roles'
+                title='Roles'
                 fontIcon='bi-archive'
                 icon='/media/icons/duotune/general/gen022.svg'
             >
@@ -51,7 +59,7 @@ export function AsideMenuMain() {
 
             <AsideMenuItem
                 to='/permissions'
-                title='permissions'
+                title='Permissions'
                 fontIcon='bi-archive'
                 icon='/media/icons/duotune/general/gen022.svg'
             >

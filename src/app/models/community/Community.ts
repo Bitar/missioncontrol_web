@@ -3,8 +3,14 @@ import {CommunityAddress} from "./CommunityAddress";
 import {CommunityContact} from "./CommunityContact";
 import {CommunityAccess} from "./CommunityAccess";
 import {Game} from "../game/Game";
-import {CommunityData} from "./CommunityData";
 
+export const initialCommunity: Community = {
+    name: '',
+    logo: '',
+    is_featured: false,
+    description: '',
+    is_follow: false
+}
 
 export type Community = {
     id?: ID,
@@ -12,10 +18,10 @@ export type Community = {
     logo: string,
     is_featured: boolean,
     description: string,
-    address: CommunityAddress,
-    contact: CommunityContact,
-    access: CommunityAccess,
-    games: Game[],
+    address?: CommunityAddress,
+    contact?: CommunityContact,
+    access?: CommunityAccess,
+    games?: Game[],
     is_follow: boolean
 }
 

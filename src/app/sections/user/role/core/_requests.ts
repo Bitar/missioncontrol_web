@@ -33,27 +33,4 @@ const updateRole = (id: any, role: Role): Promise<Role | undefined> => {
         .then((response: Response<Permission>) => response.data)
 }
 
-// const createUser = (user: User): Promise<User | undefined> => {
-//     return axios
-//         .put(ROLE_URL, user)
-//         .then((response: AxiosResponse<Response<User>>) => response.data)
-//         .then((response: Response<User>) => response.data)
-// }
-//
-// const updateUser = (user: User): Promise<User | undefined> => {
-//     return axios
-//         .post(`${ROLE_URL}/${user.id}`, user)
-//         .then((response: AxiosResponse<Response<User>>) => response.data)
-//         .then((response: Response<User>) => response.data)
-// }
-//
-// const deleteUser = (userId: ID): Promise<void> => {
-//     return axios.delete(`${ROLE_URL}/${userId}`).then(() => {})
-// }
-//
-// const deleteSelectedUsers = (userIds: Array<ID>): Promise<void> => {
-//     const requests = userIds.map((id) => axios.delete(`${ROLE_URL}/${id}`))
-//     return axios.all(requests).then(() => {})
-// }
-
 export {getRoles, getRoleById, createRole, updateRole}
