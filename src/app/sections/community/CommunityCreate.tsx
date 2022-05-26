@@ -1,32 +1,24 @@
-import React, {useState} from 'react'
-import {useFormik} from "formik";
-import * as Yup from 'yup'
-import {Permission} from "../../../models/user/Permission";
-import {isNotEmpty, KTCard, KTCardBody} from "../../../../_metronic/helpers";
+import {PageTitle} from "../../../_metronic/layout/core";
+import {isNotEmpty, KTCard, KTCardBody} from "../../../_metronic/helpers";
 import clsx from "clsx";
-import {PageTitle} from "../../../../_metronic/layout/core";
-import {createPermission} from "./core/_requests";
-import {useNavigate} from 'react-router-dom';
+import React, {useState} from "react";
+import {useFormik} from "formik";
+import {createPermission} from "../user/permission/core/_requests";
+import * as Yup from "yup";
+import {Community, initialCommunity} from "../../models/community/Community";
 
-const createPermissionSchema = Yup.object().shape({
+const createPlanSchema = Yup.object().shape({
     name: Yup.string()
         .required('Name is required'),
 })
 
-const PermissionsCreate = () => {
-    const navigate = useNavigate();
+const CommunityCreate = () => {
 
-    const [permissionForEdit] = useState<Permission>({
-        name: '',
-    })
-
-    const cancel = () => {
-        navigate('/permissions')
-    }
+    const [communityForEdit] = useState<Community>(initialCommunity)
 
     const formik = useFormik({
-        initialValues: permissionForEdit,
-        validationSchema: createPermissionSchema,
+        initialValues: communityForEdit,
+        validationSchema: createPlanSchema,
         onSubmit: async (values, {setSubmitting}) => {
             setSubmitting(true)
             try {
@@ -39,14 +31,13 @@ const PermissionsCreate = () => {
                 console.error(ex)
             } finally {
                 setSubmitting(true)
-                cancel()
             }
         },
     })
 
     return (
         <>
-            <PageTitle breadcrumbs={[]}>{'Permissions'}</PageTitle>
+            <PageTitle breadcrumbs={[]}>{'Create Community'}</PageTitle>
             <KTCard>
                 <div className="card-header">
                     <div className="card-title">
@@ -54,7 +45,7 @@ const PermissionsCreate = () => {
                             <i className="las la-plus fs-2"/>
                         </span>
                         <h3 className="card-label">
-                            Add Permission
+                            Add Community
                         </h3>
                     </div>
                 </div>
@@ -106,16 +97,6 @@ const PermissionsCreate = () => {
                         {/* begin::Actions */}
                         <div className='py-5'>
                             <button
-                                type='reset'
-                                onClick={() => cancel()}
-                                className='btn btn-light me-3'
-                                data-kt-users-modal-action='cancel'
-                                disabled={formik.isSubmitting}
-                            >
-                                Cancel
-                            </button>
-
-                            <button
                                 type='submit'
                                 className='btn btn-primary'
                                 data-kt-users-modal-action='submit'
@@ -139,4 +120,4 @@ const PermissionsCreate = () => {
     )
 }
 
-export {PermissionsCreate}
+export {CommunityCreate}

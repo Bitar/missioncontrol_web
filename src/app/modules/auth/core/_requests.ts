@@ -1,6 +1,6 @@
 import axios from 'axios'
-import {AuthModel, UserModel} from './_models'
-// import * as process from "process";
+import {AuthModel} from './_models'
+import {Profile} from "../../../models/user/Profile";
 
 const API_URL = process.env.REACT_APP_API_URL
 
@@ -42,7 +42,7 @@ export function requestPassword(email: string) {
 }
 
 export function getUserByToken(token: string) {
-  return axios.get<UserModel>(GET_USER_BY_PROFILE, {
+  return axios.get<Profile>(GET_USER_BY_PROFILE, {
     // return axios.get<UserModel>(GET_USER_BY_PROFILE, {
     headers: {
       Authorization: `Bearer ${token}`

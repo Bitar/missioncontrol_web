@@ -9,18 +9,22 @@ import {
   SetStateAction,
 } from 'react'
 import {LayoutSplashScreen} from '../../../../_metronic/layout/core'
-import {AuthModel, UserModel} from './_models'
+import {AuthModel} from './_models'
 import * as authHelper from './AuthHelpers'
 import {getUserByToken} from './_requests'
 import {Community} from "../../../models/community/Community";
+import {Subscription} from "../../../models/billing/Subscription";
+import {User} from "../../../models/user/User";
 
 type AuthContextProps = {
   auth: AuthModel | undefined
   saveAuth: (auth: AuthModel | undefined) => void
-  currentUser: UserModel | undefined
-  setCurrentUser: Dispatch<SetStateAction<UserModel | undefined>>
+  currentUser: User | undefined
+  setCurrentUser: Dispatch<SetStateAction<User | undefined>>
   communityAdmin: Community | undefined
   setCommunityAdmin: Dispatch<SetStateAction<Community | undefined>>
+  subscription: Subscription | undefined
+  setSubscription: Dispatch<SetStateAction<Subscription | undefined>>
   logout: () => void
 }
 
@@ -35,6 +39,8 @@ const initAuthContextPropsState = {
   setCommunityAdmin: () => {
 
   },
+  subscription: undefined,
+  setSubscription: () => {},
   logout: () => {
   },
 }
@@ -47,8 +53,9 @@ const useAuth = () => {
 
 const AuthProvider: FC = ({children}) => {
   const [auth, setAuth] = useState<AuthModel | undefined>(authHelper.getAuth())
-  const [currentUser, setCurrentUser] = useState<UserModel | undefined>()
+  const [currentUser, setCurrentUser] = useState<User | undefined>()
   const [communityAdmin, setCommunityAdmin] = useState<Community | undefined>()
+  const [subscription, setSubscription] = useState<Subscription | undefined>()
   const saveAuth = (auth: AuthModel | undefined) => {
     setAuth(auth)
     if (auth) {
@@ -62,18 +69,19 @@ const AuthProvider: FC = ({children}) => {
     saveAuth(undefined)
     setCurrentUser(undefined)
     setCommunityAdmin(undefined)
+    setSubscription(undefined)
   }
 
   return (
       <AuthContext.Provider
-          value={{auth, saveAuth, currentUser, setCurrentUser, communityAdmin, setCommunityAdmin, logout}}>
+          value={{auth, saveAuth, currentUser, setCurrentUser, communityAdmin, setCommunityAdmin, subscription, setSubscription, logout}}>
         {children}
       </AuthContext.Provider>
   )
 }
 
 const AuthInit: FC = ({children}) => {
-  const {auth, logout, setCurrentUser} = useAuth()
+  const {auth, logout, setCurrentUser, setSubscription} = useAuth()
   const didRequest = useRef(false)
   const [showSplashScreen, setShowSplashScreen] = useState(true)
   // We should request user by authToken (IN OUR EXAMPLE IT'S API_TOKEN) before rendering the application
@@ -84,7 +92,8 @@ const AuthInit: FC = ({children}) => {
           const {data} = await (getUserByToken(apiToken))
 
           if (data) {
-            setCurrentUser(data)
+            setSubscription(data.subscription)
+            setCurrentUser(data.user)
           }
         }
       } catch (error) {

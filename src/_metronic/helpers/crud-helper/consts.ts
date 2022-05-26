@@ -5,6 +5,7 @@ const QUERIES = {
   ROLES_LIST: 'roles-list',
   PERMISSIONS_LIST: 'permissions-list',
   GAMES_LIST: 'games-list',
+  PLANS_LIST: 'plans-list'
 }
 
 export {QUERIES}

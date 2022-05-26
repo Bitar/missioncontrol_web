@@ -17,6 +17,12 @@ import { GameCreate } from '../sections/games/GameCreate'
 import { GamesEdit } from '../sections/games/GameEdit'
 import { MarketingIndex } from '../sections/marketing/MarketingIndex'
 import { SupportIndex } from '../sections/support/SupportIndex'
+import {BillingPlanWrapper} from "../sections/billing/BillingPlanWrapper";
+import {CommunityCreate} from "../sections/community/CommunityCreate";
+import { PlansIndex } from '../sections/billing/plan/PlansIndex'
+import { PlansCreate } from '../sections/billing/plan/PlansCreate'
+import {PlansEdit} from "../sections/billing/plan/PlansEdit";
+import { BillingComplete } from '../sections/billing/BillingComplete'
 
 
 const PrivateRoutes = () => {
@@ -35,10 +41,31 @@ const PrivateRoutes = () => {
                 <Route path='dashboard' element={<DashboardWrapper/>}/>
                 <Route path='menu-test' element={<MenuTestPage/>}/>
                 {/* Pages */}
+
+                <Route path='billing/plan' element={<BillingPlanWrapper/>}/>
+                <Route path='billing/:id/complete' element={<BillingComplete/>}/>
+
+                <Route path='community/create' element={<CommunityCreate/>}/>
+
                 <Route path='activities' element={<ActivitiesIndex/>}/>
                 <Route path='games' element={<GamesIndex/>}/>
                 <Route path='marketing' element={<MarketingIndex/>}/>
                 <Route path='support' element={<SupportIndex/>}/>
+
+                <Route path='plans' element={<PlansIndex/>}/>
+                <Route path='plans/create' element={
+                    <SuspensedView>
+                        <PlansCreate/>
+                    </SuspensedView>
+                }/>
+                <Route
+                    path='plans/:id/edit'
+                    element={
+                        <SuspensedView>
+                            <PlansEdit/>
+                        </SuspensedView>
+                    }
+                />
 
                 <Route path='roles' element={<RolesIndex/>}/>
                 <Route
@@ -96,6 +123,7 @@ const PrivateRoutes = () => {
                         </SuspensedView>
                     }
                 />
+
 
                 {/* Lazy Modules */}
                 <Route
