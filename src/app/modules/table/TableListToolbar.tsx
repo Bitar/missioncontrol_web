@@ -4,11 +4,11 @@ import {FC} from "react";
 
 type Props = {
     name: string,
-    url: string
+    url: string,
+    showAdd: boolean
 }
 
-const TableListToolbar: FC<Props> = ({name, url}) => {
-    console.log();
+const TableListToolbar: FC<Props> = ({name, url, showAdd}) => {
     return (
         <div className='d-flex justify-content-end' data-kt-user-table-toolbar='base'>
             {/* begin::Export */}
@@ -18,12 +18,13 @@ const TableListToolbar: FC<Props> = ({name, url}) => {
             {/*</button>*/}
             {/* end::Export */}
 
-            {/* begin::Add New */}
-            <Link to={url + '/create'} className="btn btn-primary">
-                <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2'/>
-                Add {name}
-            </Link>
-            {/* end::Add user */}
+            {showAdd &&
+                <Link to={url + '/create'} className="btn btn-primary">
+                    <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2'/>
+                    Add {name}
+                </Link>
+            }
+
         </div>
     )
 }

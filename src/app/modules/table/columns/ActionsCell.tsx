@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import {FC, useEffect, useState} from 'react'
 import {ID, stringifyRequestQuery} from "../../../../_metronic/helpers";
 import {MenuComponent} from "../../../../_metronic/assets/ts/components";
@@ -9,10 +10,12 @@ import {useQueryRequest} from "../QueryRequestProvider";
 type Props = {
     id: ID,
     path: string,
-    queryKey: string
+    queryKey: string,
+    showEdit?: boolean,
+    showDelete?: boolean
 }
 
-const ActionsCell: FC<Props> = ({id, path, queryKey}) => {
+const ActionsCell: FC<Props> = ({id, path, queryKey, showEdit = true, showDelete = true}) => {
     const queryClient = useQueryClient()
     const {state} = useQueryRequest()
     const [query] = useState<string>(stringifyRequestQuery(state))
@@ -29,16 +32,18 @@ const ActionsCell: FC<Props> = ({id, path, queryKey}) => {
 
     return (
         <>
-            <Link to={'/' + path + '/' + id + '/edit'} className="btn btn-icon btn-sm btn-active-light-warning">
-                <i className="fa-solid fa-pencil text-warning"/>
-            </Link>
+            {showEdit &&
+                <Link to={'/' + path + '/' + id + '/edit'} className="btn btn-icon btn-sm btn-active-light-warning">
+                    <i className="fa-solid fa-pencil text-warning"/>
+                </Link>
+            }
 
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a className='btn btn-icon btn-sm btn-active-light-danger'
-               onClick={async () => await deleteItem.mutateAsync()}>
+            {showDelete &&
+                <a className='btn btn-icon btn-sm btn-active-light-danger'
+                onClick={async () => await deleteItem.mutateAsync()}>
                 <i className="fa-solid fa-trash text-danger"/>
-            </a>
-            {/* end::Menu */}
+                </a>
+            }
         </>
     )
 }

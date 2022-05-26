@@ -12,11 +12,12 @@ import {TableSearchComponent} from "./TableSearchComponent";
 
 type Props = {
     name: string,
-    url: string
+    url: string,
+    showAdd?: boolean
 }
 
 
-const TableHeader: FC<Props> = ({name, url}) => {
+const TableHeader: FC<Props> = ({name, url, showAdd = true}) => {
     // const {selected} = useListView()
     return (
         <div className='card-header border-0 pt-6'>
@@ -24,7 +25,7 @@ const TableHeader: FC<Props> = ({name, url}) => {
             {/* begin::Card toolbar */}
             <div className='card-toolbar'>
                 {/* begin::Group actions */}
-                <TableListToolbar name={name} url={url}/>
+                <TableListToolbar name={name} url={url} showAdd={showAdd}/>
                 {/*{selected.length > 0 ? <TableListGrouping/> : <TableListToolbar/>}*/}
                 {/* end::Group actions */}
             </div>

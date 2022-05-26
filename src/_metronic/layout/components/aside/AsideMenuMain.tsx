@@ -36,7 +36,7 @@ export function AsideMenuMain() {
             </AsideMenuItem>
             <AsideMenuItem
                 to='/marketing'
-                title='marketing'
+                title='Marketing'
                 fontIcon='bi-archive'
                 icon='/media/icons/duotune/general/gen022.svg'
             >
@@ -44,7 +44,7 @@ export function AsideMenuMain() {
 
             <AsideMenuItem
                 to='/support'
-                title='support'
+                title='Support'
                 fontIcon='bi-archive'
                 icon='/media/icons/duotune/general/gen022.svg'
             >
@@ -60,6 +60,14 @@ export function AsideMenuMain() {
             <AsideMenuItem
                 to='/plans'
                 title='Plans'
+                fontIcon='bi-archive'
+                icon='/media/icons/duotune/general/gen022.svg'
+            >
+            </AsideMenuItem>
+
+            <AsideMenuItem
+                to='/subscriptions'
+                title='Subscriptions'
                 fontIcon='bi-archive'
                 icon='/media/icons/duotune/general/gen022.svg'
             >

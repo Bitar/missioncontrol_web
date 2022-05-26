@@ -7,6 +7,8 @@ import {CheckOutWrapper} from "./CheckOutWrapper";
 import {getPlans} from "./plan/core/_requests";
 import {Plan} from "../../models/billing/Plan";
 import {PlanCard} from "./PlanCard";
+import {useAuth} from "../../modules/auth";
+import {useNavigate} from "react-router-dom";
 
 const BillingPlan = () => {
     const {showCheckout, setShowCheckout} = useCheckoutModal()
@@ -22,7 +24,7 @@ const BillingPlan = () => {
 
     const selectPlan = (plan: Plan) => {
         setPlan(plan)
-        if(plan.type === 1) {
+        if (plan.type === 1) {
             setShowCheckout(true)
         } else {
             // Navigate to Contact Sales Page and set stuff in DB.
@@ -80,13 +82,22 @@ const BillingPlan = () => {
     )
 }
 
-const BillingPlanWrapper = () => (
-    <>
-        <PageTitle breadcrumbs={[]}>{'Billing Plan'}</PageTitle>
-        <CheckoutModalProvider>
-            <BillingPlan/>
-        </CheckoutModalProvider>
-    </>
-)
+const BillingPlanWrapper = () => {
+    const {subscription} = useAuth()
+    const navigate = useNavigate()
+
+    if (subscription) {
+        navigate('/')
+    }
+
+    return (
+        <>
+            <PageTitle breadcrumbs={[]}>{'Billing Plan'}</PageTitle>
+            <CheckoutModalProvider>
+                <BillingPlan/>
+            </CheckoutModalProvider>
+        </>
+    )
+}
 
 export {BillingPlanWrapper}

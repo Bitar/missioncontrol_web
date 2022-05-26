@@ -145,7 +145,8 @@ const CheckOut: FC<CheckOutProps> = ({plan, paymentReq}) => {
                                     <div className="card-footer">
                                         <button className="btn btn-primary m-0 " disabled={isLoading || !stripe || !elements} id="submit">
                                             <span id="button-text">
-                                              {isLoading ? <div className="spinner" id="spinner"/> : "Pay now"}
+                                                Pay now
+                                              {/*{isLoading ? <div className="spinner" id="spinner"/> : "Pay now"}*/}
                                             </span>
                                         </button>
                                         {/* Show any error or success messages */}

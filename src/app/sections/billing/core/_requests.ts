@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from "axios";
 import {Response} from "../../../../_metronic/helpers";
 import {PaymentRequestIntent} from "../../../models/billing/PaymentRequest";
-import {PaymentResponse} from "../../../models/billing/PaymentResponse";
+import {PaymentResponseWrapper} from "../../../models/billing/PaymentResponse";
 import {Plan} from "../../../models/billing/Plan";
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -15,11 +15,11 @@ const paymentRequest = (plan: Plan): Promise<PaymentRequestIntent | undefined> =
         .then((response: Response<PaymentRequestIntent>) => response.data)
 }
 
-const getPaymentResponse = (id: any) : Promise<PaymentResponse | undefined> => {
+const getPaymentResponse = (id: any) : Promise<PaymentResponseWrapper | undefined> => {
     return axios
         .get(`${GET_PAYMENT_RESPONSE_URL}?payment_request_id=${id}`)
-        .then((response: AxiosResponse<Response<PaymentResponse>>) => response.data)
-        .then((response: Response<PaymentResponse>) => response.data)
+        .then((response: AxiosResponse<Response<PaymentResponseWrapper>>) => response.data)
+        .then((response: Response<PaymentResponseWrapper>) => response.data)
 }
 
 export {paymentRequest, getPaymentResponse}
