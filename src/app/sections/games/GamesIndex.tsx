@@ -7,6 +7,7 @@ import {QueryResponseProvider} from "../../modules/table/QueryResponseProvider";
 import {getGames} from "./core/_requests";
 import {ListViewProvider} from "../../modules/table/ListViewProvider";
 import {GamesTable} from "./GamesTable";
+import { getIgdb } from './core/_requests';
 
 const GamesList = () => {
     return (
@@ -22,7 +23,7 @@ const GamesList = () => {
 
 const GamesIndex = () => (
     <QueryRequestProvider>
-        <QueryResponseProvider id={QUERIES.ROLES_LIST} requestFunction={getGames}>
+        <QueryResponseProvider id={QUERIES.GAMES_LIST} requestFunction={getGames}>
             <ListViewProvider>
                 <GamesList/>
             </ListViewProvider>

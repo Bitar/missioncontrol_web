@@ -50,6 +50,22 @@ export function AsideMenuMain() {
             >
             </AsideMenuItem>
 
+            <AsideMenuItem
+                to='/marketing'
+                title='marketing'
+                fontIcon='bi-archive'
+                icon='/media/icons/duotune/general/gen022.svg'
+            >
+            </AsideMenuItem>
+
+            <AsideMenuItem
+                to='/support'
+                title='support'
+                fontIcon='bi-archive'
+                icon='/media/icons/duotune/general/gen022.svg'
+            >
+            </AsideMenuItem>
+
             {/*<AsideMenuItemWithSub*/}
             {/*    to=''*/}
             {/*    title='roles'*/}

@@ -15,6 +15,8 @@ import {RolesEdit} from "../sections/user/role/RolesEdit";
 import { GamesIndex } from '../sections/games/GamesIndex'
 import { GameCreate } from '../sections/games/GameCreate'
 import { GamesEdit } from '../sections/games/GameEdit'
+import { MarketingIndex } from '../sections/marketing/MarketingIndex'
+import { SupportIndex } from '../sections/support/SupportIndex'
 
 
 const PrivateRoutes = () => {
@@ -36,6 +38,8 @@ const PrivateRoutes = () => {
                 <Route path='activities' element={<ActivitiesIndex/>}/>
                 <Route path='roles' element={<RolesIndex/>}/>
                 <Route path='games' element={<GamesIndex/>}/>
+                <Route path='marketing' element={<MarketingIndex/>}/>
+                <Route path='support' element={<SupportIndex/>}/>
 
                 <Route
                     path='roles/create'
