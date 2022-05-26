@@ -6,6 +6,8 @@ import {ID, KTCard, KTCardBody, KTSVG} from "../../../_metronic/helpers";
 import {useCheckoutModal} from "./core/CheckoutModal";
 import {Plan} from "../../models/billing/Plan";
 
+const API_URL = process.env.REACT_APP_URL
+
 const stripePromise = loadStripe("pk_test_F0GQZPtb2QFxhRVRoKKAsnf3");
 
 type Props = {
@@ -45,7 +47,7 @@ const CheckOut: FC<CheckOutProps> = ({plan, paymentReq}) => {
         const {error} = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: "http://localhost:3011/billing/" + paymentReq + "/complete",
+                return_url: `${API_URL}/billing/` + paymentReq + "/complete",
             },
         });
 
@@ -146,7 +148,7 @@ const CheckOut: FC<CheckOutProps> = ({plan, paymentReq}) => {
                                         <button className="btn btn-primary m-0 " disabled={isLoading || !stripe || !elements} id="submit">
                                             <span id="button-text">
                                                 Pay now
-                                              {/*{isLoading ? <div className="spinner" id="spinner"/> : "Pay now"}*/}
+                                                {/*{isLoading ? <div className="spinner" id="spinner"/> : "Pay now"}*/}
                                             </span>
                                         </button>
                                         {/* Show any error or success messages */}

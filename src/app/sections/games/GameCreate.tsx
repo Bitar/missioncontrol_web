@@ -12,7 +12,7 @@ import {getIgdb} from './core/_requests';
 import {createGame} from './core/_requests';
 import {PageTitle} from '../../../_metronic/layout/core';
 
-//Validate Schema verify 
+//Validate Schema verify
 const createGameSearchSchema = Yup.object().shape({
     query: Yup.string()
 })
@@ -20,20 +20,15 @@ const createGameSearchSchema = Yup.object().shape({
 
 const GameCreate = () => {
     const isLoading = useQueryResponseLoading()
-    //when search parameter changes we want to search api and we use useEffect
+//when search parameter changes we want to search api and we use useEffect
     const [data, setData] = useState<Igdb[] | undefined>([])
     const [isSending, setIsSending] = useState(false)
     const [search, setSearch] = useState<string | null>(null)
-    // const [loading,setLoading] = useState(false)
     const debouncedSearch = useDebounce(search, 150)
 
     useEffect(() => {
-        //call api
-        //filter[name]        //when function returns
         getIgdb(debouncedSearch).then(response => {
             setData(response.data)
-            console.log(response.data)
-
         })
     }, [debouncedSearch])
 
@@ -42,7 +37,6 @@ const GameCreate = () => {
         if (isSending) return
         setIsSending(true)
         createGame(igdb_id)
-        console.log(createGame)
         setIsSending(false)
     }
 
