@@ -2,7 +2,7 @@ import {Elements, PaymentElement, useElements, useStripe} from "@stripe/react-st
 import React, {FC, useEffect, useState} from "react";
 import {paymentRequest} from "./core/_requests";
 import {loadStripe} from "@stripe/stripe-js";
-import {KTCard, KTCardBody, KTSVG} from "../../../_metronic/helpers";
+import {ID, KTCard, KTCardBody, KTSVG} from "../../../_metronic/helpers";
 import {useCheckoutModal} from "./core/CheckoutModal";
 import {Plan} from "../../models/billing/Plan";
 
@@ -12,7 +12,12 @@ type Props = {
     plan: Plan
 }
 
-const CheckOut: FC<Props> = ({plan}) => {
+type CheckOutProps = {
+    plan: Plan,
+    paymentReq: ID
+}
+
+const CheckOut: FC<CheckOutProps> = ({plan, paymentReq}) => {
     const stripe = useStripe();
     const elements = useElements();
 
@@ -40,7 +45,7 @@ const CheckOut: FC<Props> = ({plan}) => {
         const {error} = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: "http://localhost:3011/community/create",
+                return_url: "http://localhost:3011/billing/" + paymentReq + "/complete",
             },
         });
 
@@ -160,11 +165,13 @@ const CheckOut: FC<Props> = ({plan}) => {
 
 const CheckOutWrapper: FC<Props> = ({plan}) => {
     const [clientSecret, setClientSecret] = useState<string | undefined>();
+    const [paymentReq, setPaymentReq] = useState<ID | undefined>();
 
     useEffect(() => {
         if (!clientSecret) {
             paymentRequest(plan).then(response => {
-                setClientSecret(response?.client_secret)
+                setPaymentReq(response?.id)
+                setClientSecret(response?.stripe_pi_secret)
             })
         }
     }, [plan, clientSecret]);
@@ -177,7 +184,7 @@ const CheckOutWrapper: FC<Props> = ({plan}) => {
         <>
             {clientSecret && (
                 <Elements options={options} stripe={stripePromise}>
-                    <CheckOut plan={plan}/>
+                    <CheckOut plan={plan} paymentReq={paymentReq}/>
                 </Elements>
             )}
         </>

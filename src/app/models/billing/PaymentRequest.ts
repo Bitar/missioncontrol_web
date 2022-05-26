@@ -5,7 +5,10 @@ export type PaymentRequest = {
 }
 
 export type PaymentRequestIntent = {
-    client_secret: string
+    id: ID
+    stripe_pi_secret: string,
+    plan_id: ID,
+    amount: number,
 }
 
 export type PaymentRequestQueryResponse = Response<Array<PaymentRequest>>

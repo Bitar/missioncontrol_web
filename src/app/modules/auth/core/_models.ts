@@ -1,6 +1,8 @@
+import {User} from "../../../models/user/User";
+
 export interface AuthModel {
   token: string
-  data: UserModel,
+  data: User,
   active_community?: CommunityModel
 }
 
@@ -42,27 +44,6 @@ export interface UserSocialNetworksModel {
   facebook: string
   twitter: string
   instagram: string
-}
-
-export interface UserModel {
-  id: number
-  first_name: string
-  last_name: string
-  name: string
-  email: string
-  meta: UserMetaModel
-  // website?: 'https://keenthemes.com'
-  // emailSettings?: UserEmailSettingsModel
-  // auth?: AuthModel
-  // communication?: UserCommunicationModel
-  // address?: UserAddressModel
-  // socialNetworks?: UserSocialNetworksModel
-}
-
-export interface UserMetaModel {
-  id: number,
-  user_id: number,
-  image: string
 }
 
 export interface CommunityModel {

@@ -2,6 +2,7 @@
 import React from 'react'
 import {toAbsoluteUrl} from "../../../_metronic/helpers";
 import {Link} from "react-router-dom";
+import {useAuth} from "../../modules/auth";
 
 type Props = {
     className?: string
@@ -18,6 +19,8 @@ const EngageWidget4: React.FC<Props> = (
         bgHex = '',
     }) => {
 
+    const {subscription} = useAuth()
+
     return (
         <div className={`card ${className}`}
              style={{backgroundColor: bgHex}}>
@@ -30,7 +33,11 @@ const EngageWidget4: React.FC<Props> = (
                     </div>
 
                     <div className="mb-3">
-                        <Link to={'/billing/plan'} className="btn btn-danger fw-bold me-2">Create Community</Link>
+                        {!subscription ? (
+                            <Link to={'/billing/plan'} className="btn btn-danger fw-bold me-2">Create Community</Link>
+                        ) : (
+                            <Link to={'/community/create'} className="btn btn-danger fw-bold me-2">Create Community</Link>
+                        )}
                     </div>
                 </div>
 

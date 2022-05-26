@@ -18,6 +18,7 @@ import {CommunityCreate} from "../sections/community/CommunityCreate";
 import { PlansIndex } from '../sections/billing/plan/PlansIndex'
 import { PlansCreate } from '../sections/billing/plan/PlansCreate'
 import {PlansEdit} from "../sections/billing/plan/PlansEdit";
+import { BillingComplete } from '../sections/billing/BillingComplete'
 
 
 const PrivateRoutes = () => {
@@ -38,6 +39,7 @@ const PrivateRoutes = () => {
                 {/* Pages */}
 
                 <Route path='billing/plan' element={<BillingPlanWrapper/>}/>
+                <Route path='billing/:id/complete' element={<BillingComplete/>}/>
 
                 <Route path='community/create' element={<CommunityCreate/>}/>
 
