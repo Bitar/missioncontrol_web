@@ -2,7 +2,6 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getPaymentResponse} from "./core/_requests";
 import {PaymentResponse} from "../../models/billing/PaymentResponse";
-import {CodeBlock} from "../../../_metronic/partials";
 
 const BillingComplete = () => {
     const params = useParams()

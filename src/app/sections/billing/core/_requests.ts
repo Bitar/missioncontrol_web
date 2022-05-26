@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from "axios";
 import {Response} from "../../../../_metronic/helpers";
-import {PaymentRequest, PaymentRequestIntent} from "../../../models/billing/PaymentRequest";
+import {PaymentRequestIntent} from "../../../models/billing/PaymentRequest";
 import {PaymentResponse} from "../../../models/billing/PaymentResponse";
 import {Plan} from "../../../models/billing/Plan";
 

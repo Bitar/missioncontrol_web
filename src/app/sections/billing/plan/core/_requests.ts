@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from "axios";
 import {Plan, PlanQueryResponse} from "../../../../models/billing/Plan";
-import {ID, Response} from "../../../../../_metronic/helpers";
+import {Response} from "../../../../../_metronic/helpers";
 
 const API_URL = process.env.REACT_APP_API_URL
 const GET_PLANS_URL = `${API_URL}/plans`

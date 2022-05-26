@@ -1,4 +1,3 @@
-import {useNavigate} from "react-router-dom";
 import {PageTitle} from "../../../_metronic/layout/core";
 import {isNotEmpty, KTCard, KTCardBody} from "../../../_metronic/helpers";
 import clsx from "clsx";
