@@ -34,6 +34,22 @@ export function AsideMenuMain() {
                 icon='/media/icons/duotune/general/gen022.svg'
             >
             </AsideMenuItem>
+            <AsideMenuItem
+                to='/marketing'
+                title='marketing'
+                fontIcon='bi-archive'
+                icon='/media/icons/duotune/general/gen022.svg'
+            >
+            </AsideMenuItem>
+
+            <AsideMenuItem
+                to='/support'
+                title='support'
+                fontIcon='bi-archive'
+                icon='/media/icons/duotune/general/gen022.svg'
+            >
+            </AsideMenuItem>
+
 
             <div className='menu-item'>
                 <div className='menu-content pt-8 pb-2'>
@@ -52,22 +68,6 @@ export function AsideMenuMain() {
             <AsideMenuItem
                 to='/permissions'
                 title='permissions'
-                fontIcon='bi-archive'
-                icon='/media/icons/duotune/general/gen022.svg'
-            >
-            </AsideMenuItem>
-
-            <AsideMenuItem
-                to='/marketing'
-                title='marketing'
-                fontIcon='bi-archive'
-                icon='/media/icons/duotune/general/gen022.svg'
-            >
-            </AsideMenuItem>
-
-            <AsideMenuItem
-                to='/support'
-                title='support'
                 fontIcon='bi-archive'
                 icon='/media/icons/duotune/general/gen022.svg'
             >

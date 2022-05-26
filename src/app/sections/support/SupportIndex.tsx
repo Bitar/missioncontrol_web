@@ -137,7 +137,7 @@ const SupportIndex = () => {
         </div>
         <div className='col-12 col-sm-12 col-xl'>
           <Card7
-            icon='/media/support/AdminICon.png' 
+            icon='/media/support/AdminIcon.png'
             title='Admin Preferences'
             link='/activities'
           />
