@@ -3,10 +3,10 @@ import {TextCell} from "../../modules/table/columns/TextCell";
 import {CustomHeader} from "../../modules/table/columns/CustomHeader";
 import {ActionsCell} from "../../modules/table/columns/ActionsCell";
 import {QUERIES} from "../../../_metronic/helpers";
-import {Role} from "../../models/user/Role";
+import { Game } from '../../models/game/Game';
 import {ImageCell} from "../../modules/table/columns/ImageCell";
 
-const rolesColumns: ReadonlyArray<Column<Role>> = [
+const gamesColumns: ReadonlyArray<Column<Game>> = [
   {
     Header: (props) =>
         <CustomHeader tableProps={props} title='Title' className='min-w-125px'/>,
@@ -30,7 +30,7 @@ const rolesColumns: ReadonlyArray<Column<Role>> = [
     Header: (props) =>
         <CustomHeader tableProps={props} title='Crossplay' className='min-w-125px'/>,
     id: 'is_crossplay',
-    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].is_crossplay}/>,
+    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].is_crossplay === 0 ? 'True' : 'False'}/>
   },
   {
     Header: (props) =>
@@ -51,4 +51,4 @@ const rolesColumns: ReadonlyArray<Column<Role>> = [
   },
 ]
 
-export {rolesColumns}
+export {gamesColumns}

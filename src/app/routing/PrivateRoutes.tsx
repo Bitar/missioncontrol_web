@@ -13,6 +13,8 @@ import {ActivitiesIndex} from "../sections/activities/ActivitiesIndex";
 import {PermissionsEdit} from "../sections/user/permission/PermissionsEdit";
 import {RolesEdit} from "../sections/user/role/RolesEdit";
 import { GamesIndex } from '../sections/games/GamesIndex'
+import { GameCreate } from '../sections/games/GameCreate'
+import { GamesEdit } from '../sections/games/GameEdit'
 
 
 const PrivateRoutes = () => {
@@ -49,6 +51,25 @@ const PrivateRoutes = () => {
                     element={
                         <SuspensedView>
                             <RolesEdit/>
+                        </SuspensedView>
+                    }
+                />
+
+                <Route
+                    path='games/create'
+                    element={
+                        <SuspensedView>
+                            <GameCreate/>
+                        </SuspensedView>
+                    }
+                />
+
+
+                <Route
+                    path='games/:id/edit'
+                    element={
+                        <SuspensedView>
+                            <GamesEdit/>
                         </SuspensedView>
                     }
                 />
