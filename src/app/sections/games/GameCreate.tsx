@@ -1,256 +1,143 @@
-import React, {useState} from 'react'
-import {useFormik , FieldArray, Field ,Form} from "formik";
+import React, { useEffect, useState} from 'react'
+import useDebounce from './hooks/useDebounce';
 import * as Yup from 'yup'
-import { Game } from '../../models/game/Game';
-import { isNotEmpty, KTCard,KTCardBody } from '../../../_metronic/helpers';
-import clsx from "clsx";
-import { PageTitle } from '../../../_metronic/layout/core';
-import {createGame} from "./core/_requests";
+//import { isNotEmpty, KTCard,KTCardBody } from '../../../_metronic/helpers';
 import {useNavigate} from 'react-router-dom';
-import { platform } from 'os';
+import { Formik } from "formik";
+import {  KTCard, KTCardBody } from '../../../_metronic/helpers';
+import { TableListLoading } from '../../modules/table/TableListLoading';
+import { useQueryResponseLoading } from '../../modules/table/QueryResponseProvider';
+import { Igdb } from '../../models/game/Igdb';
+import { getIgdb } from './core/_requests';
+import { createGame } from './core/_requests';
+import { PageTitle } from '../../../_metronic/layout/core';
 
-const createGameSchema = Yup.object().shape({
-    title: Yup.string()
-        .required('Title is required'),
-    description: Yup.string()
-        .required('Description is required'),
-    is_featured: Yup.boolean().default(false),
-    is_crossplay: Yup.boolean().default(false),
-    //  image: Yup.mixed()
-    //      .required('You need to provide a file photo')
-    //      .test(
-    //         "fileSize",
-    //         "File size too large, max file size is 1 Mb",
-    //         (file) => {
-    //           console.log("file: ", file);
-    //           if (file) {
-    //             return file.size <= 1100000;
-    //           } else {
-    //             return true;
-    //           }
-    //         }
-    //       ) 
-     platforms: Yup.array().of(
-         Yup.object().shape({
-            abbreviation: Yup.string()
-         })
-     )
+//Validate Schema verify 
+const createGameSearchSchema = Yup.object().shape({
+    query: Yup.string()
 })
 
+
 const GameCreate = () => {
+  const isLoading = useQueryResponseLoading()
+    //when search parameter changes we want to search api and we use useEffect
+    const [data,setData] = useState<Igdb[] | undefined>([])
+    const [isSending, setIsSending] = useState(false)
+    const [search, setSearch] = useState<string |null>(null)
+    // const [loading,setLoading] = useState(false)
+    const debouncedSearch = useDebounce(search, 150) 
+    
+    useEffect(() => {
+      //call api
+      //filter[name]        //when function returns
+      getIgdb(debouncedSearch).then(response => { 
+        setData(response.data)
+        console.log(response.data)
+        
+      })
+      }, [debouncedSearch]) 
+
+      
+      function sendRequest (igdb_id:any) {
+        if(isSending)return
+        setIsSending(true)
+        createGame(igdb_id)
+        console.log(createGame)
+        setIsSending(false)
+      }
+      
     const navigate = useNavigate();
-
-
-    const [gameForEdit] = useState<Game>({
-        title:'' ,
-        description: '',
-        is_featured: false,
-        is_crossplay: false,
-        image: '',
-        platforms: []
-    })
-
-
+   
     const cancel = () => {
         navigate('/games')
     }
-
-    const formik = useFormik({
-        initialValues: gameForEdit,
-        validationSchema: createGameSchema,
-        onSubmit: async (values, {setSubmitting}) => {
-            setSubmitting(true)
-            try {
-                if (isNotEmpty(values.id)) {
-                    // await updateUser(values)
-                } else {
-                    await createGame(values)
-                }
-            } catch (ex) {
-                console.error(ex)
-            } finally {
-                setSubmitting(true)
-                cancel()
-            }
-        },
-    })
+    
+    
+  
 
     return (
-        <>
-            <PageTitle breadcrumbs={[]}>{'Games'}</PageTitle>
-            <KTCard>
-                <div className="card-header">
+      <>
+      <PageTitle breadcrumbs={[]}>{'Add Game'}</PageTitle>
+      <KTCard>
+          <div className="card-header">
                     <div className="card-title">
                         <span className="card-icon">
                             <i className="las la-plus fs-2"/>
                         </span>
                         <h3 className="card-label">
-                            Add Games
+                            Add Game
                         </h3>
                     </div>
                 </div>
+        <Formik
+          initialValues={{ createGameSearchSchema }}
+          onSubmit={(values, { setSubmitting }) => {
+            setSubmitting(false);
+          }}
+        >
+        {(formikProps) => (
+          <KTCardBody className='py-4'>
+            <div className="form-group has-feedback has-clear">
+            <div
+              className='d-flex flex-column scroll-y me-n7 pe-7 pt-5'
+              id='kt_modal_add_user_scroll'
+              data-kt-scroll='true'
+              data-kt-scroll-activate='{default: false, lg: true}'
+              data-kt-scroll-max-height='auto'
+              data-kt-scroll-dependencies='#kt_modal_add_user_header'
+              data-kt-scroll-wrappers='#kt_modal_add_user_scroll'
+              data-kt-scroll-offset='300px'
+              >
+                {/* begin::Input group */}
+                <div className='fv-row mb-7'>
+                  {/* begin::Label */}
+                <label className='required fw-bold fs-6 mb-2'>Search</label>
+                  {/* end::Label */}
+              <input
+                className='form-control form-control-solid mb-3 mb-lg-0'
+                name="query"
+                placeholder="Search . . . . ."
+                onChange={(e) => setSearch(e.target.value)}
+            />
+            </div>
+            <div className="py-5">
+                <button
+                 type='reset'
+                 onClick={() => cancel()}
+                 className='btn btn-light me-3'
+                 disabled={!formikProps.values.createGameSearchSchema}
+                >
+                Cancel
+                </button>
 
-
-
-                <KTCardBody className='py-4'>
-                    <form className='form' onSubmit={formik.handleSubmit} noValidate>
-                        {/* begin::Scroll */}
-                        <div
-                            className='d-flex flex-column scroll-y me-n7 pe-7 pt-5'
-                            id='kt_modal_add_user_scroll'
-                            data-kt-scroll='true'
-                            data-kt-scroll-activate='{default: false, lg: true}'
-                            data-kt-scroll-max-height='auto'
-                            data-kt-scroll-dependencies='#kt_modal_add_user_header'
-                            data-kt-scroll-wrappers='#kt_modal_add_user_scroll'
-                            data-kt-scroll-offset='300px'
-                        >
-                            {/* begin::Input group */}
-                            <div className='fv-row mb-7'>
-                                {/* begin::Label */}
-                                <label className='required fw-bold fs-6 mb-2'>Title</label>
-                                {/* end::Label */}
-
-                                {/* begin::Input */}
-                                <input
-                                    placeholder='Title'
-                                    {...formik.getFieldProps('title')}
-                                    type='text'
-                                    name='title'
-                                    className={clsx(
-                                        'form-control form-control-solid mb-3 mb-lg-0',
-                                        {'is-invalid': formik.touched.title && formik.errors.title},
-                                        {
-                                            'is-valid': formik.touched.title && !formik.errors.title,
-                                        }
-                                    )}
-                                    autoComplete='off'
-                                    disabled={formik.isSubmitting}
-                                />
-                                {formik.touched.title && formik.errors.title && (
-                                    <div className='fv-plugins-message-container'>
-                                        <div className='fv-help-block'>
-                                            <span role='alert'>{formik.errors.title}</span>
-                                        </div>
-                                    </div>
-                                )}
-                                {/* end::Input */}
-                            </div>
-
-                            <div className='fv-row mb-7'>
-                                {/* begin::Label */}
-                                <label className='required fw-bold fs-6 mb-2'>Description</label>
-                                {/* end::Label */}
-
-                                {/* begin::Input */}
-                                <input
-                                    placeholder='Description'
-                                    {...formik.getFieldProps('description')}
-                                    type='text'
-                                    name='description'
-                                    className={clsx(
-                                        'form-control form-control-solid mb-3 mb-lg-0',
-                                        {'is-invalid': formik.touched.description && formik.errors.description},
-                                        {
-                                            'is-valid': formik.touched.description && !formik.errors.description,
-                                        }
-                                    )}
-                                    autoComplete='off'
-                                    disabled={formik.isSubmitting}
-                                />
-                                {formik.touched.description && formik.errors.description && (
-                                    <div className='fv-plugins-message-container'>
-                                        <div className='fv-help-block'>
-                                            <span role='alert'>{formik.errors.description}</span>
-                                        </div>
-                                    </div>
-                                )}
-                                {/* end::Input */}
-                            </div>
-                            
-                            {/* end::Input group */}
-                            </div>
-
-                            
-                            
-                           
-                        
-                            
-                        
-
-                
-                            <div className='fv-row mb-7'>
-                            <div className='form-check form-check-solid fv-row'>
-                                <input
-                                    className='form-check-input'
-                                    type='checkbox'
-                                    {...formik.getFieldProps('is_crossplay')}
-                                />
-                                <label className='form-check-label fw-bold ps-2 fs-6' htmlFor='is_crossplay'>
-                                    Click if game is crossplay compatible
-                                </label>
-                                </div>
-                                {formik.touched.is_crossplay && formik.errors.is_crossplay && (
-                                <div className='fv-plugins-message-container'>
-                                    <div className='fv-help-block'>{formik.errors.is_crossplay}</div>
-                                </div>
-                                )}
-                          </div>
-                          <div className='fv-row mb-7'>
-                             <div className='form-check form-check-solid fv-row'>
-                                <input
-                                    className='form-check-input'
-                                    type='checkbox'
-                                    {...formik.getFieldProps('is_featured')}
-                                />
-                                <label className='form-check-label fw-bold ps-2 fs-6' htmlFor='is_featured'>
-                                   Click if featured game
-                                </label>
-                                </div>
-                                {formik.touched.is_featured && formik.errors.is_featured && (
-                                <div className='fv-plugins-message-container'>
-                                    <div className='fv-help-block'>{formik.errors.is_featured}</div>
-                                </div>
-                               )}
-                               
-                          </div>
-                                    
-                        {/* end::Scroll */}
-
-                        {/* begin::Actions */}
-                        <div className='py-5'>
-                            <button
-                                type='reset'
-                                onClick={() => cancel()}
-                                className='btn btn-light me-3'
-                                data-kt-users-modal-action='cancel'
-                                disabled={formik.isSubmitting}
-                            >
-                                Cancel
-                            </button>
-
-                            <button
-                                type='submit'
-                                className='btn btn-primary'
-                                data-kt-users-modal-action='submit'
-                                disabled={formik.isSubmitting || !formik.isValid || !formik.touched}
-                            >
-                                <span className='indicator-label'>Submit</span>
-                                {(formik.isSubmitting) && (
-                                    <span className='indicator-progress'>
-                                        Please wait...{' '}
-                                        <span className='spinner-border spinner-border-sm align-middle ms-2'/>
-                                    </span>
-                                )}
-                            </button>
+                 <div className='container py-5'>
+                  <div className='row'>
+                  {!data ?<div>Search Again</div> : data.map((d) => { 
+                  return <div className='col-md-6 col-xxl-4' key={d.id}>
+                    <div className='mb-6'>
+                    <button className='symbol symbol-100px symbol-lg-200px symbol-fixed position-relative'>
+                    <img 
+                        onClick={() => sendRequest(d.id)}
+                        className= 'w-100 h-100' 
+                        src={d.cover}
+                        />
+                         </button>
                         </div>
-                        {/* end::Actions */}
-                    </form>
-                    {(formik.isSubmitting)}
-                </KTCardBody>
-            </KTCard>
+                        </div>
+                })} 
+                </div>
+                </div>
+                </div>
+             </div>
+             </div>
+             
+          </KTCardBody>
+          )}
+        </Formik>
+        {isLoading && <TableListLoading/>}
+        </KTCard>
         </>
-    )
-}
+    );
+};
 
 export {GameCreate}
