@@ -20,6 +20,13 @@ export function AsideMenuMain() {
                 </div>
             </div>
             <AsideMenuItem
+                to='/communities'
+                title='Communities'
+                fontIcon='bi-archive'
+                icon='/media/icons/duotune/general/gen022.svg'
+            >
+            </AsideMenuItem>
+            <AsideMenuItem
                 to='/activities'
                 title='Activities'
                 fontIcon='bi-archive'
