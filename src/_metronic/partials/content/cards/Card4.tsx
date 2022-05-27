@@ -13,7 +13,7 @@ const Card4: FC<Props> = ({icon, title, description ,link}) => {
   return (
     <div className='card h-100'>
       <div className='card-body d-flex justify-content-center text-center flex-column p-8'>
-        <a href={link} className='text-gray-800 text-hover-primary d-flex flex-column'>
+        <a href={link} className='text-gray-800 text-hover-primary d-flex flex-column' target="_blank">
           <div className='symbol symbol-75px mb-6'>
             <img src={toAbsoluteUrl(icon)} alt='' />
           </div>
