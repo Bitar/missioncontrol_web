@@ -126,26 +126,29 @@ const Support = () => {
 
       <div className='row g-6 g-xl-9 mb-6 mb-xl-9'>
         <div className='col-12 col-sm-12 col-xl'>
-          <Card7 icon='/media/icons/duotune/communication/com007.svg'  
-          link='/activities' 
+          <Card7 icon='/media/support/OrgAnnouncement.png'
+          link='/#' 
           title='Org Announcements'  />
         </div>
         <div className='col-12 col-sm-12 col-xl'>
-          <Card7 icon='/media/icons/duotune/electronics/elc011.svg' 
-          link='/activities' 
-          title='Create League' />
-        </div>
-        <div className='col-12 col-sm-12 col-xl'>
-          <Card7
-            icon='/media/icons/duotune/coding/cod001.svg'
-            title='Admin Preferences'
-            link='/activities'
+          <Card7 icon='/media/support/CreateLeague.png'      
+          link='/#' 
+          title='Create League' 
           />
         </div>
         <div className='col-12 col-sm-12 col-xl'>
-          <Card7 icon='/media/icons/duotune/finance/fin001.svg' 
+          <Card7
+            icon='/media/support/AdminIcon.png'
+            link='/#'
+            title='Admin Preferences'
+           
+          />
+          
+        </div>
+        <div className='col-12 col-sm-12 col-xl'>
+          <Card7 icon='/media/support/AccountBilling.png' 
+          link='/#'
           title='Account and Billing' 
-          link='/activities'
          />
         </div>
       </div>
