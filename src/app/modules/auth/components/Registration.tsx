@@ -46,7 +46,6 @@ const registrationSchema = Yup.object().shape({
 
 export function Registration() {
   const [loading, setLoading] = useState(false)
-  const [errors, setErrors] = useState()
   const {saveAuth, setCurrentUser} = useAuth()
   const formik = useFormik({
     initialValues,
@@ -67,7 +66,7 @@ export function Registration() {
         if(data.status === 200) {
           const auth = data.data
           saveAuth(auth)
-          const {data: user} = await getUserByToken(auth.token)
+          // const {data: user} = await getUserByToken(auth.token)
           setCurrentUser(auth.data)
         } else if(data.status === 422) {
           // Unprocessed Entity
