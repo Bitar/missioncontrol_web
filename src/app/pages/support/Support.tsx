@@ -7,7 +7,7 @@ import { Card7 } from "../../../_metronic/partials/content/cards/Card7";
 
 
 
-const SupportIndex = () => {
+const Support = () => {
 
 
   
@@ -55,7 +55,7 @@ const SupportIndex = () => {
                   svgClassName='h-80px w-80px'
                 />
                 <KTSVG
-                  path='/media/icons/duotune/coding/cod009.svg'
+                  path='/media/icons/duotune/general/gen002.svg'
                   className='svg-icon-3x svg-icon-primary position-absolute'
                 /> 
               </div>
@@ -94,7 +94,7 @@ const SupportIndex = () => {
                   svgClassName='h-80px w-80px'
                 />
                 <KTSVG
-                  path='/media/icons/duotune/coding/cod009.svg'
+                  path='/media/icons/duotune/communication/com011.svg'
                   className='svg-icon-3x svg-icon-primary position-absolute'
                 /> 
               </div>
@@ -126,24 +126,24 @@ const SupportIndex = () => {
 
       <div className='row g-6 g-xl-9 mb-6 mb-xl-9'>
         <div className='col-12 col-sm-12 col-xl'>
-          <Card7 icon='/media/support/OrgAnnouncement.png'  
+          <Card7 icon='/media/icons/duotune/communication/com007.svg'  
           link='/activities' 
           title='Org Announcements'  />
         </div>
         <div className='col-12 col-sm-12 col-xl'>
-          <Card7 icon='/media/support/CreateLeague.png' 
+          <Card7 icon='/media/icons/duotune/electronics/elc011.svg' 
           link='/activities' 
           title='Create League' />
         </div>
         <div className='col-12 col-sm-12 col-xl'>
           <Card7
-            icon='/media/support/AdminIcon.png'
+            icon='/media/icons/duotune/coding/cod001.svg'
             title='Admin Preferences'
             link='/activities'
           />
         </div>
         <div className='col-12 col-sm-12 col-xl'>
-          <Card7 icon='/media/support/AccountBilling.png' 
+          <Card7 icon='/media/icons/duotune/finance/fin001.svg' 
           title='Account and Billing' 
           link='/activities'
          />
@@ -153,4 +153,4 @@ const SupportIndex = () => {
     )
 }
 
-export{SupportIndex}
+export{Support}

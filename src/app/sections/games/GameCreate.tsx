@@ -1,18 +1,18 @@
 import React, {useEffect, useState} from 'react'
 import useDebounce from './hooks/useDebounce';
 import * as Yup from 'yup'
-//import { isNotEmpty, KTCard,KTCardBody } from '../../../_metronic/helpers';
 import {useNavigate} from 'react-router-dom';
 import {Formik} from "formik";
 import {KTCard, KTCardBody} from '../../../_metronic/helpers';
-import {TableListLoading} from '../../modules/table/TableListLoading';
 import {useQueryResponseLoading} from '../../modules/table/QueryResponseProvider';
 import {Igdb} from '../../models/game/Igdb';
 import {getIgdb} from './core/_requests';
 import {createGame} from './core/_requests';
 import {PageTitle} from '../../../_metronic/layout/core';
+import Swal from 'sweetalert2';
 
-//Validate Schema verify 
+
+
 const createGameSearchSchema = Yup.object().shape({
     query: Yup.string()
 })
@@ -20,30 +20,38 @@ const createGameSearchSchema = Yup.object().shape({
 
 const GameCreate = () => {
     const isLoading = useQueryResponseLoading()
-    //when search parameter changes we want to search api and we use useEffect
-    const [data, setData] = useState<Igdb[] | undefined>([])
+    const [games, setGame] = useState<Igdb[] | undefined>([])
     const [isSending, setIsSending] = useState(false)
-    const [search, setSearch] = useState<string | null>(null)
-    // const [loading,setLoading] = useState(false)
+    const [search, setSearch] = useState<string | ''>('')
+    const [loading,setLoading] = useState(false)
+    const [currentPage,setCurrentPage] = useState(1)
+    const [gamesPerPage, setGamesPerPage] = useState(10)
     const debouncedSearch = useDebounce(search, 150)
 
     useEffect(() => {
-        //call api
-        //filter[name]        //when function returns
         getIgdb(debouncedSearch).then(response => {
-            setData(response.data)
-            console.log(response.data)
-
+            setGame(response.data)
         })
     }, [debouncedSearch])
 
+//Get current games
+const indexOfLastGame = currentPage * gamesPerPage;
+const indexOfFirstGame = indexOfLastGame - gamesPerPage;
+const currentGames = games?.slice(indexOfFirstGame,indexOfLastGame)
 
-    function sendRequest(igdb_id: any) {
+
+    const sendRequest = (igdb_id: any) => {
         if (isSending) return
         setIsSending(true)
         createGame(igdb_id)
-        console.log(createGame)
         setIsSending(false)
+        Swal.fire({
+            icon: 'success',
+            title: 'Game Added',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        postLink()
     }
 
     const navigate = useNavigate();
@@ -52,6 +60,9 @@ const GameCreate = () => {
         navigate('/games')
     }
 
+    const postLink = () => {
+      navigate('/games')
+  }
 
     return (
         <>
@@ -107,33 +118,37 @@ const GameCreate = () => {
                                         >
                                             Cancel
                                         </button>
-
-                                        <div className='container py-5'>
-                                            <div className='row'>
-                                                {!data ? <div>Search Again</div> : data.map((d) => {
-                                                    return <div className='col-md-6 col-xxl-4' key={d.id}>
-                                                        <div className='mb-6'>
-                                                            <button className='symbol symbol-100px symbol-lg-200px symbol-fixed position-relative'>
-                                                                <img
-                                                                    onClick={() => sendRequest(d.id)}
-                                                                    className='w-100 h-100'
-                                                                    src={d.cover}
-                                                                />
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                })}
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-                        </KTCardBody>
-                    )}
-                </Formik>
-                {isLoading && <TableListLoading/>}
+                            
+                    <KTCardBody className='py-8'>
+                        <KTCard>
+                        <div className="row g-6 g-xl-9 mb-6 mb-xl-9">
+                        {!games? '' : games.map((game) => (
+                            <div className="col-md-6 col-lg-4 col-xl-3" key={game.id}> 
+                             <div className=' text-center fs-9 fw-bold text-gray-400 mt-auto'>{game.name}                                  
+                            <img
+                                onClick={() => sendRequest(game.id)}
+                                className=" w-100 h-300px rounded"
+                                src={game.cover}
+                            />
+                             </div>
+                        </div> 
+                             
+                ))}
+        
+            </div>
             </KTCard>
+            </KTCardBody>
+           </KTCardBody>
+                )}
+                </Formik>
+                </KTCard>
+             
+
+
+                                            
         </>
     );
 };

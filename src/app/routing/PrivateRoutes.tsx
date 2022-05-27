@@ -15,8 +15,8 @@ import {RolesEdit} from "../sections/user/role/RolesEdit";
 import { GamesIndex } from '../sections/games/GamesIndex'
 import { GameCreate } from '../sections/games/GameCreate'
 import { GamesEdit } from '../sections/games/GameEdit'
-import { MarketingIndex } from '../sections/marketing/MarketingIndex'
-import { SupportIndex } from '../sections/support/SupportIndex'
+import { Marketing} from '../pages/marketing/Marketing'
+import { Support } from '../pages/support/Support'
 import {BillingPlanWrapper} from "../sections/billing/BillingPlanWrapper";
 import {CommunityCreate} from "../sections/community/CommunityCreate";
 import { PlansIndex } from '../sections/billing/plan/PlansIndex'
@@ -53,8 +53,8 @@ const PrivateRoutes = () => {
 
                 <Route path='activities' element={<ActivitiesIndex/>}/>
                 <Route path='games' element={<GamesIndex/>}/>
-                <Route path='marketing' element={<MarketingIndex/>}/>
-                <Route path='support' element={<SupportIndex/>}/>
+                <Route path='marketing' element={<Marketing/>}/>
+                <Route path='support' element={<Support/>}/>
 
                 <Route path='plans' element={<PlansIndex/>}/>
                 <Route path='plans/create' element={
