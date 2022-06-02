@@ -7,10 +7,10 @@ import { Response } from '../../../../_metronic/helpers';
 const API_URL = process.env.REACT_APP_API_URL
 const GET_GAMES_URL = `${API_URL}/games`
 
-const getIgdb = (query: string): Promise<IgdbQueryResponse> => {
+const getIgdb = (query: string , page:number): Promise<IgdbQueryResponse> => {
     return axios
-         //igdb/search?filter[name]=war
-        .get(`${GET_GAMES_URL}/igdb/search?filter[name]=${query}`)
+         //igdb/search?filter[name]=war 
+        .get(`${GET_GAMES_URL}/igdb/search?filter[name]=${query}&page=${page}`)
         .then((d: AxiosResponse<IgdbQueryResponse>) => d.data)
 }
 

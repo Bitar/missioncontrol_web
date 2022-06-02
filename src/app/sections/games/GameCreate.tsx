@@ -9,7 +9,7 @@ import {getIgdb} from './core/_requests';
 import {createGame} from './core/_requests';
 import {PageTitle} from '../../../_metronic/layout/core';
 import Swal from 'sweetalert2';
-
+import Pagination from '../../components/pagination/Pagination';
 
 const createGameSearchSchema = Yup.object().shape({
     query: Yup.string()
@@ -20,17 +20,28 @@ const GameCreate = () => {
     const [games, setGames] = useState<Igdb[] | undefined>([])
     const [isSending, setIsSending] = useState(false)
     const [search, setSearch] = useState<string | ''>('') 
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(10);
     const debouncedSearch = useDebounce(search, 150)
 
+    const handlePrevPage = (prevPage: number) => {
+        setPage((prevPage) => prevPage - 1);
+      };
+    
+      const handleNextPage = (nextPage: number) => {
+        console.log(nextPage);
+        setPage((nextPage) => nextPage + 1);
+      };
     
 
     useEffect(() => {
-        getIgdb(debouncedSearch).then(response => {
+        getIgdb(debouncedSearch,page).then(response => {
             setGames(response.data)
+            setTotalPages(totalPages)
          
      
         })
-    }, [debouncedSearch])
+    }, [page,debouncedSearch])
 
     
     
@@ -142,7 +153,12 @@ const GameCreate = () => {
                         </div>        
                                          
                     ))} 
-                
+                <Pagination
+                    totalPages={totalPages}
+                    currentPage={page}
+                    handlePrevPage={handlePrevPage}
+                    handleNextPage={handleNextPage}
+                />
                    
                 </div>
                 </KTCard>
