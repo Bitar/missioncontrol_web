@@ -27,10 +27,9 @@ const getGameById = (id: any): Promise<Game | undefined> => {
         .then((response: Response<Game>) => response.data)
 }
 
-//we are sending the body key val as key:igdb_id
-const createGame = (igdb_id: number): Promise<Game | undefined> => {
+const createGame = (igdb_id: number ): Promise<Game | undefined> => {
     return axios
-    .post(`${GET_GAMES_URL}`,{},{params: {igdb_id}})
+    .post(`${GET_GAMES_URL}`,{},{params: {igdb_id }})
     .then((response: AxiosResponse<Response<Game>>) => response.data)
     .then((response: Response<Game>) => response.data)
 }

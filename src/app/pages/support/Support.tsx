@@ -9,8 +9,6 @@ import { Card7 } from "../../../_metronic/partials/content/cards/Card7";
 
 const Support = () => {
 
-
-  
     return (
         <>
         <PageTitle breadcrumbs={[]}>{'Support'}</PageTitle>
