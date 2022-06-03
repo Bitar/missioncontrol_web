@@ -14,7 +14,6 @@ const Pagination: React.FC<Props> = ({
   handlePrevPage,
   handleNextPage
 
-  
 }) => {  
 
 

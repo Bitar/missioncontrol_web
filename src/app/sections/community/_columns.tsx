@@ -6,6 +6,7 @@ import {QUERIES} from "../../../_metronic/helpers";
 import { Game } from '../../models/game/Game';
 import {ImageCell} from "../../modules/table/columns/ImageCell";
 import {Community} from "../../models/community/Community";
+import { ViewsCell } from '../../modules/table/columns/ViewsCell';
 
 const communitiesColumns: ReadonlyArray<Column<Community>> = [
     {
@@ -33,14 +34,14 @@ const communitiesColumns: ReadonlyArray<Column<Community>> = [
         id: 'description',
         Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].description}/>
     },
-    // {
-    //     Header: (props) => (
-    //         <CustomHeader tableProps={props} title='Actions' className='text-end min-w-100px'/>
-    //     ),
-    //     id: 'actions',
-    //     Cell: ({...props}) => <ActionsCell id={props.data[props.row.index].id} path={'games'}
-    //                                        queryKey={QUERIES.GAMES_LIST}/>,
-    // },
+     {
+         Header: (props) => (
+             <CustomHeader tableProps={props} title='Actions' className='text-end min-w-100px'/>
+         ),
+        id: 'actions',
+         Cell: ({...props}) => <ViewsCell id={props.data[props.row.index].id} path={'community'}
+                                            queryKey={QUERIES.COMMUNITIES_LIST}/>,
+     },
 ]
 
 export {communitiesColumns}
