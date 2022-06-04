@@ -1,9 +1,13 @@
+import { useEffect } from "react";
 import Swal from "sweetalert2";
 import { KTSVG } from "../../../_metronic/helpers";
 import { PageTitle } from "../../../_metronic/layout/core";
 import marketing from "./data/MarketingData";
 
 const Marketing = () => {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+      }, [])
 
     const copy = async (text:string) => {
         await navigator.clipboard.writeText(text);
@@ -33,7 +37,7 @@ const Marketing = () => {
                     <div className='ms-6 '>
                         <h1>Community Invite Link</h1>
                         <p className='list-unstyled text-gray-600 fw-bold fs-6 p-0 m-0'>
-                            Share the link below to invite players directly to your community! If they do not have the Mission Control app, it will have them download the app then immediately join your community. If they do have the app, it will bring them straight to your community. If accessed via desktop, it will ask for a mobile number to direct the app download to.
+                        Share the link below to invite players directly to your community! If players do not have the Mission Control app, this link will first prompt them to download the app and then invite them to join your community. If players do have the app, this link will bring them straight your community on Mission Control. If players click access the link via desktop, they will be asked for a mobile number to receive the direct link invite.
                         </p>
                         <button
                             type="submit"
@@ -65,7 +69,7 @@ const Marketing = () => {
                     <div className='ms-6'>
                         <h1>Graphic Templates</h1>
                         <p className='list-unstyled text-gray-600 fw-bold fs-6 p-0 m-0'>
-                            Mission Control has prepared multiple templates of graphic design themes that can be used across various marketing mediums. Each theme includes multiple file sizes and design templates that can work as flyers, powerpoint slides, social media images, and more. Each template leaves room for organizations to customize the artwork by adding their own logo, name, programs, and more. To make it accessible for all types of designers, most themes include the base files in versions of Adobe Illustrator, Powerpoint, and editable PDFs for use on Canva or other programs.
+                        Mission Control has prepared multiple graphic design templates of various sizes to use for flyers, powerpoint slides, social media images and more. Each template can be customized with your own logo, name, program details, etc., and comes in various file types for easy edit access in Adobe Illustrator, PowerPoint, Canva and more.
                         </p>
                     </div>
                     {/* end::Description */}
@@ -73,9 +77,9 @@ const Marketing = () => {
                 </div>
             </div>
             <div className='d-flex flex-wrap flex-stack mb-6'>
-                <h3 className='fw-bolder my-2'>
+                {/* <h3 className='fw-bolder my-2'>
                     My Documents
-                </h3>
+                </h3> */}
             </div>
             <div className='row g-10'>
                 {marketing.map((market , index) =>(

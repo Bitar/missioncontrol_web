@@ -1,7 +1,7 @@
 export default[
     {
         avatar:'/media/marketing/HowPlaying.png',
-        link:'https://drive.google.com/drive/folders/14C33yaL1HlLEUQlQfsDir__dcXfIrCxn'   
+        link:'https://drive.google.com/drive/folders/1xA_CNyqzfTTdfzmrAFgRDYyIeGmWLhum'   
     },
     {
         avatar:'/media/marketing/LevelUpGame.png',
