@@ -9,7 +9,7 @@ import {getIgdb} from './core/_requests';
 import {createGame} from './core/_requests';
 import {PageTitle} from '../../../_metronic/layout/core';
 import Swal from 'sweetalert2';
-import ReactPaginate from 'react-paginate';
+// import ReactPaginate from 'react-paginate';
 
 const createGameSearchSchema = Yup.object().shape({
     query: Yup.string()
@@ -147,7 +147,7 @@ const GameCreate = () => {
                     <KTCard>
                     <div className="row g-6 g-xl-9 mb-6 mb-xl-9">
                         {currentPageData}
-                        <ReactPaginate
+                        {/* <ReactPaginate
                         breakLabel="..."
                         nextLabel="next >"
                         onPageChange={handlePageClick}
@@ -155,7 +155,7 @@ const GameCreate = () => {
                         pageCount={pageCount}
                         previousLabel="< previous"
                         //renderOnZeroPageCount={null}
-                    />
+                    /> */}
 
                         </div>
                     </KTCard>
