@@ -115,6 +115,7 @@ export function Login() {
             </div>
           </div>
           <input
+            placeholder='Password'
               type='password'
               autoComplete='off'
               {...formik.getFieldProps('password')}
