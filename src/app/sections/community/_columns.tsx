@@ -3,11 +3,8 @@ import {TextCell} from "../../modules/table/columns/TextCell";
 import {CustomHeader} from "../../modules/table/columns/CustomHeader";
 import {ImageCell} from "../../modules/table/columns/ImageCell";
 import {Community} from "../../models/community/Community";
-<<<<<<< HEAD
-=======
-import { QUERIES } from '../../../_metronic/helpers';
->>>>>>> community-tab
 import { ViewsCell } from '../../modules/table/columns/ViewsCell';
+import { QUERIES } from '../../../_metronic/helpers';
 
 const communitiesColumns: ReadonlyArray<Column<Community>> = [
     {
@@ -35,7 +32,6 @@ const communitiesColumns: ReadonlyArray<Column<Community>> = [
         id: 'description',
         Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].description}/>
     },
-<<<<<<< HEAD
      {
          Header: (props) => (
              <CustomHeader tableProps={props} title='Actions' className='text-end min-w-100px'/>
@@ -44,16 +40,6 @@ const communitiesColumns: ReadonlyArray<Column<Community>> = [
          Cell: ({...props}) => <ViewsCell id={props.data[props.row.index].id} path={'community'}
                                             queryKey={QUERIES.COMMUNITIES_LIST}/>,
      },
-=======
-    {
-        Header: (props) => (
-            <CustomHeader tableProps={props} title='Actions' className='text-end min-w-100px'/>
-        ),
-       id: 'actions',
-        Cell: ({...props}) => <ViewsCell id={props.data[props.row.index].id} path={'community'}
-                                           queryKey={QUERIES.COMMUNITIES_LIST}/>,
-    },
->>>>>>> community-tab
 ]
 
 export {communitiesColumns}

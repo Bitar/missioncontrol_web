@@ -9,11 +9,7 @@ import {getIgdb} from './core/_requests';
 import {createGame} from './core/_requests';
 import {PageTitle} from '../../../_metronic/layout/core';
 import Swal from 'sweetalert2';
-<<<<<<< HEAD
 import Pagination from '../../components/pagination/Pagination';
-=======
-// import ReactPaginate from 'react-paginate';
->>>>>>> community-tab
 
 const createGameSearchSchema = Yup.object().shape({
     query: Yup.string()
@@ -143,7 +139,6 @@ const GameCreate = () => {
                         </div>
                     </div>    
                     <KTCardBody className='py-8'>
-<<<<<<< HEAD
                         <KTCard>
                         <div className="row g-6 g-xl-9 mb-6 mb-xl-9">
                         {!games? '' : games.map((game) => (
@@ -170,28 +165,6 @@ const GameCreate = () => {
                     )}
                 </Formik>
                 </KTCard>                       
-=======
-                    <KTCard>
-                    <div className="row g-6 g-xl-9 mb-6 mb-xl-9">
-                        {currentPageData}
-                        {/* <ReactPaginate
-                        breakLabel="..."
-                        nextLabel="next >"
-                        onPageChange={handlePageClick}
-                        pageRangeDisplayed={5}
-                        pageCount={pageCount}
-                        previousLabel="< previous"
-                        //renderOnZeroPageCount={null}
-                    /> */}
-
-                        </div>
-                    </KTCard>
-                    </KTCardBody>
-        </KTCardBody>
-        )}
-        </Formik>
-        </KTCard>                                           
->>>>>>> signin-tab
         </>
     );
 };
