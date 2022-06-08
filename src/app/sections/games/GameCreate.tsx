@@ -27,14 +27,11 @@ const GameCreate = () => {
 
     
     
-
-
     const handlePrevPage = (prevPage: number) => {
         setPage((prevPage) => prevPage - 1);
         console.log(prevPage , prevPage-1)
         // window.scrollTo(0,0)
         
-      
       };    
       const handleNextPage = (nextPage: number) => {
         setPage((nextPage) => nextPage + 1);
@@ -85,8 +82,7 @@ const GameCreate = () => {
       navigate('/games')
   }
 
-    return (
-        
+    return (  
         <>
         <PageTitle breadcrumbs={[]}>{'Add Game'}</PageTitle>
         <KTCard>
@@ -142,8 +138,7 @@ const GameCreate = () => {
                             </button>
                             </div>
                         </div>
-                    </div> 
-                     
+                    </div>    
                     <KTCardBody className='py-8'>
                         <KTCard>
                         <div className="row g-6 g-xl-9 mb-6 mb-xl-9">
@@ -155,11 +150,8 @@ const GameCreate = () => {
                                 src={game.cover}
                             />}
                             <div className=' text-center fs-2 fw-bold text-black mt-auto'>{game.name}                                   </div>
-                        </div>      
-                          
-                                         
+                        </div>                             
                     ))} 
-                    
                     <Pagination
                     totalPages={totalPages}
                     currentPage={page}
@@ -169,8 +161,7 @@ const GameCreate = () => {
                 />
                 </div>
                 </KTCard>
-                </KTCardBody>
-                
+                </KTCardBody>  
             </KTCardBody>
                     )}
                 </Formik>

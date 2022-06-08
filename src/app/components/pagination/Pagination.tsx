@@ -54,7 +54,6 @@ const Pagination: React.FC<Props> = ({
     </div>
     </div>
 
-       
   );
 };
 
