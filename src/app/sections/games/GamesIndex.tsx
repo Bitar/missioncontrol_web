@@ -7,7 +7,6 @@ import {QueryResponseProvider} from "../../modules/table/QueryResponseProvider";
 import {getGames} from "./core/_requests";
 import {ListViewProvider} from "../../modules/table/ListViewProvider";
 import {GamesTable} from "./GamesTable";
-import { getIgdb } from './core/_requests';
 
 const GamesList = () => {
     return (
