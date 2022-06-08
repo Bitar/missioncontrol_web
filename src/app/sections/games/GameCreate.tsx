@@ -11,6 +11,7 @@ import {PageTitle} from '../../../_metronic/layout/core';
 import Swal from 'sweetalert2';
 import Pagination from '../../components/pagination/Pagination';
 
+
 const createGameSearchSchema = Yup.object().shape({
     query: Yup.string()
 })
@@ -24,26 +25,30 @@ const GameCreate = () => {
     const [totalPages, setTotalPages] = useState(10);
     const debouncedSearch = useDebounce(search, 150)
 
-    const handlePrevPage = (prevPage: number) => {
-        setPage((prevPage) => prevPage - 1);
-      };
     
-      const handleNextPage = (nextPage: number) => {
-        console.log(nextPage);
-        setPage((nextPage) => nextPage + 1);
-      };
     
 
+
+    const handlePrevPage = (prevPage: number) => {
+        setPage((prevPage) => prevPage - 1);
+        console.log(prevPage , prevPage-1)
+        // window.scrollTo(0,0)
+        
+      
+      };    
+      const handleNextPage = (nextPage: number) => {
+        setPage((nextPage) => nextPage + 1);
+        console.log(nextPage , nextPage + 1)
+        // window.scrollTo(0,0)
+      };
+    
     useEffect(() => {
         getIgdb(debouncedSearch,page).then(response => {
             setGames(response.data)
             setTotalPages(totalPages)
-         
-     
+            
         })
-    }, [page,debouncedSearch])
-
-    
+    }, [page,debouncedSearch,totalPages])
     
     const sendRequest = (igdb_id: any) => {
         if (isSending) return
@@ -150,23 +155,24 @@ const GameCreate = () => {
                                 src={game.cover}
                             />}
                             <div className=' text-center fs-2 fw-bold text-black mt-auto'>{game.name}                                   </div>
-                        </div>        
+                        </div>      
+                          
                                          
                     ))} 
-                <Pagination
+                    
+                    <Pagination
                     totalPages={totalPages}
                     currentPage={page}
-                    handlePrevPage={handlePrevPage}
                     handleNextPage={handleNextPage}
+                    handlePrevPage={handlePrevPage}
+                    setPage={setPage} 
                 />
-                   
                 </div>
                 </KTCard>
                 </KTCardBody>
                 
             </KTCardBody>
                     )}
-                    
                 </Formik>
                 </KTCard>                       
         </>

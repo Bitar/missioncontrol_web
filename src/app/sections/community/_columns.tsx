@@ -1,9 +1,7 @@
 import {Column} from 'react-table'
 import {TextCell} from "../../modules/table/columns/TextCell";
 import {CustomHeader} from "../../modules/table/columns/CustomHeader";
-import {ActionsCell} from "../../modules/table/columns/ActionsCell";
 import {QUERIES} from "../../../_metronic/helpers";
-import { Game } from '../../models/game/Game';
 import {ImageCell} from "../../modules/table/columns/ImageCell";
 import {Community} from "../../models/community/Community";
 import { ViewsCell } from '../../modules/table/columns/ViewsCell';
