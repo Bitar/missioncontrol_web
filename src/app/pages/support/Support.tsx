@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { KTSVG } from "../../../_metronic/helpers";
 import { PageTitle } from "../../../_metronic/layout/core";
@@ -8,7 +8,11 @@ import { Card7 } from "../../../_metronic/partials/content/cards/Card7";
 
 
 const Support = () => {
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> marketing-tab
     return (
         <>
         <PageTitle breadcrumbs={[]}>{'Support'}</PageTitle>
