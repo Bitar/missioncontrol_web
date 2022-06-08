@@ -9,7 +9,11 @@ import {getIgdb} from './core/_requests';
 import {createGame} from './core/_requests';
 import {PageTitle} from '../../../_metronic/layout/core';
 import Swal from 'sweetalert2';
+<<<<<<< HEAD
 import Pagination from '../../components/pagination/Pagination';
+=======
+// import ReactPaginate from 'react-paginate';
+>>>>>>> community-tab
 
 const createGameSearchSchema = Yup.object().shape({
     query: Yup.string()
