@@ -1,42 +1,37 @@
 import React, { useEffect } from "react";
 
-import { KTSVG } from "../../../_metronic/helpers";
+import { KTSVG, toAbsoluteUrl } from "../../../_metronic/helpers";
 import { PageTitle } from "../../../_metronic/layout/core";
-import { Card4 } from "../../../_metronic/partials/content/cards/Card4";
 import { Card7 } from "../../../_metronic/partials/content/cards/Card7";
-
+import support from "./data/SupportData";
 
 
 const Support = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+  
     return (
         <>
         <PageTitle breadcrumbs={[]}>{'Support'}</PageTitle>
         <div className='row g-6 g-xl-9 mb-6 mb-xl-9'>
-        <div className='col-12 col-sm-12 col-xl'>
-          <Card4
-            icon='/media/support/rocket-icon.svg'
-            title='Knowledge Base'
-            description='Explore articles and guides created just for our admins in our Private Knowledge Base to master the Mission Control Platform.'
-            link='https://knowledgebase.missioncontrol.gg/'
-          />
+        {support.map((supportData , index) =>(
+           <div className='col-12 col-sm-12 col-xl' key={index}>
+          <div className='card h-100'>
+          <div className='card-body d-flex justify-content-center text-center flex-column p-8'>
+            <a href={supportData.link} className='text-gray-800 text-hover-primary d-flex flex-column' target="_blank">
+              <div className='symbol symbol-75px mb-6'>
+                <img src={toAbsoluteUrl(supportData.icon)} alt='' />
+              </div>
+              <div className='fs-5 fw-bolder mb-2'>{supportData.title}</div>
+            </a>
+            <div className='fs-7 fw-bold text-gray-400 h-100'>{supportData.description}</div>
+          </div>
         </div>
-        <div className='col-12 col-sm-12 col-xl'>
-          <Card4
-            icon='/media/support/astroicon1.svg'
-            title='Admin Forum'
-            description='Join the Mission Control discord to have access to admin-only channels where you can meet other admins, share ideas, and learn more about esports.'
-            link="https://discord.com/invite/2Fbtq5U"
-          />
         </div>
-        <div className='col-12 col-sm-12 col-xl'>
-          <Card4
-            icon='/media/support/rocket-icon.svg'
-            title='Learn More'
-            description='Discover blogs, webinars, and guides on our public page that will help you build and launch your programs to new heights.'
-            link="https://www.missioncontrol.gg/learn"
-          />
-        </div>
-      </div>
+          ))}
+    </div>
+
         <div className='d-flex flex-wrap flex-stack mb-6'>
           <h3 className='fw-bolder my-2'>
           Support Events
@@ -59,9 +54,9 @@ const Support = () => {
               {/* end::Icon */}
               {/* begin::Description */}
               <div className='ms-6'>
-              <h1>Town Hall w/ CEO Austin Smith</h1>
+              <h1>Town Hall with CEO Austin Smith</h1>
               <p className='list-unstyled text-gray-600 fw-bold fs-6 p-0 m-0'>
-              We want to ensure you have a chance to hear from and ask questions related to the platform, upcoming product focuses, and anything else directly with Mission Control's CEO, Austin Smith!
+              Join us every quarter to hear from and ask questions of Mission Control CEO Austin Smith on the state of the platform, upcoming product focuses, and more!
               </p> 
               <div className="mt-2">
                 <a href="https://us06web.zoom.us/j/86411098294#success" target="_blank">

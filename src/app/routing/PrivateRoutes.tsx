@@ -25,7 +25,7 @@ import {PlansEdit} from "../sections/billing/plan/PlansEdit";
 import { BillingComplete } from '../sections/billing/BillingComplete'
 import {SubscriptionIndex} from "../sections/billing/subscriptions/SubscriptionIndex";
 import {CommunityIndex} from "../sections/community/CommunityIndex";
-import { CommunityView } from '../sections/community/core/CommunityView'
+import { CommunityView } from '../sections/community/CommunityView'
 
 
 const PrivateRoutes = () => {
