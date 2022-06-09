@@ -33,7 +33,7 @@ const CommunityTable = () => {
                         ))}
                     </tr>
                     </thead>
-                    <tbody className='text-gray-600 fw-bold' {...getTableBodyProps()}>
+                    <tbody className='text-gray-600 fw-bold pe-none' {...getTableBodyProps()}>
                     {rows.length > 0 ? (
                         rows.map((row: Row<Community>, i) => {
                             prepareRow(row)

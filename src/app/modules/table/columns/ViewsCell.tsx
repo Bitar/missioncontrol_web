@@ -33,7 +33,7 @@ const ViewsCell: FC<Props> = ({id, path, queryKey, showView = true}) => {
         <>
             {showView &&
                 <Link to={'/' + path + '/' + id + '/view'} className="btn btn-icon btn-sm btn-active-light-warning">
-                    <i className="fa-solid fa-image text-warning"/>
+                    <i className="fa-solid fa-eye text-warning"/>
                 </Link>
             }
 
