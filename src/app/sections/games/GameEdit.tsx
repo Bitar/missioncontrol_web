@@ -88,13 +88,13 @@ const GamesEdit = () => {
                             {/* begin::Input group */}
                             <div className='fv-row mb-7'>
                                 {/* begin::Label */}
-                                <label className='required fw-bold fs-6 mb-2'>Name</label>
+                                <label className='required fw-bold fs-6 mb-2'>Title</label>
                                 {/* end::Label */}
 
                                 {/* begin::Input */}
                                 {/*<Field name="name" type="text" className={'form-control form-control-solid mb-3 mb-lg-0' + (formik.touched.name && formik.errors.name ? ' is-invalid' : 'is-valid')} />*/}
                                 <input
-                                    placeholder='Name'
+                                    
                                     {...formik.getFieldProps('title')}
                                     type='text'
                                     name='title'

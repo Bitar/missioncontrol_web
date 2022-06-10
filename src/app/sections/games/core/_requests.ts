@@ -37,7 +37,7 @@ const createGame = (igdb_id: number ): Promise<Game | undefined> => {
 
 const updateGame = (id: any, game: Game): Promise<Game | undefined> => {
     return axios
-        .put(`${GET_GAMES_URL}/${id}`, game)
+        .put(`${GET_GAMES_URL}/${id}`, {"title":game.title,"description":game.description})
         .then((response: AxiosResponse<Response<Game>>) => response.data)
         .then((response: Response<Game>) => response.data)
 }

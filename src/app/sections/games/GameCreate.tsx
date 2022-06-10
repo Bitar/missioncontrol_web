@@ -10,7 +10,6 @@ import {createGame} from './core/_requests';
 import {PageTitle} from '../../../_metronic/layout/core';
 import Swal from 'sweetalert2';
 import Pagination from '../../components/pagination/Pagination';
-
 import { AxiosError } from 'axios';
 
 const createGameSearchSchema = Yup.object().shape({
@@ -158,15 +157,15 @@ const GameCreate = () => {
                     <KTCardBody className='py-8'>
                         <KTCard>
                         <div className="row g-6 g-xl-9 mb-6 mb-xl-9">
-                        {!games? '' : games.map((game) => (
+                        {games?.map((game) => (
                             <div className="col-md-6 col-lg-4 col-xl-3" key={game.id}> 
-                            {!game.cover ? <img  className=" w-100 h-300px rounded border border-2 " alt="no game cover" src={toAbsoluteUrl('/media/svg/avatars/AstroLearn.svg')} /> :<img
+                            {!game.image ? <img  className=" w-100 h-300px rounded border border-2 "  alt='cover' src={toAbsoluteUrl('/media/svg/avatars/AstroLearn.svg')} /> :<img
                                 onClick={() => sendRequest(game.id)}
                                 className=" w-100 h-300px rounded border border-2"
-                                src={game.cover}
-                                alt="game cover"
+                                src={game.image}
+                                alt='game cover'
                             />}
-                            <div className=' text-center fs-2 fw-bold text-black mt-auto'>{game.name}                                   </div>
+                            <div className=' text-center fs-2 fw-bold text-black mt-auto'>{game.title}</div>
                         </div>                             
                     ))} 
                     {search === '' ? '' : 
