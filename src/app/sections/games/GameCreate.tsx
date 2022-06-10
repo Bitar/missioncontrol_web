@@ -153,7 +153,8 @@ const GameCreate = () => {
                             </button>
                             </div>
                         </div>
-                    </div>    
+                    </div>   
+                     
                     <KTCardBody className='py-8'>
                         <KTCard>
                         <div className="row g-6 g-xl-9 mb-6 mb-xl-9">
@@ -168,15 +169,14 @@ const GameCreate = () => {
                             <div className=' text-center fs-2 fw-bold text-black mt-auto'>{game.name}                                   </div>
                         </div>                             
                     ))} 
-                    
-                   <Pagination
+                    {search === '' ? '' : 
+                    <div> <Pagination
                     totalPages={totalPages}
                     currentPage={page}
                     handleNextPage={handleNextPage}
                     handlePrevPage={handlePrevPage}
-                    setPage={setPage}  
-                    
-                    />
+                    setPage={setPage}                    
+                    /></div> }                   
                 </div>
                 </KTCard>
                 </KTCardBody>  
