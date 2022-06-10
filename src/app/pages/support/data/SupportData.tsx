@@ -1,4 +1,4 @@
-export default[
+export const support = [
     {
         icon:'/media/support/rocket-icon.svg',
         title:'Knowledge Base',

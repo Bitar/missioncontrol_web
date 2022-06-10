@@ -14,12 +14,10 @@ const Pagination: React.FC<Props> = ({
   totalPages,
   setPage,
   handlePrevPage,
-  handleNextPage
-
+  handleNextPage,
 }) => {  
-  
+
   return (
-    
     <div className='row'>
     <div className='col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'/>
     <div className='col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'>
@@ -62,7 +60,8 @@ Pagination.propTypes = {
   setPage:PropTypes.any.isRequired,
   totalPages: PropTypes.number.isRequired,
   handlePrevPage: PropTypes.func.isRequired,
-  handleNextPage: PropTypes.func.isRequired
+  handleNextPage: PropTypes.func.isRequired,
+  // setPageSafe: PropTypes.func.isRequired
 };
 
 export default Pagination;

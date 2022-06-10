@@ -15,23 +15,11 @@ const CommunityView = () => {
         navigate('/communities')
     }
 
-    const initialValues = {
-        name: community?.name || '',
-        logo: community?.logo || '',
-        is_featured: community?.is_featured,
-        description: community?.description || '',
-        address: community?.address,
-        contact: community?.contact,
-        access: community?.access,
-        games: community?.games,
-        is_follow: community?.is_follow,
-
-    }
-
+  
     useEffect(() => {
         getCommunityById(params.id).then(response => {
             setCommunity(response)
-            console.log(response)
+            
         })
     }, [params.id]);
 
@@ -39,9 +27,8 @@ const CommunityView = () => {
     return (
         <>
             <PageTitle breadcrumbs={[]}>{'Community Details'}</PageTitle>
-            
         <div className='card mb-5 mb-xl-10'>
-      <div className='card-body pt-9 pb-0'>
+        <div className='card-body pt-9 pb-0'>
         <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
           <div className='me-7 mb-4'>
             <div className='symbol symbol-100px symbol-lg-160px symbol-fixed position-relative'>
@@ -95,18 +82,17 @@ const CommunityView = () => {
               </div>
 
               <div className='d-flex my-4'>
-                <a href='#' className='btn btn-sm btn-light me-2' id='kt_user_follow_button'>
+                <button className='btn btn-sm btn-light me-2' id='kt_user_follow_button'>
                   <KTSVG
                     path='/media/icons/duotune/arrows/arr012.svg'
                     className='svg-icon-3 d-none'
                   />
-
                   <span onClick={() => goBack()} className='indicator-label'>Go Back</span>
                   <span className='indicator-progress'>
                     Please wait...
                     <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
                   </span>
-                </a>
+                </button>
                 {/* <a
                   href='#'
                   className='btn btn-sm btn-primary me-3'

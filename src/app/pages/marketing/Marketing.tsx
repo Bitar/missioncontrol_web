@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Swal from "sweetalert2";
 import { KTSVG } from "../../../_metronic/helpers";
 import { PageTitle } from "../../../_metronic/layout/core";
-import marketing from "./data/MarketingData";
+import { marketingData } from "./data/MarketingData";
 
 const Marketing = () => {
     useEffect(() => {
@@ -82,9 +82,9 @@ const Marketing = () => {
                 </h3> */}
             </div>
             <div className='row g-10'>
-                {marketing.map((market , index) =>(
+                {marketingData.map((market , index) =>(
                     <div className='col-md-4' key={index} >
-                        <a href={market.link} target="_blank" className="d-block opacity-75-hover hoverable">
+                        <a href={market.link} target="_blank"  rel="noreferrer" className="d-block opacity-75-hover hoverable">
                             <img
                                 className ='rounded w-100 h-auto'
                                 src={market.avatar} alt=''

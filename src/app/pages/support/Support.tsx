@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
-
 import { KTSVG, toAbsoluteUrl } from "../../../_metronic/helpers";
 import { PageTitle } from "../../../_metronic/layout/core";
 import { Card7 } from "../../../_metronic/partials/content/cards/Card7";
-import support from "./data/SupportData";
+import { support } from "./data/SupportData";
 
 
 const Support = () => {
@@ -19,7 +18,7 @@ const Support = () => {
            <div className='col-12 col-sm-12 col-xl' key={index}>
           <div className='card h-100'>
           <div className='card-body d-flex justify-content-center text-center flex-column p-8'>
-            <a href={supportData.link} className='text-gray-800 text-hover-primary d-flex flex-column' target="_blank">
+            <a href={supportData.link} className='text-gray-800 text-hover-primary d-flex flex-column' rel="noreferrer" target="_blank">
               <div className='symbol symbol-75px mb-6'>
                 <img src={toAbsoluteUrl(supportData.icon)} alt='' />
               </div>
@@ -59,7 +58,7 @@ const Support = () => {
               Join us every quarter to hear from and ask questions of Mission Control CEO Austin Smith on the state of the platform, upcoming product focuses, and more!
               </p> 
               <div className="mt-2">
-                <a href="https://us06web.zoom.us/j/86411098294#success" target="_blank">
+                <a href="https://us06web.zoom.us/j/86411098294#success" target="_blank" rel="noreferrer">
              <button type="submit"
               className='btn btn-primary'>Register
               </button>
@@ -99,7 +98,7 @@ const Support = () => {
               support@missioncontrol.gg
               </p>  */}
               <div className="mt-2">
-                <a href="mailto:support@missioncontrol.gg" target="_blank">
+                <a href="mailto:support@missioncontrol.gg" target="_blank" rel="noreferrer">
               <button type="submit"
                 className='btn btn-primary'
                 >Email</button></a>

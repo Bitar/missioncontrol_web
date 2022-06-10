@@ -1,11 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC, useEffect, useState} from 'react'
-import {ID, stringifyRequestQuery} from "../../../../_metronic/helpers";
+import {FC, useEffect } from 'react'
+import {ID} from "../../../../_metronic/helpers";
 import {MenuComponent} from "../../../../_metronic/assets/ts/components";
 import {Link} from "react-router-dom";
-import {useMutation, useQueryClient} from "react-query";
-import {deleteObject} from "../../../requests";
-import {useQueryRequest} from "../QueryRequestProvider";
 
 type Props = {
     id: ID,
@@ -14,20 +11,17 @@ type Props = {
     showView?: boolean,
 }
 
-const ViewsCell: FC<Props> = ({id, path, queryKey, showView = true}) => {
-    const queryClient = useQueryClient()
-    const {state} = useQueryRequest()
-    const [query] = useState<string>(stringifyRequestQuery(state))
-
+const ViewsCell: FC<Props> = ({id, path,  showView = true}) => {
+    
     useEffect(() => {
         MenuComponent.reinitialization()
     }, [])
 
-    const deleteItem = useMutation(() => deleteObject(path + '/' + id), {
-        onSuccess: () => {
-            queryClient.invalidateQueries(`${queryKey}-${query}`)
-        },
-    })
+    // const deleteItem = useMutation(() => deleteObject(path + '/' + id), {
+    //     onSuccess: () => {
+    //         queryClient.invalidateQueries(`${queryKey}-${query}`)
+    //     },
+    // })
 
     return (
         <>

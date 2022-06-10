@@ -30,7 +30,7 @@ const PermissionsCreate = () => {
         onSubmit: async (values, {setSubmitting}) => {
             setSubmitting(true)
             try {
-                if (isNotEmpty(values.id)) {
+                if(isNotEmpty(values.id)) {
                     // await updateUser(values)
                 } else {
                     await createPermission(values)

@@ -1,4 +1,4 @@
-export default[
+export const marketingData =[
     {
         avatar:'/media/marketing/HowPlaying.png',
         link:'https://drive.google.com/drive/folders/1xA_CNyqzfTTdfzmrAFgRDYyIeGmWLhum'   

@@ -11,6 +11,8 @@ import {PageTitle} from '../../../_metronic/layout/core';
 import Swal from 'sweetalert2';
 import Pagination from '../../components/pagination/Pagination';
 
+import { AxiosError } from 'axios';
+
 const createGameSearchSchema = Yup.object().shape({
     query: Yup.string()
 })
@@ -23,54 +25,68 @@ const GameCreate = () => {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(10);
     const debouncedSearch = useDebounce(search, 150)
+ 
 
-    
-    
     const handlePrevPage = (prevPage: number) => {
         setPage((prevPage) => prevPage - 1);
         console.log(prevPage , prevPage-1)
-        // window.scrollTo(0,0)
+       
         
       };    
       const handleNextPage = (nextPage: number) => {
         setPage((nextPage) => nextPage + 1);
         console.log(nextPage , nextPage + 1)
-        // window.scrollTo(0,0)
+       
       };
-    
+
+      
     useEffect(() => {
         getIgdb(debouncedSearch,page).then(response => {
             setGames(response.data)
-            setTotalPages(totalPages)
-            
+            setTotalPages(totalPages) 
+        
         })
+        
     }, [page,debouncedSearch,totalPages])
+
+
     
     const sendRequest = (igdb_id: any) => {
-        if (isSending) return
-        Swal.fire({
-            title: 'Are you sure you want to add this Game?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#009ef7',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, Add it!'
-          }).then((result) => {
-            if (result.isConfirmed) {
-              Swal.fire(
-                'Added!',
-                'Your game has been added.',
-                'success', 
-              )
-            setIsSending(true)
-            createGame(igdb_id)
-            setIsSending(false)
-            postLink()
+         if (isSending) return
+            createGame(igdb_id).then(response =>{
+                Swal.fire({
+                    title: 'Are you sure you want to add this Game?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#009ef7',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, Add it!'
+                  }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                      Swal.fire('Added!', '', 'success')
+                      setIsSending(false)
+                      postLink()
+                    } else if (result.isDenied) {
+                      Swal.fire('Game not added', '', 'info')
+                      cancel()
+                    }
+                  })            
+               
+            })
+            .catch((reason: AxiosError) => {
+                if(reason.response!.status === 500){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                        footer: '<a target=”_blank” href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500">Why do I have this issue?</a>'
+                      })
+                }
             }
-          })
-        
-    }
+          )}
+    
     const navigate = useNavigate();
 
     const cancel = () => {
@@ -143,21 +159,24 @@ const GameCreate = () => {
                         <div className="row g-6 g-xl-9 mb-6 mb-xl-9">
                         {!games? '' : games.map((game) => (
                             <div className="col-md-6 col-lg-4 col-xl-3" key={game.id}> 
-                            {!game.cover ? <img  className=" w-100 h-300px rounded border border-2" src={toAbsoluteUrl('/media/svg/avatars/AstroLearn.svg')} /> :<img
+                            {!game.cover ? <img  className=" w-100 h-300px rounded border border-2 " alt="no game cover" src={toAbsoluteUrl('/media/svg/avatars/AstroLearn.svg')} /> :<img
                                 onClick={() => sendRequest(game.id)}
                                 className=" w-100 h-300px rounded border border-2"
                                 src={game.cover}
+                                alt="game cover"
                             />}
                             <div className=' text-center fs-2 fw-bold text-black mt-auto'>{game.name}                                   </div>
                         </div>                             
                     ))} 
-                    <Pagination
+                    
+                   <Pagination
                     totalPages={totalPages}
                     currentPage={page}
                     handleNextPage={handleNextPage}
                     handlePrevPage={handlePrevPage}
-                    setPage={setPage} 
-                />
+                    setPage={setPage}  
+                    
+                    />
                 </div>
                 </KTCard>
                 </KTCardBody>  

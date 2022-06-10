@@ -32,6 +32,7 @@ const createGame = (igdb_id: number ): Promise<Game | undefined> => {
     .post(`${GET_GAMES_URL}`,{},{params: {igdb_id }})
     .then((response: AxiosResponse<Response<Game>>) => response.data)
     .then((response: Response<Game>) => response.data)
+    
 }
 
 const updateGame = (id: any, game: Game): Promise<Game | undefined> => {
