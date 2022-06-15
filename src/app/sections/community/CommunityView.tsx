@@ -4,7 +4,7 @@ import { PageTitle } from "../../../_metronic/layout/core"
 import { getCommunityById } from "./core/_requests"
 import { Community } from "../../models/community/Community"
 import { Link, useNavigate, useParams } from "react-router-dom"
-
+import { CommunityFollower } from "./CommunityFollowers"
 
 const CommunityView = () => {
     const[community,setCommunity] = useState<Community | undefined>();
@@ -19,6 +19,7 @@ const CommunityView = () => {
     useEffect(() => {
         getCommunityById(params.id).then(response => {
             setCommunity(response)
+            console.log(response)
             
         })
     }, [params.id]);
@@ -26,7 +27,7 @@ const CommunityView = () => {
     
     return (
         <>
-            <PageTitle breadcrumbs={[]}>{'Community Details'}</PageTitle>
+        <PageTitle breadcrumbs={[]}>{'Community Details'}</PageTitle>
         <div className='card mb-5 mb-xl-10'>
         <div className='card-body pt-9 pb-0'>
         <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
@@ -54,7 +55,7 @@ const CommunityView = () => {
                       path='/media/icons/duotune/communication/com006.svg'
                       className='svg-icon-4 me-1'
                     />
-                    {!community? 'no contact' :community.contact?.name}
+                    {!community? '' :community.contact?.name}
                   </div>
                   <div
                     
@@ -75,7 +76,7 @@ const CommunityView = () => {
                       path='/media/icons/duotune/communication/com011.svg'
                       className='svg-icon-4 me-1'
                     />
-                    {!community? 'no contact' :community.contact?.email}
+                    {!community? '' :community.contact?.email}
                   </a>
                 </div>
                 
@@ -118,7 +119,7 @@ const CommunityView = () => {
             <div className='d-flex flex-wrap flex-stack'>
               <div className='d-flex flex-column flex-grow-1 pe-8'>
                 <div className='d-flex flex-wrap'>
-                <div className='d-flex text-gray-600  mb-1'>{!community? 'no contact' :community.description}</div>               
+                <div className='d-flex text-gray-600  mb-1'>{!community? '' :community.description}</div>               
                 </div>
               </div>
 
@@ -143,7 +144,6 @@ const CommunityView = () => {
         <div className='d-flex overflow-auto h-55px'>
           <ul className='nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap'>
             <li className='nav-item'>
-          
                <Link
                 className={
                   `nav-link text-active-primary me-6 ` 
@@ -167,6 +167,22 @@ const CommunityView = () => {
                 Settings
               </Link> 
             </li>
+
+            <li className='nav-item'>
+               <Link
+                className={
+                  `nav-link text-active-primary me-6 ` 
+                  // +
+                  // ('active')
+                }
+            
+                to={'/communities/' + params.id + '/followers'}
+              >
+                Members
+              </Link> 
+              
+            </li>
+           
           </ul>
         </div>
       </div>
