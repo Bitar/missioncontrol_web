@@ -46,8 +46,8 @@ const CommunityFollower = () => {
                 <thead>
                 <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
                     <th className='ps-4 min-w-325px rounded-start'>Members</th>
+                    <th className='min-w-125px colspan=1 role=columnheader'>username</th>
                     <th className='min-w-125px colspan=1 role=columnheader'>email</th>
-                    <th className='min-w-125px'>username</th>
                     {/* <th className='min-w-200px'>Agent</th>
                     <th className='min-w-150px'>Status</th> */}
                     <th className='min-w-200px text-end rounded-end'></th>
