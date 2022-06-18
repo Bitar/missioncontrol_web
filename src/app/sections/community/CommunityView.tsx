@@ -8,9 +8,16 @@ import { CommunityFollower } from "./CommunityFollowers"
 
 const CommunityView = () => {
     const[community,setCommunity] = useState<Community | undefined>();
+    const [clickedButton, setClickedButton] = useState('');
     const params = useParams()
     const navigate = useNavigate();
 
+    const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+  
+      const button: HTMLButtonElement = event.currentTarget;
+      setClickedButton(button.name);
+    };
     const goBack = () => {
         navigate('/communities')
     }
@@ -170,6 +177,7 @@ const CommunityView = () => {
 
             <li className='nav-item'>
                <Link
+               
                 className={
                   `nav-link text-active-primary me-6 ` 
                   // +
@@ -182,10 +190,13 @@ const CommunityView = () => {
               </Link> 
               
             </li>
-           
+            <button onClick={buttonHandler} className="nav-link text-active-primary me-6" name="button 1">
+          Button 1
+        </button>
           </ul>
         </div>
       </div>
+      
     </div>
 
            
@@ -195,9 +206,14 @@ const CommunityView = () => {
 
 
                 
-            
+    <div className='card mb-5 mb-xl-10'>
+        {clickedButton !== ""
+          ? <CommunityFollower/> 
+          : ""}
+      </div>
                                          
         </>
+        
     )
 }
 

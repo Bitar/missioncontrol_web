@@ -56,6 +56,7 @@ const CommunityFollower = () => {
                 {/* end::Table head */}
                 {/* begin::Table body */}
                 <tbody className="text-gray-600 fw-bold role=rowgroup">
+                    
                 {members?.map((member) => ( 
                 <tr  key={member.id} role="row">
                     <td role="cell">

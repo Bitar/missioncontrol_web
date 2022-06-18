@@ -2,7 +2,7 @@
 import React from 'react'
 import {toAbsoluteUrl} from "../../../_metronic/helpers";
 import {Link} from "react-router-dom";
-import {useAuth} from "../../modules/auth";
+
 
 type Props = {
     className?: string
@@ -19,55 +19,26 @@ const EngageWidget4: React.FC<Props> = (
         bgHex = '',
     }) => {
 
-    const {subscription} = useAuth()
-
 
     return (
-        <><div className={`card ${className}`}
-            style={{ backgroundColor: bgHex }}>
-            <div className={`card-body ps-xl-15 d-flex`}>
-                <div className="m-0">
-                    <div className="position-relative fs-2x z-index-2 fw-bolder text-white mb-7">
-                        <span className="me-2">Create your first Community</span>
-                    </div>
-                    <div className="mb-3">
-                        {!subscription ? (
-                            <Link to={'/billing/plan'} className="btn btn-primary fw-bold me-2">Create Community</Link>
-                        ) : (
-                            <Link to={'/community/create'} className="btn primary fw-bold me-2">Create Community</Link>
-                        )}
-                    </div>
-                </div>
-
-                <img src={toAbsoluteUrl('media/support/astroicon1.svg')}
-                    className="position-absolute me-3 bottom-0 end-0 h-150px" alt="" />
-            </div>
-        </div>
-            
-            <div className='mt-4'>
+        <div className='mt-10'>
             <div className={`card ${className}`}
             style={{ backgroundColor: bgHex }}>
                 <div className={`card-body ps-xl-15 d-flex `}>
                     <div className="m-0">
                         <div className="position-relative fs-2x z-index-2 fw-bolder text-white mb-7">
-                            <span className="me-2">Download our App</span>
+                            <span className="me-2">Players, Download the App</span>
+                            <p className='text-white fw-bold fs-5 mt-1 mb-7'>If you are on Mission Control to play in leagues and tournaments, you can only do that by downloading our mobile app!</p>
                         </div>
                         <div className="mb-3">
-                        <a href='https://apps.apple.com/us/app/mission-control-gg/id1477441476' target="_blank" rel="noreferrer" className="btn btn-primary fw-bold me-2">Click to Download</a>  
+                        <a href='https://apps.apple.com/us/app/mission-control-gg/id1477441476' target="_blank" rel="noreferrer" className="btn btn-primary fw-bold me-2">Download App</a>  
                         </div>
                     </div>
-
-                    <img src={toAbsoluteUrl('media/support/rocket-icon.svg')}
-                        className="position-absolute me-3 bottom-0 end-0 h-150px" alt="" />
+                    <img src={toAbsoluteUrl('media/avatars/AstroPlay.png')}
+                        className="position-absolute ml-20 bottom-20 end-0 h-150px" alt="" />
                 </div>
-
-
-
             </div>
             </div>
-            </>
-
-        
     )
 }
 
