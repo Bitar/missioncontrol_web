@@ -18,7 +18,7 @@ const DashboardPage: FC = () => {
                         <><EngageWidget3
                         bgHex={'#FFFFFF'} />
                         <EngageWidget4
-                        bgHex={'#1C325E'} /></>
+                        bgHex={	'#110055'} /></>
                     )}
                 </div>
             </div>

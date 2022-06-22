@@ -20,9 +20,9 @@ const getCommunityById = (id: any): Promise<Community | undefined> => {
         .then((response: Response<Community>) => response.data)
 }
 
-const createCommunity = (community: Community): Promise<Community | undefined> => {
+const createCommunity = (formData: FormData): Promise<Community | undefined> => {
     return axios
-        .post(`${GET_COMMUNITIES_URL}`, community)
+        .post(`${GET_COMMUNITIES_URL}`, formData)
         .then((response: AxiosResponse<Response<Community>>) => response.data)
         .then((response: Response<Community>) => response.data)
 }

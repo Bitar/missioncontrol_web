@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import {toAbsoluteUrl} from "../../../_metronic/helpers";
-import {Link} from "react-router-dom";
+
 
 
 type Props = {
@@ -31,7 +31,7 @@ const EngageWidget4: React.FC<Props> = (
                             <p className='text-white fw-bold fs-5 mt-1 mb-7'>If you are on Mission Control to play in leagues and tournaments, you can only do that by downloading our mobile app!</p>
                         </div>
                         <div className="mb-3">
-                        <a href='https://apps.apple.com/us/app/mission-control-gg/id1477441476' target="_blank" rel="noreferrer" className="btn btn-primary fw-bold me-2">Download App</a>  
+                        <a href='https://missioncontrol.app.link/z7antLdv1qb' target="_blank" rel="noreferrer" className="btn btn-primary fw-bold me-2">Download App</a>  
                         </div>
                     </div>
                     <img src={toAbsoluteUrl('media/avatars/AstroPlay.png')}

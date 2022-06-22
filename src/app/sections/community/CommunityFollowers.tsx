@@ -3,7 +3,7 @@ import { PageTitle } from "../../../_metronic/layout/core"
 import { getCommunityFollowers } from "./core/_requests"
 import { CommunityFollowers } from "../../models/community/CommunityFollowers"
 import { useParams } from "react-router-dom"
-import { KTCardBody, KTCard, toAbsoluteUrl, KTSVG } from "../../../_metronic/helpers"
+import { KTCardBody, KTCard, KTSVG } from "../../../_metronic/helpers"
 
 
 const CommunityFollower = () => {
@@ -15,6 +15,7 @@ const CommunityFollower = () => {
             setMembers(response.data)
         })
     }, [params.id]);
+
 
      return (
         <>
@@ -55,10 +56,9 @@ const CommunityFollower = () => {
                 </thead>
                 {/* end::Table head */}
                 {/* begin::Table body */}
-                <tbody className="text-gray-600 fw-bold role=rowgroup">
-                    
-                {members?.map((member) => ( 
-                <tr  key={member.id} role="row">
+                <tbody className="text-gray-600 fw-bold role=rowgroup">   
+                    {members?.map((member) => ( 
+                    <tr key={member.id} role="row">
                     <td role="cell">
                     <div className='d-flex align-items-center'>
                         <div className='symbol symbol-50px me-5'>
