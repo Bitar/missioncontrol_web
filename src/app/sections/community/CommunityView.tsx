@@ -3,30 +3,36 @@ import {  KTSVG, } from "../../../_metronic/helpers"
 import { PageTitle } from "../../../_metronic/layout/core"
 import { getCommunityById } from "./core/_requests"
 import { Community } from "../../models/community/Community"
-import { Link, useNavigate, useParams } from "react-router-dom"
-
+import { useParams } from "react-router-dom"
+import { CommunityFollower } from "./CommunityFollowers"
 
 const CommunityView = () => {
     const[community,setCommunity] = useState<Community | undefined>();
+    const [clickedButton, setClickedButton] = useState('');
+    const [isActive,setActive] = useState(false)
     const params = useParams()
-    const navigate = useNavigate();
 
-    const goBack = () => {
-        navigate('/communities')
-    }
 
-  
+    const buttonHandler = (event: React.MouseEvent<HTMLAnchorElement>) => {
+      event.preventDefault();
+    
+      const a: HTMLAnchorElement = event.currentTarget;
+      setClickedButton(a.id);
+      setActive(!isActive);
+      
+    };
+
     useEffect(() => {
         getCommunityById(params.id).then(response => {
             setCommunity(response)
-            
+            console.log(response)
         })
     }, [params.id]);
 
     
     return (
         <>
-            <PageTitle breadcrumbs={[]}>{'Community Details'}</PageTitle>
+        <PageTitle breadcrumbs={[]}>{'Community Details'}</PageTitle>
         <div className='card mb-5 mb-xl-10'>
         <div className='card-body pt-9 pb-0'>
         <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
@@ -54,7 +60,7 @@ const CommunityView = () => {
                       path='/media/icons/duotune/communication/com006.svg'
                       className='svg-icon-4 me-1'
                     />
-                    {!community? 'no contact' :community.contact?.name}
+                    {!community? '' :community.contact?.name}
                   </div>
                   <div
                     
@@ -75,50 +81,18 @@ const CommunityView = () => {
                       path='/media/icons/duotune/communication/com011.svg'
                       className='svg-icon-4 me-1'
                     />
-                    {!community? 'no contact' :community.contact?.email}
+                    {!community? '' :community.contact?.email}
                   </a>
                 </div>
                 
               </div>
 
-              <div className='d-flex my-4'>
-                <button className='btn btn-sm btn-light me-2' id='kt_user_follow_button'>
-                  <KTSVG
-                    path='/media/icons/duotune/arrows/arr012.svg'
-                    className='svg-icon-3 d-none'
-                  />
-                  <span onClick={() => goBack()} className='indicator-label'>Go Back</span>
-                  <span className='indicator-progress'>
-                    Please wait...
-                    <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
-                  </span>
-                </button>
-                {/* <a
-                  href='#'
-                  className='btn btn-sm btn-primary me-3'
-                  data-bs-toggle='modal'
-                  data-bs-target='#kt_modal_offer_a_deal'
-                >
-                  Hire Me
-                </a> */}
-                {/* <div className='me-0'>
-                  <button
-                    className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
-                    data-kt-menu-trigger='click'
-                    data-kt-menu-placement='bottom-end'
-                    data-kt-menu-flip='top-end'
-                  >
-                    <i className='bi bi-three-dots fs-3'></i>
-                  </button>
-                  <Dropdown1 />
-                </div> */}
-              </div>
             </div>
 
             <div className='d-flex flex-wrap flex-stack'>
               <div className='d-flex flex-column flex-grow-1 pe-8'>
                 <div className='d-flex flex-wrap'>
-                <div className='d-flex text-gray-600  mb-1'>{!community? 'no contact' :community.description}</div>               
+                <div className='d-flex text-gray-600  mb-1'>{!community? '' :community.description}</div>               
                 </div>
               </div>
 
@@ -139,49 +113,24 @@ const CommunityView = () => {
            
           </div>
         </div>
-
-        <div className='d-flex overflow-auto h-55px'>
-          <ul className='nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap'>
-            <li className='nav-item'>
-          
-               <Link
-                className={
-                  `nav-link text-active-primary me-6 ` 
-                  // +
-                  // ('active')
-                }
-                to='/crafted/account/overview'
-              >
-                Overview
-              </Link> 
+        <ul className="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder">				
+            <li className="nav-item mt-2">              
+              <a onClick ={buttonHandler}  id="button1" className={isActive ? ' nav-link text-active-primary ms-0 me-10 py-5 active': 'nav-link text-active-primary ms-0 me-10 py-5'}>Members</a>
             </li>
-            <li className='nav-item'>
-               <Link
-                className={
-                  `nav-link text-active-primary me-6 ` 
-                  // +
-                  // ('active')
-                }
-                to='/crafted/account/settings'
-              >
-                Settings
-              </Link> 
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
 
-           
-                
-                
-                
-
-
-                
             
-                                         
+          </ul>
+      </div>
+      
+    </div>
+    <div className='card mb-5 mb-xl-10'>
+        {clickedButton !== ""
+          ? <CommunityFollower/> 
+          : ""}
+      </div>
+                                  
         </>
+        
     )
 }
 

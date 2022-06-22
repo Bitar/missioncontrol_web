@@ -1,6 +1,7 @@
 import axios, {AxiosResponse} from 'axios'
 import {Response} from '../../../../_metronic/helpers';
-import {Community, CommunityQueryResponse} from "../../../models/community/Community";
+import {Community, CommunityQueryResponse } from "../../../models/community/Community";
+import { CommunityFollowersQueryResponse,} from '../../../models/community/CommunityFollowers';
 // import process from "process";
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -19,11 +20,18 @@ const getCommunityById = (id: any): Promise<Community | undefined> => {
         .then((response: Response<Community>) => response.data)
 }
 
-const createCommunity = (community: Community): Promise<Community | undefined> => {
+const createCommunity = (formData: FormData): Promise<Community | undefined> => {
     return axios
-        .post(`${GET_COMMUNITIES_URL}`, community)
+        .post(`${GET_COMMUNITIES_URL}`, formData)
         .then((response: AxiosResponse<Response<Community>>) => response.data)
         .then((response: Response<Community>) => response.data)
 }
 
-export {getCommunities, getCommunityById, createCommunity}
+
+const getCommunityFollowers = (id: any): Promise<CommunityFollowersQueryResponse> => {
+    return axios
+        .get(`${GET_COMMUNITIES_URL}/${id}/followers`)
+        .then((response: AxiosResponse<CommunityFollowersQueryResponse>) => response.data)
+}
+
+export {getCommunities, getCommunityById, createCommunity,getCommunityFollowers}

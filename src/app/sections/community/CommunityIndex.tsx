@@ -5,7 +5,6 @@ import {ListViewProvider} from "../../modules/table/ListViewProvider";
 import {getCommunities} from "./core/_requests";
 import {PageTitle} from "../../../_metronic/layout/core";
 import {TableHeader} from "../../modules/table/TableHeader";
-import React from "react";
 import {CommunityTable} from "./CommunityTable";
 
 const CommunityList = () => {
