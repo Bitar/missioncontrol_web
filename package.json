@@ -73,6 +73,8 @@
   "scripts": {
     "start": "react-scripts start --openssl-legacy-provider",
     "build": "react-scripts build --openssl-legacy-provider",
+    "start_legacy": "export SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts start --openssl-legacy-provider",
+    "build_legacy": "export SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts build --openssl-legacy-provider",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "prettier --check .",
