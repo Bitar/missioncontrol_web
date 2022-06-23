@@ -1,8 +1,8 @@
 import {useMemo} from 'react'
 import {useTable, ColumnInstance, Row} from 'react-table'
 import {KTCardBody} from "../../../_metronic/helpers";
-import {rolesColumns} from "./_columns";
-import {Role} from "../../models/user/Role";
+import {activitiesColumns} from "./_columns";
+import {Activity} from "../../models/activity/Activity";
 import {useQueryResponseData, useQueryResponseLoading} from "../../modules/table/QueryResponseProvider";
 import {CustomHeaderColumn} from "../../modules/table/columns/CustomHeaderColumn";
 import {CustomRow} from "../../modules/table/columns/CustomRow";
@@ -11,10 +11,10 @@ import {TableListPagination} from "../../modules/table/TableListPagination";
 
 
 const ActivitiesTable = () => {
-    const roles = useQueryResponseData()
+    const activities = useQueryResponseData()
     const isLoading = useQueryResponseLoading()
-    const data = useMemo(() => roles, [roles])
-    const columns = useMemo(() => rolesColumns, [])
+    const data = useMemo(() => activities, [activities])
+    const columns = useMemo(() => activitiesColumns, [])
     const {getTableProps, getTableBodyProps, headers, rows, prepareRow} = useTable({
         columns,
         data,
@@ -29,14 +29,14 @@ const ActivitiesTable = () => {
                 >
                     <thead>
                     <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
-                        {headers.map((column: ColumnInstance<Role>) => (
+                        {headers.map((column: ColumnInstance<Activity>) => (
                             <CustomHeaderColumn key={column.id} column={column}/>
                         ))}
                     </tr>
                     </thead>
                     <tbody className='text-gray-600 fw-bold' {...getTableBodyProps()}>
                     {rows.length > 0 ? (
-                        rows.map((row: Row<Role>, i) => {
+                        rows.map((row: Row<Activity>, i) => {
                             prepareRow(row)
                             return <CustomRow row={row} key={`row-${i}-${row.id}`}/>
                         })

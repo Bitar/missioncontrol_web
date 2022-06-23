@@ -1,17 +1,16 @@
 import React, {FC, useEffect, useState} from 'react'
-import clsx from "clsx";
-import {getAdminCommunities, setAdminCommunities} from "./_requests";
-import {Community} from "../../../models/community/Community";
-import {ID} from "../../../../_metronic/helpers";
-import {useNavigate} from "react-router-dom";
+import clsx from "clsx"
+import {getAdminCommunities, setAdminCommunities} from "./_requests"
+import {Community} from "../../../models/community/Community"
+import {ID} from "../../../../_metronic/helpers"
+import {useNavigate} from "react-router-dom"
 
 const CommunityPicker: FC = () => {
-    const [communityAdmin, setCommunityAdmin] = useState<Community[] | undefined>();
+    const [communityAdmin, setCommunityAdmin] = useState<Community[] | undefined>()
 
-    const isActive = false;
-    const navigate = useNavigate();
+    const isActive = false
+    const navigate = useNavigate()
 
-    // const
     useEffect(() => {
         getAdminCommunities().then(response => {
             setCommunityAdmin(response.data)
@@ -41,8 +40,9 @@ const CommunityPicker: FC = () => {
                         return (
                             <div
                                 className="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-muted menu-active-bg menu-state-primary fw-bold py-4 fs-6 w-400px"
-                                data-kt-menu="true">
-                                <div className="menu-item px-3 my-1" key={`row-${i}-${community.id}`}>
+                                data-kt-menu="true"
+                                key={`row-${i}-${community.id}`}>
+                                <div className="menu-item px-3 my-1">
                                 <span
                                     onClick={() => {
                                         setCommunity(community.id)

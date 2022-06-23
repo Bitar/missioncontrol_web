@@ -2,17 +2,19 @@
 import {FC} from 'react'
 
 type Props = {
-    dObject: any
+    status: string,
+    color: string
 }
 
-const TextCell: FC<Props> = ({dObject}) => (
+const BadgeCell: FC<Props> = ({status, color}) => (
     <div className='d-flex align-items-center'>
         <div className='d-flex flex-column'>
-            <span className='text-gray-800 pe-none mb-1'>
-                {dObject}
+            <span className={'badge badge-' + color}>
+                {status}
             </span>
+
         </div>
     </div>
 )
 
-export {TextCell}
+export {BadgeCell}

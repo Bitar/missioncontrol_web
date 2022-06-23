@@ -3,27 +3,50 @@ import {TextCell} from "../../modules/table/columns/TextCell";
 import {CustomHeader} from "../../modules/table/columns/CustomHeader";
 import {ActionsCell} from "../../modules/table/columns/ActionsCell";
 import {QUERIES} from "../../../_metronic/helpers";
-import {Role} from "../../models/user/Role";
 import {ImageCell} from "../../modules/table/columns/ImageCell";
+import {Activity} from "../../models/activity/Activity";
+import {stat} from "fs";
+import {BadgeCell} from "../../modules/table/columns/BadgeCell";
 
-const rolesColumns: ReadonlyArray<Column<Role>> = [
+const activitiesColumns: ReadonlyArray<Column<Activity>> = [
   {
     Header: (props) =>
-        <CustomHeader tableProps={props} title='' className='min-w-125px'/>,
+        <CustomHeader tableProps={props} title='Game Cover' className='min-w-125px'/>,
     id: 'image',
     Cell: ({...props}) => <ImageCell dObject={props.data[props.row.index].game?.image}/>,
   },
   {
     Header: (props) =>
-        <CustomHeader tableProps={props} title='League Name' className='min-w-125px'/>,
-    id: 'name',
-    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].name}/>,
+        <CustomHeader tableProps={props} title='Title' className='min-w-125px'/>,
+    id: 'title',
+    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].title}/>,
   },
   {
     Header: (props) =>
         <CustomHeader tableProps={props} title='Status' className='min-w-125px'/>,
     id: 'status',
-    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].status}/>,
+    Cell: ({...props}) => {
+      let statusApi = props.data[props.row.index].status
+      let color = ''
+      let status = ''
+
+      if (statusApi === 1) {
+        status = 'Registration'
+        color = 'primary'
+      } else if (statusApi === 2) {
+        status = 'Active'
+        color = 'success'
+      } else if (statusApi === 3) {
+        status = 'Pending'
+        color = 'secondary'
+      } else {
+        status = 'Closed'
+        color = 'danger'
+      }
+
+
+      return <BadgeCell status={status} color={color}/>
+    },
   },
   {
     Header: (props) =>
@@ -70,9 +93,9 @@ const rolesColumns: ReadonlyArray<Column<Role>> = [
         <CustomHeader tableProps={props} title='Actions' className='text-end min-w-100px'/>
     ),
     id: 'actions',
-    Cell: ({...props}) => <ActionsCell id={props.data[props.row.index].id} path={'roles'}
-                                       queryKey={QUERIES.ROLES_LIST}/>,
+    Cell: ({...props}) => <ActionsCell id={props.data[props.row.index].id} path={'activities'}
+                                       queryKey={QUERIES.ACTIVITIES_LIST}/>,
   },
 ]
 
-export {rolesColumns}
+export {activitiesColumns}
