@@ -7,6 +7,7 @@ import {ImageCell} from "../../modules/table/columns/ImageCell";
 import {Activity} from "../../models/activity/Activity";
 import {stat} from "fs";
 import {BadgeCell} from "../../modules/table/columns/BadgeCell";
+import {formatDates, formatStatus} from "../../helpers/ActivityHelper";
 
 const activitiesColumns: ReadonlyArray<Column<Activity>> = [
   {
@@ -26,46 +27,16 @@ const activitiesColumns: ReadonlyArray<Column<Activity>> = [
         <CustomHeader tableProps={props} title='Status' className='min-w-125px'/>,
     id: 'status',
     Cell: ({...props}) => {
-      let statusApi = props.data[props.row.index].status
-      let color = ''
-      let status = ''
-
-      if (statusApi === 1) {
-        status = 'Registration'
-        color = 'primary'
-      } else if (statusApi === 2) {
-        status = 'Active'
-        color = 'success'
-      } else if (statusApi === 3) {
-        status = 'Pending'
-        color = 'secondary'
-      } else {
-        status = 'Closed'
-        color = 'danger'
-      }
-
-
+      const {status, color} = formatStatus(props.data[props.row.index].status)
       return <BadgeCell status={status} color={color}/>
     },
   },
   {
     Header: (props) =>
-        <CustomHeader tableProps={props} title='Dates' className='min-w-125px'/>,
+        <CustomHeader tableProps={props} title='Dates' className='min-w-200px'/>,
     id: 'dates',
     Cell: ({...props}) => {
-      const startDate = new Date(props.data[props.row.index].matchplay_dates?.start_date * 1000).toDateString();
-
-      // const startDateFormat = startDate.toLocaleDateString([], {weekday: 'short'}) + " " +
-      //     startDate.toLocaleDateString([], {month: 'short'}) + " " +
-      //     startDate.toLocaleDateString([], {day: '2-digit'}) + " " +
-      //     startDate.toLocaleDateString([], {year: 'numeric'})
-      // ;
-      //
-      // console.log(startDateFormat);
-
-      var endDate = new Date(props.data[props.row.index].matchplay_dates?.end_date * 1000).toDateString();
-
-
+      const {startDate, endDate} = formatDates(props.data[props.row.index].matchplay_dates)
       return <TextCell dObject={startDate + " - " + endDate}/>
     },
   },
