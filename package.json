@@ -38,6 +38,7 @@
     "react-query": "^3.34.12",
     "react-router-dom": "6.2.1",
     "react-scripts": "4.0.3",
+    "react-select": "^5.3.2",
     "react-table": "^7.7.0",
     "react-topbar-progress-indicator": "^4.1.0",
     "rtlcss-webpack-plugin": "^4.0.6",
@@ -71,10 +72,8 @@
     "webpack-cli": "^4.8.0"
   },
   "scripts": {
-    "start": "react-scripts start --openssl-legacy-provider",
-    "build": "react-scripts build --openssl-legacy-provider",
-    "start_legacy": "export SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts start --openssl-legacy-provider",
-    "build_legacy": "export SET NODE_OPTIONS=--openssl-legacy-provider && react-scripts build --openssl-legacy-provider",
+    "start": "react-scripts --openssl-legacy-provider start",
+    "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "prettier --check .",

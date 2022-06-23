@@ -27,6 +27,7 @@ import {SubscriptionIndex} from "../sections/billing/subscriptions/SubscriptionI
 import {CommunityIndex} from "../sections/community/CommunityIndex";
 import { CommunityView } from '../sections/community/CommunityView'
 import { CommunityFollower } from '../sections/community/CommunityFollowers'
+import {ActivityCreate} from "../sections/activities/ActivityCreate";
 
 
 const PrivateRoutes = () => {
@@ -69,6 +70,8 @@ const PrivateRoutes = () => {
 
 
                 <Route path='activities' element={<ActivitiesIndex/>}/>
+                <Route path='activities/create' element={<ActivityCreate/>}/>
+
                 <Route path='games' element={<GamesIndex/>}/>
                 <Route path='marketing' element={<Marketing/>}/>
                 <Route path='support' element={<Support/>}/>

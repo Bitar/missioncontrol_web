@@ -35,7 +35,6 @@ const GameCreate = () => {
       const handleNextPage = (nextPage: number) => {
         setPage((nextPage) => nextPage + 1);
         console.log(nextPage , nextPage + 1)
-       
       };
 
       
@@ -137,7 +136,7 @@ const GameCreate = () => {
                         <input
                             className='form-control form-control-solid mb-3 mb-lg-0'
                             name="query"
-                            placeholder="Search . . . . ."
+                            placeholder="Search..."
                             onChange={(e) => setSearch(e.target.value)}
                         />
                         </div>
