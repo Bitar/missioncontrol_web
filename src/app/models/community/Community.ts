@@ -7,6 +7,7 @@ import {Game} from "../game/Game";
 export const initialCommunity: Community = {
     name: ''
     
+    
 }
 
 export type Community = {

@@ -9,7 +9,7 @@ const ImageCell: FC<Props> = ({dObject}) => (
     <div className='d-flex align-items-center'>
         <div className='d-flex flex-column'>
             <div className="w-125px">
-                <img src={dObject} alt="" className="w-100 rounded"/>
+                <img src={dObject} alt="" className="w-100 h-100vh rounded"/>
             </div>
             {/*<a href='#' className='text-gray-800 text-hover-primary mb-1'>*/}
             {/*    {dObject}*/}

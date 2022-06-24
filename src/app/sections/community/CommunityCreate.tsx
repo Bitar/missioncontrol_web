@@ -1,7 +1,7 @@
 import {PageTitle} from "../../../_metronic/layout/core";
 import {isNotEmpty, KTCard, KTCardBody} from "../../../_metronic/helpers";
 import clsx from "clsx";
-import {useFormik} from "formik";
+import {Field, getIn, useFormik} from "formik";
 import * as Yup from "yup";
 import {initialCommunity} from "../../models/community/Community";
 import { createCommunity } from "./core/_requests";
@@ -36,35 +36,29 @@ const CommunityCreate = () => {
                 } else {
                     //console.log(values)
                     let formData = new FormData()
-                    //  @ts-ignore
-                    formData.append('logo',values.logo)
-                    //  @ts-ignore
-                    formData.append('banner_image',values.banner_image)
-                     //  @ts-ignore
-                    formData.append('name',values.name)
-                    //  @ts-ignore
-                    formData.append('description',values.description)
-                    //  @ts-ignore
-                    formData.append('contact.name',values.contact.name)
-                      //  @ts-ignore
-                    formData.append('contact.email',values.contact.email)
-                      //  @ts-ignore
-                    formData.append('contact.phone_number',values.contact.phone_number)
-                     //  @ts-ignore
-                     formData.append('address.address_one',values.address.address_one)
-                      //  @ts-ignore
-                    formData.append('address.address_two',values.address.address_two)
-                     //  @ts-ignore
-                     formData.append('address.city',values.address.city)
-                    //  @ts-ignore
-                    formData.append('address.state_province',values.address.state_province)
-                     //  @ts-ignore
-                     formData.append('address.postal_code',values.address.postal_code)
-                      //  @ts-ignore
-                      formData.append('address.country_code',values.address.country_code)
-                      
-                   
-                    await createCommunity(formData)
+
+                    formData.append('logo',values.logo!)
+                    formData.append('banner_image',values.banner_image!)
+                    formData.append('name',values.name!)
+                    formData.append('description',values.description!)
+                    formData.append('contact[name]',values.contact!.name)
+                    formData.append('contact[email]',values.contact!.email)
+                    formData.append('contact[phone_number]',values.contact!.phone_number)
+                    formData.append('address[address_one]',values.address!.address_one)
+                    formData.append('address[address_two]',values.address!.address_two)
+                    formData.append('address[city]',values.address!.city)
+                    formData.append('address[state_province]',values.address!.state_province)
+                    formData.append('address[postal_code]',values.address!.postal_code)
+                    formData.append('address[country_code]',values.address!.country_code)
+                    
+                    
+
+                    //response
+                    const potato = await createCommunity(formData)
+                    //get the id and pass it as param to the community details
+                    console.log(potato?.id)
+                    //'community/:`potato?/id`'
+                    //make sure error 
                     Swal.fire(
                         'Good job!',
                         'You created your community!',
@@ -79,6 +73,9 @@ const CommunityCreate = () => {
         },
     })
     
+    
+     
+   
     return (
         <>
             <PageTitle breadcrumbs={[]}>{'Create Community'}</PageTitle>
@@ -207,10 +204,12 @@ const CommunityCreate = () => {
                                 {/* end::Label */}
 
                                 {/* begin::Input */}
+
+                            
                                 <input
                                     placeholder='Contact Email'
                                     {...formik.getFieldProps('email')}
-                                    type='text'
+                                    type="email"
                                     name='contact.email'
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',

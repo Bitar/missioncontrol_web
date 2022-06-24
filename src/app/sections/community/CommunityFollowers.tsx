@@ -19,7 +19,7 @@ const CommunityFollower = () => {
 
      return (
         <>
-        <PageTitle breadcrumbs={[]}>{'Community Members'}</PageTitle>
+        <PageTitle breadcrumbs={[]}>{'Community Details'}</PageTitle>
         <KTCardBody >
         <KTCard>
         <div className="card">
