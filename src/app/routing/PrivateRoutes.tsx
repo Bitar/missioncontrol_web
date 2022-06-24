@@ -30,6 +30,7 @@ import { CommunityFollower } from '../sections/community/CommunityFollowers'
 import {ActivityCreate} from "../sections/activities/ActivityCreate";
 
 
+
 const PrivateRoutes = () => {
     const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
     const WizardsPage = lazy(() => import('../modules/wizards/WizardsPage'))

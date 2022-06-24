@@ -1,203 +1,162 @@
-import React, {FC, useEffect, useRef, useState} from 'react'
-import {Step1} from './steps/Step1'
-import {Step2} from './steps/Step2'
-import {Step3} from './steps/Step3'
-import {Step4} from './steps/Step4'
-import {Step5} from './steps/Step5'
-// import {StepperComponent} from '../../../../_metronic/assets/ts/components'
-import {Formik, Form, FormikValues} from 'formik'
-import {ICreateAccount, createAccountSchemas, inits} from './core/CreateAccountWizardHelper'
-import {KTSVG} from "../../../_metronic/helpers";
-import {StepperComponent} from "../../../_metronic/assets/ts/components";
+import React, {FC, useState} from 'react'
+import {useFormik} from "formik";
+import {Activity} from "../../models/activity/Activity";
+import * as Yup from "yup";
+
+const editActivitySchema = Yup.object().shape({
+    title: Yup.string()
+        .required('Title is required'),
+})
 
 const ActivityCreate: FC = () => {
-    const stepperRef = useRef<HTMLDivElement | null>(null)
-    const stepper = useRef<StepperComponent | null>(null)
-    const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
-    const [initValues] = useState<ICreateAccount>(inits)
-
-    const loadStepper = () => {
-        stepper.current = StepperComponent.createInsance(stepperRef.current as HTMLDivElement)
+    const [activity, setActivity] = useState<Activity | undefined>()
+    const initialValues = {
+        title: activity?.title || ''
     }
 
-    const prevStep = () => {
-        if (!stepper.current) {
-            return
+    const formik = useFormik({
+        enableReinitialize: true,
+        initialValues: initialValues,
+        validationSchema: editActivitySchema,
+        onSubmit: async (values, {setSubmitting}) => {
+            setSubmitting(true)
+            try {
+                // await updateRole(params.id, values)
+            } catch (ex) {
+
+            } finally {
+                setSubmitting(false)
+                // cancel()
+            }
         }
-
-        stepper.current.goPrev()
-
-        setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex - 1])
-    }
-
-    const submitStep = (values: ICreateAccount, actions: FormikValues) => {
-        if (!stepper.current) {
-            return
-        }
-
-        setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex])
-
-        if (stepper.current.currentStepIndex !== stepper.current.totatStepsNumber) {
-            stepper.current.goNext()
-        } else {
-            stepper.current.goto(1)
-            actions.resetForm()
-        }
-    }
-
-    useEffect(() => {
-        if (!stepperRef.current) {
-            return
-        }
-
-        loadStepper()
-    }, [stepperRef])
+    })
 
     return (
-        <div
-            ref={stepperRef}
-            className='stepper stepper-pills stepper-column   d-flex flex-column flex-xl-row flex-row-fluid'
-            id='kt_create_account_stepper'
-        >
-            <div className='d-flex justify-content-center bg-white rounded justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-400px me-9'>
-                <div className='px-6 px-lg-10 px-xxl-15 py-20'>
-                    <div className='stepper-nav'>
-                        <div className='stepper-item current' data-kt-stepper-element='nav'>
-                            <div className='stepper-line w-40px'/>
+        <>
+            <form className='form d-flex flex-column flex-lg-row' onSubmit={formik.handleSubmit} noValidate>
 
-                            <div className='stepper-icon w-40px h-40px'>
-                                <i className='stepper-check fas fa-check'/>
-                                <span className='stepper-number'>1</span>
-                            </div>
-
-                            <div className='stepper-label'>
-                                <h3 className='stepper-title'>Activity Type</h3>
-
-                                <div className='stepper-desc fw-bold'>Choose the type of Activity</div>
+                {/* Aside */}
+                <div className="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
+                    <div className="card card-flush py-4">
+                        <div className="card-header">
+                            <div className="card-title">
+                                <h2>Thumbnail</h2>
                             </div>
                         </div>
-
-                        <div className='stepper-item' data-kt-stepper-element='nav'>
-                            <div className='stepper-line w-40px'/>
-
-                            <div className='stepper-icon w-40px h-40px'>
-                                <i className='stepper-check fas fa-check'/>
-                                <span className='stepper-number'>2</span>
+                        <div className="card-body text-center pt-0">
+                            <div className="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
+                                {/*style="background-image: url(assets/media/svg/files/blank-image.svg)"*/}
+                                <div className="image-input-wrapper w-150px h-150px"/>
+                                <label className="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip"
+                                       title="Change avatar">
+                                    <i className="bi bi-pencil-fill fs-7"/>
+                                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg"/>
+                                    <input type="hidden" name="avatar_remove"/>
+                                </label>
+                                <span className="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
+                                      title="Cancel avatar">
+														<i className="bi bi-x fs-2"/>
+													</span>
+                                <span className="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip"
+                                      title="Remove avatar">
+														<i className="bi bi-x fs-2"/>
+													</span>
                             </div>
-
-                            <div className='stepper-label'>
-                                <h3 className='stepper-title'>Activity Info</h3>
-                                <div className='stepper-desc fw-bold'>Setup Your Activity Info</div>
-                            </div>
-                        </div>
-
-                        <div className='stepper-item' data-kt-stepper-element='nav'>
-                            <div className='stepper-line w-40px'/>
-
-                            <div className='stepper-icon w-40px h-40px'>
-                                <i className='stepper-check fas fa-check'/>
-                                <span className='stepper-number'>3</span>
-                            </div>
-
-                            <div className='stepper-label'>
-                                <h3 className='stepper-title'>Schedule Info</h3>
-                                <div className='stepper-desc fw-bold'>Activity Schedule</div>
-                            </div>
-                        </div>
-
-                        <div className='stepper-item' data-kt-stepper-element='nav'>
-                            <div className='stepper-line w-40px'/>
-
-                            <div className='stepper-icon w-40px h-40px'>
-                                <i className='stepper-check fas fa-check'/>
-                                <span className='stepper-number'>4</span>
-                            </div>
-
-                            <div className='stepper-label'>
-                                <h3 className='stepper-title'>Location & Team</h3>
-                                <div className='stepper-desc fw-bold'>Location & Team settings</div>
-                            </div>
-                        </div>
-
-                        <div className='stepper-item' data-kt-stepper-element='nav'>
-                            <div className='stepper-line w-40px'/>
-
-                            <div className='stepper-icon w-40px h-40px'>
-                                <i className='stepper-check fas fa-check'/>
-                                <span className='stepper-number'>5</span>
-                            </div>
-
-                            {/* TODO: Entry Fee + Prizes */}
-
-                            <div className='stepper-label'>
-                                <h3 className='stepper-title'>Completed</h3>
-                                <div className='stepper-desc fw-bold'>Woah, we are here</div>
-                            </div>
+                            <div className="text-muted fs-7">Set the product thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
                         </div>
                     </div>
+                    {/*<div className="card card-flush py-4">*/}
+                    {/*    <div className="card-header">*/}
+                    {/*        <div className="card-title">*/}
+                    {/*            <h2>Status</h2>*/}
+                    {/*        </div>*/}
+                    {/*        <div className="card-toolbar">*/}
+                    {/*            <div className="rounded-circle bg-success w-15px h-15px" id="kt_ecommerce_add_product_status"/>*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*    <div className="card-body pt-0">*/}
+                    {/*        /!*<select className="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">*!/*/}
+                    {/*        /!*    <option/>*!/*/}
+                    {/*        /!*    <option value="published" selected={true}>Published</option>*!/*/}
+                    {/*        /!*    <option value="draft">Draft</option>*!/*/}
+                    {/*        /!*    <option value="scheduled">Scheduled</option>*!/*/}
+                    {/*        /!*    <option value="inactive">Inactive</option>*!/*/}
+                    {/*        /!*</select>*!/*/}
+                    {/*        <div className="text-muted fs-7">Set the product status.</div>*/}
+                    {/*        <div className="d-none mt-10">*/}
+                    {/*            <label htmlFor="kt_ecommerce_add_product_status_datepicker" className="form-label">Select publishing date and time</label>*/}
+                    {/*            <input className="form-control" id="kt_ecommerce_add_product_status_datepicker" placeholder="Pick date &amp; time"/>*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+                    {/*<div className="card card-flush py-4">*/}
+                    {/*    <div className="card-header">*/}
+                    {/*        <div className="card-title">*/}
+                    {/*            <h2>Product Details</h2>*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*    <div className="card-body pt-0">*/}
+                    {/*        <label className="form-label">Categories</label>*/}
+                    {/*        /!*<select className="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true" multiple={true}>*!/*/}
+                    {/*        /!*    <option/>*!/*/}
+                    {/*        /!*    <option value="Computers">Computers</option>*!/*/}
+                    {/*        /!*    <option value="Watches">Watches</option>*!/*/}
+                    {/*        /!*    <option value="Headphones">Headphones</option>*!/*/}
+                    {/*        /!*    <option value="Footwear">Footwear</option>*!/*/}
+                    {/*        /!*    <option value="Cameras">Cameras</option>*!/*/}
+                    {/*        /!*    <option value="Shirts">Shirts</option>*!/*/}
+                    {/*        /!*    <option value="Household">Household</option>*!/*/}
+                    {/*        /!*    <option value="Handbags">Handbags</option>*!/*/}
+                    {/*        /!*    <option value="Wines">Wines</option>*!/*/}
+                    {/*        /!*    <option value="Sandals">Sandals</option>*!/*/}
+                    {/*        /!*</select>*!/*/}
+                    {/*        <div className="text-muted fs-7 mb-7">Add product to a category.</div>*/}
+                    {/*        <a href="../../demo1/dist/apps/ecommerce/catalog/add-category.html" className="btn btn-light-primary btn-sm mb-10">*/}
+                    {/*            <span className="svg-icon svg-icon-2">*/}
+                    {/*								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">*/}
+                    {/*									<rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor"/>*/}
+                    {/*									<rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor"/>*/}
+                    {/*								</svg>*/}
+                    {/*							</span>*/}
+                    {/*            Create new category</a>*/}
+                    {/*        <label className="form-label d-block">Tags</label>*/}
+                    {/*        <input id="kt_ecommerce_add_product_tags" name="kt_ecommerce_add_product_tags" className="form-control mb-2" value=""/>*/}
+                    {/*        <div className="text-muted fs-7">Add tags to a product.</div>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+                    {/*<div className="card card-flush py-4">*/}
+                    {/*    <div className="card-header">*/}
+                    {/*        <div className="card-title">*/}
+                    {/*            <h2>Weekly Sales</h2>*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*    <div className="card-body pt-0">*/}
+                    {/*        <span className="text-muted">No data available. Sales data will begin capturing once product has been published.</span>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+                    {/*<div className="card card-flush py-4">*/}
+                    {/*    <div className="card-header">*/}
+                    {/*        <div className="card-title">*/}
+                    {/*            <h2>Product Template</h2>*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*    <div className="card-body pt-0">*/}
+                    {/*        <label htmlFor="kt_ecommerce_add_product_store_template" className="form-label">Select a product template</label>*/}
+                    {/*        /!*<select className="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_store_template">*!/*/}
+                    {/*        /!*    <option/>*!/*/}
+                    {/*        /!*    <option value="default" selected={true}>Default template</option>*!/*/}
+                    {/*        /!*    <option value="electronics">Electronics</option>*!/*/}
+                    {/*        /!*    <option value="office">Office stationary</option>*!/*/}
+                    {/*        /!*    <option value="fashion">Fashion</option>*!/*/}
+                    {/*        /!*</select>*!/*/}
+                    {/*        <div className="text-muted fs-7">Assign a template from your current theme to define how a single product is displayed.</div>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                 </div>
-            </div>
 
-            <div className='d-flex flex-row-fluid flex-center bg-white rounded'>
-                <Formik validationSchema={currentSchema} initialValues={initValues} onSubmit={submitStep}>
-                    {() => (
-                        <Form className='py-20 w-100 w-xl-700px px-9' noValidate id='kt_create_account_form'>
-                            <div className='current' data-kt-stepper-element='content'>
-                                <Step1/>
-                            </div>
-
-                            <div data-kt-stepper-element='content'>
-                                <Step2/>
-                            </div>
-
-                            <div data-kt-stepper-element='content'>
-                                <Step3/>
-                            </div>
-
-                            <div data-kt-stepper-element='content'>
-                                <Step4/>
-                            </div>
-
-                            <div data-kt-stepper-element='content'>
-                                <Step5/>
-                            </div>
-
-                            <div className='d-flex flex-stack pt-10'>
-                                <div className='mr-2'>
-                                    <button
-                                        onClick={prevStep}
-                                        type='button'
-                                        className='btn btn-lg btn-light-primary me-3'
-                                        data-kt-stepper-action='previous'
-                                    >
-                                        <KTSVG
-                                            path='/media/icons/duotune/arrows/arr063.svg'
-                                            className='svg-icon-4 me-1'
-                                        />
-                                        Back
-                                    </button>
-                                </div>
-
-                                <div>
-                                    <button type='submit' className='btn btn-lg btn-primary me-3'>
-                                        <span className='indicator-label'>
-                                          {stepper.current?.currentStepIndex !==
-                                              stepper.current?.totatStepsNumber! - 1 && 'Continue'}
-                                            {stepper.current?.currentStepIndex ===
-                                                stepper.current?.totatStepsNumber! - 1 && 'Submit'}
-                                            <KTSVG
-                                                path='/media/icons/duotune/arrows/arr064.svg'
-                                                className='svg-icon-3 ms-2 me-0'
-                                            />
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
-                        </Form>
-                    )}
-                </Formik>
-            </div>
-        </div>
+                {/* Main */}
+            </form>
+        </>
     )
 }
 

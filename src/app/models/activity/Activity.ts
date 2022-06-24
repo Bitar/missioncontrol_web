@@ -3,12 +3,12 @@ import {ID, Response} from "../../../_metronic/helpers";
 
 export type Activity = {
     id?: ID,
-    name: string,
+    title: string,
     is_crossPlay?: boolean
 }
 
 export const initialActivity = {
-    name: "",
+    title: "",
     is_crossPlay: false
 }
 
