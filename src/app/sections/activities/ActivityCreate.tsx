@@ -31,7 +31,6 @@ const ActivityCreate: FC = () => {
     }
 
     const submitStep = (values: ICreateAccount, actions: FormikValues) => {
-        console.log('here')
         if (!stepper.current) {
             return
         }
