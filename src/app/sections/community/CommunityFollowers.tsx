@@ -70,7 +70,7 @@ const CommunityFollower = () => {
 
                                     <td className='text-end'>
                                         <a href='#' className="btn btn-icon btn-sm btn-active-light-warning">
-                                            <i className="fa-solid fa-eye text-warning"/>
+                                            <i className="fa fa-solid fa-eye text-warning"/>
                                         </a>
                                     </td>
                                 </tr>

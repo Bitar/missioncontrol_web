@@ -6,6 +6,8 @@ import {Link} from "react-router-dom";
 import {useMutation, useQueryClient} from "react-query";
 import {deleteObject} from "../../../requests";
 import {useQueryRequest} from "../QueryRequestProvider";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faPencil, faTrash} from '@fortawesome/free-solid-svg-icons'
 
 type Props = {
     id: ID,
@@ -34,14 +36,14 @@ const ActionsCell: FC<Props> = ({id, path, queryKey, showEdit = true, showDelete
         <>
             {showEdit &&
                 <Link to={'/' + path + '/' + id + '/edit'} className="btn btn-icon btn-sm btn-active-light-warning">
-                    <i className="fa-solid fa-pencil text-warning"/>
+                    <FontAwesomeIcon icon={faPencil} className='text-warning'/>
                 </Link>
             }
 
             {showDelete &&
                 <a className='btn btn-icon btn-sm btn-active-light-danger'
                    onClick={async () => await deleteItem.mutateAsync()}>
-                    <i className="fa-solid fa-trash text-danger"/>
+                    <FontAwesomeIcon icon={faTrash} className='text-danger'/>
                 </a>
             }
         </>
