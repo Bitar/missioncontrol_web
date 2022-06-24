@@ -17,6 +17,7 @@ const Step2: FC = () => {
         setData(updatedData)
     }
 
+
     useEffect(() => {
         getGames('per_page=200').then(response => {
             response?.data?.forEach(function (value) {

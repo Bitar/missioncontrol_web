@@ -1,22 +1,27 @@
-import React, {FC, useState} from 'react'
-import {useFormik} from "formik";
-import {Activity} from "../../models/activity/Activity";
+import React, {FC, useEffect, useState} from 'react'
+import {ErrorMessage, Field, FormikProvider, useFormik} from "formik";
+import {Activity, initialActivity} from "../../models/activity/Activity";
 import * as Yup from "yup";
+import {getGames} from "../games/core/_requests";
+import Select from "react-select";
+import {ACTIVITY_ROUNDS, selectCustomStyles} from "./core/_consts";
+import {KTCard, KTCardBody} from "../../../_metronic/helpers";
+import {initialGame} from "../../models/game/Game";
 
 const editActivitySchema = Yup.object().shape({
     title: Yup.string()
         .required('Title is required'),
 })
 
+const gamesSelect: any[] = []
+const platforms: any[] = []
+
 const ActivityCreate: FC = () => {
-    const [activity, setActivity] = useState<Activity | undefined>()
-    const initialValues = {
-        title: activity?.title || ''
-    }
+    const [activity, setActivity] = useState<Activity>(initialActivity)
 
     const formik = useFormik({
         enableReinitialize: true,
-        initialValues: initialValues,
+        initialValues: initialActivity,
         validationSchema: editActivitySchema,
         onSubmit: async (values, {setSubmitting}) => {
             setSubmitting(true)
@@ -31,131 +36,229 @@ const ActivityCreate: FC = () => {
         }
     })
 
+    useEffect(() => {
+        getGames('per_page=200').then(response => {
+            response?.data?.forEach(function (value) {
+                gamesSelect.push({value: value.id, label: value.title, image: value.image, description: value.description, platforms: value.platforms, original: value})
+            })
+        })
+    }, [])
+
+    const updatePlatforms = (inputValue: any) => {
+        if (inputValue?.platforms.length > 0) {
+            updateData({
+                game: inputValue.original
+            })
+            inputValue.platforms.forEach(function (value: any) {
+                platforms.push({value: value.id, label: value.name, abbreviation: value.abbreviation})
+            })
+        } else {
+            updateData({
+                game: initialGame,
+                is_crossPlay: false
+            })
+
+            platforms.length = 0
+        }
+    }
+
+    const updateData = (fieldsToUpdate: Partial<Activity>) => {
+        const updatedData = {...activity, ...fieldsToUpdate}
+        setActivity(updatedData)
+    }
+
     return (
         <>
-            <form className='form d-flex flex-column flex-lg-row' onSubmit={formik.handleSubmit} noValidate>
+            <FormikProvider value={formik}>
+                <form className='form d-flex flex-column flex-lg-row' onSubmit={formik.handleSubmit} noValidate>
 
-                {/* Aside */}
-                <div className="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
-                    <div className="card card-flush py-4">
-                        <div className="card-header">
-                            <div className="card-title">
-                                <h2>Thumbnail</h2>
+                    {/* Aside */}
+                    <div className="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
+                        <div className="card card-flush py-4">
+                            <div className="card-header">
+                                <div className="required card-title">
+                                    <h2>Game</h2>
+                                </div>
                             </div>
-                        </div>
-                        <div className="card-body text-center pt-0">
-                            <div className="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true">
-                                {/*style="background-image: url(assets/media/svg/files/blank-image.svg)"*/}
-                                <div className="image-input-wrapper w-150px h-150px"/>
-                                <label className="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip"
-                                       title="Change avatar">
-                                    <i className="bi bi-pencil-fill fs-7"/>
-                                    <input type="file" name="avatar" accept=".png, .jpg, .jpeg"/>
-                                    <input type="hidden" name="avatar_remove"/>
-                                </label>
-                                <span className="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip"
-                                      title="Cancel avatar">
-														<i className="bi bi-x fs-2"/>
-													</span>
-                                <span className="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip"
-                                      title="Remove avatar">
-														<i className="bi bi-x fs-2"/>
-													</span>
+                            <div className="card-body pt-0">
+
+                                <div className='mb-5'>
+                                    <Select
+                                        className="basic-single"
+                                        classNamePrefix="select"
+                                        isClearable={true}
+                                        isSearchable={true}
+                                        name="gameTitle"
+                                        onChange={updatePlatforms}
+                                        options={gamesSelect}
+                                        styles={selectCustomStyles}
+                                        formatOptionLabel={game => (
+                                            <div className="game-option">
+                                                <div className="row">
+                                                    <div className="col-3">
+                                                        <div className="game-image d-inline">
+                                                            <img src={game.image} alt={game.label} className='w-100 rounded d-block'/>
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-8">
+                                                        <div className="game-content d-inline">
+                                                            <div className="game-title">
+                                                                <h5 className="d-inline">{game.label}</h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    />
+                                </div>
+
+                                {activity?.game &&
+                                    <div>
+                                        <div className="game-option">
+                                            <div className="row">
+                                                <div className="game-image mb-2">
+                                                    <img src={activity?.game?.image} alt={activity?.game?.title}
+                                                         className='w-100 rounded d-block'/>
+                                                </div>
+                                                <div className="game-content">
+                                                    <div className="game-title mb-2">
+                                                        <h3>{activity?.game?.title}</h3>
+                                                    </div>
+                                                    <div className="game-description text-muted" style={{textAlign: 'justify'}}>
+                                                        <p>{activity?.game?.description}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                                {/*<div className="text-muted fs-7">Set the product thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted</div>*/}
                             </div>
-                            <div className="text-muted fs-7">Set the product thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
                         </div>
                     </div>
-                    {/*<div className="card card-flush py-4">*/}
-                    {/*    <div className="card-header">*/}
-                    {/*        <div className="card-title">*/}
-                    {/*            <h2>Status</h2>*/}
-                    {/*        </div>*/}
-                    {/*        <div className="card-toolbar">*/}
-                    {/*            <div className="rounded-circle bg-success w-15px h-15px" id="kt_ecommerce_add_product_status"/>*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*    <div className="card-body pt-0">*/}
-                    {/*        /!*<select className="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_status_select">*!/*/}
-                    {/*        /!*    <option/>*!/*/}
-                    {/*        /!*    <option value="published" selected={true}>Published</option>*!/*/}
-                    {/*        /!*    <option value="draft">Draft</option>*!/*/}
-                    {/*        /!*    <option value="scheduled">Scheduled</option>*!/*/}
-                    {/*        /!*    <option value="inactive">Inactive</option>*!/*/}
-                    {/*        /!*</select>*!/*/}
-                    {/*        <div className="text-muted fs-7">Set the product status.</div>*/}
-                    {/*        <div className="d-none mt-10">*/}
-                    {/*            <label htmlFor="kt_ecommerce_add_product_status_datepicker" className="form-label">Select publishing date and time</label>*/}
-                    {/*            <input className="form-control" id="kt_ecommerce_add_product_status_datepicker" placeholder="Pick date &amp; time"/>*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    {/*<div className="card card-flush py-4">*/}
-                    {/*    <div className="card-header">*/}
-                    {/*        <div className="card-title">*/}
-                    {/*            <h2>Product Details</h2>*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*    <div className="card-body pt-0">*/}
-                    {/*        <label className="form-label">Categories</label>*/}
-                    {/*        /!*<select className="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true" multiple={true}>*!/*/}
-                    {/*        /!*    <option/>*!/*/}
-                    {/*        /!*    <option value="Computers">Computers</option>*!/*/}
-                    {/*        /!*    <option value="Watches">Watches</option>*!/*/}
-                    {/*        /!*    <option value="Headphones">Headphones</option>*!/*/}
-                    {/*        /!*    <option value="Footwear">Footwear</option>*!/*/}
-                    {/*        /!*    <option value="Cameras">Cameras</option>*!/*/}
-                    {/*        /!*    <option value="Shirts">Shirts</option>*!/*/}
-                    {/*        /!*    <option value="Household">Household</option>*!/*/}
-                    {/*        /!*    <option value="Handbags">Handbags</option>*!/*/}
-                    {/*        /!*    <option value="Wines">Wines</option>*!/*/}
-                    {/*        /!*    <option value="Sandals">Sandals</option>*!/*/}
-                    {/*        /!*</select>*!/*/}
-                    {/*        <div className="text-muted fs-7 mb-7">Add product to a category.</div>*/}
-                    {/*        <a href="../../demo1/dist/apps/ecommerce/catalog/add-category.html" className="btn btn-light-primary btn-sm mb-10">*/}
-                    {/*            <span className="svg-icon svg-icon-2">*/}
-                    {/*								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">*/}
-                    {/*									<rect opacity="0.5" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="currentColor"/>*/}
-                    {/*									<rect x="6" y="11" width="12" height="2" rx="1" fill="currentColor"/>*/}
-                    {/*								</svg>*/}
-                    {/*							</span>*/}
-                    {/*            Create new category</a>*/}
-                    {/*        <label className="form-label d-block">Tags</label>*/}
-                    {/*        <input id="kt_ecommerce_add_product_tags" name="kt_ecommerce_add_product_tags" className="form-control mb-2" value=""/>*/}
-                    {/*        <div className="text-muted fs-7">Add tags to a product.</div>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    {/*<div className="card card-flush py-4">*/}
-                    {/*    <div className="card-header">*/}
-                    {/*        <div className="card-title">*/}
-                    {/*            <h2>Weekly Sales</h2>*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*    <div className="card-body pt-0">*/}
-                    {/*        <span className="text-muted">No data available. Sales data will begin capturing once product has been published.</span>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                    {/*<div className="card card-flush py-4">*/}
-                    {/*    <div className="card-header">*/}
-                    {/*        <div className="card-title">*/}
-                    {/*            <h2>Product Template</h2>*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*    <div className="card-body pt-0">*/}
-                    {/*        <label htmlFor="kt_ecommerce_add_product_store_template" className="form-label">Select a product template</label>*/}
-                    {/*        /!*<select className="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="kt_ecommerce_add_product_store_template">*!/*/}
-                    {/*        /!*    <option/>*!/*/}
-                    {/*        /!*    <option value="default" selected={true}>Default template</option>*!/*/}
-                    {/*        /!*    <option value="electronics">Electronics</option>*!/*/}
-                    {/*        /!*    <option value="office">Office stationary</option>*!/*/}
-                    {/*        /!*    <option value="fashion">Fashion</option>*!/*/}
-                    {/*        /!*</select>*!/*/}
-                    {/*        <div className="text-muted fs-7">Assign a template from your current theme to define how a single product is displayed.</div>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
-                </div>
 
-                {/* Main */}
-            </form>
+                    {/* Main */}
+                    <div className="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
+                        <div className="d-flex flex-column gap-7 gap-lg-10">
+                            <KTCard className='card-flush py-4'>
+                                <div className="card-header">
+                                    <div className="card-title">
+                                        <h2>General</h2>
+                                    </div>
+                                </div>
+
+                                <KTCardBody className='py-4'>
+                                    <div className="mb-10 fv-row">
+                                        <label className="required form-label">Title</label>
+
+                                        <Field
+                                            type='text'
+                                            className='form-control mb-2'
+                                            placeholder='Activity Title'
+                                            name='title'
+                                        />
+
+
+                                        <div className="text-muted fs-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+                                        <div className='text-danger mt-2'>
+                                            <ErrorMessage name='title'/>
+                                        </div>
+                                    </div>
+
+                                    <div className='mb-10 fv-row'>
+                                        <label className='required form-label'>Description</label>
+
+                                        <Field
+                                            as='textarea'
+                                            name='description'
+                                            className='form-control mb-2'
+                                            placeholder='Activity Description...'
+                                            rows={3}
+                                        />
+                                        <div className='text-danger mt-2'>
+                                            <ErrorMessage name='description'/>
+                                        </div>
+                                    </div>
+
+                                    <div className='mb-10 fv-row'>
+                                        <label className='required form-label'>Rounds</label>
+
+                                        <Select
+                                            className="basic-single"
+                                            classNamePrefix="select"
+                                            isClearable={true}
+                                            isSearchable={true}
+                                            name="rounds"
+                                            options={ACTIVITY_ROUNDS}
+                                            styles={selectCustomStyles}
+                                        />
+
+                                        <div className='text-danger mt-2'>
+                                            <ErrorMessage name='rounds'/>
+                                        </div>
+                                    </div>
+
+                                    <div className="mb-10 fv-row">
+                                        <div className='d-flex flex-stack'>
+                                            <div className='d-flex'>
+                                                <div className='d-flex flex-column'>
+                                                    <span className='fs-5 text-dark fw-bolder'>
+                                                        Enable CrossPlay
+                                                    </span>
+                                                    <div className='fs-6 fw-bold text-gray-400'>Description on what that means to enable cross play.</div>
+                                                </div>
+                                            </div>
+                                            <div className='d-flex justify-content-end'>
+                                                <div className='form-check form-check-solid form-switch'>
+                                                    <input
+                                                        className='form-check-input w-45px h-30px'
+                                                        type='checkbox'
+                                                        id='googleswitch'
+                                                        checked={activity?.is_crossPlay}
+                                                        onChange={() =>
+                                                            updateData({
+                                                                is_crossPlay: !activity?.is_crossPlay,
+                                                            })
+                                                        }
+                                                    />
+                                                    <label className='form-check-label' htmlFor='googleswitch'/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {activity?.is_crossPlay && platforms.length > 0 &&
+                                        <div className='mb-10 fv-row'>
+                                            <label className='form-label mb-3'>Platforms</label>
+
+                                            {platforms.length > 0 &&
+                                                <Select
+                                                    className="basic-single"
+                                                    classNamePrefix="select"
+                                                    isClearable={true}
+                                                    isSearchable={true}
+                                                    isMulti={true}
+                                                    name="platforms"
+                                                    options={platforms}
+                                                    styles={selectCustomStyles}
+                                                />
+                                            }
+
+                                            <div className='text-danger mt-2'>
+                                                <ErrorMessage name='platforms'/>
+                                            </div>
+                                        </div>
+                                    }
+
+
+                                </KTCardBody>
+                            </KTCard>
+                        </div>
+                    </div>
+                </form>
+            </FormikProvider>
         </>
     )
 }

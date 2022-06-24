@@ -21,6 +21,7 @@ const getCommunityById = (id: any): Promise<Community | undefined> => {
 }
 
 const createCommunity = (formData: FormData): Promise<Community | undefined> => {
+    console.log(formData)
     return axios
         .post(`${GET_COMMUNITIES_URL}`, formData)
         .then((response: AxiosResponse<Response<Community>>) => response.data)
