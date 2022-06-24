@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Role} from "../../../models/user/Role";
+import {Role, roleSchema} from "../../../models/user/Role";
 import {useNavigate, useParams} from "react-router-dom";
 import {useFormik} from "formik";
 import * as Yup from "yup";
@@ -7,11 +7,6 @@ import {getRoleById, updateRole} from "./core/_requests";
 import {PageTitle} from "../../../../_metronic/layout/core";
 import {KTCard, KTCardBody} from "../../../../_metronic/helpers";
 import clsx from "clsx";
-
-const editRoleSchema = Yup.object().shape({
-    name: Yup.string()
-        .required('Name is required'),
-})
 
 
 const RolesEdit = () => {
@@ -30,7 +25,7 @@ const RolesEdit = () => {
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: initialValues,
-        validationSchema: editRoleSchema,
+        validationSchema: roleSchema,
         onSubmit: async (values, {setSubmitting}) => {
             setSubmitting(true)
             try {

@@ -1,17 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import {useFormik} from "formik";
-import * as Yup from 'yup'
-import {Permission} from "../../../models/user/Permission";
+import {Permission, permissionSchema} from "../../../models/user/Permission";
 import {KTCard, KTCardBody} from "../../../../_metronic/helpers";
 import clsx from "clsx";
 import {PageTitle} from "../../../../_metronic/layout/core";
 import {getPermissionById, updatePermission} from "./core/_requests";
 import {useNavigate, useParams} from 'react-router-dom';
-
-const editPermissionSchema = Yup.object().shape({
-    name: Yup.string()
-        .required('Name is required'),
-})
 
 const PermissionsEdit = () => {
     const [permission, setPermission] = useState<Permission | undefined>();
@@ -29,7 +23,7 @@ const PermissionsEdit = () => {
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: initialValues,
-        validationSchema: editPermissionSchema,
+        validationSchema: permissionSchema,
         onSubmit: async (values, {setSubmitting}) => {
             setSubmitting(true)
             try {

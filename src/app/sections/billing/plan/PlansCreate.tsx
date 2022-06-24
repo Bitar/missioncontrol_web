@@ -7,9 +7,6 @@ import {PageTitle} from "../../../../_metronic/layout/core";
 import clsx from "clsx";
 import {createPlan} from "./core/_requests";
 
-
-
-
 const PlansCreate = () => {
 
     const navigate = useNavigate();

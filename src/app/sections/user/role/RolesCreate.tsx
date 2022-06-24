@@ -5,13 +5,8 @@ import {isNotEmpty, KTCard, KTCardBody} from "../../../../_metronic/helpers";
 import clsx from "clsx";
 import {PageTitle} from "../../../../_metronic/layout/core";
 import {useNavigate} from 'react-router-dom';
-import {Role} from "../../../models/user/Role";
+import {Role, roleSchema} from "../../../models/user/Role";
 import {createRole} from "./core/_requests";
-
-const createRoleSchema = Yup.object().shape({
-    name: Yup.string()
-        .required('Name is required'),
-})
 
 const RolesCreate = () => {
 
@@ -27,7 +22,7 @@ const RolesCreate = () => {
 
     const formik = useFormik({
         initialValues: permissionForEdit,
-        validationSchema: createRoleSchema,
+        validationSchema: roleSchema,
         onSubmit: async (values, {setSubmitting}) => {
             setSubmitting(true)
             try {

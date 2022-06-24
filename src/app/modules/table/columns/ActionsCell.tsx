@@ -40,8 +40,8 @@ const ActionsCell: FC<Props> = ({id, path, queryKey, showEdit = true, showDelete
 
             {showDelete &&
                 <a className='btn btn-icon btn-sm btn-active-light-danger'
-                onClick={async () => await deleteItem.mutateAsync()}>
-                <i className="fa-solid fa-trash text-danger"/>
+                   onClick={async () => await deleteItem.mutateAsync()}>
+                    <i className="fa-solid fa-trash text-danger"/>
                 </a>
             }
         </>
