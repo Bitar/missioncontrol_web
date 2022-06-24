@@ -37,7 +37,7 @@ const communitiesColumns: ReadonlyArray<Column<Community>> = [
              <CustomHeader tableProps={props} title='Actions' className='text-end min-w-100px'/>
          ),
         id: 'actions',
-         Cell: ({...props}) => <ViewsCell id={props.data[props.row.index].id} path={'community'}
+         Cell: ({...props}) => <ViewsCell id={props.data[props.row.index].id} path={'communities'}
                                             queryKey={QUERIES.COMMUNITIES_LIST}/>,
      },
 ]

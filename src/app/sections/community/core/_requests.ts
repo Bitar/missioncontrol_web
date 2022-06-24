@@ -13,9 +13,9 @@ const getCommunities = (query: String): Promise<CommunityQueryResponse> => {
         .then((response: AxiosResponse<CommunityQueryResponse>) => response.data)
 }
 
-const getCommunityById = (id: any): Promise<Community | undefined> => {
+const getCommunityById = (id: any, query : String | undefined): Promise<Community | undefined> => {
     return axios
-        .get(`${GET_COMMUNITIES_URL}/${id}`)
+        .get(`${GET_COMMUNITIES_URL}/${id}?${query}`)
         .then((response: AxiosResponse<Response<Community>>) => response.data)
         .then((response: Response<Community>) => response.data)
 }

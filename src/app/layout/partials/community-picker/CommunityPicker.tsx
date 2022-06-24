@@ -26,7 +26,6 @@ const CommunityPicker: FC = () => {
 
     return (
         <div>
-
             {communityAdmin && communityAdmin?.length > 0 &&
                 <div className='btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px'>
 
@@ -41,8 +40,8 @@ const CommunityPicker: FC = () => {
                         return (
                             <div
                                 className="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-muted menu-active-bg menu-state-primary fw-bold py-4 fs-6 w-400px"
-                                data-kt-menu="true">
-                                <div className="menu-item px-3 my-1" key={`row-${i}-${community.id}`}>
+                                data-kt-menu="true" key={`row-${i}-${community.id}`}>
+                                <div className="menu-item px-3 my-1">
                                 <span
                                     onClick={() => {
                                         setCommunity(community.id)

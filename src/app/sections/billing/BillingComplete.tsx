@@ -14,7 +14,7 @@ const BillingComplete = () => {
         getPaymentResponse(params.id).then(response => {
             if (response?.status === 1) {
                 setSubscription(response?.subscription)
-                navigate('/community/create')
+                navigate('/communities/create')
             } else {
                 setPaymentRes(response?.payment_response)
             }

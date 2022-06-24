@@ -4,8 +4,9 @@ import clsx from "clsx";
 import {Field, getIn, useFormik} from "formik";
 import * as Yup from "yup";
 import {initialCommunity} from "../../models/community/Community";
-import { createCommunity } from "./core/_requests";
+import {createCommunity} from "./core/_requests";
 import Swal from "sweetalert2";
+import {useNavigate} from "react-router-dom";
 
 
 const createPlanSchema = Yup.object().shape({
@@ -13,17 +14,30 @@ const createPlanSchema = Yup.object().shape({
         .required('Name is required'),
     description: Yup.string()
         .required('Description is required'),
-    contact:Yup.object().shape({
-            arr: Yup.array().of(Yup.object().shape({ name: Yup.string().required('Name is required'), email: Yup.string().required('Email is required'), phone_number: Yup.string().required('Phone Number is required')})),
-            }),
-    address:Yup.object().shape({
-             arr: Yup.array().of(Yup.object().shape({ address_one: Yup.string().required('Description is required') , address_two: Yup.string(), city: Yup.string(),state_province: Yup.string() ,postal_code: Yup.string(), country_code: Yup.string()  })),
-             }) , 
-    banner_image:Yup.mixed().required('File is required'),
-    logo:Yup.mixed().required('File is required')
+    contact: Yup.object().shape({
+        arr: Yup.array().of(Yup.object().shape({
+            name: Yup.string().required('Name is required'),
+            email: Yup.string().required('Email is required'),
+            phone_number: Yup.string().required('Phone Number is required')
+        })),
+    }),
+    address: Yup.object().shape({
+        arr: Yup.array().of(Yup.object().shape({
+            address_one: Yup.string().required('Description is required'),
+            address_two: Yup.string(),
+            city: Yup.string(),
+            state_province: Yup.string(),
+            postal_code: Yup.string(),
+            country_code: Yup.string()
+        })),
+    }),
+    banner_image: Yup.mixed().required('File is required'),
+    logo: Yup.mixed().required('File is required')
 })
 
 const CommunityCreate = () => {
+
+    const navigate = useNavigate()
 
     const formik = useFormik({
         initialValues: initialCommunity,
@@ -37,33 +51,23 @@ const CommunityCreate = () => {
                     //console.log(values)
                     let formData = new FormData()
 
-                    formData.append('logo',values.logo!)
-                    formData.append('banner_image',values.banner_image!)
-                    formData.append('name',values.name!)
-                    formData.append('description',values.description!)
-                    formData.append('contact[name]',values.contact!.name)
-                    formData.append('contact[email]',values.contact!.email)
-                    formData.append('contact[phone_number]',values.contact!.phone_number)
-                    formData.append('address[address_one]',values.address!.address_one)
-                    formData.append('address[address_two]',values.address!.address_two)
-                    formData.append('address[city]',values.address!.city)
-                    formData.append('address[state_province]',values.address!.state_province)
-                    formData.append('address[postal_code]',values.address!.postal_code)
-                    formData.append('address[country_code]',values.address!.country_code)
-                    
-                    
+                    formData.append('logo', values.logo!)
+                    formData.append('banner_image', values.banner_image!)
+                    formData.append('name', values.name!)
+                    formData.append('description', values.description!)
+                    formData.append('contact[name]', values.contact!.name)
+                    formData.append('contact[email]', values.contact!.email)
+                    formData.append('contact[phone_number]', values.contact!.phone_number)
+                    formData.append('address[address_one]', values.address!.address_one)
+                    formData.append('address[address_two]', values.address!.address_two)
+                    formData.append('address[city]', values.address!.city)
+                    formData.append('address[state_province]', values.address!.state_province)
+                    formData.append('address[postal_code]', values.address!.postal_code)
+                    formData.append('address[country_code]', values.address!.country_code)
 
-                    //response
                     const potato = await createCommunity(formData)
-                    //get the id and pass it as param to the community details
-                    console.log(potato?.id)
-                    //'community/:`potato?/id`'
-                    //make sure error 
-                    Swal.fire(
-                        'Good job!',
-                        'You created your community!',
-                        'success'
-                      )
+                    navigate('/communities/' + potato?.id)
+
                 }
             } catch (ex) {
                 console.error(ex)
@@ -72,10 +76,8 @@ const CommunityCreate = () => {
             }
         },
     })
-    
-    
-     
-   
+
+
     return (
         <>
             <PageTitle breadcrumbs={[]}>{'Create Community'}</PageTitle>
@@ -91,7 +93,7 @@ const CommunityCreate = () => {
                     </div>
                 </div>
                 <KTCardBody className='py-4'>
-                    <form className='form' method="post" encType="multipart/form-data"  onSubmit={formik.handleSubmit} noValidate>
+                    <form className='form' method="post" encType="multipart/form-data" onSubmit={formik.handleSubmit} noValidate>
                         {/* begin::Scroll */}
                         <div
                             className='d-flex flex-column scroll-y me-n7 pe-7 pt-5'
@@ -133,10 +135,10 @@ const CommunityCreate = () => {
                             </div>
                             {/* end::Input group */}
 
-                                {/* begin::Input group */}
+                            {/* begin::Input group */}
                             <div className='fv-row mb-7'>
                                 {/* begin::Label */}
-                            <label className='required fw-bold fs-6 mb-2'>Description</label>
+                                <label className='required fw-bold fs-6 mb-2'>Description</label>
                                 {/* end::Label */}
 
                                 {/* begin::Input */}
@@ -165,7 +167,7 @@ const CommunityCreate = () => {
                                 {/* end::Input */}
                             </div>
                             {/* end::Input group */}
-                       
+
                             <div className='fv-row mb-7'>
                                 {/* begin::Label */}
                                 <label className='required fw-bold fs-6 mb-2'>Contact Name</label>
@@ -196,7 +198,7 @@ const CommunityCreate = () => {
                                 )}
                                 {/* end::Input */}
 
-                                
+
                             </div>
                             <div className='fv-row mb-7'>
                                 {/* begin::Label */}
@@ -205,7 +207,7 @@ const CommunityCreate = () => {
 
                                 {/* begin::Input */}
 
-                            
+
                                 <input
                                     placeholder='Contact Email'
                                     {...formik.getFieldProps('email')}
@@ -228,9 +230,9 @@ const CommunityCreate = () => {
                                         </div>
                                     </div>
                                 )}
-                                {/* end::Input */}                     
+                                {/* end::Input */}
                             </div>
-                            
+
                             <div className='fv-row mb-7'>
                                 {/* begin::Label */}
                                 <label className='required fw-bold fs-6 mb-2'>Phone number</label>
@@ -259,7 +261,7 @@ const CommunityCreate = () => {
                                         </div>
                                     </div>
                                 )}
-                                {/* end::Input */} 
+                                {/* end::Input */}
                             </div>
 
                             <div className='fv-row mb-7'>
@@ -290,7 +292,7 @@ const CommunityCreate = () => {
                                         </div>
                                     </div>
                                 )}
-                                {/* end::Input */} 
+                                {/* end::Input */}
                             </div>
 
 
@@ -322,7 +324,7 @@ const CommunityCreate = () => {
                                         </div>
                                     </div>
                                 )}
-                                {/* end::Input */} 
+                                {/* end::Input */}
                             </div>
 
                             <div className='fv-row mb-7'>
@@ -353,10 +355,10 @@ const CommunityCreate = () => {
                                         </div>
                                     </div>
                                 )}
-                                {/* end::Input */} 
+                                {/* end::Input */}
                             </div>
 
-                            
+
                             <div className='fv-row mb-7'>
                                 {/* begin::Label */}
                                 <label className='required fw-bold fs-6 mb-2'>State</label>
@@ -385,7 +387,7 @@ const CommunityCreate = () => {
                                         </div>
                                     </div>
                                 )}
-                                {/* end::Input */} 
+                                {/* end::Input */}
                             </div>
 
 
@@ -417,7 +419,7 @@ const CommunityCreate = () => {
                                         </div>
                                     </div>
                                 )}
-                                {/* end::Input */} 
+                                {/* end::Input */}
                             </div>
 
                             <div className='fv-row mb-7'>
@@ -448,7 +450,7 @@ const CommunityCreate = () => {
                                         </div>
                                     </div>
                                 )}
-                                {/* end::Input */} 
+                                {/* end::Input */}
                             </div>
 
                             <div className='fv-row mb-7'>
@@ -460,10 +462,10 @@ const CommunityCreate = () => {
                                 <input
                                     type='file'
                                     name='file'
-                                     // @ts-ignore
-                                     onChange={(event) => formik.setFieldValue('logo',event.target.files[0])}
-                                     //onChange={(event) => console.log('banner_image',event.target.files[0])}
-                                    
+                                    // @ts-ignore
+                                    onChange={(event) => formik.setFieldValue('logo', event.target.files[0])}
+                                    //onChange={(event) => console.log('banner_image',event.target.files[0])}
+
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
                                         {'is-invalid': formik.touched.logo && formik.errors.logo},
@@ -481,7 +483,7 @@ const CommunityCreate = () => {
                                         </div>
                                     </div>
                                 )}
-                                {/* end::Input */} 
+                                {/* end::Input */}
                             </div>
 
                             <div className='fv-row mb-7'>
@@ -493,10 +495,10 @@ const CommunityCreate = () => {
                                 <input
                                     type='file'
                                     name='file'
-                                     // @ts-ignore
-                                     onChange={(event) => formik.setFieldValue('banner_image',event.target.files[0])}
-                                     //onChange={(event) => console.log('banner_image',event.target.files[0])}
-                                    
+                                    // @ts-ignore
+                                    onChange={(event) => formik.setFieldValue('banner_image', event.target.files[0])}
+                                    //onChange={(event) => console.log('banner_image',event.target.files[0])}
+
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
                                         {'is-invalid': formik.touched.banner_image && formik.errors.banner_image},
@@ -514,15 +516,12 @@ const CommunityCreate = () => {
                                         </div>
                                     </div>
                                 )}
-                                {/* end::Input */} 
+                                {/* end::Input */}
                             </div>
 
 
-                            
-
-                       
                         </div>
-                      
+
 
                         {/* begin::Actions */}
                         <div className='py-5'>
