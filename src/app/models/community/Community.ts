@@ -1,13 +1,19 @@
 import {ID, Response} from "../../../_metronic/helpers";
-import {CommunityAddress} from "./CommunityAddress";
-import {CommunityContact} from "./CommunityContact";
-import {CommunityAccess} from "./CommunityAccess";
+import {CommunityAddress, initialCommunityAddress} from "./CommunityAddress";
+import {CommunityContact, initialCommunityContact} from "./CommunityContact";
+import {CommunityAccess, initialCommunityAccess} from "./CommunityAccess";
 import {Game} from "../game/Game";
 
 export const initialCommunity: Community = {
-    name: ''
-    
-    
+    name: '',
+    logo: '',
+    banner_image: '',
+    is_featured: false,
+    description: '',
+    address: initialCommunityAddress,
+    contact: initialCommunityContact,
+    access: initialCommunityAccess,
+    is_follow: false
 }
 
 export type Community = {

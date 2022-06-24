@@ -1,47 +1,55 @@
 import {PageTitle} from "../../../_metronic/layout/core";
 import {isNotEmpty, KTCard, KTCardBody} from "../../../_metronic/helpers";
 import clsx from "clsx";
-import {Field, getIn, useFormik} from "formik";
+import {useFormik} from "formik";
 import * as Yup from "yup";
-import {initialCommunity} from "../../models/community/Community";
+import {Community, initialCommunity} from "../../models/community/Community";
 import {createCommunity} from "./core/_requests";
-import Swal from "sweetalert2";
 import {useNavigate} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {getCountries, getStates} from "../misc/core/_requests";
+import {selectCustomStyles} from "../activities/core/_consts";
+import Select from "react-select";
+import {CommunityAddress, initialCommunityAddress} from "../../models/community/CommunityAddress";
 
-
-const createPlanSchema = Yup.object().shape({
-    name: Yup.string()
-        .required('Name is required'),
-    description: Yup.string()
-        .required('Description is required'),
-    contact: Yup.object().shape({
-        arr: Yup.array().of(Yup.object().shape({
-            name: Yup.string().required('Name is required'),
-            email: Yup.string().required('Email is required'),
-            phone_number: Yup.string().required('Phone Number is required')
-        })),
-    }),
-    address: Yup.object().shape({
-        arr: Yup.array().of(Yup.object().shape({
-            address_one: Yup.string().required('Description is required'),
-            address_two: Yup.string(),
-            city: Yup.string(),
-            state_province: Yup.string(),
-            postal_code: Yup.string(),
-            country_code: Yup.string()
-        })),
-    }),
+const createCommunitySchema = Yup.object().shape({
+    name: Yup.string().required('Name is required'),
+    description: Yup.string().required('Description is required'),
+    contact_name: Yup.string()
+        .required('Contact Name is required'),
+    contact_email: Yup.string().email()
+        .required('Contact email is required'),
+    contact_phone_number: Yup.string()
+        .required('Contact phone number is required'),
+    address_address_one: Yup.string()
+        .required('Address One is required'),
+    address_address_two: Yup.string()
+        .required('Address Two is required'),
+    address_city: Yup.string()
+        .required('City is required'),
+    address_state_province: Yup.string()
+        .required('State Province is required'),
+    address_postal_code: Yup.string()
+        .required('Postal Code is required'),
+    address_country_code: Yup.string()
+        .required('Country Code is required'),
     banner_image: Yup.mixed().required('File is required'),
     logo: Yup.mixed().required('File is required')
 })
 
+const stateSelect: any[] = []
+const countrySelect: any[] = []
+
 const CommunityCreate = () => {
+
+    const [community, setCommunity] = useState<Community>(initialCommunity)
+    const [communityAddress, setCommunityAddress] = useState<CommunityAddress>(initialCommunityAddress)
 
     const navigate = useNavigate()
 
     const formik = useFormik({
         initialValues: initialCommunity,
-        validationSchema: createPlanSchema,
+        validationSchema: createCommunitySchema,
         onSubmit: async (values, {setSubmitting}) => {
             setSubmitting(true)
             try {
@@ -50,6 +58,8 @@ const CommunityCreate = () => {
                 } else {
                     //console.log(values)
                     let formData = new FormData()
+
+                    console.log(values)
 
                     formData.append('logo', values.logo!)
                     formData.append('banner_image', values.banner_image!)
@@ -61,9 +71,9 @@ const CommunityCreate = () => {
                     formData.append('address[address_one]', values.address!.address_one)
                     formData.append('address[address_two]', values.address!.address_two)
                     formData.append('address[city]', values.address!.city)
-                    formData.append('address[state_province]', values.address!.state_province)
+                    formData.append('address[state_province]', communityAddress.state_province)
                     formData.append('address[postal_code]', values.address!.postal_code)
-                    formData.append('address[country_code]', values.address!.country_code)
+                    formData.append('address[country_code]', communityAddress.country_code)
 
                     const potato = await createCommunity(formData)
                     navigate('/communities/' + potato?.id)
@@ -76,6 +86,26 @@ const CommunityCreate = () => {
             }
         },
     })
+
+
+    useEffect(() => {
+        getStates().then(response => {
+            response?.data?.forEach(function (value) {
+                stateSelect.push({value: value.id, label: value.name, code: value.code})
+            })
+        })
+
+        getCountries().then(response => {
+            response?.data?.forEach(function (value) {
+                countrySelect.push({value: value.id, label: value.name, code: value.code})
+            })
+        })
+    }, [])
+
+    const updateAddressData = (fieldsToUpdate: Partial<CommunityAddress>) => {
+        const updatedData = {...communityAddress, ...fieldsToUpdate}
+        setCommunityAddress(updatedData)
+    }
 
 
     return (
@@ -96,24 +126,16 @@ const CommunityCreate = () => {
                     <form className='form' method="post" encType="multipart/form-data" onSubmit={formik.handleSubmit} noValidate>
                         {/* begin::Scroll */}
                         <div
-                            className='d-flex flex-column scroll-y me-n7 pe-7 pt-5'
-                            data-kt-scroll='true'
-                            data-kt-scroll-activate='{default: false, lg: true}'
-                            data-kt-scroll-max-height='auto'
-                            data-kt-scroll-offset='300px'
+                            className='d-flex flex-column me-n7 pe-7 pt-5'
                         >
-                            {/* begin::Input group */}
                             <div className='fv-row mb-7'>
-                                {/* begin::Label */}
                                 <label className='required fw-bold fs-6 mb-2'>Name</label>
-                                {/* end::Label */}
 
-                                {/* begin::Input */}
+
                                 <input
                                     placeholder='Name'
                                     {...formik.getFieldProps('name')}
                                     type='text'
-                                    name='name'
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
                                         {'is-invalid': formik.touched.name && formik.errors.name},
@@ -142,11 +164,9 @@ const CommunityCreate = () => {
                                 {/* end::Label */}
 
                                 {/* begin::Input */}
-                                <input
-                                    placeholder='Description'
+                                <textarea
+                                    rows={3}
                                     {...formik.getFieldProps('description')}
-                                    type='text'
-                                    name='description'
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
                                         {'is-invalid': formik.touched.description && formik.errors.description},
@@ -154,7 +174,6 @@ const CommunityCreate = () => {
                                             'is-valid': formik.touched.description && !formik.errors.description,
                                         }
                                     )}
-                                    autoComplete='off'
                                     disabled={formik.isSubmitting}
                                 />
                                 {formik.touched.description && formik.errors.description && (
@@ -176,26 +195,25 @@ const CommunityCreate = () => {
                                 {/* begin::Input */}
                                 <input
                                     placeholder='Contact Name'
-                                    {...formik.getFieldProps('contact name')}
                                     type='text'
                                     name='contact.name'
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
-                                        {'is-invalid': formik.touched.contact && formik.errors.contact},
-                                        {
-                                            'is-valid': formik.touched.contact && !formik.errors.contact,
-                                        }
+                                        // {'is-invalid': formik.touched.contact && formik.errors.contact},
+                                        // {
+                                        //     'is-valid': formik.touched.contact && !formik.errors.contact,
+                                        // }
                                     )}
                                     autoComplete='off'
                                     disabled={formik.isSubmitting}
                                 />
-                                {formik.touched.contact && formik.errors.contact && (
-                                    <div className='fv-plugins-message-container'>
-                                        <div className='fv-help-block'>
-                                            <span role='alert'>{formik.errors.contact}</span>
-                                        </div>
-                                    </div>
-                                )}
+                                {/*{formik.touched.contact && formik.errors.contact && (*/}
+                                {/*    <div className='fv-plugins-message-container'>*/}
+                                {/*        <div className='fv-help-block'>*/}
+                                {/*            <span role='alert'>{formik.errors.contact}</span>*/}
+                                {/*        </div>*/}
+                                {/*    </div>*/}
+                                {/*)}*/}
                                 {/* end::Input */}
 
 
@@ -210,27 +228,14 @@ const CommunityCreate = () => {
 
                                 <input
                                     placeholder='Contact Email'
-                                    {...formik.getFieldProps('email')}
+                                    {...formik.getFieldProps('contact_email')}
                                     type="email"
-                                    name='contact.email'
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
-                                        {'is-invalid': formik.touched.contact && formik.errors.contact},
-                                        {
-                                            'is-valid': formik.touched.contact && !formik.errors.contact,
-                                        }
                                     )}
                                     autoComplete='off'
                                     disabled={formik.isSubmitting}
                                 />
-                                {formik.touched.contact && formik.errors.contact && (
-                                    <div className='fv-plugins-message-container'>
-                                        <div className='fv-help-block'>
-                                            <span role='alert'>{formik.errors.contact}</span>
-                                        </div>
-                                    </div>
-                                )}
-                                {/* end::Input */}
                             </div>
 
                             <div className='fv-row mb-7'>
@@ -241,26 +246,14 @@ const CommunityCreate = () => {
                                 {/* begin::Input */}
                                 <input
                                     placeholder='Contact Phone Number'
-                                    {...formik.getFieldProps('phone_number')}
+                                    {...formik.getFieldProps('contact_phone_number')}
                                     type='text'
-                                    name='contact.phone_number'
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
-                                        {'is-invalid': formik.touched.contact && formik.errors.contact},
-                                        {
-                                            'is-valid': formik.touched.contact && !formik.errors.contact,
-                                        }
                                     )}
                                     autoComplete='off'
                                     disabled={formik.isSubmitting}
                                 />
-                                {formik.touched.contact && formik.errors.contact && (
-                                    <div className='fv-plugins-message-container'>
-                                        <div className='fv-help-block'>
-                                            <span role='alert'>{formik.errors.contact}</span>
-                                        </div>
-                                    </div>
-                                )}
                                 {/* end::Input */}
                             </div>
 
@@ -272,59 +265,30 @@ const CommunityCreate = () => {
                                 {/* begin::Input */}
                                 <input
                                     placeholder='ex:1350 Boylston Street'
-                                    {...formik.getFieldProps('address_one')}
+                                    {...formik.getFieldProps('address_address_one')}
                                     type='text'
-                                    name='address.address_one'
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
-                                        {'is-invalid': formik.touched.address && formik.errors.address},
-                                        {
-                                            'is-valid': formik.touched.address && !formik.errors.address,
-                                        }
                                     )}
                                     autoComplete='off'
                                     disabled={formik.isSubmitting}
                                 />
-                                {formik.touched.address && formik.errors.address && (
-                                    <div className='fv-plugins-message-container'>
-                                        <div className='fv-help-block'>
-                                            <span role='alert'>{formik.errors.address}</span>
-                                        </div>
-                                    </div>
-                                )}
-                                {/* end::Input */}
                             </div>
 
 
                             <div className='fv-row mb-7'>
-                                {/* begin::Label */}
                                 <label className='required fw-bold fs-6 mb-2'>Address Two</label>
-                                {/* end::Label */}
 
-                                {/* begin::Input */}
                                 <input
                                     placeholder='ex:Unit 611'
-                                    {...formik.getFieldProps('address_two')}
+                                    {...formik.getFieldProps('address_address_two')}
                                     type='text'
-                                    name='address.address_two'
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
-                                        {'is-invalid': formik.touched.address && formik.errors.address},
-                                        {
-                                            'is-valid': formik.touched.address && !formik.errors.address,
-                                        }
                                     )}
                                     autoComplete='off'
                                     disabled={formik.isSubmitting}
                                 />
-                                {formik.touched.address && formik.errors.address && (
-                                    <div className='fv-plugins-message-container'>
-                                        <div className='fv-help-block'>
-                                            <span role='alert'>{formik.errors.address}</span>
-                                        </div>
-                                    </div>
-                                )}
-                                {/* end::Input */}
                             </div>
 
                             <div className='fv-row mb-7'>
@@ -335,27 +299,13 @@ const CommunityCreate = () => {
                                 {/* begin::Input */}
                                 <input
                                     placeholder='ex:Boston'
-                                    {...formik.getFieldProps('city')}
+                                    {...formik.getFieldProps('address_city')}
                                     type='text'
-                                    name='address.city'
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
-                                        {'is-invalid': formik.touched.address && formik.errors.address},
-                                        {
-                                            'is-valid': formik.touched.address && !formik.errors.address,
-                                        }
                                     )}
                                     autoComplete='off'
-                                    disabled={formik.isSubmitting}
                                 />
-                                {formik.touched.address && formik.errors.address && (
-                                    <div className='fv-plugins-message-container'>
-                                        <div className='fv-help-block'>
-                                            <span role='alert'>{formik.errors.address}</span>
-                                        </div>
-                                    </div>
-                                )}
-                                {/* end::Input */}
                             </div>
 
 
@@ -365,29 +315,23 @@ const CommunityCreate = () => {
                                 {/* end::Label */}
 
                                 {/* begin::Input */}
-                                <input
-                                    placeholder='ex:MA'
-                                    {...formik.getFieldProps('state_province')}
-                                    type='text'
-                                    name='address.state_province'
+                                <Select
+                                    {...formik.getFieldProps('address_state_province')}
                                     className={clsx(
-                                        'form-control form-control-solid mb-3 mb-lg-0',
-                                        {'is-invalid': formik.touched.address && formik.errors.address},
-                                        {
-                                            'is-valid': formik.touched.address && !formik.errors.address,
-                                        }
+                                        'basic-select',
                                     )}
-                                    autoComplete='off'
-                                    disabled={formik.isSubmitting}
+                                    classNamePrefix="select"
+                                    isClearable={true}
+                                    isSearchable={true}
+                                    name="state"
+                                    onChange={(inputValue) => {
+                                        updateAddressData({
+                                            state_province: inputValue.code
+                                        })
+                                    }}
+                                    options={stateSelect}
+                                    styles={selectCustomStyles}
                                 />
-                                {formik.touched.address && formik.errors.address && (
-                                    <div className='fv-plugins-message-container'>
-                                        <div className='fv-help-block'>
-                                            <span role='alert'>{formik.errors.address}</span>
-                                        </div>
-                                    </div>
-                                )}
-                                {/* end::Input */}
                             </div>
 
 
@@ -399,131 +343,78 @@ const CommunityCreate = () => {
                                 {/* begin::Input */}
                                 <input
                                     placeholder='ex:02215'
-                                    {...formik.getFieldProps('postal_code')}
+                                    {...formik.getFieldProps('address_postal_code')}
                                     type='text'
                                     name='address.postal_code'
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
-                                        {'is-invalid': formik.touched.address && formik.errors.address},
-                                        {
-                                            'is-valid': formik.touched.address && !formik.errors.address,
-                                        }
                                     )}
                                     autoComplete='off'
                                     disabled={formik.isSubmitting}
                                 />
-                                {formik.touched.address && formik.errors.address && (
-                                    <div className='fv-plugins-message-container'>
-                                        <div className='fv-help-block'>
-                                            <span role='alert'>{formik.errors.address}</span>
-                                        </div>
-                                    </div>
-                                )}
-                                {/* end::Input */}
                             </div>
+
 
                             <div className='fv-row mb-7'>
                                 {/* begin::Label */}
                                 <label className='required fw-bold fs-6 mb-2'>Country Code</label>
                                 {/* end::Label */}
 
+
                                 {/* begin::Input */}
-                                <input
-                                    placeholder='ex:US'
-                                    {...formik.getFieldProps('country_code')}
-                                    type='text'
-                                    name='address.country_code'
+                                <Select
+                                    {...formik.getFieldProps('address_country_code')}
                                     className={clsx(
-                                        'form-control form-control-solid mb-3 mb-lg-0',
-                                        {'is-invalid': formik.touched.address && formik.errors.address},
-                                        {
-                                            'is-valid': formik.touched.address && !formik.errors.address,
-                                        }
+                                        'basic-select',
                                     )}
-                                    autoComplete='off'
-                                    disabled={formik.isSubmitting}
+                                    classNamePrefix="select"
+                                    isClearable={true}
+                                    isSearchable={true}
+                                    onChange={(inputValue) => {
+                                        updateAddressData({
+                                            country_code: inputValue.code
+                                        })
+                                    }}
+                                    options={countrySelect}
+                                    styles={selectCustomStyles}
                                 />
-                                {formik.touched.address && formik.errors.address && (
-                                    <div className='fv-plugins-message-container'>
-                                        <div className='fv-help-block'>
-                                            <span role='alert'>{formik.errors.address}</span>
-                                        </div>
-                                    </div>
-                                )}
-                                {/* end::Input */}
                             </div>
 
                             <div className='fv-row mb-7'>
-                                {/* begin::Label */}
                                 <label className='required fw-bold fs-6 mb-2'>logo</label>
-                                {/* end::Label */}
-
-                                {/* begin::Input */}
                                 <input
                                     type='file'
                                     name='file'
                                     // @ts-ignore
                                     onChange={(event) => formik.setFieldValue('logo', event.target.files[0])}
-                                    //onChange={(event) => console.log('banner_image',event.target.files[0])}
 
-                                    className={clsx(
-                                        'form-control form-control-solid mb-3 mb-lg-0',
-                                        {'is-invalid': formik.touched.logo && formik.errors.logo},
-                                        {
-                                            'is-valid': formik.touched.logo && !formik.errors.logo,
-                                        }
+                                    className={clsx('form-control form-control-solid mb-3 mb-lg-0',
                                     )}
                                     autoComplete='off'
                                     disabled={formik.isSubmitting}
                                 />
-                                {formik.touched.logo && formik.errors.logo && (
-                                    <div className='fv-plugins-message-container'>
-                                        <div className='fv-help-block'>
-                                            <span role='alert'>{formik.errors.logo}</span>
-                                        </div>
-                                    </div>
-                                )}
-                                {/* end::Input */}
                             </div>
 
                             <div className='fv-row mb-7'>
-                                {/* begin::Label */}
                                 <label className='required fw-bold fs-6 mb-2'>Banner Image</label>
-                                {/* end::Label */}
 
-                                {/* begin::Input */}
                                 <input
                                     type='file'
                                     name='file'
                                     // @ts-ignore
                                     onChange={(event) => formik.setFieldValue('banner_image', event.target.files[0])}
-                                    //onChange={(event) => console.log('banner_image',event.target.files[0])}
 
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
-                                        {'is-invalid': formik.touched.banner_image && formik.errors.banner_image},
-                                        {
-                                            'is-valid': formik.touched.banner_image && !formik.errors.banner_image,
-                                        }
                                     )}
                                     autoComplete='off'
                                     disabled={formik.isSubmitting}
                                 />
-                                {formik.touched.banner_image && formik.errors.banner_image && (
-                                    <div className='fv-plugins-message-container'>
-                                        <div className='fv-help-block'>
-                                            <span role='alert'>{formik.errors.banner_image}</span>
-                                        </div>
-                                    </div>
-                                )}
-                                {/* end::Input */}
                             </div>
 
 
                         </div>
 
-
-                        {/* begin::Actions */}
                         <div className='py-5'>
                             <button
                                 type='submit'
@@ -540,7 +431,7 @@ const CommunityCreate = () => {
                                 )}
                             </button>
                         </div>
-                        {/* end::Actions */}
+
                     </form>
                     {(formik.isSubmitting)}
                 </KTCardBody>
