@@ -9,7 +9,6 @@ const GET_GAMES_URL = `${API_URL}/games`
 
 const getIgdb = (query: string , page:number): Promise<IgdbQueryResponse> => {
     return axios
-         //igdb/search?filter[name]=war 
         .get(`${GET_GAMES_URL}/igdb/search?filter[name]=${query}&page=${page}`)
         .then((d: AxiosResponse<IgdbQueryResponse>) => d.data)
 }

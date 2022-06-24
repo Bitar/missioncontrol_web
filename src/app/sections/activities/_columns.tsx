@@ -3,46 +3,40 @@ import {TextCell} from "../../modules/table/columns/TextCell";
 import {CustomHeader} from "../../modules/table/columns/CustomHeader";
 import {ActionsCell} from "../../modules/table/columns/ActionsCell";
 import {QUERIES} from "../../../_metronic/helpers";
-import {Role} from "../../models/user/Role";
 import {ImageCell} from "../../modules/table/columns/ImageCell";
+import {Activity} from "../../models/activity/Activity";
+import {stat} from "fs";
+import {BadgeCell} from "../../modules/table/columns/BadgeCell";
+import {formatDates, formatStatus} from "../../helpers/ActivityHelper";
 
-const rolesColumns: ReadonlyArray<Column<Role>> = [
+const activitiesColumns: ReadonlyArray<Column<Activity>> = [
   {
     Header: (props) =>
-        <CustomHeader tableProps={props} title='' className='min-w-125px'/>,
+        <CustomHeader tableProps={props} title='Game Cover' className='min-w-125px'/>,
     id: 'image',
     Cell: ({...props}) => <ImageCell dObject={props.data[props.row.index].game?.image}/>,
   },
   {
     Header: (props) =>
-        <CustomHeader tableProps={props} title='League Name' className='min-w-125px'/>,
-    id: 'name',
-    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].name}/>,
+        <CustomHeader tableProps={props} title='Title' className='min-w-125px'/>,
+    id: 'title',
+    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].title}/>,
   },
   {
     Header: (props) =>
         <CustomHeader tableProps={props} title='Status' className='min-w-125px'/>,
     id: 'status',
-    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].status}/>,
+    Cell: ({...props}) => {
+      const {status, color} = formatStatus(props.data[props.row.index].status)
+      return <BadgeCell status={status} color={color}/>
+    },
   },
   {
     Header: (props) =>
-        <CustomHeader tableProps={props} title='Dates' className='min-w-125px'/>,
+        <CustomHeader tableProps={props} title='Dates' className='min-w-200px'/>,
     id: 'dates',
     Cell: ({...props}) => {
-      const startDate = new Date(props.data[props.row.index].matchplay_dates?.start_date * 1000).toDateString();
-
-      // const startDateFormat = startDate.toLocaleDateString([], {weekday: 'short'}) + " " +
-      //     startDate.toLocaleDateString([], {month: 'short'}) + " " +
-      //     startDate.toLocaleDateString([], {day: '2-digit'}) + " " +
-      //     startDate.toLocaleDateString([], {year: 'numeric'})
-      // ;
-      //
-      // console.log(startDateFormat);
-
-      var endDate = new Date(props.data[props.row.index].matchplay_dates?.end_date * 1000).toDateString();
-
-
+      const {startDate, endDate} = formatDates(props.data[props.row.index].matchplay_dates)
       return <TextCell dObject={startDate + " - " + endDate}/>
     },
   },
@@ -70,9 +64,9 @@ const rolesColumns: ReadonlyArray<Column<Role>> = [
         <CustomHeader tableProps={props} title='Actions' className='text-end min-w-100px'/>
     ),
     id: 'actions',
-    Cell: ({...props}) => <ActionsCell id={props.data[props.row.index].id} path={'roles'}
-                                       queryKey={QUERIES.ROLES_LIST}/>,
+    Cell: ({...props}) => <ActionsCell id={props.data[props.row.index].id} path={'activities'}
+                                       queryKey={QUERIES.ACTIVITIES_LIST}/>,
   },
 ]
 
-export {rolesColumns}
+export {activitiesColumns}
