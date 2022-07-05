@@ -8,7 +8,6 @@ import {ScrollTop} from './components/ScrollTop'
 import {Content} from './components/Content'
 import {PageDataProvider} from './core'
 import {useLocation} from 'react-router-dom'
-import {DrawerMessenger, Main, InviteUsers, UpgradePlan} from '../partials'
 import {MenuComponent} from '../assets/ts/components'
 
 const MasterLayout = () => {
@@ -45,13 +44,13 @@ const MasterLayout = () => {
             </div>
 
             {/* begin:: Drawers */}
-            <DrawerMessenger/>
+            {/*<DrawerMessenger/>*/}
             {/* end:: Drawers */}
 
             {/* begin:: Modals */}
-            <Main/>
-            <InviteUsers/>
-            <UpgradePlan/>
+            {/*<Main/>*/}
+            {/*<InviteUsers/>*/}
+            {/*<UpgradePlan/>*/}
             {/* end:: Modals */}
             <ScrollTop/>
         </PageDataProvider>
