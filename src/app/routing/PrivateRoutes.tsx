@@ -5,13 +5,13 @@ import TopBarProgress from 'react-topbar-progress-indicator'
 import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper'
 import {MenuTestPage} from '../pages/MenuTestPage'
 import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
-import {RolesIndex} from "../sections/user/role/RolesIndex";
-import {PermissionsIndex} from "../sections/user/permission/PermissionsIndex";
-import {PermissionsCreate} from "../sections/user/permission/PermissionsCreate";
-import {RolesCreate} from "../sections/user/role/RolesCreate";
+import {RolesIndex} from "../sections/identity/role/RolesIndex";
+import {PermissionsIndex} from "../sections/identity/permission/PermissionsIndex";
+import {PermissionsCreate} from "../sections/identity/permission/PermissionsCreate";
+import {RolesCreate} from "../sections/identity/role/RolesCreate";
 import {ActivitiesIndex} from "../sections/activities/ActivitiesIndex";
-import {PermissionsEdit} from "../sections/user/permission/PermissionsEdit";
-import {RolesEdit} from "../sections/user/role/RolesEdit";
+import {PermissionsEdit} from "../sections/identity/permission/PermissionsEdit";
+import {RolesEdit} from "../sections/identity/role/RolesEdit";
 import { GamesIndex } from '../sections/games/GamesIndex'
 import { GameCreate } from '../sections/games/GameCreate'
 import { GamesEdit } from '../sections/games/GameEdit'

@@ -66,7 +66,7 @@ export function Registration() {
         if(data.status === 200) {
           const auth = data.data
           saveAuth(auth)
-          // const {data: user} = await getUserByToken(auth.token)
+          // const {data: identity} = await getUserByToken(auth.token)
           setCurrentUser(auth.data)
         } else if(data.status === 422) {
           // Unprocessed Entity

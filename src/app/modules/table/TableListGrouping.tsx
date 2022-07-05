@@ -1,13 +1,13 @@
 // import {useQueryClient} from 'react-query'
 // import {useQueryClient, useMutation} from 'react-query'
-// import {useQueryResponse} from "../apps/user-management/users-list/core/QueryResponseProvider";
-// import {useListView} from "../apps/user-management/users-list/core/ListViewProvider";
+// import {useQueryResponse} from "../apps/identity-management/users-list/core/QueryResponseProvider";
+// import {useListView} from "../apps/identity-management/users-list/core/ListViewProvider";
 // import {QUERIES} from "../../../_metronic/helpers";
 import {useListView} from "./ListViewProvider";
 // import {useQueryResponse} from "./QueryResponseProvider";
 // import {deleteObject} from "../../requests";
 
-// import {deleteSelectedUsers} from "../apps/user-management/users-list/core/_requests";
+// import {deleteSelectedUsers} from "../apps/identity-management/users-list/core/_requests";
 
 const TableListGrouping = () => {
     const {selected} = useListView()

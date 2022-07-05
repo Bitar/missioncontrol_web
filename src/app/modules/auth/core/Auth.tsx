@@ -14,7 +14,7 @@ import * as authHelper from './AuthHelpers'
 import {getUserByToken} from './_requests'
 import {Community} from "../../../models/community/Community";
 import {Subscription} from "../../../models/billing/Subscription";
-import {User} from "../../../models/user/User";
+import {User} from "../../../models/identity/User";
 
 type AuthContextProps = {
   auth: AuthModel | undefined
@@ -84,7 +84,7 @@ const AuthInit: FC = ({children}) => {
   const {auth, logout, setCurrentUser, setSubscription} = useAuth()
   const didRequest = useRef(false)
   const [showSplashScreen, setShowSplashScreen] = useState(true)
-  // We should request user by authToken (IN OUR EXAMPLE IT'S API_TOKEN) before rendering the application
+  // We should request identity by authToken (IN OUR EXAMPLE IT'S API_TOKEN) before rendering the application
   useEffect(() => {
     const requestUser = async (apiToken: string) => {
       try {

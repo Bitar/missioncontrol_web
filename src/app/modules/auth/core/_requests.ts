@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {AuthModel} from './_models'
-import {Profile} from "../../../models/user/Profile";
+import {Profile} from "../../../models/identity/Profile";
 
 const API_URL = process.env.REACT_APP_API_URL
 

@@ -1,4 +1,4 @@
-import {User} from "../../../models/user/User";
+import {User} from "../../../models/identity/User";
 
 export interface AuthModel {
   token: string

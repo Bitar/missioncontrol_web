@@ -12,16 +12,16 @@ const getActivities = (query: string): Promise<ActivityQueryResponse> => {
         .get(`${ACTIVITIES_URL}?${query}`)
         .then((d: AxiosResponse<ActivityQueryResponse>) => d.data)
 }
-// const createUser = (user: User): Promise<User | undefined> => {
+// const createUser = (identity: User): Promise<User | undefined> => {
 //     return axios
-//         .put(ROLE_URL, user)
+//         .put(ROLE_URL, identity)
 //         .then((response: AxiosResponse<Response<User>>) => response.data)
 //         .then((response: Response<User>) => response.data)
 // }
 //
-// const updateUser = (user: User): Promise<User | undefined> => {
+// const updateUser = (identity: User): Promise<User | undefined> => {
 //     return axios
-//         .post(`${ROLE_URL}/${user.id}`, user)
+//         .post(`${ROLE_URL}/${identity.id}`, identity)
 //         .then((response: AxiosResponse<Response<User>>) => response.data)
 //         .then((response: Response<User>) => response.data)
 // }
