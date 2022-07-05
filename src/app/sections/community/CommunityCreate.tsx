@@ -15,26 +15,26 @@ import {CommunityAddress, initialCommunityAddress} from "../../models/community/
 const createCommunitySchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
     description: Yup.string().required('Description is required'),
-    contact_name: Yup.string()
-        .required('Contact Name is required'),
-    contact_email: Yup.string().email()
-        .required('Contact email is required'),
-    contact_phone_number: Yup.string()
-        .required('Contact phone number is required'),
-    address_address_one: Yup.string()
-        .required('Address One is required'),
-    address_address_two: Yup.string()
-        .required('Address Two is required'),
-    address_city: Yup.string()
-        .required('City is required'),
-    address_state_province: Yup.string()
-        .required('State Province is required'),
-    address_postal_code: Yup.string()
-        .required('Postal Code is required'),
-    address_country_code: Yup.string()
-        .required('Country Code is required'),
-    banner_image: Yup.mixed().required('File is required'),
-    logo: Yup.mixed().required('File is required')
+    // contact_name: Yup.string()
+    //     .required('Contact Name is required'),
+    // contact_email: Yup.string().email()
+    //     .required('Contact email is required'),
+    // contact_phone_number: Yup.string()
+    //     .required('Contact phone number is required'),
+    // address_address_one: Yup.string()
+    //     .required('Address One is required'),
+    // address_address_two: Yup.string()
+    //     .required('Address Two is required'),
+    // address_city: Yup.string()
+    //     .required('City is required'),
+    // address_state_province: Yup.string()
+    //     .required('State Province is required'),
+    // address_postal_code: Yup.string()
+    //     .required('Postal Code is required'),
+    // address_country_code: Yup.string()
+    //     .required('Country Code is required'),
+    // banner_image: Yup.mixed().required('File is required'),
+    // logo: Yup.mixed().required('File is required')
 })
 
 const stateSelect: any[] = []
@@ -196,7 +196,7 @@ const CommunityCreate = () => {
                                 <input
                                     placeholder='Contact Name'
                                     type='text'
-                                    name='contact.name'
+                                    {...formik.getFieldProps('contact[name]')}
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
                                         // {'is-invalid': formik.touched.contact && formik.errors.contact},
@@ -228,7 +228,7 @@ const CommunityCreate = () => {
 
                                 <input
                                     placeholder='Contact Email'
-                                    {...formik.getFieldProps('contact_email')}
+                                    {...formik.getFieldProps('contact[email]')}
                                     type="email"
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
@@ -246,7 +246,7 @@ const CommunityCreate = () => {
                                 {/* begin::Input */}
                                 <input
                                     placeholder='Contact Phone Number'
-                                    {...formik.getFieldProps('contact_phone_number')}
+                                    {...formik.getFieldProps('contact[phone_number]')}
                                     type='text'
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
@@ -265,7 +265,7 @@ const CommunityCreate = () => {
                                 {/* begin::Input */}
                                 <input
                                     placeholder='ex:1350 Boylston Street'
-                                    {...formik.getFieldProps('address_address_one')}
+                                    {...formik.getFieldProps('address[address_one]')}
                                     type='text'
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
@@ -281,7 +281,7 @@ const CommunityCreate = () => {
 
                                 <input
                                     placeholder='ex:Unit 611'
-                                    {...formik.getFieldProps('address_address_two')}
+                                    {...formik.getFieldProps('address[address_two]')}
                                     type='text'
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
@@ -299,7 +299,7 @@ const CommunityCreate = () => {
                                 {/* begin::Input */}
                                 <input
                                     placeholder='ex:Boston'
-                                    {...formik.getFieldProps('address_city')}
+                                    {...formik.getFieldProps('address[city]')}
                                     type='text'
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
@@ -316,7 +316,7 @@ const CommunityCreate = () => {
 
                                 {/* begin::Input */}
                                 <Select
-                                    {...formik.getFieldProps('address_state_province')}
+                                // {...formik.getFieldProps('address[state_province]')}
                                     className={clsx(
                                         'basic-select',
                                     )}
@@ -343,7 +343,7 @@ const CommunityCreate = () => {
                                 {/* begin::Input */}
                                 <input
                                     placeholder='ex:02215'
-                                    {...formik.getFieldProps('address_postal_code')}
+                                    // {...formik.getFieldProps('address[postal_code]')}
                                     type='text'
                                     name='address.postal_code'
                                     className={clsx(
@@ -363,7 +363,7 @@ const CommunityCreate = () => {
 
                                 {/* begin::Input */}
                                 <Select
-                                    {...formik.getFieldProps('address_country_code')}
+                                    // {...formik.getFieldProps('address[country_code]')}
                                     className={clsx(
                                         'basic-select',
                                     )}

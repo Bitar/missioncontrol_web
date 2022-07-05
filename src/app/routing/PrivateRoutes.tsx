@@ -32,11 +32,11 @@ import {ActivityCreate} from "../sections/activities/ActivityCreate";
 
 
 const PrivateRoutes = () => {
-    const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
-    const WizardsPage = lazy(() => import('../modules/wizards/WizardsPage'))
-    const AccountPage = lazy(() => import('../modules/accounts/AccountPage'))
-    const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'))
-    const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'))
+    // const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
+    // const WizardsPage = lazy(() => import('../modules/wizards/WizardsPage'))
+    // const AccountPage = lazy(() => import('../modules/accounts/AccountPage'))
+    // const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'))
+    // const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'))
 
     return (
         <Routes>
@@ -155,7 +155,7 @@ const PrivateRoutes = () => {
                     path='crafted/pages/profile/*'
                     element={
                         <SuspensedView>
-                            <ProfilePage/>
+                            {/* <ProfilePage/> */}
                         </SuspensedView>
                     }
                 />
@@ -163,7 +163,7 @@ const PrivateRoutes = () => {
                     path='crafted/pages/wizards/*'
                     element={
                         <SuspensedView>
-                            <WizardsPage/>
+                            {/* <WizardsPage/> */}
                         </SuspensedView>
                     }
                 />
@@ -171,7 +171,7 @@ const PrivateRoutes = () => {
                     path='crafted/widgets/*'
                     element={
                         <SuspensedView>
-                            <WidgetsPage/>
+                            {/* <WidgetsPage/> */}
                         </SuspensedView>
                     }
                 />
@@ -179,7 +179,7 @@ const PrivateRoutes = () => {
                     path='crafted/account/*'
                     element={
                         <SuspensedView>
-                            <AccountPage/>
+                            {/* <AccountPage/> */}
                         </SuspensedView>
                     }
                 />
@@ -187,7 +187,7 @@ const PrivateRoutes = () => {
                     path='apps/chat/*'
                     element={
                         <SuspensedView>
-                            <ChatPage/>
+                            {/* <ChatPage/> */}
                         </SuspensedView>
                     }
                 />

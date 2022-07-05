@@ -3,6 +3,8 @@ import {FC, useEffect } from 'react'
 import {ID} from "../../../../_metronic/helpers";
 import {MenuComponent} from "../../../../_metronic/assets/ts/components";
 import {Link} from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 
 type Props = {
     id: ID,
@@ -27,7 +29,7 @@ const ViewsCell: FC<Props> = ({id, path,  showView = true}) => {
         <>                   
             {showView &&
                 <Link to={'/' + path + '/' + id } className="btn btn-icon btn-sm btn-active-light-warning">
-                    <i className="fa fa-solid fa-eye text-warning"/>
+                     <FontAwesomeIcon icon={faEye} className='text-warning'/>
                 </Link>
             }
 
