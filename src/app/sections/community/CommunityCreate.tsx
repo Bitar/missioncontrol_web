@@ -15,6 +15,14 @@ import {CommunityAddress, initialCommunityAddress} from "../../models/community/
 const createCommunitySchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
     description: Yup.string().required('Description is required'),
+    contact: Yup.object().shape({
+        name: Yup.string().required('Contact name  is required'),
+        email: Yup.string().email('Please enter a valid email').required('Email is required'),
+        phone_number :Yup.string().required('Phone number is required'),
+      }),
+
+    
+
     // contact_name: Yup.string()
     //     .required('Contact Name is required'),
     // contact_email: Yup.string().email()
@@ -56,10 +64,8 @@ const CommunityCreate = () => {
                 if (isNotEmpty(values.id)) {
                     // await updateUser(values)
                 } else {
-                    //console.log(values)
+               
                     let formData = new FormData()
-
-                    console.log(values)
 
                     formData.append('logo', values.logo!)
                     formData.append('banner_image', values.banner_image!)
@@ -75,8 +81,8 @@ const CommunityCreate = () => {
                     formData.append('address[postal_code]', values.address!.postal_code)
                     formData.append('address[country_code]', communityAddress.country_code)
 
-                    const potato = await createCommunity(formData)
-                    navigate('/communities/' + potato?.id)
+                    const comm = await createCommunity(formData)
+                    navigate('/communities/' + comm?.id)
 
                 }
             } catch (ex) {
@@ -196,6 +202,7 @@ const CommunityCreate = () => {
                                 <input
                                     placeholder='Contact Name'
                                     type='text'
+                                   
                                     {...formik.getFieldProps('contact[name]')}
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
@@ -230,12 +237,21 @@ const CommunityCreate = () => {
                                     placeholder='Contact Email'
                                     {...formik.getFieldProps('contact[email]')}
                                     type="email"
+                                    name='contact.email'
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
                                     )}
                                     autoComplete='off'
                                     disabled={formik.isSubmitting}
                                 />
+                                 {formik.touched.contact && formik.errors.contact && (
+                                   <div className='fv-plugins-message-container'>
+                                       <div className='fv-help-block'>
+                                           <span role='alert'>{formik.errors.contact}</span>
+                                        </div>
+                                   </div>
+                                )}
+                           
                             </div>
 
                             <div className='fv-row mb-7'>
@@ -248,6 +264,7 @@ const CommunityCreate = () => {
                                     placeholder='Contact Phone Number'
                                     {...formik.getFieldProps('contact[phone_number]')}
                                     type='text'
+                                    name='contact.phone_number'
                                     className={clsx(
                                         'form-control form-control-solid mb-3 mb-lg-0',
                                     )}
