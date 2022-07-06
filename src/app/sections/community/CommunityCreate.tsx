@@ -15,11 +15,11 @@ import {CommunityAddress, initialCommunityAddress} from "../../models/community/
 const createCommunitySchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
     description: Yup.string().required('Description is required'),
-    contact: Yup.object().shape({
-        name: Yup.string().required('Contact name  is required'),
-        email: Yup.string().email('Please enter a valid email').required('Email is required'),
-        phone_number :Yup.string().required('Phone number is required'),
-      }),
+    // contact: Yup.object().shape({
+    //     name: Yup.string().required('Contact name  is required'),
+    //     email: Yup.string().email('Please enter a valid email').required('Email is required'),
+    //     phone_number :Yup.string().required('Phone number is required'),
+    //   }),
 
     
 
