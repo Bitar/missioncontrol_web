@@ -3,11 +3,12 @@ import {KTSVG,} from "../../../_metronic/helpers"
 import {PageTitle} from "../../../_metronic/layout/core"
 import {getCommunityById} from "./core/_requests"
 import {Community} from "../../models/community/Community"
-import {useParams} from "react-router-dom"
+import {Link, useNavigate, useParams} from "react-router-dom"
 import {CommunityFollower} from "./CommunityFollowers"
 
 const CommunityView = () => {
     const [community, setCommunity] = useState<Community | undefined>();
+    const navigate = useNavigate()
     const params = useParams()
 
     useEffect(() => {
@@ -16,6 +17,8 @@ const CommunityView = () => {
             setCommunity(response)
         })
     }, [params.id]);
+
+    
 
     return (
         <>
@@ -28,6 +31,7 @@ const CommunityView = () => {
                                 <img src={community?.logo} alt=""/>
                             </div>
                         </div>
+                        
 
                         <div className='flex-grow-1'>
                             <div className='d-flex justify-content-between align-items-start flex-wrap mb-2'>
@@ -70,7 +74,12 @@ const CommunityView = () => {
                                     </div>
 
                                 </div>
-
+                                <div className='card-toolbar'>
+                                 <Link className='btn btn-sm btn-primary' to='/activities/create' >
+                            <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2'/>
+                            New Activity
+                        </Link>
+                    </div>
                             </div>
 
                             <div className='d-flex flex-wrap flex-stack'>
