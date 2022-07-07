@@ -25,7 +25,7 @@ const CommunityView = () => {
                     <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
                         <div className='me-7 mb-4'>
                             <div className='symbol symbol-100px symbol-lg-160px symbol-fixed position-relative'>
-                                <img src={community?.logo} alt=""/>
+                                <img src={community?.logo} className="img-fluid w-100" alt=""/>
                             </div>
                         </div>
 
