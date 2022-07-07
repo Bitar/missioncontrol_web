@@ -3,12 +3,11 @@ import {KTSVG,} from "../../../_metronic/helpers"
 import {PageTitle} from "../../../_metronic/layout/core"
 import {getCommunityById} from "./core/_requests"
 import {Community} from "../../models/community/Community"
-import {Link, useNavigate, useParams} from "react-router-dom"
+import {Link, useParams} from "react-router-dom"
 import {CommunityFollower} from "./CommunityFollowers"
 
 const CommunityView = () => {
     const [community, setCommunity] = useState<Community | undefined>();
-    const navigate = useNavigate()
     const params = useParams()
 
     useEffect(() => {
@@ -18,7 +17,7 @@ const CommunityView = () => {
         })
     }, [params.id]);
 
-    
+
 
     return (
         <>
@@ -75,7 +74,7 @@ const CommunityView = () => {
 
                                 </div>
                                 <div className='card-toolbar'>
-                                 <Link className='btn btn-sm btn-primary' to='/activities/create' >
+                                 <Link className='btn btn-sm btn-primary' to='/activities/create'>
                             <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2'/>
                             New Activity
                         </Link>

@@ -16,6 +16,18 @@ const ACTIVITY_ROUNDS = [
     {value: 7, label: 7}
 ]
 
+const ACTIVITY_LOCATION = [
+    {value: 1, label: 'Online'},
+    {value: 2, label: 'In person'},
+    
+]
+
+const ACTIVITY_FEE = [
+    {value: 1, label: 'Free'},
+    {value: 2, label: 'In person'},
+    
+]
+
 const selectCustomStyles = {
     option: (styles: any) => ({
         ...styles,
@@ -23,4 +35,4 @@ const selectCustomStyles = {
     })
 }
 
-export {ACTIVITY_STATUS, ACTIVITY_ROUNDS, selectCustomStyles}
+export {ACTIVITY_STATUS, ACTIVITY_ROUNDS, ACTIVITY_LOCATION,ACTIVITY_FEE, selectCustomStyles}
