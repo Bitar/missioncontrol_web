@@ -5,24 +5,26 @@ import * as Yup from "yup";
 import {getGames} from "../games/core/_requests";
 import Select from "react-select";
 import {ACTIVITY_FEE, ACTIVITY_LOCATION, ACTIVITY_ROUNDS, selectCustomStyles} from "./core/_consts";
-import {KTCard, KTCardBody} from "../../../_metronic/helpers";
+import {isNotEmpty, KTCard, KTCardBody} from "../../../_metronic/helpers";
 import {initialGame} from "../../models/game/Game";
 import DateTimePicker from 'react-datetime-picker';
+import { createCommunity } from '../community/core/_requests';
+import { createActivity } from './core/_requests';
 
 const editActivitySchema = Yup.object().shape({
-    title: Yup.string()
-        .required('Title is required'),
-    description: Yup.string()
-    .required('Description is required'),
-    team:Yup.object().shape({
-        players: Yup.string()
-            .required('Number of team players is required'),
-        min: Yup.string()
-        .required('Number of maximum team players is required'),
-        max: Yup.string()
-        .required('Number of minimum team players is required'),
+    // title: Yup.string()
+    //     .required('Title is required'),
+    // description: Yup.string()
+    // .required('Description is required'),
+    // team:Yup.object().shape({
+    //     players: Yup.string()
+    //         .required('Number of team players is required'),
+    //     min: Yup.string()
+    //     .required('Number of maximum team players is required'),
+    //     max: Yup.string()
+    //     .required('Number of minimum team players is required'),
         
-    })
+    // })
     
 })
 
@@ -45,9 +47,39 @@ const ActivityCreate: FC = () => {
         onSubmit: async (values, {setSubmitting}) => {
             setSubmitting(true)
             try {
+                if(isNotEmpty(values.id)){
+
+                }else{
+                    //console.log(values)
+                    let formData = new FormData()
+
+                    formData.append('title', values.title!)
+                    formData.append('description', values.description!)
+                    formData.append('rounds', values.rounds!)
+                  
+                    // formData.append('is_cross_play', values.is_crossPlay!)
+                     formData.append('team[players]', values.team!.toString())
+                     formData.append('team[min]', values.team!.min.toString())
+                     formData.append('team[max]', values.team!.max.toString())
+                    // formData.append('contact[phone_number]', values.contact!.phone_number)
+                    // formData.append('address[address_one]', values.address!.address_one)
+                    // formData.append('address[address_two]', values.address!.address_two)
+                    // formData.append('address[city]', values.address!.city)
+                    // formData.append('address[state_province]', communityAddress.state_province)
+                    // formData.append('address[postal_code]', values.address!.postal_code)
+                    // formData.append('address[country_code]', communityAddress.country_code)
+
+                    const potato = await createActivity(formData)
+                    // navigate('/communities/' + potato?.id)
+                    console.log(values)
+
+
+
+                    
+                }
                 // await updateRole(params.id, values)
             } catch (ex) {
-
+                console.error(ex)
             } finally {
                 setSubmitting(false)
                 // cancel()
@@ -334,7 +366,7 @@ const ActivityCreate: FC = () => {
                                             type='text'
                                             className='form-control mb-2'
                                             placeholder='Team Players'
-                                            name='team.players'
+                                            {...formik.getFieldProps('team[players]')}
                                         />
                                         <div className="text-muted fs-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
                                         <div className='text-danger mt-2'>
@@ -349,7 +381,7 @@ const ActivityCreate: FC = () => {
                                             type='text'
                                             className='form-control mb-2'
                                             placeholder='Team Players Minimum'
-                                            name='team.min'
+                                            {...formik.getFieldProps('team[min]')}
                                         />
 
 
@@ -366,7 +398,7 @@ const ActivityCreate: FC = () => {
                                             type='text'
                                             className='form-control mb-2'
                                             placeholder='Team Players Maximum'
-                                            name='team.max'
+                                            {...formik.getFieldProps('team[max]')}
                                         />
                                         <div className="text-muted fs-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
                                         <div className='text-danger mt-2'>
@@ -432,99 +464,27 @@ const ActivityCreate: FC = () => {
                                         </div>
                                     </div>
 
-                                    <div className='mb-10 fv-row'>
-                                        <label className='required form-label'>Description</label>
-
-                                        <Field
-                                            as='textarea'
-                                            name='description'
-                                            className='form-control mb-2'
-                                            placeholder='Activity Description...'
-                                            rows={3}
-                                        />
-                                        <div className='text-danger mt-2'>
-                                            <ErrorMessage name='description'/>
-                                        </div>
-                                    </div>
-
-                                    <div className='mb-10 fv-row'>
-                                        <label className='required form-label'>Rounds</label>
-
-                                        <Select
-                                            className="basic-single"
-                                            classNamePrefix="select"
-                                            isClearable={true}
-                                            isSearchable={true}
-                                            name="rounds"
-                                            options={ACTIVITY_ROUNDS}
-                                            styles={selectCustomStyles}
-                                        />
-
-                                        <div className='text-danger mt-2'>
-                                            <ErrorMessage name='rounds'/>
-                                        </div>
-                                    </div>
-
-                                    <div className="mb-10 fv-row">
-                                        <div className='d-flex flex-stack'>
-                                            <div className='d-flex'>
-                                                <div className='d-flex flex-column'>
-                                                    <span className='fs-5 text-dark fw-bolder'>
-                                                        Enable CrossPlay
-                                                    </span>
-                                                    <div className='fs-6 fw-bold text-gray-400'>Description on what that means to enable cross play.</div>
-                                                </div>
-                                            </div>
-                                            <div className='d-flex justify-content-end'>
-                                                <div className='form-check form-check-solid form-switch'>
-                                                    <input
-                                                        className='form-check-input w-45px h-30px'
-                                                        type='checkbox'
-                                                        id='googleswitch'
-                                                        checked={activity?.is_crossPlay}
-                                                        onChange={() =>
-                                                            updateData({
-                                                                is_crossPlay: !activity?.is_crossPlay,
-                                                            })
-                                                        }
-                                                    />
-                                                    <label className='form-check-label' htmlFor='googleswitch'/>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {activity?.is_crossPlay && platforms.length > 0 &&
-                                        <div className='mb-10 fv-row'>
-                                            <label className='form-label mb-3'>Platforms</label>
-
-                                            {platforms.length > 0 &&
-                                                <Select
-                                                    className="basic-single"
-                                                    classNamePrefix="select"
-                                                    isClearable={true}
-                                                    isSearchable={true}
-                                                    isMulti={true}
-                                                    name="platforms"
-                                                    options={platforms}
-                                                    styles={selectCustomStyles}
-                                                />
-                                            }
-
-                                            <div className='text-danger mt-2'>
-                                                <ErrorMessage name='platforms'/>
-                                            </div>
-                                        </div>
-                                    }
-
-                                    
-
-
-
-                                </KTCardBody>
-                            </KTCard>
+                                <div className='py-5'>
+                                <button
+                                    type='submit'
+                                    className='btn btn-primary'
+                                    data-kt-users-modal-action='submit'
+                                    disabled={formik.isSubmitting || !formik.isValid || !formik.touched}
+                                >
+                                    <span className='indicator-label'>Submit</span>
+                                    {(formik.isSubmitting) && (
+                                        <span className='indicator-progress'>
+                                            Please wait...{' '}
+                                            <span className='spinner-border spinner-border-sm align-middle ms-2'/>
+                                        </span>
+                                    )}
+                                </button>
+                            </div>
+                        </KTCardBody>
+                        </KTCard>
                     </div>
                 </form>
+                {(formik.isSubmitting)}  
             </FormikProvider>
         </>
     )
