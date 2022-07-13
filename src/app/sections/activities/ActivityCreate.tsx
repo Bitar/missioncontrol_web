@@ -1,15 +1,18 @@
 import React, {FC, useEffect, useState} from 'react'
-import {ErrorMessage, Field, FormikProvider, useFormik} from "formik";
+import {ErrorMessage, Field, FormikProvider, setIn, useFormik} from "formik";
 import {Activity, initialActivity} from "../../models/activity/Activity";
 import * as Yup from "yup";
 import {getGames} from "../games/core/_requests";
 import Select from "react-select";
-import {ACTIVITY_FEE, ACTIVITY_LOCATION, ACTIVITY_ROUNDS, selectCustomStyles} from "./core/_consts";
+import {ACTIVITY_FEE, ACTIVITY_ITEMTYPE, ACTIVITY_ITEM_VALUETYPE, ACTIVITY_LOCATION,ACTIVITY_PRIZETYPE,ACTIVITY_ROUNDS, ACTIVITY_TIMEZONES, selectCustomStyles} from "./core/_consts";
 import {isNotEmpty, KTCard, KTCardBody} from "../../../_metronic/helpers";
-import {initialGame} from "../../models/game/Game";
-import DateTimePicker from 'react-datetime-picker';
-import { createCommunity } from '../community/core/_requests';
+import {Game, initialGame} from "../../models/game/Game";
 import { createActivity } from './core/_requests';
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import { format,parseISO } from 'date-fns'
+import TimePicker from 'react-time-picker';
+
 
 const editActivitySchema = Yup.object().shape({
     // title: Yup.string()
@@ -28,17 +31,59 @@ const editActivitySchema = Yup.object().shape({
     
 })
 
+
 const gamesSelect: any[] = []
 const platforms: any[] = []
 
-
 const ActivityCreate: FC = () => {
     const [activity, setActivity] = useState<Activity>(initialActivity)
-    const [value, onChange] = useState(new Date());
 
+    const [selectedStateOption, setselectedStateOption] = useState(0)    
+    const [location,setLocation] = useState("selectLocation")
+    const[inPerson,setInPerson] = useState(false)
+    const [clickedButton, setClickedButton] = useState('');
+    const [date, setDate] = useState<Date | null>(new Date());
+    const [enddate,setEndDate] = useState<Date | null>(new Date());
+    const [matchdate, setMatchDate] = useState<Date | null>(new Date());
+    const [matchenddate,setMatchEndDate] = useState<Date | null>(new Date());
+    const [frequencys, setFrequencys] = useState<[Date]>([new Date()]);
+    const [timevalue, setTimeValue] = useState<Date>(new Date());
     
-    
+    // var x = frequencys
+    // x.push(new Date())
+    // setFrequencys(x)
 
+    const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();  
+        const button: HTMLButtonElement = event.currentTarget;
+        setClickedButton(button.name);
+      };  
+      useEffect(() => {
+        location === 'inperson'
+        ?setInPerson(true)
+        :setInPerson(false);
+      },[location])
+    
+    function HandleDateChange (value:any)  {
+        setDate(new Date(value))
+    }
+
+    function HandleEndDateChange (value:any)  {
+        setEndDate(new Date(value))
+    }
+
+    function HandleMatchStartDate (value:any)  {
+        setMatchDate(new Date(value))
+    }
+
+    function HandleMatchEndDate (value:any)  {
+        setMatchEndDate(new Date(value))  
+    }
+
+    function HandleTimePicker (value:any)  {
+        console.log(value);
+        setTimeValue(value)
+    }
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -48,34 +93,47 @@ const ActivityCreate: FC = () => {
             setSubmitting(true)
             try {
                 if(isNotEmpty(values.id)){
-
                 }else{
                     //console.log(values)
                     let formData = new FormData()
 
                     formData.append('title', values.title!)
                     formData.append('description', values.description!)
-                    formData.append('rounds', values.rounds!)
+                    formData.append('rounds', values.rounds! as any)
+                    formData.append('platforms_ids', values.platforms! as any)
                   
-                    // formData.append('is_cross_play', values.is_crossPlay!)
-                     formData.append('team[players]', values.team!.toString())
-                     formData.append('team[min]', values.team!.min.toString())
-                     formData.append('team[max]', values.team!.max.toString())
-                    // formData.append('contact[phone_number]', values.contact!.phone_number)
-                    // formData.append('address[address_one]', values.address!.address_one)
-                    // formData.append('address[address_two]', values.address!.address_two)
-                    // formData.append('address[city]', values.address!.city)
-                    // formData.append('address[state_province]', communityAddress.state_province)
-                    // formData.append('address[postal_code]', values.address!.postal_code)
-                    // formData.append('address[country_code]', communityAddress.country_code)
+                    formData.append('is_cross_play', values.is_crossPlay! as any)
+                    formData.append('team[players]', values.team!.players)
+                    formData.append('team[min]', values.team!.min)
+                    formData.append('team[max]', values.team!.max)
+          
+                                                                                                                              
+                    formData.append('schedule[registration_dates][start_date]',format(date!, "yyyy-MM-dd") as any)
+                    formData.append('schedule[registration_dates][end_date]',format(enddate!, "yyyy-MM-dd") as any)
+                     formData.append('schedule[match_play_dates][start_date]',format(matchdate!, "yyyy-MM-dd") as any)
+                     formData.append('schedule[match_play_dates][end_date]',format(matchenddate!, "yyyy-MM-dd") as any)
+                     //formData.append('schedule[match_frequency][dates]',values.schedule!.match_frequency.dates)        
 
-                    const potato = await createActivity(formData)
-                    // navigate('/communities/' + potato?.id)
-                    console.log(values)
-
-
-
+                    //formData.append('schedule[time][time_of_day]',format(timevalue!,"hh:mm" )as any)
+                    formData.append('schedule[time][timezone]',values.schedule!.time_timezone)
                     
+                    
+                    
+                    formData.append('location[type]',values.location!.type)
+                    formData.append('location[location]',values.location!.location)
+                    formData.append('entry_fee[type]',values.entry_fee!.type)
+                    formData.append('entry_fee[amount]',values.entry_fee!.amount)
+
+
+                    formData.append('prize[rank][0][prize_type]',values.prize!.prize_type as any)
+                    formData.append('prize[rank][0][item][type]',values.prize!.item_type as any)
+                    formData.append('prize[rank][0][item][name]',values.prize!.item_name)
+                    formData.append('prize[rank][0][item][value]',values.prize!.item_value as any)
+                    formData.append('prize[rank][0][item][value_type]',values.prize!.item_value_type as any)
+                    // @ts-ignore
+                     console.log(...formData)
+                    const potato = await createActivity(formData)
+                    // navigate('/communities/' + potato?.id)     
                 }
                 // await updateRole(params.id, values)
             } catch (ex) {
@@ -98,7 +156,8 @@ const ActivityCreate: FC = () => {
     const updatePlatforms = (inputValue: any) => {
         if (inputValue?.platforms.length > 0) {
             updateData({
-                game: inputValue.original
+                game: inputValue.original,
+                is_crossPlay: true
             })
             inputValue.platforms.forEach(function (value: any) {
                 platforms.push({value: value.id, label: value.name, abbreviation: value.abbreviation})
@@ -184,8 +243,6 @@ const ActivityCreate: FC = () => {
                                         </div>
                                     </div>
                                 }
-
-                                {/*<div className="text-muted fs-7">Set the product thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted</div>*/}
                             </div>
                         </div>
                     </div>
@@ -203,16 +260,12 @@ const ActivityCreate: FC = () => {
                                 <KTCardBody className='py-4'>
                                     <div className="mb-10 fv-row">
                                         <label className="required form-label">Title</label>
-
                                         <Field
                                             type='text'
                                             className='form-control mb-2'
                                             placeholder='Activity Title'
                                             name='title'
                                         />
-
-
-                                        <div className="text-muted fs-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
                                         <div className='text-danger mt-2'>
                                             <ErrorMessage name='title'/>
                                         </div>
@@ -220,7 +273,6 @@ const ActivityCreate: FC = () => {
 
                                     <div className='mb-10 fv-row'>
                                         <label className='required form-label'>Description</label>
-
                                         <Field
                                             as='textarea'
                                             name='description'
@@ -235,17 +287,13 @@ const ActivityCreate: FC = () => {
 
                                     <div className='mb-10 fv-row'>
                                         <label className='required form-label'>Rounds</label>
-
-                                        <Select
-                                            className="basic-single"
-                                            classNamePrefix="select"
-                                            isClearable={true}
-                                            isSearchable={true}
-                                            name="rounds"
-                                            options={ACTIVITY_ROUNDS}
-                                            styles={selectCustomStyles}
-                                        />
-
+                                        <select className="form-select" aria-label="Default select example" defaultValue={'DEFAULT'}
+                                         {...formik.getFieldProps('rounds')}
+                                       >
+                                         {ACTIVITY_ROUNDS.map((option, index) => (
+                                            <option key={option.value} selected={index===selectedStateOption}>{option.label}</option>
+                                          ))}
+                                          </select>   
                                         <div className='text-danger mt-2'>
                                             <ErrorMessage name='rounds'/>
                                         </div>
@@ -262,11 +310,12 @@ const ActivityCreate: FC = () => {
                                                 </div>
                                             </div>
                                             <div className='d-flex justify-content-end'>
-                                                <div className='form-check form-check-solid form-switch'>
-                                                    <input
+                                                <div className='form-check form-check-solid form-switch'>            
+                                                <Field
                                                         className='form-check-input w-45px h-30px'
                                                         type='checkbox'
                                                         id='googleswitch'
+                                                        {...formik.getFieldProps('is_cross_play')}
                                                         checked={activity?.is_crossPlay}
                                                         onChange={() =>
                                                             updateData({
@@ -302,9 +351,6 @@ const ActivityCreate: FC = () => {
                                             </div>
                                         </div>
                                     }
-
-
-
                                 </KTCardBody>
                             </KTCard>
                         </div>
@@ -316,12 +362,89 @@ const ActivityCreate: FC = () => {
                                 </div>
 
                                 <KTCardBody className='py-4'>
-                                    <div className="mb-10 fv-row">
-                                        <label className="required form-label">Date</label>
-                                        <div>   <DateTimePicker onChange={onChange} value={value} /></div>       
+                               <div className='mb-10 fv-row'>
+                                <label className='required form-label'>Registration Start Date</label>
+                                        <DatePicker
+                                        onChange={(value) => HandleDateChange(value)}
+                                        selected={date}      
+                                        />
+                               
+                                    <div className='text-danger mt-2'>
+                                    <ErrorMessage name='registration_dates.start_date'/>
                                     </div>
+                                </div>
 
-                            
+                                <div className='mb-10 fv-row'>
+                                <label className='required form-label'>Registration End Date</label>
+                                        <DatePicker
+                                        name="registration_dates.end_date"
+                                        onChange={(value) => HandleEndDateChange(value)}
+                                        selected={enddate}
+                                        />
+                               
+                                    <div className='text-danger mt-2'>
+                                    <ErrorMessage name='registration_dates.end_date'/>
+                                    </div>
+                                </div>
+                                <div className='mb-10 fv-row'>
+                                <label className='required form-label'>Match Start Date</label>
+                                        <DatePicker
+                                        onChange={(value, e) => HandleMatchStartDate(value)}
+                                        selected={matchdate}   
+                                        />                   
+                                    <div className='text-danger mt-2'>
+                                    <ErrorMessage name='registration_dates.start_date'/>
+                                    </div>
+                                </div>
+
+                                <div className='mb-10 fv-row'>
+                                <label className='required form-label'>Match End Date</label>
+                                        <DatePicker
+                                        onChange={(value, e) => HandleMatchEndDate(value)}
+                                        selected={matchenddate}      
+                                        />
+                               
+                                    <div className='text-danger mt-2'>
+                                    <ErrorMessage name='registration_dates.start_date'/>
+                                    </div>
+                                </div>
+
+                                <div className='mb-10 fv-row'>
+                                <label className='required form-label'>Time Picker</label>
+                                        <TimePicker
+                                        amPmAriaLabel="Select AM/PM"
+                                        clearAriaLabel="Clear value"
+                                        clockAriaLabel="Toggle clock"
+                                        hourAriaLabel="Hour"
+                                        maxDetail="second"
+                                        minuteAriaLabel="Minute"
+                                        nativeInputAriaLabel="Time"
+                                        onChange={(value) => HandleTimePicker(value)}
+                                        value={timevalue}
+                                        />
+                               
+                                    <div className='text-danger mt-2'>
+                                    <ErrorMessage name='registration_dates.start_date'/>
+                                    </div>
+                                </div>
+
+                                    <div className='mb-10 fv-row'>
+                                        <label className='required form-label'>Time Zones</label>
+                                        <select className="form-select" aria-label="Default select example" defaultValue={'DEFAULT'}
+                                         {...formik.getFieldProps('schedule[time_timezone]')}
+                                       >
+                                         {ACTIVITY_TIMEZONES.map((option, index) => (
+                                            <option 
+                                            key={option.value} selected={index===selectedStateOption}>
+                                                {option.value}
+                                                </option>
+                                          ))}    
+                                          </select>
+                                        <div className='text-danger mt-2'>
+                                            <ErrorMessage name='schedule.time_timezone'/>
+                                        </div>
+                                    </div>
+  
                                 </KTCardBody>
                             </KTCard>
                             <KTCard className='card-flush py-4'>
@@ -334,19 +457,50 @@ const ActivityCreate: FC = () => {
                                 <KTCardBody className='py-4'>
                                     <div className='mb-10 fv-row'>
                                         <label className='required form-label'>Location Type</label>
-                                        <Select
-                                            className="basic-single"
-                                            classNamePrefix="select"
-                                            isClearable={true}
-                                            isSearchable={true}
-                                            name="location"
-                                            options={ACTIVITY_LOCATION}
-                                            styles={selectCustomStyles}
-                                            
-                                        />
+                                        <div>
+                                            <Field
+                                             as="select"
+                                             type='text'
+                                             name="location[type]"
+                                            className='form-select' 
+                                            value={location} 
+                                            >
+                                                <option value="selectLocation">Select your loction</option>
+                                                <option value="inperson">In Person</option>
+                                                <option value="online">Online</option>
+                                            </Field>                 
+                                          </div>
                                         <div className='text-danger mt-2'>
-                                            <ErrorMessage name='location'/>
-                                        </div>
+                                            <ErrorMessage name='location.type'/>
+                                        </div> 
+                                    </div>
+                                    <div className='mb-10 fv-row'>
+                                        <label className='required form-label'>Location Place</label>
+                                        <div>
+                                            
+                                            {inPerson && <Field
+                                            type='text'
+                                            className='form-control mb-2'
+                                            placeholder='Team Players'
+                                            name="location.location"
+                                            //{...formik.getFieldProps('location.location')}
+                                        />}
+                                        {/* <select className="form-select" 
+                                        aria-label="Default select example" 
+                                         defaultValue={'DEFAULT'}
+                                       
+                             
+                                         {...formik.getFieldProps('location.type')}
+                                        >
+                                         {ACTIVITY_LOCATION.map((option, index) => (
+                                            <option key={option.value} selected={index===selectedStateOption}>{option.label}</option>
+                                          ))}
+                                          </select>  */}
+                                          
+                                          </div>
+                                        <div className='text-danger mt-2'>
+                                            <ErrorMessage name='location.location'/>
+                                        </div> 
                                     </div>
                                     
                                 </KTCardBody>
@@ -368,7 +522,7 @@ const ActivityCreate: FC = () => {
                                             placeholder='Team Players'
                                             {...formik.getFieldProps('team[players]')}
                                         />
-                                        <div className="text-muted fs-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+                                        {/* <div className="text-muted fs-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
                                         <div className='text-danger mt-2'>
                                             <ErrorMessage name='team.players'/>
                                         </div>
@@ -385,7 +539,7 @@ const ActivityCreate: FC = () => {
                                         />
 
 
-                                        <div className="text-muted fs-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+                                        {/* <div className="text-muted fs-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
                                         <div className='text-danger mt-2'>
                                             <ErrorMessage name='team.min'/>
                                         </div>
@@ -400,7 +554,7 @@ const ActivityCreate: FC = () => {
                                             placeholder='Team Players Maximum'
                                             {...formik.getFieldProps('team[max]')}
                                         />
-                                        <div className="text-muted fs-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+                                        {/* <div className="text-muted fs-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div> */}
                                         <div className='text-danger mt-2'>
                                             <ErrorMessage name='team.max'/>
                                         </div>
@@ -420,17 +574,18 @@ const ActivityCreate: FC = () => {
                                 <KTCardBody className='py-4'>
                                     <div className='mb-10 fv-row'>
                                         <label className='required form-label'>Entry Type</label>
-                                        <Select
-                                            className="basic-single"
-                                            classNamePrefix="select"
-                                            isClearable={true}
-                                            isSearchable={true}
-                                            name="location"
-                                            options={ACTIVITY_FEE}
-                                            styles={selectCustomStyles}
-                                        />
+
+                                        <select className="form-select" aria-label="Default select example" 
+                                         defaultValue={'DEFAULT'}
+                                        {...formik.getFieldProps('entry.type')}
+                                        
+                                        >
+                                         {ACTIVITY_FEE.map((option, index) => (
+                                            <option key={option.value} selected={index===selectedStateOption}>{option.label}</option>
+                                          ))}
+                                          </select> 
                                         <div className='text-danger mt-2'>
-                                            <ErrorMessage name='location'/>
+                                            <ErrorMessage name='entry.type'/>
                                         </div>
                                     </div>
                                 </KTCardBody>
@@ -446,40 +601,165 @@ const ActivityCreate: FC = () => {
                                     </div>
                                 </div>
 
+                                
                                 <KTCardBody className='py-4'>
-                                    <div className="mb-10 fv-row">
-                                        <label className="required form-label">Title</label>
+                                    <div className='mb-10 fv-row'>
+                                        <label className='required form-label'>Prize Item Type</label>
+                                         <select className="form-select" aria-label="Default select example" 
+                                         defaultValue={'DEFAULT'}
+                                         {...formik.getFieldProps('prize.prize_type')}
+                                        >
+                                         {ACTIVITY_PRIZETYPE.map((option, index) => (
+                                            <option key={option.value} selected={index===selectedStateOption}>{option.label}</option>
+                                          ))}
+                                          </select> 
+                                        <div className='text-danger mt-2'>
+                                            <ErrorMessage name='prize.prize_type'/>
+                                        </div>
+                                    </div>
+                 
+                                    <div className='mb-10 fv-row'>
+                                        <label className='required form-label'>Prize Item Type</label>
+                                         <select className="form-select" aria-label="Default select example" 
+                                         defaultValue={'DEFAULT'}
+                                         {...formik.getFieldProps('prize.item_type')}
 
+                                        >
+                                         {ACTIVITY_ITEMTYPE.map((option, index) => (
+                                            <option key={option.value} selected={index===selectedStateOption}>{option.label}</option>
+                                          ))}
+                                          </select> 
+                                        <div className='text-danger mt-2'>
+                                            <ErrorMessage name='prize.item_type'/>
+                                        </div>
+                                    </div>
+                              
+                                    <div className="mb-10 fv-row">
+                                        <label className="required form-label">Prize Item Name</label>   
                                         <Field
                                             type='text'
                                             className='form-control mb-2'
                                             placeholder='Activity Title'
-                                            name='title'
+                                            name='prize.item_name'
                                         />
-
-
-                                        <div className="text-muted fs-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
                                         <div className='text-danger mt-2'>
-                                            <ErrorMessage name='title'/>
+                                            <ErrorMessage name='prize.item_name'/>
+                                        </div>
+                                    </div>
+                                    <div className="mb-10 fv-row">
+                                        <label className="required form-label">Prize Item Amount</label>                           
+                                        <Field
+                                            type='text'
+                                            className='form-control mb-2'
+                                            placeholder='Activity Title'
+                                            name='prize.item_value'
+                                        />     
+                                        <div className='text-danger mt-2'>
+                                            <ErrorMessage name='prize.item_value'/>
+                                        </div>
+                                    </div>
+                                    <div className='mb-10 fv-row'>
+                                        <label className='required form-label'>Item Type</label>
+                                        <select className="form-select" aria-label="Default select example" 
+                                         defaultValue={'DEFAULT'}
+                                         {...formik.getFieldProps('prize.item_value_type')} 
+                                        >
+                                         {ACTIVITY_ITEM_VALUETYPE.map((option, index) => (
+                                            <option key={option.value} selected={index===selectedStateOption}>{option.label}</option>
+                                          ))}
+                                          </select> 
+                                        <div className='text-danger mt-2'>
+                                            <ErrorMessage name='prize.item_value_type'/>
                                         </div>
                                     </div>
 
-                                <div className='py-5'>
-                                <button
-                                    type='submit'
-                                    className='btn btn-primary'
-                                    data-kt-users-modal-action='submit'
-                                    disabled={formik.isSubmitting || !formik.isValid || !formik.touched}
-                                >
-                                    <span className='indicator-label'>Submit</span>
-                                    {(formik.isSubmitting) && (
-                                        <span className='indicator-progress'>
-                                            Please wait...{' '}
-                                            <span className='spinner-border spinner-border-sm align-middle ms-2'/>
-                                        </span>
-                                    )}
-                                </button>
-                            </div>
+                                   <button 
+                                   onClick={buttonHandler} 
+                                   className="btn btn-primary mb-5" name="button 1">
+                                    Add Prize
+                                    </button>
+                                    <div className='card mb-5 mb-xl-10'>
+                                    {clickedButton !== ""
+                                    ? <><div className='mb-10 fv-row'>
+                                            <label className='required form-label'>Prize Item Type</label>
+                                            <select className="form-select" aria-label="Default select example"
+                                                defaultValue={'DEFAULT'}
+                                                {...formik.getFieldProps('prize.prize_type')}
+                                            >
+                                                {ACTIVITY_PRIZETYPE.map((option, index) => (
+                                                    <option key={option.value} selected={index === selectedStateOption}>{option.label}</option>
+                                                ))}
+                                            </select>
+                                            <div className='text-danger mt-2'>
+                                                <ErrorMessage name='prize.prize_type' />
+                                            </div>
+                                        </div><div className='mb-10 fv-row'>
+                                                <label className='required form-label'>Prize Item Type</label>
+                                                <select className="form-select" aria-label="Default select example"
+                                                    defaultValue={'DEFAULT'}
+                                                    {...formik.getFieldProps('prize.item_type')}
+
+                                                >
+                                                    {ACTIVITY_ITEMTYPE.map((option, index) => (
+                                                        <option key={option.value} selected={index === selectedStateOption}>{option.label}</option>
+                                                    ))}
+                                                </select>
+                                                <div className='text-danger mt-2'>
+                                                    <ErrorMessage name='prize.item_type' />
+                                                </div>
+                                            </div><div className="mb-10 fv-row">
+                                                <label className="required form-label">Prize Item Name</label>
+                                                <Field
+                                                    type='text'
+                                                    className='form-control mb-2'
+                                                    placeholder='Activity Title'
+                                                    name='prize.item_name' />
+                                                <div className='text-danger mt-2'>
+                                                    <ErrorMessage name='prize.item_name' />
+                                                </div>
+                                            </div><div className="mb-10 fv-row">
+                                                <label className="required form-label">Prize Item Amount</label>
+                                                <Field
+                                                    type='text'
+                                                    className='form-control mb-2'
+                                                    placeholder='Activity Title'
+                                                    name='prize.item_value' />
+                                                <div className='text-danger mt-2'>
+                                                    <ErrorMessage name='prize.item_value' />
+                                                </div>
+                                            </div><div className='mb-10 fv-row'>
+                                                <label className='required form-label'>Item Type</label>
+                                                <select className="form-select" aria-label="Default select example"
+                                                    defaultValue={'DEFAULT'}
+                                                    {...formik.getFieldProps('prize.item_value_type')}
+                                                >
+                                                    {ACTIVITY_ITEM_VALUETYPE.map((option, index) => (
+                                                        <option key={option.value} selected={index === selectedStateOption}>{option.label}</option>
+                                                    ))}
+                                                </select>
+                                                <div className='text-danger mt-2'>
+                                                    <ErrorMessage name='prize.item_value_type' />
+                                                </div>
+                                            </div></>
+                                                : ""}
+                                            </div>
+                                            
+                                        <div className='py-5'>
+                                        <button
+                                            type='submit'
+                                            className='btn btn-primary'
+                                            data-kt-users-modal-action='submit'
+                                            disabled={formik.isSubmitting || !formik.isValid || !formik.touched}
+                                        >
+                                            <span className='indicator-label'>Submit</span>
+                                            {(formik.isSubmitting) && (
+                                                <span className='indicator-progress'>
+                                                    Please wait...{' '}
+                                                    <span className='spinner-border spinner-border-sm align-middle ms-2'/>
+                                                </span>
+                                            )}
+                                        </button>
+                                    </div>
                         </KTCardBody>
                         </KTCard>
                     </div>
