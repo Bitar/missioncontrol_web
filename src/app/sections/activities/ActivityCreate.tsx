@@ -10,8 +10,8 @@ import {Game, initialGame} from "../../models/game/Game";
 import { createActivity } from './core/_requests';
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import { format,parseISO } from 'date-fns'
-import TimePicker from 'react-time-picker';
+import { format} from 'date-fns'
+
 
 
 const editActivitySchema = Yup.object().shape({
@@ -46,12 +46,10 @@ const ActivityCreate: FC = () => {
     const [enddate,setEndDate] = useState<Date | null>(new Date());
     const [matchdate, setMatchDate] = useState<Date | null>(new Date());
     const [matchenddate,setMatchEndDate] = useState<Date | null>(new Date());
-    const [frequencys, setFrequencys] = useState<[Date]>([new Date()]);
-    const [timevalue, setTimeValue] = useState<Date>(new Date());
+    const [frequencys, setFrequencys] = useState<any>([new Date()]);
+    const [time, setTime] = useState(new Date());
     
-    // var x = frequencys
-    // x.push(new Date())
-    // setFrequencys(x)
+   
 
     const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();  
@@ -81,9 +79,18 @@ const ActivityCreate: FC = () => {
     }
 
     function HandleTimePicker (value:any)  {
-        console.log(value);
-        setTimeValue(value)
+        setTime(new Date(value))
     }
+
+    function FrequencyDatePicker (value:any)  {
+         var value = frequencys
+         value.push(new Date())
+        setFrequencys(value)
+    }
+
+     // var x = frequencys
+    // x.push(new Date())
+    // setFrequencys(x)
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -106,19 +113,16 @@ const ActivityCreate: FC = () => {
                     formData.append('team[players]', values.team!.players)
                     formData.append('team[min]', values.team!.min)
                     formData.append('team[max]', values.team!.max)
-          
-                                                                                                                              
+
                     formData.append('schedule[registration_dates][start_date]',format(date!, "yyyy-MM-dd") as any)
                     formData.append('schedule[registration_dates][end_date]',format(enddate!, "yyyy-MM-dd") as any)
                      formData.append('schedule[match_play_dates][start_date]',format(matchdate!, "yyyy-MM-dd") as any)
                      formData.append('schedule[match_play_dates][end_date]',format(matchenddate!, "yyyy-MM-dd") as any)
                      //formData.append('schedule[match_frequency][dates]',values.schedule!.match_frequency.dates)        
 
-                    //formData.append('schedule[time][time_of_day]',format(timevalue!,"hh:mm" )as any)
+                    formData.append('schedule[time][time_of_day]',format(time!,"HH:mm" )as any)
                     formData.append('schedule[time][timezone]',values.schedule!.time_timezone)
-                    
-                    
-                    
+                            
                     formData.append('location[type]',values.location!.type)
                     formData.append('location[location]',values.location!.location)
                     formData.append('entry_fee[type]',values.entry_fee!.type)
@@ -411,18 +415,16 @@ const ActivityCreate: FC = () => {
 
                                 <div className='mb-10 fv-row'>
                                 <label className='required form-label'>Time Picker</label>
-                                        <TimePicker
-                                        amPmAriaLabel="Select AM/PM"
-                                        clearAriaLabel="Clear value"
-                                        clockAriaLabel="Toggle clock"
-                                        hourAriaLabel="Hour"
-                                        maxDetail="second"
-                                        minuteAriaLabel="Minute"
-                                        nativeInputAriaLabel="Time"
-                                        onChange={(value) => HandleTimePicker(value)}
-                                        value={timevalue}
-                                        />
-                               
+                                <DatePicker
+                                selected={time}
+                                onChange={(value) => HandleTimePicker(value)}
+                                showTimeSelect
+                                showTimeSelectOnly
+                                timeIntervals={15}
+                                timeCaption="Time"
+                                dateFormat="h:mm aa"
+                                />
+                                                        
                                     <div className='text-danger mt-2'>
                                     <ErrorMessage name='registration_dates.start_date'/>
                                     </div>
