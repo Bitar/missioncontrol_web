@@ -50,9 +50,9 @@ const CommunityCreate = () => {
                 if (isNotEmpty(values.id)) {
                     // await updateUser(values)
                 } else {
-               
+                    var country = "US"
                     let formData = new FormData()
-
+                    
                     formData.append('logo', values.logo!)
                     formData.append('banner_image', values.banner_image!)
                     formData.append('name', values.name!)
@@ -65,8 +65,9 @@ const CommunityCreate = () => {
                     formData.append('address[city]', values.address!.city)
                     formData.append('address[state_province]', communityAddress.state_province)
                     formData.append('address[postal_code]', values.address!.postal_code)
-                    formData.append('address[country_code]', communityAddress.country_code)
-
+                    formData.append('address[country_code]', country)
+                    // @ts-ignore
+                    console.log(...formData)
                     const comm = await createCommunity(formData)
                     navigate('/communities/' + comm?.id)
 
@@ -149,7 +150,7 @@ const CommunityCreate = () => {
 
                             <div className='fv-row mb-7'>
                                 <label className='required fw-bold fs-6 mb-2'>Contact Name</label>
-                                <Field
+                                        <Field
                                            type='text'
                                            className='form-control mb-2'
                                             placeholder='Community Contact Name...'
@@ -167,6 +168,7 @@ const CommunityCreate = () => {
                                            type='text'
                                            className='form-control mb-2'
                                             placeholder='Community Contact Email...'
+                                            
                                             {...formik.getFieldProps('contact[email]')}
                                         />
                                         <div className='text-danger mt-2'>
@@ -180,6 +182,7 @@ const CommunityCreate = () => {
                                             type='text'
                                             className='form-control mb-2'
                                             placeholder='Community Contact Phone Number...'
+                                           
                                             {...formik.getFieldProps('contact[phone_number]')}
                                         />
                                         <div className='text-danger mt-2'>
@@ -196,6 +199,7 @@ const CommunityCreate = () => {
                                             type='text'
                                             className='form-control mb-2'
                                             placeholder='ex: 424 Broadway'
+                                            
                                             {...formik.getFieldProps('address[address_one]')}
                                             
                                         />
@@ -207,12 +211,13 @@ const CommunityCreate = () => {
 
 
                             <div className='fv-row mb-7'>
-                                <label className='required fw-bold fs-6 mb-2'>Address Two</label>
+                                <label className='fw-bold fs-6 mb-2'>Address Two</label>
                                         <Field
                                             type='text'
                                             className='form-control mb-2'
                                             placeholder='ex: Unit 134'
-                                            {...formik.getFieldProps('address[address_two]')}
+                                            
+                                             {...formik.getFieldProps('address[address_two]')}
                                             
                                         />
                                         <div className='text-danger mt-2'>
@@ -227,6 +232,7 @@ const CommunityCreate = () => {
                                         type='text'
                                         className='form-control mb-2'
                                         placeholder='ex: Boston'
+                                      
                                         {...formik.getFieldProps('address[city]')}
                                             
                                         />
@@ -240,14 +246,14 @@ const CommunityCreate = () => {
                             <div className='fv-row mb-7'>
                                 <label className='required fw-bold fs-6 mb-2'>State</label>
                                 <Select
-                                //  {...formik.getFieldProps('address[state_province]')}
+                                  //{...formik.getFieldProps('address[state_province]')}
                                     className={clsx(
                                         'basic-select',
                                     )}
                                     classNamePrefix="select"
                                     isClearable={true}
                                     isSearchable={true}
-                                    name="address.state_providence"
+                                    name="address.state_province"
                                     onChange={(inputValue) => {
                                         updateAddressData({
                                             state_province: inputValue.code
@@ -275,35 +281,6 @@ const CommunityCreate = () => {
                                             <ErrorMessage name='address.postal_code'/>
                                         </div>
                                     </div>
-
-                            <div className='fv-row mb-7'>
-                                {/* begin::Label */}
-                                <label className='required fw-bold fs-6 mb-2'>Country Code</label>
-                                {/* end::Label */}
-
-
-                                {/* begin::Input */}
-                                <Select
-                                    // {...formik.getFieldProps('address[country_code]')}
-                                    className={clsx(
-                                        'basic-select',
-                                    )}
-                                    classNamePrefix="select"
-                                    isClearable={true}
-                                    name="address.country_code"
-                                    isSearchable={true}
-                                    onChange={(inputValue) => {
-                                        updateAddressData({
-                                            country_code: inputValue.code
-                                        })
-                                    }}
-                                    options={countrySelect}
-                                    styles={selectCustomStyles}
-                                />
-                                <div className='text-danger mt-2'>
-                                <ErrorMessage name='address.country_code'/>
-                                </div>
-                            </div>
 
                             <div className='fv-row mb-7'>
                                 <label className='required fw-bold fs-6 mb-2'>logo</label>
