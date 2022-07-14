@@ -14,6 +14,7 @@ import { format} from 'date-fns'
 
 
 
+
 const editActivitySchema = Yup.object().shape({
     // title: Yup.string()
     //     .required('Title is required'),
@@ -40,7 +41,7 @@ const ActivityCreate: FC = () => {
 
     const [selectedStateOption, setselectedStateOption] = useState(0)    
     const [location,setLocation] = useState("selectLocation")
-    const[inPerson,setInPerson] = useState(false)
+    const [inPerson,setInPerson] = useState(false)
     const [clickedButton, setClickedButton] = useState('');
     const [date, setDate] = useState<Date | null>(new Date());
     const [enddate,setEndDate] = useState<Date | null>(new Date());
@@ -48,19 +49,27 @@ const ActivityCreate: FC = () => {
     const [matchenddate,setMatchEndDate] = useState<Date | null>(new Date());
     const [frequencys, setFrequencys] = useState<any>([new Date()]);
     const [time, setTime] = useState(new Date());
-    
-   
+    const [startDate, setStartDate] = useState<Date | null>(new Date());
+    const [endingDate, setEndingDate] = useState(null);
+    const [onefrequency, setOneFrequencys] = useState<any>([new Date()]);
+    const [selected, setSelected] = useState('Online');
+    const [selectedfee, setSelectedFee] = useState('Free');
+    const [selectedfrequency, setSelectedFrequency] = useState('Daily');
 
     const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();  
         const button: HTMLButtonElement = event.currentTarget;
         setClickedButton(button.name);
       };  
-      useEffect(() => {
-        location === 'inperson'
-        ?setInPerson(true)
-        :setInPerson(false);
-      },[location])
+      
+      function FrequencyPicker (value:any) {
+        const [start, end] = value;
+        console.log(start)
+        console.log(end)
+        setStartDate(start);
+        setEndingDate(end);
+      };
+      
     
     function HandleDateChange (value:any)  {
         setDate(new Date(value))
@@ -82,11 +91,18 @@ const ActivityCreate: FC = () => {
         setTime(new Date(value))
     }
 
-    function FrequencyDatePicker (value:any)  {
-         var value = frequencys
-         value.push(new Date())
-        setFrequencys(value)
-    }
+     function HandleOneFrequency (value:any)  {
+         setOneFrequencys(new Date(value))
+     }
+
+    const selectionChanged = (e:any) => setSelected(e.target.value);
+    const selectionFee = (e:any) => setSelectedFee(e.target.value);
+    const selectionFrequency = (e:any) => setSelectedFrequency(e.target.value);
+    // function FrequencyDatePicker (value:any)  {
+    //      var value = frequencys
+    //      value.push(new Date())
+    //     setFrequencys(value)
+    // }
 
      // var x = frequencys
     // x.push(new Date())
@@ -118,14 +134,14 @@ const ActivityCreate: FC = () => {
                     formData.append('schedule[registration_dates][end_date]',format(enddate!, "yyyy-MM-dd") as any)
                      formData.append('schedule[match_play_dates][start_date]',format(matchdate!, "yyyy-MM-dd") as any)
                      formData.append('schedule[match_play_dates][end_date]',format(matchenddate!, "yyyy-MM-dd") as any)
-                     //formData.append('schedule[match_frequency][dates]',values.schedule!.match_frequency.dates)        
+                     formData.append('schedule[match_frequency][dates]',format(startDate!, "yyyy-MM-dd") as any)      
 
                     formData.append('schedule[time][time_of_day]',format(time!,"HH:mm" )as any)
                     formData.append('schedule[time][timezone]',values.schedule!.time_timezone)
                             
-                    formData.append('location[type]',values.location!.type)
+                    formData.append('location[type]',selected)
                     formData.append('location[location]',values.location!.location)
-                    formData.append('entry_fee[type]',values.entry_fee!.type)
+                    formData.append('entry_fee[type]',selectedfee)
                     formData.append('entry_fee[amount]',values.entry_fee!.amount)
 
 
@@ -368,6 +384,7 @@ const ActivityCreate: FC = () => {
                                 <KTCardBody className='py-4'>
                                <div className='mb-10 fv-row'>
                                 <label className='required form-label'>Registration Start Date</label>
+
                                         <DatePicker
                                         onChange={(value) => HandleDateChange(value)}
                                         selected={date}      
@@ -393,13 +410,52 @@ const ActivityCreate: FC = () => {
                                 <div className='mb-10 fv-row'>
                                 <label className='required form-label'>Match Start Date</label>
                                         <DatePicker
-                                        onChange={(value, e) => HandleMatchStartDate(value)}
+                                        onChange={(value) => HandleMatchStartDate(value)}
                                         selected={matchdate}   
                                         />                   
                                     <div className='text-danger mt-2'>
                                     <ErrorMessage name='registration_dates.start_date'/>
                                     </div>
                                 </div>
+
+                                <div className='mb-10 fv-row'>
+                                <label className='required form-label'>Match Frequency</label>
+                                <div className='mb-10 fv-row'>
+                                    {/* SELECT COMPONENT */}
+                                    <select className="form-select" value={selectedfrequency}onChange={selectionFrequency}>
+                                        <option value="Daily">Daily</option>
+                                        <option value="Weekly">Weekly</option>
+                                    </select>
+                                     {/* IF OPTION 2 IS SELECTED */}
+                                    {selectedfrequency === "Daily" && (
+                                        <>
+                                         <DatePicker
+                                            onChange={(value) => FrequencyPicker(value)}
+                                            selected={matchdate}   
+                                            />     
+                                        <div className='text-danger mt-2'>
+                                            <ErrorMessage name='entry.amount'/>
+                                        </div>
+                                        </>
+                                    )}
+                                    </div>
+                                    {/* IF OPTION 1 IS SELECTED */}
+                                    {selectedfrequency === "Weekly" && (
+                                        <DatePicker
+                                        selected={startDate}
+                                        onChange={(value) => FrequencyPicker(value)}
+                                        startDate={startDate}
+                                        endDate={endingDate}
+                                        selectsRange
+                                        inline
+                                        />
+                                    )}
+                                                                
+                                    <div className='text-danger mt-2'>
+                                    <ErrorMessage name='registration_dates.start_date'/>
+                                    </div>
+                                </div>
+
 
                                 <div className='mb-10 fv-row'>
                                 <label className='required form-label'>Match End Date</label>
@@ -412,7 +468,6 @@ const ActivityCreate: FC = () => {
                                     <ErrorMessage name='registration_dates.start_date'/>
                                     </div>
                                 </div>
-
                                 <div className='mb-10 fv-row'>
                                 <label className='required form-label'>Time Picker</label>
                                 <DatePicker
@@ -459,52 +514,30 @@ const ActivityCreate: FC = () => {
                                 <KTCardBody className='py-4'>
                                     <div className='mb-10 fv-row'>
                                         <label className='required form-label'>Location Type</label>
-                                        <div>
-                                            <Field
-                                             as="select"
-                                             type='text'
-                                             name="location[type]"
-                                            className='form-select' 
-                                            value={location} 
-                                            >
-                                                <option value="selectLocation">Select your loction</option>
-                                                <option value="inperson">In Person</option>
-                                                <option value="online">Online</option>
-                                            </Field>                 
-                                          </div>
-                                        <div className='text-danger mt-2'>
-                                            <ErrorMessage name='location.type'/>
-                                        </div> 
-                                    </div>
-                                    <div className='mb-10 fv-row'>
-                                        <label className='required form-label'>Location Place</label>
-                                        <div>
-                                            
-                                            {inPerson && <Field
+                                        {/* HandleOneFrequency */}
+                                <div className='mb-10 fv-row'>
+                                    {/* SELECT COMPONENT */}
+                                    <select className="form-select" value={selected} onChange={selectionChanged}>
+                                        <option value="Online">Online</option>
+                                        <option value="InPerson">In Person</option>
+                                    </select> 
+                                    {/* IF OPTION 2 IS SELECTED */}
+                                    {selected === "InPerson" && (
+                                        <>
+                                        <Field
                                             type='text'
                                             className='form-control mb-2'
-                                            placeholder='Team Players'
-                                            name="location.location"
-                                            //{...formik.getFieldProps('location.location')}
-                                        />}
-                                        {/* <select className="form-select" 
-                                        aria-label="Default select example" 
-                                         defaultValue={'DEFAULT'}
-                                       
-                             
-                                         {...formik.getFieldProps('location.type')}
-                                        >
-                                         {ACTIVITY_LOCATION.map((option, index) => (
-                                            <option key={option.value} selected={index===selectedStateOption}>{option.label}</option>
-                                          ))}
-                                          </select>  */}
-                                          
-                                          </div>
+                                            placeholder='Location'
+                                            name='location.location'
+                                        />
                                         <div className='text-danger mt-2'>
                                             <ErrorMessage name='location.location'/>
-                                        </div> 
+                                        </div>
+                                        </>
+                                    )}
                                     </div>
-                                    
+                                </div>
+                                                              
                                 </KTCardBody>
                             </KTCard>
                             <KTCard className='card-flush py-4'>
@@ -563,10 +596,7 @@ const ActivityCreate: FC = () => {
                                     </div>
                                 </KTCardBody>
                             </KTCard>
-                            
-                            
-                            
-                            
+                                     
                             <KTCard className='card-flush py-4'>
                                 <div className="card-header">
                                     <div className="card-title">
@@ -576,16 +606,30 @@ const ActivityCreate: FC = () => {
                                 <KTCardBody className='py-4'>
                                     <div className='mb-10 fv-row'>
                                         <label className='required form-label'>Entry Type</label>
+                                        <div className='mb-10 fv-row'>
+                                    {/* SELECT COMPONENT */}
+                                    <select className="form-select" value={selectedfee} onChange={selectionFee}>
+                                        <option value="Free">Free</option>
+                                        <option value="Paid">Paid</option>
+                                    </select>
+                                     {/* IF OPTION 2 IS SELECTED */}
+                                    {selectedfee === "Paid" && (
+                                        <>
+                                        <Field
+                                            type='text'
+                                            className='form-control mb-2'
+                                            placeholder='Enter Entry Amount'
+                                            name="entry_fee[amount]"
+                                            
+                                        />
+                                        <div className='text-danger mt-2'>
+                                            <ErrorMessage name='entry.amount'/>
+                                        </div>
+                                        </>
+                                    )}
+                                    </div>
 
-                                        <select className="form-select" aria-label="Default select example" 
-                                         defaultValue={'DEFAULT'}
-                                        {...formik.getFieldProps('entry.type')}
-                                        
-                                        >
-                                         {ACTIVITY_FEE.map((option, index) => (
-                                            <option key={option.value} selected={index===selectedStateOption}>{option.label}</option>
-                                          ))}
-                                          </select> 
+                                       
                                         <div className='text-danger mt-2'>
                                             <ErrorMessage name='entry.type'/>
                                         </div>
