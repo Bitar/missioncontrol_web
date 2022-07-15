@@ -7,4 +7,5 @@ export type Platform = {
     description: string
 }
 
+
 export type PlatformQueryResponse = Response<Array<Platform>>

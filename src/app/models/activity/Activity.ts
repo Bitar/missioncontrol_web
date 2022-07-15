@@ -1,5 +1,7 @@
 import {ID, Response} from "../../../_metronic/helpers";
+import { initialCheckoutModal } from "../../sections/billing/core/CheckoutModal";
 import {Game, initialGame} from "../game/Game";
+import { Platform } from "../game/Platform";
 import { ActivityFee, initialActivityFee } from "./ActivityFee";
 import { ActivityLocation, initialActivityLocation } from "./ActivityLocation";
 import { ActivityPrize, initialActivityPrize } from "./ActivityPrize";
@@ -12,7 +14,6 @@ export const initialActivity : Activity = {
     description: "",
     rounds:0,
     is_crossPlay: false,
-    platforms:"",
     game: initialGame,
     location:initialActivityLocation,
     team:initialActivityTeam,
@@ -30,8 +31,9 @@ export type Activity = {
     title: string,
     description?: string,
     rounds?:number,
+    platform_ids?:ID,
     is_crossPlay?: boolean,
-    platforms?:string,
+    platforms?:Platform,
     game?: Game,
     location?:ActivityLocation,
     team?:ActivityTeam,

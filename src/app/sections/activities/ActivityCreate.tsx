@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react'
+import React, {FC, useEffect, useState,useRef} from 'react'
 import {ErrorMessage, Field, FormikProvider, setIn, useFormik} from "formik";
 import {Activity, initialActivity} from "../../models/activity/Activity";
 import * as Yup from "yup";
@@ -8,12 +8,12 @@ import {ACTIVITY_FEE, ACTIVITY_ITEMTYPE, ACTIVITY_ITEM_VALUETYPE, ACTIVITY_LOCAT
 import {isNotEmpty, KTCard, KTCardBody} from "../../../_metronic/helpers";
 import {Game, initialGame} from "../../models/game/Game";
 import { createActivity } from './core/_requests';
-import DatePicker from 'react-datepicker'
+//import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { format} from 'date-fns'
-
-
-
+import DatePicker, { DateObject} from "react-multi-date-picker"
+import DatePanel from "react-multi-date-picker/plugins/date_panel"
+import type{Value} from "react-multi-date-picker"
 
 const editActivitySchema = Yup.object().shape({
     // title: Yup.string()
@@ -56,11 +56,28 @@ const ActivityCreate: FC = () => {
     const [selectedfee, setSelectedFee] = useState('Free');
     const [selectedfrequency, setSelectedFrequency] = useState('Daily');
 
+
+    const [startDateTest, setStartDateTest] =useState<Date | null>(new Date());
+    const [endDateTest, setEndDateTest] = useState<Date | null>(new Date());
+
+
+    const [dates, setDates] = useState<Value>(new Date());
+    // const format = 'MM/DD/YYYY';
+    const [sdate, setSdate] = React.useState();
+    console.log(sdate);
+  
+    const [values, setValues] = React.useState([
+      new DateObject(),
+      new DateObject().add(1, 'day'),
+    ]);
     const buttonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();  
         const button: HTMLButtonElement = event.currentTarget;
         setClickedButton(button.name);
       };  
+
+
+      const datepickerRef = useRef<any>();
       
       function FrequencyPicker (value:any) {
         const [start, end] = value;
@@ -70,6 +87,22 @@ const ActivityCreate: FC = () => {
         setEndingDate(end);
       };
       
+      function handleDateChange(date:any) {
+        // initial change: start by setting the startDate
+        if (!startDateTest && !endDateTest) {
+          setStartDateTest(date);
+         // startDate has been set, set the end date
+        } else if (startDateTest && !endDateTest) {
+         setEndDateTest(date);
+        }
+    
+        // user is choosing another range => set the start date
+        // and set the endDate back to null
+        if (startDateTest && endDateTest) {
+          setStartDateTest(date);
+          setEndDateTest(null);
+        }
+     }
     
     function HandleDateChange (value:any)  {
         setDate(new Date(value))
@@ -91,22 +124,24 @@ const ActivityCreate: FC = () => {
         setTime(new Date(value))
     }
 
-     function HandleOneFrequency (value:any)  {
-         setOneFrequencys(new Date(value))
-     }
+    //  function HandleOneFrequency (value:any)  {
+    //      setOneFrequencys(new Date(value))
+    //  }
 
     const selectionChanged = (e:any) => setSelected(e.target.value);
     const selectionFee = (e:any) => setSelectedFee(e.target.value);
     const selectionFrequency = (e:any) => setSelectedFrequency(e.target.value);
-    // function FrequencyDatePicker (value:any)  {
-    //      var value = frequencys
-    //      value.push(new Date())
-    //     setFrequencys(value)
-    // }
+     
+    function FrequencyDatePicker (value:any)  {
+          var value = frequencys
+          value.push(new Date())
+         setFrequencys(value)
+     }
 
      // var x = frequencys
     // x.push(new Date())
     // setFrequencys(x)
+    const calendarRef = useRef<any>();
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -119,13 +154,16 @@ const ActivityCreate: FC = () => {
                 }else{
                     //console.log(values)
                     let formData = new FormData()
-
+                    formData.append('game_id', activity.game!.id as any)
+                    formData.append('type_id', '1')
+                    formData.append('community_id', '224')
                     formData.append('title', values.title!)
                     formData.append('description', values.description!)
                     formData.append('rounds', values.rounds! as any)
-                    formData.append('platforms_ids', values.platforms! as any)
+                    formData.append('platform_ids', '7')
+                    //formData.append('platform_ids', activity.platforms!.id as any)
                   
-                    formData.append('is_cross_play', values.is_crossPlay! as any)
+                    formData.append('is_cross_play', activity.is_crossPlay! as any)
                     formData.append('team[players]', values.team!.players)
                     formData.append('team[min]', values.team!.min)
                     formData.append('team[max]', values.team!.max)
@@ -360,7 +398,7 @@ const ActivityCreate: FC = () => {
                                                     isClearable={true}
                                                     isSearchable={true}
                                                     isMulti={true}
-                                                    name="platforms"
+                                                    name="platform_ids"
                                                     options={platforms}
                                                     styles={selectCustomStyles}
                                                 />
@@ -385,10 +423,15 @@ const ActivityCreate: FC = () => {
                                <div className='mb-10 fv-row'>
                                 <label className='required form-label'>Registration Start Date</label>
 
-                                        <DatePicker
-                                        onChange={(value) => HandleDateChange(value)}
-                                        selected={date}      
-                                        />
+                                <DatePicker
+                                value={dates}
+                                onChange={setDates}
+                                range
+                                sort
+                                placeholder="write"
+                                calendarPosition="bottom-center"
+                                plugins={[<DatePanel />]}
+                            />
                                
                                     <div className='text-danger mt-2'>
                                     <ErrorMessage name='registration_dates.start_date'/>
@@ -397,11 +440,11 @@ const ActivityCreate: FC = () => {
 
                                 <div className='mb-10 fv-row'>
                                 <label className='required form-label'>Registration End Date</label>
-                                        <DatePicker
+                                        {/* <DatePicker
                                         name="registration_dates.end_date"
                                         onChange={(value) => HandleEndDateChange(value)}
                                         selected={enddate}
-                                        />
+                                        /> */}
                                
                                     <div className='text-danger mt-2'>
                                     <ErrorMessage name='registration_dates.end_date'/>
@@ -409,10 +452,10 @@ const ActivityCreate: FC = () => {
                                 </div>
                                 <div className='mb-10 fv-row'>
                                 <label className='required form-label'>Match Start Date</label>
-                                        <DatePicker
+                                        {/* <DatePicker
                                         onChange={(value) => HandleMatchStartDate(value)}
                                         selected={matchdate}   
-                                        />                   
+                                        />                    */}
                                     <div className='text-danger mt-2'>
                                     <ErrorMessage name='registration_dates.start_date'/>
                                     </div>
@@ -429,10 +472,10 @@ const ActivityCreate: FC = () => {
                                      {/* IF OPTION 2 IS SELECTED */}
                                     {selectedfrequency === "Daily" && (
                                         <>
-                                         <DatePicker
-                                            onChange={(value) => FrequencyPicker(value)}
-                                            selected={matchdate}   
-                                            />     
+                                         <div>
+                                        
+                                            </div>
+                                         
                                         <div className='text-danger mt-2'>
                                             <ErrorMessage name='entry.amount'/>
                                         </div>
@@ -441,14 +484,23 @@ const ActivityCreate: FC = () => {
                                     </div>
                                     {/* IF OPTION 1 IS SELECTED */}
                                     {selectedfrequency === "Weekly" && (
-                                        <DatePicker
-                                        selected={startDate}
-                                        onChange={(value) => FrequencyPicker(value)}
-                                        startDate={startDate}
-                                        endDate={endingDate}
-                                        selectsRange
-                                        inline
-                                        />
+                                        // <DatePicker
+                                        // selected={startDate}
+                                        // onChange={(value) => FrequencyPicker(value)}
+                                        // startDate={startDate}
+                                        // endDate={endingDate}
+                                        // selectsRange
+                                        // inline
+                                        // />
+                                        <>
+                                         <div>
+                                        
+                                            </div>
+                                         
+                                        <div className='text-danger mt-2'>
+                                            <ErrorMessage name='entry.amount'/>
+                                        </div>
+                                        </>
                                     )}
                                                                 
                                     <div className='text-danger mt-2'>
@@ -459,10 +511,10 @@ const ActivityCreate: FC = () => {
 
                                 <div className='mb-10 fv-row'>
                                 <label className='required form-label'>Match End Date</label>
-                                        <DatePicker
+                                        {/* <DatePicker
                                         onChange={(value, e) => HandleMatchEndDate(value)}
                                         selected={matchenddate}      
-                                        />
+                                        /> */}
                                
                                     <div className='text-danger mt-2'>
                                     <ErrorMessage name='registration_dates.start_date'/>
@@ -470,7 +522,7 @@ const ActivityCreate: FC = () => {
                                 </div>
                                 <div className='mb-10 fv-row'>
                                 <label className='required form-label'>Time Picker</label>
-                                <DatePicker
+                                {/* <DatePicker
                                 selected={time}
                                 onChange={(value) => HandleTimePicker(value)}
                                 showTimeSelect
@@ -478,7 +530,7 @@ const ActivityCreate: FC = () => {
                                 timeIntervals={15}
                                 timeCaption="Time"
                                 dateFormat="h:mm aa"
-                                />
+                                /> */}
                                                         
                                     <div className='text-danger mt-2'>
                                     <ErrorMessage name='registration_dates.start_date'/>
