@@ -82,6 +82,14 @@ export function AsideMenuMain() {
             </AsideMenuItem>
 
             <AsideMenuItem
+                to='/users'
+                title='Users'
+                // fontIcon='bi-archive'
+                icon='/media/icons/duotune/general/gen022.svg'
+            >
+            </AsideMenuItem>
+
+            <AsideMenuItem
                 to='/roles'
                 title='Roles'
                 // fontIcon='bi-archive'

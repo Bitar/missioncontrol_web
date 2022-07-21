@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import {FC} from 'react'
 
 type Props = {
@@ -11,9 +10,6 @@ const ImageCell: FC<Props> = ({dObject}) => (
             <div className="w-125px">
                 <img src={dObject} alt="" className="w-100 h-100vh rounded"/>
             </div>
-            {/*<a href='#' className='text-gray-800 text-hover-primary mb-1'>*/}
-            {/*    {dObject}*/}
-            {/*</a>*/}
         </div>
     </div>
 )

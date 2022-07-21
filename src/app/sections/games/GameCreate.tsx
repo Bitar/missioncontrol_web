@@ -27,7 +27,7 @@ const GameCreate = () => {
             setGames(response.data)
         })
 
-    }, [debouncedSearch])
+    }, [debouncedSearch, search])
 
 
     const sendRequest = (igdb_id: any) => {

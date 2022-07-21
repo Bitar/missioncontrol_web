@@ -42,6 +42,7 @@ const CommunityView: React.FC = () => {
                     element={
                         <>
                             <PageTitle breadcrumbs={[]}>Members</PageTitle>
+                            {/* TODO: Work on the members tab to be a separate component*/}
                             <CommunityFollower/>
                         </>
                     }

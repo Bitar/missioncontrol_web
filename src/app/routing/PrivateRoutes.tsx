@@ -26,6 +26,7 @@ import {CommunityIndex} from "../sections/community/CommunityIndex";
 import {CommunityView} from '../sections/community/CommunityView'
 import {CommunityFollower} from '../sections/community/CommunityFollowers'
 import {ActivityCreate} from "../sections/activities/ActivityCreate";
+import {UsersIndex} from "../sections/identity/user/UsersIndex";
 
 const PrivateRoutes = () => {
 
@@ -83,6 +84,8 @@ const PrivateRoutes = () => {
                         </SuspensedView>
                     }
                 />
+
+                <Route path='users' element={<UsersIndex/>}/>
 
                 <Route path='roles' element={<RolesIndex/>}/>
                 <Route

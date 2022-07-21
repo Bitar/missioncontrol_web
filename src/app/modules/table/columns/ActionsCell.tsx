@@ -7,7 +7,7 @@ import {useMutation, useQueryClient} from "react-query";
 import {deleteObject} from "../../../requests";
 import {useQueryRequest} from "../QueryRequestProvider";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faPencil, faTrash} from '@fortawesome/free-solid-svg-icons'
+import {faPencil, faTrash, faEye} from '@fortawesome/free-solid-svg-icons'
 
 type Props = {
     id: ID,
@@ -15,9 +15,10 @@ type Props = {
     queryKey: string,
     showEdit?: boolean,
     showDelete?: boolean
+    showView?: boolean
 }
 
-const ActionsCell: FC<Props> = ({id, path, queryKey, showEdit = true, showDelete = true}) => {
+const ActionsCell: FC<Props> = ({id, path, queryKey, showEdit = true, showDelete = true, showView = false}) => {
     const queryClient = useQueryClient()
     const {state} = useQueryRequest()
     const [query] = useState<string>(stringifyRequestQuery(state))
@@ -34,6 +35,12 @@ const ActionsCell: FC<Props> = ({id, path, queryKey, showEdit = true, showDelete
 
     return (
         <>
+            {showView &&
+                <Link to={'/' + path + '/' + id} className="btn btn-icon btn-sm btn-active-light-dark">
+                    <FontAwesomeIcon icon={faEye} className='text-dark'/>
+                </Link>
+            }
+
             {showEdit &&
                 <Link to={'/' + path + '/' + id + '/edit'} className="btn btn-icon btn-sm btn-active-light-warning">
                     <FontAwesomeIcon icon={faPencil} className='text-warning'/>
