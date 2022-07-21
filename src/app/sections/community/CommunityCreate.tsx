@@ -1,9 +1,9 @@
 import {PageTitle} from "../../../_metronic/layout/core";
 import {isNotEmpty, KTCard, KTCardBody} from "../../../_metronic/helpers";
 import clsx from "clsx";
-import {ErrorMessage, Field, FormikProvider, useFormik} from "formik";
+import {ErrorMessage, Field, Form, Formik, FormikProvider, useFormik} from "formik";
 import * as Yup from "yup";
-import {Community, initialCommunity} from "../../models/community/Community";
+import {Community, communitySchema, initialCommunity} from "../../models/community/Community";
 import {createCommunity} from "./core/_requests";
 import {useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
@@ -11,39 +11,28 @@ import {getCountries, getStates} from "../misc/core/_requests";
 import {selectCustomStyles} from "../activities/core/_consts";
 import Select from "react-select";
 import {CommunityAddress, initialCommunityAddress} from "../../models/community/CommunityAddress";
-
-const createCommunitySchema = Yup.object().shape({
-    name: Yup.string().required('Community name is required'),
-    description: Yup.string().required('Community description is required'),
-    contact:Yup.object().shape({
-        name: Yup.string().required('Contact name is required'),
-        email: Yup.string().email('Please enter a valid email').required('Contact email is required'),
-        phone_number :Yup.string().required('Contact phone number is required'),
-    }),
-    address:Yup.object().shape({
-        address_one: Yup.string().required('Contact address is required'),
-        address_two: Yup.string(),
-        city :Yup.string().required('City is required'),
-        // state_province: Yup.string().required('State Province is required'),
-        postal_code: Yup.string().required('Postal Code is required'),
-        // country_code: Yup.string().required('Country Code is required'),
-
-    }),
-})
+import {submitForm, updateData} from "../../helpers/FormHelper";
+import {createRole} from "../identity/role/core/_requests";
 
 const stateSelect: any[] = []
 const countrySelect: any[] = []
 
 const CommunityCreate = () => {
-
     const [community, setCommunity] = useState<Community>(initialCommunity)
     const [communityAddress, setCommunityAddress] = useState<CommunityAddress>(initialCommunityAddress)
-
     const navigate = useNavigate()
+
+    const toIndex = () => {
+        navigate('/communities')
+    }
+
+    const handleSubmit = async () => {
+        await submitForm(createCommunity, community, toIndex)
+    };
 
     const formik = useFormik({
         initialValues: initialCommunity,
-        validationSchema: createCommunitySchema,
+        validationSchema: communitySchema,
         onSubmit: async (values, {setSubmitting}) => {
             setSubmitting(true)
             try {
@@ -100,6 +89,9 @@ const CommunityCreate = () => {
         setCommunityAddress(updatedData)
     }
 
+    const handleOnChange = (event: any) => {
+        updateData({[event.target.name]: event.target.value}, setCommunity, community);
+    };
 
     return (
         <>
@@ -117,222 +109,302 @@ const CommunityCreate = () => {
                         </div>
                     </div>
                     <KTCardBody className='py-4'>
-                        <form className='form' method="post" encType="multipart/form-data" onSubmit={formik.handleSubmit} noValidate>
-                            <div
-                                className='d-flex flex-column me-n7 pe-7 pt-5'
-                            >
-                                <div className='fv-row mb-7'>
-                                    <label className='required fw-bold fs-6 mb-2'>Name</label>
-                                    <Field
-                                        type='text'
-                                        className='form-control mb-2'
-                                        placeholder='Community Name'
-                                        name='name'
-                                    />
-                                    <div className='text-danger mt-2'>
-                                        <ErrorMessage name='name'/>
-                                    </div>
-                                </div>
 
-                                <div className='fv-row mb-7'>
-                                    <label className='required fw-bold fs-6 mb-2'>Description</label>
-                                    <Field
-                                        as='textarea'
-                                        name='description'
-                                        className='form-control mb-2'
-                                        placeholder='Community Description'
-                                        rows={3}
-                                    />
-                                    <div className='text-danger mt-2'>
-                                        <ErrorMessage name='description'/>
-                                    </div>
-                                </div>
+                        <Formik initialValues={community} onSubmit={values => {
+                            // same shape as initial values
+                            console.log(values);
+                        }}
+                                validationSchema={communitySchema}>
+                            {
+                                ({isSubmitting, isValid, touched, errors}) => (
+                                    <Form onChange={handleOnChange} className='form'>
 
-                                <div className='fv-row mb-7'>
-                                    <label className='required fw-bold fs-6 mb-2'>Contact Name</label>
-                                    <Field
-                                        type='text'
-                                        className='form-control mb-2'
-                                        placeholder='Community Contact Name...'
-                                        {...formik.getFieldProps('contact[name]')}
-                                    />
-                                    <div className='text-danger mt-2'>
-                                        <ErrorMessage name='contact.name'/>
-                                    </div>
-                                </div>
+                                        <div className='d-flex flex-column me-n7 pe-7 pt-5'>
+                                            <div className="row mb-6">
+                                                <label
+                                                    className="col-lg-4 col-form-label required fw-bold fs-6">Name</label>
+                                                <div className="col-lg-8 fv-row">
+                                                    <Field
+                                                        type="text"
+                                                        name="name"
+                                                        placeholder="Community Name"
+                                                        className={clsx("form-control mb-3 mb-lg-0",
+                                                            {"is-invalid": touched.name && errors.name},
+                                                            {"is-valid": touched.name && !errors.name}
+                                                        )}
+                                                        autoComplete="off"
+                                                        disabled={isSubmitting}
+                                                    />
+                                                    {/*<div className='text-danger mt-2'>*/}
+                                                    {/*    <ErrorMessage name='name'/>*/}
+                                                    {/*</div>*/}
+                                                </div>
+                                            </div>
 
-                                <div className='fv-row mb-7'>
+                                            <div className='row mb-6'>
+                                                <label
+                                                    className="col-lg-4 col-form-label required fw-bold fs-6">Description</label>
+                                                <div className="col-lg-8 fv-row">
+                                                    <Field
+                                                        as='textarea'
+                                                        name='description'
+                                                        className={clsx("form-control mb-3 mb-lg-0",
+                                                            {"is-invalid": touched.description && errors.description},
+                                                            {"is-valid": touched.description && !errors.description}
+                                                        )}
+                                                        placeholder='Community Description'
+                                                        rows={3}
+                                                    />
+                                                    {/*<div className='text-danger mt-2'>*/}
+                                                    {/*    <ErrorMessage name='description'/>*/}
+                                                    {/*</div>*/}
+                                                </div>
+                                            </div>
 
-                                    <label className='required fw-bold fs-6 mb-2'>Contact Email</label>
-                                    <Field
-                                        type='text'
-                                        className='form-control mb-2'
-                                        placeholder='Community Contact Email...'
+                                            <div className='row mb-6'>
+                                                <label
+                                                    className="col-lg-4 col-form-label required fw-bold fs-6">Image</label>
+                                                <div className="col-lg-8 fv-row">
+                                                    <input
+                                                        type='file'
+                                                        name='file'
+                                                        // @ts-ignore
+                                                        onChange={(event) => formik.setFieldValue('logo', event.target.files[0])}
 
-                                        {...formik.getFieldProps('contact[email]')}
-                                    />
-                                    <div className='text-danger mt-2'>
-                                        <ErrorMessage name='contact.email'/>
-                                    </div>
-                                </div>
+                                                        className={clsx('form-control form-control-solid mb-3 mb-lg-0',
+                                                        )}
+                                                        autoComplete='off'
+                                                        disabled={formik.isSubmitting}
+                                                    />
+                                                </div>
+                                            </div>
 
-                                <div className='fv-row mb-7'>
-                                    <label className='required fw-bold fs-6 mb-2'>Phone number</label>
-                                    <Field
-                                        type='text'
-                                        className='form-control mb-2'
-                                        placeholder='Community Contact Phone Number...'
+                                            <div className='row mb-6'>
+                                                <label
+                                                    className="col-lg-4 col-form-label required fw-bold fs-6">Banner Image</label>
+                                                <div className="col-lg-8 fv-row">
+                                                    <input
+                                                        type='file'
+                                                        name='file'
+                                                        // @ts-ignore
+                                                        onChange={(event) => formik.setFieldValue('banner_image', event.target.files[0])}
+                                                        className={clsx(
+                                                            'form-control form-control-solid mb-3 mb-lg-0',
+                                                        )}
+                                                        autoComplete='off'
+                                                        disabled={formik.isSubmitting}
+                                                    />
+                                                </div>
+                                            </div>
 
-                                        {...formik.getFieldProps('contact[phone_number]')}
-                                    />
-                                    <div className='text-danger mt-2'>
-                                        <ErrorMessage name='contact.phone_number'/>
-                                    </div>
-                                </div>
+                                            <div className="separator separator-dashed my-6"></div>
+
+                                            <div className='row mb-6'>
+                                                <div className="col-12">
+                                                    <h4 className='text-dark'>Contact Info:</h4>
+                                                </div>
+                                            </div>
+
+                                            <div className='row mb-6'>
+                                                <label
+                                                    className="col-lg-4 col-form-label required fw-bold fs-6">Name</label>
+                                                <div className="col-lg-8 fv-row">
+                                                    <Field
+                                                        type='text'
+                                                        name='contact.name'
+                                                        placeholder='Contact Name'
+                                                        className={clsx("form-control mb-3 mb-lg-0",
+                                                            // {"is-invalid": touched.name && errors.name},
+                                                            // {"is-valid": touched.name && !errors.name}
+                                                        )}
+                                                    />
+                                                </div>
+
+                                                {/*<div className='text-danger mt-2'>*/}
+                                                {/*    <ErrorMessage name='contact.name'/>*/}
+                                                {/*</div>*/}
+                                            </div>
+
+                                            <div className='row mb-6'>
+                                                <label
+                                                    className="col-lg-4 col-form-label required fw-bold fs-6">Email</label>
+                                                <div className="col-lg-8 fv-row">
+                                                    <Field
+                                                        type='text'
+                                                        name='contact.email'
+                                                        placeholder='Contact Email'
+                                                        className={clsx("form-control mb-3 mb-lg-0",
+                                                            // {"is-invalid": touched.name && errors.name},
+                                                            // {"is-valid": touched.name && !errors.name}
+                                                        )}
+                                                    />
+                                                </div>
+
+                                                {/*<div className='text-danger mt-2'>*/}
+                                                {/*    <ErrorMessage name='contact.email'/>*/}
+                                                {/*</div>*/}
+                                            </div>
+
+                                            <div className='row mb-6'>
+                                                <label
+                                                    className="col-lg-4 col-form-label required fw-bold fs-6">Phone
+                                                    Number</label>
+                                                <div className="col-lg-8 fv-row">
+                                                    <Field
+                                                        type='text'
+                                                        name='contact.phone_number'
+                                                        placeholder='Phone Number...'
+                                                        className={clsx("form-control mb-3 mb-lg-0",
+                                                            // {"is-invalid": touched.name && errors.name},
+                                                            // {"is-valid": touched.name && !errors.name}
+                                                        )}
+                                                    />
+                                                </div>
+                                                {/*<div className='text-danger mt-2'>*/}
+                                                {/*    <ErrorMessage name='contact.phone_number'/>*/}
+                                                {/*</div>*/}
+                                            </div>
+
+                                            <div className="separator separator-dashed my-6"></div>
+
+                                            <div className='row mb-6'>
+                                                <div className="col-12">
+                                                    <h4 className='text-dark'>Address:</h4>
+                                                </div>
+                                            </div>
+
+                                            <div className='row mb-6'>
+                                                <label
+                                                    className="col-lg-4 col-form-label required fw-bold fs-6">Address
+                                                    One</label>
+                                                <div className="col-lg-8 fv-row">
+                                                    <Field
+                                                        type='text'
+                                                        name='address.address_one'
+                                                        placeholder='ex: 420 Broadway'
+                                                        className={clsx("form-control mb-3 mb-lg-0",
+                                                            // {"is-invalid": touched.name && errors.name},
+                                                            // {"is-valid": touched.name && !errors.name}
+                                                        )}
+                                                    />
+                                                </div>
+
+                                                {/*<div className='text-danger mt-2'>*/}
+                                                {/*    <ErrorMessage name='address.address_one'/>*/}
+                                                {/*</div>*/}
+                                            </div>
+
+                                            <div className='row mb-6'>
+                                                <label
+                                                    className="col-lg-4 col-form-label required fw-bold fs-6">Address
+                                                    Two</label>
+                                                <div className="col-lg-8 fv-row">
+                                                    <Field
+                                                        type='text'
+                                                        name='address.address_two'
+                                                        className={clsx("form-control mb-3 mb-lg-0",
+                                                            // {"is-invalid": touched.name && errors.name},
+                                                            // {"is-valid": touched.name && !errors.name}
+                                                        )}
+                                                        placeholder='ex: Unit 134'
+                                                    />
+                                                </div>
+
+                                                {/*<div className='text-danger mt-2'>*/}
+                                                {/*    <ErrorMessage name='address.address_two'/>*/}
+                                                {/*</div>*/}
+                                            </div>
 
 
+                                            <div className='row mb-6'>
+                                                <label
+                                                    className="col-lg-4 col-form-label required fw-bold fs-6">City</label>
+                                                <div className="col-lg-8 fv-row">
+                                                    <Field
+                                                        type='text'
+                                                        name='address.city'
+                                                        className={clsx("form-control mb-3 mb-lg-0",
+                                                            // {"is-invalid": touched.name && errors.name},
+                                                            // {"is-valid": touched.name && !errors.name}
+                                                        )}
+                                                        placeholder='ex: Boston'
+                                                    />
+                                                </div>
 
-                                <div className='fv-row mb-7'>
-                                    {/* begin::Label */}
-                                    <label className='required fw-bold fs-6 mb-2'>Address One</label>
-                                    <Field
-                                        type='text'
-                                        className='form-control mb-2'
-                                        placeholder='ex: 424 Broadway'
-
-                                        {...formik.getFieldProps('address[address_one]')}
-
-                                    />
-                                    <div className='text-danger mt-2'>
-                                        <ErrorMessage name='address.address_one'/>
-                                    </div>
-                                </div>
-
-
-
-                                <div className='fv-row mb-7'>
-                                    <label className='fw-bold fs-6 mb-2'>Address Two</label>
-                                    <Field
-                                        type='text'
-                                        className='form-control mb-2'
-                                        placeholder='ex: Unit 134'
-
-                                        {...formik.getFieldProps('address[address_two]')}
-
-                                    />
-                                    <div className='text-danger mt-2'>
-                                        <ErrorMessage name='address.address_two'/>
-                                    </div>
-                                </div>
+                                                {/*<div className='text-danger mt-2'>*/}
+                                                {/*    <ErrorMessage name='address.city'/>*/}
+                                                {/*</div>*/}
+                                            </div>
 
 
-                                <div className='fv-row mb-7'>
-                                    <label className='required fw-bold fs-6 mb-2'>City</label>
-                                    <Field
-                                        type='text'
-                                        className='form-control mb-2'
-                                        placeholder='ex: Boston'
-
-                                        {...formik.getFieldProps('address[city]')}
-
-                                    />
-                                    <div className='text-danger mt-2'>
-                                        <ErrorMessage name='address.city'/>
-                                    </div>
-                                </div>
-
-
-
-                                <div className='fv-row mb-7'>
-                                    <label className='required fw-bold fs-6 mb-2'>State</label>
-                                    <Select
-                                        //{...formik.getFieldProps('address[state_province]')}
-                                        className={clsx(
-                                            'basic-select',
-                                        )}
-                                        classNamePrefix="select"
-                                        isClearable={true}
-                                        isSearchable={true}
-                                        name="address.state_province"
-                                        onChange={(inputValue) => {
-                                            updateAddressData({
-                                                state_province: inputValue.code
-                                            })
-                                        }}
-                                        options={stateSelect}
-                                        styles={selectCustomStyles}
-                                    />
-                                    <div className='text-danger mt-2'>
-                                        <ErrorMessage name='address.state_province'/>
-                                    </div>
-                                </div>
+                                            <div className='row mb-6'>
+                                                <label
+                                                    className="col-lg-4 col-form-label required fw-bold fs-6">State</label>
+                                                <div className="col-lg-8 fv-row">
+                                                    <Select
+                                                        //{...formik.getFieldProps('address[state_province]')}
+                                                        className={clsx(
+                                                            'basic-select',
+                                                        )}
+                                                        classNamePrefix="select"
+                                                        isClearable={true}
+                                                        isSearchable={true}
+                                                        name="address.state_province"
+                                                        onChange={(inputValue) => {
+                                                            updateAddressData({
+                                                                state_province: inputValue.code
+                                                            })
+                                                        }}
+                                                        options={stateSelect}
+                                                        styles={selectCustomStyles}
+                                                    />
+                                                </div>
+                                                {/*<div className='text-danger mt-2'>*/}
+                                                {/*    <ErrorMessage name='address.state_province'/>*/}
+                                                {/*</div>*/}
+                                            </div>
 
 
-                                <div className='fv-row mb-7'>
-                                    <label className='required fw-bold fs-6 mb-2'>Postal Code</label>
-                                    <Field
-                                        type='text'
-                                        className='form-control mb-2'
-                                        placeholder='ex: 95125'
-                                        {...formik.getFieldProps('address[postal_code]')}
+                                            <div className='row mb-6'>
+                                                <label
+                                                    className="col-lg-4 col-form-label required fw-bold fs-6">Postal Code</label>
+                                                <div className="col-lg-8 fv-row">
+                                                    <Field
+                                                        type='text'
+                                                        name='address.postal_code'
+                                                        className={clsx("form-control mb-3 mb-lg-0",
+                                                            // {"is-invalid": touched.name && errors.name},
+                                                            // {"is-valid": touched.name && !errors.name}
+                                                        )}
+                                                        placeholder='ex: 95125'
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
 
-                                    />
-                                    <div className='text-danger mt-2'>
-                                        <ErrorMessage name='address.postal_code'/>
-                                    </div>
-                                </div>
-
-                                <div className='fv-row mb-7'>
-                                    <label className='required fw-bold fs-6 mb-2'>logo</label>
-                                    <input
-                                        type='file'
-                                        name='file'
-                                        // @ts-ignore
-                                        onChange={(event) => formik.setFieldValue('logo', event.target.files[0])}
-
-                                        className={clsx('form-control form-control-solid mb-3 mb-lg-0',
-                                        )}
-                                        autoComplete='off'
-                                        disabled={formik.isSubmitting}
-                                    />
-                                </div>
-
-                                <div className='fv-row mb-7'>
-                                    <label className='required fw-bold fs-6 mb-2'>Banner Image</label>
-                                    <input
-                                        type='file'
-                                        name='file'
-                                        // @ts-ignore
-                                        onChange={(event) => formik.setFieldValue('banner_image', event.target.files[0])}
-                                        className={clsx(
-                                            'form-control form-control-solid mb-3 mb-lg-0',
-                                        )}
-                                        autoComplete='off'
-                                        disabled={formik.isSubmitting}
-                                    />
-
-                                </div>
-                            </div>
-
-                            <div className='py-5'>
-                                <button
-                                    type='submit'
-                                    className='btn btn-primary'
-                                    data-kt-users-modal-action='submit'
-                                    disabled={formik.isSubmitting || !formik.isValid || !formik.touched}
-                                >
-                                    <span className='indicator-label'>Submit</span>
-                                    {(formik.isSubmitting) && (
-                                        <span className='indicator-progress'>
+                                        <div className='py-5'>
+                                            <button
+                                                type='submit'
+                                                className='btn btn-primary'
+                                                data-kt-users-modal-action='submit'
+                                                disabled={formik.isSubmitting || !formik.isValid || !formik.touched}
+                                            >
+                                                <span className='indicator-label'>Submit</span>
+                                                {(formik.isSubmitting) && (
+                                                    <span className='indicator-progress'>
                                         Please wait...{' '}
-                                            <span className='spinner-border spinner-border-sm align-middle ms-2'/>
+                                                        <span
+                                                            className='spinner-border spinner-border-sm align-middle ms-2'/>
                                     </span>
-                                    )}
-                                </button>
-                            </div>
+                                                )}
+                                            </button>
+                                        </div>
+                                    </Form>
+                                )
+                            }
 
-                        </form>
-                        {(formik.isSubmitting)}
+                        </Formik>
+
                     </KTCardBody>
                 </KTCard>
             </FormikProvider>

@@ -126,7 +126,7 @@ const ActivityCreate: FC = () => {
 
     //  function HandleOneFrequency (value:any)  {
     //      setOneFrequencys(new Date(value))
-    //  }
+    //  }1
 
     const selectionChanged = (e:any) => setSelected(e.target.value);
     const selectionFee = (e:any) => setSelectedFee(e.target.value);
