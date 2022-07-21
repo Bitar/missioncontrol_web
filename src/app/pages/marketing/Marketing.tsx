@@ -1,20 +1,22 @@
-import React, { useEffect } from "react";
-import Swal from "sweetalert2";
+import React, {useEffect} from "react";
 import {KTSVG, toAbsoluteUrl} from "../../../_metronic/helpers";
-import { PageTitle } from "../../../_metronic/layout/core";
-import { marketingData } from "./data/MarketingData";
+import {PageTitle} from "../../../_metronic/layout/core";
+import {marketingData} from "./data/MarketingData";
 import {support} from "./data/SupportData";
 import {Card7} from "../../../_metronic/partials/content/cards/Card7";
+import toast, {Toaster} from "react-hot-toast";
 
 const Marketing = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
-      }, [])
+    }, [])
 
-    const copy = async (text:string) => {
+    const notify = async () => {
+        let text = 'Invite Link copied!'
+        // TODO: Update Link for clipboard
         await navigator.clipboard.writeText(text);
-        Swal.fire('Copied , now invite players directly to your community!')
-    }
+        toast.success(text)
+    };
 
     return (
         <>
@@ -39,12 +41,30 @@ const Marketing = () => {
                     <div className='ms-6 '>
                         <h1>Community Invite Link</h1>
                         <p className='list-unstyled text-gray-600 fw-bold fs-6 p-0 m-0'>
-                        Share the link below to invite players directly to your community! If players do not have the Mission Control app, this link will first prompt them to download the app and then invite them to join your community. If players do have the app, this link will bring them straight your community on Mission Control. If players click access the link via desktop, they will be asked for a mobile number to receive the direct link invite.
+                            Share the link below to invite players directly to your community! If players do not have
+                            the Mission Control app, this link will first prompt them to download the app and then
+                            invite them to join your community. If players do have the app, this link will bring them
+                            straight your community on Mission Control. If players click access the link via desktop,
+                            they will be asked for a mobile number to receive the direct link invite.
                         </p>
                         <button
                             type="submit"
                             className='mt-2 btn btn-primary'
-                            onClick={() => copy("https://missioncontrol.test-app.link/?organization=46efece0-e7dc-4506-b343-44b0cc0dcbd0&action=view")}>
+                            onClick={notify}>
+                            <Toaster
+                                position={"top-right"}
+                                toastOptions={{
+                                    // Define default options
+                                    className: '',
+                                    duration: 5000,
+
+                                    // Default options for specific types
+                                    success: {
+                                        duration: 3000,
+                                        className: 'bg-success text-light',
+                                    },
+                                }}
+                            />
                             Invite Link
                         </button>
                     </div>
@@ -52,7 +72,7 @@ const Marketing = () => {
                 </div>
             </div>
             <div className='card mb-10'>
-                <div className='card-body d-flex align-items-center py-8 '>
+                <div className='card-body d-flex align-items-center py-8'>
                     {/* begin::Icon */}
                     <div className='d-flex h-80px w-80px flex-shrink-0 flex-center position-relative'>
                         <KTSVG
@@ -71,7 +91,10 @@ const Marketing = () => {
                     <div className='ms-6'>
                         <h1>Graphic Templates</h1>
                         <p className='list-unstyled text-gray-600 fw-bold fs-6 p-0 m-0'>
-                        Mission Control has prepared multiple graphic design templates of various sizes to use for flyers, powerpoint slides, social media images and more. Each template can be customized with your own logo, name, program details, etc., and comes in various file types for easy edit access in Adobe Illustrator, PowerPoint, Canva and more.
+                            Mission Control has prepared multiple graphic design templates of various sizes to use for
+                            flyers, powerpoint slides, social media images and more. Each template can be customized
+                            with your own logo, name, program details, etc., and comes in various file types for easy
+                            edit access in Adobe Illustrator, PowerPoint, Canva and more.
                         </p>
                     </div>
                     {/* end::Description */}
@@ -84,11 +107,12 @@ const Marketing = () => {
                 </h3> */}
             </div>
             <div className='row g-10 mb-10'>
-                {marketingData.map((market , index) =>(
-                    <div className='col-md-4' key={index} >
-                        <a href={market.link} target="_blank"  rel="noreferrer" className="d-block opacity-75-hover hoverable">
+                {marketingData.map((market, index) => (
+                    <div className='col-md-4' key={index}>
+                        <a href={market.link} target="_blank" rel="noreferrer"
+                           className="d-block opacity-75-hover hoverable">
                             <img
-                                className ='rounded w-100 h-auto'
+                                className='rounded w-100 h-auto'
                                 src={market.avatar} alt=''
                             />
 
@@ -236,4 +260,4 @@ const Marketing = () => {
         </>
     )
 }
-export{Marketing}
+export {Marketing}
