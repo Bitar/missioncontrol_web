@@ -7,14 +7,16 @@ export type Activity = {
     title: string,
     description: string,
     is_crossPlay?: boolean,
-    game?: Game
+    game?: Game,
+    status: number
 }
 
 export const initialActivity = {
     title: "",
     description: "",
     is_crossPlay: false,
-    game: initialGame
+    game: initialGame,
+    status: 0
 }
 
 export type ActivityQueryResponse = Response<Array<Activity>>

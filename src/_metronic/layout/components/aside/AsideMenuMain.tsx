@@ -2,6 +2,7 @@
 import React from 'react'
 import {useIntl} from 'react-intl'
 import {AsideMenuItem} from './AsideMenuItem'
+import {faPeopleGroup, faGamepad} from '@fortawesome/free-solid-svg-icons'
 
 export function AsideMenuMain() {
     const intl = useIntl()
@@ -10,9 +11,8 @@ export function AsideMenuMain() {
         <>
             <AsideMenuItem
                 to='/dashboard'
-                icon='/media/icons/duotune/art/art002.svg'
+                icon='/media/icons/duotune/general/gen001.svg'
                 title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
-                fontIcon='bi-app-indicator'
             />
             <div className='menu-item'>
                 <div className='menu-content pt-8 pb-2'>
@@ -22,14 +22,14 @@ export function AsideMenuMain() {
             <AsideMenuItem
                 to='/communities'
                 title='Communities'
-                fontIcon='bi-archive'
-                icon='/media/icons/duotune/general/gen022.svg'
+                fontIcon={faPeopleGroup}
+                menuIcon='font'
             >
             </AsideMenuItem>
             <AsideMenuItem
                 to='/activities'
                 title='Activities'
-                fontIcon='bi-archive'
+                // fontIcon='bi-archive'
                 icon='/media/icons/duotune/general/gen022.svg'
             >
             </AsideMenuItem>
@@ -37,14 +37,14 @@ export function AsideMenuMain() {
             <AsideMenuItem
                 to='/games'
                 title='Games'
-                fontIcon='bi-archive'
-                icon='/media/icons/duotune/general/gen022.svg'
+                fontIcon={faGamepad}
+                menuIcon='font'
             >
             </AsideMenuItem>
             <AsideMenuItem
                 to='/marketing'
                 title='Marketing'
-                fontIcon='bi-archive'
+                // fontIcon='bi-archive'
                 icon='/media/icons/duotune/general/gen022.svg'
             >
             </AsideMenuItem>
@@ -52,7 +52,7 @@ export function AsideMenuMain() {
             <AsideMenuItem
                 to='/support'
                 title='Support'
-                fontIcon='bi-archive'
+                // fontIcon='bi-archive'
                 icon='/media/icons/duotune/general/gen022.svg'
             >
             </AsideMenuItem>
@@ -67,7 +67,7 @@ export function AsideMenuMain() {
             <AsideMenuItem
                 to='/plans'
                 title='Plans'
-                fontIcon='bi-archive'
+                // fontIcon='bi-archive'
                 icon='/media/icons/duotune/general/gen022.svg'
             >
             </AsideMenuItem>
@@ -75,7 +75,7 @@ export function AsideMenuMain() {
             <AsideMenuItem
                 to='/subscriptions'
                 title='Subscriptions'
-                fontIcon='bi-archive'
+                // fontIcon='bi-archive'
                 icon='/media/icons/duotune/general/gen022.svg'
             >
             </AsideMenuItem>
@@ -83,7 +83,7 @@ export function AsideMenuMain() {
             <AsideMenuItem
                 to='/roles'
                 title='Roles'
-                fontIcon='bi-archive'
+                // fontIcon='bi-archive'
                 icon='/media/icons/duotune/general/gen022.svg'
             >
             </AsideMenuItem>
@@ -91,7 +91,7 @@ export function AsideMenuMain() {
             <AsideMenuItem
                 to='/permissions'
                 title='Permissions'
-                fontIcon='bi-archive'
+                // fontIcon='bi-archive'
                 icon='/media/icons/duotune/general/gen022.svg'
             >
             </AsideMenuItem>

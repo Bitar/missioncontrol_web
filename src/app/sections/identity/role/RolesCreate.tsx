@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import {useFormik} from "formik";
-import * as Yup from 'yup'
 import {isNotEmpty, KTCard, KTCardBody} from "../../../../_metronic/helpers";
 import clsx from "clsx";
 import {PageTitle} from "../../../../_metronic/layout/core";

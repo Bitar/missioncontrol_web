@@ -39,7 +39,14 @@ const ActivityCreate: FC = () => {
     useEffect(() => {
         getGames('per_page=200').then(response => {
             response?.data?.forEach(function (value) {
-                gamesSelect.push({value: value.id, label: value.title, image: value.image, description: value.description, platforms: value.platforms, original: value})
+                gamesSelect.push({
+                    value: value.id,
+                    label: value.title,
+                    image: value.image,
+                    description: value.description,
+                    platforms: value.platforms,
+                    original: value
+                })
             })
         })
     }, [])
@@ -97,7 +104,8 @@ const ActivityCreate: FC = () => {
                                                 <div className="row">
                                                     <div className="col-3">
                                                         <div className="game-image d-inline">
-                                                            <img src={game.image} alt={game.label} className='w-100 rounded d-block'/>
+                                                            <img src={game.image} alt={game.label}
+                                                                 className='w-100 rounded d-block'/>
                                                         </div>
                                                     </div>
                                                     <div className="col-8">
@@ -125,7 +133,8 @@ const ActivityCreate: FC = () => {
                                                     <div className="game-title mb-2">
                                                         <h3>{activity?.game?.title}</h3>
                                                     </div>
-                                                    <div className="game-description text-muted" style={{textAlign: 'justify'}}>
+                                                    <div className="game-description text-muted"
+                                                         style={{textAlign: 'justify'}}>
                                                         <p>{activity?.game?.description}</p>
                                                     </div>
                                                 </div>
@@ -161,17 +170,14 @@ const ActivityCreate: FC = () => {
                                         />
 
 
-                                        <div className="text-muted fs-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+                                        <div className="text-muted fs-7">Lorem ipsum dolor sit amet, consectetur
+                                            adipisicing elit.
+                                        </div>
                                         <div className='text-danger mt-2'>
                                             <ErrorMessage name='title'/>
                                         </div>
                                     </div>
 
-
-
-
-
-                                    
 
                                     <div className='mb-10 fv-row'>
                                         <label className='required form-label'>Description</label>
@@ -213,7 +219,9 @@ const ActivityCreate: FC = () => {
                                                     <span className='fs-5 text-dark fw-bolder'>
                                                         Enable CrossPlay
                                                     </span>
-                                                    <div className='fs-6 fw-bold text-gray-400'>Description on what that means to enable cross play.</div>
+                                                    <div className='fs-6 fw-bold text-gray-400'>Description on what that
+                                                        means to enable cross play.
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div className='d-flex justify-content-end'>

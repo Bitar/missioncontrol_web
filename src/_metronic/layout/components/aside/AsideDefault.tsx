@@ -32,7 +32,7 @@ const AsideDefault: FC = () => {
               alt='Logo'
               className='logo'
               src={toAbsoluteUrl('/media/logos/mc_logo_aside.png')}
-              height={'18px !important'}
+              height={'15px !important'}
             />
           </Link>
         )}
@@ -42,7 +42,7 @@ const AsideDefault: FC = () => {
               alt='Logo'
               className='logo'
               src={toAbsoluteUrl('/media/logos/mc_logo_aside.png')}
-              height={'18px !important'}
+              height={'15px !important'}
             />
           </Link>
         )}

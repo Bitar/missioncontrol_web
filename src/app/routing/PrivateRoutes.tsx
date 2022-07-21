@@ -1,4 +1,4 @@
-import {lazy, FC, Suspense} from 'react'
+import {FC, Suspense} from 'react'
 import {Route, Routes, Navigate} from 'react-router-dom'
 import {MasterLayout} from '../../_metronic/layout/MasterLayout'
 import TopBarProgress from 'react-topbar-progress-indicator'
@@ -12,23 +12,22 @@ import {RolesCreate} from "../sections/identity/role/RolesCreate";
 import {ActivitiesIndex} from "../sections/activities/ActivitiesIndex";
 import {PermissionsEdit} from "../sections/identity/permission/PermissionsEdit";
 import {RolesEdit} from "../sections/identity/role/RolesEdit";
-import { GamesIndex } from '../sections/games/GamesIndex'
-import { GameCreate } from '../sections/games/GameCreate'
-import { GamesEdit } from '../sections/games/GameEdit'
-import { Marketing} from '../pages/marketing/Marketing'
-import { Support } from '../pages/support/Support'
+import {GamesIndex} from '../sections/games/GamesIndex'
+import {GameCreate} from '../sections/games/GameCreate'
+import {GamesEdit} from '../sections/games/GameEdit'
+import {Marketing} from '../pages/marketing/Marketing'
+import {Support} from '../pages/support/Support'
 import {BillingPlanWrapper} from "../sections/billing/BillingPlanWrapper";
 import {CommunityCreate} from "../sections/community/CommunityCreate";
-import { PlansIndex } from '../sections/billing/plan/PlansIndex'
-import { PlansCreate } from '../sections/billing/plan/PlansCreate'
+import {PlansIndex} from '../sections/billing/plan/PlansIndex'
+import {PlansCreate} from '../sections/billing/plan/PlansCreate'
 import {PlansEdit} from "../sections/billing/plan/PlansEdit";
-import { BillingComplete } from '../sections/billing/BillingComplete'
+import {BillingComplete} from '../sections/billing/BillingComplete'
 import {SubscriptionIndex} from "../sections/billing/subscriptions/SubscriptionIndex";
 import {CommunityIndex} from "../sections/community/CommunityIndex";
-import { CommunityView } from '../sections/community/CommunityView'
-import { CommunityFollower } from '../sections/community/CommunityFollowers'
+import {CommunityView} from '../sections/community/CommunityView'
+import {CommunityFollower} from '../sections/community/CommunityFollowers'
 import {ActivityCreate} from "../sections/activities/ActivityCreate";
-
 
 
 const PrivateRoutes = () => {
@@ -58,15 +57,15 @@ const PrivateRoutes = () => {
                     path='communities/:id/'
                     element={
                         <SuspensedView>
-                           <CommunityView/>
+                            <CommunityView/>
                         </SuspensedView>
                     }
                 />
-                <Route path='/communities/:id/followers' 
-                element={<SuspensedView>
-                    <CommunityFollower/>
-                    </SuspensedView>
-                }
+                <Route path='/communities/:id/followers'
+                       element={<SuspensedView>
+                           <CommunityFollower/>
+                       </SuspensedView>
+                       }
                 />
 
 

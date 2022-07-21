@@ -2,12 +2,10 @@ import React, {useEffect, useState} from "react";
 import {Role, roleSchema} from "../../../models/identity/Role";
 import {useNavigate, useParams} from "react-router-dom";
 import {useFormik} from "formik";
-import * as Yup from "yup";
 import {getRoleById, updateRole} from "./core/_requests";
 import {PageTitle} from "../../../../_metronic/layout/core";
 import {KTCard, KTCardBody} from "../../../../_metronic/helpers";
 import clsx from "clsx";
-
 
 const RolesEdit = () => {
     const [role, setRole] = useState<Role | undefined>()

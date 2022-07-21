@@ -5,51 +5,51 @@ import {checkIsActive, KTSVG} from '../../../helpers'
 import {useLayout} from '../../core'
 
 type Props = {
-  to: string
-  title: string
-  icon?: string
-  fontIcon?: string
-  hasBullet?: boolean
+    to: string
+    title: string
+    icon?: string
+    fontIcon?: string
+    hasBullet?: boolean
+    menuIcon?: string
 }
 
 const AsideMenuItemWithSub: React.FC<Props> = ({
-  children,
-  to,
-  title,
-  icon,
-  fontIcon,
-  hasBullet,
-}) => {
-  const {pathname} = useLocation()
-  const isActive = checkIsActive(pathname, to)
-  const {config} = useLayout()
-  const {aside} = config
+                                                   children,
+                                                   to,
+                                                   title,
+                                                   icon,
+                                                   fontIcon,
+                                                   hasBullet,
+                                                   menuIcon = 'svg'
+                                               }) => {
+    const {pathname} = useLocation()
+    const isActive = checkIsActive(pathname, to)
 
-  return (
-    <div
-      className={clsx('menu-item', {'here show': isActive}, 'menu-accordion')}
-      data-kt-menu-trigger='click'
-    >
+    return (
+        <div
+            className={clsx('menu-item', {'here show': isActive}, 'menu-accordion')}
+            data-kt-menu-trigger='click'
+        >
       <span className='menu-link'>
         {hasBullet && (
-          <span className='menu-bullet'>
+            <span className='menu-bullet'>
             <span className='bullet bullet-dot'></span>
           </span>
         )}
-        {icon && aside.menuIcon === 'svg' && (
-          <span className='menu-icon'>
-            <KTSVG path={icon} className='svg-icon-2' />
+          {icon && menuIcon === 'svg' && (
+              <span className='menu-icon'>
+            <KTSVG path={icon} className='svg-icon-2'/>
           </span>
-        )}
-        {fontIcon && aside.menuIcon === 'font' && <i className={clsx('bi fs-3', fontIcon)}></i>}
-        <span className='menu-title'>{title}</span>
+          )}
+          {fontIcon && menuIcon === 'font' && <i className={clsx('bi fs-3', fontIcon)}></i>}
+          <span className='menu-title'>{title}</span>
         <span className='menu-arrow'></span>
       </span>
-      <div className={clsx('menu-sub menu-sub-accordion', {'menu-active-bg': isActive})}>
-        {children}
-      </div>
-    </div>
-  )
+            <div className={clsx('menu-sub menu-sub-accordion', {'menu-active-bg': isActive})}>
+                {children}
+            </div>
+        </div>
+    )
 }
 
 export {AsideMenuItemWithSub}

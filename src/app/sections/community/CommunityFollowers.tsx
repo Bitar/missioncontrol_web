@@ -1,10 +1,10 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import {useEffect, useState} from "react"
 import {PageTitle} from "../../../_metronic/layout/core"
 import {getCommunityFollowers} from "./core/_requests"
 import {CommunityFollowers} from "../../models/community/CommunityFollowers"
 import {useParams} from "react-router-dom"
-import {KTCardBody, KTCard, KTSVG} from "../../../_metronic/helpers"
-
+import {KTCard, KTSVG} from "../../../_metronic/helpers"
 
 const CommunityFollower = () => {
     const [members, setMembers] = useState<CommunityFollowers[] | undefined>([]);

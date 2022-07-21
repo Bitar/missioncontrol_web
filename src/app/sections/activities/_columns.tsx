@@ -5,7 +5,6 @@ import {ActionsCell} from "../../modules/table/columns/ActionsCell";
 import {QUERIES} from "../../../_metronic/helpers";
 import {ImageCell} from "../../modules/table/columns/ImageCell";
 import {Activity} from "../../models/activity/Activity";
-import {stat} from "fs";
 import {BadgeCell} from "../../modules/table/columns/BadgeCell";
 import {formatDates, formatStatus} from "../../helpers/ActivityHelper";
 

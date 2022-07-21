@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {useFormik} from "formik";
-import {initialPermission, Permission, permissionSchema} from "../../../models/identity/Permission";
+import {initialPermission, permissionSchema} from "../../../models/identity/Permission";
 import {isNotEmpty, KTCard, KTCardBody} from "../../../../_metronic/helpers";
 import clsx from "clsx";
 import {PageTitle} from "../../../../_metronic/layout/core";

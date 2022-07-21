@@ -30,7 +30,6 @@ export interface IAside {
   minimized: boolean // Set aside minimized by default
   minimize: boolean // Allow aside minimize toggle
   hoverable: boolean // Allow aside hovering when minimized
-  menuIcon: 'svg' | 'font' // Menu icon type(svg|font)
 }
 
 export interface IContent {
