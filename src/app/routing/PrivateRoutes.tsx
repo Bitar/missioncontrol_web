@@ -45,20 +45,22 @@ const PrivateRoutes = () => {
                 <Route path='communities' element={<CommunityIndex/>}/>
 
                 <Route path='communities/create' element={<CommunityCreate/>}/>
+
                 <Route
-                    path='communities/:id/'
+                    path='communities/:id/*'
                     element={
                         <SuspensedView>
-                            <CommunityView/>
+                            <CommunityView />
                         </SuspensedView>
                     }
                 />
-                <Route path='/communities/:id/followers'
-                       element={<SuspensedView>
-                           <CommunityFollower/>
-                       </SuspensedView>
-                       }
-                />
+
+                {/*<Route path='/communities/:id/followers'*/}
+                {/*       element={<SuspensedView>*/}
+                {/*           <CommunityFollower/>*/}
+                {/*       </SuspensedView>*/}
+                {/*       }*/}
+                {/*/>*/}
 
 
                 <Route path='activities' element={<ActivitiesIndex/>}/>

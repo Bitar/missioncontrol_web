@@ -19,7 +19,7 @@ const CommunityFollower = () => {
 
     return (
         <>
-            <PageTitle breadcrumbs={[]}>{'Community Details'}</PageTitle>
+            <PageTitle breadcrumbs={[]}>{'Members'}</PageTitle>
             <KTCard>
                 <div className='card-header border-0 pt-5'>
                     <h3 className='card-title align-items-start flex-column'>
@@ -35,7 +35,8 @@ const CommunityFollower = () => {
                 <div className='card-body py-3'>
                     <div className='table-responsive'>
 
-                        <table className='table align-middle gs-0 gy-4 table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer'>
+                        <table
+                            className='table align-middle gs-0 gy-4 table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer'>
                             <thead>
                             <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
                                 <th className='ps-4 min-w-325px rounded-start'>Members</th>
@@ -57,15 +58,18 @@ const CommunityFollower = () => {
                                                 />
                                             </div>
                                             <div className='d-flex justify-content-start flex-column'>
-                                                <span className='text-muted fw-bold text-muted d-block fs-7'>{member.name}</span>
+                                                <span
+                                                    className='text-muted fw-bold text-muted d-block fs-7'>{member.name}</span>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <span className='text-muted fw-bold text-muted d-block fs-7'>{member.meta?.username}</span>
+                                        <span
+                                            className='text-muted fw-bold text-muted d-block fs-7'>{member.meta?.username}</span>
                                     </td>
                                     <td>
-                                        <span className='text-muted fw-bold text-muted d-block fs-7'>{member.email}</span>
+                                        <span
+                                            className='text-muted fw-bold text-muted d-block fs-7'>{member.email}</span>
                                     </td>
 
                                     <td className='text-end'>
