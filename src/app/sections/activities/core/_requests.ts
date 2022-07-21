@@ -1,5 +1,6 @@
 import axios, {AxiosResponse} from 'axios'
-import {ActivityQueryResponse} from "../../../models/activity/Activity";
+import { Response } from '../../../../_metronic/helpers';
+import {Activity, ActivityQueryResponse} from "../../../models/activity/Activity";
 // import process from "process";
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -12,6 +13,16 @@ const getActivities = (query: string): Promise<ActivityQueryResponse> => {
         .get(`${ACTIVITIES_URL}?${query}`)
         .then((d: AxiosResponse<ActivityQueryResponse>) => d.data)
 }
+const createActivity = (formData: FormData): Promise<Activity | undefined> => {
+    console.log(formData)
+    return axios
+        .post(`${ACTIVITIES_URL}`, formData)
+        .then((response: AxiosResponse<Response<Activity>>) => response.data)
+        .then((response: Response<Activity>) => response.data)
+}
+
+
+
 // const createUser = (identity: User): Promise<User | undefined> => {
 //     return axios
 //         .put(ROLE_URL, identity)
@@ -35,4 +46,4 @@ const getActivities = (query: string): Promise<ActivityQueryResponse> => {
 //     return axios.all(requests).then(() => {})
 // }
 
-export {getActivities, ACTIVITIES_URL}
+export {getActivities, createActivity,ACTIVITIES_URL}

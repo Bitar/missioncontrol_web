@@ -28,20 +28,14 @@ import {CommunityFollower} from '../sections/community/CommunityFollowers'
 import {ActivityCreate} from "../sections/activities/ActivityCreate";
 
 const PrivateRoutes = () => {
-    // const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
-    // const WizardsPage = lazy(() => import('../modules/wizards/WizardsPage'))
-    // const AccountPage = lazy(() => import('../modules/accounts/AccountPage'))
-    // const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'))
-    // const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'))
 
     return (
         <Routes>
             <Route element={<MasterLayout/>}>
-                {/* Redirect to Dashboard after success login/registartion */}
                 <Route path='auth/*' element={<Navigate to='/dashboard'/>}/>
+
                 {/* Pages */}
                 <Route path='dashboard' element={<DashboardWrapper/>}/>
-                {/*<Route path='menu-test' element={<MenuTestPage/>}/>*/}
                 <Route path='marketing-support' element={<Marketing/>}/>
                 {/* Pages */}
 
@@ -72,8 +66,6 @@ const PrivateRoutes = () => {
 
                 <Route path='games' element={<GamesIndex/>}/>
 
-                {/*<Route path='marketing' element={<Marketing/>}/>*/}
-                {/*<Route path='support' element={<Support/>}/>*/}
 
                 <Route path='plans' element={<PlansIndex/>}/>
                 <Route path='plans/create' element={
