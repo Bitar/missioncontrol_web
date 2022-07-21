@@ -11,4 +11,10 @@ export type Role = {
     name: string
 }
 
+export const roleInitial = (role?: Role) => {
+    return {
+        name: role?.name || ""
+    }
+}
+
 export type RolesQueryResponse = Response<Array<Role>>

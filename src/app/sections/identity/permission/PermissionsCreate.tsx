@@ -1,39 +1,29 @@
-import React from 'react'
-import {useFormik} from "formik";
-import {initialPermission, permissionSchema} from "../../../models/identity/Permission";
-import {isNotEmpty, KTCard, KTCardBody} from "../../../../_metronic/helpers";
+import React, {useState} from 'react'
+import {Field, Form, Formik} from "formik";
+import {Permission, permissionInitial, permissionSchema} from "../../../models/identity/Permission";
+import {KTCard, KTCardBody} from "../../../../_metronic/helpers";
 import clsx from "clsx";
 import {PageTitle} from "../../../../_metronic/layout/core";
 import {createPermission} from "./core/_requests";
 import {useNavigate} from 'react-router-dom';
-
+import {submitForm, updateData} from "../../../helpers/FormHelper";
 
 const PermissionsCreate = () => {
+    const [permission, setPermission] = useState<Permission>(permissionInitial)
+
     const navigate = useNavigate();
 
-    const cancel = () => {
+    const toIndex = () => {
         navigate('/permissions')
     }
 
-    const formik = useFormik({
-        initialValues: initialPermission,
-        validationSchema: permissionSchema,
-        onSubmit: async (values, {setSubmitting}) => {
-            setSubmitting(true)
-            try {
-                if (isNotEmpty(values.id)) {
-                    // await updateUser(values)
-                } else {
-                    await createPermission(values)
-                }
-            } catch (ex) {
-                console.error(ex)
-            } finally {
-                setSubmitting(true)
-                cancel()
-            }
-        },
-    })
+    const handleSubmit = async () => {
+        await submitForm(createPermission, permission, toIndex)
+    };
+
+    const handleOnChange = (event: any) => {
+        updateData({[event.target.name]: event.target.value}, setPermission, permission);
+    };
 
     return (
         <>
@@ -50,80 +40,62 @@ const PermissionsCreate = () => {
                     </div>
                 </div>
                 <KTCardBody className='py-4'>
-                    <form className='form' onSubmit={formik.handleSubmit} noValidate>
-                        {/* begin::Scroll */}
-                        <div
-                            className='d-flex flex-column scroll-y me-n7 pe-7 pt-5'
-                            data-kt-scroll='true'
-                            data-kt-scroll-activate='{default: false, lg: true}'
-                            data-kt-scroll-max-height='auto'
-                            data-kt-scroll-offset='300px'
-                        >
-                            {/* begin::Input group */}
-                            <div className='fv-row mb-7'>
-                                {/* begin::Label */}
-                                <label className='required fw-bold fs-6 mb-2'>Name</label>
-                                {/* end::Label */}
+                    <Formik initialValues={permission} onSubmit={handleSubmit} validationSchema={permissionSchema}>
+                        {
+                            ({isSubmitting, isValid, touched, errors}) => (
+                                <Form onChange={handleOnChange} className="form">
 
-                                {/* begin::Input */}
-                                <input
-                                    placeholder='Name'
-                                    {...formik.getFieldProps('name')}
-                                    type='text'
-                                    name='name'
-                                    className={clsx(
-                                        'form-control form-control-solid mb-3 mb-lg-0',
-                                        {'is-invalid': formik.touched.name && formik.errors.name},
-                                        {
-                                            'is-valid': formik.touched.name && !formik.errors.name,
-                                        }
-                                    )}
-                                    autoComplete='off'
-                                    disabled={formik.isSubmitting}
-                                />
-                                {formik.touched.name && formik.errors.name && (
-                                    <div className='fv-plugins-message-container'>
-                                        <div className='fv-help-block'>
-                                            <span role='alert'>{formik.errors.name}</span>
+                                    <div className="d-flex flex-column me-n7 pe-7 pt-5">
+                                        <div className="row mb-6">
+                                            <label
+                                                className="col-lg-4 col-form-label required fw-bold fs-6">Name</label>
+                                            <div className="col-lg-8 fv-row">
+                                                <Field
+                                                    type="text"
+                                                    name="name"
+                                                    placeholder="Name"
+                                                    className={clsx("form-control mb-3 mb-lg-0",
+                                                        {"is-invalid": touched.name && errors.name},
+                                                        {"is-valid": touched.name && !errors.name}
+                                                    )}
+                                                    autoComplete="off"
+                                                    disabled={isSubmitting}
+                                                />
+                                            </div>
                                         </div>
                                     </div>
-                                )}
-                                {/* end::Input */}
-                            </div>
-                            {/* end::Input group */}
-                        </div>
-                        {/* end::Scroll */}
 
-                        {/* begin::Actions */}
-                        <div className='py-5'>
-                            <button
-                                type='reset'
-                                onClick={() => cancel()}
-                                className='btn btn-light me-3'
-                                data-kt-users-modal-action='cancel'
-                                disabled={formik.isSubmitting}
-                            >
-                                Cancel
-                            </button>
+                                    <div className="py-5">
+                                        <button
+                                            type="reset"
+                                            onClick={() => toIndex()}
+                                            className="btn btn-light me-3"
+                                            data-kt-users-modal-action="cancel"
+                                            disabled={isSubmitting}>
+                                            Cancel
+                                        </button>
 
-                            <button
-                                type='submit'
-                                className='btn btn-primary'
-                                data-kt-users-modal-action='submit'
-                                disabled={formik.isSubmitting || !formik.isValid || !formik.touched}
-                            >
-                                <span className='indicator-label'>Submit</span>
-                                {(formik.isSubmitting) && (
-                                    <span className='indicator-progress'>
-                                        Please wait...{' '}
-                                        <span className='spinner-border spinner-border-sm align-middle ms-2'/>
-                                    </span>
-                                )}
-                            </button>
-                        </div>
-                        {/* end::Actions */}
-                    </form>
-                    {(formik.isSubmitting)}
+                                        <button
+                                            type="submit"
+                                            className="btn btn-primary"
+                                            data-kt-users-modal-action="submit"
+                                            disabled={isSubmitting || !isValid || !touched}
+                                        >
+                                            <span className="indicator-label">Submit</span>
+                                            {(isSubmitting) && (
+                                                <span className="indicator-progress">
+                                                    Please wait...{" "}
+                                                    <span
+                                                        className="spinner-border spinner-border-sm align-middle ms-2"/>
+                                                </span>
+                                            )}
+                                        </button>
+                                    </div>
+                                </Form>
+                            )
+                        }
+                    </Formik>
+
                 </KTCardBody>
             </KTCard>
         </>

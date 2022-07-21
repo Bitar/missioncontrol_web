@@ -1,5 +1,6 @@
 import {ID, Response} from "../../../_metronic/helpers";
 import * as Yup from "yup";
+import {Role} from "./Role";
 
 export const permissionSchema = Yup.object().shape({
     name: Yup.string()
@@ -11,9 +12,10 @@ export type Permission = {
     name: string
 }
 
-export const initialPermission = {
-    id: 0,
-    name: ""
+export const permissionInitial = (permission?: Permission) => {
+    return {
+        name: permission?.name || ""
+    }
 }
 
 export type PermissionQueryResponse = Response<Array<Permission>>

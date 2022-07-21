@@ -12,7 +12,7 @@ const CommunityList = () => {
         <>
             <PageTitle breadcrumbs={[]}>{'Communities'}</PageTitle>
             <KTCard>
-                <TableHeader name='Community' url='/communities' showAdd={false}/>
+                <TableHeader name='Community' url='/communities'/>
                 <CommunityTable/>
             </KTCard>
         </>
