@@ -51,13 +51,10 @@ const Marketing = () => {
                             type="submit"
                             className='mt-2 btn btn-primary'
                             onClick={notify}>
+                            {/* TODO: Change below Toast to be uniform across app*/}
                             <Toaster
                                 position={"top-right"}
                                 toastOptions={{
-                                    // Define default options
-                                    className: '',
-                                    duration: 5000,
-
                                     // Default options for specific types
                                     success: {
                                         duration: 3000,
