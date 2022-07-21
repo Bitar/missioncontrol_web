@@ -9,7 +9,7 @@ type Props = {
     showAdd?: boolean
 }
 
-const TableListToolbar: FC<Props> = ({name, url, showAdd = true}) => {
+const TableListToolbar: FC<Props> = ({name, url, showAdd}) => {
     return (
         <div className='d-flex justify-content-end' data-kt-user-table-toolbar='base'>
             {/* begin::Export */}

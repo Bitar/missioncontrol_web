@@ -35,9 +35,7 @@ const Marketing = () => {
                             className='svg-icon-3x svg-icon-primary position-absolute'
                         />
                     </div>
-                    {/* end::Icon */}
 
-                    {/* begin::Description */}
                     <div className='ms-6 '>
                         <h1>Community Invite Link</h1>
                         <p className='list-unstyled text-gray-600 fw-bold fs-6 p-0 m-0'>
@@ -65,12 +63,10 @@ const Marketing = () => {
                             Invite Link
                         </button>
                     </div>
-                    {/* end::Description */}
                 </div>
             </div>
             <div className='card mb-10'>
                 <div className='card-body d-flex align-items-center py-8'>
-                    {/* begin::Icon */}
                     <div className='d-flex h-80px w-80px flex-shrink-0 flex-center position-relative'>
                         <KTSVG
                             path='/media/icons/duotune/abstract/abs051.svg'
@@ -82,9 +78,7 @@ const Marketing = () => {
                             className='svg-icon-3x svg-icon-primary position-absolute'
                         />
                     </div>
-                    {/* end::Icon */}
 
-                    {/* begin::Description */}
                     <div className='ms-6'>
                         <h1>Graphic Templates</h1>
                         <p className='list-unstyled text-gray-600 fw-bold fs-6 p-0 m-0'>
@@ -94,7 +88,6 @@ const Marketing = () => {
                             edit access in Adobe Illustrator, PowerPoint, Canva and more.
                         </p>
                     </div>
-                    {/* end::Description */}
 
                 </div>
             </div>
@@ -145,7 +138,6 @@ const Marketing = () => {
             </div>
             <div className='card mb-10'>
                 <div className='card-body d-flex align-items-center py-8 '>
-                    {/* begin::Icon */}
                     <div className='d-flex h-80px w-80px flex-shrink-0 flex-center position-relative'>
                         <KTSVG
                             path='/media/icons/duotune/abstract/abs051.svg'
@@ -157,8 +149,6 @@ const Marketing = () => {
                             className='svg-icon-3x svg-icon-primary position-absolute'
                         />
                     </div>
-                    {/* end::Icon */}
-                    {/* begin::Description */}
                     <div className='ms-6'>
                         <h1>Town Hall with CEO Austin Smith</h1>
                         <p className='list-unstyled text-gray-600 fw-bold fs-6 p-0 m-0'>
@@ -173,7 +163,6 @@ const Marketing = () => {
                             </a>
                         </div>
                     </div>
-                    {/* end::Description */}
                 </div>
             </div>
             <div className='d-flex flex-wrap flex-stack mb-6'>
@@ -185,7 +174,6 @@ const Marketing = () => {
 
             <div className='card mb-10'>
                 <div className='card-body d-flex align-items-center py-8 '>
-                    {/* begin::Icon */}
                     <div className='d-flex h-80px w-80px flex-shrink-0 flex-center position-relative'>
                         <KTSVG
                             path='/media/icons/duotune/abstract/abs051.svg'
@@ -197,24 +185,15 @@ const Marketing = () => {
                             className='svg-icon-3x svg-icon-primary position-absolute'
                         />
                     </div>
-                    {/* end::Icon */}
-                    {/* begin::Description */}
-                    <div className='ms-6'>
 
+                    <div className='ms-6'>
                         <h1>Email Admin Support</h1>
-                        {/* <p className='list-unstyled text-gray-600 fw-bold fs-6 p-0 m-0'>
-              support@missioncontrol.gg
-              </p>  */}
                         <div className="mt-2">
                             <a href="mailto:support@missioncontrol.gg" target="_blank" rel="noreferrer">
-                                <button type="submit"
-                                        className='btn btn-primary'
-                                >Email
-                                </button>
+                                <button type="submit" className='btn btn-primary'>Email</button>
                             </a>
                         </div>
                     </div>
-                    {/* end::Description */}
                 </div>
             </div>
 
