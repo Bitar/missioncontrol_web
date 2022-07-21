@@ -7,21 +7,22 @@ import {EngageWidget3} from '../../partials/widgets/EngageWidget3';
 import {EngageWidget4} from "../../partials/widgets/EngageWidget4";
 
 const DashboardPage: FC = () => {
-    const {communityAdmin} = useAuth()
+    const {auth} = useAuth()
 
     return (
         <>
             <div className='row gy-5 g-xl-8'>
                 <div className='col-xl-12'>
-                    {communityAdmin ? (
-                    <div></div>
-                    ) : (
+                    {/*TODO: Check if request has been done.*/}
+                    {auth && !auth.active_community ? (
                         <>
-                        <EngageWidget3
-                        bgHex={'#FFFFFF'} />
-                        <EngageWidget4
-                        bgHex={	'#110055'} />
+                            <EngageWidget3
+                                bgHex={'#FFFFFF'}/>
+                            <EngageWidget4
+                                bgHex={'#110055'}/>
                         </>
+                    ) : (
+                        <div></div>
                     )}
                 </div>
             </div>

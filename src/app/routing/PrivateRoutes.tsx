@@ -3,7 +3,6 @@ import {Route, Routes, Navigate} from 'react-router-dom'
 import {MasterLayout} from '../../_metronic/layout/MasterLayout'
 import TopBarProgress from 'react-topbar-progress-indicator'
 import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper'
-import {MenuTestPage} from '../pages/MenuTestPage'
 import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
 import {RolesIndex} from "../sections/identity/role/RolesIndex";
 import {PermissionsIndex} from "../sections/identity/permission/PermissionsIndex";
@@ -16,7 +15,6 @@ import {GamesIndex} from '../sections/games/GamesIndex'
 import {GameCreate} from '../sections/games/GameCreate'
 import {GamesEdit} from '../sections/games/GameEdit'
 import {Marketing} from '../pages/marketing/Marketing'
-import {Support} from '../pages/support/Support'
 import {BillingPlanWrapper} from "../sections/billing/BillingPlanWrapper";
 import {CommunityCreate} from "../sections/community/CommunityCreate";
 import {PlansIndex} from '../sections/billing/plan/PlansIndex'
@@ -28,7 +26,6 @@ import {CommunityIndex} from "../sections/community/CommunityIndex";
 import {CommunityView} from '../sections/community/CommunityView'
 import {CommunityFollower} from '../sections/community/CommunityFollowers'
 import {ActivityCreate} from "../sections/activities/ActivityCreate";
-
 
 const PrivateRoutes = () => {
     // const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -44,7 +41,8 @@ const PrivateRoutes = () => {
                 <Route path='auth/*' element={<Navigate to='/dashboard'/>}/>
                 {/* Pages */}
                 <Route path='dashboard' element={<DashboardWrapper/>}/>
-                <Route path='menu-test' element={<MenuTestPage/>}/>
+                {/*<Route path='menu-test' element={<MenuTestPage/>}/>*/}
+                <Route path='marketing-support' element={<Marketing/>}/>
                 {/* Pages */}
 
                 <Route path='billing/plan' element={<BillingPlanWrapper/>}/>
@@ -73,8 +71,9 @@ const PrivateRoutes = () => {
                 <Route path='activities/create' element={<ActivityCreate/>}/>
 
                 <Route path='games' element={<GamesIndex/>}/>
-                <Route path='marketing' element={<Marketing/>}/>
-                <Route path='support' element={<Support/>}/>
+
+                {/*<Route path='marketing' element={<Marketing/>}/>*/}
+                {/*<Route path='support' element={<Support/>}/>*/}
 
                 <Route path='plans' element={<PlansIndex/>}/>
                 <Route path='plans/create' element={
@@ -148,48 +147,6 @@ const PrivateRoutes = () => {
                     }
                 />
 
-
-                {/* Lazy Modules */}
-                <Route
-                    path='crafted/pages/profile/*'
-                    element={
-                        <SuspensedView>
-                            {/* <ProfilePage/> */}
-                        </SuspensedView>
-                    }
-                />
-                <Route
-                    path='crafted/pages/wizards/*'
-                    element={
-                        <SuspensedView>
-                            {/* <WizardsPage/> */}
-                        </SuspensedView>
-                    }
-                />
-                <Route
-                    path='crafted/widgets/*'
-                    element={
-                        <SuspensedView>
-                            {/* <WidgetsPage/> */}
-                        </SuspensedView>
-                    }
-                />
-                <Route
-                    path='crafted/account/*'
-                    element={
-                        <SuspensedView>
-                            {/* <AccountPage/> */}
-                        </SuspensedView>
-                    }
-                />
-                <Route
-                    path='apps/chat/*'
-                    element={
-                        <SuspensedView>
-                            {/* <ChatPage/> */}
-                        </SuspensedView>
-                    }
-                />
                 {/* Page Not Found */}
                 <Route path='*' element={<Navigate to='/error/404'/>}/>
             </Route>

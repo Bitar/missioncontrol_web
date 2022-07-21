@@ -5,10 +5,10 @@ import {FC} from "react";
 type Props = {
     name: string,
     url: string,
-    showAdd: boolean
+    showAdd?: boolean
 }
 
-const TableListToolbar: FC<Props> = ({name, url, showAdd}) => {
+const TableListToolbar: FC<Props> = ({name, url, showAdd = true}) => {
     return (
         <div className='d-flex justify-content-end' data-kt-user-table-toolbar='base'>
             {/* begin::Export */}

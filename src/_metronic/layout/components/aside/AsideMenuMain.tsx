@@ -41,21 +41,22 @@ export function AsideMenuMain() {
                 menuIcon='font'
             >
             </AsideMenuItem>
-            <AsideMenuItem
-                to='/marketing'
-                title='Marketing'
-                // fontIcon='bi-archive'
-                icon='/media/icons/duotune/general/gen022.svg'
-            >
-            </AsideMenuItem>
 
-            <AsideMenuItem
-                to='/support'
-                title='Support'
-                // fontIcon='bi-archive'
-                icon='/media/icons/duotune/general/gen022.svg'
-            >
-            </AsideMenuItem>
+            {/*<AsideMenuItem*/}
+            {/*    to='/marketing'*/}
+            {/*    title='Marketing'*/}
+            {/*    // fontIcon='bi-archive'*/}
+            {/*    icon='/media/icons/duotune/general/gen022.svg'*/}
+            {/*>*/}
+            {/*</AsideMenuItem>*/}
+
+            {/*<AsideMenuItem*/}
+            {/*    to='/support'*/}
+            {/*    title='Support'*/}
+            {/*    // fontIcon='bi-archive'*/}
+            {/*    icon='/media/icons/duotune/general/gen022.svg'*/}
+            {/*>*/}
+            {/*</AsideMenuItem>*/}
 
 
             <div className='menu-item'>
