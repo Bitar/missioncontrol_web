@@ -10,10 +10,11 @@ const submitForm = async (fun: any, model: any, to: any, id?: any) => {
         } else {
             await fun(model);
         }
-    } catch (ex) {
-        console.error(ex);
-    } finally {
+
         to();
+    } catch (ex) {
+        // TODO: Return Error and handle Error Ness.
+        console.error(ex);
     }
 };
 

@@ -7,16 +7,16 @@ import * as Yup from "yup";
 
 export const communitySchema = Yup.object().shape({
     name: Yup.string().required('Community name is required'),
-    description: Yup.string().required('Community description is required'),
-    contact:Yup.object().shape({
+    // description: Yup.string().required('Community description is required'),
+    contact: Yup.object().shape({
         name: Yup.string().required('Contact name is required'),
         email: Yup.string().email('Please enter a valid email').required('Contact email is required'),
-        phone_number :Yup.string().required('Contact phone number is required'),
+        phone_number: Yup.string().required('Contact phone number is required'),
     }),
-    address:Yup.object().shape({
+    address: Yup.object().shape({
         address_one: Yup.string().required('Contact address is required'),
-        address_two: Yup.string(),
-        city :Yup.string().required('City is required'),
+        // address_two: Yup.string(),
+        city: Yup.string().required('City is required'),
         // state_province: Yup.string().required('State Province is required'),
         postal_code: Yup.string().required('Postal Code is required'),
         // country_code: Yup.string().required('Country Code is required'),
@@ -26,21 +26,21 @@ export const communitySchema = Yup.object().shape({
 
 export const initialCommunity: Community = {
     name: '',
-    logo: '',
-    banner_image: '',
+    // logo: '',
+    // banner_image: '',
     is_featured: false,
-    description: '',
+    // description: '',
     address: initialCommunityAddress,
     contact: initialCommunityContact,
-    access: initialCommunityAccess,
-    is_follow: false
+    // access: initialCommunityAccess,
+    // is_follow: false
 }
 
 export type Community = {
     id?: ID,
     name: string,
     logo?: string,
-    banner_image?:string,
+    banner_image?: string,
     is_featured?: boolean,
     description?: string,
     address?: CommunityAddress,

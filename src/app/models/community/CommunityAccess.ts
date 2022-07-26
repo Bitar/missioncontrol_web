@@ -10,8 +10,8 @@ export type CommunityAccess = {
 }
 
 export const initialCommunityAccess = {
-    type: 1,
-    key: 1,
+    type: 0,
+    key: 0,
     value: ''
 }
 
