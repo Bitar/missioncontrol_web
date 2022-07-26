@@ -5,6 +5,7 @@ import {marketingData} from "./data/MarketingData";
 import {support} from "./data/SupportData";
 import {Card7} from "../../../_metronic/partials/content/cards/Card7";
 import toast, {Toaster} from "react-hot-toast";
+import {MCToaster} from "../../helpers/ToastHelper"
 
 const Marketing = () => {
     useEffect(() => {
@@ -50,16 +51,16 @@ const Marketing = () => {
                             className='mt-2 btn btn-primary'
                             onClick={notify}>
                             {/* TODO: Change below Toast to be uniform across app*/}
-                            <Toaster
-                                position={"top-right"}
-                                toastOptions={{
-                                    // Default options for specific types
-                                    success: {
-                                        duration: 3000,
-                                        className: 'bg-success text-light',
-                                    },
-                                }}
-                            />
+                            {/*<Toaster*/}
+                            {/*    position={"top-right"}*/}
+                            {/*    toastOptions={{*/}
+                            {/*        // Default options for specific types*/}
+                            {/*        success: {*/}
+                            {/*            duration: 3000,*/}
+                            {/*            className: 'bg-success text-light',*/}
+                            {/*        },*/}
+                            {/*    }}*/}
+                            {/*/>*/}
                             Invite Link
                         </button>
                     </div>

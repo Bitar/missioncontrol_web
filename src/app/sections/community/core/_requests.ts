@@ -1,7 +1,8 @@
-import axios, {AxiosResponse} from 'axios'
+import axios, {AxiosError, AxiosResponse} from 'axios'
 import {Response} from '../../../../_metronic/helpers';
 import {Community, CommunityQueryResponse } from "../../../models/community/Community";
 import { CommunityFollowersQueryResponse,} from '../../../models/community/CommunityFollowers';
+import {Simulate} from "react-dom/test-utils";
 // import process from "process";
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -20,7 +21,7 @@ const getCommunityById = (id: any, query : String | undefined): Promise<Communit
         .then((response: Response<Community>) => response.data)
 }
 
-const createCommunity = (formData: FormData): Promise<Community | undefined> => {
+const createCommunity = (formData: FormData): Promise<Community | undefined | void> => {
     console.log(formData)
     return axios
         .post(`${GET_COMMUNITIES_URL}`, formData)

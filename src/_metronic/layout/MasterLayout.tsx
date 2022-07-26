@@ -1,4 +1,4 @@
-import {useEffect} from 'react'
+import React, {useEffect} from 'react'
 import {Outlet} from 'react-router-dom'
 import {AsideDefault} from './components/aside/AsideDefault'
 import {Footer} from './components/Footer'
@@ -9,6 +9,7 @@ import {Content} from './components/Content'
 import {PageDataProvider} from './core'
 import {useLocation} from 'react-router-dom'
 import {MenuComponent} from '../assets/ts/components'
+import {MCToaster} from "../../app/helpers/ToastHelper";
 
 const MasterLayout = () => {
     const location = useLocation()
@@ -34,6 +35,7 @@ const MasterLayout = () => {
                     <div id='kt_content' className='content d-flex flex-column flex-column-fluid'>
                         <Toolbar/>
                         <div className='post d-flex flex-column-fluid' id='kt_post'>
+                            <MCToaster/>
                             <Content>
                                 <Outlet/>
                             </Content>
