@@ -4,8 +4,7 @@ import {PageTitle} from "../../../_metronic/layout/core";
 import {marketingData} from "./data/MarketingData";
 import {support} from "./data/SupportData";
 import {Card7} from "../../../_metronic/partials/content/cards/Card7";
-import toast, {Toaster} from "react-hot-toast";
-import {MCToaster} from "../../helpers/ToastHelper"
+import toast from "react-hot-toast";
 
 const Marketing = () => {
     useEffect(() => {

@@ -1,9 +1,7 @@
-import axios, {AxiosError, AxiosResponse} from 'axios'
+import axios, {AxiosResponse} from 'axios'
 import {Response} from '../../../../_metronic/helpers';
-import {Community, CommunityQueryResponse } from "../../../models/community/Community";
-import { CommunityFollowersQueryResponse,} from '../../../models/community/CommunityFollowers';
-import {Simulate} from "react-dom/test-utils";
-// import process from "process";
+import {Community, CommunityQueryResponse} from "../../../models/community/Community";
+import {CommunityFollowersQueryResponse,} from '../../../models/community/CommunityFollowers';
 
 const API_URL = process.env.REACT_APP_API_URL
 const GET_COMMUNITIES_URL = `${API_URL}/communities`
@@ -14,7 +12,7 @@ const getCommunities = (query: String): Promise<CommunityQueryResponse> => {
         .then((response: AxiosResponse<CommunityQueryResponse>) => response.data)
 }
 
-const getCommunityById = (id: any, query : String | undefined): Promise<Community | undefined> => {
+const getCommunityById = (id: any, query: String | undefined): Promise<Community | undefined> => {
     return axios
         .get(`${GET_COMMUNITIES_URL}/${id}?${query}`)
         .then((response: AxiosResponse<Response<Community>>) => response.data)
@@ -22,7 +20,7 @@ const getCommunityById = (id: any, query : String | undefined): Promise<Communit
 }
 
 const createCommunity = (formData: FormData): Promise<Community | undefined | void> => {
-    console.log(formData)
+    // console.log(formData)
     return axios
         .post(`${GET_COMMUNITIES_URL}`, formData)
         .then((response: AxiosResponse<Response<Community>>) => response.data)
@@ -36,4 +34,4 @@ const getCommunityFollowers = (id: any): Promise<CommunityFollowersQueryResponse
         .then((response: AxiosResponse<CommunityFollowersQueryResponse>) => response.data)
 }
 
-export {getCommunities, getCommunityById, createCommunity,getCommunityFollowers}
+export {getCommunities, getCommunityById, createCommunity, getCommunityFollowers}

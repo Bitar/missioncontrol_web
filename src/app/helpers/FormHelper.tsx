@@ -1,4 +1,4 @@
-import axios, {AxiosError} from "axios";
+import axios from "axios";
 import toast from "react-hot-toast";
 
 const updateData = (fieldsToUpdate: Partial<any>, setFunction: any, model: any) => {
@@ -15,24 +15,20 @@ const submitForm = async (fun: any, model: any, to: any, id?: any) => {
         }
 
         toast.success('Successful')
+
         to();
     } catch (exception) {
+        // TODO: Return Error and handle Error Ness.
         if (axios.isAxiosError(exception)) {
-            if (exception.response?.status == 422) {
-                let validation_errors = exception.response?.data.error.validation
+            if (exception.response?.status === 422) {
+                // let validation_errors = exception.response?.data.error.validation
                 // console.log(exception.response?.data.error.validation)
 
                 toast.error('Validation Error')
             }
-            console.log(exception.response?.status)
-            // Access to config, request, and response
         } else {
             console.log(exception)
-            // Just a stock error
         }
-
-
-        // TODO: Return Error and handle Error Ness.
     }
 }
 

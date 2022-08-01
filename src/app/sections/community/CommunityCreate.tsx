@@ -1,8 +1,7 @@
 import {PageTitle} from "../../../_metronic/layout/core";
-import {isNotEmpty, KTCard, KTCardBody} from "../../../_metronic/helpers";
+import {KTCard, KTCardBody} from "../../../_metronic/helpers";
 import clsx from "clsx";
-import {ErrorMessage, Field, Form, Formik, FormikProvider, getIn, useFormik} from "formik";
-import * as Yup from "yup";
+import {ErrorMessage, Field, Form, Formik, getIn} from "formik";
 import {Community, communitySchema, initialCommunity} from "../../models/community/Community";
 import {createCommunity} from "./core/_requests";
 import {useNavigate} from "react-router-dom";
@@ -99,11 +98,11 @@ const CommunityCreate = () => {
         if (target_name.includes('address.')) {
             let address_field = target_name.split("address.")[1]
             updateData({[address_field]: event.target.value}, setCommunityAddress, communityAddress);
-            updateData({['address']: communityAddress}, setCommunity, community);
+            updateData({'address': communityAddress}, setCommunity, community);
         } else if (target_name.includes('contact.')) {
             let contact_field = target_name.split("contact.")[1]
             updateData({[contact_field]: event.target.value}, setCommunityContact, communityContact);
-            updateData({['contact']: communityContact}, setCommunity, community);
+            updateData({'contact': communityContact}, setCommunity, community);
         } else {
             updateData({[event.target.name]: event.target.value}, setCommunity, community);
         }

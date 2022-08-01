@@ -1,7 +1,7 @@
 import {ID, Response} from "../../../_metronic/helpers";
 import {CommunityAddress, initialCommunityAddress} from "./CommunityAddress";
 import {CommunityContact, initialCommunityContact} from "./CommunityContact";
-import {CommunityAccess, initialCommunityAccess} from "./CommunityAccess";
+import {CommunityAccess} from "./CommunityAccess";
 import {Game} from "../game/Game";
 import * as Yup from "yup";
 

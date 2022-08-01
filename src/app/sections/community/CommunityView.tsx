@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react"
-import {KTSVG,} from "../../../_metronic/helpers"
 import {PageTitle} from "../../../_metronic/layout/core"
 import {getCommunityById} from "./core/_requests"
 import {Community} from "../../models/community/Community"
-import {Link, Navigate, Outlet, Route, Routes, useParams} from "react-router-dom"
+import {Navigate, Outlet, Route, Routes, useParams} from "react-router-dom"
 import {CommunityFollower} from "./CommunityFollowers"
 import {CommunityInfo} from "./CommunityInfo";
 

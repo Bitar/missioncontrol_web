@@ -1,6 +1,5 @@
 import {ID, Response} from "../../../_metronic/helpers";
 import * as Yup from "yup";
-import {Role} from "./Role";
 
 export const permissionSchema = Yup.object().shape({
     name: Yup.string()

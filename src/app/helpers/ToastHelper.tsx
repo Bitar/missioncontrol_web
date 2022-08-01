@@ -1,6 +1,5 @@
-import toast, {Toaster, ToastPosition} from "react-hot-toast";
+import {Toaster} from "react-hot-toast";
 import React, {FC} from "react";
-
 
 const MCToaster: FC = () => {
     return (
@@ -21,14 +20,6 @@ const MCToaster: FC = () => {
             />
         </>
     )
-}
-
-const notifySuccess = (text: string) => {
-    toast.success(text)
-}
-
-const notifyErrpr = (text: string) => {
-    toast.success(text)
 }
 
 export {MCToaster}
