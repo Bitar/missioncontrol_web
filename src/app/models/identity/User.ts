@@ -1,5 +1,6 @@
 import {ID, Response} from "../../../_metronic/helpers";
 import * as Yup from "yup";
+import {Role} from "./Role";
 
 let schema = {
     first_name: Yup.string()
@@ -41,7 +42,7 @@ export type User = {
     email: string
     password?: string
     password_confirmation?: string
-    // roles: Role[]
+    roles: Role[]
     meta?: UserMeta
 }
 
@@ -57,7 +58,8 @@ export const userInitial = (user?: User) => {
         last_name: user?.last_name || "",
         email: user?.email || "",
         password: "",
-        password_confirmation: ""
+        password_confirmation: "",
+        roles: []
     }
 }
 

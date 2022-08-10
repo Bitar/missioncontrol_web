@@ -1,14 +1,19 @@
 import axios, {AxiosResponse} from 'axios'
 import {Response} from "../../../../../_metronic/helpers";
 import {Role, RolesQueryResponse} from "../../../../models/identity/Role";
-import {Permission} from "../../../../models/identity/Permission";
 
 const API_URL = process.env.REACT_APP_API_URL
 const GET_ROLES_URL = `${API_URL}/roles`
 
-const getRoles = (query: string): Promise<RolesQueryResponse> => {
+const getRoles = (query?: string): Promise<RolesQueryResponse> => {
+    let url = `${GET_ROLES_URL}`;
+
+    if (query) {
+        url += `?${query}`
+    }
+
     return axios
-        .get(`${GET_ROLES_URL}?${query}`)
+        .get(url)
         .then((d: AxiosResponse<RolesQueryResponse>) => d.data)
 }
 

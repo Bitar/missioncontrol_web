@@ -5,6 +5,8 @@ import {useNavigate, useParams} from "react-router-dom";
 import {getUserById, updateUser} from "./core/_requests";
 import {submitForm, updateData} from "../../../helpers/FormHelper";
 import {User, userInitial, userSchema} from "../../../models/identity/User";
+import AsyncSelect from "react-select/async";
+import {getRoles} from "../role/core/_requests";
 
 const UsersEdit = () => {
     const [user, setUser] = useState<User | undefined>();
@@ -28,6 +30,27 @@ const UsersEdit = () => {
             setUser(response);
         });
     }, [params.id]);
+
+    const loadRoles = (searchValue: any, callback: any) => {
+        getRoles().then(response => {
+            let roles: any[] = [];
+
+            response?.data?.forEach(function (value) {
+                roles.push({value: value.id, label: value.name, original: value});
+            });
+
+            callback(roles);
+        })
+    }
+
+    const handleChange = (selectedOption: any) => {
+        let rolesObject = selectedOption.map((option: any) => {
+            delete option.original.name
+            return option.original
+        })
+
+        updateData({'roles': rolesObject}, setUser, user);
+    }
 
     return (
         <>
@@ -88,6 +111,18 @@ const UsersEdit = () => {
                                                             placeholder="Email"
                                                             className={"form-control mb-3 mb-lg-0"}
                                                             autoComplete="off"
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div className='row mb-6'>
+                                                    <label className='col-lg-4 col-form-label required fw-bold fs-6'>Roles</label>
+                                                    <div className='col-lg-8 fv-row'>
+                                                        <AsyncSelect
+                                                            loadOptions={loadRoles}
+                                                            defaultOptions
+                                                            isMulti
+                                                            onChange={handleChange}
                                                         />
                                                     </div>
                                                 </div>

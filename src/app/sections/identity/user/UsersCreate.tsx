@@ -5,6 +5,8 @@ import {useNavigate} from "react-router-dom";
 import {createUser} from "./core/_requests";
 import {submitForm, updateData} from "../../../helpers/FormHelper";
 import {User, userInitial, userSchema} from "../../../models/identity/User";
+import {getRoles} from "../role/core/_requests";
+import AsyncSelect from "react-select/async";
 
 const UsersCreate = () => {
     const [user, setUser] = useState<User>(userInitial);
@@ -22,6 +24,27 @@ const UsersCreate = () => {
         updateData({[event.target.name]: event.target.value}, setUser, user);
     };
 
+    const loadRoles = (searchValue: any, callback: any) => {
+        getRoles().then(response => {
+            let roles: any[] = [];
+
+            response?.data?.forEach(function (value) {
+                roles.push({value: value.id, label: value.name, original: value});
+            });
+
+            callback(roles);
+        })
+    }
+
+    const handleChange = (selectedOption: any) => {
+        let rolesObject = selectedOption.map((option: any) => {
+            delete option.original.name
+            return option.original
+        })
+
+        updateData({'roles': rolesObject}, setUser, user);
+    }
+
     return (
         <>
             <KTCard>
@@ -37,7 +60,7 @@ const UsersCreate = () => {
                 </div>
                 <Formik initialValues={user} onSubmit={handleSubmit} validationSchema={userSchema(true)}>
                     {
-                        ({isSubmitting, isValid, touched, errors}) => {
+                        ({isSubmitting, isValid, touched}) => {
                             return (
                                 <>
                                     <Form onChange={handleOnChange} className="form">
@@ -110,6 +133,18 @@ const UsersCreate = () => {
                                                             placeholder="Password"
                                                             className={"form-control mb-3 mb-lg-0"}
                                                             autoComplete="off"
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div className='row mb-6'>
+                                                    <label className='col-lg-4 col-form-label required fw-bold fs-6'>Roles</label>
+                                                    <div className='col-lg-8 fv-row'>
+                                                        <AsyncSelect
+                                                            loadOptions={loadRoles}
+                                                            defaultOptions
+                                                            isMulti
+                                                            onChange={handleChange}
                                                         />
                                                     </div>
                                                 </div>
