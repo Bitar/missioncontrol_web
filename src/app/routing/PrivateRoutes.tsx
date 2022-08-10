@@ -25,6 +25,7 @@ import {SubscriptionIndex} from "../sections/billing/subscriptions/SubscriptionI
 import {CommunityIndex} from "../sections/community/CommunityIndex";
 import {CommunityView} from '../sections/community/CommunityView'
 import {UsersPage} from "../sections/identity/user/UsersPage";
+import {RolesPage} from "../sections/identity/role/RolesPage";
 
 
 const PrivateRoutes = () => {
@@ -41,6 +42,7 @@ const PrivateRoutes = () => {
 
                 {/* Sections */}
                 <Route path='users/*' element={<UsersPage/>}/>
+                <Route path='roles/*' element={<RolesPage/>}/>
                 {/* Sections */}
 
                 <Route path='billing/plan' element={<BillingPlanWrapper/>}/>
@@ -75,25 +77,6 @@ const PrivateRoutes = () => {
                     element={
                         <SuspensedView>
                             <PlansEdit/>
-                        </SuspensedView>
-                    }
-                />
-
-                <Route path='roles' element={<RolesIndex/>}/>
-                <Route
-                    path='roles/create'
-                    element={
-                        <SuspensedView>
-                            <RolesCreate/>
-                        </SuspensedView>
-                    }
-                />
-
-                <Route
-                    path='roles/:id/edit'
-                    element={
-                        <SuspensedView>
-                            <RolesEdit/>
                         </SuspensedView>
                     }
                 />

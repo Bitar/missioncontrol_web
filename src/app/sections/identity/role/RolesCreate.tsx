@@ -1,8 +1,6 @@
 import React, {useState} from "react";
 import {Form, Field, Formik} from "formik";
 import {KTCard, KTCardBody} from "../../../../_metronic/helpers";
-import clsx from "clsx";
-import {PageTitle} from "../../../../_metronic/layout/core";
 import {useNavigate} from "react-router-dom";
 import {Role, roleInitial, roleSchema} from "../../../models/identity/Role";
 import {createRole} from "./core/_requests";
@@ -27,7 +25,6 @@ const RolesCreate = () => {
 
     return (
         <>
-            <PageTitle breadcrumbs={[]}>{"Roles"}</PageTitle>
             <KTCard>
                 <div className="card-header">
                     <div className="card-title">
@@ -39,46 +36,37 @@ const RolesCreate = () => {
                         </h3>
                     </div>
                 </div>
-                <KTCardBody className="py-4">
-                    <Formik initialValues={role} onSubmit={handleSubmit} validationSchema={roleSchema}>
-                        {
-                            ({isSubmitting, isValid, touched, errors}) => (
+                <Formik initialValues={role} onSubmit={handleSubmit} validationSchema={roleSchema}>
+                    {
+                        ({isSubmitting, isValid, touched, errors}) => (
+                            <>
                                 <Form onChange={handleOnChange} className="form">
-                                    {/* begin::Scroll */}
-                                    <div className="d-flex flex-column me-n7 pe-7 pt-5">
-                                        <div className="row mb-6">
-                                            <label
-                                                className="col-lg-4 col-form-label required fw-bold fs-6">Name</label>
-                                            <div className="col-lg-8 fv-row">
-                                                <Field
-                                                    type="text"
-                                                    name="name"
-                                                    placeholder="Name"
-                                                    className="form-control mb-3 mb-lg-0"
-                                                    autoComplete="off"
-                                                    disabled={isSubmitting}
-                                                />
+                                    <KTCardBody className="py-4">
+                                        <div className="d-flex flex-column me-n7 pe-7 pt-5">
+                                            <div className="row mb-6">
+                                                <label
+                                                    className="col-lg-4 col-form-label required fw-bold fs-6">Name</label>
+                                                <div className="col-lg-8 fv-row">
+                                                    <Field
+                                                        type="text"
+                                                        name="name"
+                                                        placeholder="Name"
+                                                        className="form-control mb-3 mb-lg-0"
+                                                        autoComplete="off"
+                                                        disabled={isSubmitting}
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div className="py-5">
-                                        <button
-                                            type="reset"
-                                            onClick={() => toIndex()}
-                                            className="btn btn-light me-3"
-                                            data-kt-users-modal-action="cancel"
-                                            disabled={isSubmitting}>
-                                            Cancel
-                                        </button>
-
+                                    </KTCardBody>
+                                    <div className="card-footer d-flex justify-content-end py-6 px-9">
                                         <button
                                             type="submit"
-                                            className="btn btn-primary"
+                                            className="btn btn-light-primary btn-active-primary btn-sm"
                                             data-kt-users-modal-action="submit"
                                             disabled={isSubmitting || !isValid || !touched}
                                         >
-                                            <span className="indicator-label">Submit</span>
+                                            <span className="indicator-label">Add Role</span>
                                             {(isSubmitting) && (
                                                 <span className="indicator-progress">
                                                     Please wait...{" "}
@@ -88,12 +76,11 @@ const RolesCreate = () => {
                                             )}
                                         </button>
                                     </div>
-                                    {/* end::Actions */}
                                 </Form>
-                            )
-                        }
-                    </Formik>
-                </KTCardBody>
+                            </>
+                        )
+                    }
+                </Formik>
             </KTCard>
         </>
     );

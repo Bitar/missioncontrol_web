@@ -1,7 +1,7 @@
 import {ID, Response} from "../../../_metronic/helpers";
 import * as Yup from "yup";
 
-export const userSchema = (password: false) => Yup.object().shape({
+let schema = {
     first_name: Yup.string()
         .required("First name is required"),
     last_name: Yup.string()
@@ -9,20 +9,29 @@ export const userSchema = (password: false) => Yup.object().shape({
     email: Yup.string()
         .email()
         .required("Email is required"),
-    // password: Yup.string()
-    //     .min(8, "Minimum 8 symbols")
-    //     .max(50, "Maximum 50 symbols")
-    //     .required("Password is required"),
-    // password_confirmation: Yup.string()
-    //     .required("Password confirmation is required")
-    //     .when("password", {
-    //         // is: (val: string) => (val && val.length > 0 ? true : false),
-    //         is: (val: string) => (!!(val && val.length > 0)),
-    //         then: Yup.string().oneOf([Yup.ref("password")], "Password and Confirm Password didn't match")
-    //     }),
-    // roles: Yup.array()
-    //     .required("Role is required")
-});
+}
+
+export const userSchema = (password: boolean) => {
+    if (password) {
+        schema = {
+            ...schema, ...{
+                password: Yup.string()
+                    .min(8, "Minimum 8 symbols")
+                    .max(50, "Maximum 50 symbols")
+                    .required("Password is required"),
+                password_confirmation: Yup.string()
+                    .required("Password confirmation is required")
+                    .when("password", {
+                        // is: (val: string) => (val && val.length > 0 ? true : false),
+                        is: (val: string) => (!!(val && val.length > 0)),
+                        then: Yup.string().oneOf([Yup.ref("password")], "Password and Confirm Password didn't match")
+                    }),
+            }
+        }
+    }
+
+    return Yup.object().shape(schema)
+};
 
 export type User = {
     id?: ID
