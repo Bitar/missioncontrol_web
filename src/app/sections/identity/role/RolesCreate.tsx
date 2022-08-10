@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Form, Field, Formik } from "formik";
-import { KTCard, KTCardBody } from "../../../../_metronic/helpers";
+import React, {useState} from "react";
+import {Form, Field, Formik} from "formik";
+import {KTCard, KTCardBody} from "../../../../_metronic/helpers";
 import clsx from "clsx";
-import { PageTitle } from "../../../../_metronic/layout/core";
-import { useNavigate } from "react-router-dom";
-import { Role, roleInitial, roleSchema } from "../../../models/identity/Role";
-import { createRole } from "./core/_requests";
-import { submitForm, updateData } from "../../../helpers/FormHelper";
+import {PageTitle} from "../../../../_metronic/layout/core";
+import {useNavigate} from "react-router-dom";
+import {Role, roleInitial, roleSchema} from "../../../models/identity/Role";
+import {createRole} from "./core/_requests";
+import {submitForm, updateData} from "../../../helpers/FormHelper";
 
 const RolesCreate = () => {
     const [role, setRole] = useState<Role>(roleInitial);
@@ -32,7 +32,7 @@ const RolesCreate = () => {
                 <div className="card-header">
                     <div className="card-title">
                         <span className="card-icon">
-                            <i className="las la-plus fs-2" />
+                            <i className="las la-plus fs-2"/>
                         </span>
                         <h3 className="card-label">
                             Add Role
@@ -42,8 +42,8 @@ const RolesCreate = () => {
                 <KTCardBody className="py-4">
                     <Formik initialValues={role} onSubmit={handleSubmit} validationSchema={roleSchema}>
                         {
-                            ({ isSubmitting, isValid, touched, errors }) => (
-                                <Form onChange={handleOnChange} className="form" >
+                            ({isSubmitting, isValid, touched, errors}) => (
+                                <Form onChange={handleOnChange} className="form">
                                     {/* begin::Scroll */}
                                     <div className="d-flex flex-column me-n7 pe-7 pt-5">
                                         <div className="row mb-6">
@@ -54,10 +54,7 @@ const RolesCreate = () => {
                                                     type="text"
                                                     name="name"
                                                     placeholder="Name"
-                                                    className={clsx("form-control mb-3 mb-lg-0",
-                                                        { "is-invalid": touched.name && errors.name },
-                                                        { "is-valid": touched.name && !errors.name }
-                                                    )}
+                                                    className="form-control mb-3 mb-lg-0"
                                                     autoComplete="off"
                                                     disabled={isSubmitting}
                                                 />
@@ -86,7 +83,7 @@ const RolesCreate = () => {
                                                 <span className="indicator-progress">
                                                     Please wait...{" "}
                                                     <span
-                                                        className="spinner-border spinner-border-sm align-middle ms-2" />
+                                                        className="spinner-border spinner-border-sm align-middle ms-2"/>
                                                 </span>
                                             )}
                                         </button>
@@ -102,4 +99,4 @@ const RolesCreate = () => {
     );
 };
 
-export { RolesCreate };
+export {RolesCreate};

@@ -61,14 +61,12 @@ export function Registration() {
             values.changepassword
         )
 
-        console.log(data)
-
-        if(data.status === 200) {
+        if (data.status === 200) {
           const auth = data.data
           saveAuth(auth)
           // const {data: identity} = await getUserByToken(auth.token)
           setCurrentUser(auth.data)
-        } else if(data.status === 422) {
+        } else if (data.status === 422) {
           // Unprocessed Entity
           setStatus(data.data.errors.email[0])
         }

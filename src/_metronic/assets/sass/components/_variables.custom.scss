@@ -34,3 +34,18 @@ $warning: if(isDarkMode(), #ffa800, #ffc700);
 $warning-active: if(isDarkMode(), #ee9d01, #f1bc00);
 $warning-light: if(isDarkMode(), #392f28, #fff8dd);
 $warning-inverse: #ffffff;
+
+$mc-primary: #110055;
+$mc-primary-active: darken(#110055, 3%);
+$mc-primary-light: if(isDarkMode(), darken(#110055, 42%), lighten(#110055, 42%));
+$mc-primary-inverse: #ffffff;
+
+$mc-secondary: #ff9933;
+$mc-secondary-active: darken(#ff9933, 3%);
+$mc-secondary-light: if(isDarkMode(), darken(#ff9933, 42%), lighten(#ff9933, 42%));
+$mc-secondary-inverse: #ffffff;
+
+$mc-dark: #272727;
+$mc-dark-active: darken(#272727, 3%);
+$mc-dark-light: if(isDarkMode(), darken(#272727, 42%), lighten(#272727, 42%));
+$mc-dark-inverse: #ffffff;

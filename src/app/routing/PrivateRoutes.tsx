@@ -24,7 +24,7 @@ import {BillingComplete} from '../sections/billing/BillingComplete'
 import {SubscriptionIndex} from "../sections/billing/subscriptions/SubscriptionIndex";
 import {CommunityIndex} from "../sections/community/CommunityIndex";
 import {CommunityView} from '../sections/community/CommunityView'
-import {UsersIndex} from "../sections/identity/user/UsersIndex";
+import {UsersPage} from "../sections/identity/user/UsersPage";
 
 
 const PrivateRoutes = () => {
@@ -39,6 +39,10 @@ const PrivateRoutes = () => {
                 <Route path='marketing-support' element={<Marketing/>}/>
                 {/* Pages */}
 
+                {/* Sections */}
+                <Route path='users/*' element={<UsersPage/>}/>
+                {/* Sections */}
+
                 <Route path='billing/plan' element={<BillingPlanWrapper/>}/>
                 <Route path='billing/:id/complete' element={<BillingComplete/>}/>
                 <Route path='subscriptions' element={<SubscriptionIndex/>}/>
@@ -50,21 +54,12 @@ const PrivateRoutes = () => {
                     path='communities/:id/*'
                     element={
                         <SuspensedView>
-                            <CommunityView />
+                            <CommunityView/>
                         </SuspensedView>
                     }
                 />
 
-                {/*<Route path='/communities/:id/followers'*/}
-                {/*       element={<SuspensedView>*/}
-                {/*           <CommunityFollower/>*/}
-                {/*       </SuspensedView>*/}
-                {/*       }*/}
-                {/*/>*/}
-
-
                 <Route path='activities' element={<ActivitiesIndex/>}/>
-                {/*<Route path='activities/create' element={<ActivityCreate/>}/>*/}
 
                 <Route path='games' element={<GamesIndex/>}/>
 
@@ -83,8 +78,6 @@ const PrivateRoutes = () => {
                         </SuspensedView>
                     }
                 />
-
-                <Route path='users' element={<UsersIndex/>}/>
 
                 <Route path='roles' element={<RolesIndex/>}/>
                 <Route

@@ -13,7 +13,7 @@ const PlanCard: FC<Props> = ({plan, selectPlan, paymentTerms}) => {
 
     return (
         <>
-            <div key={plan.id} className={plan.type === 1 ? "col-xl-4" : "col-xl-12"}>
+            <div className={plan.type === 1 ? "col-xl-4" : "col-xl-12"}>
                 <div className="d-flex h-100 align-items-center">
                     <div
                         className="w-100 d-flex flex-column flex-center rounded-3 bg-light bg-opacity-75 py-15 px-10">

@@ -12,6 +12,26 @@
 @import 'components/variables.custom';
 @import './core/components/variables';
 
+$theme-colors: map-merge($theme-colors, ("mc-primary": $mc-primary));
+$theme-colors: map-merge($theme-colors, ("mc-secondary": $mc-secondary));
+$theme-colors: map-merge($theme-colors, ("mc-dark": $mc-dark));
+
+$theme-text-colors: map-merge($theme-text-colors, ("mc-primary": $mc-primary));
+$theme-text-colors: map-merge($theme-text-colors, ("mc-secondary": $mc-secondary));
+$theme-text-colors: map-merge($theme-text-colors, ("mc-dark": $mc-dark));
+
+$theme-active-colors: map-merge($theme-active-colors, ("mc-primary": $mc-primary-active));
+$theme-active-colors: map-merge($theme-active-colors, ("mc-secondary": $mc-secondary-active));
+$theme-active-colors: map-merge($theme-active-colors, ("mc-dark": $mc-dark-active));
+
+$theme-inverse-colors: map-merge($theme-inverse-colors, ("mc-primary": $mc-primary-inverse));
+$theme-inverse-colors: map-merge($theme-inverse-colors, ("mc-secondary": $mc-secondary-inverse));
+$theme-inverse-colors: map-merge($theme-inverse-colors, ("mc-dark": $mc-dark-inverse));
+
+$theme-light-colors: map-merge($theme-light-colors, ("mc-primary": $mc-primary-light));
+$theme-light-colors: map-merge($theme-light-colors, ("mc-secondary": $mc-secondary-light));
+$theme-light-colors: map-merge($theme-light-colors, ("mc-dark": $mc-dark-light));
+
 // Bootstrap initializaton
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';

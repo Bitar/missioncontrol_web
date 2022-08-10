@@ -29,8 +29,8 @@ const createRole = (role: Role): Promise<Role | undefined> => {
 const updateRole = (id: any, role: Role): Promise<Role | undefined> => {
     return axios
         .put(`${GET_ROLES_URL}/${id}`, role)
-        .then((response: AxiosResponse<Response<Permission>>) => response.data)
-        .then((response: Response<Permission>) => response.data)
+        .then((response: AxiosResponse<Response<Role>>) => response.data)
+        .then((response: Response<Role>) => response.data)
 }
 
 export {getRoles, getRoleById, createRole, updateRole}

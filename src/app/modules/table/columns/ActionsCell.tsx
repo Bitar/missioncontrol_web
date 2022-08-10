@@ -36,7 +36,7 @@ const ActionsCell: FC<Props> = ({id, path, queryKey, showEdit = true, showDelete
     return (
         <>
             {showView &&
-                <Link to={'/' + path + '/' + id} className="btn btn-icon btn-sm btn-active-light-dark">
+                <Link to={'/' + path + '/' + id} className="btn btn-icon btn-sm btn-active-light-">
                     <FontAwesomeIcon icon={faEye} className='text-dark'/>
                 </Link>
             }

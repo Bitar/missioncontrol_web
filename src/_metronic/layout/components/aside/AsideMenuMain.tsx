@@ -2,7 +2,8 @@
 import React from 'react'
 import {useIntl} from 'react-intl'
 import {AsideMenuItem} from './AsideMenuItem'
-import {faPeopleGroup, faGamepad} from '@fortawesome/free-solid-svg-icons'
+import {faPeopleGroup, faGamepad, faUsers} from '@fortawesome/free-solid-svg-icons'
+import {AsideMenuItemWithSub} from "./AsideMenuItemWithSub";
 
 export function AsideMenuMain() {
     const intl = useIntl()
@@ -42,23 +43,6 @@ export function AsideMenuMain() {
             >
             </AsideMenuItem>
 
-            {/*<AsideMenuItem*/}
-            {/*    to='/marketing'*/}
-            {/*    title='Marketing'*/}
-            {/*    // fontIcon='bi-archive'*/}
-            {/*    icon='/media/icons/duotune/general/gen022.svg'*/}
-            {/*>*/}
-            {/*</AsideMenuItem>*/}
-
-            {/*<AsideMenuItem*/}
-            {/*    to='/support'*/}
-            {/*    title='Support'*/}
-            {/*    // fontIcon='bi-archive'*/}
-            {/*    icon='/media/icons/duotune/general/gen022.svg'*/}
-            {/*>*/}
-            {/*</AsideMenuItem>*/}
-
-
             <div className='menu-item'>
                 <div className='menu-content pt-8 pb-2'>
                     <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Settings</span>
@@ -81,39 +65,17 @@ export function AsideMenuMain() {
             >
             </AsideMenuItem>
 
-            <AsideMenuItem
-                to='/users'
-                title='Users'
-                // fontIcon='bi-archive'
-                icon='/media/icons/duotune/general/gen022.svg'
-            >
-            </AsideMenuItem>
 
-            <AsideMenuItem
-                to='/roles'
-                title='Roles'
-                // fontIcon='bi-archive'
-                icon='/media/icons/duotune/general/gen022.svg'
+            <AsideMenuItemWithSub
+                to={['/users', '/roles', '/permissions']}
+                title='Identity'
+                fontIcon={faUsers}
+                menuIcon='font'
             >
-            </AsideMenuItem>
-
-            <AsideMenuItem
-                to='/permissions'
-                title='Permissions'
-                // fontIcon='bi-archive'
-                icon='/media/icons/duotune/general/gen022.svg'
-            >
-            </AsideMenuItem>
-
-            {/*<AsideMenuItemWithSub*/}
-            {/*    to=''*/}
-            {/*    title='roles'*/}
-            {/*    fontIcon='bi-archive'*/}
-            {/*    icon='/media/icons/duotune/general/gen022.svg'*/}
-            {/*>*/}
-            {/*    <AsideMenuItem to='/roles/' title='List Roles'/>*/}
-            {/*    <AsideMenuItem to='/roles/create' title='Create Role'/>*/}
-            {/*</AsideMenuItemWithSub>*/}
+                <AsideMenuItem to='/users' title='Users' hasBullet={true}/>
+                <AsideMenuItem to='/roles' title='Roles' hasBullet={true}/>
+                <AsideMenuItem to='/permissions' title='Permissions' hasBullet={true}/>
+            </AsideMenuItemWithSub>
         </>
     )
 }
