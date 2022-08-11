@@ -17,7 +17,6 @@ const Step2: FC = () => {
         setData(updatedData)
     }
 
-
     useEffect(() => {
         getGames('per_page=200').then(response => {
             response?.data?.forEach(function (value) {
@@ -151,45 +150,45 @@ const Step2: FC = () => {
                     </div>
                     <div className='d-flex justify-content-end'>
                         <div className='form-check form-check-solid form-switch'>
-                            <input
-                                className='form-check-input w-45px h-30px'
-                                type='checkbox'
-                                id='googleswitch'
-                                checked={data?.is_crossPlay}
-                                onChange={() =>
-                                    updateData({
-                                        is_crossPlay: !data?.is_crossPlay,
-                                    })
-                                }
-                            />
+                            {/*<input*/}
+                            {/*    className='form-check-input w-45px h-30px'*/}
+                            {/*    type='checkbox'*/}
+                            {/*    id='googleswitch'*/}
+                            {/*    checked={data?.is_crossPlay}*/}
+                            {/*    onChange={() =>*/}
+                            {/*        updateData({*/}
+                            {/*            is_crossPlay: !data?.is_crossPlay,*/}
+                            {/*        })*/}
+                            {/*    }*/}
+                            {/*/>*/}
                             <label className='form-check-label' htmlFor='googleswitch'/>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {data.is_crossPlay && platforms.length > 0 &&
-                <div className='mb-10 fv-row'>
-                    <label className='form-label mb-3'>Platforms</label>
+            {/*{data.is_crossPlay && platforms.length > 0 &&*/}
+            {/*    <div className='mb-10 fv-row'>*/}
+            {/*        <label className='form-label mb-3'>Platforms</label>*/}
 
-                    {platforms.length > 0 &&
-                        <Select
-                            className="basic-single"
-                            classNamePrefix="select"
-                            isClearable={true}
-                            isSearchable={true}
-                            isMulti={true}
-                            name="platforms"
-                            options={platforms}
-                            styles={selectCustomStyles}
-                        />
-                    }
+            {/*        {platforms.length > 0 &&*/}
+            {/*            <Select*/}
+            {/*                className="basic-single"*/}
+            {/*                classNamePrefix="select"*/}
+            {/*                isClearable={true}*/}
+            {/*                isSearchable={true}*/}
+            {/*                isMulti={true}*/}
+            {/*                name="platforms"*/}
+            {/*                options={platforms}*/}
+            {/*                styles={selectCustomStyles}*/}
+            {/*            />*/}
+            {/*        }*/}
 
-                    <div className='text-danger mt-2'>
-                        <ErrorMessage name='platforms'/>
-                    </div>
-                </div>
-            }
+            {/*        <div className='text-danger mt-2'>*/}
+            {/*            <ErrorMessage name='platforms'/>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*}*/}
         </div>
     )
 }

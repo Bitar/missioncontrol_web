@@ -4,6 +4,7 @@ import {UsersCreate} from "./UsersCreate";
 import {UsersEdit} from "./UsersEdit";
 import {PageLink, PageTitle} from "../../../../_metronic/layout/core";
 import React from "react";
+import {UserView} from "./UserView";
 
 const userBreadCrumbs: Array<PageLink> = [
     {
@@ -41,10 +42,10 @@ const UsersPage: React.FC = () => {
                     <UsersEdit/>
                 </>
             }/>
-            <Route path='/:id' element={
+            <Route path='/:id/*' element={
                 <>
                     <PageTitle breadcrumbs={userBreadCrumbs}>{"View User"}</PageTitle>
-                    <UsersEdit/>
+                    <UserView/>
                 </>
             }/>
             <Route index element={<Navigate to='/users/overview'/>}/>

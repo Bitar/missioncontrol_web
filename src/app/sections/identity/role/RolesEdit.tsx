@@ -51,7 +51,7 @@ const RolesEdit = () => {
                             <>
                                 <Form onChange={handleOnChange} className="form">
                                     <KTCardBody className="py-4">
-                                        <div className="d-flex flex-column me-n7 pe-7 pt-5">
+                                        <div className="d-flex flex-column pt-5">
                                             <div className="row mb-6">
                                                 <label className="col-lg-4 col-form-label required fw-bold fs-6">Name</label>
                                                 <div className="col-lg-8 fv-row">

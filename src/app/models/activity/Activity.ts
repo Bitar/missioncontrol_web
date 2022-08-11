@@ -1,44 +1,67 @@
 import {ID, Response} from "../../../_metronic/helpers";
-import { initialCheckoutModal } from "../../sections/billing/core/CheckoutModal";
 import {Game, initialGame} from "../game/Game";
-import { Platform } from "../game/Platform";
-import { ActivityFee, initialActivityFee } from "./ActivityFee";
-import { ActivityLocation, initialActivityLocation } from "./ActivityLocation";
-import { ActivityPrize, initialActivityPrize } from "./ActivityPrize";
-import { ActivitySchedule, initialActivitySchedule } from "./ActivitySchedule";
-import { ActivityTeam, initialActivityTeam } from "./ActivityTeam";
+import {ActivityFee, initialActivityFee} from "./ActivityFee";
+import {ActivityLocation, initialActivityLocation} from "./ActivityLocation";
+import {ActivitySchedule, initialActivitySchedule} from "./ActivitySchedule";
+import {Community, initialCommunity} from "../community/Community";
 
 
-export const initialActivity : Activity = {
+export const initialActivity: Activity = {
     title: "",
     description: "",
-    rounds:0,
-    is_crossPlay: false,
+    status: 0,
+    community: initialCommunity,
     game: initialGame,
-    location:initialActivityLocation,
-    team:initialActivityTeam,
-    entry_fee:initialActivityFee,
-    schedule:initialActivitySchedule,
-    prize:initialActivityPrize,
+    entry_fee: initialActivityFee,
+    schedule: initialActivitySchedule,
+    location: initialActivityLocation,
+
+    registration_dates: {
+        start_date: "",
+        end_date: ""
+    },
+    matchplay_dates: {
+        start_date: "",
+        end_date: ""
+    },
+    rules: [],
+    additional_data: {
+        teams_count: 0,
+        players_count: 0,
+    }
+
+
+    // team: initialActivityTeam,
+    // prize: initialActivityPrize,
 }
 
 
 export type Activity = {
     id?: ID,
-    community_id?: ID,
-    game_id?: ID,
     title: string,
     description?: string,
-    rounds?:number,
-    platform_ids?:ID,
-    is_crossPlay?: boolean,
-    platforms?:Platform,
+    status: number,
+    // team?: Team
+    community?: Community,
     game?: Game,
-    location?:ActivityLocation,
-    team?:ActivityTeam,
     entry_fee?: ActivityFee
-    schedule?:ActivitySchedule,
-    prize?:ActivityPrize
-    
+    schedule?: ActivitySchedule,
+    // platforms?: Platform,
+    location?: ActivityLocation,
+
+    registration_dates: {
+        start_date: string,
+        end_date: string
+    },
+    matchplay_dates: {
+        start_date: string,
+        end_date: string
+    },
+    rules?: [],
+    // standings: []
+    additional_data?: {
+        teams_count: number,
+        players_count: number,
+    }
 }
 export type ActivityQueryResponse = Response<Array<Activity>>

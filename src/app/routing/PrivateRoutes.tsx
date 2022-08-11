@@ -4,13 +4,10 @@ import {MasterLayout} from '../../_metronic/layout/MasterLayout'
 import TopBarProgress from 'react-topbar-progress-indicator'
 import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper'
 import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
-import {RolesIndex} from "../sections/identity/role/RolesIndex";
 import {PermissionsIndex} from "../sections/identity/permission/PermissionsIndex";
 import {PermissionsCreate} from "../sections/identity/permission/PermissionsCreate";
-import {RolesCreate} from "../sections/identity/role/RolesCreate";
 import {ActivitiesIndex} from "../sections/activities/ActivitiesIndex";
 import {PermissionsEdit} from "../sections/identity/permission/PermissionsEdit";
-import {RolesEdit} from "../sections/identity/role/RolesEdit";
 import {GamesIndex} from '../sections/games/GamesIndex'
 import {GameCreate} from '../sections/games/GameCreate'
 import {GamesEdit} from '../sections/games/GameEdit'
@@ -61,7 +58,7 @@ const PrivateRoutes = () => {
                     }
                 />
 
-                <Route path='activities' element={<ActivitiesIndex/>}/>
+                <Route path='/activities' element={<ActivitiesIndex/>}/>
 
                 <Route path='games' element={<GamesIndex/>}/>
 

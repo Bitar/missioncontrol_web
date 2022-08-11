@@ -131,7 +131,7 @@ const CommunityCreate = () => {
                             ({isSubmitting, isValid, touched, errors}) => (
                                 <Form onChange={handleOnChange} className='form'>
 
-                                    <div className='d-flex flex-column me-n7 pe-7 pt-5'>
+                                    <div className='d-flex flex-column pt-5'>
                                         <div className="row mb-6">
                                             <label
                                                 className="col-lg-4 col-form-label required fw-bold fs-6">Name</label>

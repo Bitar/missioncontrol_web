@@ -42,6 +42,7 @@ export type User = {
     email: string
     password?: string
     password_confirmation?: string
+    created_at: number
     roles: Role[]
     meta?: UserMeta
 }
@@ -49,7 +50,9 @@ export type User = {
 export interface UserMeta {
     id?: ID,
     user_id?: ID,
-    image: string
+    image: string,
+    username?: string,
+    rng?: string
 }
 
 export const userInitial = (user?: User) => {
@@ -59,6 +62,7 @@ export const userInitial = (user?: User) => {
         email: user?.email || "",
         password: "",
         password_confirmation: "",
+        created_at: 0,
         roles: []
     }
 }
@@ -69,4 +73,4 @@ export const userMetaInitial = (userMeta?: UserMeta) => {
     }
 }
 
-export type UserResponseQuery = Response<Array<User>>
+export type UserQueryResponse = Response<Array<User>>
