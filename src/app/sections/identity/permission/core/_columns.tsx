@@ -1,9 +1,9 @@
 import {Column} from 'react-table'
-import {TextCell} from "../../../modules/table/columns/TextCell";
-import {CustomHeader} from "../../../modules/table/columns/CustomHeader";
-import {ActionsCell} from "../../../modules/table/columns/ActionsCell";
-import {QUERIES} from "../../../../_metronic/helpers";
-import {Permission} from "../../../models/identity/Permission";
+import {TextCell} from "../../../../modules/table/columns/TextCell";
+import {CustomHeader} from "../../../../modules/table/columns/CustomHeader";
+import {ActionsCell} from "../../../../modules/table/columns/ActionsCell";
+import {QUERIES} from "../../../../../_metronic/helpers";
+import {Permission} from "../../../../models/identity/Permission";
 
 const permissionColumns: ReadonlyArray<Column<Permission>> = [
   {

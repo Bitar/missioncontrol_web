@@ -3,7 +3,7 @@ import {useTable, ColumnInstance, Row} from 'react-table'
 import {KTCardBody} from "../../../../_metronic/helpers";
 import {CustomHeaderColumn} from "../../../modules/table/columns/CustomHeaderColumn";
 import {CustomRow} from "../../../modules/table/columns/CustomRow";
-import {permissionColumns} from "./_columns";
+import {permissionColumns} from "./core/_columns";
 import {Permission} from "../../../models/identity/Permission";
 import {useQueryResponseData, useQueryResponseLoading} from "../../../modules/table/QueryResponseProvider";
 import {TableListLoading} from "../../../modules/table/TableListLoading";

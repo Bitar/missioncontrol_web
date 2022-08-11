@@ -1,5 +1,4 @@
 import React from 'react'
-import {PageTitle} from "../../../../_metronic/layout/core";
 import {KTCard, QUERIES} from "../../../../_metronic/helpers";
 import {TableHeader} from "../../../modules/table/TableHeader";
 import {QueryRequestProvider} from "../../../modules/table/QueryRequestProvider";
@@ -11,7 +10,6 @@ import {ListViewProvider} from "../../../modules/table/ListViewProvider";
 const PermissionsList = () => {
     return (
         <>
-            <PageTitle breadcrumbs={[]}>{'Permissions'}</PageTitle>
             <KTCard>
                 <TableHeader name='Permission' url="/permissions"/>
                 <PermissionsTable/>

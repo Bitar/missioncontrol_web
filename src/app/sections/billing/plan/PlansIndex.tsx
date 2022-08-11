@@ -3,7 +3,6 @@ import {QueryRequestProvider} from "../../../modules/table/QueryRequestProvider"
 import {QueryResponseProvider} from "../../../modules/table/QueryResponseProvider";
 import {ListViewProvider} from "../../../modules/table/ListViewProvider";
 import {getPlans} from "./core/_requests";
-import {PageTitle} from "../../../../_metronic/layout/core";
 import {TableHeader} from "../../../modules/table/TableHeader";
 import React from "react";
 import {PlansTable} from "./PlansTable";
@@ -11,7 +10,6 @@ import {PlansTable} from "./PlansTable";
 const PoleList = () => {
     return (
         <>
-            <PageTitle breadcrumbs={[]}>{'Plans'}</PageTitle>
             <KTCard>
                 <TableHeader name='Plan' url='/plans'/>
                 <PlansTable/>

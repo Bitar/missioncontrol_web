@@ -1,10 +1,10 @@
 import {Column} from 'react-table'
-import {TextCell} from "../../../modules/table/columns/TextCell";
-import {CustomHeader} from "../../../modules/table/columns/CustomHeader";
-import {ActionsCell} from "../../../modules/table/columns/ActionsCell";
-import {QUERIES} from "../../../../_metronic/helpers";
-import {User} from "../../../models/identity/User";
-import {ImageCell} from "../../../modules/table/columns/ImageCell";
+import {TextCell} from "../../../../modules/table/columns/TextCell";
+import {CustomHeader} from "../../../../modules/table/columns/CustomHeader";
+import {ActionsCell} from "../../../../modules/table/columns/ActionsCell";
+import {QUERIES} from "../../../../../_metronic/helpers";
+import {User} from "../../../../models/identity/User";
+import {ImageCell} from "../../../../modules/table/columns/ImageCell";
 
 const usersColumns: ReadonlyArray<Column<User>> = [
   {

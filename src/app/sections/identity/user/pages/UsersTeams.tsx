@@ -1,9 +1,9 @@
-import {KTCard, KTCardBody} from "../../../../_metronic/helpers";
-import {getUserTeams} from "./core/_requests";
+import {KTCard, KTCardBody} from "../../../../../_metronic/helpers";
+import {getUserTeams} from "../core/_requests";
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import {Team} from "../../../models/squad/Team";
-import {TeamObject} from "../../../partials/squad/TeamObject";
+import {Team} from "../../../../models/squad/Team";
+import {TeamObject} from "../../../../partials/squad/TeamObject";
 
 const UsersTeams = () => {
     const params = useParams();

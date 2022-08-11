@@ -1,7 +1,7 @@
 import {useMemo} from 'react'
 import {useTable, ColumnInstance, Row} from 'react-table'
 import {KTCardBody} from "../../../../_metronic/helpers";
-import {rolesColumns} from "./_columns";
+import {rolesColumns} from "./core/_columns";
 import {Role} from "../../../models/identity/Role";
 import {useQueryResponseData, useQueryResponseLoading} from "../../../modules/table/QueryResponseProvider";
 import {CustomHeaderColumn} from "../../../modules/table/columns/CustomHeaderColumn";

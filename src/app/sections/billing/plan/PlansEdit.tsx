@@ -51,7 +51,6 @@ const PlansEdit = () => {
 
     return (
         <>
-            <PageTitle breadcrumbs={[]}>{'Edit Plan ' + plan?.name}</PageTitle>
             <KTCard>
                 <div className="card-header">
                     <div className="card-title">

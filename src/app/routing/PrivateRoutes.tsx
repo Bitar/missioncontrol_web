@@ -4,10 +4,7 @@ import {MasterLayout} from '../../_metronic/layout/MasterLayout'
 import TopBarProgress from 'react-topbar-progress-indicator'
 import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper'
 import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
-import {PermissionsIndex} from "../sections/identity/permission/PermissionsIndex";
-import {PermissionsCreate} from "../sections/identity/permission/PermissionsCreate";
 import {ActivitiesIndex} from "../sections/activities/ActivitiesIndex";
-import {PermissionsEdit} from "../sections/identity/permission/PermissionsEdit";
 import {GamesIndex} from '../sections/games/GamesIndex'
 import {GameCreate} from '../sections/games/GameCreate'
 import {GamesEdit} from '../sections/games/GameEdit'
@@ -21,8 +18,10 @@ import {BillingComplete} from '../sections/billing/BillingComplete'
 import {SubscriptionIndex} from "../sections/billing/subscriptions/SubscriptionIndex";
 import {CommunityIndex} from "../sections/community/CommunityIndex";
 import {CommunityView} from '../sections/community/CommunityView'
-import {UsersPage} from "../sections/identity/user/UsersPage";
-import {RolesPage} from "../sections/identity/role/RolesPage";
+import {UsersPage} from "../sections/identity/user/pages/UsersPage";
+import {RolesPage} from "../sections/identity/role/pages/RolesPage";
+import {PermissionsPage} from "../sections/identity/permission/pages/PermissionsPage";
+import {PlansPage} from "../sections/billing/plan/pages/PlansPage";
 
 
 const PrivateRoutes = () => {
@@ -40,6 +39,9 @@ const PrivateRoutes = () => {
                 {/* Sections */}
                 <Route path='users/*' element={<UsersPage/>}/>
                 <Route path='roles/*' element={<RolesPage/>}/>
+                <Route path='permissions/*' element={<PermissionsPage/>}/>
+
+                <Route path='plans/*' element={<PlansPage/>}/>
                 {/* Sections */}
 
                 <Route path='billing/plan' element={<BillingPlanWrapper/>}/>
@@ -62,22 +64,6 @@ const PrivateRoutes = () => {
 
                 <Route path='games' element={<GamesIndex/>}/>
 
-
-                <Route path='plans' element={<PlansIndex/>}/>
-                <Route path='plans/create' element={
-                    <SuspensedView>
-                        <PlansCreate/>
-                    </SuspensedView>
-                }/>
-                <Route
-                    path='plans/:id/edit'
-                    element={
-                        <SuspensedView>
-                            <PlansEdit/>
-                        </SuspensedView>
-                    }
-                />
-
                 <Route
                     path='games/create'
                     element={
@@ -93,25 +79,6 @@ const PrivateRoutes = () => {
                     element={
                         <SuspensedView>
                             <GamesEdit/>
-                        </SuspensedView>
-                    }
-                />
-
-                <Route path='permissions' element={<PermissionsIndex/>}/>
-                <Route
-                    path='permissions/create'
-                    element={
-                        <SuspensedView>
-                            <PermissionsCreate/>
-                        </SuspensedView>
-                    }
-                />
-
-                <Route
-                    path='permissions/:id/edit'
-                    element={
-                        <SuspensedView>
-                            <PermissionsEdit/>
                         </SuspensedView>
                     }
                 />

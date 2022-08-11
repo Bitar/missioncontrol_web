@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from "react"
-import {getUserById} from "./core/_requests"
+import {getUserById} from "../core/_requests"
 import {Navigate, Outlet, Route, Routes, useParams} from "react-router-dom"
-import {User} from "../../../models/identity/User";
-import {UsersInfo} from "./UsersInfo";
-import {PageLink, PageTitle} from "../../../../_metronic/layout/core";
-import {UsersEdit} from "./UsersEdit";
-import {UsersActivities} from "./UserActivities";
+import {User} from "../../../../models/identity/User";
+import {UsersInfo} from "../UsersInfo";
+import {PageLink, PageTitle} from "../../../../../_metronic/layout/core";
+import {UsersEdit} from "../UsersEdit";
+import {UsersActivities} from "./UsersActivities";
 import {UsersTeams} from "./UsersTeams";
 
-const UserView: React.FC = () => {
+const UsersView: React.FC = () => {
     const [user, setUser] = useState<User | undefined>();
     const params = useParams()
 
@@ -97,17 +97,7 @@ const UserView: React.FC = () => {
                 <Route index element={<Navigate to={'/users/' + params.id + '/overview'}/>}/>
             </Route>
         </Routes>
-        // <>
-        //     <PageTitle breadcrumbs={[]}>{'Community Details'}</PageTitle>
-        //     <CommunityInfo community={community}/>
-        //
-        //     <div className='card mb-5 mb-xl-10'>
-        //         <CommunityFollower/>
-        //     </div>
-        //
-        // </>
-
     )
 }
 
-export {UserView}
+export {UsersView}

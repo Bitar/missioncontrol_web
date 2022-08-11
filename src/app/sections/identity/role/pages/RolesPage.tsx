@@ -1,11 +1,11 @@
 import {Navigate, Route, Routes} from "react-router-dom";
-import {PageLink, PageTitle} from "../../../../_metronic/layout/core";
+import {PageLink, PageTitle} from "../../../../../_metronic/layout/core";
 import React from "react";
-import {RolesIndex} from "./RolesIndex";
-import {RolesCreate} from "./RolesCreate";
-import {RolesEdit} from "./RolesEdit";
+import {RolesIndex} from "../RolesIndex";
+import {RolesCreate} from "../RolesCreate";
+import {RolesEdit} from "../RolesEdit";
 
-const roleBreadCrumbs: Array<PageLink> = [
+const rolesBreadCrumbs: Array<PageLink> = [
     {
         title: 'Roles',
         path: '/roles/overview',
@@ -25,29 +25,23 @@ const RolesPage: React.FC = () => {
         <Routes>
             <Route path='/overview' element={
                 <>
-                    <PageTitle breadcrumbs={roleBreadCrumbs}>{"Overview"}</PageTitle>
+                    <PageTitle breadcrumbs={rolesBreadCrumbs}>{"Overview"}</PageTitle>
                     <RolesIndex/>
                 </>
             }/>
             <Route path='/create' element={
                 <>
-                    <PageTitle breadcrumbs={roleBreadCrumbs}>{"Add Role"}</PageTitle>
+                    <PageTitle breadcrumbs={rolesBreadCrumbs}>{"Add Role"}</PageTitle>
                     <RolesCreate/>
                 </>
             }/>
             <Route path='/:id/edit' element={
                 <>
-                    <PageTitle breadcrumbs={roleBreadCrumbs}>{"Update Role"}</PageTitle>
+                    <PageTitle breadcrumbs={rolesBreadCrumbs}>{"Update Role"}</PageTitle>
                     <RolesEdit/>
                 </>
             }/>
-            <Route path='/:id' element={
-                <>
-                    <PageTitle breadcrumbs={roleBreadCrumbs}>{"View Role"}</PageTitle>
-                    <RolesEdit/>
-                </>
-            }/>
-            <Route index element={<Navigate to='/roles/overview'/>}/>
+            <Route index element={<Navigate to='/roles/overview' replace={true}/>}/>
         </Routes>
     )
 }

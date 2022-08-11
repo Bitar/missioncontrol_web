@@ -39,7 +39,6 @@ const PlansCreate = () => {
 
     return (
         <>
-            <PageTitle breadcrumbs={[]}>{'Create Plan'}</PageTitle>
             <KTCard>
                 <div className="card-header">
                     <div className="card-title">

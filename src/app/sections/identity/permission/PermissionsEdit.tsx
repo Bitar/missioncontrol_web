@@ -3,7 +3,6 @@ import { Field, Form, Formik } from "formik";
 import { Permission, permissionInitial, permissionSchema } from "../../../models/identity/Permission";
 import {KTCard, KTCardBody} from "../../../../_metronic/helpers";
 import clsx from "clsx";
-import {PageTitle} from "../../../../_metronic/layout/core";
 import { getPermissionById, updatePermission } from "./core/_requests";
 import {useNavigate, useParams} from 'react-router-dom';
 import { submitForm, updateData } from "../../../helpers/FormHelper";
@@ -33,7 +32,6 @@ const PermissionsEdit = () => {
 
     return (
         <>
-            <PageTitle breadcrumbs={[]}>{'Permissions'}</PageTitle>
             <KTCard>
                 <div className="card-header">
                     <div className="card-title">
