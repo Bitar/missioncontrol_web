@@ -52,12 +52,15 @@ export interface UserMeta {
     user_id?: ID,
     image: string,
     username?: string,
-    rng?: string
+    rng?: string,
+    city?: string
 }
 
 export const initialUserMeta = (userMeta?: UserMeta) => {
     return {
-        image: userMeta?.image || ""
+        image: userMeta?.image || "",
+        username: userMeta?.username || "",
+        city: userMeta?.city || ""
     }
 }
 
@@ -68,9 +71,9 @@ export const initialUser = (user?: User) => {
         email: user?.email || "",
         password: "",
         password_confirmation: "",
-        created_at: 0,
+        created_at: user?.created_at || 0,
         roles: [],
-        meta: initialUserMeta()
+        meta: user?.meta || initialUserMeta()
     }
 }
 

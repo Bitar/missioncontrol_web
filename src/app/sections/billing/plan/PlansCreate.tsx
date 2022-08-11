@@ -3,7 +3,6 @@ import {isNotEmpty, KTCard, KTCardBody} from "../../../../_metronic/helpers";
 import React, {useState} from "react";
 import {initialPlan, Plan, planSchema} from "../../../models/billing/Plan";
 import {useNavigate} from "react-router-dom";
-import {PageTitle} from "../../../../_metronic/layout/core";
 import clsx from "clsx";
 import {createPlan} from "./core/_requests";
 

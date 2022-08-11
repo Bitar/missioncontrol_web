@@ -11,9 +11,6 @@ import {GamesEdit} from '../sections/games/GameEdit'
 import {Marketing} from '../pages/marketing/Marketing'
 import {BillingPlanWrapper} from "../sections/billing/BillingPlanWrapper";
 import {CommunityCreate} from "../sections/community/CommunityCreate";
-import {PlansIndex} from '../sections/billing/plan/PlansIndex'
-import {PlansCreate} from '../sections/billing/plan/PlansCreate'
-import {PlansEdit} from "../sections/billing/plan/PlansEdit";
 import {BillingComplete} from '../sections/billing/BillingComplete'
 import {SubscriptionIndex} from "../sections/billing/subscriptions/SubscriptionIndex";
 import {CommunityIndex} from "../sections/community/CommunityIndex";

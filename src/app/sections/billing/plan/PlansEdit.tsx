@@ -4,7 +4,6 @@ import {Plan, planSchema} from "../../../models/billing/Plan";
 import {useFormik} from "formik";
 import {KTCard, KTCardBody} from "../../../../_metronic/helpers";
 import {getPlanById, updatePlan} from "./core/_requests";
-import {PageTitle} from "../../../../_metronic/layout/core";
 import clsx from "clsx";
 
 const PlansEdit = () => {

@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from 'axios'
-import {ID, Response} from "../../../../../_metronic/helpers";
+import {Response} from "../../../../../_metronic/helpers";
 import {User, UserQueryResponse} from "../../../../models/identity/User";
 import {ActivityQueryResponse} from "../../../../models/activity/Activity";
 import {TeamQueryResponse} from "../../../../models/squad/Team";
@@ -34,7 +34,7 @@ const createUser = (formData: FormData): Promise<User | undefined> => {
 
 const updateUser = (id: any, formData: FormData): Promise<User | undefined> => {
     return axios
-        .put(`${GET_USERS_URL}/${id}`, formData)
+        .post(`${GET_USERS_URL}/${id}`, formData)
         .then((response: AxiosResponse<Response<User>>) => response.data)
         .then((response: Response<User>) => response.data)
 }

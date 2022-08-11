@@ -43,15 +43,15 @@
   .menu {
     .menu-item {
       .menu-section {
-        color: #4c4e6f !important;
+        color: $mc-secondary !important;
       }
 
       //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
       @include menu-link-default-state($white, #9899ac, $white, $white, null);
-      @include menu-link-hover-state($white, $white, $mc-secondary, $white, #4762be);
-      @include menu-link-here-state($white, $white, $mc-secondary, $white, #4762be);
-      @include menu-link-show-state($white, $white, $mc-secondary, $white, #4762be);
-      @include menu-link-active-state($white, $white, $mc-secondary, $white, #4762be);
+      @include menu-link-hover-state($white, $white, $mc-secondary, $white, darken($mc-primary, 5));
+      @include menu-link-here-state($white, $white, $mc-secondary, $white, darken($mc-primary, 5));
+      @include menu-link-show-state($white, $white, $mc-secondary, $white, darken($mc-primary, 5));
+      @include menu-link-active-state($white, $white, $mc-secondary, $white, darken($mc-primary, 5));
     }
   }
 }

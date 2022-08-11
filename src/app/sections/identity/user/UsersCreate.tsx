@@ -4,13 +4,14 @@ import {KTCard, KTCardBody} from "../../../../_metronic/helpers";
 import {useNavigate} from "react-router-dom";
 import {createUser} from "./core/_requests";
 import {jsonToFormData, updateData} from "../../../helpers/FormHelper";
-import {User, initialUser, userSchema} from "../../../models/identity/User";
+import {User, initialUser, userSchema, UserMeta, initialUserMeta} from "../../../models/identity/User";
 import {getRoles} from "../role/core/_requests";
 import AsyncSelect from "react-select/async";
 import {AvatarImage} from "./partials/AvatarImage";
 
 const UsersCreate = () => {
     const [user, setUser] = useState<User>(initialUser);
+    const [userMeta, setUserMeta] = useState<UserMeta | undefined>(initialUserMeta)
 
     const navigate = useNavigate();
 
