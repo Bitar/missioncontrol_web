@@ -3,7 +3,7 @@ import {getUserTeams} from "../core/_requests";
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {Team} from "../../../../models/squad/Team";
-import {TeamObject} from "../../../../partials/squad/TeamObject";
+import {TeamObject} from "../objects/squad/TeamObject";
 
 const UsersTeams = () => {
     const params = useParams();

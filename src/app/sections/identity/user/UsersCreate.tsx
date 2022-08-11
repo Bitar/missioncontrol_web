@@ -3,25 +3,38 @@ import {Form, Field, Formik} from "formik";
 import {KTCard, KTCardBody} from "../../../../_metronic/helpers";
 import {useNavigate} from "react-router-dom";
 import {createUser} from "./core/_requests";
-import {submitForm, updateData} from "../../../helpers/FormHelper";
-import {User, userInitial, userSchema} from "../../../models/identity/User";
+import {jsonToFormData, updateData} from "../../../helpers/FormHelper";
+import {User, initialUser, userSchema} from "../../../models/identity/User";
 import {getRoles} from "../role/core/_requests";
 import AsyncSelect from "react-select/async";
+import {AvatarImage} from "./partials/AvatarImage";
 
 const UsersCreate = () => {
-    const [user, setUser] = useState<User>(userInitial);
+    const [user, setUser] = useState<User>(initialUser);
+
     const navigate = useNavigate();
 
-    const toIndex = () => {
-        navigate('/users')
-    }
-
     const handleSubmit = async () => {
-        await submitForm(createUser, user, toIndex)
+        let data = jsonToFormData(user)
+        await createUser(data)
+            .then(response => navigate('/users/' + response?.id));
     };
 
     const handleOnChange = (event: any) => {
-        updateData({[event.target.name]: event.target.value}, setUser, user);
+        let target_name = event.target.name
+
+        if (target_name.includes('meta.')) {
+            let meta_field = target_name.split("meta.")[1]
+            let file = event.target.files[0]
+
+            updateData({
+                'meta': {
+                    [meta_field]: file
+                }
+            }, setUser, user)
+        } else {
+            updateData({[event.target.name]: event.target.value}, setUser, user);
+        }
     };
 
     const loadRoles = (searchValue: any, callback: any) => {
@@ -63,9 +76,11 @@ const UsersCreate = () => {
                         ({isSubmitting, isValid, touched}) => {
                             return (
                                 <>
-                                    <Form onChange={handleOnChange} className="form">
+                                    <Form onChange={handleOnChange} className="form" encType="multipart/form-data">
                                         <KTCardBody className="py-4">
                                             <div className="d-flex flex-column pt-5">
+                                                <AvatarImage user={user} setUser={setUser}/>
+
                                                 <div className="row mb-6">
                                                     <label className="col-lg-4 col-form-label required fw-bold fs-6">Full
                                                         Name</label>

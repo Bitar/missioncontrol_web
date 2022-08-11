@@ -3,7 +3,7 @@ import {getUserActivities} from "../core/_requests";
 import React, {useEffect, useState} from "react";
 import {Activity} from "../../../../models/activity/Activity";
 import {useParams} from "react-router-dom";
-import {ActivityObject} from "../../../../partials/activity/ActivityObject";
+import {ActivityObject} from "../objects/activity/ActivityObject";
 
 const UsersActivities = () => {
     const params = useParams();

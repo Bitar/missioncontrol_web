@@ -25,17 +25,16 @@ const getUserById = (id: any, query?: string): Promise<User | undefined> => {
         .then((response: Response<User>) => response.data)
 }
 
-const createUser = (user: User): Promise<User | undefined> => {
+const createUser = (formData: FormData): Promise<User | undefined> => {
     return axios
-        .post(`${GET_USERS_URL}`, user)
+        .post(`${GET_USERS_URL}`, formData)
         .then((response: AxiosResponse<Response<User>>) => response.data)
         .then((response: Response<User>) => response.data)
 }
 
-const updateUser = (id: ID, user: User): Promise<User | undefined> => {
-    console.log(id);
+const updateUser = (id: any, formData: FormData): Promise<User | undefined> => {
     return axios
-        .put(`${GET_USERS_URL}/${id}`, user)
+        .put(`${GET_USERS_URL}/${id}`, formData)
         .then((response: AxiosResponse<Response<User>>) => response.data)
         .then((response: Response<User>) => response.data)
 }

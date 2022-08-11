@@ -3,8 +3,8 @@ import React, {FC} from 'react'
 import {useIntl} from 'react-intl'
 import {PageTitle} from '../../../_metronic/layout/core'
 import {useAuth} from '../../modules/auth';
-import {EngageWidget3} from '../../partials/widgets/EngageWidget3';
-import {EngageWidget4} from "../../partials/widgets/EngageWidget4";
+import {EngageWidget3} from '../../layout/widgets/EngageWidget3';
+import {EngageWidget4} from "../../layout/widgets/EngageWidget4";
 
 const DashboardPage: FC = () => {
     const {auth} = useAuth()

@@ -1,6 +1,6 @@
 import React, {FC} from "react";
-import {Team} from "../../models/squad/Team";
-import {toAbsoluteUrl} from "../../../_metronic/helpers";
+import {Team} from "../../../../../models/squad/Team";
+import {toAbsoluteUrl} from "../../../../../../_metronic/helpers";
 
 type Props = {
     team: Team

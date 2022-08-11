@@ -55,7 +55,13 @@ export interface UserMeta {
     rng?: string
 }
 
-export const userInitial = (user?: User) => {
+export const initialUserMeta = (userMeta?: UserMeta) => {
+    return {
+        image: userMeta?.image || ""
+    }
+}
+
+export const initialUser = (user?: User) => {
     return {
         first_name: user?.first_name || "",
         last_name: user?.last_name || "",
@@ -63,13 +69,8 @@ export const userInitial = (user?: User) => {
         password: "",
         password_confirmation: "",
         created_at: 0,
-        roles: []
-    }
-}
-
-export const userMetaInitial = (userMeta?: UserMeta) => {
-    return {
-        image: userMeta?.image || ""
+        roles: [],
+        meta: initialUserMeta()
     }
 }
 

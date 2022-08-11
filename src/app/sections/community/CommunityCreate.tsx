@@ -31,48 +31,6 @@ const CommunityCreate = () => {
         await submitForm(createCommunity, community, toIndex)
     };
 
-    // const formik = useFormik({
-    //     initialValues: initialCommunity,
-    //     validationSchema: communitySchema,
-    //     onSubmit: async (values, {setSubmitting}) => {
-    //         setSubmitting(true)
-    //         try {
-    //             if (isNotEmpty(values.id)) {
-    //                 // await updateUser(values)
-    //             } else {
-    //
-    //                 console.log(values);
-    //                 // var country = "US"
-    //                 // let formData = new FormData()
-    //
-    //                 // formData.append('logo', values.logo!)
-    //                 // formData.append('banner_image', values.banner_image!)
-    //                 // formData.append('name', values.name!)
-    //                 // formData.append('description', values.description!)
-    //                 // formData.append('contact[name]', values.contact!.name)
-    //                 // formData.append('contact[email]', values.contact!.email)
-    //                 // formData.append('contact[phone_number]', values.contact!.phone_number)
-    //                 // formData.append('address[address_one]', values.address!.address_one)
-    //                 // formData.append('address[address_two]', values.address!.address_two)
-    //                 // formData.append('address[city]', values.address!.city)
-    //                 // formData.append('address[state_province]', communityAddress.state_province)
-    //                 // formData.append('address[postal_code]', values.address!.postal_code)
-    //                 // formData.append('address[country_code]', country)
-    //                 // // @ts-ignore
-    //                 // console.log(...formData)
-    //                 // const comm = await createCommunity(formData)
-    //                 // navigate('/communities/' + comm?.id)
-    //
-    //             }
-    //         } catch (ex) {
-    //             console.error(ex)
-    //         } finally {
-    //             setSubmitting(true)
-    //         }
-    //     },
-    // })
-
-
     useEffect(() => {
         getStates().then(response => {
             response?.data?.forEach(function (value) {
