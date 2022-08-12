@@ -15,7 +15,7 @@ const UsersCreate = () => {
     const handleSubmit = async () => {
         let data = jsonToFormData(user);
         await createUser(data)
-          // .then(response => navigate("/users/" + response?.id));
+          .then(response => navigate("/users/" + response?.id));
     };
 
     const handleOnChange = (event: any) => {

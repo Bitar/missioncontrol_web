@@ -10,7 +10,7 @@ type Props = {
 }
 
 const DatePickerMC: FC<Props> = ({ user, setUser }) => {
-    const [date, setDate] = useState<Moment | null>(moment());
+    const [date, setDate] = useState<Moment | null>(null);
     const [focusedInput, setFocusedInput] = useState<boolean>(false);
 
     const handleFocusChange = (arg: {
@@ -41,6 +41,7 @@ const DatePickerMC: FC<Props> = ({ user, setUser }) => {
       <>
           <SingleDatePicker
             date={date} // momentPropTypes.momentObj or null
+            placeholder={"Date of Birth"}
             onDateChange={onDateChange} // PropTypes.func.isRequired
             focused={focusedInput} // PropTypes.bool
             onFocusChange={handleFocusChange} // PropTypes.func.isRequired
