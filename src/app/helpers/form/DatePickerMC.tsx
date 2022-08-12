@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState } from "react";
+import React, { FC, useState } from "react";
 import { updateData } from "./FormHelper";
 import moment, { Moment } from "moment";
 import { SingleDatePicker } from "react-dates";
@@ -40,7 +40,7 @@ const DatePickerMC: FC<Props> = ({ user, setUser }) => {
     return (
       <>
           <SingleDatePicker
-            date={date} // momentPropTypes.momentObj or null
+            date={date ?? (user?.meta?.date_of_birth ? moment(user?.meta?.date_of_birth * 1000) : date)} // momentPropTypes.momentObj or null
             placeholder={"Date of Birth"}
             onDateChange={onDateChange} // PropTypes.func.isRequired
             focused={focusedInput} // PropTypes.bool

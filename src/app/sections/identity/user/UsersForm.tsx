@@ -16,12 +16,6 @@ type Props = {
 
 const UsersForm: FC<Props> = ({method, user, setUser}) => {
 
-    // const [focusedInput, setFocusedInput] = useState<FocusedInputShape | null>(
-    //     null
-    // )
-
-
-
     const [selected, setSelected] = useState([]);
     const [loaded, setLoaded] = useState(false)
     const loadRoles = (searchValue: any, callback: any) => {

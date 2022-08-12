@@ -2,11 +2,17 @@
 // 3rd-party config
 //
 @import 'react-dates/lib/css/_datepicker.css';
+
+.DateInput_input__focused {
+  border-bottom-color: $mc-secondary;
+}
+
 .CalendarDay__default:hover {
   background: $mc-secondary; //background
   border: 1px solid darken($mc-secondary, 5); //default styles include a border
   color: white; //text
 }
+
 // Will edit everything selected including everything between a range of dates
 .CalendarDay__selected_span {
   background: $mc-primary; //background
