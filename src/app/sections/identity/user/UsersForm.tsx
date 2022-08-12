@@ -4,7 +4,8 @@ import React, {FC, useEffect, useState} from "react";
 import {User} from "../../../models/identity/User";
 import {getRoles} from "../role/core/_requests";
 import {updateData} from "../../../helpers/form/FormHelper";
-// import {DateRangePickerWrapper} from "react-dates";
+import { DatePickerMC } from "../../../helpers/form/DatePickerMC";
+
 
 
 type Props = {
@@ -14,6 +15,13 @@ type Props = {
 }
 
 const UsersForm: FC<Props> = ({method, user, setUser}) => {
+
+    // const [focusedInput, setFocusedInput] = useState<FocusedInputShape | null>(
+    //     null
+    // )
+
+
+
     const [selected, setSelected] = useState([]);
     const [loaded, setLoaded] = useState(false)
     const loadRoles = (searchValue: any, callback: any) => {
@@ -51,6 +59,7 @@ const UsersForm: FC<Props> = ({method, user, setUser}) => {
 
         updateData({'roles': rolesObject}, setUser, user);
     }
+
 
 
     return (
@@ -178,7 +187,7 @@ const UsersForm: FC<Props> = ({method, user, setUser}) => {
                 <label
                     className="col-lg-4 col-form-label required fw-bold fs-6">Date of Birth</label>
                 <div className="col-lg-8 fv-row">
-                    {/*<DateRangePickerWrapper/>*/}
+                    <DatePickerMC user={user} setUser={setUser}/>
                 </div>
             </div>
 

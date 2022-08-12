@@ -1,5 +1,7 @@
 import axios from "axios";
 import toast from "react-hot-toast";
+import Moment from "moment";
+import moment from "moment";
 
 const updateData = (fieldsToUpdate: Partial<any>, setFunction: any, model: any) => {
     const updatedData = {...model, ...fieldsToUpdate};
@@ -33,14 +35,14 @@ const submitForm = async (fun: any, model: any, to: any, id?: any) => {
 }
 
 function buildFormData(formData: FormData, data: any, parentKey?: any) {
-    if (data && typeof data === 'object' && !(data instanceof Date) && !(data instanceof File)) {
+    if (data && typeof data === 'object' && !(data instanceof Date) && !(data instanceof File) && !(data instanceof Moment)) {
         Object.keys(data).forEach(key => {
             buildFormData(formData, data[key], parentKey ? `${parentKey}[${key}]` : key);
         });
     } else {
         if (data !== null && data !== '' && parentKey !== 'id' && parentKey !== 'created_at') {
-            if (data instanceof Date) {
-                formData.append(parentKey, data.getTime().toString());
+            if (data instanceof Moment) {
+                formData.append(parentKey, moment(data).format("X"));
             } else {
                 formData.append(parentKey, data);
             }
