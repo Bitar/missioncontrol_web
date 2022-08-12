@@ -13,11 +13,11 @@ import {BillingPlanWrapper} from "../sections/billing/BillingPlanWrapper";
 import {CommunityCreate} from "../sections/community/CommunityCreate";
 import {BillingComplete} from '../sections/billing/BillingComplete'
 import {SubscriptionIndex} from "../sections/billing/subscriptions/SubscriptionIndex";
-import {CommunityIndex} from "../sections/community/CommunityIndex";
-import {CommunityView} from '../sections/community/CommunityView'
-import {UsersPage} from "../sections/identity/user/pages/UsersPage";
-import {RolesPage} from "../sections/identity/role/pages/RolesPage";
-import {PermissionsPage} from "../sections/identity/permission/pages/PermissionsPage";
+import {CommunityIndex} from "../sections/community/pages/CommunityIndex";
+import {CommunityView} from '../sections/community/pages/CommunityView'
+import {UserPage} from "../sections/identity/user/pages/UserPage";
+import {RolePage} from "../sections/identity/role/pages/RolePage";
+import {PermissionPage} from "../sections/identity/permission/pages/PermissionPage";
 import {PlansPage} from "../sections/billing/plan/pages/PlansPage";
 
 
@@ -34,9 +34,9 @@ const PrivateRoutes = () => {
                 {/* Pages */}
 
                 {/* Sections */}
-                <Route path='users/*' element={<UsersPage/>}/>
-                <Route path='roles/*' element={<RolesPage/>}/>
-                <Route path='permissions/*' element={<PermissionsPage/>}/>
+                <Route path='users/*' element={<UserPage/>}/>
+                <Route path='roles/*' element={<RolePage/>}/>
+                <Route path='permissions/*' element={<PermissionPage/>}/>
 
                 <Route path='plans/*' element={<PlansPage/>}/>
                 {/* Sections */}
