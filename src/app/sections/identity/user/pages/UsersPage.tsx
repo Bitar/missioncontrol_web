@@ -1,7 +1,6 @@
 import {Navigate, Route, Routes} from "react-router-dom";
 import {UsersIndex} from "./UsersIndex";
 import {UsersCreate} from "../UsersCreate";
-import {UsersEdit} from "../UsersEdit";
 import {PageLink, PageTitle} from "../../../../../_metronic/layout/core";
 import React from "react";
 import {UsersView} from "./UsersView";
@@ -36,12 +35,12 @@ const UsersPage: React.FC = () => {
                     <UsersCreate/>
                 </>
             }/>
-            <Route path='/:id/edit' element={
-                <>
-                    <PageTitle breadcrumbs={usersBreadCrumbs}>{"Update User"}</PageTitle>
-                    <UsersEdit/>
-                </>
-            }/>
+            {/*<Route path='/:id/edit' element={*/}
+            {/*    <>*/}
+            {/*        <PageTitle breadcrumbs={usersBreadCrumbs}>{"Update User"}</PageTitle>*/}
+            {/*        <UsersEdit/>*/}
+            {/*    </>*/}
+            {/*}/>*/}
             <Route path='/:id/*' element={
                 <>
                     <PageTitle breadcrumbs={usersBreadCrumbs}>{"View User"}</PageTitle>

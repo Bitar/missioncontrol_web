@@ -31,7 +31,7 @@ const usersColumns: ReadonlyArray<Column<User>> = [
     ),
     id: 'actions',
     Cell: ({...props}) => <ActionsCell id={props.data[props.row.index].id} path={'users'}
-                                       queryKey={QUERIES.USERS_LIST} showView={true}/>,
+                                       queryKey={QUERIES.USERS_LIST} showView={true} showEdit={false}/>,
   },
 ]
 

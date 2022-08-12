@@ -5,7 +5,7 @@ import {KTCard, KTCardBody} from "../../../../_metronic/helpers";
 import clsx from "clsx";
 import { getPermissionById, updatePermission } from "./core/_requests";
 import {useNavigate, useParams} from 'react-router-dom';
-import { submitForm, updateData } from "../../../helpers/FormHelper";
+import { submitForm, updateData } from "../../../helpers/form/FormHelper";
 
 const PermissionsEdit = () => {
     const [permission, setPermission] = useState<Permission | undefined>();

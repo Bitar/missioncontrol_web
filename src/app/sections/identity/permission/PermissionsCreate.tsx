@@ -5,7 +5,7 @@ import {KTCard, KTCardBody} from "../../../../_metronic/helpers";
 import clsx from "clsx";
 import {createPermission} from "./core/_requests";
 import {useNavigate} from 'react-router-dom';
-import {submitForm, updateData} from "../../../helpers/FormHelper";
+import {submitForm, updateData} from "../../../helpers/form/FormHelper";
 
 const PermissionsCreate = () => {
     const [permission, setPermission] = useState<Permission>(permissionInitial)

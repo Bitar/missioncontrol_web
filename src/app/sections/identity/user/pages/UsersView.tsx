@@ -61,7 +61,6 @@ const UsersView: React.FC = () => {
                     element={
                         <>
                             <PageTitle breadcrumbs={userViewBreadCrumbs}>Overview</PageTitle>
-                            {/*<UsersEdit/>*/}
                         </>
                     }
                 />
@@ -70,7 +69,6 @@ const UsersView: React.FC = () => {
                     element={
                         <>
                             <PageTitle breadcrumbs={userViewBreadCrumbs}>Activities</PageTitle>
-                            {/*<CommunityFollower/>*/}
                             <UsersActivities/>
                         </>
                     }
@@ -81,7 +79,6 @@ const UsersView: React.FC = () => {
                         <>
                             <PageTitle breadcrumbs={userViewBreadCrumbs}>Teams</PageTitle>
                             <UsersTeams/>
-                            {/*<CommunityFollower/>*/}
                         </>
                     }
                 />
@@ -90,7 +87,7 @@ const UsersView: React.FC = () => {
                     element={
                         <>
                             <PageTitle breadcrumbs={userViewBreadCrumbs}>Settings</PageTitle>
-                            <UsersEdit/>
+                            <UsersEdit user={user} setUser={setUser}/>
                         </>
                     }
                 />

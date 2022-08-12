@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import {toAbsoluteUrl} from "../../../../../_metronic/helpers";
 import React, {FC, useEffect, useState} from "react";
-import {updateData} from "../../../../helpers/FormHelper";
+import {updateData} from "../../../../helpers/form/FormHelper";
 
 type Props = {
     user: any,

@@ -11,6 +11,8 @@ type Props = {
 const UsersInfo: FC<Props> = ({user}) => {
     const location = useLocation()
 
+    console.log(user?.meta?.image)
+
     return (
         <>
             <div className='card mb-5 mb-xl-10'>

@@ -10,7 +10,7 @@ import {getCountries, getStates} from "../misc/core/_requests";
 import {selectCustomStyles} from "../activities/core/_consts";
 import Select from "react-select";
 import {CommunityAddress, initialCommunityAddress} from "../../models/community/CommunityAddress";
-import {submitForm, updateData} from "../../helpers/FormHelper";
+import {submitForm, updateData} from "../../helpers/form/FormHelper";
 import {CommunityContact, initialCommunityContact} from "../../models/community/CommunityContact";
 
 const stateSelect: any[] = []

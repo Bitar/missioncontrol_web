@@ -8,6 +8,7 @@ import {
   ToggleComponent,
   SwapperComponent,
 } from '../assets/ts/components'
+import 'react-dates/initialize';
 
 import {useLayout} from './core'
 

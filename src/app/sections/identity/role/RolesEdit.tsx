@@ -5,7 +5,7 @@ import {Form, Field, Formik} from "formik";
 import {getRoleById, updateRole} from "./core/_requests";
 import {KTCard, KTCardBody} from "../../../../_metronic/helpers";
 import clsx from "clsx";
-import {submitForm, updateData} from "../../../helpers/FormHelper";
+import {submitForm, updateData} from "../../../helpers/form/FormHelper";
 
 
 const RolesEdit = () => {

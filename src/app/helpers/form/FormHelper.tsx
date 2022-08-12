@@ -33,18 +33,20 @@ const submitForm = async (fun: any, model: any, to: any, id?: any) => {
 }
 
 function buildFormData(formData: FormData, data: any, parentKey?: any) {
-    console.log(parentKey)
     if (data && typeof data === 'object' && !(data instanceof Date) && !(data instanceof File)) {
         Object.keys(data).forEach(key => {
             buildFormData(formData, data[key], parentKey ? `${parentKey}[${key}]` : key);
         });
     } else {
         if (data !== null && data !== '' && parentKey !== 'id' && parentKey !== 'created_at') {
-            formData.append(parentKey, data);
+            if (data instanceof Date) {
+                formData.append(parentKey, data.getTime().toString());
+            } else {
+                formData.append(parentKey, data);
+            }
         } else {
-            console.log('cant append', parentKey, data)
+            // console.log('cant append', parentKey, data)
         }
-
     }
 }
 

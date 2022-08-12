@@ -48,11 +48,12 @@ export type User = {
 }
 
 export interface UserMeta {
-    id?: ID,
-    user_id?: ID,
-    image: string,
-    username?: string,
-    rng?: string,
+    id?: ID
+    user_id?: ID
+    image: string
+    username?: string
+    date_of_birth?: string
+    rng?: string
     city?: string
 }
 
@@ -60,17 +61,18 @@ export const initialUserMeta = (userMeta?: UserMeta) => {
     return {
         image: userMeta?.image || "",
         username: userMeta?.username || "",
-        city: userMeta?.city || ""
+        city: userMeta?.city || "",
+        date_of_birth: userMeta?.date_of_birth || ""
     }
 }
 
 export const initialUser = (user?: User) => {
     return {
-        first_name: user?.first_name || "",
-        last_name: user?.last_name || "",
-        email: user?.email || "",
-        password: "",
-        password_confirmation: "",
+        first_name: user?.first_name || "ayman",
+        last_name: user?.last_name || "bitar",
+        email: user?.email || "ayman@mc.com",
+        password: "123123123",
+        password_confirmation: "123123123",
         created_at: user?.created_at || 0,
         roles: [],
         meta: user?.meta || initialUserMeta()
