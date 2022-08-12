@@ -8,8 +8,14 @@ const API_URL = process.env.REACT_APP_API_URL
 const GET_USERS_URL = `${API_URL}/users`
 
 const getUsers = (query: string): Promise<UserQueryResponse> => {
+    let url = `${GET_USERS_URL}`;
+
+    if (query) {
+        url += `?include=roles&${query}`
+    }
+
     return axios
-        .get(`${GET_USERS_URL}?${query}`)
+        .get(`${url}`)
         .then((d: AxiosResponse<UserQueryResponse>) => d.data)
 }
 
