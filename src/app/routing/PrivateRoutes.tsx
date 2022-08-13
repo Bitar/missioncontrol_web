@@ -19,6 +19,7 @@ import {UserPage} from "../sections/identity/user/pages/UserPage";
 import {RolePage} from "../sections/identity/role/pages/RolePage";
 import {PermissionPage} from "../sections/identity/permission/pages/PermissionPage";
 import {PlansPage} from "../sections/billing/plan/pages/PlansPage";
+import {CommunityPage} from '../sections/community/pages/CommunityPage'
 
 
 const PrivateRoutes = () => {
@@ -34,6 +35,8 @@ const PrivateRoutes = () => {
                 {/* Pages */}
 
                 {/* Sections */}
+                <Route path='communities/*' element={<CommunityPage/>}/>
+
                 <Route path='users/*' element={<UserPage/>}/>
                 <Route path='roles/*' element={<RolePage/>}/>
                 <Route path='permissions/*' element={<PermissionPage/>}/>
@@ -44,18 +47,18 @@ const PrivateRoutes = () => {
                 <Route path='billing/plan' element={<BillingPlanWrapper/>}/>
                 <Route path='billing/:id/complete' element={<BillingComplete/>}/>
                 <Route path='subscriptions' element={<SubscriptionIndex/>}/>
-                <Route path='communities' element={<CommunityIndex/>}/>
+                {/*<Route path='communities' element={<CommunityIndex/>}/>*/}
 
-                <Route path='communities/create' element={<CommunityCreate/>}/>
+                {/*<Route path='communities/create' element={<CommunityCreate/>}/>*/}
 
-                <Route
-                    path='communities/:id/*'
-                    element={
-                        <SuspensedView>
-                            <CommunityView/>
-                        </SuspensedView>
-                    }
-                />
+                {/*<Route*/}
+                {/*    path='communities/:id/*'*/}
+                {/*    element={*/}
+                {/*        <SuspensedView>*/}
+                {/*            <CommunityView/>*/}
+                {/*        </SuspensedView>*/}
+                {/*    }*/}
+                {/*/>*/}
 
                 <Route path='/activities' element={<ActivitiesIndex/>}/>
 

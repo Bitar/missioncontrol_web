@@ -122,23 +122,27 @@ const GameCreate = () => {
                             <div className="row g-6 g-xl-9 mb-6 mb-xl-9">
                                 {games?.map((game) => (
                                     <div className="col-md-6 col-lg-4 col-xl-3" key={game.id}>
-                                        <div className="game-container">
-                                            {/* TODO: Set The image as background Image*/}
-                                            <div className="game-image">
-                                                {!game.image ?
-                                                    <img className=" w-100 rounded border border-2 " alt='cover'
-                                                         src={toAbsoluteUrl('/media/svg/avatars/AstroLearn.svg')}/>
-                                                    :
-                                                    <img
-                                                        onClick={() => sendRequest(game.id)}
-                                                        className=" w-100 rounded border border-2"
-                                                        src={game.image}
-                                                        alt='game cover'
-                                                    />}
-                                            </div>
-                                            <div className="game-title">
-                                                <div
-                                                    className='text-center fs-2 fw-bold text-black mt-auto'>{game.title}</div>
+                                        <div className="card card-stretch card-bordered mb-5">
+                                            <div className="card-body">
+                                                <div className="game-container">
+                                                    {/* TODO: Set The image as background Image*/}
+                                                    <div className="game-image">
+                                                        {!game.image ?
+                                                          <img className=" w-100 rounded border border-2 " alt='cover'
+                                                               src={toAbsoluteUrl('/media/svg/avatars/AstroLearn.svg')}/>
+                                                          :
+                                                          <img
+                                                            onClick={() => sendRequest(game.id)}
+                                                            className=" w-100 rounded border border-2"
+                                                            src={game.image}
+                                                            alt='game cover'
+                                                          />}
+                                                    </div>
+                                                    <div className="game-title">
+                                                        <div
+                                                          className='text-center fs-5 fw-bold text-black mt-auto '>{game.title}</div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 

@@ -1,4 +1,4 @@
-import {ID, Response} from "../../../_metronic/helpers";
+import {ID, Response} from '../../../_metronic/helpers'
 
 
 export type CommunityAddress = {
@@ -12,13 +12,15 @@ export type CommunityAddress = {
     country_code: string,
 }
 
-export const initialCommunityAddress = {
-    address_one: '',
-    address_two: '',
-    city: '',
-    state_province: '',
-    postal_code: '',
-    country_code: '',
+export const initialCommunityAddress = (address?: CommunityAddress) => {
+    return {
+        address_one: address?.address_one || '246 Over There',
+        address_two: address?.address_two || '',
+        city: address?.city || 'Someplace',
+        state_province: address?.state_province || 'MA',
+        postal_code: address?.postal_code || '12345',
+        country_code: address?.country_code || 'US',
+    }
 }
 
 export type CommunityAddressQueryResponse = Response<Array<CommunityAddress>>

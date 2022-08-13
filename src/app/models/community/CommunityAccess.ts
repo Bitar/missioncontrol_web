@@ -9,10 +9,12 @@ export type CommunityAccess = {
     value: string
 }
 
-export const initialCommunityAccess = {
-    type: 0,
-    key: 0,
-    value: ''
+export const initialCommunityAccess = (communityAccess?: CommunityAccess) => {
+    return {
+        type: communityAccess?.type || 0,
+        key: communityAccess?.key || 0,
+        value: communityAccess?.value || ""
+    }
 }
 
 export type CommunityAccessQueryResponse = Response<Array<CommunityQueryResponse>>

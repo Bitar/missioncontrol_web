@@ -1,9 +1,9 @@
-import {ID, Response} from "../../../_metronic/helpers";
-import {CommunityAddress, initialCommunityAddress} from "./CommunityAddress";
-import {CommunityContact, initialCommunityContact} from "./CommunityContact";
-import {CommunityAccess} from "./CommunityAccess";
-import {Game} from "../game/Game";
-import * as Yup from "yup";
+import {ID, Response} from '../../../_metronic/helpers'
+import {CommunityAddress, initialCommunityAddress} from './CommunityAddress'
+import {CommunityContact, initialCommunityContact} from './CommunityContact'
+import { CommunityAccess, initialCommunityAccess } from "./CommunityAccess";
+import {Game} from '../game/Game'
+import * as Yup from 'yup'
 
 export const communitySchema = Yup.object().shape({
     name: Yup.string().required('Community name is required'),
@@ -24,16 +24,15 @@ export const communitySchema = Yup.object().shape({
     }),
 })
 
-export const initialCommunity: Community = {
-    name: '',
-    // logo: '',
-    // banner_image: '',
-    is_featured: false,
-    // description: '',
-    address: initialCommunityAddress,
-    contact: initialCommunityContact,
-    // access: initialCommunityAccess,
-    // is_follow: false
+export const initialCommunity = (community?: Community) => {
+    return {
+        name: community?.name || 'AB Community',
+        logo: community?.logo || '',
+        banner_image: community?.banner_image || '',
+        address: community?.address || initialCommunityAddress(),
+        contact: community?.contact || initialCommunityContact(),
+        access: community?.access || initialCommunityAccess(),
+    }
 }
 
 export type Community = {
