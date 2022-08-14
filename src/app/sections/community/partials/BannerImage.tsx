@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react'
+import React, { FC, useEffect, useState } from "react";
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {updateData} from '../../../helpers/form/FormHelper'
 import clsx from 'clsx'
@@ -12,6 +12,18 @@ const BannerImage: FC<Props> = ({community, setCommunity}) => {
     const defaultImage = community?.image || toAbsoluteUrl('/media/svg/avatars/blank.svg')
     const [image, setImage] = useState<string>('')
     const [imageInput, setImageInput] = useState<string>('')
+
+    useEffect(() => {
+        if (community?.banner_image !== undefined && community?.banner_image !== "") {
+            if (community?.banner_image !== 'http://dashboard.missioncontrol.test/media/avatar/blank.svg') {
+                setImage(`url(${community?.banner_image})`)
+            } else {
+                setImage(`none`)
+            }
+        } else {
+            setImage(`none`)
+        }
+    }, [community])
 
     const handleOnChange = (event: any) => {
         let file = event.target.files[0]

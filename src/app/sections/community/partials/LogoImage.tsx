@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React, {FC, useState} from 'react'
+import React, { FC, useEffect, useState } from "react";
 import {updateData} from '../../../helpers/form/FormHelper'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 
@@ -13,18 +13,18 @@ const LogoImage: FC<Props> = ({community, setCommunity}) => {
     const [image, setImage] = useState<string>('')
     const [imageInput, setImageInput] = useState<string>('')
 
-    // useEffect(() => {
-    //     if (community?.image !== undefined && community?.image !== "") {
-    //         if (community?.image !== 'http://dashboard.missioncontrol.test/media/avatar/blank.svg') {
-    //             console.log(`url(${community?.image})`)
-    //             setImage(`url(${community?.image})`)
-    //         } else {
-    //             setImage(`none`)
-    //         }
-    //     } else {
-    //         setImage(`none`)
-    //     }
-    // }, [community])
+    useEffect(() => {
+        if (community?.logo !== undefined && community?.logo !== "") {
+            if (community?.logo !== 'http://dashboard.missioncontrol.test/media/avatar/blank.svg') {
+                console.log(`url(${community?.logo})`)
+                setImage(`url(${community?.logo})`)
+            } else {
+                setImage(`none`)
+            }
+        } else {
+            setImage(`none`)
+        }
+    }, [community])
 
     const handleOnChange = (event: any) => {
         let file = event.target.files[0]
