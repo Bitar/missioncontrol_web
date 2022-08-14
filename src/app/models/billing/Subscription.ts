@@ -1,5 +1,5 @@
 import {ID, Response} from "../../../_metronic/helpers";
-import {User} from "../identity/User";
+import {User} from "../../sections/identity/user/models/User";
 import {Plan} from "./Plan";
 
 export type Subscription = {

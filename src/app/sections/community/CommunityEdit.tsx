@@ -1,23 +1,32 @@
-import { KTCard, KTCardBody } from "../../../_metronic/helpers";
-import { Form, Formik } from "formik";
+import React, { Dispatch, FC, SetStateAction } from "react";
 import { Community, communitySchema, formOnChange, initialCommunity } from "./models/Community";
-import { createCommunity } from "./core/_requests";
-import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
-import { jsonToFormData } from "../../helpers/form/FormHelper";
+import { useNavigate, useParams } from "react-router-dom";
+import { Form, Formik } from "formik";
+import { KTCard, KTCardBody } from "../../../_metronic/helpers";
 import { LogoImage } from "./partials/LogoImage";
 import { BannerImage } from "./partials/BannerImage";
 import { CommunityForm } from "./CommunityForm";
+import { jsonToFormData } from "../../helpers/form/FormHelper";
+import { updateCommunity } from "./core/_requests";
 
+type Props = {
+  community: Community | undefined,
+  setCommunity: Dispatch<SetStateAction<Community | undefined>>
+}
 
-const CommunityCreate = () => {
-  const [community, setCommunity] = useState<Community>(initialCommunity);
+const CommunityEdit: FC<Props> = ({ community, setCommunity }) => {
   const navigate = useNavigate();
+  const params = useParams();
 
   const handleSubmit = async () => {
     let data = jsonToFormData(community);
-    await createCommunity(data)
-      .then(response => navigate("/communities/" + response?.id));
+    data.append("_method", "PUT");
+
+    await updateCommunity(params.id, data)
+      .then(response => {
+        setCommunity(response);
+        navigate("/communities/" + response?.id);
+      });
   };
 
   const handleOnChange = (e: any) => formOnChange(e, community, setCommunity);
@@ -27,15 +36,12 @@ const CommunityCreate = () => {
       <KTCard>
         <div className="card-header">
           <div className="card-title">
-            <span className="card-icon">
-              <i className="las la-plus fs-2" />
-            </span>
             <h3 className="card-label">
-              Add Community
+              Update Community
             </h3>
           </div>
         </div>
-        <Formik initialValues={community} onSubmit={handleSubmit}
+        <Formik initialValues={initialCommunity(community)} onSubmit={handleSubmit}
                 validationSchema={communitySchema}>
           {
             ({ isSubmitting, isValid, touched }) => (
@@ -43,6 +49,7 @@ const CommunityCreate = () => {
                 <KTCardBody className="py-4">
                   <div className="d-flex flex-column pt-5">
                     <div className="row mb-6">
+
                       <label className="col-lg-4 col-form-label fw-bold fs-6">Images</label>
 
                       <div className="col-lg-8">
@@ -54,8 +61,7 @@ const CommunityCreate = () => {
                       </div>
                     </div>
 
-                    <CommunityForm method={"create"} community={community} setCommunity={setCommunity} />
-
+                    <CommunityForm method={"edit"} community={community} setCommunity={setCommunity} />
                   </div>
                 </KTCardBody>
                 <div className="card-footer d-flex justify-content-end py-6 px-9">
@@ -65,7 +71,7 @@ const CommunityCreate = () => {
                     data-kt-users-modal-action="submit"
                     disabled={isSubmitting || !isValid || !touched}
                   >
-                    <span className="indicator-label">Add Community</span>
+                    <span className="indicator-label">Save Changes</span>
                     {(isSubmitting) && (
                       <span className="indicator-progress">
                         Please wait...{" "}
@@ -85,4 +91,4 @@ const CommunityCreate = () => {
   );
 };
 
-export { CommunityCreate };
+export { CommunityEdit };

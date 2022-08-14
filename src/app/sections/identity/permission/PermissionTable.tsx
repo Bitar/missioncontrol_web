@@ -4,7 +4,7 @@ import {KTCardBody} from "../../../../_metronic/helpers";
 import {CustomHeaderColumn} from "../../../modules/table/columns/CustomHeaderColumn";
 import {CustomRow} from "../../../modules/table/columns/CustomRow";
 import {permissionColumns} from "./core/_columns";
-import {Permission} from "../../../models/identity/Permission";
+import {Permission} from "./models/Permission";
 import {useQueryResponseData, useQueryResponseLoading} from "../../../modules/table/QueryResponseProvider";
 import {TableListLoading} from "../../../modules/table/TableListLoading";
 import {TableListPagination} from "../../../modules/table/TableListPagination";

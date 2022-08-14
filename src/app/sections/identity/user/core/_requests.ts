@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from 'axios'
 import {Response} from "../../../../../_metronic/helpers";
-import {User, UserQueryResponse} from "../../../../models/identity/User";
+import {User, UserQueryResponse} from "../models/User";
 import {ActivityQueryResponse} from "../../../../models/activity/Activity";
 import {TeamQueryResponse} from "../../../../models/squad/Team";
 

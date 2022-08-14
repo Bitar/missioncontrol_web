@@ -6,4 +6,11 @@ export type Country = {
     code: string
 }
 
+export const initialCountry = (country?: Country) => {
+    return {
+        name: country?.name ?? "",
+        code: country?.code ?? ""
+    }
+}
+
 export type CountryQueryResponse = Response<Array<Country>>

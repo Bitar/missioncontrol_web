@@ -3,9 +3,9 @@ import {TextCell} from '../../../../modules/table/columns/TextCell'
 import {CustomHeader} from '../../../../modules/table/columns/CustomHeader'
 import {ActionsCell} from '../../../../modules/table/columns/ActionsCell'
 import {QUERIES, toAbsoluteUrl} from '../../../../../_metronic/helpers'
-import {User} from '../../../../models/identity/User'
+import {User} from '../models/User'
 import {Link} from 'react-router-dom'
-import {Role} from '../../../../models/identity/Role'
+import {Role} from '../../role/models/Role'
 
 const usersColumns: ReadonlyArray<Column<User>> = [
     {

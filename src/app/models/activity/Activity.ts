@@ -3,7 +3,7 @@ import {Game, initialGame} from "../game/Game";
 import {ActivityFee, initialActivityFee} from "./ActivityFee";
 import {ActivityLocation, initialActivityLocation} from "./ActivityLocation";
 import {ActivitySchedule, initialActivitySchedule} from "./ActivitySchedule";
-import {Community, initialCommunity} from "../community/Community";
+import {Community, initialCommunity} from "../../sections/community/models/Community";
 
 
 export const initialActivity: Activity = {

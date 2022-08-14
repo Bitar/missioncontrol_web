@@ -6,4 +6,11 @@ export type State = {
     code: string
 }
 
+export const initialState = (state?: State) => {
+    return {
+        name: state?.name ?? "",
+        code: state?.code ?? ""
+    }
+}
+
 export type StateQueryResponse = Response<Array<State>>

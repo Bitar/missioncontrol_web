@@ -1,4 +1,4 @@
-import {ID, Response} from "../../../_metronic/helpers";
+import {ID, Response} from "../../../../../_metronic/helpers";
 import * as Yup from "yup";
 
 export const permissionSchema = Yup.object().shape({

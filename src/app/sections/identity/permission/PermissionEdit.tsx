@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { Field, Form, Formik } from "formik";
-import { Permission, permissionInitial, permissionSchema } from "../../../models/identity/Permission";
+import { Permission, permissionInitial, permissionSchema } from "./models/Permission";
 import {KTCard, KTCardBody} from "../../../../_metronic/helpers";
 import clsx from "clsx";
 import { getPermissionById, updatePermission } from "./core/_requests";

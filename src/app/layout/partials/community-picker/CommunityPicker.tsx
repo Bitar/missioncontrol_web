@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react'
 import clsx from "clsx"
 import {getAdminCommunities, setAdminCommunities} from "./_requests"
-import {Community} from "../../../models/community/Community"
+import {Community} from "../../../sections/community/models/Community"
 import {ID} from "../../../../_metronic/helpers"
 import {useNavigate} from "react-router-dom"
 

@@ -2,7 +2,7 @@ import {Column} from 'react-table'
 import {TextCell} from "../../../modules/table/columns/TextCell";
 import {CustomHeader} from "../../../modules/table/columns/CustomHeader";
 import {ImageCell} from "../../../modules/table/columns/ImageCell";
-import {Community} from "../../../models/community/Community";
+import {Community} from "../models/Community";
 import {QUERIES} from '../../../../_metronic/helpers';
 import {ActionsCell} from "../../../modules/table/columns/ActionsCell";
 

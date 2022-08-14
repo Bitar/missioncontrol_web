@@ -12,9 +12,9 @@ import {LayoutSplashScreen} from '../../../../_metronic/layout/core'
 import {AuthModel} from './_models'
 import * as authHelper from './AuthHelpers'
 import {getUserByToken} from './_requests'
-import {Community} from "../../../models/community/Community";
+import {Community} from "../../../sections/community/models/Community";
 import {Subscription} from "../../../models/billing/Subscription";
-import {User} from "../../../models/identity/User";
+import {User} from "../../../sections/identity/user/models/User";
 
 type AuthContextProps = {
   auth: AuthModel | undefined

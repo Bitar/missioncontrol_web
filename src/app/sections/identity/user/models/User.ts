@@ -1,6 +1,9 @@
-import {ID, Response} from "../../../_metronic/helpers";
+import {ID, Response} from "../../../../../_metronic/helpers";
 import * as Yup from "yup";
-import {Role} from "./Role";
+import {Role} from "../../role/models/Role";
+import { initialUserMeta, UserMeta } from "./UserMeta";
+import { Dispatch, SetStateAction } from "react";
+import { updateData } from "../../../../helpers/form/FormHelper";
 
 let schema = {
     first_name: Yup.string()
@@ -47,25 +50,6 @@ export type User = {
     meta?: UserMeta
 }
 
-export interface UserMeta {
-    id?: ID
-    user_id?: ID
-    image: string
-    username?: string
-    date_of_birth?: number
-    rng?: string
-    city?: string
-}
-
-export const initialUserMeta = (userMeta?: UserMeta) => {
-    return {
-        image: userMeta?.image || "",
-        username: userMeta?.username || "",
-        city: userMeta?.city || "",
-        date_of_birth: userMeta?.date_of_birth || 0
-    }
-}
-
 export const initialUser = (user?: User) => {
     return {
         first_name: user?.first_name || "ayman",
@@ -80,3 +64,25 @@ export const initialUser = (user?: User) => {
 }
 
 export type UserQueryResponse = Response<Array<User>>
+
+export function formOnChange(event: any, user: User | undefined, setUser: Dispatch<SetStateAction<User>>) {
+    let target_name = event.target.name
+
+    if (target_name.includes('meta.')) {
+        let meta_field = target_name.split("meta.")[1]
+        let value;
+
+        if (meta_field === 'image') {
+            value = event.target.files[0]
+        } else {
+            value = event.target.value
+        }
+
+        updateData({
+            'meta': {...user?.meta, ...{[meta_field]: value}}
+        }, setUser, user)
+
+    } else {
+        updateData({[target_name]: event.target.value}, setUser, user);
+    }
+}

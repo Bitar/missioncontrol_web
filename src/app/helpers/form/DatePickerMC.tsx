@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import { updateData } from "./FormHelper";
 import moment, { Moment } from "moment";
 import { SingleDatePicker } from "react-dates";
-import { User } from "../../models/identity/User";
+import { User } from "../../sections/identity/user/models/User";
 
 type Props = {
     user: User | undefined,

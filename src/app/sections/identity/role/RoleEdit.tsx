@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Role, roleInitial, roleSchema} from "../../../models/identity/Role";
+import {Role, roleInitial, roleSchema} from "./models/Role";
 import {useNavigate, useParams} from "react-router-dom";
 import {Form, Field, Formik} from "formik";
 import {getRoleById, updateRole} from "./core/_requests";

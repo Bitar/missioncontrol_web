@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { FC, useEffect, useState } from "react";
-import { User } from "../../../models/identity/User";
+import { User } from "./models/User";
 import { KTSVG, toAbsoluteUrl } from "../../../../_metronic/helpers";
 import Moment from "moment";
 

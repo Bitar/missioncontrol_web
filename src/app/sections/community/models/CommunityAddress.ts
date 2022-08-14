@@ -1,4 +1,6 @@
-import {ID, Response} from '../../../_metronic/helpers'
+import {ID, Response} from '../../../../_metronic/helpers'
+import { initialState, State } from "../../../models/misc/State";
+import { Country, initialCountry } from "../../../models/misc/Country";
 
 
 export type CommunityAddress = {
@@ -7,9 +9,9 @@ export type CommunityAddress = {
     address_one: string,
     address_two: string,
     city: string,
-    state_province: string,
+    state: State,
     postal_code: string,
-    country_code: string,
+    country: Country,
 }
 
 export const initialCommunityAddress = (address?: CommunityAddress) => {
@@ -17,9 +19,9 @@ export const initialCommunityAddress = (address?: CommunityAddress) => {
         address_one: address?.address_one || '246 Over There',
         address_two: address?.address_two || '',
         city: address?.city || 'Someplace',
-        state_province: address?.state_province || 'MA',
+        state: initialState(address?.state),
         postal_code: address?.postal_code || '12345',
-        country_code: address?.country_code || 'US',
+        country: initialCountry(address?.country),
     }
 }
 

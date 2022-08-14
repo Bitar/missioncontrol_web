@@ -3,8 +3,8 @@ import { Form, Formik } from "formik";
 import { KTCard, KTCardBody } from "../../../../_metronic/helpers";
 import { useNavigate } from "react-router-dom";
 import { createUser } from "./core/_requests";
-import { jsonToFormData, updateData } from "../../../helpers/form/FormHelper";
-import { User, initialUser, userSchema } from "../../../models/identity/User";
+import { jsonToFormData } from "../../../helpers/form/FormHelper";
+import { User, initialUser, userSchema, formOnChange } from "./models/User";
 import { AvatarImage } from "./partials/AvatarImage";
 import { UserForm } from "./UserForm";
 
@@ -18,26 +18,7 @@ const UserCreate = () => {
           .then(response => navigate("/users/" + response?.id));
     };
 
-    const handleOnChange = (event: any) => {
-        let target_name = event.target.name;
-
-        if (target_name.includes("meta.")) {
-            let meta_field = target_name.split("meta.")[1];
-            let value;
-
-            if (meta_field === "image") {
-                value = event.target.files[0];
-            } else {
-                value = event.target.value;
-            }
-
-            updateData({
-                "meta": { ...user?.meta, ...{ [meta_field]: value } }
-            }, setUser, user);
-        } else {
-            updateData({ [event.target.name]: event.target.value }, setUser, user);
-        }
-    };
+    const handleOnChange = (e: any) => formOnChange(e, user, setUser);
 
     return (
       <>

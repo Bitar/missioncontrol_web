@@ -1,7 +1,7 @@
 import {Field} from 'formik'
 import AsyncSelect from 'react-select/async'
 import React, {FC, useEffect, useState} from 'react'
-import {User} from '../../../models/identity/User'
+import {User} from './models/User'
 import {getRoles} from '../role/core/_requests'
 import {updateData} from '../../../helpers/form/FormHelper'
 import {DatePickerMC} from '../../../helpers/form/DatePickerMC'

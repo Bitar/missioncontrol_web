@@ -2,7 +2,7 @@ import {useMemo} from 'react'
 import {useTable, ColumnInstance, Row} from 'react-table'
 import {KTCardBody} from "../../../../_metronic/helpers";
 import {usersColumns} from "./core/_columns";
-import {User} from "../../../models/identity/User";
+import {User} from "./models/User";
 import {useQueryResponseData, useQueryResponseLoading} from "../../../modules/table/QueryResponseProvider";
 import {CustomHeaderColumn} from "../../../modules/table/columns/CustomHeaderColumn";
 import {CustomRow} from "../../../modules/table/columns/CustomRow";

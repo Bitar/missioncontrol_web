@@ -7,7 +7,7 @@ import {CustomRow} from "../../modules/table/columns/CustomRow";
 import {TableListPagination} from "../../modules/table/TableListPagination";
 import {TableListLoading} from "../../modules/table/TableListLoading";
 import {KTCardBody} from "../../../_metronic/helpers";
-import {Community} from "../../models/community/Community";
+import {Community} from "./models/Community";
 
 const CommunityTable = () => {
     const communities = useQueryResponseData()
