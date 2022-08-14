@@ -1,7 +1,7 @@
-import {KTSVG} from '../../../_metronic/helpers'
+import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
 import {Link, useLocation} from 'react-router-dom'
 import {Community} from './models/Community'
-import {FC} from 'react'
+import {FC, useEffect, useState} from 'react'
 
 type Props = {
   community: Community | undefined
@@ -9,6 +9,24 @@ type Props = {
 
 const CommunityInfo: FC<Props> = ({community}) => {
   const location = useLocation()
+  const [image, setImage] = useState<string>('')
+
+  useEffect(() => {
+    if (community?.logo) {
+      if (community?.logo !== '') {
+        setImage(community?.logo)
+      }
+
+      if (community?.logo.constructor.name === 'File') {
+        // @ts-ignore
+        let url = URL.createObjectURL(community?.logo)
+        setImage(url)
+      }
+      // if(user?.meta?.image.constructor.name)
+    } else {
+      setImage(toAbsoluteUrl('/media/svg/avatars/blank.svg'))
+    }
+  }, [community])
 
   return (
     <>
@@ -17,7 +35,7 @@ const CommunityInfo: FC<Props> = ({community}) => {
           <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
             <div className='me-7 mb-4'>
               <div className='symbol symbol-100px symbol-lg-160px symbol-fixed position-relative'>
-                <img src={community?.logo} alt={community?.name + 'image'} />
+                <img src={image} alt={community?.name} />
               </div>
             </div>
 

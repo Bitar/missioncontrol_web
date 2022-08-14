@@ -36,7 +36,7 @@ const UserInfo: FC<Props> = ({user}) => {
           <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
             <div className='me-7 mb-4'>
               <div className='symbol symbol-100px symbol-lg-160px symbol-fixed position-relative'>
-                <img alt='Logo' src={image} />
+                <img alt={user?.name} src={image} />
                 {/*{user?.meta?.image && user?.meta?.image !== "" ? (*/}
                 {/*  <img alt="Logo" src={user.meta.image} />*/}
                 {/*) : (*/}
