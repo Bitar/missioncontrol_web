@@ -17,11 +17,10 @@ let statesOptions: any[] = [];
 let countriesOptions: any[] = [];
 
 const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
-
   const [roleSelected, setRoleSelected] = useState<any | null>(null);
-  // const [countrySelected, setCountrySelected] = useState<any | null>(null);
+  const [countrySelected, setCountrySelected] = useState<any | null>(null);
   const [rolesLoaded, setRolesLoaded] = useState(false);
-  // const [countriesLoaded, setCountriesLoaded] = useState(false);
+  const [countriesLoaded, setCountriesLoaded] = useState(false);
 
   useEffect(() => {
     getStates().then(response => {
@@ -51,16 +50,16 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
       setRolesLoaded(true);
     }
 
-    // if (community?.address?.country) {
-    //   let countryObject = community?.address?.country;
-    //   let selectedOption = statesOptions.find(element => element.value === community?.address?.country?.id);
-    //   if (selectedOption) {
-    //     selectedOption.isSelected = true;
-    //   }
-    //
-    //   setCountrySelected({ value: countryObject?.id, label: countryObject?.name, code: countryObject?.code, isSelected: true });
-    //   setCountriesLoaded(true);
-    // }
+    if (community?.address?.country) {
+      let countryObject = community?.address?.country;
+      let selectedOption = statesOptions.find(element => element.value === community?.address?.country?.id);
+      if (selectedOption) {
+        selectedOption.isSelected = true;
+      }
+
+      setCountrySelected({ value: countryObject?.id, label: countryObject?.name, code: countryObject?.code, isSelected: true });
+      setCountriesLoaded(true);
+    }
   }, [community]);
 
   const handleRoleChange = (selectedOption: any) => {
@@ -76,20 +75,20 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
       "address": { ...community?.address, ...{ "state": stateObject } }
     }, setCommunity, community);
   };
-  
-  // const handleCountryChange = (selectedOption: any) => {
-  //   setRoleSelected(selectedOption);
-  //
-  //   let countryObject = {
-  //     id: selectedOption.value,
-  //     name: selectedOption.label,
-  //     code: selectedOption.code
-  //   };
-  //
-  //   updateData({
-  //     "address": { ...community?.address, ...{ "country": countryObject } }
-  //   }, setCommunity, community);
-  // };
+
+  const handleCountryChange = (selectedOption: any) => {
+    setRoleSelected(selectedOption);
+
+    let countryObject = {
+      id: selectedOption.value,
+      name: selectedOption.label,
+      code: selectedOption.code
+    };
+
+    updateData({
+      "address": { ...community?.address, ...{ "country": countryObject } }
+    }, setCommunity, community);
+  };
 
   return (
     <>
@@ -169,8 +168,7 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
 
       <div className="row mb-6">
         <label
-          className="col-lg-4 col-form-label required fw-bold fs-6">Phone
-                                                                    Number</label>
+          className="col-lg-4 col-form-label required fw-bold fs-6">Phone Number</label>
         <div className="col-lg-8 fv-row">
           <Field
             type="text"
@@ -194,8 +192,7 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
 
       <div className="row mb-6">
         <label
-          className="col-lg-4 col-form-label required fw-bold fs-6">Address
-                                                                    One</label>
+          className="col-lg-4 col-form-label required fw-bold fs-6">Address One</label>
         <div className="col-lg-8 fv-row">
           <Field
             type="text"
@@ -212,7 +209,7 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
       <div className="row mb-6">
         <label
           className="col-lg-4 col-form-label fw-bold fs-6">Address
-                                                                    Two</label>
+                                                           Two</label>
         <div className="col-lg-8 fv-row">
           <Field
             type="text"
@@ -260,22 +257,22 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
         </div>
       </div>
 
-      {/*<div className="row mb-6">*/}
-      {/*  <label*/}
-      {/*    className="col-lg-4 col-form-label required fw-bold fs-6">Country</label>*/}
-      {/*  <div className="col-lg-8 fv-row">*/}
-      {/*    {(countriesLoaded || method === "create") &&*/}
-      {/*      <Select*/}
-      {/*        defaultValue={countrySelected}*/}
-      {/*        options={countriesOptions}*/}
-      {/*        onChange={handleCountryChange}*/}
-      {/*      />*/}
-      {/*    }*/}
-      {/*    <div className="text-danger mt-2">*/}
-      {/*      <ErrorMessage name="address.state_province" />*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
+      <div className="row mb-6 d-none">
+        <label
+          className="col-lg-4 col-form-label fw-bold fs-6">Country</label>
+        <div className="col-lg-8 fv-row">
+          {(countriesLoaded || method === "create") &&
+            <Select
+              defaultValue={countrySelected}
+              options={countriesOptions}
+              onChange={handleCountryChange}
+            />
+          }
+          <div className="text-danger mt-2">
+            <ErrorMessage name="address.state_province" />
+          </div>
+        </div>
+      </div>
 
       <div className="row mb-6">
         <label

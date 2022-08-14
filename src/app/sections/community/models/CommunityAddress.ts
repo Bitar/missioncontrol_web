@@ -17,7 +17,7 @@ export type CommunityAddress = {
 export const initialCommunityAddress = (address?: CommunityAddress) => {
     return {
         address_one: address?.address_one || '246 Over There',
-        address_two: address?.address_two || '',
+        address_two: address?.address_two || "",
         city: address?.city || 'Someplace',
         state: initialState(address?.state),
         postal_code: address?.postal_code || '12345',
