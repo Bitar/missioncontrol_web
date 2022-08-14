@@ -7,7 +7,7 @@ import {CommunityView} from './CommunityView'
 
 const communityBreadCrumbs: Array<PageLink> = [
   {
-    title: 'Community',
+    title: 'Communities',
     path: '/communities/overview',
     isSeparator: false,
     isActive: false,
