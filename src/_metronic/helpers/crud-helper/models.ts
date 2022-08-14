@@ -5,7 +5,7 @@ export type ID = undefined | null | number
 export type PaginationState = {
   page: number
   per_page: 10 | 30 | 50 | 100
-  links?: Array<{ label: string; active: boolean; url: string | null; page: number | null }>
+  links?: Array<{label: string; active: boolean; url: string | null; page: number | null}>
   current_page?: number
 }
 
@@ -24,7 +24,7 @@ export type SearchState = {
 
 export type Response<T> = {
   data?: T
-  meta?: PaginationState,
+  meta?: PaginationState
 }
 
 export type QueryState = PaginationState & SortState & FilterState & SearchState
@@ -41,8 +41,7 @@ export const initialQueryState: QueryState = {
 
 export const initialQueryRequest: QueryRequestContextProps = {
   state: initialQueryState,
-  updateState: () => {
-  },
+  updateState: () => {},
 }
 
 export type QueryResponseContextProps<T> = {
@@ -53,10 +52,9 @@ export type QueryResponseContextProps<T> = {
 }
 
 export const initialQueryResponse = {
-  refetch: () => {
-  },
+  refetch: () => {},
   isLoading: false,
-  query: ''
+  query: '',
 }
 
 export type ListViewContextProps = {
@@ -75,14 +73,10 @@ export type ListViewContextProps = {
 
 export const initialListView: ListViewContextProps = {
   selected: [],
-  onSelect: () => {
-  },
-  onSelectAll: () => {
-  },
-  clearSelected: () => {
-  },
-  setItemIdForUpdate: () => {
-  },
+  onSelect: () => {},
+  onSelectAll: () => {},
+  clearSelected: () => {},
+  setItemIdForUpdate: () => {},
   isAllSelected: false,
   disabled: false,
 }

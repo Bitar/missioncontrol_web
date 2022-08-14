@@ -38,12 +38,12 @@ setupAxios(axios)
 const queryClient = new QueryClient()
 
 ReactDOM.render(
-    <QueryClientProvider client={queryClient}>
-        <MetronicI18nProvider>
-            <AuthProvider>
-                <AppRoutes/>
-            </AuthProvider>
-        </MetronicI18nProvider>
-    </QueryClientProvider>,
-    document.getElementById('root')
+  <QueryClientProvider client={queryClient}>
+    <MetronicI18nProvider>
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
+    </MetronicI18nProvider>
+  </QueryClientProvider>,
+  document.getElementById('root')
 )

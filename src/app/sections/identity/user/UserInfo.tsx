@@ -1,42 +1,42 @@
-import { Link, useLocation } from "react-router-dom";
-import { FC, useEffect, useState } from "react";
-import { User } from "./models/User";
-import { KTSVG, toAbsoluteUrl } from "../../../../_metronic/helpers";
-import Moment from "moment";
+import {Link, useLocation} from 'react-router-dom'
+import {FC, useEffect, useState} from 'react'
+import {User} from './models/User'
+import {KTSVG, toAbsoluteUrl} from '../../../../_metronic/helpers'
+import Moment from 'moment'
 
 type Props = {
-  user: User | undefined,
+  user: User | undefined
 }
 
-const UserInfo: FC<Props> = ({ user }) => {
-  const location = useLocation();
-    const [image, setImage] = useState<string>("");
+const UserInfo: FC<Props> = ({user}) => {
+  const location = useLocation()
+  const [image, setImage] = useState<string>('')
 
   useEffect(() => {
-      if(user?.meta?.image) {
-          if(user?.meta?.image !== "") {
-                setImage(user?.meta?.image)
-          }
-
-          if(user?.meta?.image.constructor.name === 'File') {
-              // @ts-ignore
-              let url = URL.createObjectURL(user?.meta?.image)
-              setImage(url)
-          }
-          // if(user?.meta?.image.constructor.name)
-      } else {
-          setImage(toAbsoluteUrl("/media/svg/avatars/blank.svg"))
+    if (user?.meta?.image) {
+      if (user?.meta?.image !== '') {
+        setImage(user?.meta?.image)
       }
+
+      if (user?.meta?.image.constructor.name === 'File') {
+        // @ts-ignore
+        let url = URL.createObjectURL(user?.meta?.image)
+        setImage(url)
+      }
+      // if(user?.meta?.image.constructor.name)
+    } else {
+      setImage(toAbsoluteUrl('/media/svg/avatars/blank.svg'))
+    }
   }, [user])
 
   return (
     <>
-      <div className="card mb-5 mb-xl-10">
-        <div className="card-body pt-9 pb-0">
-          <div className="d-flex flex-wrap flex-sm-nowrap mb-3">
-            <div className="me-7 mb-4">
-              <div className="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                  <img alt="Logo" src={image} />
+      <div className='card mb-5 mb-xl-10'>
+        <div className='card-body pt-9 pb-0'>
+          <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
+            <div className='me-7 mb-4'>
+              <div className='symbol symbol-100px symbol-lg-160px symbol-fixed position-relative'>
+                <img alt='Logo' src={image} />
                 {/*{user?.meta?.image && user?.meta?.image !== "" ? (*/}
                 {/*  <img alt="Logo" src={user.meta.image} />*/}
                 {/*) : (*/}
@@ -46,47 +46,43 @@ const UserInfo: FC<Props> = ({ user }) => {
               </div>
             </div>
 
-            <div className="flex-grow-1">
-              <div className="d-flex justify-content-between align-items-start flex-wrap mb-2">
-                <div className="d-flex flex-column">
-                  <div className="d-flex align-items-center mb-2">
-                    <div className="text-gray-800 fs-2 fw-bolder me-1">
-                      {user?.name}
-                    </div>
+            <div className='flex-grow-1'>
+              <div className='d-flex justify-content-between align-items-start flex-wrap mb-2'>
+                <div className='d-flex flex-column'>
+                  <div className='d-flex align-items-center mb-2'>
+                    <div className='text-gray-800 fs-2 fw-bolder me-1'>{user?.name}</div>
                   </div>
 
-                  <div className="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
-
+                  <div className='d-flex flex-wrap fw-bold fs-6 mb-4 pe-2'>
                     {user?.meta?.username && (
-                      <div className="d-flex align-items-center text-gray-400 me-5 mb-2">
+                      <div className='d-flex align-items-center text-gray-400 me-5 mb-2'>
                         <KTSVG
-                          path="/media/icons/duotune/communication/com006.svg"
-                          className="svg-icon-4 me-1"
+                          path='/media/icons/duotune/communication/com006.svg'
+                          className='svg-icon-4 me-1'
                         />
-                        {user?.meta?.username + "#" + user?.meta?.rng}
+                        {user?.meta?.username + '#' + user?.meta?.rng}
                       </div>
                     )}
                     <a
-                      href="mailto:`{community.contact?.email}`"
-                      className="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2"
+                      href='mailto:`{community.contact?.email}`'
+                      className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'
                     >
                       <KTSVG
-                        path="/media/icons/duotune/communication/com011.svg"
-                        className="svg-icon-4 me-1"
+                        path='/media/icons/duotune/communication/com011.svg'
+                        className='svg-icon-4 me-1'
                       />
                       {user?.email}
                     </a>
-                    {user?.created_at &&
-                      <div className="d-flex align-items-center text-gray-400 mb-2">
+                    {user?.created_at && (
+                      <div className='d-flex align-items-center text-gray-400 mb-2'>
                         <KTSVG
-                          path="/media/icons/duotune/general/gen014.svg"
-                          className="svg-icon-4 me-1"
+                          path='/media/icons/duotune/general/gen014.svg'
+                          className='svg-icon-4 me-1'
                         />
-                        since {Moment(user.created_at * 1000).format("MMM D, YYYY")}
+                        since {Moment(user.created_at * 1000).format('MMM D, YYYY')}
                       </div>
-                    }
+                    )}
                   </div>
-
                 </div>
               </div>
 
@@ -99,52 +95,51 @@ const UserInfo: FC<Props> = ({ user }) => {
               {/*        </div>*/}
               {/*    </div>*/}
               {/*</div>*/}
-
             </div>
           </div>
 
-          <div className="d-flex overflow-auto h-55px">
-            <ul className="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap">
-              <li className="nav-item">
+          <div className='d-flex overflow-auto h-55px'>
+            <ul className='nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap'>
+              <li className='nav-item'>
                 <Link
                   className={
                     `nav-link text-active-primary me-6 ` +
-                    (location.pathname === ("/users/" + user?.id + "/overview") && "active")
+                    (location.pathname === '/users/' + user?.id + '/overview' && 'active')
                   }
-                  to={"/users/" + user?.id + "/overview"}
+                  to={'/users/' + user?.id + '/overview'}
                 >
                   Overview
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className='nav-item'>
                 <Link
                   className={
                     `nav-link text-active-primary me-6 ` +
-                    (location.pathname === ("/users/" + user?.id + "/activities") && "active")
+                    (location.pathname === '/users/' + user?.id + '/activities' && 'active')
                   }
-                  to={"/users/" + user?.id + "/activities"}
+                  to={'/users/' + user?.id + '/activities'}
                 >
                   Activities
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className='nav-item'>
                 <Link
                   className={
                     `nav-link text-active-primary me-6 ` +
-                    (location.pathname === ("/users/" + user?.id + "/teams") && "active")
+                    (location.pathname === '/users/' + user?.id + '/teams' && 'active')
                   }
-                  to={"/users/" + user?.id + "/teams"}
+                  to={'/users/' + user?.id + '/teams'}
                 >
                   Teams
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className='nav-item'>
                 <Link
                   className={
                     `nav-link text-active-primary me-6 ` +
-                    (location.pathname === ("/users/" + user?.id + "/settings") && "active")
+                    (location.pathname === '/users/' + user?.id + '/settings' && 'active')
                   }
-                  to={"/users/" + user?.id + "/settings"}
+                  to={'/users/' + user?.id + '/settings'}
                 >
                   Settings
                 </Link>
@@ -154,7 +149,7 @@ const UserInfo: FC<Props> = ({ user }) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export { UserInfo };
+export {UserInfo}

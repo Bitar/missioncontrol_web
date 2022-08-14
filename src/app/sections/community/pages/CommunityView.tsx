@@ -1,49 +1,49 @@
-import React, { useEffect, useState } from "react";
-import { PageLink, PageTitle } from "../../../../_metronic/layout/core";
-import { getCommunityById } from "../core/_requests";
-import { Community } from "../models/Community";
-import { Navigate, Outlet, Route, Routes, useParams } from "react-router-dom";
-import { CommunityFollower } from "./CommunityFollowers";
-import { CommunityInfo } from "../CommunityInfo";
-import { CommunityEdit } from "../CommunityEdit";
+import React, {useEffect, useState} from 'react'
+import {PageLink, PageTitle} from '../../../../_metronic/layout/core'
+import {getCommunityById} from '../core/_requests'
+import {Community} from '../models/Community'
+import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
+import {CommunityFollower} from './CommunityFollowers'
+import {CommunityInfo} from '../CommunityInfo'
+import {CommunityEdit} from '../CommunityEdit'
 
 const CommunityView: React.FC = () => {
-  const [community, setCommunity] = useState<Community | undefined>();
-  const params = useParams();
+  const [community, setCommunity] = useState<Community | undefined>()
+  const params = useParams()
 
   const communityViewBreadCrumbs: Array<PageLink> = [
     {
-      title: "Communities",
-      path: "/communities/overview",
+      title: 'Communities',
+      path: '/communities/overview',
       isSeparator: false,
-      isActive: false
+      isActive: false,
     },
     {
-      title: "",
-      path: "",
+      title: '',
+      path: '',
       isSeparator: true,
-      isActive: false
+      isActive: false,
     },
     {
-      title: community?.name || "",
-      path: "/communities/" + params.id + "/overview",
+      title: community?.name || '',
+      path: '/communities/' + params.id + '/overview',
       isSeparator: false,
-      isActive: false
+      isActive: false,
     },
     {
-      title: "",
-      path: "",
+      title: '',
+      path: '',
       isSeparator: true,
-      isActive: false
-    }
-  ];
+      isActive: false,
+    },
+  ]
 
   useEffect(() => {
-    const query = "include=contact,address,access";
-    getCommunityById(params.id, query).then(response => {
-      setCommunity(response);
-    });
-  }, [params.id]);
+    const query = 'include=contact,address,access'
+    getCommunityById(params.id, query).then((response) => {
+      setCommunity(response)
+    })
+  }, [params.id])
 
   return (
     <Routes>
@@ -56,7 +56,7 @@ const CommunityView: React.FC = () => {
         }
       >
         <Route
-          path="overview"
+          path='overview'
           element={
             <>
               <PageTitle breadcrumbs={communityViewBreadCrumbs}>Overview</PageTitle>
@@ -65,7 +65,7 @@ const CommunityView: React.FC = () => {
           }
         />
         <Route
-          path="activities"
+          path='activities'
           element={
             <>
               <PageTitle breadcrumbs={communityViewBreadCrumbs}>Activities</PageTitle>
@@ -73,7 +73,7 @@ const CommunityView: React.FC = () => {
           }
         />
         <Route
-          path="members"
+          path='members'
           element={
             <>
               <PageTitle breadcrumbs={communityViewBreadCrumbs}>Members</PageTitle>
@@ -83,18 +83,18 @@ const CommunityView: React.FC = () => {
           }
         />
         <Route
-          path="settings"
+          path='settings'
           element={
             <>
               <PageTitle breadcrumbs={communityViewBreadCrumbs}>Settings</PageTitle>
-              <CommunityEdit community={community} setCommunity={setCommunity}/>
+              <CommunityEdit community={community} setCommunity={setCommunity} />
             </>
           }
         />
-        <Route index element={<Navigate to={"/communities/" + params.id + "/overview"} />} />
+        <Route index element={<Navigate to={'/communities/' + params.id + '/overview'} />} />
       </Route>
     </Routes>
-  );
-};
+  )
+}
 
-export { CommunityView };
+export {CommunityView}

@@ -72,7 +72,9 @@ const Languages: FC = () => {
           >
             <a
               href='#'
-              className={clsx('menu-link d-flex px-5', {active: l.lang === currentLanguage?.lang})}
+              className={clsx('menu-link d-flex px-5', {
+                active: l.lang === currentLanguage?.lang,
+              })}
             >
               <span className='symbol symbol-20px me-4'>
                 <img className='rounded-1' src={l.flag} alt='metronic' />

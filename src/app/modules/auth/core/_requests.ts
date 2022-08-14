@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {AuthModel} from './_models'
-import {Profile} from "../../../models/identity/Profile";
+import {Profile} from '../../../models/identity/Profile'
 
 const API_URL = process.env.REACT_APP_API_URL
 
@@ -11,50 +11,56 @@ export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`
 
 // Server should return AuthModel
 export function login(email: string, password: string) {
-    return axios.post<AuthModel>(LOGIN_URL, {
-        email,
-        password,
-    })
+  return axios.post<AuthModel>(LOGIN_URL, {
+    email,
+    password,
+  })
 }
 
 // Server should return AuthModel
 export function register(
-    email: string,
-    firstname: string,
-    lastname: string,
-    password: string,
-    password_confirmation: string
+  email: string,
+  firstname: string,
+  lastname: string,
+  password: string,
+  password_confirmation: string
 ) {
-    return axios.post(REGISTER_URL, {
-        email,
-        first_name: firstname,
-        last_name: lastname,
-        password,
-        password_confirmation,
-    }, {
-        validateStatus: function (status) {
-            return status < 500; // Resolve only if the status code is less than 500
-        }
-    })
+  return axios.post(
+    REGISTER_URL,
+    {
+      email,
+      first_name: firstname,
+      last_name: lastname,
+      password,
+      password_confirmation,
+    },
+    {
+      validateStatus: function (status) {
+        return status < 500 // Resolve only if the status code is less than 500
+      },
+    }
+  )
 }
 
 // export functi
 
 // Server should return object => { result: boolean } (Is Email in DB)
 export function requestPassword(email: string) {
-    return axios.post<{ result: boolean }>(REQUEST_PASSWORD_URL, {
-        email,
-    })
+  return axios.post<{result: boolean}>(REQUEST_PASSWORD_URL, {
+    email,
+  })
 }
 
 export function getUserByToken(token: string) {
-    return axios.get<Profile>(GET_USER_BY_PROFILE, {
-        // return axios.get<UserModel>(GET_USER_BY_PROFILE, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        },
-        transformResponse: [function (data) {
-            return JSON.parse(data).data;
-        }],
-    })
+  return axios.get<Profile>(GET_USER_BY_PROFILE, {
+    // return axios.get<UserModel>(GET_USER_BY_PROFILE, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    transformResponse: [
+      function (data) {
+        return JSON.parse(data).data
+      },
+    ],
+  })
 }

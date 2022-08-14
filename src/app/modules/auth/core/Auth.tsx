@@ -12,9 +12,9 @@ import {LayoutSplashScreen} from '../../../../_metronic/layout/core'
 import {AuthModel} from './_models'
 import * as authHelper from './AuthHelpers'
 import {getUserByToken} from './_requests'
-import {Community} from "../../../sections/community/models/Community";
-import {Subscription} from "../../../models/billing/Subscription";
-import {User} from "../../../sections/identity/user/models/User";
+import {Community} from '../../../sections/community/models/Community'
+import {Subscription} from '../../../models/billing/Subscription'
+import {User} from '../../../sections/identity/user/models/User'
 
 type AuthContextProps = {
   auth: AuthModel | undefined
@@ -30,19 +30,14 @@ type AuthContextProps = {
 
 const initAuthContextPropsState = {
   auth: authHelper.getAuth(),
-  saveAuth: () => {
-  },
+  saveAuth: () => {},
   currentUser: undefined,
-  setCurrentUser: () => {
-  },
+  setCurrentUser: () => {},
   communityAdmin: undefined,
-  setCommunityAdmin: () => {
-
-  },
+  setCommunityAdmin: () => {},
   subscription: undefined,
   setSubscription: () => {},
-  logout: () => {
-  },
+  logout: () => {},
 }
 
 const AuthContext = createContext<AuthContextProps>(initAuthContextPropsState)
@@ -73,10 +68,21 @@ const AuthProvider: FC = ({children}) => {
   }
 
   return (
-      <AuthContext.Provider
-          value={{auth, saveAuth, currentUser, setCurrentUser, communityAdmin, setCommunityAdmin, subscription, setSubscription, logout}}>
-        {children}
-      </AuthContext.Provider>
+    <AuthContext.Provider
+      value={{
+        auth,
+        saveAuth,
+        currentUser,
+        setCurrentUser,
+        communityAdmin,
+        setCommunityAdmin,
+        subscription,
+        setSubscription,
+        logout,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
   )
 }
 
@@ -89,7 +95,7 @@ const AuthInit: FC = ({children}) => {
     const requestUser = async (apiToken: string) => {
       try {
         if (!didRequest.current) {
-          const {data} = await (getUserByToken(apiToken))
+          const {data} = await getUserByToken(apiToken)
 
           if (data) {
             setSubscription(data.subscription)
@@ -117,7 +123,7 @@ const AuthInit: FC = ({children}) => {
     // eslint-disable-next-line
   }, [])
 
-  return showSplashScreen ? <LayoutSplashScreen/> : <>{children}</>
+  return showSplashScreen ? <LayoutSplashScreen /> : <>{children}</>
 }
 
 export {AuthProvider, AuthInit, useAuth}

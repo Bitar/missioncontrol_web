@@ -9,7 +9,7 @@ import Select from "react-select";
 
 type Props = {
   method: string
-  community: Community | undefined,
+  community: Community | undefined
   setCommunity: Dispatch<SetStateAction<Community>>
 }
 
@@ -23,16 +23,26 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
   const [countriesLoaded, setCountriesLoaded] = useState(false);
 
   useEffect(() => {
-    getStates().then(response => {
+    getStates().then((response) => {
       response?.data?.forEach(function(value) {
-        let option = { value: value.id, label: value.name, code: value.code, isSelected: false };
+        let option = {
+          value: value.id,
+          label: value.name,
+          code: value.code,
+          isSelected: false
+        };
         statesOptions.push(option);
       });
     });
 
-    getCountries().then(response => {
+    getCountries().then((response) => {
       response?.data?.forEach(function(value) {
-        let option = { value: value.id, label: value.name, code: value.code, isSelected: false };
+        let option = {
+          value: value.id,
+          label: value.name,
+          code: value.code,
+          isSelected: false
+        };
         countriesOptions.push(option);
       });
     });
@@ -41,23 +51,37 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
   useEffect(() => {
     if (community?.address?.state) {
       let stateObject = community?.address?.state;
-      let selectedOption = statesOptions.find(element => element.value === community?.address?.state?.id);
+      let selectedOption = statesOptions.find(
+        (element) => element.value === community?.address?.state?.id
+      );
       if (selectedOption) {
         selectedOption.isSelected = true;
       }
 
-      setRoleSelected({ value: stateObject?.id, label: stateObject?.name, code: stateObject?.code, isSelected: true });
+      setRoleSelected({
+        value: stateObject?.id,
+        label: stateObject?.name,
+        code: stateObject?.code,
+        isSelected: true
+      });
       setRolesLoaded(true);
     }
 
     if (community?.address?.country) {
       let countryObject = community?.address?.country;
-      let selectedOption = statesOptions.find(element => element.value === community?.address?.country?.id);
+      let selectedOption = statesOptions.find(
+        (element) => element.value === community?.address?.country?.id
+      );
       if (selectedOption) {
         selectedOption.isSelected = true;
       }
 
-      setCountrySelected({ value: countryObject?.id, label: countryObject?.name, code: countryObject?.code, isSelected: true });
+      setCountrySelected({
+        value: countryObject?.id,
+        label: countryObject?.name,
+        code: countryObject?.code,
+        isSelected: true
+      });
       setCountriesLoaded(true);
     }
   }, [community]);
@@ -71,9 +95,13 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
       code: selectedOption.code
     };
 
-    updateData({
-      "address": { ...community?.address, ...{ "state": stateObject } }
-    }, setCommunity, community);
+    updateData(
+      {
+        address: { ...community?.address, ...{ state: stateObject } }
+      },
+      setCommunity,
+      community
+    );
   };
 
   const handleCountryChange = (selectedOption: any) => {
@@ -85,16 +113,19 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
       code: selectedOption.code
     };
 
-    updateData({
-      "address": { ...community?.address, ...{ "country": countryObject } }
-    }, setCommunity, community);
+    updateData(
+      {
+        address: { ...community?.address, ...{ country: countryObject } }
+      },
+      setCommunity,
+      community
+    );
   };
 
   return (
     <>
       <div className="row mb-6">
-        <label
-          className="col-lg-4 col-form-label required fw-bold fs-6">Name</label>
+        <label className="col-lg-4 col-form-label required fw-bold fs-6">Name</label>
         <div className="col-lg-8 fv-row">
           <Field
             type="text"
@@ -134,8 +165,7 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
       </div>
 
       <div className="row mb-6">
-        <label
-          className="col-lg-4 col-form-label required fw-bold fs-6">Name</label>
+        <label className="col-lg-4 col-form-label required fw-bold fs-6">Name</label>
         <div className="col-lg-8 fv-row">
           <Field
             type="text"
@@ -150,8 +180,7 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
       </div>
 
       <div className="row mb-6">
-        <label
-          className="col-lg-4 col-form-label required fw-bold fs-6">Email</label>
+        <label className="col-lg-4 col-form-label required fw-bold fs-6">Email</label>
         <div className="col-lg-8 fv-row">
           <Field
             type="text"
@@ -163,12 +192,10 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
             <ErrorMessage name="contact.email" />
           </div>
         </div>
-
       </div>
 
       <div className="row mb-6">
-        <label
-          className="col-lg-4 col-form-label required fw-bold fs-6">Phone Number</label>
+        <label className="col-lg-4 col-form-label required fw-bold fs-6">Phone Number</label>
         <div className="col-lg-8 fv-row">
           <Field
             type="text"
@@ -191,8 +218,7 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
       </div>
 
       <div className="row mb-6">
-        <label
-          className="col-lg-4 col-form-label required fw-bold fs-6">Address One</label>
+        <label className="col-lg-4 col-form-label required fw-bold fs-6">Address One</label>
         <div className="col-lg-8 fv-row">
           <Field
             type="text"
@@ -207,9 +233,7 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
       </div>
 
       <div className="row mb-6">
-        <label
-          className="col-lg-4 col-form-label fw-bold fs-6">Address
-                                                           Two</label>
+        <label className="col-lg-4 col-form-label fw-bold fs-6">Address Two</label>
         <div className="col-lg-8 fv-row">
           <Field
             type="text"
@@ -224,8 +248,7 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
       </div>
 
       <div className="row mb-6">
-        <label
-          className="col-lg-4 col-form-label required fw-bold fs-6">City</label>
+        <label className="col-lg-4 col-form-label required fw-bold fs-6">City</label>
         <div className="col-lg-8 fv-row">
           <Field
             type="text"
@@ -240,17 +263,16 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
       </div>
 
       <div className="row mb-6">
-        <label
-          className="col-lg-4 col-form-label required fw-bold fs-6">State</label>
+        <label className="col-lg-4 col-form-label required fw-bold fs-6">State</label>
         <div className="col-lg-8 fv-row">
-          {(rolesLoaded || method === "create") &&
+          {(rolesLoaded || method === "create") && (
             <Select
               isSearchable
               defaultValue={roleSelected}
               options={statesOptions}
               onChange={handleRoleChange}
             />
-          }
+          )}
           <div className="text-danger mt-2">
             <ErrorMessage name="address.state_province" />
           </div>
@@ -258,16 +280,15 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
       </div>
 
       <div className="row mb-6 d-none">
-        <label
-          className="col-lg-4 col-form-label fw-bold fs-6">Country</label>
+        <label className="col-lg-4 col-form-label fw-bold fs-6">Country</label>
         <div className="col-lg-8 fv-row">
-          {(countriesLoaded || method === "create") &&
+          {(countriesLoaded || method === "create") && (
             <Select
               defaultValue={countrySelected}
               options={countriesOptions}
               onChange={handleCountryChange}
             />
-          }
+          )}
           <div className="text-danger mt-2">
             <ErrorMessage name="address.state_province" />
           </div>
@@ -275,9 +296,7 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
       </div>
 
       <div className="row mb-6">
-        <label
-          className="col-lg-4 col-form-label required fw-bold fs-6">Postal
-                                                                    Code</label>
+        <label className="col-lg-4 col-form-label required fw-bold fs-6">Postal Code</label>
         <div className="col-lg-8 fv-row">
           <Field
             type="text"
@@ -298,8 +317,7 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
       </div>
 
       <div className="row mb-6">
-        <label
-          className="col-lg-4 col-form-label required fw-bold fs-6">Visibility</label>
+        <label className="col-lg-4 col-form-label required fw-bold fs-6">Visibility</label>
         <div className="col-lg-8 fv-row">
           <div className="row">
             <div className="col-lg-6">
@@ -340,9 +358,7 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
 
                   <span className="d-flex flex-column">
                     <span className="fw-bolder fs-6">Private</span>
-                    <span className="fs-7 text-muted">
-                      Only certain people
-                    </span>
+                    <span className="fs-7 text-muted">Only certain people</span>
                   </span>
                 </span>
 
@@ -361,10 +377,9 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
         </div>
       </div>
 
-      {community?.access?.type === 2 &&
+      {community?.access?.type === 2 && (
         <div className="row mb-6">
-          <label
-            className="col-lg-4 col-form-label required fw-bold fs-6">Entry Access</label>
+          <label className="col-lg-4 col-form-label required fw-bold fs-6">Entry Access</label>
           <div className="col-lg-8 fv-row">
             <div className="row">
               <div className="col-lg-6">
@@ -380,7 +395,9 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
                     <span className="d-flex flex-column">
                       <span className="fw-bolder fs-6">Email</span>
 
-                      <span className="fs-7 text-muted">Based on email's domain '@example.com'</span>
+                      <span className="fs-7 text-muted">
+                        Based on email's domain '@example.com'
+                      </span>
                     </span>
                   </span>
 
@@ -407,9 +424,7 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
 
                     <span className="d-flex flex-column">
                       <span className="fw-bolder fs-6">Passcode</span>
-                      <span className="fs-7 text-muted">
-                        Good ol' fashion password
-                      </span>
+                      <span className="fs-7 text-muted">Good ol' fashion password</span>
                     </span>
                   </span>
 
@@ -427,31 +442,33 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
             </div>
           </div>
         </div>
-      }
+      )}
 
-      {community?.access?.key === 1 &&
+      {community?.access?.key === 1 && (
         <div className="row mb-6">
-          <label
-            className="col-lg-4 col-form-label required fw-bold fs-6">Email</label>
+          <label className="col-lg-4 col-form-label required fw-bold fs-6">Email</label>
           <div className="col-lg-8 fv-row">
             <Field
               type="text"
               name="access.value"
               className="form-control mb-3 mb-lg-0"
               placeholder="Email Address"
-              value={community?.access?.type === 2 && community?.access?.key === 1 ? community?.access?.value : ""}
+              value={
+                community?.access?.type === 2 && community?.access?.key === 1
+                  ? community?.access?.value
+                  : ""
+              }
             />
             <div className="text-danger mt-2">
               <ErrorMessage name="access.value" />
             </div>
           </div>
         </div>
-      }
+      )}
 
-      {community?.access?.key === 2 &&
+      {community?.access?.key === 2 && (
         <div className="row mb-6">
-          <label
-            className="col-lg-4 col-form-label required fw-bold fs-6">Passcode</label>
+          <label className="col-lg-4 col-form-label required fw-bold fs-6">Passcode</label>
           <div className="col-lg-8 fv-row">
             <Field
               type="password"
@@ -464,7 +481,7 @@ const CommunityForm: FC<Props> = ({ method, community, setCommunity }) => {
             </div>
           </div>
         </div>
-      }
+      )}
     </>
   );
 };

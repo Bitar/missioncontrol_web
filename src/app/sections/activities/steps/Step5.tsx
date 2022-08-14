@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
 // import {KTSVG} from '../../../../../_metronic/helpers'
 import {Link} from 'react-router-dom'
-import {KTSVG} from "../../../../_metronic/helpers";
+import {KTSVG} from '../../../../_metronic/helpers'
 
 const Step5: FC = () => {
   return (

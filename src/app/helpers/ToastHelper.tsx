@@ -1,25 +1,25 @@
-import {Toaster} from "react-hot-toast";
-import React, {FC} from "react";
+import {Toaster} from 'react-hot-toast'
+import React, {FC} from 'react'
 
 const MCToaster: FC = () => {
-    return (
-        <>
-            <Toaster
-                position={'top-right'}
-                toastOptions={{
-                    duration: 3000,
+  return (
+    <>
+      <Toaster
+        position={'top-right'}
+        toastOptions={{
+          duration: 3000,
 
-                    success: {
-                        className: 'bg-success text-light',
-                    },
+          success: {
+            className: 'bg-success text-light',
+          },
 
-                    error: {
-                        className: 'bg-danger text-light',
-                    },
-                }}
-            />
-        </>
-    )
+          error: {
+            className: 'bg-danger text-light',
+          },
+        }}
+      />
+    </>
+  )
 }
 
 export {MCToaster}

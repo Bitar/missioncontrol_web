@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from 'axios'
-import { Response } from '../../../../_metronic/helpers';
-import {Activity, ActivityQueryResponse} from "../../../models/activity/Activity";
+import {Response} from '../../../../_metronic/helpers'
+import {Activity, ActivityQueryResponse} from '../../../models/activity/Activity'
 // import process from "process";
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -8,20 +8,18 @@ const API_URL = process.env.REACT_APP_API_URL
 const ACTIVITIES_URL = `${API_URL}/activities`
 
 const getActivities = (query: string): Promise<ActivityQueryResponse> => {
-    query = query + "&include=entryFee,matchPlayDate"
-    return axios
-        .get(`${ACTIVITIES_URL}?${query}`)
-        .then((d: AxiosResponse<ActivityQueryResponse>) => d.data)
+  query = query + '&include=entryFee,matchPlayDate'
+  return axios
+    .get(`${ACTIVITIES_URL}?${query}`)
+    .then((d: AxiosResponse<ActivityQueryResponse>) => d.data)
 }
 const createActivity = (formData: FormData): Promise<Activity | undefined> => {
-    console.log(formData)
-    return axios
-        .post(`${ACTIVITIES_URL}`, formData)
-        .then((response: AxiosResponse<Response<Activity>>) => response.data)
-        .then((response: Response<Activity>) => response.data)
+  console.log(formData)
+  return axios
+    .post(`${ACTIVITIES_URL}`, formData)
+    .then((response: AxiosResponse<Response<Activity>>) => response.data)
+    .then((response: Response<Activity>) => response.data)
 }
-
-
 
 // const createUser = (identity: User): Promise<User | undefined> => {
 //     return axios
@@ -46,4 +44,4 @@ const createActivity = (formData: FormData): Promise<Activity | undefined> => {
 //     return axios.all(requests).then(() => {})
 // }
 
-export {getActivities, createActivity,ACTIVITIES_URL}
+export {getActivities, createActivity, ACTIVITIES_URL}

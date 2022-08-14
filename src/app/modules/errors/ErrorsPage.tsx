@@ -9,7 +9,9 @@ const ErrorsLayout = () => {
     <div className='d-flex flex-column flex-root'>
       <div
         className='d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed'
-        style={{backgroundImage: `url('${toAbsoluteUrl('/media/illustrations/progress-hd.png')}')`}}
+        style={{
+          backgroundImage: `url('${toAbsoluteUrl('/media/illustrations/progress-hd.png')}')`,
+        }}
       >
         <div className='d-flex flex-column flex-column-fluid text-center p-10 py-lg-20'>
           <a href='/dashboard' className='mb-10 pt-lg-20'>

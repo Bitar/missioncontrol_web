@@ -1,16 +1,16 @@
-import {ID, Response} from "../../../_metronic/helpers";
+import {ID, Response} from '../../../_metronic/helpers'
 
 export type State = {
-    id?: ID,
-    name: string,
-    code: string
+  id?: ID
+  name: string
+  code: string
 }
 
 export const initialState = (state?: State) => {
-    return {
-        name: state?.name ?? "",
-        code: state?.code ?? ""
-    }
+  return {
+    name: state?.name ?? '',
+    code: state?.code ?? '',
+  }
 }
 
 export type StateQueryResponse = Response<Array<State>>

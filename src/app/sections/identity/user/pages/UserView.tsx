@@ -1,50 +1,50 @@
-import React, { useEffect, useState } from "react";
-import { getUserById } from "../core/_requests";
-import { Navigate, Outlet, Route, Routes, useParams } from "react-router-dom";
-import { User } from "../models/User";
-import { UserInfo } from "../UserInfo";
-import { PageLink, PageTitle } from "../../../../../_metronic/layout/core";
-import { UserEdit } from "../UserEdit";
-import { UserActivities } from "./UserActivities";
-import { UserTeams } from "./UserTeams";
+import React, {useEffect, useState} from 'react'
+import {getUserById} from '../core/_requests'
+import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
+import {User} from '../models/User'
+import {UserInfo} from '../UserInfo'
+import {PageLink, PageTitle} from '../../../../../_metronic/layout/core'
+import {UserEdit} from '../UserEdit'
+import {UserActivities} from './UserActivities'
+import {UserTeams} from './UserTeams'
 
 const UserView: React.FC = () => {
-  const [user, setUser] = useState<User | undefined>();
-  const params = useParams();
+  const [user, setUser] = useState<User | undefined>()
+  const params = useParams()
 
   const userViewBreadCrumbs: Array<PageLink> = [
     {
-      title: "Users",
-      path: "/users/overview",
+      title: 'Users',
+      path: '/users/overview',
       isSeparator: false,
-      isActive: false
+      isActive: false,
     },
     {
-      title: "",
-      path: "",
+      title: '',
+      path: '',
       isSeparator: true,
-      isActive: false
+      isActive: false,
     },
     {
-      title: user?.name || "",
-      path: "/users/" + params.id + "/overview",
+      title: user?.name || '',
+      path: '/users/' + params.id + '/overview',
       isSeparator: false,
-      isActive: false
+      isActive: false,
     },
     {
-      title: "",
-      path: "",
+      title: '',
+      path: '',
       isSeparator: true,
-      isActive: false
-    }
-  ];
+      isActive: false,
+    },
+  ]
 
   useEffect(() => {
-    const query = "include=roles";
-    getUserById(params.id, query).then(response => {
-      setUser(response);
-    });
-  }, [params.id]);
+    const query = 'include=roles'
+    getUserById(params.id, query).then((response) => {
+      setUser(response)
+    })
+  }, [params.id])
 
   return (
     <Routes>
@@ -57,7 +57,7 @@ const UserView: React.FC = () => {
         }
       >
         <Route
-          path="/overview"
+          path='/overview'
           element={
             <>
               <PageTitle breadcrumbs={userViewBreadCrumbs}>Overview</PageTitle>
@@ -65,7 +65,7 @@ const UserView: React.FC = () => {
           }
         />
         <Route
-          path="/activities"
+          path='/activities'
           element={
             <>
               <PageTitle breadcrumbs={userViewBreadCrumbs}>Activities</PageTitle>
@@ -74,7 +74,7 @@ const UserView: React.FC = () => {
           }
         />
         <Route
-          path="/teams"
+          path='/teams'
           element={
             <>
               <PageTitle breadcrumbs={userViewBreadCrumbs}>Teams</PageTitle>
@@ -83,7 +83,7 @@ const UserView: React.FC = () => {
           }
         />
         <Route
-          path="/settings"
+          path='/settings'
           element={
             <>
               <PageTitle breadcrumbs={userViewBreadCrumbs}>Settings</PageTitle>
@@ -91,10 +91,10 @@ const UserView: React.FC = () => {
             </>
           }
         />
-        <Route index element={<Navigate to={"/users/" + params.id + "/overview"} />} />
+        <Route index element={<Navigate to={'/users/' + params.id + '/overview'} />} />
       </Route>
     </Routes>
-  );
-};
+  )
+}
 
-export { UserView };
+export {UserView}

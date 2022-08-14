@@ -33,7 +33,7 @@ export const DefaultLayoutConfig: ILayout = {
     fixed: true,
     minimized: false,
     minimize: true,
-    hoverable: true
+    hoverable: true,
   },
   content: {
     width: 'fixed', // Set fixed|fluid to change width

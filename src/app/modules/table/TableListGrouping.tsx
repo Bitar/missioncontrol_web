@@ -3,42 +3,42 @@
 // import {useQueryResponse} from "../apps/identity-management/users-list/core/QueryResponseProvider";
 // import {useListView} from "../apps/identity-management/users-list/core/ListViewProvider";
 // import {QUERIES} from "../../../_metronic/helpers";
-import {useListView} from "./ListViewProvider";
+import {useListView} from './ListViewProvider'
 // import {useQueryResponse} from "./QueryResponseProvider";
 // import {deleteObject} from "../../requests";
 
 // import {deleteSelectedUsers} from "../apps/identity-management/users-list/core/_requests";
 
 const TableListGrouping = () => {
-    const {selected} = useListView()
-    // const {selected, clearSelected} = useListView()
-    // const queryClient = useQueryClient()
-    // const {query} = useQueryResponse()
+  const {selected} = useListView()
+  // const {selected, clearSelected} = useListView()
+  // const queryClient = useQueryClient()
+  // const {query} = useQueryResponse()
 
-    // const deleteSelectedItems = useMutation(() => deleteSelectedUsers(selected), {
-    //     // 💡 response of the mutation is passed to onSuccess
-    //     onSuccess: () => {
-    //         // ✅ update detail view directly
-    //         queryClient.invalidateQueries([`${QUERIES.USERS_LIST}-${query}`])
-    //         clearSelected()
-    //     },
-    // })
+  // const deleteSelectedItems = useMutation(() => deleteSelectedUsers(selected), {
+  //     // 💡 response of the mutation is passed to onSuccess
+  //     onSuccess: () => {
+  //         // ✅ update detail view directly
+  //         queryClient.invalidateQueries([`${QUERIES.USERS_LIST}-${query}`])
+  //         clearSelected()
+  //     },
+  // })
 
-    return (
-        <div className='d-flex justify-content-end align-items-center'>
-            <div className='fw-bolder me-5'>
-                <span className='me-2'>{selected.length}</span> Selected
-            </div>
+  return (
+    <div className='d-flex justify-content-end align-items-center'>
+      <div className='fw-bolder me-5'>
+        <span className='me-2'>{selected.length}</span> Selected
+      </div>
 
-            <button
-                type='button'
-                className='btn btn-danger'
-                // onClick={async () => await deleteSelectedItems.mutateAsync()}
-            >
-                Delete Selected
-            </button>
-        </div>
-    )
+      <button
+        type='button'
+        className='btn btn-danger'
+        // onClick={async () => await deleteSelectedItems.mutateAsync()}
+      >
+        Delete Selected
+      </button>
+    </div>
+  )
 }
 
 export {TableListGrouping}

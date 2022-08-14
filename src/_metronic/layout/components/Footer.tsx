@@ -13,7 +13,12 @@ const Footer: FC = () => {
         {/* begin::Copyright */}
         <div className='text-dark order-2 order-md-1'>
           <span className='text-muted fw-bold me-2'>{new Date().getFullYear()} &copy;</span>
-          <a href="https://missioncontrol.gg/" target="_blank" className='text-gray-800 text-hover-primary' rel="noreferrer">
+          <a
+            href='https://missioncontrol.gg/'
+            target='_blank'
+            className='text-gray-800 text-hover-primary'
+            rel='noreferrer'
+          >
             Mission Control
           </a>
         </div>

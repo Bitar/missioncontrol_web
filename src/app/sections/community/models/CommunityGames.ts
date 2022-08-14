@@ -1,6 +1,5 @@
-import {ID} from "../../../../_metronic/helpers";
+import {ID} from '../../../../_metronic/helpers'
 
 export type CommunityGames = {
-    id?: ID,
-
+  id?: ID
 }

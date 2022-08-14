@@ -7,24 +7,24 @@ import {TableHeader} from '../../../modules/table/TableHeader'
 import {CommunityTable} from '../CommunityTable'
 
 const CommunityList = () => {
-    return (
-        <>
-            <KTCard>
-                <TableHeader name='Community' url='/communities' />
-                <CommunityTable />
-            </KTCard>
-        </>
-    )
+  return (
+    <>
+      <KTCard>
+        <TableHeader name='Community' url='/communities' />
+        <CommunityTable />
+      </KTCard>
+    </>
+  )
 }
 
 const CommunityIndex = () => (
-    <QueryRequestProvider>
-        <QueryResponseProvider id={QUERIES.COMMUNITIES_LIST} requestFunction={getCommunities}>
-            <ListViewProvider>
-                <CommunityList />
-            </ListViewProvider>
-        </QueryResponseProvider>
-    </QueryRequestProvider>
+  <QueryRequestProvider>
+    <QueryResponseProvider id={QUERIES.COMMUNITIES_LIST} requestFunction={getCommunities}>
+      <ListViewProvider>
+        <CommunityList />
+      </ListViewProvider>
+    </QueryResponseProvider>
+  </QueryRequestProvider>
 )
 
 export {CommunityIndex}

@@ -121,9 +121,7 @@ const TablesWidget13: React.FC<Props> = ({className}) => {
       {/* begin::Body */}
       <div className='card-body py-3'>
         {/* begin::Table container */}
-        
-        
-        
+
         <div className='table-responsive'>
           {/* begin::Table */}
           <table className='table table-row-bordered table-row-gray-100 align-middle gs-0 gy-3'>

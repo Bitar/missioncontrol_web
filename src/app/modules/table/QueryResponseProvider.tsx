@@ -6,11 +6,11 @@ import {
   initialQueryResponse,
   initialQueryState,
   PaginationState,
-  stringifyRequestQuery
-} from "../../../_metronic/helpers";
+  stringifyRequestQuery,
+} from '../../../_metronic/helpers'
 
 type Props = {
-  id: string,
+  id: string
   requestFunction: any
 }
 
@@ -32,17 +32,17 @@ const QueryResponseProvider: FC<Props> = ({id, requestFunction, children}) => {
     refetch,
     data: response,
   } = useQuery(
-      `${id}-${query}`,
-      () => {
-        return requestFunction(query)
-      },
-      {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
+    `${id}-${query}`,
+    () => {
+      return requestFunction(query)
+    },
+    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
   )
 
   return (
-      <QueryResponseContext.Provider value={{isLoading: isFetching, refetch, response, query}}>
-        {children}
-      </QueryResponseContext.Provider>
+    <QueryResponseContext.Provider value={{isLoading: isFetching, refetch, response, query}}>
+      {children}
+    </QueryResponseContext.Provider>
   )
 }
 

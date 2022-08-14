@@ -51,7 +51,13 @@
       @include menu-link-hover-state($white, $white, $mc-secondary, $white, darken($mc-primary, 5));
       @include menu-link-here-state($white, $white, $mc-secondary, $white, darken($mc-primary, 5));
       @include menu-link-show-state($white, $white, $mc-secondary, $white, darken($mc-primary, 5));
-      @include menu-link-active-state($white, $white, $mc-secondary, $white, darken($mc-primary, 5));
+      @include menu-link-active-state(
+        $white,
+        $white,
+        $mc-secondary,
+        $white,
+        darken($mc-primary, 5)
+      );
     }
   }
 }
