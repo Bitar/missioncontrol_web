@@ -62,9 +62,21 @@ const CommunityCreate = () => {
         targetValue = +targetValue;
       }
 
-      updateData({
-        "access": { ...community.access, ...{ [access_field]: targetValue } }
-      }, setCommunity, community);
+      if (access_field === "type" && targetValue === 1) {
+        updateData({
+          "access": { type: targetValue }
+        }, setCommunity, community);
+      } else {
+        let updateStuff = { [access_field]: targetValue }
+
+        if(access_field !== 'value') {
+          updateStuff = {...updateStuff, ...{value: ""}}
+        }
+
+        updateData({
+          "access": { ...community.access, ...updateStuff }
+        }, setCommunity, community);
+      }
     } else {
       if (targetName === "logo" || targetName === "banner_image") {
         targetValue = event.target.files[0];
@@ -445,10 +457,11 @@ const CommunityCreate = () => {
                           className="col-lg-4 col-form-label required fw-bold fs-6">Email</label>
                         <div className="col-lg-8 fv-row">
                           <Field
-                            type="email"
+                            type="text"
                             name="access.value"
                             className="form-control mb-3 mb-lg-0"
                             placeholder="Email Address"
+                            value={community?.access?.type === 2 && community?.access?.key === 1 ? community?.access?.value : ""}
                           />
                           <div className="text-danger mt-2">
                             <ErrorMessage name="access.value" />
@@ -467,6 +480,7 @@ const CommunityCreate = () => {
                             name="access.value"
                             className="form-control mb-3 mb-lg-0"
                             placeholder="Passcode"
+                            value={community?.access?.type === 2 && community?.access?.key === 2 ? community?.access?.value : ""}
                           />
                           <div className="text-danger mt-2">
                             <ErrorMessage name="access.value" />
