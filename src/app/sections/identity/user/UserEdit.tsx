@@ -2,7 +2,7 @@ import React, {FC} from 'react'
 import {Form, Formik} from 'formik'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {useNavigate, useParams} from 'react-router-dom'
-import {updateUser} from './core/_requests'
+import {updateUser} from './core/UserRequests'
 import {jsonToFormData} from '../../../helpers/form/FormHelper'
 import {User, initialUser, userSchema, formOnChange} from './models/User'
 import {AvatarImage} from './partials/AvatarImage'
@@ -43,36 +43,32 @@ const UserEdit: FC<Props> = ({user, setUser}) => {
           validationSchema={userSchema}
           enableReinitialize={true}
         >
-          {({isSubmitting, isValid, touched}) => {
-            return (
-              <>
-                <Form onChange={handleOnChange} className='form' encType='multipart/form-data'>
-                  <KTCardBody className='py-4'>
-                    <div className='d-flex flex-column pt-5'>
-                      <AvatarImage user={user} setUser={setUser} />
+          {({isSubmitting, isValid, touched}) => (
+            <Form onChange={handleOnChange} className='form' encType='multipart/form-data'>
+              <KTCardBody className='py-4'>
+                <div className='d-flex flex-column pt-5'>
+                  <AvatarImage user={user} setUser={setUser} />
 
-                      <UserForm method={'edit'} user={user} setUser={setUser} />
-                    </div>
-                  </KTCardBody>
-                  <div className='card-footer d-flex justify-content-end py-6 px-9'>
-                    <button
-                      type='submit'
-                      className='btn btn-light-primary btn-active-primary btn-sm'
-                      disabled={isSubmitting || !isValid || !touched}
-                    >
-                      <span className='indicator-label'>Save Changes</span>
-                      {isSubmitting && (
-                        <span className='indicator-progress'>
-                          Please wait...{' '}
-                          <span className='spinner-border spinner-border-sm align-middle ms-2' />
-                        </span>
-                      )}
-                    </button>
-                  </div>
-                </Form>
-              </>
-            )
-          }}
+                  <UserForm method={'edit'} user={user} setUser={setUser} />
+                </div>
+              </KTCardBody>
+              <div className='card-footer d-flex justify-content-end py-6 px-9'>
+                <button
+                  type='submit'
+                  className='btn btn-light-primary btn-active-primary btn-sm'
+                  disabled={isSubmitting || !isValid || !touched}
+                >
+                  <span className='indicator-label'>Save Changes</span>
+                  {isSubmitting && (
+                    <span className='indicator-progress'>
+                      Please wait...{' '}
+                      <span className='spinner-border spinner-border-sm align-middle ms-2' />
+                    </span>
+                  )}
+                </button>
+              </div>
+            </Form>
+          )}
         </Formik>
       </KTCard>
     </>

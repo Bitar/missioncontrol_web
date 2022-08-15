@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {getUserById} from '../core/_requests'
+import {getUserById} from '../core/UserRequests'
 import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
 import {User} from '../models/User'
 import {UserInfo} from '../UserInfo'

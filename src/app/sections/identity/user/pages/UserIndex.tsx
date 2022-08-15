@@ -3,7 +3,7 @@ import {KTCard, QUERIES} from '../../../../../_metronic/helpers'
 import {TableHeader} from '../../../../modules/table/TableHeader'
 import {QueryRequestProvider} from '../../../../modules/table/QueryRequestProvider'
 import {QueryResponseProvider} from '../../../../modules/table/QueryResponseProvider'
-import {getUsers} from '../core/_requests'
+import {getUsers} from '../core/UserRequests'
 import {ListViewProvider} from '../../../../modules/table/ListViewProvider'
 import {UserTable} from '../UserTable'
 

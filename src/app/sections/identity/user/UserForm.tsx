@@ -5,6 +5,7 @@ import {User} from './models/User'
 import {getRoles} from '../role/core/_requests'
 import {updateData} from '../../../helpers/form/FormHelper'
 import {DatePickerMC} from '../../../helpers/form/DatePickerMC'
+import Select from 'react-select'
 
 type Props = {
   method: string
@@ -12,39 +13,44 @@ type Props = {
   setUser: any
 }
 
+let rolesOptions: any[] = []
+
 const UserForm: FC<Props> = ({method, user, setUser}) => {
   const [selected, setSelected] = useState([])
   const [loaded, setLoaded] = useState(false)
-  const loadRoles = (searchValue: any, callback: any) => {
-    getRoles().then((response) => {
-      let roles: any[] = []
-
-      response?.data?.forEach(function (value) {
-        let option = {value: value.id, label: value.name}
-        roles.push(option)
-      })
-
-      callback(roles)
-    })
-  }
 
   useEffect(() => {
-    user?.roles?.forEach(function (role) {
-      setSelected((prevState) => ({
-        ...prevState,
-        ...{
-          value: role.id,
-          label: role.name,
-        },
-      }))
+    if (rolesOptions.length === 0) {
+      getRoles().then((response) => {
+        response?.data?.forEach(function (value) {
+          let option = {value: value.id, label: value.name, isSelected: false}
+          rolesOptions.push(option)
+        })
+      })
+    }
+  }, [])
+
+  useEffect(() => {
+    if (user?.roles) {
+      user?.roles?.forEach(function (role) {
+        setSelected((prevState) => ({
+          ...prevState,
+          ...{
+            value: role.id,
+            label: role.name,
+            isSelected: true,
+          },
+        }))
+      })
       setLoaded(true)
-    })
+    }
   }, [user])
 
   const handleChange = (selectedOption: any) => {
     let rolesObject = selectedOption.map((option: any) => {
       return {
         id: option.value,
+        name: option.label,
       }
     })
 
@@ -100,12 +106,11 @@ const UserForm: FC<Props> = ({method, user, setUser}) => {
         <label className='col-lg-4 col-form-label required fw-bold fs-6'>Roles</label>
         <div className='col-lg-8 fv-row'>
           {(loaded || method === 'create') && (
-            <AsyncSelect
+            <Select
               isMulti
-              cacheOptions
+              isSearchable
               defaultValue={selected}
-              defaultOptions
-              loadOptions={loadRoles}
+              options={rolesOptions}
               onChange={handleChange}
             />
           )}
@@ -155,7 +160,7 @@ const UserForm: FC<Props> = ({method, user, setUser}) => {
       </div>
 
       <div className='row mb-6'>
-        <label className='col-lg-4 col-form-label required fw-bold fs-6'>Username</label>
+        <label className='col-lg-4 col-form-label fw-bold fs-6'>Username</label>
         <div className='col-lg-8 fv-row'>
           <div className='input-group mb-3'>
             <Field
@@ -171,14 +176,14 @@ const UserForm: FC<Props> = ({method, user, setUser}) => {
       </div>
 
       <div className='row mb-6'>
-        <label className='col-lg-4 col-form-label required fw-bold fs-6'>Date of Birth</label>
+        <label className='col-lg-4 col-form-label fw-bold fs-6'>Date of Birth</label>
         <div className='col-lg-8 fv-row'>
           <DatePickerMC user={user} setUser={setUser} />
         </div>
       </div>
 
       <div className='row mb-6'>
-        <label className='col-lg-4 col-form-label required fw-bold fs-6'>City</label>
+        <label className='col-lg-4 col-form-label fw-bold fs-6'>City</label>
         <div className='col-lg-8 fv-row'>
           <Field
             type='text'

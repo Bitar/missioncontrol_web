@@ -19,33 +19,37 @@ let countriesOptions: any[] = []
 const CommunityForm: FC<Props> = ({method, community, setCommunity}) => {
   const [roleSelected, setRoleSelected] = useState<any | null>(null)
   const [countrySelected, setCountrySelected] = useState<any | null>(null)
-  const [rolesLoaded, setRolesLoaded] = useState(false)
+  const [statesLoaded, setStatesLoaded] = useState(false)
   const [countriesLoaded, setCountriesLoaded] = useState(false)
 
   useEffect(() => {
-    getStates().then((response) => {
-      response?.data?.forEach(function (value) {
-        let option = {
-          value: value.id,
-          label: value.name,
-          code: value.code,
-          isSelected: false,
-        }
-        statesOptions.push(option)
+    if (statesOptions.length === 0) {
+      getStates().then((response) => {
+        response?.data?.forEach(function (value) {
+          let option = {
+            value: value.id,
+            label: value.name,
+            code: value.code,
+            isSelected: false,
+          }
+          statesOptions.push(option)
+        })
       })
-    })
+    }
 
-    getCountries().then((response) => {
-      response?.data?.forEach(function (value) {
-        let option = {
-          value: value.id,
-          label: value.name,
-          code: value.code,
-          isSelected: false,
-        }
-        countriesOptions.push(option)
+    if (countriesOptions.length === 0) {
+      getCountries().then((response) => {
+        response?.data?.forEach(function (value) {
+          let option = {
+            value: value.id,
+            label: value.name,
+            code: value.code,
+            isSelected: false,
+          }
+          countriesOptions.push(option)
+        })
       })
-    })
+    }
   }, [])
 
   useEffect(() => {
@@ -64,7 +68,7 @@ const CommunityForm: FC<Props> = ({method, community, setCommunity}) => {
         code: stateObject?.code,
         isSelected: true,
       })
-      setRolesLoaded(true)
+      setStatesLoaded(true)
     }
 
     if (community?.address?.country) {
@@ -265,7 +269,7 @@ const CommunityForm: FC<Props> = ({method, community, setCommunity}) => {
       <div className='row mb-6'>
         <label className='col-lg-4 col-form-label required fw-bold fs-6'>State</label>
         <div className='col-lg-8 fv-row'>
-          {(rolesLoaded || method === 'create') && (
+          {(statesLoaded || method === 'create') && (
             <Select
               isSearchable
               defaultValue={roleSelected}

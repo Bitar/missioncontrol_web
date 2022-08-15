@@ -41,12 +41,6 @@ const UserPage: React.FC = () => {
           </>
         }
       />
-      {/*<Route path='/:id/edit' element={*/}
-      {/*    <>*/}
-      {/*        <PageTitle breadcrumbs={usersBreadCrumbs}>{"Update User"}</PageTitle>*/}
-      {/*        <UserEdit/>*/}
-      {/*    </>*/}
-      {/*}/>*/}
       <Route
         path='/:id/*'
         element={

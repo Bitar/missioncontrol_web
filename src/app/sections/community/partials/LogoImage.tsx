@@ -16,7 +16,6 @@ const LogoImage: FC<Props> = ({community, setCommunity}) => {
   useEffect(() => {
     if (community?.logo !== undefined && community?.logo !== '') {
       if (community?.logo !== 'http://dashboard.missioncontrol.test/media/avatar/blank.svg') {
-        console.log(`url(${community?.logo})`)
         setImage(`url(${community?.logo})`)
       } else {
         setImage(`none`)

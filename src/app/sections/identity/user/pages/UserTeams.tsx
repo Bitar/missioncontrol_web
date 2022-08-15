@@ -1,5 +1,5 @@
 import {KTCard, KTCardBody} from '../../../../../_metronic/helpers'
-import {getUserTeams} from '../core/_requests'
+import {getUserTeams} from '../core/UserRequests'
 import React, {useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom'
 import {Team} from '../../../../models/squad/Team'

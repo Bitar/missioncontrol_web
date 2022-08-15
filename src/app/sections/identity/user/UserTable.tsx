@@ -1,7 +1,7 @@
 import {useMemo} from 'react'
 import {useTable, ColumnInstance, Row} from 'react-table'
 import {KTCardBody} from '../../../../_metronic/helpers'
-import {usersColumns} from './core/_columns'
+import {usersColumns} from './core/UserColumns'
 import {User} from './models/User'
 import {
   useQueryResponseData,
