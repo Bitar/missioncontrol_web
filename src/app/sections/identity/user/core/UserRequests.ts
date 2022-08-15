@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from 'axios'
 import {Response} from '../../../../../_metronic/helpers'
 import {User, UserQueryResponse} from '../models/User'
-import {ActivityQueryResponse} from '../../../../models/activity/Activity'
+import {ActivityQueryResponse} from '../../../activities/models/Activity'
 import {TeamQueryResponse} from '../../../../models/squad/Team'
 
 const API_URL = process.env.REACT_APP_API_URL

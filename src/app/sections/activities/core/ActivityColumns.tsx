@@ -3,7 +3,7 @@ import {TextCell} from '../../../modules/table/columns/TextCell'
 import {CustomHeader} from '../../../modules/table/columns/CustomHeader'
 import {ActionsCell} from '../../../modules/table/columns/ActionsCell'
 import {QUERIES, toAbsoluteUrl} from '../../../../_metronic/helpers'
-import {Activity} from '../../../models/activity/Activity'
+import {Activity} from '../models/Activity'
 import {BadgeCell} from '../../../modules/table/columns/BadgeCell'
 import {formatDates, formatStatus} from '../../../helpers/ActivityHelper'
 

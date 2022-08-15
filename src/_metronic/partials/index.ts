@@ -9,7 +9,7 @@ export * from './layout/header-menus/HeaderUserMenu'
 // export * from './layout/sidebar-partials/SidebarUser'
 // export * from './layout/demos-drawer/DemosDrawer'
 // export * from './layout/drawer-messenger/DrawerMessenger'
-// export * from './layout/activity-drawer/ActivityDrawer'
+// export * from './layout/models-drawer/ActivityDrawer'
 // export * from './layout/identity-menu/UserMenu'
 // export * from './layout/create-app/CreateApp'
 

@@ -7,6 +7,7 @@ import {jsonToFormData} from '../../../helpers/form/FormHelper'
 import {User, initialUser, userSchema, formOnChange} from './models/User'
 import {AvatarImage} from './partials/AvatarImage'
 import {UserForm} from './UserForm'
+import { FormAction } from "../../../helpers/form/FormAction";
 
 const UserCreate = () => {
   const [user, setUser] = useState<User>(initialUser)
@@ -42,22 +43,10 @@ const UserCreate = () => {
                       <UserForm method={'create'} user={user} setUser={setUser} />
                     </div>
                   </KTCardBody>
-                  <div className='card-footer d-flex justify-content-end py-6 px-9'>
-                    <button
-                      type='submit'
-                      className='btn btn-light-mc-secondary btn-active-mc-secondary btn-sm'
-                      data-kt-users-modal-action='submit'
-                      disabled={isSubmitting || !isValid || !touched}
-                    >
-                      <span className='indicator-label'>Add User</span>
-                      {isSubmitting && (
-                        <span className='indicator-progress'>
-                          Please wait...{' '}
-                          <span className='spinner-border spinner-border-sm align-middle ms-2' />
-                        </span>
-                      )}
-                    </button>
-                  </div>
+                  <FormAction
+                    text={"Add User"}
+                    isSubmitting={isSubmitting}
+                  />
                 </Form>
               </>
             )

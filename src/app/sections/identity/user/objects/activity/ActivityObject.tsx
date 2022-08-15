@@ -1,4 +1,4 @@
-import {Activity} from '../../../../../models/activity/Activity'
+import {Activity} from '../../../../activities/models/Activity'
 import {FC} from 'react'
 import {KTCard, KTCardBody, toAbsoluteUrl} from '../../../../../../_metronic/helpers'
 import Moment from 'moment'

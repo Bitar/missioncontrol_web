@@ -19,7 +19,7 @@ let countriesOptions: any[] = []
 const CommunityForm: FC<Props> = ({method, community, setCommunity}) => {
   const [roleSelected, setRoleSelected] = useState<any | null>(null)
   const [countrySelected, setCountrySelected] = useState<any | null>(null)
-  const [statesLoaded, setStatesLoaded] = useState(false)
+  const [rolesLoaded, setRolesLoaded] = useState(false)
   const [countriesLoaded, setCountriesLoaded] = useState(false)
 
   useEffect(() => {
@@ -68,7 +68,7 @@ const CommunityForm: FC<Props> = ({method, community, setCommunity}) => {
         code: stateObject?.code,
         isSelected: true,
       })
-      setStatesLoaded(true)
+      setRolesLoaded(true)
     }
 
     if (community?.address?.country) {
@@ -269,7 +269,7 @@ const CommunityForm: FC<Props> = ({method, community, setCommunity}) => {
       <div className='row mb-6'>
         <label className='col-lg-4 col-form-label required fw-bold fs-6'>State</label>
         <div className='col-lg-8 fv-row'>
-          {(statesLoaded || method === 'create') && (
+          {(rolesLoaded || method === 'create') && (
             <Select
               isSearchable
               defaultValue={roleSelected}

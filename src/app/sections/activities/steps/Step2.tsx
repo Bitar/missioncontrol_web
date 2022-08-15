@@ -3,7 +3,7 @@ import {ErrorMessage, Field} from 'formik'
 import Select from 'react-select'
 import {getGames} from '../../games/core/GameRequests'
 import {ACTIVITY_ROUNDS, selectCustomStyles} from '../core/_consts'
-import {Activity, initialActivity} from '../../../models/activity/Activity'
+import {Activity, initialActivity} from '../models/Activity'
 
 const gamesSelect: any[] = []
 const platforms: any[] = []

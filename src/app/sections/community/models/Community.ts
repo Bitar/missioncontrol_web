@@ -28,7 +28,7 @@ export const communitySchema = Yup.object().shape({
 
 export const initialCommunity = (community?: Community) => {
   return {
-    name: community?.name || 'AB Community',
+    name: community?.name || '',
     logo: community?.logo || '',
     banner_image: community?.banner_image || '',
     address: community?.address || initialCommunityAddress(),

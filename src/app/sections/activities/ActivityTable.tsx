@@ -2,7 +2,7 @@ import {useMemo} from 'react'
 import {useTable, ColumnInstance, Row} from 'react-table'
 import {KTCardBody} from '../../../_metronic/helpers'
 import {activitiesColumns} from './core/ActivityColumns'
-import {Activity} from '../../models/activity/Activity'
+import {Activity} from './models/Activity'
 import {
   useQueryResponseData,
   useQueryResponseLoading,

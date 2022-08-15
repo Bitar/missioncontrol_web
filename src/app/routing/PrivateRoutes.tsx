@@ -4,7 +4,7 @@ import {MasterLayout} from '../../_metronic/layout/MasterLayout'
 import TopBarProgress from 'react-topbar-progress-indicator'
 import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper'
 import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
-import {ActivityIndex} from '../sections/activities/ActivityIndex'
+import {ActivityIndex} from '../sections/activities/pages/ActivityIndex'
 import {Marketing} from '../pages/marketing/Marketing'
 import {BillingPlanWrapper} from '../sections/billing/BillingPlanWrapper'
 import {BillingComplete} from '../sections/billing/BillingComplete'
@@ -16,6 +16,7 @@ import {PlansPage} from '../sections/billing/plan/pages/PlansPage'
 import {CommunityPage} from '../sections/community/pages/CommunityPage'
 import {GamePage} from '../sections/games/pages/GamePage'
 import { SuspenseView } from "../layout/SuspenseView";
+import { ActivityPage } from "../sections/activities/pages/ActivityPage";
 
 const PrivateRoutes = () => {
   return (
@@ -36,14 +37,14 @@ const PrivateRoutes = () => {
         <Route path='roles/*' element={<SuspenseView><RolePage /></SuspenseView>} />
         <Route path='permissions/*' element={<PermissionPage />} />
 
+        <Route path='activities/*' element={<SuspenseView><ActivityPage /></SuspenseView>} />
+
         <Route path='plans/*' element={<PlansPage />} />
         {/* Sections */}
 
         <Route path='billing/plan' element={<BillingPlanWrapper />} />
         <Route path='billing/:id/complete' element={<BillingComplete />} />
         <Route path='subscriptions' element={<SubscriptionIndex />} />
-
-        <Route path='/activities' element={<ActivityIndex />} />
 
         {/* Page Not Found */}
         <Route path='*' element={<Navigate to='/error/404' />} />
