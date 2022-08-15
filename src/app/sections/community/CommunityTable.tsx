@@ -4,7 +4,7 @@ import {
 } from '../../modules/table/QueryResponseProvider'
 import {useMemo} from 'react'
 import {ColumnInstance, Row, useTable} from 'react-table'
-import {communitiesColumns} from './core/_columns'
+import {communitiesColumns} from './core/CommunityColumns'
 import {CustomHeaderColumn} from '../../modules/table/columns/CustomHeaderColumn'
 import {CustomRow} from '../../modules/table/columns/CustomRow'
 import {TableListPagination} from '../../modules/table/TableListPagination'

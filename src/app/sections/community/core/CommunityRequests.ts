@@ -40,4 +40,10 @@ const getCommunityFollowers = (id: any): Promise<CommunityFollowersQueryResponse
     .then((response: AxiosResponse<CommunityFollowersQueryResponse>) => response.data)
 }
 
-export {getCommunities, getCommunityById, createCommunity, getCommunityFollowers, updateCommunity}
+const getCommunityActivities = (id: any): Promise<CommunityFollowersQueryResponse> => {
+  return axios
+    .get(`${GET_COMMUNITIES_URL}/${id}/activities`)
+    .then((response: AxiosResponse<CommunityFollowersQueryResponse>) => response.data)
+}
+
+export {getCommunities, getCommunityById, createCommunity, getCommunityFollowers, updateCommunity, getCommunityActivities}

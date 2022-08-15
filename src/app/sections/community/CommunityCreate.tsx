@@ -1,7 +1,7 @@
 import {KTCard, KTCardBody} from '../../../_metronic/helpers'
 import {Form, Formik} from 'formik'
 import {Community, communitySchema, formOnChange, initialCommunity} from './models/Community'
-import {createCommunity} from './core/_requests'
+import {createCommunity} from './core/CommunityRequests'
 import {useNavigate} from 'react-router-dom'
 import React, {useState} from 'react'
 import {jsonToFormData} from '../../helpers/form/FormHelper'

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {PageLink, PageTitle} from '../../../../_metronic/layout/core'
-import {getCommunityById} from '../core/_requests'
+import {getCommunityById} from '../core/CommunityRequests'
 import {Community} from '../models/Community'
 import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
 import {CommunityFollower} from './CommunityFollowers'
@@ -39,7 +39,7 @@ const CommunityView: React.FC = () => {
   ]
 
   useEffect(() => {
-    const query = 'include=contact,address,access'
+    const query = 'include=contact,address,access,activities,followers'
     getCommunityById(params.id, query).then((response) => {
       setCommunity(response)
     })
@@ -69,6 +69,7 @@ const CommunityView: React.FC = () => {
           element={
             <>
               <PageTitle breadcrumbs={communityViewBreadCrumbs}>Activities</PageTitle>
+
             </>
           }
         />

@@ -7,7 +7,7 @@ import {LogoImage} from './partials/LogoImage'
 import {BannerImage} from './partials/BannerImage'
 import {CommunityForm} from './CommunityForm'
 import {jsonToFormData} from '../../helpers/form/FormHelper'
-import {updateCommunity} from './core/_requests'
+import {updateCommunity} from './core/CommunityRequests'
 
 type Props = {
   community: Community | undefined

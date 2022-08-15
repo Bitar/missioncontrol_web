@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {useEffect, useState} from 'react'
-import {getCommunityFollowers} from '../core/_requests'
+import {getCommunityFollowers} from '../core/CommunityRequests'
 import {CommunityFollowers} from '../models/CommunityFollowers'
 import {useParams} from 'react-router-dom'
 import {KTCard, KTSVG} from '../../../../_metronic/helpers'
