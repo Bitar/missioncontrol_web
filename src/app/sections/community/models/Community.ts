@@ -40,10 +40,10 @@ export const initialCommunity = (community?: Community) => {
 export type Community = {
   id?: ID
   name: string
+  description?: string
   logo?: string
   banner_image?: string
   is_featured?: boolean
-  description?: string
   address?: CommunityAddress
   contact?: CommunityContact
   access?: CommunityAccess

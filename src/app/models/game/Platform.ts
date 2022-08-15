@@ -7,4 +7,12 @@ export type Platform = {
   description: string
 }
 
+export const initialPlatform = (platform?: Platform) => {
+  return {
+    name: platform?.name || "",
+    abbreviation: platform?.abbreviation || "",
+    description: platform?.description || ""
+  }
+}
+
 export type PlatformQueryResponse = Response<Array<Platform>>

@@ -6,7 +6,7 @@ import {KTCard, KTCardBody} from '../../../_metronic/helpers'
 import {LogoImage} from './partials/LogoImage'
 import {BannerImage} from './partials/BannerImage'
 import {CommunityForm} from './CommunityForm'
-import {jsonToFormData, updateData} from '../../helpers/form/FormHelper'
+import {jsonToFormData} from '../../helpers/form/FormHelper'
 import {updateCommunity} from './core/CommunityRequests'
 
 type Props = {

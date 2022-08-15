@@ -22,7 +22,7 @@ const GameEdit = () => {
     title: game?.title || '',
     description: game?.description || '',
     is_featured: false,
-    is_crossplay: false,
+    is_cross_play: false,
     image: game?.image || '',
     platforms: game?.platforms || [],
   }

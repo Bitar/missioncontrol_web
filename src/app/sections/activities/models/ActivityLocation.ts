@@ -1,4 +1,4 @@
-import {ID, Response} from '../../../../_metronic/helpers'
+import { ID, Response } from "../../../../_metronic/helpers";
 
 export type ActivityLocation = {
   id?: ID
@@ -7,9 +7,11 @@ export type ActivityLocation = {
   location: string
 }
 
-export const initialActivityLocation = {
-  type: '',
-  location: '',
-}
+export const initialActivityLocation = (activityLocation?: ActivityLocation) => {
+  return {
+    type: activityLocation?.type || 1,
+    location: activityLocation?.location || ""
+  };
+};
 
 export type ActivityLocationQueryResponse = Response<Array<ActivityLocation>>

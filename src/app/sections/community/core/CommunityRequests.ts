@@ -12,6 +12,12 @@ const getCommunities = (query: String): Promise<CommunityQueryResponse> => {
     .then((response: AxiosResponse<CommunityQueryResponse>) => response.data)
 }
 
+const getAllCommunities = (): Promise<CommunityQueryResponse> => {
+  return axios
+    .get(`${GET_COMMUNITIES_URL}/all`)
+    .then((response: AxiosResponse<CommunityQueryResponse>) => response.data)
+}
+
 const getCommunityById = (id: any, query?: String | undefined): Promise<Community | undefined> => {
   let url = `${GET_COMMUNITIES_URL}/${id}`
 
@@ -44,4 +50,4 @@ const getCommunityActivities = (id: any): Promise<ActivityQueryResponse> => {
     .then((response: AxiosResponse<ActivityQueryResponse>) => response.data)
 }
 
-export {getCommunities, getCommunityById, createCommunity, updateCommunity, getCommunityActivities}
+export {getCommunities, getCommunityById, createCommunity, updateCommunity, getCommunityActivities, getAllCommunities}
