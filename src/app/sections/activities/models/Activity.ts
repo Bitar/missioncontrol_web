@@ -1,20 +1,18 @@
-import { ID, Response } from "../../../../_metronic/helpers";
-import { Game, initialGame } from "../../../models/game/Game";
-import { ActivityFee, initialActivityFee } from "./ActivityFee";
-import { ActivityLocation, initialActivityLocation } from "./ActivityLocation";
-import { ActivitySchedule, initialActivitySchedule } from "./ActivitySchedule";
-import { Community, initialCommunity } from "../../community/models/Community";
-import { Dispatch, SetStateAction } from "react";
-import { updateData } from "../../../helpers/form/FormHelper"
+import {ID, Response} from '../../../../_metronic/helpers'
+import {Game, initialGame} from '../../../models/game/Game'
+import {ActivityFee, initialActivityFee} from './ActivityFee'
+import {ActivityLocation, initialActivityLocation} from './ActivityLocation'
+import {ActivitySchedule, initialActivitySchedule} from './ActivitySchedule'
+import {Community, initialCommunity} from '../../community/models/Community'
+import {Dispatch, SetStateAction} from 'react'
+import {updateData} from '../../../helpers/form/FormHelper'
 import * as Yup from 'yup'
 
-export const activitySchema = Yup.object().shape({
-
-})
+export const activitySchema = Yup.object().shape({})
 
 export const initialActivity: Activity = {
-  title: "",
-  description: "",
+  title: '',
+  description: '',
   status: 0,
   community: initialCommunity(),
   game: initialGame,
@@ -24,21 +22,21 @@ export const initialActivity: Activity = {
 
   registration_dates: {
     start_date: 0,
-    end_date: 0
+    end_date: 0,
   },
   matchplay_dates: {
     start_date: 0,
-    end_date: 0
+    end_date: 0,
   },
   rules: [],
   additional_data: {
     teams_count: 0,
-    players_count: 0
-  }
+    players_count: 0,
+  },
 
   // team: initialActivityTeam,
   // prize: initialActivityPrize,
-};
+}
 
 export type Activity = {
   id?: ID
@@ -75,8 +73,8 @@ export function formOnChange(
   activity: Activity | undefined,
   setActivity: Dispatch<SetStateAction<Activity>>
 ) {
-  let targetName = event.target.name;
-  let targetValue = event.target.value;
+  let targetName = event.target.name
+  let targetValue = event.target.value
 
-  updateData({ [targetName]: targetValue }, setActivity, activity);
+  updateData({[targetName]: targetValue}, setActivity, activity)
 }

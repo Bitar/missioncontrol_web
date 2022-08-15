@@ -6,7 +6,7 @@ import {KTCard, KTCardBody} from '../../../_metronic/helpers'
 import {LogoImage} from './partials/LogoImage'
 import {BannerImage} from './partials/BannerImage'
 import {CommunityForm} from './CommunityForm'
-import {jsonToFormData} from '../../helpers/form/FormHelper'
+import {jsonToFormData, updateData} from '../../helpers/form/FormHelper'
 import {updateCommunity} from './core/CommunityRequests'
 
 type Props = {
@@ -42,6 +42,7 @@ const CommunityEdit: FC<Props> = ({community, setCommunity}) => {
           initialValues={initialCommunity(community)}
           onSubmit={handleSubmit}
           validationSchema={communitySchema}
+          enableReinitialize
         >
           {({isSubmitting, isValid, touched}) => (
             <Form onChange={handleOnChange} className='form'>

@@ -15,8 +15,8 @@ import {PermissionPage} from '../sections/identity/permission/pages/PermissionPa
 import {PlansPage} from '../sections/billing/plan/pages/PlansPage'
 import {CommunityPage} from '../sections/community/pages/CommunityPage'
 import {GamePage} from '../sections/games/pages/GamePage'
-import { SuspenseView } from "../layout/SuspenseView";
-import { ActivityPage } from "../sections/activities/pages/ActivityPage";
+import {SuspenseView} from '../layout/SuspenseView'
+import {ActivityPage} from '../sections/activities/pages/ActivityPage'
 
 const PrivateRoutes = () => {
   return (
@@ -30,14 +30,42 @@ const PrivateRoutes = () => {
         {/* Pages */}
 
         {/* Sections */}
-        <Route path='communities/*' element={<SuspenseView><CommunityPage /></SuspenseView>} />
+        <Route
+          path='communities/*'
+          element={
+            <SuspenseView>
+              <CommunityPage />
+            </SuspenseView>
+          }
+        />
         <Route path='games/*' element={<GamePage />} />
 
-        <Route path='users/*' element={<SuspenseView><UserPage /></SuspenseView>} />
-        <Route path='roles/*' element={<SuspenseView><RolePage /></SuspenseView>} />
+        <Route
+          path='users/*'
+          element={
+            <SuspenseView>
+              <UserPage />
+            </SuspenseView>
+          }
+        />
+        <Route
+          path='roles/*'
+          element={
+            <SuspenseView>
+              <RolePage />
+            </SuspenseView>
+          }
+        />
         <Route path='permissions/*' element={<PermissionPage />} />
 
-        <Route path='activities/*' element={<SuspenseView><ActivityPage /></SuspenseView>} />
+        <Route
+          path='activities/*'
+          element={
+            <SuspenseView>
+              <ActivityPage />
+            </SuspenseView>
+          }
+        />
 
         <Route path='plans/*' element={<PlansPage />} />
         {/* Sections */}

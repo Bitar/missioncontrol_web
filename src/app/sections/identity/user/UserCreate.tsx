@@ -7,7 +7,7 @@ import {jsonToFormData} from '../../../helpers/form/FormHelper'
 import {User, initialUser, userSchema, formOnChange} from './models/User'
 import {AvatarImage} from './partials/AvatarImage'
 import {UserForm} from './UserForm'
-import { FormAction } from "../../../helpers/form/FormAction";
+import {FormAction} from '../../../helpers/form/FormAction'
 
 const UserCreate = () => {
   const [user, setUser] = useState<User>(initialUser)
@@ -43,10 +43,7 @@ const UserCreate = () => {
                       <UserForm method={'create'} user={user} setUser={setUser} />
                     </div>
                   </KTCardBody>
-                  <FormAction
-                    text={"Add User"}
-                    isSubmitting={isSubmitting}
-                  />
+                  <FormAction text={'Add User'} isSubmitting={isSubmitting} />
                 </Form>
               </>
             )

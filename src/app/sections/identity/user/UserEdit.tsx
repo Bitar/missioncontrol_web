@@ -41,7 +41,7 @@ const UserEdit: FC<Props> = ({user, setUser}) => {
           initialValues={initialUser(user)}
           onSubmit={handleSubmit}
           validationSchema={userSchema}
-          enableReinitialize={true}
+          enableReinitialize
         >
           {({isSubmitting, isValid, touched}) => (
             <Form onChange={handleOnChange} className='form' encType='multipart/form-data'>

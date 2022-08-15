@@ -81,12 +81,12 @@ const CommunityInfo: FC<Props> = ({community}) => {
                     )}
                   </div>
                 </div>
-                <div className='card-toolbar'>
-                  <Link className='btn btn-sm btn-primary' to='/activities/create'>
-                    <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2' />
-                    New Activity
-                  </Link>
-                </div>
+                {/*<div className='card-toolbar'>*/}
+                {/*  <Link className='btn btn-sm btn-primary' to='/activities/create'>*/}
+                {/*    <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2' />*/}
+                {/*    New Activity*/}
+                {/*  </Link>*/}
+                {/*</div>*/}
               </div>
 
               <div className='d-flex flex-wrap flex-stack'>

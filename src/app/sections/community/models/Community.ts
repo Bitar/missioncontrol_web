@@ -10,7 +10,6 @@ import {User} from '../../identity/user/models/User'
 
 export const communitySchema = Yup.object().shape({
   name: Yup.string().required('Community name is required'),
-  // description: Yup.string().required('Community description is required'),
   contact: Yup.object().shape({
     name: Yup.string().required('Contact name is required'),
     email: Yup.string().email('Please enter a valid email').required('Contact email is required'),
@@ -29,11 +28,12 @@ export const communitySchema = Yup.object().shape({
 export const initialCommunity = (community?: Community) => {
   return {
     name: community?.name || '',
+    description: community?.description || '',
     logo: community?.logo || '',
     banner_image: community?.banner_image || '',
-    address: community?.address || initialCommunityAddress(),
-    contact: community?.contact || initialCommunityContact(),
-    access: community?.access || initialCommunityAccess(),
+    address: initialCommunityAddress(community?.address),
+    contact: initialCommunityContact(community?.contact),
+    access: initialCommunityAccess(community?.access),
   }
 }
 
