@@ -16,12 +16,12 @@ export const initialActivity: Activity = {
   location: initialActivityLocation,
 
   registration_dates: {
-    start_date: '',
-    end_date: '',
+    start_date: 0,
+    end_date: 0,
   },
   matchplay_dates: {
-    start_date: '',
-    end_date: '',
+    start_date: 0,
+    end_date: 0,
   },
   rules: [],
   additional_data: {
@@ -47,12 +47,12 @@ export type Activity = {
   location?: ActivityLocation
 
   registration_dates: {
-    start_date: string
-    end_date: string
+    start_date: number
+    end_date: number
   }
   matchplay_dates: {
-    start_date: string
-    end_date: string
+    start_date: number
+    end_date: number
   }
   rules?: []
   // standings: []

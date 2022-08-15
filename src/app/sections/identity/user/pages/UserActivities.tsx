@@ -6,8 +6,8 @@ import {useParams} from 'react-router-dom'
 import {ActivityObject} from '../objects/activity/ActivityObject'
 
 const UserActivities = () => {
-  const params = useParams()
   const [activities, setActivities] = useState<Activity[] | undefined>([])
+  const params = useParams()
 
   useEffect(() => {
     getUserActivities(params.id).then((response) => {

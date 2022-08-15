@@ -3,9 +3,10 @@ import {PageLink, PageTitle} from '../../../../_metronic/layout/core'
 import {getCommunityById} from '../core/CommunityRequests'
 import {Community} from '../models/Community'
 import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
-import {CommunityFollower} from './CommunityFollowers'
+import {CommunityUsers} from './CommunityUsers'
 import {CommunityInfo} from '../CommunityInfo'
 import {CommunityEdit} from '../CommunityEdit'
+import { CommunityActivities } from "./CommunityActivities";
 
 const CommunityView: React.FC = () => {
   const [community, setCommunity] = useState<Community | undefined>()
@@ -39,8 +40,7 @@ const CommunityView: React.FC = () => {
   ]
 
   useEffect(() => {
-    const query = 'include=contact,address,access,activities,followers'
-    getCommunityById(params.id, query).then((response) => {
+    getCommunityById(params.id).then((response) => {
       setCommunity(response)
     })
   }, [params.id])
@@ -69,7 +69,7 @@ const CommunityView: React.FC = () => {
           element={
             <>
               <PageTitle breadcrumbs={communityViewBreadCrumbs}>Activities</PageTitle>
-
+              <CommunityActivities community={community}/>
             </>
           }
         />
@@ -79,7 +79,7 @@ const CommunityView: React.FC = () => {
             <>
               <PageTitle breadcrumbs={communityViewBreadCrumbs}>Members</PageTitle>
               {/* TODO: Work on the members tab to be a separate component*/}
-              <CommunityFollower />
+              <CommunityUsers community={community} />
             </>
           }
         />

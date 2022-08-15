@@ -6,6 +6,7 @@ import {Game} from '../../../models/game/Game'
 import * as Yup from 'yup'
 import {updateData} from '../../../helpers/form/FormHelper'
 import {Dispatch, SetStateAction} from 'react'
+import {User} from '../../identity/user/models/User'
 
 export const communitySchema = Yup.object().shape({
   name: Yup.string().required('Community name is required'),
@@ -46,6 +47,7 @@ export type Community = {
   address?: CommunityAddress
   contact?: CommunityContact
   access?: CommunityAccess
+  users?: User[]
   games?: Game[]
   is_follow?: boolean
 }
