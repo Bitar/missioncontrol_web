@@ -15,7 +15,7 @@ const usersColumns: ReadonlyArray<Column<User>> = [
       <TextImageCell
         dImage={props.data[props.row.index].meta.image}
         dText={props.data[props.row.index].name}
-        link={`/communities/${props.data[props.row.index].id}`}
+        link={`/users/${props.data[props.row.index].id}`}
         dExtraText={props.data[props.row.index].email}
       />
     ),

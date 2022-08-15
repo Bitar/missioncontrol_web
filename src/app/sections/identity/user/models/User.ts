@@ -59,7 +59,7 @@ export const initialUser = (user?: User) => {
     password_confirmation: '123123123',
     created_at: user?.created_at || 0,
     roles: [],
-    meta: user?.meta || initialUserMeta(),
+    meta: initialUserMeta(user?.meta),
   }
 }
 

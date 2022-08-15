@@ -4,6 +4,7 @@ import {UserCreate} from '../UserCreate'
 import {PageLink, PageTitle} from '../../../../../_metronic/layout/core'
 import React from 'react'
 import {UserView} from './UserView'
+import { SuspenseView } from "../../../../layout/SuspenseView";
 
 const usersBreadCrumbs: Array<PageLink> = [
   {
@@ -27,8 +28,10 @@ const UserPage: React.FC = () => {
         path='/overview'
         element={
           <>
+          <SuspenseView>
             <PageTitle breadcrumbs={usersBreadCrumbs}>{'Overview'}</PageTitle>
             <UserIndex />
+          </SuspenseView>
           </>
         }
       />
@@ -36,8 +39,10 @@ const UserPage: React.FC = () => {
         path='/create'
         element={
           <>
+          <SuspenseView>
             <PageTitle breadcrumbs={usersBreadCrumbs}>{'Add User'}</PageTitle>
             <UserCreate />
+          </SuspenseView>
           </>
         }
       />
@@ -45,8 +50,10 @@ const UserPage: React.FC = () => {
         path='/:id/*'
         element={
           <>
+          <SuspenseView>
             <PageTitle breadcrumbs={usersBreadCrumbs}>{'View User'}</PageTitle>
             <UserView />
+          </SuspenseView>
           </>
         }
       />

@@ -12,9 +12,8 @@ type Props = {
 
 let activitiesObject: any[] = []
 
-const CommunityActivities: FC<Props> = ({community}) => {
+const CommunityActivities: FC<Props> = () => {
   const [activities, setActivities] = useState<Activity[] | undefined>([])
-  const [loadedActivities, setLoadedActivities] = useState(false)
   const params = useParams()
 
   useEffect(() => {

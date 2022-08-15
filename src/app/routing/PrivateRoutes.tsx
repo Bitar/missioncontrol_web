@@ -5,9 +5,6 @@ import TopBarProgress from 'react-topbar-progress-indicator'
 import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper'
 import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
 import {ActivityIndex} from '../sections/activities/ActivityIndex'
-import {GameIndex} from '../sections/games/GameIndex'
-import {GameCreate} from '../sections/games/GameCreate'
-import {GameEdit} from '../sections/games/GameEdit'
 import {Marketing} from '../pages/marketing/Marketing'
 import {BillingPlanWrapper} from '../sections/billing/BillingPlanWrapper'
 import {BillingComplete} from '../sections/billing/BillingComplete'
@@ -18,6 +15,7 @@ import {PermissionPage} from '../sections/identity/permission/pages/PermissionPa
 import {PlansPage} from '../sections/billing/plan/pages/PlansPage'
 import {CommunityPage} from '../sections/community/pages/CommunityPage'
 import {GamePage} from '../sections/games/pages/GamePage'
+import { SuspenseView } from "../layout/SuspenseView";
 
 const PrivateRoutes = () => {
   return (
@@ -31,11 +29,11 @@ const PrivateRoutes = () => {
         {/* Pages */}
 
         {/* Sections */}
-        <Route path='communities/*' element={<CommunityPage />} />
+        <Route path='communities/*' element={<SuspenseView><CommunityPage /></SuspenseView>} />
         <Route path='games/*' element={<GamePage />} />
 
-        <Route path='users/*' element={<UserPage />} />
-        <Route path='roles/*' element={<RolePage />} />
+        <Route path='users/*' element={<SuspenseView><UserPage /></SuspenseView>} />
+        <Route path='roles/*' element={<SuspenseView><RolePage /></SuspenseView>} />
         <Route path='permissions/*' element={<PermissionPage />} />
 
         <Route path='plans/*' element={<PlansPage />} />
@@ -52,18 +50,6 @@ const PrivateRoutes = () => {
       </Route>
     </Routes>
   )
-}
-
-const SuspensedView: FC = ({children}) => {
-  const baseColor = getCSSVariableValue('--bs-primary')
-  TopBarProgress.config({
-    barColors: {
-      '0': baseColor,
-    },
-    barThickness: 1,
-    shadowBlur: 5,
-  })
-  return <Suspense fallback={<TopBarProgress />}>{children}</Suspense>
 }
 
 export {PrivateRoutes}

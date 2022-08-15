@@ -55,7 +55,7 @@ const UserEdit: FC<Props> = ({user, setUser}) => {
               <div className='card-footer d-flex justify-content-end py-6 px-9'>
                 <button
                   type='submit'
-                  className='btn btn-light-primary btn-active-primary btn-sm'
+                  className='btn btn-light-mc-secondary btn-active-mc-secondary btn-sm'
                   disabled={isSubmitting || !isValid || !touched}
                 >
                   <span className='indicator-label'>Save Changes</span>
