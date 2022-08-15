@@ -4,7 +4,7 @@ import {TableHeader} from '../../../modules/table/TableHeader'
 import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
 import {RoleTable} from './RoleTable'
 import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvider'
-import {getRoles} from './core/_requests'
+import {getRoles} from './core/RoleRequests'
 import {ListViewProvider} from '../../../modules/table/ListViewProvider'
 
 const RolesList = () => {

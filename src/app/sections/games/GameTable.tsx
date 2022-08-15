@@ -1,7 +1,7 @@
 import {useMemo} from 'react'
 import {useTable, ColumnInstance, Row} from 'react-table'
 import {KTCardBody} from '../../../_metronic/helpers'
-import {gamesColumns} from './_columns'
+import {gamesColumns} from './core/GameColumns'
 import {Game} from '../../models/game/Game'
 import {
   useQueryResponseData,
@@ -12,7 +12,7 @@ import {CustomRow} from '../../modules/table/columns/CustomRow'
 import {TableListLoading} from '../../modules/table/TableListLoading'
 import {TableListPagination} from '../../modules/table/TableListPagination'
 
-const GamesTable = () => {
+const GameTable = () => {
   const games = useQueryResponseData()
   const isLoading = useQueryResponseLoading()
   const data = useMemo(() => games, [games])
@@ -60,4 +60,4 @@ const GamesTable = () => {
   )
 }
 
-export {GamesTable}
+export {GameTable}

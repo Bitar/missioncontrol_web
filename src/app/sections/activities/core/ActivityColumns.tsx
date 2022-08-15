@@ -1,25 +1,30 @@
 import {Column} from 'react-table'
-import {TextCell} from '../../modules/table/columns/TextCell'
-import {CustomHeader} from '../../modules/table/columns/CustomHeader'
-import {ActionsCell} from '../../modules/table/columns/ActionsCell'
-import {QUERIES} from '../../../_metronic/helpers'
-import {ImageCell} from '../../modules/table/columns/ImageCell'
-import {Activity} from '../../models/activity/Activity'
-import {BadgeCell} from '../../modules/table/columns/BadgeCell'
-import {formatDates, formatStatus} from '../../helpers/ActivityHelper'
+import {TextCell} from '../../../modules/table/columns/TextCell'
+import {CustomHeader} from '../../../modules/table/columns/CustomHeader'
+import {ActionsCell} from '../../../modules/table/columns/ActionsCell'
+import {QUERIES, toAbsoluteUrl} from '../../../../_metronic/helpers'
+import {Activity} from '../../../models/activity/Activity'
+import {BadgeCell} from '../../../modules/table/columns/BadgeCell'
+import {formatDates, formatStatus} from '../../../helpers/ActivityHelper'
 
 const activitiesColumns: ReadonlyArray<Column<Activity>> = [
   {
-    Header: (props) => (
-      <CustomHeader tableProps={props} title='Game Cover' className='min-w-125px' />
-    ),
-    id: 'image',
-    Cell: ({...props}) => <ImageCell dObject={props.data[props.row.index].game?.image} />,
-  },
-  {
     Header: (props) => <CustomHeader tableProps={props} title='Title' className='min-w-125px' />,
     id: 'title',
-    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].title} />,
+    Cell: ({...props}) => (
+      <div className='d-flex align-items-center'>
+        <div className='w-75px me-3'>
+          <img
+            src={toAbsoluteUrl(props.data[props.row.index].game?.image)}
+            alt=''
+            className='w-100 h-100vh rounded'
+          />
+        </div>
+        <div className='d-flex flex-column'>
+          <span className='text-gray-800 mb-1'>{props.data[props.row.index].title}</span>
+        </div>
+      </div>
+    ),
   },
   {
     Header: (props) => <CustomHeader tableProps={props} title='Status' className='min-w-125px' />,
@@ -31,7 +36,15 @@ const activitiesColumns: ReadonlyArray<Column<Activity>> = [
   },
   {
     Header: (props) => <CustomHeader tableProps={props} title='Dates' className='min-w-200px' />,
-    id: 'dates',
+    id: 'Registration',
+    Cell: ({...props}) => {
+      const {startDate, endDate} = formatDates(props.data[props.row.index].registration_dates)
+      return <TextCell dObject={startDate + ' - ' + endDate} />
+    },
+  },
+  {
+    Header: (props) => <CustomHeader tableProps={props} title='Dates' className='min-w-200px' />,
+    id: 'Game Day',
     Cell: ({...props}) => {
       const {startDate, endDate} = formatDates(props.data[props.row.index].matchplay_dates)
       return <TextCell dObject={startDate + ' - ' + endDate} />
@@ -72,6 +85,7 @@ const activitiesColumns: ReadonlyArray<Column<Activity>> = [
         id={props.data[props.row.index].id}
         path={'activities'}
         queryKey={QUERIES.ACTIVITIES_LIST}
+        showView={true}
       />
     ),
   },

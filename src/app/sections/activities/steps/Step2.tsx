@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react'
 import {ErrorMessage, Field} from 'formik'
 import Select from 'react-select'
-import {getGames} from '../../games/core/_requests'
+import {getGames} from '../../games/core/GameRequests'
 import {ACTIVITY_ROUNDS, selectCustomStyles} from '../core/_consts'
 import {Activity, initialActivity} from '../../../models/activity/Activity'
 

@@ -5,7 +5,7 @@ import {Game} from '../../models/game/Game'
 import {KTCard, KTCardBody} from '../../../_metronic/helpers'
 import clsx from 'clsx'
 import {PageTitle} from '../../../_metronic/layout/core'
-import {getGameById, updateGame} from './core/_requests'
+import {getGameById, updateGame} from './core/GameRequests'
 import {useNavigate, useParams} from 'react-router-dom'
 
 const editGamesSchema = Yup.object().shape({
@@ -13,7 +13,7 @@ const editGamesSchema = Yup.object().shape({
   description: Yup.string().required('Name is required'),
 })
 
-const GamesEdit = () => {
+const GameEdit = () => {
   const [game, setGame] = useState<Game | undefined>()
   const navigate = useNavigate()
   const params = useParams()
@@ -184,4 +184,4 @@ const GamesEdit = () => {
   )
 }
 
-export {GamesEdit}
+export {GameEdit}

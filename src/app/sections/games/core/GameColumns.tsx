@@ -1,30 +1,28 @@
 import {Column} from 'react-table'
-import {TextCell} from '../../modules/table/columns/TextCell'
-import {CustomHeader} from '../../modules/table/columns/CustomHeader'
-import {ActionsCell} from '../../modules/table/columns/ActionsCell'
-import {QUERIES} from '../../../_metronic/helpers'
-import {Game} from '../../models/game/Game'
-import {ImageCell} from '../../modules/table/columns/ImageCell'
+import {TextCell} from '../../../modules/table/columns/TextCell'
+import {CustomHeader} from '../../../modules/table/columns/CustomHeader'
+import {ActionsCell} from '../../../modules/table/columns/ActionsCell'
+import {QUERIES, toAbsoluteUrl} from '../../../../_metronic/helpers'
+import {Game} from '../../../models/game/Game'
 
 const gamesColumns: ReadonlyArray<Column<Game>> = [
   {
     Header: (props) => <CustomHeader tableProps={props} title='Title' className='min-w-125px' />,
     id: 'title',
-    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].title} />,
-  },
-  {
-    Header: (props) => (
-      <CustomHeader tableProps={props} title='Cover Image' className='min-w-125px' />
+    Cell: ({...props}) => (
+      <div className='d-flex align-items-center'>
+        <div className='w-75px me-3'>
+          <img
+            src={toAbsoluteUrl(props.data[props.row.index].image)}
+            alt=''
+            className='w-100 h-100vh rounded'
+          />
+        </div>
+        <div className='d-flex flex-column'>
+          <span className='text-gray-800 mb-1'>{props.data[props.row.index].title}</span>
+        </div>
+      </div>
     ),
-    id: 'image',
-    Cell: ({...props}) => <ImageCell dObject={props.data[props.row.index].image} />,
-  },
-  {
-    Header: (props) => (
-      <CustomHeader tableProps={props} title='Description' className='min-w-125px' />
-    ),
-    id: 'description',
-    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].description} />,
   },
 
   {
@@ -59,6 +57,7 @@ const gamesColumns: ReadonlyArray<Column<Game>> = [
         id={props.data[props.row.index].id}
         path={'games'}
         queryKey={QUERIES.GAMES_LIST}
+        showEdit={true}
       />
     ),
   },

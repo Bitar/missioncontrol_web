@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from 'axios'
 import {Response} from '../../../../_metronic/helpers'
 import {Community, CommunityQueryResponse} from '../models/Community'
-import { ActivityQueryResponse } from "../../../models/activity/Activity";
+import {ActivityQueryResponse} from '../../../models/activity/Activity'
 
 const API_URL = process.env.REACT_APP_API_URL
 const GET_COMMUNITIES_URL = `${API_URL}/communities`

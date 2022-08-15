@@ -3,7 +3,7 @@ import {KTCard, QUERIES} from '../../../../_metronic/helpers'
 import {TableHeader} from '../../../modules/table/TableHeader'
 import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
 import {PermissionTable} from './PermissionTable'
-import {getPermissions} from './core/_requests'
+import {getPermissions} from './core/PermissionRequests'
 import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvider'
 import {ListViewProvider} from '../../../modules/table/ListViewProvider'
 

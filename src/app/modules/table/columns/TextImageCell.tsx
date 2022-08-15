@@ -27,10 +27,8 @@ const TextImageCell: FC<Props> = ({dImage, dText, dExtraText, link}) => {
       </div>
       <div className='d-flex flex-column'>
         {link ? (
-          <Link to={`${link}`}>
-            <Link to={`${link}`} className='text-gray-800 text-hover-mc-secondary mb-1'>
-              {dText}
-            </Link>
+          <Link to={`${link}`} className='text-gray-800 text-hover-mc-secondary mb-1'>
+            {dText}
           </Link>
         ) : (
           <span className='text-gray-800 mb-1'>{dText}</span>

@@ -6,7 +6,7 @@ import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
 import {CommunityUsers} from './CommunityUsers'
 import {CommunityInfo} from '../CommunityInfo'
 import {CommunityEdit} from '../CommunityEdit'
-import { CommunityActivities } from "./CommunityActivities";
+import {CommunityActivities} from './CommunityActivities'
 
 const CommunityView: React.FC = () => {
   const [community, setCommunity] = useState<Community | undefined>()
@@ -69,7 +69,7 @@ const CommunityView: React.FC = () => {
           element={
             <>
               <PageTitle breadcrumbs={communityViewBreadCrumbs}>Activities</PageTitle>
-              <CommunityActivities community={community}/>
+              <CommunityActivities community={community} />
             </>
           }
         />

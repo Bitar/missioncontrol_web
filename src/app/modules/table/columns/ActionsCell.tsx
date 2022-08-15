@@ -18,14 +18,7 @@ type Props = {
   showView?: boolean
 }
 
-const ActionsCell: FC<Props> = ({
-  id,
-  path,
-  queryKey,
-  showEdit = true,
-  showDelete = true,
-  showView = false,
-}) => {
+const ActionsCell: FC<Props> = ({id, path, queryKey, showEdit, showDelete = true, showView}) => {
   const queryClient = useQueryClient()
   const {state} = useQueryRequest()
   const [query] = useState<string>(stringifyRequestQuery(state))

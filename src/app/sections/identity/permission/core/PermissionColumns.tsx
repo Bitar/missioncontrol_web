@@ -21,6 +21,7 @@ const permissionColumns: ReadonlyArray<Column<Permission>> = [
         id={props.data[props.row.index].id}
         path={'permissions'}
         queryKey={QUERIES.PERMISSIONS_LIST}
+        showEdit={true}
       />
     ),
   },

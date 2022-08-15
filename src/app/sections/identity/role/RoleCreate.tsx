@@ -3,7 +3,7 @@ import {Form, Field, Formik} from 'formik'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {useNavigate} from 'react-router-dom'
 import {Role, roleInitial, roleSchema} from './models/Role'
-import {createRole} from './core/_requests'
+import {createRole} from './core/RoleRequests'
 import {submitForm, updateData} from '../../../helpers/form/FormHelper'
 
 const RoleCreate = () => {

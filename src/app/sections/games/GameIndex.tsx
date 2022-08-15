@@ -4,9 +4,9 @@ import {KTCard, QUERIES} from '../../../_metronic/helpers'
 import {TableHeader} from '../../modules/table/TableHeader'
 import {QueryRequestProvider} from '../../modules/table/QueryRequestProvider'
 import {QueryResponseProvider} from '../../modules/table/QueryResponseProvider'
-import {getGames} from './core/_requests'
+import {getGames} from './core/GameRequests'
 import {ListViewProvider} from '../../modules/table/ListViewProvider'
-import {GamesTable} from './GamesTable'
+import {GameTable} from './GameTable'
 
 const GamesList = () => {
   return (
@@ -14,13 +14,13 @@ const GamesList = () => {
       <PageTitle breadcrumbs={[]}>{'Games'}</PageTitle>
       <KTCard>
         <TableHeader name='Game' url='/games' />
-        <GamesTable />
+        <GameTable />
       </KTCard>
     </>
   )
 }
 
-const GamesIndex = () => (
+const GameIndex = () => (
   <QueryRequestProvider>
     <QueryResponseProvider id={QUERIES.GAMES_LIST} requestFunction={getGames}>
       <ListViewProvider>
@@ -30,4 +30,4 @@ const GamesIndex = () => (
   </QueryRequestProvider>
 )
 
-export {GamesIndex}
+export {GameIndex}
