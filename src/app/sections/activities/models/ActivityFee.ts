@@ -1,4 +1,4 @@
-import { ID, Response } from "../../../../_metronic/helpers";
+import {ID, Response} from '../../../../_metronic/helpers'
 
 export type ActivityFee = {
   id?: ID
@@ -9,9 +9,9 @@ export type ActivityFee = {
 
 export const initialActivityFee = (activityFee?: ActivityFee) => {
   return {
-    type: "",
-    amount: ""
-  };
-};
+    type: '',
+    amount: '',
+  }
+}
 
 export type ActivityFeeQueryResponse = Response<Array<ActivityFee>>

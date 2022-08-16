@@ -1,4 +1,4 @@
-import { ID, Response } from "../../../../_metronic/helpers";
+import {ID, Response} from '../../../../_metronic/helpers'
 
 export type ActivitySchedule = {
   id?: ID
@@ -15,13 +15,13 @@ export type ActivitySchedule = {
 export const initialActivitySchedule = (activitySchedule?: ActivitySchedule) => {
   return {
     registration_dates_start_date: activitySchedule?.registration_dates_start_date || 0,
-    registration_dates_end_date: "",
-    match_play_dates_start_date: "",
-    match_play_date_end_date: "",
+    registration_dates_end_date: '',
+    match_play_dates_start_date: '',
+    match_play_date_end_date: '',
     match_frequency_dates: [],
-    time_time_of_day: "",
-    time_timezone: ""
-  };
-};
+    time_time_of_day: '',
+    time_timezone: '',
+  }
+}
 
 export type ActivityScheduleQueryResponse = Response<Array<ActivitySchedule>>

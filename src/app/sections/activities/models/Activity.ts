@@ -1,21 +1,21 @@
-import { ID, Response } from "../../../../_metronic/helpers";
-import { Game } from "../../../models/game/Game";
-import { ActivityFee } from "./ActivityFee";
-import { ActivityLocation } from "./ActivityLocation";
-import { ActivitySchedule } from "./ActivitySchedule";
-import { Community } from "../../community/models/Community";
-import { Dispatch, SetStateAction } from "react";
-import { updateData } from "../../../helpers/form/FormHelper";
-import * as Yup from "yup";
-import { ActivityType, initialActivityType } from "./ActivityType";
-import { ActivitySettings, initialActivitySettings } from "./ActivitySettings";
+import {ID, Response} from '../../../../_metronic/helpers'
+import {Game} from '../../../models/game/Game'
+import {ActivityFee} from './ActivityFee'
+import {ActivityLocation} from './ActivityLocation'
+import {ActivitySchedule} from './ActivitySchedule'
+import {Community} from '../../community/models/Community'
+import {Dispatch, SetStateAction} from 'react'
+import {updateData} from '../../../helpers/form/FormHelper'
+import * as Yup from 'yup'
+import {ActivityType, initialActivityType} from './ActivityType'
+import {ActivitySettings, initialActivitySettings} from './ActivitySettings'
 
-export const activitySchema = Yup.object().shape({});
+export const activitySchema = Yup.object().shape({})
 
 export const initialActivity = (activity?: Activity) => {
   return {
-    title: activity?.title || "",
-    description: activity?.description || "",
+    title: activity?.title || '',
+    description: activity?.description || '',
     type: initialActivityType(activity?.type),
     status: activity?.status || 0,
     settings: initialActivitySettings(activity?.settings),
@@ -23,11 +23,11 @@ export const initialActivity = (activity?: Activity) => {
     // game: initialGame(activity?.game),
     registration_dates: {
       start_date: 0,
-      end_date: 0
+      end_date: 0,
     },
     matchplay_dates: {
       start_date: 0,
-      end_date: 0
+      end_date: 0,
     },
 
     // location: initialActivityLocation(activity?.location),
@@ -35,13 +35,13 @@ export const initialActivity = (activity?: Activity) => {
 
     additional_data: {
       teams_count: 0,
-      players_count: 0
-    }
+      players_count: 0,
+    },
 
     // team: initialActivityTeam,
     // prize: initialActivityPrize,
-  };
-};
+  }
+}
 
 export type Activity = {
   id?: ID
@@ -82,8 +82,8 @@ export function formOnChange(
   activity: Activity | undefined,
   setActivity: Dispatch<SetStateAction<Activity>>
 ) {
-  let targetName = event.target.name;
-  let targetValue = event.target.value;
+  let targetName = event.target.name
+  let targetValue = event.target.value
 
-  updateData({ [targetName]: targetValue }, setActivity, activity);
+  updateData({[targetName]: targetValue}, setActivity, activity)
 }

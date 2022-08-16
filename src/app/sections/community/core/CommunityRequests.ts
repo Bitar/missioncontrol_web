@@ -50,4 +50,11 @@ const getCommunityActivities = (id: any): Promise<ActivityQueryResponse> => {
     .then((response: AxiosResponse<ActivityQueryResponse>) => response.data)
 }
 
-export {getCommunities, getCommunityById, createCommunity, updateCommunity, getCommunityActivities, getAllCommunities}
+export {
+  getCommunities,
+  getCommunityById,
+  createCommunity,
+  updateCommunity,
+  getCommunityActivities,
+  getAllCommunities,
+}

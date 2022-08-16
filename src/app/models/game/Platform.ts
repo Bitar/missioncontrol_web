@@ -9,9 +9,9 @@ export type Platform = {
 
 export const initialPlatform = (platform?: Platform) => {
   return {
-    name: platform?.name || "",
-    abbreviation: platform?.abbreviation || "",
-    description: platform?.description || ""
+    name: platform?.name || '',
+    abbreviation: platform?.abbreviation || '',
+    description: platform?.description || '',
   }
 }
 

@@ -420,7 +420,7 @@ const CommunityForm: FC<Props> = ({method, community, setCommunity}) => {
                 <label className='d-flex flex-stack cursor-pointer mb-5'>
                   <span className='d-flex align-items-center me-2'>
                     <span className='symbol symbol-50px me-6'>
-                      <span className='symbol-label bg-light-mc-primary'>
+                      <span className='symbol-label bg-mc-primary'>
                         <i className='fab fa-react text-success fs-2x'></i>
                         <FontAwesomeIcon icon={faKey} className='text-mc-secondary fs-2x' />
                       </span>
