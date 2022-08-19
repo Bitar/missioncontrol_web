@@ -36,7 +36,6 @@ const ActivityCreate: FC = () => {
               <KTCardBody className='py-4'>
                 <div className='d-flex flex-column pt-5'>
                   <ActivityForm
-                    method={'create'}
                     activity={activity}
                     setActivity={setActivity}
                   ></ActivityForm>

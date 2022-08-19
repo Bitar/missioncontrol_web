@@ -1,33 +1,32 @@
-import {ID, Response} from '../../../../_metronic/helpers'
-import {Game} from '../../../models/game/Game'
-import {ActivityFee} from './ActivityFee'
-import {ActivityLocation} from './ActivityLocation'
-import {ActivitySchedule} from './ActivitySchedule'
-import {Community} from '../../community/models/Community'
-import {Dispatch, SetStateAction} from 'react'
-import {updateData} from '../../../helpers/form/FormHelper'
-import * as Yup from 'yup'
-import {ActivityType, initialActivityType} from './ActivityType'
-import {ActivitySettings, initialActivitySettings} from './ActivitySettings'
+import { ID, Response } from "../../../../_metronic/helpers";
+import { Game } from "../../../models/game/Game";
+import { ActivityFee } from "./ActivityFee";
+import { ActivityLocation } from "./ActivityLocation";
+import { ActivitySchedule } from "./ActivitySchedule";
+import { Community } from "../../community/models/Community";
+import { Dispatch, SetStateAction } from "react";
+import { updateData } from "../../../helpers/form/FormHelper";
+import * as Yup from "yup";
+import { ActivityType, initialActivityType } from "./ActivityType";
+import { ActivitySettings, initialActivitySettings } from "./ActivitySettings";
+import { GameMode } from "../../../models/game/GameMode";
 
-export const activitySchema = Yup.object().shape({})
+export const activitySchema = Yup.object().shape({});
 
 export const initialActivity = (activity?: Activity) => {
   return {
-    title: activity?.title || '',
-    description: activity?.description || '',
+    title: activity?.title || "",
+    description: activity?.description || "",
     type: initialActivityType(activity?.type),
     status: activity?.status || 0,
     settings: initialActivitySettings(activity?.settings),
-    // community: initialCommunity(activity?.community),
-    // game: initialGame(activity?.game),
     registration_dates: {
       start_date: 0,
-      end_date: 0,
+      end_date: 0
     },
     matchplay_dates: {
       start_date: 0,
-      end_date: 0,
+      end_date: 0
     },
 
     // location: initialActivityLocation(activity?.location),
@@ -35,13 +34,13 @@ export const initialActivity = (activity?: Activity) => {
 
     additional_data: {
       teams_count: 0,
-      players_count: 0,
-    },
+      players_count: 0
+    }
 
     // team: initialActivityTeam,
     // prize: initialActivityPrize,
-  }
-}
+  };
+};
 
 export type Activity = {
   id?: ID
@@ -53,6 +52,7 @@ export type Activity = {
   settings: ActivitySettings
   community?: Community
   game?: Game
+  game_mode?: GameMode
   registration_dates: {
     start_date: number
     end_date: number
@@ -82,8 +82,15 @@ export function formOnChange(
   activity: Activity | undefined,
   setActivity: Dispatch<SetStateAction<Activity>>
 ) {
-  let targetName = event.target.name
-  let targetValue = event.target.value
+  let targetName = event.target.name;
+  let targetValue = event.target.value;
 
-  updateData({[targetName]: targetValue}, setActivity, activity)
+  if (targetName === "is_cross_play") {
+    updateData({
+      settings: { ...activity?.settings, ...{ "is_cross_play": !activity?.settings?.is_cross_play } }
+    }, setActivity, activity);
+  } else {
+    updateData({ [targetName]: targetValue }, setActivity, activity);
+  }
+
 }
