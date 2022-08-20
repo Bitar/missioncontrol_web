@@ -1,15 +1,15 @@
 import React, {FC, useState} from 'react'
-import {updateData} from './FormHelper'
+import {updateData} from '../../../../helpers/form/FormHelper'
 import moment, {Moment} from 'moment'
 import {SingleDatePicker} from 'react-dates'
-import {User} from '../../sections/identity/user/models/User'
+import {User} from '../models/User'
 
 type Props = {
   user: User | undefined
   setUser: any
 }
 
-const DatePickerMC: FC<Props> = ({user, setUser}) => {
+const DatePickerDoB: FC<Props> = ({user, setUser}) => {
   const [date, setDate] = useState<Moment | null>(null)
   const [focusedInput, setFocusedInput] = useState<boolean>(false)
 
@@ -89,4 +89,4 @@ const DatePickerMC: FC<Props> = ({user, setUser}) => {
   )
 }
 
-export {DatePickerMC}
+export {DatePickerDoB}

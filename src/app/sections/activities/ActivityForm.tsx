@@ -58,6 +58,8 @@ const ActivityForm: FC<Props> = ({ activity, setActivity }) => {
         <SelectMC label={"Community"} api={getAllCommunities} onChangeData={handleChange} />
       </div>
 
+      <div className="separator separator-dashed my-6"></div>
+
       <Schedule activity={activity} setActivity={setActivity} />
 
       <div className="separator separator-dashed my-6"></div>

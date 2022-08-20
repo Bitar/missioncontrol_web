@@ -3,7 +3,7 @@ import React, {FC, useEffect, useState} from 'react'
 import {User} from './models/User'
 import {getRoles} from '../role/core/RoleRequests'
 import {updateData} from '../../../helpers/form/FormHelper'
-import {DatePickerMC} from '../../../helpers/form/DatePickerMC'
+import {DatePickerDoB} from './partials/DatePickerDoB'
 import Select from 'react-select'
 
 type Props = {
@@ -177,7 +177,7 @@ const UserForm: FC<Props> = ({method, user, setUser}) => {
       <div className='row mb-6'>
         <label className='col-lg-4 col-form-label fw-bold fs-6'>Date of Birth</label>
         <div className='col-lg-8 fv-row'>
-          <DatePickerMC user={user} setUser={setUser} />
+          <DatePickerDoB user={user} setUser={setUser} />
         </div>
       </div>
 

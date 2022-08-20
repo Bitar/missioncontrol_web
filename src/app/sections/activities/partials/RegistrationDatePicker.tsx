@@ -21,17 +21,14 @@ const RegistrationDatePicker: FC<Props> = ({ activity, setActivity }) => {
   const onDateChange = (startDate: Moment | null, endDate: Moment | null) => {
     setStartDate(startDate);
     setEndDate(endDate);
-    // updateData(
-    //   {
-    //     registration_dates: {...activity?.registration_dates, ...{date_of_birth: date}},
-    //   },
-    //   setActivity,
-    //   activity
-    // )
+    updateData(
+      {
+        registration_dates: {...activity?.registration_dates, ...{'start_date': startDate, 'end_date': endDate}},
+      },
+      setActivity,
+      activity
+    )
   };
-
-  const isOutsideRange = (day: any) =>
-    day.isAfter(moment()) || day.isBefore(moment().subtract(70, "years"));
 
   return (
     <>
@@ -47,49 +44,8 @@ const RegistrationDatePicker: FC<Props> = ({ activity, setActivity }) => {
           onFocusChange={handleFocusChange} // PropTypes.func.isRequired,
           keepOpenOnDateSelect={true}
           hideKeyboardShortcutsPanel={true}
-          openDirection={'up'}
         />
       </div>
-      {/*<SingleDatePicker*/}
-      {/*  // date={date ?? (user?.meta?.date_of_birth ? moment(user?.meta?.date_of_birth * 1000) : date)} // momentPropTypes.momentObj or null*/}
-      {/*  placeholder={'Date of Birth'}*/}
-      {/*  onDateChange={onDateChange} // PropTypes.func.isRequired*/}
-      {/*  focused={focusedInput} // PropTypes.bool*/}
-      {/*  onFocusChange={handleFocusChange} // PropTypes.func.isRequired*/}
-      {/*  id='your_unique_id' // PropTypes.string.isRequired,*/}
-      {/*  numberOfMonths={1}*/}
-      {/*  openDirection={'up'}*/}
-      {/*  hideKeyboardShortcutsPanel={true}*/}
-      {/*  isOutsideRange={isOutsideRange}*/}
-      {/*  block*/}
-      {/*  small={true}*/}
-      {/*  renderMonthElement={({month, onMonthSelect, onYearSelect}) => (*/}
-      {/*    <div style={{display: 'flex', justifyContent: 'center', marginTop: '-4px'}}>*/}
-      {/*      <div>*/}
-      {/*        <select*/}
-      {/*          className={'form-select form-select-sm py-2 form-select-transparent'}*/}
-      {/*          value={month.month()}*/}
-      {/*          onChange={(e) => onMonthSelect(month, e.target.value)}*/}
-      {/*        >*/}
-      {/*          {moment.months().map((label, value) => (*/}
-      {/*            <option value={value} key={value}>*/}
-      {/*              {label}*/}
-      {/*            </option>*/}
-      {/*          ))}*/}
-      {/*        </select>*/}
-      {/*      </div>*/}
-      {/*      <div>*/}
-      {/*        <select*/}
-      {/*          className={'form-select form-select-sm py-2 form-select-transparent'}*/}
-      {/*          value={month.year()}*/}
-      {/*          onChange={(e) => onYearSelect(month, e.target.value)}*/}
-      {/*        >*/}
-      {/*          {returnYears()}*/}
-      {/*        </select>*/}
-      {/*      </div>*/}
-      {/*    </div>*/}
-      {/*  )}*/}
-      {/*/>*/}
     </>
   );
 };
