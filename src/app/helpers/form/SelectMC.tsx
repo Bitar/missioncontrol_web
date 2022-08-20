@@ -1,6 +1,6 @@
-import React, { FC, useEffect, useState } from "react";
-import Select from "react-select";
-import { ErrorMessage } from "formik";
+import React, {FC, useEffect, useState} from 'react'
+import Select from 'react-select'
+import {ErrorMessage} from 'formik'
 
 type Props = {
   label: string
@@ -9,50 +9,50 @@ type Props = {
   data?: any
 }
 
-const SelectMC: FC<Props> = ({ label, onChangeData, api, data }) => {
-  const [options, setOptions] = useState<any[]>([]);
-  const [optionSelected, setOptionSelected] = useState<any | null>(null);
-  const [optionsLoaded, setOptionsLoaded] = useState<boolean>(false);
+const SelectMC: FC<Props> = ({label, onChangeData, api, data}) => {
+  const [options, setOptions] = useState<any[]>([])
+  const [optionSelected, setOptionSelected] = useState<any | null>(null)
+  const [optionsLoaded, setOptionsLoaded] = useState<boolean>(false)
 
   useEffect(() => {
     if (options.length === 0) {
       if (api) {
         api().then((response: any) => {
-          let options: any[] = [];
-          response?.data?.forEach(function(value: any) {
+          let options: any[] = []
+          response?.data?.forEach(function (value: any) {
             let option = {
               value: value.id,
               label: value.name || value.title,
               isSelected: false,
-              original: value
-            };
+              original: value,
+            }
 
-            options.push(option);
-          });
+            options.push(option)
+          })
 
-          setOptions(options);
-          setOptionsLoaded(true);
-        });
+          setOptions(options)
+          setOptionsLoaded(true)
+        })
       } else if (data) {
-        console.log("in data");
-        console.log(data);
+        console.log('in data')
+        console.log(data)
       } else {
-        console.log("in else");
+        console.log('in else')
       }
     }
-  }, []);
+  }, [options, api, data])
 
   const handleChange = (selectedOption: any) => {
-    setOptionSelected(selectedOption);
+    setOptionSelected(selectedOption)
 
-    let object = selectedOption.original;
-    onChangeData(object);
-  };
+    let object = selectedOption.original
+    onChangeData(object)
+  }
 
   return (
     <>
-      <label className="col-lg-4 col-form-label required fw-bold fs-6">{label}</label>
-      <div className="col-lg-8 fv-row">
+      <label className='col-lg-4 col-form-label required fw-bold fs-6'>{label}</label>
+      <div className='col-lg-8 fv-row'>
         {optionsLoaded && (
           <Select
             isSearchable
@@ -61,11 +61,11 @@ const SelectMC: FC<Props> = ({ label, onChangeData, api, data }) => {
             onChange={handleChange}
           />
         )}
-        <div className="text-danger mt-2">
-          <ErrorMessage name="description" />
+        <div className='text-danger mt-2'>
+          <ErrorMessage name='description' />
         </div>
       </div>
     </>
-  );
-};
-export { SelectMC };
+  )
+}
+export {SelectMC}

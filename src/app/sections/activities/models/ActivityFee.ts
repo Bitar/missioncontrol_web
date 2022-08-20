@@ -3,14 +3,14 @@ import {ID, Response} from '../../../../_metronic/helpers'
 export type ActivityFee = {
   id?: ID
   activity_id?: ID
-  type: string
-  amount: string
+  type: number
+  amount: number
 }
 
 export const initialActivityFee = (activityFee?: ActivityFee) => {
   return {
-    type: '',
-    amount: '',
+    type: activityFee?.type || 1,
+    amount: activityFee?.amount || 0,
   }
 }
 

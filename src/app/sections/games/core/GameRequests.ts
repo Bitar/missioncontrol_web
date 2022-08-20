@@ -2,7 +2,7 @@ import axios, {AxiosResponse} from 'axios'
 import {Game, GameQueryResponse} from '../../../models/game/Game'
 import {IgdbQueryResponse} from '../../../models/game/Igdb'
 import {Response} from '../../../../_metronic/helpers'
-import { GameModeQueryResponse } from "../../../models/game/GameMode";
+import {GameModeQueryResponse} from '../../../models/game/GameMode'
 
 const API_URL = process.env.REACT_APP_API_URL
 const GET_GAMES_URL = `${API_URL}/games`
@@ -20,7 +20,8 @@ const getGames = (query: string): Promise<GameQueryResponse> => {
 }
 
 const getAllGames = (): Promise<GameQueryResponse> => {
-  return axios.get(`${GET_GAMES_URL}/all`)
+  return axios
+    .get(`${GET_GAMES_URL}/all`)
     .then((response: AxiosResponse<GameQueryResponse>) => response.data)
 }
 
@@ -46,7 +47,8 @@ const updateGame = (id: any, game: Game): Promise<Game | undefined> => {
 }
 
 const getAllGameModes = (gameId: any): Promise<GameModeQueryResponse> => {
-  return axios.get(`${GET_GAMES_URL}/${gameId}/modes`)
+  return axios
+    .get(`${GET_GAMES_URL}/${gameId}/modes`)
     .then((response: AxiosResponse<GameModeQueryResponse>) => response.data)
 }
 

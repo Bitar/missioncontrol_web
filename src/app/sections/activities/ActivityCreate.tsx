@@ -35,10 +35,7 @@ const ActivityCreate: FC = () => {
             <Form onChange={handleOnChange} className='form'>
               <KTCardBody className='py-4'>
                 <div className='d-flex flex-column pt-5'>
-                  <ActivityForm
-                    activity={activity}
-                    setActivity={setActivity}
-                  ></ActivityForm>
+                  <ActivityForm activity={activity} setActivity={setActivity}></ActivityForm>
                 </div>
               </KTCardBody>
               <FormAction text={'Add Activity'} isSubmitting={isSubmitting} />

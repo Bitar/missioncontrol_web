@@ -4,41 +4,46 @@
 @import 'react-dates/lib/css/_datepicker.css';
 
 .DateInput_input__focused {
-  border-bottom-color: $mc-secondary;
+  border-bottom-color: #ff8e32;  //#008489
 }
 
 .CalendarDay__default:hover {
-  background: $mc-secondary; //background
-  border: 1px solid darken($mc-secondary, 5); //default styles include a border
+  background: #fff2e4; //background #e4e7e7
+  border: 1px solid #fff2e4; //default styles include a border #e4e7e7
   color: white; //text
 }
 
-// Will edit everything selected including everything between a range of dates
+//// Will edit everything selected including everything between a range of dates
 .CalendarDay__selected_span {
-  background: $mc-primary; //background
-  border: 1px solid darken($mc-primary, 5); //default styles include a border
+  background: #ffb974; //background #66e2da
+  border: 1px solid #ffaa55; //33dacd
   color: white; //text
 }
 
-// Will edit selected date or the endpoints of a range of dates
-.CalendarDay__selected {
-  background: $mc-primary;
-  border-color: darken($mc-primary, 5);
+.CalendarDay__selected_span:active,
+.CalendarDay__selected_span:hover {
+  background: #ffaa55; //background #33dacd
+  border: 1px solid #ffaa55; //default styles include a border 33dacd
+  color: white; //text
+}
+
+
+//// Will edit selected date or the endpoints of a range of dates
+.CalendarDay__selected,
+ .CalendarDay__selected:hover,
+ .CalendarDay__selected:active {
+  background: $mc-secondary; //#00a699
+  border-color: $mc-secondary; //#00a699
   color: white;
 }
 
-// Will edit when hovered over. _span style also has this property
-.CalendarDay__selected:hover {
-  background: darken($mc-primary, 5);
-  border-color: darken($mc-primary, 10);
-  color: white;
-}
-
-// Will edit when the second date (end date) in a range of dates
-// is not yet selected. Edits the dates between your mouse and said date
+//// Will edit when the second date (end date) in a range of dates
+//// is not yet selected. Edits the dates between your mouse and said date
 .CalendarDay__hovered_span:hover,
 .CalendarDay__hovered_span {
-  background: darken($mc-primary, 15);
+  background: #ffdfbf; //#b2f1ec
+  border-color: #ffcd9b; //#80e8e0
+  color: #ffffff;
 }
 
 // Custom Scroll(Perfect Scrollbar)

@@ -1,6 +1,6 @@
 import {ID, Response} from '../../../_metronic/helpers'
 import {Platform} from './Platform'
-import { GameMode } from "./GameMode";
+import {GameMode} from './GameMode'
 
 export type Game = {
   id?: ID
@@ -9,7 +9,7 @@ export type Game = {
   is_featured: boolean
   is_cross_play: boolean
   image: string
-  platforms: Platform[],
+  platforms: Platform[]
   game_modes?: GameMode[]
 }
 
@@ -22,7 +22,7 @@ export const initialGame = (game?: Game) => {
     description: game?.description || '',
     image: game?.image || '',
     platforms: game?.platforms || [],
-    game_modes: game?.game_modes || []
+    game_modes: game?.game_modes || [],
   }
 }
 
