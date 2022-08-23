@@ -1,0 +1,24 @@
+$aside-config: (
+        z-index: 101,
+  // Aside's z-index property
+        transition-speed: 0.3s,
+  // transition speed
+        padding-x: 25px,
+        menu-indention: 0.75rem,
+        bg-color: $mc-primary,
+        bg-color-dark: #1e1e2d,
+        logo-bg-color: darken(#1e1e2d, 2%),
+        scrollbar-color: #3b3b64,
+        scrollbar-color-dark: $gray-200-dark,
+        scrollbar-hover-color: lighten(#3b3b64, 3%),
+        scrollbar-hover-color-dark: $gray-300-dark,
+        width: 265px,
+  // Aside width for desktop mode
+        minimized-width: 75px,
+  // Aside minimized width for desktop mode
+        box-shadow: 0 0 28px 0 rgba(82, 63, 105, 0.05),
+        box-shadow-dark: none,
+        minimized-hover-box-shadow: 5px 0px 10px rgba(70, 78, 95, 0.075),
+        minimized-hover-box-shadow-dark: none,
+);
+

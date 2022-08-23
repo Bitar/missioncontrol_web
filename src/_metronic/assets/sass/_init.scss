@@ -118,4 +118,5 @@ $theme-light-colors: map-merge(
 @import './core/vendors/plugins/variables';
 
 // Custom layout variables
+@import 'layout/variables.custom';
 @import 'layout/variables';

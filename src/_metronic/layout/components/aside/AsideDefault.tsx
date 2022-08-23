@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC, useRef} from 'react'
+import React, {FC, useRef} from 'react'
 import {Link} from 'react-router-dom'
 import clsx from 'clsx'
 import {useLayout} from '../../core'
@@ -19,10 +19,12 @@ const AsideDefault: FC<React.PropsWithChildren<unknown>> = () => {
     }, 300)
   }
 
+  let theme = localStorage.getItem('kt_theme_mode_menu')
+
   return (
     <div
       id='kt_aside'
-      className={clsx('aside', classes.aside.join(' '))}
+      className={clsx('aside', classes.aside.join(' '), `aside-${theme}`)}
       data-kt-drawer='true'
       data-kt-drawer-name='aside'
       data-kt-drawer-activate='{default: true, lg: false}'
@@ -35,7 +37,7 @@ const AsideDefault: FC<React.PropsWithChildren<unknown>> = () => {
       {/* begin::Brand */}
       <div className='aside-logo flex-column-auto' id='kt_aside_logo'>
         {/* begin::Logo */}
-        {aside.theme === 'dark' && (
+        {theme === 'dark' && (
           <Link to='/dashboard'>
             <img
               alt='Logo'
@@ -44,7 +46,7 @@ const AsideDefault: FC<React.PropsWithChildren<unknown>> = () => {
             />
           </Link>
         )}
-        {aside.theme === 'light' && (
+        {theme === 'light' && (
           <Link to='/dashboard'>
             <img
               alt='Logo'

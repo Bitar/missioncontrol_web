@@ -11,6 +11,7 @@ import {
   IPageTitle,
 } from './LayoutModels'
 import {DefaultLayoutConfig} from './DefaultLayoutConfig'
+import { ThemeModeComponent } from "../../assets/ts/layout";
 
 const LAYOUT_CONFIG_KEY = process.env.REACT_APP_BASE_LAYOUT_CONFIG_KEY || 'LayoutConfig'
 
@@ -198,9 +199,11 @@ export class LayoutSetup {
       return
     }
 
+    // let theme = localStorage.getItem('kt_theme_mode_menu')
+
     // Enable Aside
     document.body.classList.add('aside-enabled')
-    LayoutSetup.classes.aside.push(`aside-${config.theme}`)
+    // LayoutSetup.classes.aside.push(`aside-${theme}`)
 
     // Fixed Aside
     if (config.fixed) {
