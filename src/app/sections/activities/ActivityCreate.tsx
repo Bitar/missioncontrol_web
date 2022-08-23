@@ -8,7 +8,7 @@ import {Form, Formik} from 'formik'
 import {FormAction} from '../../helpers/form/FormAction'
 import {ActivityForm} from './ActivityForm'
 
-const ActivityCreate: FC = () => {
+const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
   const [activity, setActivity] = useState<Activity>(initialActivity)
   const navigate = useNavigate()
 

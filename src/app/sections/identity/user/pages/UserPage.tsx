@@ -21,7 +21,7 @@ const usersBreadCrumbs: Array<PageLink> = [
   },
 ]
 
-const UserPage: React.FC = () => {
+const UserPage: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <Routes>
       <Route

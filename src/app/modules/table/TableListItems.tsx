@@ -6,7 +6,7 @@ type Props = {
   className: string
 }
 
-const TablesWidget13: React.FC<Props> = ({className}) => {
+const TablesWidget13: React.FC<React.PropsWithChildren<Props>> = ({className}) => {
   return (
     <div className={`card ${className}`}>
       {/* begin::Header */}
@@ -24,7 +24,7 @@ const TablesWidget13: React.FC<Props> = ({className}) => {
             data-kt-menu-placement='bottom-end'
             data-kt-menu-flip='top-end'
           >
-            <KTSVG path='/media/icons/duotune/general/gen024.svg' className='svg-icon-2' />
+            <KTSVG path='/media/icons/duotune/gen024.svg' className='svg-icon-2' />
           </button>
           {/* begin::Menu 2 */}
           <div
@@ -191,16 +191,16 @@ const TablesWidget13: React.FC<Props> = ({className}) => {
                     href='#'
                     className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
                   >
-                    <KTSVG path='/media/icons/duotune/general/gen019.svg' className='svg-icon-3' />
+                    <KTSVG path='/media/icons/duotune/gen019.svg' className='svg-icon-3' />
                   </a>
                   <a
                     href='#'
                     className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
                   >
-                    <KTSVG path='/media/icons/duotune/art/art005.svg' className='svg-icon-3' />
+                    <KTSVG path='/media/icons/duotune/art005.svg' className='svg-icon-3' />
                   </a>
                   <a href='#' className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'>
-                    <KTSVG path='/media/icons/duotune/general/gen027.svg' className='svg-icon-3' />
+                    <KTSVG path='/media/icons/duotune/gen027.svg' className='svg-icon-3' />
                   </a>
                 </td>
               </tr>
@@ -244,16 +244,16 @@ const TablesWidget13: React.FC<Props> = ({className}) => {
                     href='#'
                     className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
                   >
-                    <KTSVG path='/media/icons/duotune/general/gen019.svg' className='svg-icon-3' />
+                    <KTSVG path='/media/icons/duotune/gen019.svg' className='svg-icon-3' />
                   </a>
                   <a
                     href='#'
                     className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
                   >
-                    <KTSVG path='/media/icons/duotune/art/art005.svg' className='svg-icon-3' />
+                    <KTSVG path='/media/icons/duotune/art005.svg' className='svg-icon-3' />
                   </a>
                   <a href='#' className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'>
-                    <KTSVG path='/media/icons/duotune/general/gen027.svg' className='svg-icon-3' />
+                    <KTSVG path='/media/icons/duotune/gen027.svg' className='svg-icon-3' />
                   </a>
                 </td>
               </tr>
@@ -295,16 +295,16 @@ const TablesWidget13: React.FC<Props> = ({className}) => {
                     href='#'
                     className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
                   >
-                    <KTSVG path='/media/icons/duotune/general/gen019.svg' className='svg-icon-3' />
+                    <KTSVG path='/media/icons/duotune/gen019.svg' className='svg-icon-3' />
                   </a>
                   <a
                     href='#'
                     className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
                   >
-                    <KTSVG path='/media/icons/duotune/art/art005.svg' className='svg-icon-3' />
+                    <KTSVG path='/media/icons/duotune/art005.svg' className='svg-icon-3' />
                   </a>
                   <a href='#' className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'>
-                    <KTSVG path='/media/icons/duotune/general/gen027.svg' className='svg-icon-3' />
+                    <KTSVG path='/media/icons/duotune/gen027.svg' className='svg-icon-3' />
                   </a>
                 </td>
               </tr>
@@ -346,16 +346,16 @@ const TablesWidget13: React.FC<Props> = ({className}) => {
                     href='#'
                     className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
                   >
-                    <KTSVG path='/media/icons/duotune/general/gen019.svg' className='svg-icon-3' />
+                    <KTSVG path='/media/icons/duotune/gen019.svg' className='svg-icon-3' />
                   </a>
                   <a
                     href='#'
                     className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
                   >
-                    <KTSVG path='/media/icons/duotune/art/art005.svg' className='svg-icon-3' />
+                    <KTSVG path='/media/icons/duotune/art005.svg' className='svg-icon-3' />
                   </a>
                   <a href='#' className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'>
-                    <KTSVG path='/media/icons/duotune/general/gen027.svg' className='svg-icon-3' />
+                    <KTSVG path='/media/icons/duotune/gen027.svg' className='svg-icon-3' />
                   </a>
                 </td>
               </tr>
@@ -397,16 +397,16 @@ const TablesWidget13: React.FC<Props> = ({className}) => {
                     href='#'
                     className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
                   >
-                    <KTSVG path='/media/icons/duotune/general/gen019.svg' className='svg-icon-3' />
+                    <KTSVG path='/media/icons/duotune/gen019.svg' className='svg-icon-3' />
                   </a>
                   <a
                     href='#'
                     className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
                   >
-                    <KTSVG path='/media/icons/duotune/art/art005.svg' className='svg-icon-3' />
+                    <KTSVG path='/media/icons/duotune/art005.svg' className='svg-icon-3' />
                   </a>
                   <a href='#' className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'>
-                    <KTSVG path='/media/icons/duotune/general/gen027.svg' className='svg-icon-3' />
+                    <KTSVG path='/media/icons/duotune/gen027.svg' className='svg-icon-3' />
                   </a>
                 </td>
               </tr>

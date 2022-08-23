@@ -12,7 +12,7 @@ export const initialCheckoutModal: CheckoutModalContextProps = {
 
 const CheckoutModalContext = createContext<CheckoutModalContextProps>(initialCheckoutModal)
 
-const CheckoutModalProvider: FC = ({children}) => {
+const CheckoutModalProvider: FC<React.PropsWithChildren<unknown>> = ({children}) => {
   const [showCheckout, setShowCheckout] = useState<boolean>(initialCheckoutModal.showCheckout)
 
   return (

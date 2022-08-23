@@ -9,10 +9,10 @@ type Props = {
   handleClose: () => void
 }
 
-const SearchModal: React.FC<Props> = ({show, handleClose}) => {
+const SearchModal: React.FC<React.PropsWithChildren<Props>> = ({show, handleClose}) => {
   return (
     <Modal
-      className='bg-white'
+      className='bg-body'
       id='kt_header_search_modal'
       aria-hidden='true'
       dialogClassName='modal-fullscreen h-auto'
@@ -23,7 +23,7 @@ const SearchModal: React.FC<Props> = ({show, handleClose}) => {
           <div className='modal-header d-flex justify-content-end border-0'>
             {/* begin::Close */}
             <div className='btn btn-icon btn-sm btn-light-primary ms-2' onClick={handleClose}>
-              <KTSVG className='svg-icon-2' path='/media/icons/duotune/arrows/arr061.svg' />
+              <KTSVG className='svg-icon-2' path='/media/icons/duotune/arr061.svg' />
             </div>
             {/* end::Close */}
           </div>
@@ -59,7 +59,7 @@ const SearchModal: React.FC<Props> = ({show, handleClose}) => {
                               )}')`,
                             }}
                           />
-                          <div className='overlay-layer bg-white bg-opacity-50'>
+                          <div className='overlay-layer bg-body bg-opacity-50'>
                             <a href='#' className='btn btn-sm fw-bold btn-primary'>
                               Explore
                             </a>
@@ -76,7 +76,7 @@ const SearchModal: React.FC<Props> = ({show, handleClose}) => {
                               )}')`,
                             }}
                           />
-                          <div className='overlay-layer bg-white bg-opacity-50'>
+                          <div className='overlay-layer bg-body bg-opacity-50'>
                             <a href='#' className='btn btn-sm fw-bold btn-primary'>
                               Explore
                             </a>
@@ -95,7 +95,7 @@ const SearchModal: React.FC<Props> = ({show, handleClose}) => {
                               )}')`,
                             }}
                           />
-                          <div className='overlay-layer bg-white bg-opacity-50'>
+                          <div className='overlay-layer bg-body bg-opacity-50'>
                             <a href='#' className='btn btn-sm fw-bold btn-primary'>
                               Explore
                             </a>
@@ -116,7 +116,7 @@ const SearchModal: React.FC<Props> = ({show, handleClose}) => {
                           )}')`,
                         }}
                       ></div>
-                      <div className='overlay-layer bg-white bg-opacity-50'>
+                      <div className='overlay-layer bg-body bg-opacity-50'>
                         <a href='#' className='btn btn-sm fw-bold btn-primary'>
                           Explore
                         </a>

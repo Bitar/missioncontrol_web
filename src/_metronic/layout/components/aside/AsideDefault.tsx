@@ -1,15 +1,23 @@
 /* eslint-disable react/jsx-no-target-blank */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {FC} from 'react'
+import {FC, useRef} from 'react'
 import {Link} from 'react-router-dom'
 import clsx from 'clsx'
 import {useLayout} from '../../core'
 import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {AsideMenu} from './AsideMenu'
 
-const AsideDefault: FC = () => {
+const AsideDefault: FC<React.PropsWithChildren<unknown>> = () => {
   const {config, classes} = useLayout()
+  const asideRef = useRef<HTMLDivElement | null>(null)
   const {aside} = config
+
+  const minimize = () => {
+    asideRef.current?.classList.add('animating')
+    setTimeout(() => {
+      asideRef.current?.classList.remove('animating')
+    }, 300)
+  }
 
   return (
     <div
@@ -22,6 +30,7 @@ const AsideDefault: FC = () => {
       data-kt-drawer-width="{default:'200px', '300px': '250px'}"
       data-kt-drawer-direction='start'
       data-kt-drawer-toggle='#kt_aside_mobile_toggle'
+      ref={asideRef}
     >
       {/* begin::Brand */}
       <div className='aside-logo flex-column-auto' id='kt_aside_logo'>
@@ -30,9 +39,8 @@ const AsideDefault: FC = () => {
           <Link to='/dashboard'>
             <img
               alt='Logo'
-              className='logo'
+              className='h-15px logo'
               src={toAbsoluteUrl('/media/logos/mc_logo_aside.png')}
-              height={'15px !important'}
             />
           </Link>
         )}
@@ -40,9 +48,8 @@ const AsideDefault: FC = () => {
           <Link to='/dashboard'>
             <img
               alt='Logo'
-              className='logo'
+              className='h-15px logo'
               src={toAbsoluteUrl('/media/logos/mc_logo_aside.png')}
-              height={'15px !important'}
             />
           </Link>
         )}
@@ -57,11 +64,9 @@ const AsideDefault: FC = () => {
             data-kt-toggle-state='active'
             data-kt-toggle-target='body'
             data-kt-toggle-name='aside-minimize'
+            onClick={minimize}
           >
-            <KTSVG
-              path={'/media/icons/duotune/arrows/arr080.svg'}
-              className={'svg-icon-1 rotate-180'}
-            />
+            <KTSVG path={'/media/icons/duotune/arr080.svg'} className={'svg-icon-1 rotate-180'} />
           </div>
         )}
         {/* end::Aside toggler */}
@@ -77,7 +82,7 @@ const AsideDefault: FC = () => {
       {/* begin::Footer */}
       <div className='aside-footer flex-column-auto pt-5 pb-7 px-5' id='kt_aside_footer'>
         <Link to={'/marketing-support'} className='btn btn-custom btn-primary w-100'>
-          <KTSVG path='/media/icons/duotune/general/gen005.svg' className='svg-icon-2' />
+          <KTSVG path='/media/icons/duotune/gen005.svg' className='svg-icon-2' />
           <span className='btn-label'>Marketing & Support</span>
         </Link>
       </div>

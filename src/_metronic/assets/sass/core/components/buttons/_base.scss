@@ -4,6 +4,10 @@
 
 // Button
 .btn {
+  --#{$prefix}btn-color: var(--kt-body-color);
+  --#{$prefix}btn-bg: transparent;
+  --#{$prefix}btn-border-color: transparent;
+
   // Reset outline
   outline: none !important;
 
@@ -39,14 +43,14 @@
     font-weight: $btn-font-weight;
   }
 
-  // Outline dashed
-  &.btn-outline-dashed {
-    border: 1px dashed $border-dashed-color;
+  // Outline
+  &.btn-outline:not(.btn-outline-dashed) {
+    border: 1px solid var(--kt-input-border-color);
   }
 
-  // Outline default
-  &.btn-outline-default {
-    border: 1px solid $input-border-color;
+  // Outline dashed
+  &.btn-outline-dashed {
+    border: 1px dashed var(--kt-input-border-color);
   }
 
   // Flush

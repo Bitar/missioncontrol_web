@@ -9,7 +9,7 @@ type Props = {
   setUser: any
 }
 
-const DatePickerDoB: FC<Props> = ({user, setUser}) => {
+const DatePickerDoB: FC<React.PropsWithChildren<Props>> = ({user, setUser}) => {
   const [date, setDate] = useState<Moment | null>(null)
   const [focusedInput, setFocusedInput] = useState<boolean>(false)
 

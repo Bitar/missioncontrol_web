@@ -9,7 +9,7 @@ type Props = {
   dExtraText?: string
 }
 
-const TextImageCell: FC<Props> = ({dImage, dText, dExtraText, link}) => {
+const TextImageCell: FC<React.PropsWithChildren<Props>> = ({dImage, dText, dExtraText, link}) => {
   return (
     <div className='d-flex align-items-center'>
       <div className='symbol symbol-circle symbol-50px overflow-hidden me-3'>

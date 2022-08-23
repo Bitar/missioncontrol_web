@@ -1,7 +1,7 @@
-import React, {useRef, useEffect} from 'react'
+import {FC, useRef, useEffect} from 'react'
 import {useLocation} from 'react-router'
 import clsx from 'clsx'
-import {checkIsActive, KTSVG} from '../../../helpers'
+import {checkIsActive, KTSVG, WithChildren} from '../../../helpers'
 
 type Props = {
   to: string
@@ -15,7 +15,7 @@ type Props = {
   isMega?: boolean
 }
 
-const MenuInnerWithSub: React.FC<Props> = ({
+const MenuInnerWithSub: FC<React.PropsWithChildren<Props & WithChildren>> = ({
   children,
   to,
   title,

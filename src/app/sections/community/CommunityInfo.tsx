@@ -7,7 +7,7 @@ type Props = {
   community: Community | undefined
 }
 
-const CommunityInfo: FC<Props> = ({community}) => {
+const CommunityInfo: FC<React.PropsWithChildren<Props>> = ({community}) => {
   const location = useLocation()
   const [image, setImage] = useState<string>('')
 
@@ -51,7 +51,7 @@ const CommunityInfo: FC<Props> = ({community}) => {
                       <>
                         <div className='d-flex align-items-center text-gray-400 me-5 mb-2'>
                           <KTSVG
-                            path='/media/icons/duotune/communication/com006.svg'
+                            path='/media/icons/duotune/com006.svg'
                             className='svg-icon-4 me-1'
                           />
                           {community?.contact?.name}
@@ -62,7 +62,7 @@ const CommunityInfo: FC<Props> = ({community}) => {
                           className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'
                         >
                           <KTSVG
-                            path='/media/icons/duotune/communication/com011.svg'
+                            path='/media/icons/duotune/com011.svg'
                             className='svg-icon-4 me-1'
                           />
                           {community?.contact?.email}
@@ -72,10 +72,7 @@ const CommunityInfo: FC<Props> = ({community}) => {
 
                     {community?.address && (
                       <div className='d-flex align-items-center text-gray-400 mb-2'>
-                        <KTSVG
-                          path='/media/icons/duotune/general/gen018.svg'
-                          className='svg-icon-4 me-1'
-                        />
+                        <KTSVG path='/media/icons/duotune/gen018.svg' className='svg-icon-4 me-1' />
                         {community?.address?.city}
                       </div>
                     )}
@@ -83,7 +80,7 @@ const CommunityInfo: FC<Props> = ({community}) => {
                 </div>
                 {/*<div className='card-toolbar'>*/}
                 {/*  <Link className='btn btn-sm btn-primary' to='/activities/create'>*/}
-                {/*    <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2' />*/}
+                {/*    <KTSVG path='/media/icons/duotune/arr075.svg' className='svg-icon-2' />*/}
                 {/*    New Activity*/}
                 {/*  </Link>*/}
                 {/*</div>*/}

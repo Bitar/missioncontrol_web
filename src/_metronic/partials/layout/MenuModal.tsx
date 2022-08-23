@@ -10,7 +10,7 @@ type Props = {
   handleClose: () => void
 }
 
-const MenuModal: React.FC<Props> = ({show, handleClose, children}) => {
+const MenuModal: React.FC<React.PropsWithChildren<Props>> = ({show, handleClose, children}) => {
   const location = useLocation()
   const isFirstRef = useRef(true)
   useEffect(() => {
@@ -47,7 +47,7 @@ const MenuModal: React.FC<Props> = ({show, handleClose, children}) => {
 
           {/* begin::Close */}
           <div className='btn btn-icon btn-sm btn-light-primary ms-2' onClick={handleClose}>
-            <KTSVG path='/media/icons/duotune/arrows/arr061.svg' className='svg-icon-2' />
+            <KTSVG path='/media/icons/duotune/arr061.svg' className='svg-icon-2' />
           </div>
           {/* end::Close */}
         </div>

@@ -19,7 +19,7 @@ const activityBreadCrumbs: Array<PageLink> = [
   },
 ]
 
-const ActivityPage: FC = () => {
+const ActivityPage: FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <Routes>
       <Route

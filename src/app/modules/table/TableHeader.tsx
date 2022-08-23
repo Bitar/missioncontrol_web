@@ -1,5 +1,5 @@
 import {TableListToolbar} from './TableListToolbar'
-import {FC} from 'react'
+import React, {FC} from 'react'
 import {TableSearchComponent} from './TableSearchComponent'
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
   showAdd?: boolean
 }
 
-const TableHeader: FC<Props> = ({name, url, showAdd = true}) => {
+const TableHeader: FC<React.PropsWithChildren<Props>> = ({name, url, showAdd = true}) => {
   return (
     <div className='card-header border-0 pt-6'>
       <TableSearchComponent />

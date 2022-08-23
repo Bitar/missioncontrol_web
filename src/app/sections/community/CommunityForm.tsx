@@ -1,11 +1,10 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
 import {ErrorMessage, Field} from 'formik'
 import {updateData} from '../../helpers/form/FormHelper'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faEnvelope, faKey} from '@fortawesome/free-solid-svg-icons'
 import {Community} from './models/Community'
 import {getCountries, getStates} from '../misc/core/_requests'
 import Select from 'react-select'
+import clsx from 'clsx'
 
 type Props = {
   method: string
@@ -16,7 +15,7 @@ type Props = {
 let statesOptions: any[] = []
 let countriesOptions: any[] = []
 
-const CommunityForm: FC<Props> = ({method, community, setCommunity}) => {
+const CommunityForm: FC<React.PropsWithChildren<Props>> = ({method, community, setCommunity}) => {
   const [roleSelected, setRoleSelected] = useState<any | null>(null)
   const [countrySelected, setCountrySelected] = useState<any | null>(null)
   const [rolesLoaded, setRolesLoaded] = useState(false)
@@ -392,7 +391,7 @@ const CommunityForm: FC<Props> = ({method, community, setCommunity}) => {
                     <span className='symbol symbol-50px me-6'>
                       <span className='symbol-label bg-mc-primary'>
                         <i className='fab fa-html5 text-warning fs-2x'></i>
-                        <FontAwesomeIcon icon={faEnvelope} className='text-mc-secondary fs-2x' />
+                        <i className={clsx('fa fs-3', 'fa-envelope')}></i>
                       </span>
                     </span>
 
@@ -422,7 +421,7 @@ const CommunityForm: FC<Props> = ({method, community, setCommunity}) => {
                     <span className='symbol symbol-50px me-6'>
                       <span className='symbol-label bg-mc-primary'>
                         <i className='fab fa-react text-success fs-2x'></i>
-                        <FontAwesomeIcon icon={faKey} className='text-mc-secondary fs-2x' />
+                        <i className={clsx('fa fs-3', 'fa-key')}></i>
                       </span>
                     </span>
 

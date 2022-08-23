@@ -20,7 +20,7 @@ const permissionsBreadCrumbs: Array<PageLink> = [
   },
 ]
 
-const PermissionPage: React.FC = () => {
+const PermissionPage: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <Routes>
       <Route

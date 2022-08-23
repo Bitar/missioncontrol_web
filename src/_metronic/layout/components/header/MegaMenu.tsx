@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {FC} from 'react'
 
-const MegaMenu: FC = () => (
+const MegaMenu: FC<React.PropsWithChildren<unknown>> = () => (
   <div className='row' data-kt-menu-dismiss='true'>
     <div className='col-lg-4 border-left-lg-1'>
       <div className='menu-inline menu-column menu-active-bg'>

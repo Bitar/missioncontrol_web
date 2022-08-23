@@ -8,7 +8,7 @@ type Props = {
   setCommunity: any
 }
 
-const BannerImage: FC<Props> = ({community, setCommunity}) => {
+const BannerImage: FC<React.PropsWithChildren<Props>> = ({community, setCommunity}) => {
   const defaultImage = community?.image || toAbsoluteUrl('/media/svg/avatars/blank.svg')
   const [image, setImage] = useState<string>('')
   const [imageInput, setImageInput] = useState<string>('')

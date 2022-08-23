@@ -28,7 +28,7 @@ const TableSearchComponent = () => {
       {/* begin::Search */}
       <div className='d-flex align-items-center position-relative my-1'>
         <KTSVG
-          path='/media/icons/duotune/general/gen021.svg'
+          path='/media/icons/duotune/gen021.svg'
           className='svg-icon-1 position-absolute ms-6'
         />
         <input

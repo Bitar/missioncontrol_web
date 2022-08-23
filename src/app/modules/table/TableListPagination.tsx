@@ -2,58 +2,91 @@
 import clsx from 'clsx'
 import {useQueryResponseLoading, useQueryResponsePagination} from './QueryResponseProvider'
 import {useQueryRequest} from './QueryRequestProvider'
-import {ScrollTopComponent} from '../../../_metronic/assets/ts/components'
+
+const mappedLabel = (label: string): string => {
+  if (label === '&laquo; Previous') {
+    return 'Previous'
+  }
+
+  if (label === 'Next &raquo;') {
+    return 'Next'
+  }
+
+  return label
+}
 
 const TableListPagination = () => {
   const pagination = useQueryResponsePagination()
   const isLoading = useQueryResponseLoading()
   const {updateState} = useQueryRequest()
-
   const updatePage = (page: number | undefined) => {
     if (!page || isLoading || pagination.page === page) {
       return
     }
 
     updateState({page, per_page: pagination.per_page || 10})
-
-    scrollTop()
-  }
-
-  const scrollTop = () => {
-    ScrollTopComponent.goTop()
   }
 
   const currentPage = (link: any) => {
-    if (link) {
-      return parseInt(link.url?.substring(link.url?.indexOf('page=') + 5))
+    const url = new URL(link.url);
+    let pageNumber = url.searchParams.get('page')
+    if (pageNumber) {
+      return parseInt(pageNumber)
     }
   }
 
   return (
     <div className='row'>
-      <div className='col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start' />
+      <div className='col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'></div>
       <div className='col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'>
         <ul className='pagination'>
-          {pagination.links?.map((link) => (
-            <li
-              key={link.label}
-              className={clsx('page-item', {
-                active: pagination.current_page === currentPage(link),
-                disabled: isLoading,
-                previous: link.label === '&laquo; Previous',
-                next: link.label === 'Next &raquo;',
-              })}
-            >
-              <a
-                className='page-link'
-                onClick={() => {
-                  updatePage(currentPage(link))
-                }}
-                dangerouslySetInnerHTML={{__html: link.label}}
-                style={{cursor: 'pointer'}}
-              />
-            </li>
-          ))}
+          {pagination.links
+            ?.map((link) => {
+              return {...link, label: mappedLabel(link.label)}
+            })
+            .map((link) => (
+              <li
+                key={link.label}
+                className={clsx('page-item', {
+                  active: link.active,
+                  disabled: isLoading,
+                  previous: link.label === 'Previous',
+                  next: link.label === 'Next',
+                })}
+              >
+                <a
+                  className={clsx('page-link', {
+                    'page-text': link.label === 'Previous' || link.label === 'Next',
+                    'me-5': link.label === 'Previous',
+                  })}
+                  onClick={() => updatePage(currentPage(link))}
+                  style={{cursor: 'pointer'}}
+                >
+                  {mappedLabel(link.label)}
+                </a>
+              </li>
+            ))}
+
+          {/*{pagination.links?.map((link) => (*/}
+          {/*  <li*/}
+          {/*    key={link.label}*/}
+          {/*    className={clsx('page-item', {*/}
+          {/*      active: pagination.current_page === currentPage(link),*/}
+          {/*      disabled: isLoading,*/}
+          {/*      previous: link.label === '&laquo; Previous',*/}
+          {/*      next: link.label === 'Next &raquo;',*/}
+          {/*    })}*/}
+          {/*  >*/}
+          {/*    <a*/}
+          {/*      className='page-link'*/}
+          {/*      onClick={() => {*/}
+          {/*        updatePage(currentPage(link))*/}
+          {/*      }}*/}
+          {/*      dangerouslySetInnerHTML={{__html: link.label}}*/}
+          {/*      style={{cursor: 'pointer'}}*/}
+          {/*    />*/}
+          {/*  </li>*/}
+          {/*))}*/}
         </ul>
       </div>
     </div>

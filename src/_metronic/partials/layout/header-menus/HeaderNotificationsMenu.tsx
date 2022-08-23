@@ -4,7 +4,7 @@ import {FC} from 'react'
 import {Link} from 'react-router-dom'
 import {KTSVG, toAbsoluteUrl, defaultAlerts, defaultLogs} from '../../../helpers'
 
-const HeaderNotificationsMenu: FC = () => (
+const HeaderNotificationsMenu: FC<React.PropsWithChildren<unknown>> = () => (
   <div
     className='menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px'
     data-kt-menu='true'
@@ -84,7 +84,7 @@ const HeaderNotificationsMenu: FC = () => (
             to='/crafted/pages/profile'
             className='btn btn-color-gray-600 btn-active-color-primary'
           >
-            View All <KTSVG path='/media/icons/duotune/arrows/arr064.svg' className='svg-icon-5' />
+            View All <KTSVG path='/media/icons/duotune/arr064.svg' className='svg-icon-5' />
           </Link>
         </div>
       </div>
@@ -143,7 +143,7 @@ const HeaderNotificationsMenu: FC = () => (
             to='/crafted/pages/profile'
             className='btn btn-color-gray-600 btn-active-color-primary'
           >
-            View All <KTSVG path='/media/icons/duotune/arrows/arr064.svg' className='svg-icon-5' />
+            View All <KTSVG path='/media/icons/duotune/arr064.svg' className='svg-icon-5' />
           </Link>
         </div>
       </div>

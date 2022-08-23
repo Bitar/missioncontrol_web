@@ -9,7 +9,7 @@ type Props = {
   setActivity: Dispatch<SetStateAction<Activity>>
 }
 
-const EntryFee: FC<Props> = ({activity, setActivity}) => {
+const EntryFee: FC<React.PropsWithChildren<Props>> = ({activity, setActivity}) => {
   const handleEntryFeeChange = (object: any, type: number) => {
     updateData(
       {

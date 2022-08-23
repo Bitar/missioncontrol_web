@@ -42,8 +42,6 @@ export function register(
   )
 }
 
-// export functi
-
 // Server should return object => { result: boolean } (Is Email in DB)
 export function requestPassword(email: string) {
   return axios.post<{result: boolean}>(REQUEST_PASSWORD_URL, {

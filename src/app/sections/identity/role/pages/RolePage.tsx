@@ -20,7 +20,7 @@ const rolesBreadCrumbs: Array<PageLink> = [
   },
 ]
 
-const RolePage: React.FC = () => {
+const RolePage: React.FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <Routes>
       <Route

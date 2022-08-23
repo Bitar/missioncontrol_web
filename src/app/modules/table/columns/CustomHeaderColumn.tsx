@@ -5,7 +5,7 @@ type Props = {
   column: ColumnInstance<any>
 }
 
-const CustomHeaderColumn: FC<Props> = ({column}) => (
+const CustomHeaderColumn: FC<React.PropsWithChildren<Props>> = ({column}) => (
   <>
     {column.Header && typeof column.Header === 'string' ? (
       <th {...column.getHeaderProps()}>{column.render('Header')}</th>

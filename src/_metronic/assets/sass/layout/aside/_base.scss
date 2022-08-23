@@ -6,7 +6,7 @@
 .aside {
   display: flex;
   flex-direction: column;
-  box-shadow: get($aside-config, box-shadow);
+  box-shadow: var(--kt-aside-box-shadow);
   padding: 0;
 
   // Custom button
@@ -37,7 +37,7 @@
 
   // Dark theme
   &.aside-dark {
-    background-color: get($aside-config, bg-color);
+    background-color: get($aside-config, bg-color-dark);
 
     // Logo
     .aside-logo {
@@ -56,16 +56,15 @@
 
     // Custom button
     .btn-custom {
-      //$color, $icon-color, $border-color, $bg-color, $color-active, $icon-color-active, $border-color-active, $bg-color-active
       @include button-custom-variant(
-        #b5b5c3,
-        null,
-        null,
-        rgba(63, 66, 84, 0.35),
-        #b5b5c3,
-        null,
-        null,
-        rgba(63, 66, 84, 0.35)
+        $color: #b5b5c3,
+        $icon-color: null,
+        $border-color: null,
+        $bg-color: rgba(63, 66, 84, 0.35),
+        $color-active: #b5b5c3,
+        $icon-color-active: null,
+        $border-color-active: null,
+        $bg-color-active: rgba(63, 66, 84, 0.35)
       );
 
       .btn-icon {
@@ -80,7 +79,7 @@
 
   // Light theme
   &.aside-light {
-    background-color: $white;
+    background-color: var(--kt-aside-bg-color);
   }
 }
 
@@ -140,7 +139,7 @@
       &.aside-hoverable:hover:not(.animating) {
         transition: width get($aside-config, transition-speed) ease;
         width: get($aside-config, width);
-        box-shadow: get($aside-config, minimized-hover-box-shadow);
+        box-shadow: var(--kt-aside-minimized-hover-box-shadow);
       }
 
       // Not hovered mode

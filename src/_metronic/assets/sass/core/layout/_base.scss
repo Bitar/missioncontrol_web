@@ -1,3 +1,7 @@
+//
+// Root
+//
+
 html {
   font-family: sans-serif;
   text-size-adjust: 100%;
@@ -8,6 +12,8 @@ body {
   height: 100%;
   margin: 0px;
   padding: 0px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-size: $root-font-size !important;
   font-weight: $font-weight-base;
   font-family: $font-family-sans-serif;
@@ -21,9 +27,11 @@ body {
   @include media-breakpoint-down(md) {
     font-size: $root-font-size-md !important;
   }
+}
 
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body {
+  display: flex;
+  flex-direction: column;
 
   a:hover,
   a:active,
@@ -32,17 +40,11 @@ body {
   }
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-  color: $body-color;
+canvas {
+  user-select: none;
 }
 
 // Angular integration
 router-outlet {
   display: none;
-}
-
-canvas {
-  user-select: none;
 }

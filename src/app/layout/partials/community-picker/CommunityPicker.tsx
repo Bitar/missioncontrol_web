@@ -5,7 +5,7 @@ import {Community} from '../../../sections/community/models/Community'
 import {ID} from '../../../../_metronic/helpers'
 import {useNavigate} from 'react-router-dom'
 
-const CommunityPicker: FC = () => {
+const CommunityPicker: FC<React.PropsWithChildren<unknown>> = () => {
   const [communityAdmin, setCommunityAdmin] = useState<Community[] | undefined>()
 
   const isActive = false

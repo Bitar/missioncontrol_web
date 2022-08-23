@@ -8,7 +8,7 @@ import {Activity, initialActivity} from '../models/Activity'
 const gamesSelect: any[] = []
 const platforms: any[] = []
 
-const Step2: FC = () => {
+const Step2: FC<React.PropsWithChildren<unknown>> = () => {
   //TODO: Change this so that it is a community Object
   const [data, setData] = useState<Activity>(initialActivity)
 

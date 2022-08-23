@@ -12,7 +12,7 @@ type Props = {
 
 let activitiesObject: any[] = []
 
-const CommunityActivities: FC<Props> = () => {
+const CommunityActivities: FC<React.PropsWithChildren<Props>> = () => {
   const [activities, setActivities] = useState<Activity[] | undefined>([])
   const params = useParams()
 

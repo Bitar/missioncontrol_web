@@ -6,7 +6,7 @@ type Props = {
   row: Row<any>
 }
 
-const CustomRow: FC<Props> = ({row}) => (
+const CustomRow: FC<React.PropsWithChildren<Props>> = ({row}) => (
   <tr {...row.getRowProps()}>
     {row.cells.map((cell) => {
       return (

@@ -12,6 +12,7 @@ import {LayoutSplashScreen} from '../../../../_metronic/layout/core'
 import {AuthModel} from './_models'
 import * as authHelper from './AuthHelpers'
 import {getUserByToken} from './_requests'
+import {WithChildren} from '../../../../_metronic/helpers'
 import {Community} from '../../../sections/community/models/Community'
 import {Subscription} from '../../../models/billing/Subscription'
 import {User} from '../../../sections/identity/user/models/User'
@@ -46,7 +47,7 @@ const useAuth = () => {
   return useContext(AuthContext)
 }
 
-const AuthProvider: FC = ({children}) => {
+const AuthProvider: FC<WithChildren> = ({children}) => {
   const [auth, setAuth] = useState<AuthModel | undefined>(authHelper.getAuth())
   const [currentUser, setCurrentUser] = useState<User | undefined>()
   const [communityAdmin, setCommunityAdmin] = useState<Community | undefined>()
@@ -86,17 +87,16 @@ const AuthProvider: FC = ({children}) => {
   )
 }
 
-const AuthInit: FC = ({children}) => {
+const AuthInit: FC<WithChildren> = ({children}) => {
   const {auth, logout, setCurrentUser, setSubscription} = useAuth()
   const didRequest = useRef(false)
   const [showSplashScreen, setShowSplashScreen] = useState(true)
-  // We should request identity by authToken (IN OUR EXAMPLE IT'S API_TOKEN) before rendering the application
+  // We should request user by authToken (IN OUR EXAMPLE IT'S API_TOKEN) before rendering the application
   useEffect(() => {
     const requestUser = async (apiToken: string) => {
       try {
         if (!didRequest.current) {
           const {data} = await getUserByToken(apiToken)
-
           if (data) {
             setSubscription(data.subscription)
             setCurrentUser(data.user)

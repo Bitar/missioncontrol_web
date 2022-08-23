@@ -2,7 +2,7 @@ import React, {FC, useState} from 'react'
 import {Field, ErrorMessage} from 'formik'
 // import DatePicker from "react-datepicker";
 
-const Step3: FC = () => {
+const Step3: FC<React.PropsWithChildren<unknown>> = () => {
   const [date, setDate] = useState(new Date())
 
   return (

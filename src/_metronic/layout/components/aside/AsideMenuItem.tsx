@@ -1,21 +1,20 @@
-import React from 'react'
+import {FC} from 'react'
 import clsx from 'clsx'
 import {Link} from 'react-router-dom'
 import {useLocation} from 'react-router'
-import {checkIsActive, KTSVG} from '../../../helpers'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {IconProp} from '@fortawesome/fontawesome-svg-core'
+import {checkIsActive, KTSVG, WithChildren} from '../../../helpers'
+import {useLayout} from '../../core'
 
 type Props = {
   to: string
   title: string
   icon?: string
-  fontIcon?: IconProp
+  fontIcon?: string
   hasBullet?: boolean
   menuIcon?: string
 }
 
-const AsideMenuItem: React.FC<Props> = ({
+const AsideMenuItem: FC<React.PropsWithChildren<Props & WithChildren>> = ({
   children,
   to,
   title,
@@ -42,12 +41,9 @@ const AsideMenuItem: React.FC<Props> = ({
         )}
         {fontIcon && menuIcon === 'font' && (
           <span className='menu-icon'>
-            {/*<FontAwesomeIcon icon="fa-solid fa-people-group" />*/}
-            <FontAwesomeIcon icon={fontIcon} className='fs-2' />
-            {/*<i className={clsx('bi fs-3', fontIcon)}></i>*/}
+            <i className={clsx('fa fs-3', fontIcon)}></i>
           </span>
         )}
-
         <span className='menu-title'>{title}</span>
       </Link>
       {children}

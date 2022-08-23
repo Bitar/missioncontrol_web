@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {FC, createContext, useContext, useEffect, useState} from 'react'
+import {WithChildren} from '../../helpers'
 
 export interface PageLink {
   title: string
@@ -23,7 +24,7 @@ const PageDataContext = createContext<PageDataContextModel>({
   setPageDescription: (_description: string) => {},
 })
 
-const PageDataProvider: React.FC = ({children}) => {
+const PageDataProvider: FC<React.PropsWithChildren<WithChildren>> = ({children}) => {
   const [pageTitle, setPageTitle] = useState<string>('')
   const [pageDescription, setPageDescription] = useState<string>('')
   const [pageBreadcrumbs, setPageBreadcrumbs] = useState<Array<PageLink>>([])
@@ -47,7 +48,11 @@ type Props = {
   breadcrumbs?: Array<PageLink>
 }
 
-const PageTitle: FC<Props> = ({children, description, breadcrumbs}) => {
+const PageTitle: FC<React.PropsWithChildren<Props & WithChildren>> = ({
+  children,
+  description,
+  breadcrumbs,
+}) => {
   const {setPageTitle, setPageDescription, setPageBreadcrumbs} = usePageData()
   useEffect(() => {
     if (children) {
@@ -79,7 +84,7 @@ const PageTitle: FC<Props> = ({children, description, breadcrumbs}) => {
   return <></>
 }
 
-const PageDescription: React.FC = ({children}) => {
+const PageDescription: FC<React.PropsWithChildren<WithChildren>> = ({children}) => {
   const {setPageDescription} = usePageData()
   useEffect(() => {
     if (children) {

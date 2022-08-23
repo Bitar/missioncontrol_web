@@ -1,9 +1,9 @@
-import {FC, useState, createContext, useContext} from 'react'
+import React, {FC, useState, createContext, useContext} from 'react'
 import {initialQueryRequest, QueryRequestContextProps, QueryState} from '../../../_metronic/helpers'
 
 const QueryRequestContext = createContext<QueryRequestContextProps>(initialQueryRequest)
 
-const QueryRequestProvider: FC = ({children}) => {
+const QueryRequestProvider: FC<React.PropsWithChildren<unknown>> = ({children}) => {
   const [state, setState] = useState<QueryState>(initialQueryRequest.state)
 
   const updateState = (updates: Partial<QueryState>) => {

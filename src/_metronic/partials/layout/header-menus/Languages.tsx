@@ -37,7 +37,7 @@ const languages = [
   },
 ]
 
-const Languages: FC = () => {
+const Languages: FC<React.PropsWithChildren<unknown>> = () => {
   const lang = useLang()
   const currentLanguage = languages.find((x) => x.lang === lang)
   return (
@@ -72,9 +72,7 @@ const Languages: FC = () => {
           >
             <a
               href='#'
-              className={clsx('menu-link d-flex px-5', {
-                active: l.lang === currentLanguage?.lang,
-              })}
+              className={clsx('menu-link d-flex px-5', {active: l.lang === currentLanguage?.lang})}
             >
               <span className='symbol symbol-20px me-4'>
                 <img className='rounded-1' src={l.flag} alt='metronic' />

@@ -3,8 +3,9 @@ import {useState, useEffect} from 'react'
 import {useFormik} from 'formik'
 import * as Yup from 'yup'
 import clsx from 'clsx'
-import {register} from '../core/_requests'
+import {getUserByToken, register} from '../core/_requests'
 import {Link} from 'react-router-dom'
+import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {PasswordMeterComponent} from '../../../../_metronic/assets/ts/components'
 import {useAuth} from '../core/Auth'
 
@@ -14,7 +15,7 @@ const initialValues = {
   email: '',
   password: '',
   changepassword: '',
-  acceptTerms: true,
+  acceptTerms: false,
 }
 
 const registrationSchema = Yup.object().shape({
@@ -32,13 +33,13 @@ const registrationSchema = Yup.object().shape({
     .max(50, 'Maximum 50 symbols')
     .required('Last name is required'),
   password: Yup.string()
-    .min(8, 'Minimum 8 symbols')
+    .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
     .required('Password is required'),
   changepassword: Yup.string()
     .required('Password confirmation is required')
     .when('password', {
-      is: (val: string) => !!(val && val.length > 0),
+      is: (val: string) => (val && val.length > 0 ? true : false),
       then: Yup.string().oneOf([Yup.ref('password')], "Password and Confirm Password didn't match"),
     }),
   acceptTerms: Yup.bool().required('You must accept the terms and conditions'),
@@ -53,36 +54,19 @@ export function Registration() {
     onSubmit: async (values, {setStatus, setSubmitting}) => {
       setLoading(true)
       try {
-        const data = await register(
+        const {data: auth} = await register(
           values.email,
           values.firstname,
           values.lastname,
           values.password,
           values.changepassword
         )
-
-        if (data.status === 200) {
-          const auth = data.data
-          saveAuth(auth)
-          // const {data: identity} = await getUserByToken(auth.token)
-          setCurrentUser(auth.data)
-        } else if (data.status === 422) {
-          // Unprocessed Entity
-          setStatus(data.data.errors.email[0])
-        }
-
-        // if (data?.data) {
-        //   // Success
-        //   console.log('working')
-        // } else {
-        //   // Error
-        //   console.log('no working')
-        //   saveAuth(undefined)
-        //   setStatus('The registration details is incorrect')
-        //   setSubmitting(false)
-        //   setLoading(false)
-        // }
-        //
+        saveAuth(auth)
+        const {data: profile} = await getUserByToken(auth.api_token)
+        setCurrentUser(profile.user)
+        // console.log(user);
+        console.log('registration')
+        // setCurrentUser(user)
       } catch (error) {
         console.error(error)
         saveAuth(undefined)
@@ -104,19 +88,38 @@ export function Registration() {
       id='kt_login_signup_form'
       onSubmit={formik.handleSubmit}
     >
+      {/* begin::Heading */}
       <div className='mb-10 text-center'>
+        {/* begin::Title */}
         <h1 className='text-dark mb-3'>Create an Account</h1>
+        {/* end::Title */}
 
+        {/* begin::Link */}
         <div className='text-gray-400 fw-bold fs-4'>
           Already have an account?
-          <Link
-            to='/auth/forgot-password'
-            className='link-primary fw-bolder'
-            style={{marginLeft: '5px'}}
-          >
+          <Link to='/auth/login' className='link-primary fw-bolder' style={{marginLeft: '5px'}}>
             Forgot Password ?
           </Link>
         </div>
+        {/* end::Link */}
+      </div>
+      {/* end::Heading */}
+
+      {/* begin::Action */}
+      <button type='button' className='btn btn-light-primary fw-bolder w-100 mb-10'>
+        <img
+          alt='Logo'
+          src={toAbsoluteUrl('/media/svg/brand-logos/google-icon.svg')}
+          className='h-20px me-3'
+        />
+        Sign in with Google
+      </button>
+      {/* end::Action */}
+
+      <div className='d-flex align-items-center mb-10'>
+        <div className='border-bottom border-gray-300 mw-50 w-100'></div>
+        <span className='fw-bold text-gray-400 fs-7 mx-2'>OR</span>
+        <div className='border-bottom border-gray-300 mw-50 w-100'></div>
       </div>
 
       {formik.status && (
@@ -126,9 +129,9 @@ export function Registration() {
       )}
 
       {/* begin::Form group Firstname */}
-      <div className='row fv-row'>
+      <div className='row fv-row mb-7'>
         <div className='col-xl-6'>
-          <label className='form-label fw-bolder text-dark fs-6'>First name</label>
+          <label className='class="form-label fw-bolder text-dark fs-6'>First name</label>
           <input
             placeholder='First name'
             type='text'
@@ -185,7 +188,7 @@ export function Registration() {
       {/* end::Form group */}
 
       {/* begin::Form group Email */}
-      <div className='fv-row mb-5'>
+      <div className='fv-row mb-7'>
         <label className='form-label fw-bolder text-dark fs-6'>Email</label>
         <input
           placeholder='Email'
@@ -297,8 +300,8 @@ export function Registration() {
             className='form-check-label fw-bold text-gray-700 fs-6'
             htmlFor='kt_login_toc_agree'
           >
-            I agree the{' '}
-            <Link to='/auth/terms' className='ms-1 link-primary' target={'_blank'}>
+            I Agree the{' '}
+            <Link to='/auth/terms' className='ms-1 link-primary'>
               terms and conditions
             </Link>
             .

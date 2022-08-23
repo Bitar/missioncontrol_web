@@ -8,7 +8,7 @@ type Props = {
   setUser: any
 }
 
-const AvatarImage: FC<Props> = ({user, setUser}) => {
+const AvatarImage: FC<React.PropsWithChildren<Props>> = ({user, setUser}) => {
   const defaultImage = user?.meta?.image || toAbsoluteUrl('/media/svg/avatars/blank.svg')
   const [image, setImage] = useState<string>('')
   const [imageInput, setImageInput] = useState<string>('')

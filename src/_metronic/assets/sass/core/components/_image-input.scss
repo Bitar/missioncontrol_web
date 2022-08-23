@@ -103,8 +103,8 @@
   // Bordered style
   &.image-input-outline {
     .image-input-wrapper {
-      border: 3px solid $body-bg;
-      box-shadow: if(isDarkMode(), $box-shadow, $box-shadow-sm);
+      border: 3px solid var(--kt-body-bg);
+      box-shadow: var(--kt-box-shadow);
     }
   }
 }

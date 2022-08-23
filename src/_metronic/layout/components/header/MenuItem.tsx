@@ -13,7 +13,7 @@ type Props = {
   hasBullet?: boolean
 }
 
-const MenuItem: React.FC<Props> = ({
+const MenuItem: React.FC<React.PropsWithChildren<Props>> = ({
   to,
   title,
   icon,

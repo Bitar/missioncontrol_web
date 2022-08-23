@@ -1,9 +1,7 @@
-/* eslint-disable react/jsx-no-target-blank */
 import React from 'react'
 import {useIntl} from 'react-intl'
-import {AsideMenuItem} from './AsideMenuItem'
-import {faPeopleGroup, faUsers, faGamepad, faBurger} from '@fortawesome/free-solid-svg-icons'
 import {AsideMenuItemWithSub} from './AsideMenuItemWithSub'
+import {AsideMenuItem} from './AsideMenuItem'
 
 export function AsideMenuMain() {
   const intl = useIntl()
@@ -12,7 +10,7 @@ export function AsideMenuMain() {
     <>
       <AsideMenuItem
         to='/dashboard'
-        icon='/media/icons/duotune/general/gen001.svg'
+        icon='/media/icons/duotune/gen001.svg'
         title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
       />
       <div className='menu-item'>
@@ -23,17 +21,12 @@ export function AsideMenuMain() {
       <AsideMenuItem
         to='/communities'
         title='Communities'
-        fontIcon={faPeopleGroup}
+        fontIcon={'fa-people-group'}
         menuIcon='font'
-      ></AsideMenuItem>
-      <AsideMenuItem
-        to='/activities'
-        title='Activities'
-        fontIcon={faBurger}
-        menuIcon='font'
-      ></AsideMenuItem>
+      />
+      <AsideMenuItem to='/activities' title='Activities' fontIcon={'fa-burger'} menuIcon='font' />
 
-      <AsideMenuItem to='/games' title='Games' fontIcon={faGamepad} menuIcon='font'></AsideMenuItem>
+      <AsideMenuItem to='/games' title='Games' fontIcon={'fa-gamepad'} menuIcon='font' />
 
       <div className='menu-item'>
         <div className='menu-content pt-8 pb-2'>
@@ -45,20 +38,20 @@ export function AsideMenuMain() {
         to='/plans'
         title='Plans'
         // fontIcon='bi-archive'
-        icon='/media/icons/duotune/general/gen022.svg'
+        icon='/media/icons/duotune/gen022.svg'
       ></AsideMenuItem>
 
       <AsideMenuItem
         to='/subscriptions'
         title='Subscriptions'
         // fontIcon='bi-archive'
-        icon='/media/icons/duotune/general/gen022.svg'
+        icon='/media/icons/duotune/gen022.svg'
       ></AsideMenuItem>
 
       <AsideMenuItemWithSub
         to={['/users', '/roles', '/permissions']}
         title='Identity'
-        fontIcon={faUsers}
+        fontIcon={'fa-users'}
         menuIcon='font'
       >
         <AsideMenuItem to='/users' title='Users' hasBullet={true} />

@@ -3,7 +3,7 @@ import React, {FC} from 'react'
 import {KTSVG} from '../../../../_metronic/helpers'
 import {ErrorMessage, Field} from 'formik'
 
-const Step1: FC = () => {
+const Step1: FC<React.PropsWithChildren<unknown>> = () => {
   // TODO: Get Types from API
 
   return (
@@ -42,10 +42,7 @@ const Step1: FC = () => {
               className='btn btn-outline btn-outline-dashed btn-outline-default p-7 d-flex align-items-center mb-10'
               htmlFor='mc_create_activity_form_type_league'
             >
-              <KTSVG
-                path='/media/icons/duotune/communication/com005.svg'
-                className='svg-icon-3x me-5'
-              />
+              <KTSVG path='/media/icons/duotune/com005.svg' className='svg-icon-3x me-5' />
 
               <span className='d-block fw-bold text-start'>
                 <span className='text-dark fw-bolder d-block fs-4 mb-2'>League</span>
@@ -66,7 +63,7 @@ const Step1: FC = () => {
               className='btn btn-outline btn-outline-dashed btn-outline-default p-7 d-flex align-items-center'
               htmlFor='mc_create_activity_form_type_tournament'
             >
-              <KTSVG path='/media/icons/duotune/finance/fin006.svg' className='svg-icon-3x me-5' />
+              <KTSVG path='/media/icons/duotune/fin006.svg' className='svg-icon-3x me-5' />
 
               <span className='d-block fw-bold text-start'>
                 <span className='text-dark fw-bolder d-block fs-4 mb-2'>Tournament</span>

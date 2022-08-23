@@ -26,12 +26,12 @@ const Marketing = () => {
           {/* begin::Icon */}
           <div className='d-flex h-80px w-80px flex-shrink-0 flex-center position-relative'>
             <KTSVG
-              path='/media/icons/duotune/abstract/abs051.svg'
+              path='/media/icons/duotune/abs051.svg'
               className='svg-icon-primary position-absolute opacity-15'
               svgClassName='h-80px w-80px'
             />
             <KTSVG
-              path='/media/icons/duotune/communication/com013.svg'
+              path='/media/icons/duotune/com013.svg'
               className='svg-icon-3x svg-icon-primary position-absolute'
             />
           </div>
@@ -67,12 +67,12 @@ const Marketing = () => {
         <div className='card-body d-flex align-items-center py-8'>
           <div className='d-flex h-80px w-80px flex-shrink-0 flex-center position-relative'>
             <KTSVG
-              path='/media/icons/duotune/abstract/abs051.svg'
+              path='/media/icons/duotune/abs051.svg'
               className='svg-icon-primary position-absolute opacity-15'
               svgClassName='h-80px w-80px'
             />
             <KTSVG
-              path='/media/icons/duotune/files/fil012.svg'
+              path='/media/icons/duotune/fil012.svg'
               className='svg-icon-3x svg-icon-primary position-absolute'
             />
           </div>
@@ -138,12 +138,12 @@ const Marketing = () => {
         <div className='card-body d-flex align-items-center py-8 '>
           <div className='d-flex h-80px w-80px flex-shrink-0 flex-center position-relative'>
             <KTSVG
-              path='/media/icons/duotune/abstract/abs051.svg'
+              path='/media/icons/duotune/abs051.svg'
               className='svg-icon-primary position-absolute opacity-15'
               svgClassName='h-80px w-80px'
             />
             <KTSVG
-              path='/media/icons/duotune/general/gen002.svg'
+              path='/media/icons/duotune/gen002.svg'
               className='svg-icon-3x svg-icon-primary position-absolute'
             />
           </div>
@@ -175,12 +175,12 @@ const Marketing = () => {
         <div className='card-body d-flex align-items-center py-8 '>
           <div className='d-flex h-80px w-80px flex-shrink-0 flex-center position-relative'>
             <KTSVG
-              path='/media/icons/duotune/abstract/abs051.svg'
+              path='/media/icons/duotune/abs051.svg'
               className='svg-icon-primary position-absolute opacity-15'
               svgClassName='h-80px w-80px'
             />
             <KTSVG
-              path='/media/icons/duotune/communication/com011.svg'
+              path='/media/icons/duotune/com011.svg'
               className='svg-icon-3x svg-icon-primary position-absolute'
             />
           </div>

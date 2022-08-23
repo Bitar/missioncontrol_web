@@ -30,6 +30,7 @@ export interface IAside {
   minimized: boolean // Set aside minimized by default
   minimize: boolean // Allow aside minimize toggle
   hoverable: boolean // Allow aside hovering when minimized
+  menuIcon: 'svg' | 'font' // Menu icon type(svg|font)
 }
 
 export interface IContent {
@@ -46,7 +47,7 @@ export interface ISidebar {
   toggle: boolean
   shown: boolean
   content: 'general' | 'user' | 'shop'
-  bgColor: 'bg-white' | 'bg-info'
+  bgColor: 'bg-body' | 'bg-info'
   displayFooter: boolean
   displayFooterButton: boolean
 }

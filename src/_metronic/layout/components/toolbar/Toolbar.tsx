@@ -1,17 +1,65 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
-import {useLayout} from '../../core/LayoutProvider'
-import {Toolbar1} from './Toolbar1'
+import {useLayout} from '../../core'
+import clsx from 'clsx'
+import {DefaultTitle} from '../header/page-title/DefaultTitle'
 
 const Toolbar = () => {
-  const {config} = useLayout()
+  const {classes} = useLayout()
 
-  switch (config.toolbar.layout) {
-    case 'toolbar1':
-      return <Toolbar1 />
+  return (
+    <>
+      <div className='toolbar' id='kt_toolbar'>
+        {/* begin::Container */}
+        <div
+          id='kt_toolbar_container'
+          className={clsx(classes.toolbarContainer.join(' '), 'd-flex flex-stack')}
+        >
+          <DefaultTitle />
 
-    default:
-      return <Toolbar1 />
-  }
+          {/*/!* begin::Actions *!/*/}
+          {/*<div className='d-flex align-items-center py-1'>*/}
+          {/*  /!* begin::Wrapper *!/*/}
+          {/*  <div className='me-4'>*/}
+          {/*    /!* begin::Menu *!/*/}
+          {/*    <a*/}
+          {/*      href='#'*/}
+          {/*      className='btn btn-sm btn-flex btn-light btn-active-primary fw-bolder'*/}
+          {/*      data-kt-menu-trigger='click'*/}
+          {/*      data-kt-menu-placement='bottom-end'*/}
+          {/*      data-kt-menu-flip='top-end'*/}
+          {/*    >*/}
+          {/*      <KTSVG*/}
+          {/*        path='/media/icons/duotune/gen031.svg'*/}
+          {/*        className='svg-icon-5 svg-icon-gray-500 me-1'*/}
+          {/*      />*/}
+          {/*      Filter*/}
+          {/*    </a>*/}
+
+          {/*    /!* end::Menu *!/*/}
+          {/*  </div>*/}
+          {/*  /!* end::Wrapper *!/*/}
+
+          {/*  /!* begin::Button *!/*/}
+
+          {/*  <a*/}
+          {/*    className='btn btn-sm btn-primary cursor-pointer'*/}
+          {/*    id='kt_toolbar_primary_button'*/}
+          {/*    data-bs-toggle='modal'*/}
+          {/*    data-bs-target='#kt_modal_create_app'*/}
+          {/*    onClick={() => setShowCreateAppModal(true)}*/}
+          {/*  >*/}
+          {/*    Create*/}
+          {/*  </a>*/}
+          {/*  /!* end::Button *!/*/}
+          {/*</div>*/}
+          {/*/!* end::Actions *!/*/}
+        </div>
+        {/* end::Container */}
+      </div>
+      {/*<CreateAppModal show={showCreateAppModal} handleClose={() => setShowCreateAppModal(false)} />*/}
+    </>
+  )
 }
 
 export {Toolbar}

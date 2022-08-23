@@ -6,8 +6,7 @@ import {Link} from 'react-router-dom'
 import {useMutation, useQueryClient} from 'react-query'
 import {deleteObject} from '../../../requests'
 import {useQueryRequest} from '../QueryRequestProvider'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faPencil, faTrash, faEye} from '@fortawesome/free-solid-svg-icons'
+import clsx from 'clsx'
 
 type Props = {
   id: ID
@@ -18,7 +17,14 @@ type Props = {
   showView?: boolean
 }
 
-const ActionsCell: FC<Props> = ({id, path, queryKey, showEdit, showDelete = true, showView}) => {
+const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
+  id,
+  path,
+  queryKey,
+  showEdit,
+  showDelete = true,
+  showView,
+}) => {
   const queryClient = useQueryClient()
   const {state} = useQueryRequest()
   const [query] = useState<string>(stringifyRequestQuery(state))
@@ -37,7 +43,7 @@ const ActionsCell: FC<Props> = ({id, path, queryKey, showEdit, showDelete = true
     <>
       {showView && (
         <Link to={'/' + path + '/' + id} className='btn btn-icon btn-sm btn-active-light-success'>
-          <FontAwesomeIcon icon={faEye} className='text-success' />
+          <i className={clsx('fa fs-2 text-success', 'fa-eye')}></i>
         </Link>
       )}
 
@@ -46,7 +52,7 @@ const ActionsCell: FC<Props> = ({id, path, queryKey, showEdit, showDelete = true
           to={'/' + path + '/' + id + '/edit'}
           className='btn btn-icon btn-sm btn-active-light-warning'
         >
-          <FontAwesomeIcon icon={faPencil} className='text-warning' />
+          <i className={clsx('fa fs-2 text-warning', 'fa-pencil')}></i>
         </Link>
       )}
 
@@ -55,7 +61,7 @@ const ActionsCell: FC<Props> = ({id, path, queryKey, showEdit, showDelete = true
           className='btn btn-icon btn-sm btn-active-light-danger'
           onClick={async () => await deleteItem.mutateAsync()}
         >
-          <FontAwesomeIcon icon={faTrash} className='text-danger' />
+          <i className={clsx('fa fs-2 text-danger', 'fa-trash')}></i>
         </a>
       )}
     </>

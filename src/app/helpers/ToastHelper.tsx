@@ -1,7 +1,7 @@
 import {Toaster} from 'react-hot-toast'
 import React, {FC} from 'react'
 
-const MCToaster: FC = () => {
+const MCToaster: FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <>
       <Toaster

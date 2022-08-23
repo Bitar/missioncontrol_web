@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx'
 import React, {FC} from 'react'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faSun, faMoon} from '@fortawesome/free-solid-svg-icons'
 
 const themes = [
   {
@@ -17,7 +15,7 @@ const themes = [
   },
 ]
 
-const ThemePicker: FC = () => {
+const ThemePicker: FC<React.PropsWithChildren<unknown>> = () => {
   const currentTheme = themes.find((x) => x.slug === 'theme-light')
 
   return (
@@ -31,9 +29,9 @@ const ThemePicker: FC = () => {
         <span className='menu-title position-relative'>
           Theme
           <span className='fs-8 rounded px-3 py-2 position-absolute translate-middle-y top-50 end-0'>
-            {currentTheme?.icon === 'sun' && <FontAwesomeIcon icon={faSun} className='fs-2' />}
+            {currentTheme?.icon === 'sun' && <i className={clsx('fa fs-2', 'fa-sun')} />}
 
-            {currentTheme?.icon === 'moon' && <FontAwesomeIcon icon={faMoon} className='fs-2' />}
+            {currentTheme?.icon === 'moon' && <i className={clsx('fa fs-2', 'fa-moon')} />}
           </span>
         </span>
       </a>
@@ -55,9 +53,9 @@ const ThemePicker: FC = () => {
               })}
             >
               <span className='symbol symbol-20px me-4'>
-                {t.icon === 'sun' && <FontAwesomeIcon icon={faSun} className='fs-2' />}
+                {t.icon === 'sun' && <i className={clsx('fa fs-2', 'fa-sun')} />}
 
-                {t.icon === 'moon' && <FontAwesomeIcon icon={faMoon} className='fs-2' />}
+                {t.icon === 'moon' && <i className={clsx('fa fs-2', 'fa-moon')} />}
               </span>
               {t.name}
             </a>

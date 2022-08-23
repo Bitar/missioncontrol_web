@@ -105,12 +105,14 @@ class SwapperComponent {
     const parentSelector = this.getOption('parent')?.toString()
     const mode = this.getOption('mode')
     const parentElement = parentSelector ? document.querySelector(parentSelector) : null
-
     if (parentElement && this.element.parentNode !== parentElement) {
-      if (mode === 'prepend') {
-        parentElement.prepend(this.element)
-      } else if (mode === 'append') {
-        parentElement.append(this.element)
+      const alreadyPended = document.getElementById('kt_header_menu') !== null
+      if (!alreadyPended) {
+        if (mode === 'prepend') {
+          parentElement.prepend(this.element)
+        } else if (mode === 'append') {
+          parentElement.append(this.element)
+        }
       }
     }
   }
@@ -124,8 +126,8 @@ class SwapperComponent {
     return EventHandlerUtil.one(this.element, name, handler)
   }
 
-  public off = (name: string) => {
-    return EventHandlerUtil.off(this.element, name)
+  public off = (name: string, handlerId: string) => {
+    return EventHandlerUtil.off(this.element, name, handlerId)
   }
 
   public trigger = (name: string, event: Event) => {

@@ -34,6 +34,7 @@ export const DefaultLayoutConfig: ILayout = {
     minimized: false,
     minimize: true,
     hoverable: true,
+    menuIcon: 'svg',
   },
   content: {
     width: 'fixed', // Set fixed|fluid to change width

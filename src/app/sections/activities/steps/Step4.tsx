@@ -3,7 +3,7 @@ import React, {FC} from 'react'
 import {Field, ErrorMessage} from 'formik'
 import {KTSVG, toAbsoluteUrl} from '../../../../_metronic/helpers'
 
-const Step4: FC = () => {
+const Step4: FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <div className='w-100'>
       <div className='pb-10 pb-lg-15'>
@@ -142,7 +142,7 @@ const Step4: FC = () => {
             </div>
 
             <div className='position-absolute translate-middle-y top-50 end-0 me-3'>
-              <KTSVG path='/media/icons/duotune/finance/fin002.svg' className='svg-icon-2hx' />
+              <KTSVG path='/media/icons/duotune/fin002.svg' className='svg-icon-2hx' />
             </div>
           </div>
         </div>

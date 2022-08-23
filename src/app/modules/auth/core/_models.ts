@@ -1,9 +1,10 @@
 import {User} from '../../../sections/identity/user/models/User'
+import {Community} from '../../../sections/community/models/Community'
 
 export interface AuthModel {
   token: string
   data: User
-  active_community?: CommunityModel
+  active_community?: Community
 }
 
 export interface UserAddressModel {
@@ -46,11 +47,25 @@ export interface UserSocialNetworksModel {
   instagram: string
 }
 
-export interface CommunityModel {
+export interface UserModel {
   id: number
-  name: string
-  logo: string
-  description: string
-  slug: string
-  is_featured: boolean
+  username: string
+  password: string | undefined
+  email: string
+  first_name: string
+  last_name: string
+  fullname?: string
+  occupation?: string
+  companyName?: string
+  phone?: string
+  roles?: Array<number>
+  pic?: string
+  language?: 'en' | 'de' | 'es' | 'fr' | 'ja' | 'zh' | 'ru'
+  timeZone?: string
+  website?: 'https://keenthemes.com'
+  emailSettings?: UserEmailSettingsModel
+  auth?: AuthModel
+  communication?: UserCommunicationModel
+  address?: UserAddressModel
+  socialNetworks?: UserSocialNetworksModel
 }

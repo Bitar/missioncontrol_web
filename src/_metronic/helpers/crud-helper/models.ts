@@ -25,6 +25,13 @@ export type SearchState = {
 export type Response<T> = {
   data?: T
   meta?: PaginationState
+  payload?: {
+    message?: string
+    errors?: {
+      [key: string]: Array<string>
+    }
+    pagination?: PaginationState
+  }
 }
 
 export type QueryState = PaginationState & SortState & FilterState & SearchState

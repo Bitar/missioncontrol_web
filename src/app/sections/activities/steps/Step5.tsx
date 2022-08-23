@@ -3,7 +3,7 @@ import React, {FC} from 'react'
 import {Link} from 'react-router-dom'
 import {KTSVG} from '../../../../_metronic/helpers'
 
-const Step5: FC = () => {
+const Step5: FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <div className='w-100'>
       <div className='pb-8 pb-lg-10'>
@@ -28,7 +28,7 @@ const Step5: FC = () => {
 
         <div className='notice d-flex bg-light-warning rounded border-warning border border-dashed p-6'>
           <KTSVG
-            path='/media/icons/duotune/general/gen044.svg'
+            path='/media/icons/duotune/gen044.svg'
             className='svg-icon-2tx svg-icon-warning me-4'
           />
           <div className='d-flex flex-stack flex-grow-1'>

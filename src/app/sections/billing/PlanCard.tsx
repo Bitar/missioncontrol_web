@@ -9,7 +9,7 @@ type Props = {
   paymentTerms: number
 }
 
-const PlanCard: FC<Props> = ({plan, selectPlan, paymentTerms}) => {
+const PlanCard: FC<React.PropsWithChildren<Props>> = ({plan, selectPlan, paymentTerms}) => {
   return (
     <>
       <div className={plan.type === 1 ? 'col-xl-4' : 'col-xl-12'}>
@@ -50,7 +50,7 @@ const PlanCard: FC<Props> = ({plan, selectPlan, paymentTerms}) => {
                   Up to 30 Registrations
                 </span>
                 <KTSVG
-                  path={toAbsoluteUrl('/media/icons/duotune/general/gen043.svg')}
+                  path={toAbsoluteUrl('/media/icons/duotune/gen043.svg')}
                   className='svg-icon-1 svg-icon-success'
                 />
               </div>
@@ -61,7 +61,7 @@ const PlanCard: FC<Props> = ({plan, selectPlan, paymentTerms}) => {
                 </span>
 
                 <KTSVG
-                  path={toAbsoluteUrl('/media/icons/duotune/general/gen043.svg')}
+                  path={toAbsoluteUrl('/media/icons/duotune/gen043.svg')}
                   className='svg-icon-1 svg-icon-success'
                 />
               </div>
@@ -72,7 +72,7 @@ const PlanCard: FC<Props> = ({plan, selectPlan, paymentTerms}) => {
                 </span>
 
                 <KTSVG
-                  path={toAbsoluteUrl('/media/icons/duotune/general/gen043.svg')}
+                  path={toAbsoluteUrl('/media/icons/duotune/gen043.svg')}
                   className='svg-icon-1 svg-icon-success'
                 />
               </div>
@@ -81,7 +81,7 @@ const PlanCard: FC<Props> = ({plan, selectPlan, paymentTerms}) => {
                 <span className='fw-bold fs-6 text-gray-800 flex-grow-1 pe-3'>Launch</span>
 
                 <KTSVG
-                  path={toAbsoluteUrl('/media/icons/duotune/general/gen040.svg')}
+                  path={toAbsoluteUrl('/media/icons/duotune/gen040.svg')}
                   className='svg-icon-1'
                 />
               </div>

@@ -9,7 +9,7 @@ type Props = {
   data?: any
 }
 
-const SelectMC: FC<Props> = ({label, onChangeData, api, data}) => {
+const SelectMC: FC<React.PropsWithChildren<Props>> = ({label, onChangeData, api, data}) => {
   const [options, setOptions] = useState<any[]>([])
   const [optionSelected, setOptionSelected] = useState<any | null>(null)
   const [optionsLoaded, setOptionsLoaded] = useState<boolean>(false)

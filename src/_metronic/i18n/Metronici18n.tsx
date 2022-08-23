@@ -1,4 +1,5 @@
 import React, {FC, createContext, useContext} from 'react'
+import {WithChildren} from '../helpers'
 
 const I18N_CONFIG_KEY = process.env.REACT_APP_I18N_CONFIG_KEY || 'i18nConfig'
 
@@ -33,7 +34,7 @@ const useLang = () => {
   return useContext(I18nContext).selectedLang
 }
 
-const MetronicI18nProvider: FC = ({children}) => {
+const MetronicI18nProvider: FC<React.PropsWithChildren<WithChildren>> = ({children}) => {
   const lang = getConfig()
   return <I18nContext.Provider value={lang}>{children}</I18nContext.Provider>
 }

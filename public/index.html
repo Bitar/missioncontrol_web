@@ -6,14 +6,35 @@
     <meta name="theme-color" content="#110055" />
     <meta name="description" content="Mission Control community dashboard" />
     <link href="//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" />
-    <!-- SPLASH SCREEN-->
-    <link rel="stylesheet" id="layout-styles-anchor" href="%PUBLIC_URL%/splash-screen.css" />
     <title>Mission Control | Dashboard</title>
     <link rel="shortcut icon" href="%PUBLIC_URL%/media/logos/favicon.ico" />
+    <link rel="stylesheet" id="layout-styles-anchor" href="%PUBLIC_URL%/splash-screen.css" />
   </head>
-  <!-- TIP: add dark-mode class to enable dark mode -->
-  <body id="kt_body" class="page-loading">
+
+  <body id="kt_body" class="page-loading splash-screen">
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!--begin::Theme mode setup on page load-->
+    <script>
+      if (document.documentElement) {
+        var defaultThemeMode = 'system'
+
+        var hasKTName = document.body.hasAttribute('data-kt-name')
+        var lsKey = 'kt_' + (hasKTName ? name + '_' : '') + 'theme_mode_value'
+        var themeMode = localStorage.getItem(lsKey)
+
+        if (!themeMode) {
+          themeMode = defaultThemeMode
+        }
+
+        if (defaultThemeMode === 'system') {
+          themeMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        }
+
+        document.documentElement.setAttribute('data-theme', themeMode)
+      }
+    </script>
+    <!--end::Theme mode setup on page load-->
+
     <div id="root" class="d-flex flex-column flex-root"></div>
     <div id="splash-screen" class="splash-screen">
       <img
@@ -21,6 +42,7 @@
         alt="Mission Control logo"
         class="h-30px"
       />
+      <!--  <img src="%PUBLIC_URL%/media/logos/default-small.svg" alt="Metronic logo" />-->
       <span>Loading ...</span>
     </div>
     <div id="root-modals"></div>

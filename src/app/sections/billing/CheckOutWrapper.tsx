@@ -19,7 +19,7 @@ type CheckOutProps = {
   paymentReq: ID
 }
 
-const CheckOut: FC<CheckOutProps> = ({plan, paymentReq}) => {
+const CheckOut: FC<React.PropsWithChildren<CheckOutProps>> = ({plan, paymentReq}) => {
   const stripe = useStripe()
   const elements = useElements()
 
@@ -71,7 +71,7 @@ const CheckOut: FC<CheckOutProps> = ({plan, paymentReq}) => {
               onClick={() => setShowCheckout(false)}
               style={{cursor: 'pointer'}}
             >
-              <KTSVG path='/media/icons/duotune/arrows/arr061.svg' className='svg-icon-1' />
+              <KTSVG path='/media/icons/duotune/arr061.svg' className='svg-icon-1' />
             </div>
             {/* end::Close */}
 
@@ -91,7 +91,7 @@ const CheckOut: FC<CheckOutProps> = ({plan, paymentReq}) => {
                           <td className='text-muted'>
                             <div className='d-flex align-items-center'>
                               <KTSVG
-                                path='/media/icons/duotune/files/fil002.svg'
+                                path='/media/icons/duotune/fil002.svg'
                                 className='svg-icon-2 me-2'
                               />
                               Plan
@@ -104,7 +104,7 @@ const CheckOut: FC<CheckOutProps> = ({plan, paymentReq}) => {
                           <td className='text-muted'>
                             <div className='d-flex align-items-center'>
                               <KTSVG
-                                path='/media/icons/duotune/finance/fin008.svg'
+                                path='/media/icons/duotune/fin008.svg'
                                 className='svg-icon-2 me-2'
                               />
                               Recurring Amount
@@ -117,7 +117,7 @@ const CheckOut: FC<CheckOutProps> = ({plan, paymentReq}) => {
                           <td className='text-muted'>
                             <div className='d-flex align-items-center'>
                               <KTSVG
-                                path='/media/icons/duotune/ecommerce/ecm006.svg'
+                                path='/media/icons/duotune/ecm006.svg'
                                 className='svg-icon-2 me-2'
                               />
                               Launch Cost
@@ -168,7 +168,7 @@ const CheckOut: FC<CheckOutProps> = ({plan, paymentReq}) => {
   )
 }
 
-const CheckOutWrapper: FC<Props> = ({plan}) => {
+const CheckOutWrapper: FC<React.PropsWithChildren<Props>> = ({plan}) => {
   const [clientSecret, setClientSecret] = useState<string | undefined>()
   const [paymentReq, setPaymentReq] = useState<ID | undefined>()
 

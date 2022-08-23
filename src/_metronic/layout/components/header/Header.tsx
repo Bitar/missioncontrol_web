@@ -1,9 +1,10 @@
-import React, {FC} from 'react'
+import {FC} from 'react'
 import {MenuInner} from './MenuInner'
 
-const Header: FC = () => {
+const Header: FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <div
+      id='kt_header_menu'
       className='header-menu align-items-stretch'
       data-kt-drawer='true'
       data-kt-drawer-name='header-menu'
@@ -21,7 +22,8 @@ const Header: FC = () => {
         id='#kt_header_menu'
         data-kt-menu='true'
       >
-        <MenuInner />
+        {/*TODO: Community Picker here maybe? */}
+        {/*<MenuInner />*/}
       </div>
     </div>
   )

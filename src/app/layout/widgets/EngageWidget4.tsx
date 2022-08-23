@@ -11,7 +11,7 @@ type Props = {
   lg?: string
 }
 
-const EngageWidget4: React.FC<Props> = ({className, bgHex = ''}) => {
+const EngageWidget4: React.FC<React.PropsWithChildren<Props>> = ({className, bgHex = ''}) => {
   return (
     <div className='mt-10'>
       <div className={`card ${className}`} style={{backgroundColor: bgHex}}>

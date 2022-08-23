@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import {useEffect} from 'react'
 import {Outlet} from 'react-router-dom'
 import {AsideDefault} from './components/aside/AsideDefault'
 import {Footer} from './components/Footer'
@@ -8,8 +8,10 @@ import {ScrollTop} from './components/ScrollTop'
 import {Content} from './components/Content'
 import {PageDataProvider} from './core'
 import {useLocation} from 'react-router-dom'
+import {
+  ThemeModeProvider,
+} from '../partials'
 import {MenuComponent} from '../assets/ts/components'
-import {MCToaster} from '../../app/helpers/ToastHelper'
 
 const MasterLayout = () => {
   const location = useLocation()
@@ -27,34 +29,26 @@ const MasterLayout = () => {
 
   return (
     <PageDataProvider>
-      <div className='page d-flex flex-row flex-column-fluid'>
-        <AsideDefault />
-        <div className='wrapper d-flex flex-column flex-row-fluid' id='kt_wrapper'>
-          <HeaderWrapper />
+      <ThemeModeProvider>
+        <div className='page d-flex flex-row flex-column-fluid'>
+          <AsideDefault />
+          <div className='wrapper d-flex flex-column flex-row-fluid' id='kt_wrapper'>
+            <HeaderWrapper />
 
-          <div id='kt_content' className='content d-flex flex-column flex-column-fluid'>
-            <Toolbar />
-            <div className='post d-flex flex-column-fluid' id='kt_post'>
-              <MCToaster />
-              <Content>
-                <Outlet />
-              </Content>
+            <div id='kt_content' className='content d-flex flex-column flex-column-fluid'>
+              <Toolbar />
+              <div className='post d-flex flex-column-fluid' id='kt_post'>
+                <Content>
+                  <Outlet />
+                </Content>
+              </div>
             </div>
+            <Footer />
           </div>
-          <Footer />
         </div>
-      </div>
 
-      {/* begin:: Drawers */}
-      {/*<DrawerMessenger/>*/}
-      {/* end:: Drawers */}
-
-      {/* begin:: Modals */}
-      {/*<Main/>*/}
-      {/*<InviteUsers/>*/}
-      {/*<UpgradePlan/>*/}
-      {/* end:: Modals */}
-      <ScrollTop />
+        <ScrollTop />
+      </ThemeModeProvider>
     </PageDataProvider>
   )
 }

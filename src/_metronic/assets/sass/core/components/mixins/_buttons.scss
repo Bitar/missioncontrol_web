@@ -68,3 +68,16 @@
     }
   }
 }
+
+@mixin button-active-state() {
+  .btn-check:checked + &,
+  .btn-check:active + &,
+  &:focus:not(.btn-active),
+  &:hover:not(.btn-active),
+  &:active:not(.btn-active),
+  &.active,
+  &.show,
+  .show > & {
+    @content;
+  }
+}

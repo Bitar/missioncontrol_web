@@ -1,20 +1,19 @@
 import React from 'react'
 import clsx from 'clsx'
 import {useLocation} from 'react-router'
-import {checkIsActive, KTSVG} from '../../../helpers'
-import {IconProp} from '@fortawesome/fontawesome-svg-core'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {checkIsActive, KTSVG, WithChildren} from '../../../helpers'
+import {useLayout} from '../../core'
 
 type Props = {
   to: string[]
   title: string
   icon?: string
-  fontIcon?: IconProp
+  fontIcon?: string
   hasBullet?: boolean
   menuIcon?: string
 }
 
-const AsideMenuItemWithSub: React.FC<Props> = ({
+const AsideMenuItemWithSub: React.FC<React.PropsWithChildren<Props & WithChildren>> = ({
   children,
   to,
   title,
@@ -44,7 +43,6 @@ const AsideMenuItemWithSub: React.FC<Props> = ({
             <span className='bullet bullet-dot'></span>
           </span>
         )}
-
         {icon && menuIcon === 'svg' && (
           <span className='menu-icon'>
             <KTSVG path={icon} className='svg-icon-2' />
@@ -53,10 +51,9 @@ const AsideMenuItemWithSub: React.FC<Props> = ({
 
         {fontIcon && menuIcon === 'font' && (
           <span className='menu-icon'>
-            <FontAwesomeIcon icon={fontIcon} className='fs-2' />
+            <i className={clsx('fa fs-3', fontIcon)}></i>
           </span>
         )}
-
         <span className='menu-title'>{title}</span>
         <span className='menu-arrow'></span>
       </span>

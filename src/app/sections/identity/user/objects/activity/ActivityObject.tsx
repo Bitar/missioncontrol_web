@@ -8,7 +8,7 @@ type Props = {
   activity: Activity
 }
 
-const ActivityObject: FC<Props> = ({activity}) => {
+const ActivityObject: FC<React.PropsWithChildren<Props>> = ({activity}) => {
   return (
     <>
       <KTCard>

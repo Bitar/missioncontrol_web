@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState, useEffect} from 'react'
+import {FC, createContext, useContext, useState, useEffect} from 'react'
 import {DefaultLayoutConfig} from './DefaultLayoutConfig'
 import {
   getEmptyCssClasses,
@@ -12,6 +12,7 @@ import {
   ILayoutCSSClasses,
   ILayoutHTMLAttributes,
 } from './LayoutModels'
+import {WithChildren} from '../../helpers'
 
 export interface LayoutContextModel {
   config: ILayout
@@ -43,7 +44,7 @@ const disableSplashScreen = () => {
   }
 }
 
-const LayoutProvider: React.FC = ({children}) => {
+const LayoutProvider: FC<React.PropsWithChildren<WithChildren>> = ({children}) => {
   const [config, setConfig] = useState(LayoutSetup.config)
   const [classes, setClasses] = useState(LayoutSetup.classes)
   const [attributes, setAttributes] = useState(LayoutSetup.attributes)

@@ -2,7 +2,7 @@
 // Carousel
 //
 
-.carousel.carousel-custom {
+.carousel-custom {
   // Indicators
   .carousel-indicators {
     align-items: center;
@@ -39,7 +39,7 @@
           content: ' ';
           @include border-radius(50%);
           transition: all $carousel-custom-indicator-transition-speed ease;
-          background-color: $carousel-custom-indicator-default-bg-color;
+          background-color: var(--kt-carousel-custom-indicator-default-bg-color);
           height: $carousel-custom-dots-indicator-default-size;
           width: $carousel-custom-dots-indicator-default-size;
         }
@@ -51,7 +51,7 @@
             transition: all $carousel-custom-indicator-transition-speed ease;
             height: $carousel-custom-dots-indicator-active-size;
             width: $carousel-custom-dots-indicator-active-size;
-            background-color: $carousel-custom-indicator-active-bg-color;
+            background-color: var(--kt-carousel-custom-indicator-active-bg-color);
           }
         }
       }
@@ -74,7 +74,7 @@
           display: inline-block;
           content: ' ';
           transition: all $carousel-custom-indicator-transition-speed ease;
-          background-color: $carousel-custom-bullet-indicator-default-bg-color;
+          background-color: var(--kt-carousel-custom-bullet-indicator-default-bg-color);
           border-radius: $carousel-custom-bullet-indicator-default-size;
           height: $carousel-custom-bullet-indicator-default-size;
           width: $carousel-custom-bullet-indicator-default-size;
@@ -90,7 +90,7 @@
             transition: all $carousel-custom-indicator-transition-speed ease;
             height: $carousel-custom-bullet-indicator-default-size;
             width: $carousel-custom-bullet-indicator-active-width;
-            background-color: $carousel-custom-bullet-indicator-active-bg-color;
+            background-color: var(--kt-carousel-custom-bullet-indicator-active-bg-color);
           }
         }
       }

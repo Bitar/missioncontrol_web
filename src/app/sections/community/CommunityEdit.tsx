@@ -14,7 +14,7 @@ type Props = {
   setCommunity: Dispatch<SetStateAction<Community | undefined>>
 }
 
-const CommunityEdit: FC<Props> = ({community, setCommunity}) => {
+const CommunityEdit: FC<React.PropsWithChildren<Props>> = ({community, setCommunity}) => {
   const navigate = useNavigate()
   const params = useParams()
 

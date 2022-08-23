@@ -32,7 +32,7 @@
 // Aside dark theme
 .aside-dark {
   .hover-scroll-overlay-y {
-    --scrollbar-space: 0.4rem;
+    --kt-scrollbar-space: 0.4rem;
 
     @include scrollbar-color(
       get($aside-config, scrollbar-color),
@@ -43,20 +43,38 @@
   .menu {
     .menu-item {
       .menu-section {
-        color: $mc-secondary !important;
+        color: #4c4e6f !important;
       }
 
       //$title-color, $icon-color, $bullet-color, $arrow-color, $bg-color
-      @include menu-link-default-state($white, #9899ac, $white, $white, null);
-      @include menu-link-hover-state($white, $white, $mc-secondary, $white, darken($mc-primary, 5));
-      @include menu-link-here-state($white, $white, $mc-secondary, $white, darken($mc-primary, 5));
-      @include menu-link-show-state($white, $white, $mc-secondary, $white, darken($mc-primary, 5));
+      @include menu-link-default-state(#9899ac, #494b74, #9899ac, #9899ac, null);
+      @include menu-link-hover-state(
+        var(--kt-primary-inverse),
+        var(--kt-primary),
+        var(--kt-primary),
+        var(--kt-primary-inverse),
+        #1b1b28
+      );
+      @include menu-link-here-state(
+        var(--kt-primary-inverse),
+        var(--kt-primary),
+        var(--kt-primary),
+        var(--kt-primary-inverse),
+        #1b1b28
+      );
+      @include menu-link-show-state(
+        var(--kt-primary-inverse),
+        var(--kt-primary),
+        var(--kt-primary),
+        var(--kt-primary-inverse),
+        #1b1b28
+      );
       @include menu-link-active-state(
-        $white,
-        $white,
-        $mc-secondary,
-        $white,
-        darken($mc-primary, 5)
+        var(--kt-primary-inverse),
+        var(--kt-primary),
+        var(--kt-primary),
+        var(--kt-primary-inverse),
+        #1b1b28
       );
     }
   }

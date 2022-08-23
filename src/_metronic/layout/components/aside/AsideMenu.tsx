@@ -8,7 +8,7 @@ type Props = {
   asideMenuCSSClasses: string[]
 }
 
-const AsideMenu: React.FC<Props> = ({asideMenuCSSClasses}) => {
+const AsideMenu: React.FC<React.PropsWithChildren<Props>> = ({asideMenuCSSClasses}) => {
   const scrollRef = useRef<HTMLDivElement | null>(null)
   const {pathname} = useLocation()
 

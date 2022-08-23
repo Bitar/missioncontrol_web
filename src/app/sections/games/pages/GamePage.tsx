@@ -20,7 +20,7 @@ const gameBreadCrumbs: Array<PageLink> = [
   },
 ]
 
-const GamePage: FC = () => {
+const GamePage: FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <Routes>
       <Route

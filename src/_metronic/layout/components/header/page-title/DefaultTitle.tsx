@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import {useLayout} from '../../../core/LayoutProvider'
 import {usePageData} from '../../../core/PageData'
 
-const DefaultTitle: FC = () => {
+const DefaultTitle: FC<React.PropsWithChildren<unknown>> = () => {
   const {pageTitle, pageDescription, pageBreadcrumbs} = usePageData()
   const {config, classes} = useLayout()
   return (

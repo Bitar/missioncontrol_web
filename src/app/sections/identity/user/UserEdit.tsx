@@ -13,7 +13,7 @@ type Props = {
   setUser: any
 }
 
-const UserEdit: FC<Props> = ({user, setUser}) => {
+const UserEdit: FC<React.PropsWithChildren<Props>> = ({user, setUser}) => {
   const navigate = useNavigate()
   const params = useParams()
 

@@ -19,7 +19,7 @@ import {App} from '../App'
  */
 const {PUBLIC_URL} = process.env
 
-const AppRoutes: FC = () => {
+const AppRoutes: FC<React.PropsWithChildren<unknown>> = () => {
   const {currentUser} = useAuth()
   return (
     <BrowserRouter basename={PUBLIC_URL}>

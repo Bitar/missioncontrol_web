@@ -20,7 +20,7 @@ const communityBreadCrumbs: Array<PageLink> = [
   },
 ]
 
-const CommunityPage: FC = () => {
+const CommunityPage: FC<React.PropsWithChildren<unknown>> = () => {
   return (
     <Routes>
       <Route

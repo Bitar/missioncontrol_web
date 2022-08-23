@@ -31,7 +31,7 @@ export function HeaderWrapper() {
               className='btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px'
               id='kt_aside_mobile_toggle'
             >
-              <KTSVG path='/media/icons/duotune/abstract/abs015.svg' className='svg-icon-2x mt-1' />
+              <KTSVG path='/media/icons/duotune/abs015.svg' className='svg-icon-2x mt-1' />
             </div>
           </div>
         )}
@@ -42,7 +42,7 @@ export function HeaderWrapper() {
             <Link to='/dashboard' className='d-lg-none'>
               <img
                 alt='Logo'
-                src={toAbsoluteUrl('/media/logos/mc_logo_icon.png')}
+                src={toAbsoluteUrl('/media/logos/default-small.svg')}
                 className='h-30px'
               />
             </Link>
@@ -55,7 +55,7 @@ export function HeaderWrapper() {
             <Link to='/' className='d-lg-none'>
               <img
                 alt='Logo'
-                src={toAbsoluteUrl('/media/logos/mc_logo_icon.png')}
+                src={toAbsoluteUrl('/media/logos/default-small.svg')}
                 className='h-30px'
               />
             </Link>

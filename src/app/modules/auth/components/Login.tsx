@@ -4,7 +4,8 @@ import * as Yup from 'yup'
 import clsx from 'clsx'
 import {Link} from 'react-router-dom'
 import {useFormik} from 'formik'
-import {login} from '../core/_requests'
+import {getUserByToken, login} from '../core/_requests'
+import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {useAuth} from '../core/Auth'
 
 const loginSchema = Yup.object().shape({
@@ -20,8 +21,8 @@ const loginSchema = Yup.object().shape({
 })
 
 const initialValues = {
-  email: '',
-  password: '',
+  email: 'admin@demo.com',
+  password: 'demo',
 }
 
 /*
@@ -42,8 +43,10 @@ export function Login() {
       try {
         const {data: auth} = await login(values.email, values.password)
         saveAuth(auth)
-        setCurrentUser(auth.data)
+        const {data: profile} = await getUserByToken(auth.token)
+        setCurrentUser(profile.user)
       } catch (error) {
+        console.error(error)
         saveAuth(undefined)
         setStatus('The login detail is incorrect')
         setSubmitting(false)
@@ -61,7 +64,7 @@ export function Login() {
     >
       {/* begin::Heading */}
       <div className='text-center mb-10'>
-        <h1 className='text-dark mb-3'>Sign In to Mission Control</h1>
+        <h1 className='text-dark mb-3'>Sign In to Metronic</h1>
         <div className='text-gray-400 fw-bold fs-4'>
           New Here?{' '}
           <Link to='/auth/registration' className='link-primary fw-bolder'>
@@ -70,6 +73,19 @@ export function Login() {
         </div>
       </div>
       {/* begin::Heading */}
+
+      {formik.status ? (
+        <div className='mb-lg-15 alert alert-danger'>
+          <div className='alert-text font-weight-bold'>{formik.status}</div>
+        </div>
+      ) : (
+        <div className='mb-10 bg-light-info p-8 rounded'>
+          <div className='text-info'>
+            Use account <strong>admin@demo.com</strong> and password <strong>demo</strong> to
+            continue.
+          </div>
+        </div>
+      )}
 
       {/* begin::Form group */}
       <div className='fv-row mb-10'>
@@ -115,7 +131,6 @@ export function Login() {
           </div>
         </div>
         <input
-          placeholder='Password'
           type='password'
           autoComplete='off'
           {...formik.getFieldProps('password')}
@@ -155,6 +170,43 @@ export function Login() {
             </span>
           )}
         </button>
+
+        {/* begin::Separator */}
+        <div className='text-center text-muted text-uppercase fw-bolder mb-5'>or</div>
+        {/* end::Separator */}
+
+        {/* begin::Google link */}
+        <a href='#' className='btn btn-flex flex-center btn-light btn-lg w-100 mb-5'>
+          <img
+            alt='Logo'
+            src={toAbsoluteUrl('/media/svg/brand-logos/google-icon.svg')}
+            className='h-20px me-3'
+          />
+          Continue with Google
+        </a>
+        {/* end::Google link */}
+
+        {/* begin::Google link */}
+        <a href='#' className='btn btn-flex flex-center btn-light btn-lg w-100 mb-5'>
+          <img
+            alt='Logo'
+            src={toAbsoluteUrl('/media/svg/brand-logos/facebook-4.svg')}
+            className='h-20px me-3'
+          />
+          Continue with Facebook
+        </a>
+        {/* end::Google link */}
+
+        {/* begin::Google link */}
+        <a href='#' className='btn btn-flex flex-center btn-light btn-lg w-100'>
+          <img
+            alt='Logo'
+            src={toAbsoluteUrl('/media/svg/brand-logos/apple-black.svg')}
+            className='h-20px me-3'
+          />
+          Continue with Apple
+        </a>
+        {/* end::Google link */}
       </div>
       {/* end::Action */}
     </form>

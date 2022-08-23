@@ -11,6 +11,10 @@
     background-color: $color;
   }
 
+  &::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
+
   @if ($hover-color != null) {
     // Hover state
     &:hover {
@@ -20,6 +24,10 @@
       // Webkit
       &::-webkit-scrollbar-thumb {
         background-color: $hover-color;
+      }
+
+      &::-webkit-scrollbar-corner {
+        background-color: transparent;
       }
     }
   }
