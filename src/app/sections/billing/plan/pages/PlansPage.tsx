@@ -20,7 +20,7 @@ const plansBreadCrumbs: Array<PageLink> = [
   },
 ]
 
-const PlansPage: React.FC<React.PropsWithChildren<unknown>> = () => {
+const PlansPage: React.FC = () => {
   return (
     <Routes>
       <Route

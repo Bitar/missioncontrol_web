@@ -8,7 +8,7 @@ type Props = {
   community: Community | undefined
 }
 
-const CommunityUsers: FC<React.PropsWithChildren<Props>> = ({community}) => {
+const CommunityUsers: FC<Props> = ({community}) => {
   const [members, setMembers] = useState<User[] | undefined>([])
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const CommunityUsers: FC<React.PropsWithChildren<Props>> = ({community}) => {
           {/*    href='src/app/sections/community/pages/CommunityFollowers#CommunityUsers.tsx'*/}
           {/*    className='btn btn-sm btn-light-primary'*/}
           {/*  >*/}
-          {/*    <KTSVG path='/media/icons/duotune/arr075.svg' className='svg-icon-2' />*/}
+          {/*    <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-2' />*/}
           {/*    New Member*/}
           {/*  </a>*/}
           {/*</div>*/}

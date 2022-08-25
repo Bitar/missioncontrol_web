@@ -8,7 +8,7 @@ type Props = {
   user: User | undefined
 }
 
-const UserInfo: FC<React.PropsWithChildren<Props>> = ({user}) => {
+const UserInfo: FC<Props> = ({user}) => {
   const location = useLocation()
   const [image, setImage] = useState<string>('')
 
@@ -56,7 +56,10 @@ const UserInfo: FC<React.PropsWithChildren<Props>> = ({user}) => {
                   <div className='d-flex flex-wrap fw-bold fs-6 mb-4 pe-2'>
                     {user?.meta?.username && (
                       <div className='d-flex align-items-center text-gray-400 me-5 mb-2'>
-                        <KTSVG path='/media/icons/duotune/com006.svg' className='svg-icon-4 me-1' />
+                        <KTSVG
+                          path='/media/icons/duotune/communication/com006.svg'
+                          className='svg-icon-4 me-1'
+                        />
                         {user?.meta?.username + '#' + user?.meta?.rng}
                       </div>
                     )}
@@ -64,12 +67,18 @@ const UserInfo: FC<React.PropsWithChildren<Props>> = ({user}) => {
                       href='mailto:`{community.contact?.email}`'
                       className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'
                     >
-                      <KTSVG path='/media/icons/duotune/com011.svg' className='svg-icon-4 me-1' />
+                      <KTSVG
+                        path='/media/icons/duotune/communication/com011.svg'
+                        className='svg-icon-4 me-1'
+                      />
                       {user?.email}
                     </a>
                     {user?.created_at && (
                       <div className='d-flex align-items-center text-gray-400 mb-2'>
-                        <KTSVG path='/media/icons/duotune/gen014.svg' className='svg-icon-4 me-1' />
+                        <KTSVG
+                          path='/media/icons/duotune/general/gen014.svg'
+                          className='svg-icon-4 me-1'
+                        />
                         since {Moment(user.created_at * 1000).format('MMM D, YYYY')}
                       </div>
                     )}

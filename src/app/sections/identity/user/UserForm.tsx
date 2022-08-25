@@ -14,7 +14,7 @@ type Props = {
 
 let rolesOptions: any[] = []
 
-const UserForm: FC<React.PropsWithChildren<Props>> = ({method, user, setUser}) => {
+const UserForm: FC<Props> = ({method, user, setUser}) => {
   const [selected, setSelected] = useState([])
   const [loaded, setLoaded] = useState(false)
 

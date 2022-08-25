@@ -6,8 +6,16 @@ import clsx from 'clsx'
 import {useLayout} from '../../core'
 import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {AsideMenu} from './AsideMenu'
+import {useThemeMode} from "../../../partials";
+import {ThemeModeComponent} from "../../../assets/ts/layout";
+
+const systemMode = ThemeModeComponent.getSystemMode() as 'light' | 'dark'
 
 const AsideDefault: FC<React.PropsWithChildren<unknown>> = () => {
+
+  const {mode} = useThemeMode()
+  const theme = mode === 'system' ? systemMode : mode
+
   const {config, classes} = useLayout()
   const asideRef = useRef<HTMLDivElement | null>(null)
   const {aside} = config
@@ -18,8 +26,6 @@ const AsideDefault: FC<React.PropsWithChildren<unknown>> = () => {
       asideRef.current?.classList.remove('animating')
     }, 300)
   }
-
-  let theme = localStorage.getItem('kt_theme_mode_menu')
 
   return (
     <div

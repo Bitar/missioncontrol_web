@@ -8,7 +8,7 @@ import {CommunityInfo} from '../CommunityInfo'
 import {CommunityEdit} from '../CommunityEdit'
 import {CommunityActivities} from './CommunityActivities'
 
-const CommunityView: React.FC<React.PropsWithChildren<unknown>> = () => {
+const CommunityView: React.FC = () => {
   const [community, setCommunity] = useState<Community | undefined>()
   const params = useParams()
 

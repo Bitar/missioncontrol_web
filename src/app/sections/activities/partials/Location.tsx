@@ -9,7 +9,7 @@ type Props = {
   setActivity: Dispatch<SetStateAction<Activity>>
 }
 
-const Location: FC<React.PropsWithChildren<Props>> = ({activity, setActivity}) => {
+const Location: FC<Props> = ({activity, setActivity}) => {
   const handleLocationChange = (object: any, type: number) => {
     updateData(
       {

@@ -6,7 +6,7 @@ type Props = {
   team: Team
 }
 
-const TeamObject: FC<React.PropsWithChildren<Props>> = ({team}) => {
+const TeamObject: FC<Props> = ({team}) => {
   return (
     <>
       <div className='card'>

@@ -9,7 +9,7 @@ import {UserActivities} from './UserActivities'
 import {UserTeams} from './UserTeams'
 import {SuspenseView} from '../../../../layout/SuspenseView'
 
-const UserView: React.FC<React.PropsWithChildren<unknown>> = () => {
+const UserView: React.FC = () => {
   const [user, setUser] = useState<User | undefined>()
   const params = useParams()
 

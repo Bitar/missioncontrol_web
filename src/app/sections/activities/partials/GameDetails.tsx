@@ -11,7 +11,7 @@ type Props = {
   setActivity: Dispatch<SetStateAction<Activity>>
 }
 
-const GameDetails: FC<React.PropsWithChildren<Props>> = ({activity, setActivity}) => {
+const GameDetails: FC<Props> = ({activity, setActivity}) => {
   const handleGameChange = (object: any) => {
     updateData({game: object}, setActivity, activity)
   }

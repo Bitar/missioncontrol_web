@@ -22,7 +22,7 @@ const core = {
 
   yellow: '#ffe8bc',
   yellow_dark: '#ffce71',
-}
+};
 
 const DatePickerTheme = {
   reactDates: {
@@ -193,6 +193,6 @@ const DatePickerTheme = {
       },
     },
   },
-}
+};
 
 export default DatePickerTheme

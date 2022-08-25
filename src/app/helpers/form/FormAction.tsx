@@ -5,7 +5,7 @@ type Props = {
   isSubmitting: boolean
 }
 
-const FormAction: FC<React.PropsWithChildren<Props>> = ({text, isSubmitting}) => {
+const FormAction: FC<Props> = ({text, isSubmitting}) => {
   return (
     <>
       <div className='card-footer d-flex justify-content-end py-6 px-9'>
