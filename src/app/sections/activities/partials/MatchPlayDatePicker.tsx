@@ -18,8 +18,6 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
   const [value, setValue] = useState<DateRange<Dayjs>>([null, null]);
   const [minDate, setMinDate] = useState<Dayjs | null>(dayjs());
 
-  console.log(minDate);
-
   const onDateChange = (newValue: any) => {
     setValue(newValue)
 
