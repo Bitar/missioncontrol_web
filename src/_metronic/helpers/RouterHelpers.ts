@@ -4,6 +4,7 @@ export function getCurrentUrl(pathname: string) {
 
 export function checkIsActive(pathname: string, url: string) {
   const current = getCurrentUrl(pathname)
+
   if (!current || !url) {
     return false
   }
@@ -12,9 +13,5 @@ export function checkIsActive(pathname: string, url: string) {
     return true
   }
 
-  if (current.indexOf(url) > -1) {
-    return true
-  }
-
-  return false
+  return current.indexOf(url) === 0
 }

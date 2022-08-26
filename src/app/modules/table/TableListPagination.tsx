@@ -28,7 +28,7 @@ const TableListPagination = () => {
   }
 
   const currentPage = (link: any) => {
-    const url = new URL(link.url);
+    const url = new URL(link.url)
     let pageNumber = url.searchParams.get('page')
     if (pageNumber) {
       return parseInt(pageNumber)

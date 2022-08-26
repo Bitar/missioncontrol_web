@@ -6,13 +6,12 @@ import clsx from 'clsx'
 import {useLayout} from '../../core'
 import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {AsideMenu} from './AsideMenu'
-import {useThemeMode} from "../../../partials";
-import {ThemeModeComponent} from "../../../assets/ts/layout";
+import {useThemeMode} from '../../../partials'
+import {ThemeModeComponent} from '../../../assets/ts/layout'
 
 const systemMode = ThemeModeComponent.getSystemMode() as 'light' | 'dark'
 
 const AsideDefault: FC<React.PropsWithChildren<unknown>> = () => {
-
   const {mode} = useThemeMode()
   const theme = mode === 'system' ? systemMode : mode
 
@@ -89,7 +88,7 @@ const AsideDefault: FC<React.PropsWithChildren<unknown>> = () => {
 
       {/* begin::Footer */}
       <div className='aside-footer flex-column-auto pt-5 pb-7 px-5' id='kt_aside_footer'>
-        <Link to={'/marketing-support'} className='btn btn-custom btn-primary w-100'>
+        <Link to={'/marketing-support'} className='btn btn-custom btn-mc-secondary w-100'>
           <KTSVG path='/media/icons/duotune/gen005.svg' className='svg-icon-2' />
           <span className='btn-label'>Marketing & Support</span>
         </Link>

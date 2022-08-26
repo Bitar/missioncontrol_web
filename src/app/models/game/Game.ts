@@ -26,4 +26,10 @@ export const initialGame = (game?: Game) => {
   }
 }
 
+export const roundList = [
+  {value: 1, label: 1},
+  {value: 3, label: 3},
+  {value: 5, label: 5},
+]
+
 export type GameQueryResponse = Response<Array<Game>>

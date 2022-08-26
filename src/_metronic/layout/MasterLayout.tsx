@@ -8,9 +8,7 @@ import {ScrollTop} from './components/ScrollTop'
 import {Content} from './components/Content'
 import {PageDataProvider} from './core'
 import {useLocation} from 'react-router-dom'
-import {
-  ThemeModeProvider,
-} from '../partials'
+import {ThemeModeProvider} from '../partials'
 import {MenuComponent} from '../assets/ts/components'
 
 const MasterLayout = () => {

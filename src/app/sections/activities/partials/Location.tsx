@@ -80,7 +80,7 @@ const Location: FC<Props> = ({activity, setActivity}) => {
         </div>
       </div>
 
-      {activity?.location?.type === 2 && (
+      {activity?.location?.type === 2 &&
         <div className='row mb-6'>
           <label className='col-lg-4 col-form-label required fw-bold fs-6'>Place</label>
           <div className='col-lg-8 fv-row'>
@@ -95,7 +95,7 @@ const Location: FC<Props> = ({activity, setActivity}) => {
             </div>
           </div>
         </div>
-      )}
+      }
     </>
   )
 }

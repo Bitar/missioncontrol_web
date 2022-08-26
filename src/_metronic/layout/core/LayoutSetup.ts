@@ -11,7 +11,7 @@ import {
   IPageTitle,
 } from './LayoutModels'
 import {DefaultLayoutConfig} from './DefaultLayoutConfig'
-import { ThemeModeComponent } from "../../assets/ts/layout";
+import {ThemeModeComponent} from '../../assets/ts/layout'
 
 const LAYOUT_CONFIG_KEY = process.env.REACT_APP_BASE_LAYOUT_CONFIG_KEY || 'LayoutConfig'
 

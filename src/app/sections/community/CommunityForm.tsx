@@ -390,8 +390,7 @@ const CommunityForm: FC<React.PropsWithChildren<Props>> = ({method, community, s
                   <span className='d-flex align-items-center me-2'>
                     <span className='symbol symbol-50px me-6'>
                       <span className='symbol-label bg-mc-primary'>
-                        <i className='fab fa-html5 text-warning fs-2x'></i>
-                        <i className={clsx('fa fs-3', 'fa-envelope')}></i>
+                        <i className='fa fa-envelope text-mc-secondary fs-3'></i>
                       </span>
                     </span>
 
@@ -420,8 +419,8 @@ const CommunityForm: FC<React.PropsWithChildren<Props>> = ({method, community, s
                   <span className='d-flex align-items-center me-2'>
                     <span className='symbol symbol-50px me-6'>
                       <span className='symbol-label bg-mc-primary'>
-                        <i className='fab fa-react text-success fs-2x'></i>
-                        <i className={clsx('fa fs-3', 'fa-key')}></i>
+                        <i className='fa fa-key text-mc-secondary fs-3'></i>
+                        <i className={clsx('fa fs-3', '')}></i>
                       </span>
                     </span>
 

@@ -1,15 +1,16 @@
 import React, {FC, useEffect, useState} from 'react'
-import Select from 'react-select'
+import Select, {GroupBase} from 'react-select'
 import {ErrorMessage} from 'formik'
 
 type Props = {
   label: string
   api?: any
   onChangeData: any
-  data?: any
+  data?: any,
+  isMulti?: boolean
 }
 
-const SelectMC: FC<Props> = ({label, onChangeData, api, data}) => {
+const SelectMC: FC<Props> = ({label, onChangeData, api, data, isMulti}) => {
   const [options, setOptions] = useState<any[]>([])
   const [optionSelected, setOptionSelected] = useState<any | null>(null)
   const [optionsLoaded, setOptionsLoaded] = useState<boolean>(false)
@@ -46,26 +47,41 @@ const SelectMC: FC<Props> = ({label, onChangeData, api, data}) => {
     setOptionSelected(selectedOption)
 
     let object = selectedOption.original
+    console.log(object)
     onChangeData(object)
   }
 
   return (
-    <>
-      <label className='col-lg-4 col-form-label required fw-bold fs-6'>{label}</label>
-      <div className='col-lg-8 fv-row'>
-        {optionsLoaded && (
-          <Select
-            isSearchable
-            defaultValue={optionSelected}
-            options={options}
-            onChange={handleChange}
-          />
-        )}
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='description' />
+      <>
+        <label className='col-lg-4 col-form-label required fw-bold fs-6'>{label}</label>
+        <div className='col-lg-8 fv-row'>
+          {optionsLoaded && (
+              <>
+                {isMulti ? (
+                    <Select
+                        isMulti
+                        isSearchable
+                        defaultValue={optionSelected}
+                        options={options}
+                        onChange={handleChange}
+                    />
+                ) : (
+                    <Select
+                        isSearchable
+                        defaultValue={optionSelected}
+                        options={options}
+                        onChange={handleChange}
+
+                    />
+                )}
+
+              </>
+          )}
+          <div className='text-danger mt-2'>
+            <ErrorMessage name='description'/>
+          </div>
         </div>
-      </div>
-    </>
+      </>
   )
 }
 export {SelectMC}

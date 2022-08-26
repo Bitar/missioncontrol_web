@@ -83,12 +83,12 @@ export function formOnChange(
       community
     )
   } else if (targetName.includes('access.')) {
-    let access_field = targetName.split('access.')[1]
-    if (access_field === 'type' || access_field === 'key') {
+    let accessField = targetName.split('access.')[1]
+    if (accessField === 'type' || accessField === 'key') {
       targetValue = +targetValue
     }
 
-    if (access_field === 'type' && targetValue === 1) {
+    if (accessField === 'type' && targetValue === 1) {
       updateData(
         {
           access: {type: targetValue},
@@ -97,9 +97,9 @@ export function formOnChange(
         community
       )
     } else {
-      let updateStuff = {[access_field]: targetValue}
+      let updateStuff = {[accessField]: targetValue}
 
-      if (access_field !== 'value') {
+      if (accessField !== 'value') {
         updateStuff = {...updateStuff, ...{value: ''}}
       }
 

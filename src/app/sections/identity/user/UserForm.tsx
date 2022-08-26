@@ -32,7 +32,7 @@ const UserForm: FC<Props> = ({method, user, setUser}) => {
   useEffect(() => {
     if (user?.roles) {
       user?.roles?.forEach(function (role) {
-        setSelected((prevState) => ({
+        setSelected((prevState: any) => ({
           ...prevState,
           ...{
             value: role.id,
