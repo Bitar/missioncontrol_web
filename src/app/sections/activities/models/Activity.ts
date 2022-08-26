@@ -10,7 +10,7 @@ import * as Yup from 'yup'
 import {ActivityType, initialActivityType} from './ActivityType'
 import {ActivitySettings, initialActivitySettings} from './ActivitySettings'
 import {GameMode} from '../../../models/game/GameMode'
-import {ActivityTeamSetting, initialActivityTeamSetting} from "./AvtivityTeamSetting";
+import {ActivityTeamSetting, initialActivityTeamSetting} from './AvtivityTeamSetting'
 
 export const activitySchema = Yup.object().shape({})
 
@@ -38,7 +38,7 @@ export const initialActivity = (activity?: Activity) => {
       players_count: 0,
     },
 
-    team_settings: initialActivityTeamSetting(activity?.team_settings)
+    team_settings: initialActivityTeamSetting(activity?.team_settings),
 
     // team: initialActivityTeam,
     // prize: initialActivityPrize,
@@ -107,13 +107,13 @@ export function formOnChange(
   } else if (targetName.includes('team_settings.')) {
     let targetField = targetName.split('team_settings.')[1]
     updateData(
-        {
-          team_settings: {...activity?.team_settings, ...{[targetField]: targetValue}},
-        },
-        setActivity,
-        activity
+      {
+        team_settings: {...activity?.team_settings, ...{[targetField]: targetValue}},
+      },
+      setActivity,
+      activity
     )
-  }else {
+  } else {
     updateData({[targetName]: targetValue}, setActivity, activity)
   }
 }

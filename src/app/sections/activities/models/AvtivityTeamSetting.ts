@@ -1,16 +1,16 @@
-import {ID} from "../../../../_metronic/helpers";
+import {ID} from '../../../../_metronic/helpers'
 
 export type ActivityTeamSetting = {
-    id?: ID,
-    min: number,
-    max: number,
-    players: number,
+  id?: ID
+  min: number
+  max: number
+  players: number
 }
 
 export const initialActivityTeamSetting = (activityTeamSetting?: ActivityTeamSetting) => {
-    return {
-        min: 0,
-        max: 0,
-        players: 0
-    }
+  return {
+    min: 0,
+    max: 0,
+    players: 0,
+  }
 }
