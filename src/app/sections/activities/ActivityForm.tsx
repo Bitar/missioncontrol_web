@@ -97,11 +97,11 @@ const ActivityForm: FC<React.PropsWithChildren<Props>> = ({ activity, setActivit
 
       <div className="separator separator-dashed my-6"></div>
 
-      <Schedule {...ActivityProps} />
+      <GameDetails {...ActivityProps} />
 
       <div className="separator separator-dashed my-6"></div>
 
-      <GameDetails {...ActivityProps} />
+      <Schedule {...ActivityProps} />
 
       <div className="separator separator-dashed my-6"></div>
 

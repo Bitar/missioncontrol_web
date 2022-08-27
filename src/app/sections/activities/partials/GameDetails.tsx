@@ -1,5 +1,4 @@
 import React, { Dispatch, FC, SetStateAction, useEffect, useRef, useState } from "react";
-import { SelectMC } from "../../../helpers/form/SelectMC";
 import { getAllGameModes, getAllGamePlatforms, getAllGames } from "../../games/core/GameRequests";
 import { updateData } from "../../../helpers/form/FormHelper";
 import { ErrorMessage } from "formik";
@@ -21,7 +20,7 @@ const GameDetails: FC<Props> = ({ activity, setActivity }) => {
   const platformsObj = useRef<Platform[] | undefined>([]);
   const [platforms, setPlatforms] = useState<Platform[]>([]);
 
-  const [selectedGames, setSelectedGames] = useState<Game>();
+  // const [selectedGames, setSelectedGames] = useState<Game>();
   const [games, setGames] = useState<Game[]>();
 
   const [selectedModes, setSelectedModes] = useState("");
@@ -41,7 +40,7 @@ const GameDetails: FC<Props> = ({ activity, setActivity }) => {
 
   useEffect(() => {
     if (activity?.game?.id) {
-      setSelectedModes("")
+      setSelectedModes("");
       getAllGameModes(activity?.game?.id).then((response) => {
         setModes(response.data);
       });
@@ -65,8 +64,6 @@ const GameDetails: FC<Props> = ({ activity, setActivity }) => {
 
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth size="small">
-              {/*<InputLabel id="games-select-label">Game</InputLabel>*/}
-
               {games && games.length > 0 &&
                 <Autocomplete
                   size="small"
@@ -74,6 +71,7 @@ const GameDetails: FC<Props> = ({ activity, setActivity }) => {
                   getOptionLabel={(game) => game.title}
                   options={games}
                   sx={{ maxHeight: 300 }}
+                  isOptionEqualToValue={(option: any, value: any) => option.id === value.id}
                   renderInput={(params) => <TextField {...params} label="Game" />}
                   onChange={(e, game) => {
                     updateData({
@@ -158,13 +156,6 @@ const GameDetails: FC<Props> = ({ activity, setActivity }) => {
                 </FormControl>
               </Box>
             </div>
-
-            {/*<SelectMC*/}
-            {/*  key={activity?.game?.id}*/}
-            {/*  label="Game Mode"*/}
-            {/*  api={() => getAllGameModes(activity?.game?.id)}*/}
-            {/*  onChangeData={(object: any) => updateData({ game_mode: object }, setActivity, activity)}*/}
-            {/*/>*/}
           </div>
 
           <div className="row mb-6">
@@ -195,7 +186,6 @@ const GameDetails: FC<Props> = ({ activity, setActivity }) => {
                     <MenuItem value={3}>3</MenuItem>
                     <MenuItem value={5}>5</MenuItem>
                     <MenuItem value={7}>7</MenuItem>
-                    {/*<MenuItem value="3">Custom</MenuItem>*/}
                   </Select>
                 </FormControl>
               </Box>
@@ -209,40 +199,59 @@ const GameDetails: FC<Props> = ({ activity, setActivity }) => {
             <label className="col-lg-4 col-form-label required fw-bold fs-6">Cross Play</label>
             <div className="col-lg-8 fv-row">
               <div className="form-check form-check-custom form-check-solid form-switch">
-                <Switch name="is_cross_play" />
+                <Switch name="is_cross_play" onChange={(e) => {
+                  setPlatforms([])
+                }} />
               </div>
               <div className="text-danger mt-2">
                 <ErrorMessage name="is_cross_play" />
               </div>
             </div>
           </div>
-          {activity?.settings?.is_cross_play && (
-            <div className="row mb-6">
-              <label className="col-lg-4 col-form-label required fw-bold fs-6">Platforms</label>
-              <div className="col-lg-8 fv-row">
 
-                {/* Check issue with select open. */}
-                <Box sx={{ minWidth: 120 }}>
-                  <FormControl fullWidth size="small">
-                    <InputLabel id="platforms-select-label">Platforms</InputLabel>
-                    <Select
-                      labelId="platforms-select-label"
-                      label="platforms"
-                      multiple
-                      value={platforms}
-                      onChange={(e: any) => setPlatforms(e.target.value)}
-                    >
-                      {platformsObj.current && platformsObj.current.length > 0 && (
-                        platformsObj.current.map((row: any) => (
-                          <MenuItem key={row.id} value={row.id}>{row.name}</MenuItem>
-                        ))
-                      )}
-                    </Select>
-                  </FormControl>
-                </Box>
-              </div>
+          <div className="row mb-6">
+            <label className="col-lg-4 col-form-label required fw-bold fs-6">Platforms</label>
+            <div className="col-lg-8 fv-row">
+
+              {/* Check issue with select open. */}
+              <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth size="small">
+                  <InputLabel id="platforms-select-label">Platforms</InputLabel>
+                  <Select
+                    labelId="platforms-select-label"
+                    label="platforms"
+                    multiple
+                    value={platforms}
+                    onChange={(e: any) => {
+                      let targetValue = e.target.value
+
+                      if (activity?.settings?.is_cross_play) {
+                        setPlatforms(targetValue);
+                      } else {
+                        if (platforms.length === 0) {
+                          setPlatforms(targetValue);
+                        } else {
+                          let lastPlatform = targetValue[targetValue.length - 1]
+                          setPlatforms([lastPlatform])
+                        }
+                      }
+
+                      if(targetValue.length === 0) {
+                        setPlatforms([])
+                      }
+
+                    }}
+                  >
+                    {platformsObj.current && platformsObj.current.length > 0 && (
+                      platformsObj.current.map((row: any) => (
+                        <MenuItem key={row.id} value={row.id}>{row.name}</MenuItem>
+                      ))
+                    )}
+                  </Select>
+                </FormControl>
+              </Box>
             </div>
-          )}
+          </div>
         </>
       )}
     </>
