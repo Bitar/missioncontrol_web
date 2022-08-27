@@ -32,7 +32,7 @@ const ActivityForm: FC<React.PropsWithChildren<Props>> = ({activity, setActivity
         <div className='col-lg-8 fv-row'>
           <Field
             type='text'
-            name='name'
+            name='title'
             placeholder='Activity Title'
             className='form-control mb-3 mb-lg-0'
             autoComplete='off'

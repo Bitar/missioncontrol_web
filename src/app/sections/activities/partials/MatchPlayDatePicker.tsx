@@ -62,9 +62,9 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
                 minDate={minDate}
                 renderInput={(startProps, endProps) => (
                     <React.Fragment>
-                      <TextField {...startProps} />
-                      <Box sx={{mx: 2}}> to </Box>
-                      <TextField {...endProps} />
+                      <TextField {...startProps} size={"small"} />
+                      <Box sx={{ mx: 2 }}> to </Box>
+                      <TextField {...endProps} size={"small"} />
                     </React.Fragment>
                 )}
             />

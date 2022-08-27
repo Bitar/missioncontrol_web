@@ -102,7 +102,7 @@ const GameDetails: FC<Props> = ({activity, setActivity}) => {
                   labelId="timezone-select-label"
                   id="timezone-select"
                   value={rounds}
-                  label="Match Frequency"
+                  label="Rounds"
                   onChange={(e) => {
                     setRounds(e.target.value as string)
 
@@ -116,8 +116,10 @@ const GameDetails: FC<Props> = ({activity, setActivity}) => {
                     }, setActivity, activity)
                   }}
               >
-                <MenuItem value={1}>Daily</MenuItem>
-                <MenuItem value={2}>Weekly</MenuItem>
+                <MenuItem value={1}>1</MenuItem>
+                <MenuItem value={3}>3</MenuItem>
+                <MenuItem value={5}>5</MenuItem>
+                <MenuItem value={7}>7</MenuItem>
                 {/*<MenuItem value="3">Custom</MenuItem>*/}
               </Select>
             </FormControl>
