@@ -47,7 +47,6 @@ const SelectMC: FC<Props> = ({label, onChangeData, api, data, isMulti}) => {
     setOptionSelected(selectedOption)
 
     let object = selectedOption.original
-    console.log(object)
     onChangeData(object)
   }
 
