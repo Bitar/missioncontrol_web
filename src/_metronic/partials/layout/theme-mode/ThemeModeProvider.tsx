@@ -56,6 +56,12 @@ const ThemeModeContext = createContext<ThemeModeContextType>({
   updateMenuMode: (_menuMode: ThemeModeType) => {},
 })
 
+export const getTheme = () => {
+  let systemMode = ThemeModeComponent.getSystemMode() as 'light' | 'dark'
+  let mode = getThemeModeFromLocalStorage(themeModeLSKey)
+  return mode === 'system' ? systemMode : mode;
+}
+
 const useThemeMode = () => useContext(ThemeModeContext)
 
 const ThemeModeProvider = ({children}: {children: React.ReactNode}) => {

@@ -1,12 +1,13 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
 import {SelectMC} from '../../../helpers/form/SelectMC'
 import {getAllGameModes, getAllGamePlatforms, getAllGames} from '../../games/core/GameRequests'
-// import Select from 'react-select'
 import {updateData} from '../../../helpers/form/FormHelper'
 import {ErrorMessage, Field} from 'formik'
 import {Activity} from '../models/Activity'
-import {roundList} from '../../../models/game/Game'
-import Select, {GroupBase} from 'react-select'
+import FormControl from "@mui/material/FormControl";
+import {MenuItem, Select, InputLabel} from "@mui/material";
+import Box from "@mui/material/Box";
+
 
 type Props = {
   activity: Activity | undefined
@@ -16,6 +17,7 @@ type Props = {
 let platformsObject: any[] = []
 
 const GameDetails: FC<Props> = ({activity, setActivity}) => {
+  const [rounds, setRounds] = useState('')
   const [selected, setSelected] = useState([])
   const [platforms, setPlatforms] = useState([])
 
@@ -50,9 +52,9 @@ const GameDetails: FC<Props> = ({activity, setActivity}) => {
 
   const handlePlatformChange = (selectedOption: any) => {
     // console.log(selectedOption)
-    let platformIds: any[] = []
+    // let platformIds: any[] = []
     platformsObject = selectedOption.map((option: any) => {
-      platformIds.push(option.value)
+      // platformIds.push(option.value)
       return {
         id: option.value,
         name: option.label,
@@ -93,17 +95,33 @@ const GameDetails: FC<Props> = ({activity, setActivity}) => {
       <div className='row mb-6'>
         <label className='col-lg-4 col-form-label required fw-bold fs-6'>Rounds</label>
         <div className='col-lg-8 fv-row'>
-          <select
-            name='rounds'
-            className='form-select form-select-white form-select-sm'
-            defaultValue='1'
-            onChange={(e: any) => updateData({rounds: e.target.value}, setActivity, activity)}
-          >
-            <option value='1'>1</option>
-            <option value='2'>3</option>
-            <option value='3'>5</option>
-            <option value='4'>7</option>
-          </select>
+          <Box sx={{minWidth: 120}}>
+            <FormControl fullWidth size="small">
+              <InputLabel id="timezone-select-label">Rounds</InputLabel>
+              <Select
+                  labelId="timezone-select-label"
+                  id="timezone-select"
+                  value={rounds}
+                  label="Match Frequency"
+                  onChange={(e) => {
+                    setRounds(e.target.value as string)
+
+                    updateData({
+                      settings: {
+                        ...activity?.settings,
+                        ...{
+                          rounds: e.target.value
+                        },
+                      },
+                    }, setActivity, activity)
+                  }}
+              >
+                <MenuItem value={1}>Daily</MenuItem>
+                <MenuItem value={2}>Weekly</MenuItem>
+                {/*<MenuItem value="3">Custom</MenuItem>*/}
+              </Select>
+            </FormControl>
+          </Box>
           <div className='text-danger mt-2'>
             <ErrorMessage name='rounds' />
           </div>
@@ -132,14 +150,15 @@ const GameDetails: FC<Props> = ({activity, setActivity}) => {
             <div className='row mb-6'>
               <label className='col-lg-4 col-form-label required fw-bold fs-6'>Platforms</label>
               <div className='col-lg-8 fv-row'>
-                <Select
-                  // key={activity?.game?.id}
-                  isMulti
-                  isSearchable
-                  defaultValue={selected}
-                  options={platformsObject}
-                  onChange={handlePlatformChange}
-                />
+
+                {/*<Select*/}
+                {/*  // key={activity?.game?.id}*/}
+                {/*  isMulti*/}
+                {/*  isSearchable*/}
+                {/*  defaultValue={selected}*/}
+                {/*  options={platformsObject}*/}
+                {/*  onChange={handlePlatformChange}*/}
+                {/*/>*/}
               </div>
             </div>
           )}

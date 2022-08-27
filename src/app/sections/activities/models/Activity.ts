@@ -2,7 +2,6 @@ import {ID, Response} from '../../../../_metronic/helpers'
 import {Game} from '../../../models/game/Game'
 import {ActivityFee, initialActivityFee} from './ActivityFee'
 import {ActivityLocation, initialActivityLocation} from './ActivityLocation'
-import {ActivitySchedule} from './ActivitySchedule'
 import {Community} from '../../community/models/Community'
 import {Dispatch, SetStateAction} from 'react'
 import {updateData} from '../../../helpers/form/FormHelper'
@@ -51,7 +50,6 @@ export type Activity = {
   description?: string
   type: ActivityType
   status: number
-  // team?: Team
   settings: ActivitySettings
   community?: Community
   game?: Game
@@ -65,7 +63,6 @@ export type Activity = {
     end_date: number
   }
   prize?: []
-  schedule?: ActivitySchedule
   location?: ActivityLocation
   // platforms?: Platform,
   announcements?: []
@@ -95,6 +92,14 @@ export function formOnChange(
       },
       setActivity,
       activity
+    )
+  } else if(targetName === 'location.location') {
+    updateData(
+        {
+          location: {...activity?.location, ...{location: targetValue}},
+        },
+        setActivity,
+        activity
     )
   } else if (targetName === 'entry_fee.amount') {
     updateData(
