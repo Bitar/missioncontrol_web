@@ -11,7 +11,7 @@ import dayjs, {Dayjs} from 'dayjs'
 import {getTheme} from '../../../../_metronic/partials'
 import FormControl from '@mui/material/FormControl'
 import Box from '@mui/material/Box'
-import {InputLabel, MenuItem, Select, SelectChangeEvent} from "@mui/material";
+import {InputLabel, MenuItem, Select} from "@mui/material";
 import {getTimeZones} from "../../misc/core/_requests";
 import {TimeZone} from "../../../models/misc/TimeZone";
 import {updateData} from "../../../helpers/form/FormHelper";
@@ -27,10 +27,6 @@ const Schedule: FC<Props> = ({activity, setActivity}) => {
   const [selectedTimeZone, setSelectedTimeZone] = useState('')
   const [timeZones, setTimeZones] = useState<TimeZone[]>()
   const theme = getTheme()
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setFrequency(event.target.value as string);
-  };
 
   useEffect(() => {
     getTimeZones().then((response) => {

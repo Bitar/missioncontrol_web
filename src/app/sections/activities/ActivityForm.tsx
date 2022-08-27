@@ -1,28 +1,35 @@
-import React, { Dispatch, FC, SetStateAction, useState } from "react";
+import React, { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { Activity } from "./models/Activity";
 import { ErrorMessage } from "formik";
 import { updateData } from "../../helpers/form/FormHelper";
-import { SelectMC } from "../../helpers/form/SelectMC";
 import { getAllCommunities } from "../community/core/CommunityRequests";
 import { GameDetails, Location, EntryFee, Schedule, TeamDetails, Scoring } from "./partials";
-import { KTCard, KTCardBody } from "../../../_metronic/helpers";
 import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import { InputLabel, MenuItem, Select } from "@mui/material";
+import Box from "@mui/material/Box";
+import { Community } from "../community/models/Community";
 
 type Props = {
   activity: Activity | undefined
   setActivity: Dispatch<SetStateAction<Activity>>
 }
 
+
 const ActivityForm: FC<React.PropsWithChildren<Props>> = ({ activity, setActivity }) => {
-  const [openScoring, setOpenScoring] = useState(false);
+  const [selectedCommunity, setSelectedCommunity] = useState("");
+  const [communities, setCommunities] = useState<Community[]>();
+
   const ActivityProps = {
     activity: activity,
     setActivity: setActivity
   };
 
-  const handleChange = (object: any) => {
-    updateData({ community: object }, setActivity, activity);
-  };
+  useEffect(() => {
+    getAllCommunities().then((response) => {
+      setCommunities(response.data);
+    });
+  }, []);
 
   return (
     <>
@@ -51,13 +58,6 @@ const ActivityForm: FC<React.PropsWithChildren<Props>> = ({ activity, setActivit
             name="description"
             className="w-100"
             size="small" />
-          {/*<Field*/}
-          {/*  as="textarea"*/}
-          {/*  name="description"*/}
-          {/*  className="form-control mb-3 mb-lg-0"*/}
-          {/*  placeholder="Activity Description"*/}
-          {/*  rows={3}*/}
-          {/*/>*/}
           <div className="text-danger mt-2">
             <ErrorMessage name="description" />
           </div>
@@ -65,8 +65,34 @@ const ActivityForm: FC<React.PropsWithChildren<Props>> = ({ activity, setActivit
       </div>
 
       <div className="row mb-6">
-        {/*TODO: Maybe Async here*/}
-        <SelectMC label={"Community"} api={getAllCommunities} onChangeData={handleChange} />
+        <label className="col-lg-4 col-form-label required fw-bold fs-6">Community</label>
+        <div className="col-lg-8 fv-row">
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth size="small">
+              <InputLabel id="communities-select-label">Community</InputLabel>
+              <Select
+                labelId="communities-select-label"
+                id="communities-select"
+                value={selectedCommunity}
+                label="Community"
+                MenuProps={{ PaperProps: { sx: { maxHeight: 300 } } }}
+                onChange={(e) => {
+                  setSelectedCommunity(e.target.value as string);
+
+                  updateData({
+                    community_id: e.target.value
+                  }, setActivity, activity);
+                }}
+              >
+                {communities && communities?.length > 0 && (
+                  communities?.map((community: any) => (
+                    <MenuItem key={community.id} value={community.id}>{community.name}</MenuItem>
+                  ))
+                )}
+              </Select>
+            </FormControl>
+          </Box>
+        </div>
       </div>
 
       <div className="separator separator-dashed my-6"></div>

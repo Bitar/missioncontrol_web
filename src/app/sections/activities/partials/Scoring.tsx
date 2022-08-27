@@ -36,7 +36,7 @@ const Scoring: FC<Props> = ({ activity, setActivity }) => {
       <div className="row mb-6">
         <div className="col-12">
           <TextField
-            label="Players"
+            label="Type"
             variant="outlined"
             className="w-100"
             size="small"
