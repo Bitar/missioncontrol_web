@@ -65,7 +65,7 @@ const GameDetails: FC<Props> = ({ activity, setActivity }) => {
               key={activity?.game?.id}
               label="Game Mode"
               api={() => getAllGameModes(activity?.game?.id)}
-              onChangeData={() => handleGameModeChange}
+              onChangeData={handleGameModeChange}
             />
           </div>
 

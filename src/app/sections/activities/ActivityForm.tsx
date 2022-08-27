@@ -1,14 +1,11 @@
-import React, { Dispatch, FC, SetStateAction } from "react";
+import React, { Dispatch, FC, SetStateAction, useState } from "react";
 import { Activity } from "./models/Activity";
-import { ErrorMessage, Field } from "formik";
+import { ErrorMessage } from "formik";
 import { updateData } from "../../helpers/form/FormHelper";
 import { SelectMC } from "../../helpers/form/SelectMC";
 import { getAllCommunities } from "../community/core/CommunityRequests";
-import { GameDetails } from "./partials/GameDetails";
-import { Location } from "./partials/Location";
-import { EntryFee } from "./partials/EntryFee";
-import { Schedule } from "./partials/Schedule";
-import { TeamDetails } from "./partials/TeamDetails";
+import { GameDetails, Location, EntryFee, Schedule, TeamDetails, Scoring } from "./partials";
+import { KTCard, KTCardBody } from "../../../_metronic/helpers";
 import TextField from "@mui/material/TextField";
 
 type Props = {
@@ -17,6 +14,7 @@ type Props = {
 }
 
 const ActivityForm: FC<React.PropsWithChildren<Props>> = ({ activity, setActivity }) => {
+  const [openScoring, setOpenScoring] = useState(false);
   const ActivityProps = {
     activity: activity,
     setActivity: setActivity
@@ -35,8 +33,8 @@ const ActivityForm: FC<React.PropsWithChildren<Props>> = ({ activity, setActivit
             label="Title"
             variant="outlined"
             name="title"
-            className='w-100'
-            size='small' />
+            className="w-100"
+            size="small" />
           <div className="text-danger mt-2">
             <ErrorMessage name="title" />
           </div>
@@ -51,8 +49,8 @@ const ActivityForm: FC<React.PropsWithChildren<Props>> = ({ activity, setActivit
             variant="outlined"
             multiline
             name="description"
-            className='w-100'
-            size='small' />
+            className="w-100"
+            size="small" />
           {/*<Field*/}
           {/*  as="textarea"*/}
           {/*  name="description"*/}
@@ -80,6 +78,14 @@ const ActivityForm: FC<React.PropsWithChildren<Props>> = ({ activity, setActivit
       <GameDetails {...ActivityProps} />
 
       <div className="separator separator-dashed my-6"></div>
+
+      {activity?.game_mode && (
+        <>
+          <Scoring {...ActivityProps} />
+
+          <div className="separator separator-dashed my-6"></div>
+        </>
+      )}
 
       <TeamDetails {...ActivityProps} />
 
