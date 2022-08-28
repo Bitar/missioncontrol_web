@@ -1,6 +1,5 @@
 const TimeZoneColumns = () => {
-
-    return (<></>)
+  return <></>
 }
 
 export {TimeZoneColumns}

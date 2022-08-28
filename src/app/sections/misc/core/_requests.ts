@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from 'axios'
 import {StateQueryResponse} from '../../../models/misc/State'
 import {CountryQueryResponse} from '../../../models/misc/Country'
-import {TimeZoneCollection} from "../../../models/misc/TimeZone";
+import {TimeZoneCollection} from '../../../models/misc/TimeZone'
 
 const API_URL = process.env.REACT_APP_API_URL
 const GET_MISC_URL = `${API_URL}/misc`

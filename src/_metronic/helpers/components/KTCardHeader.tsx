@@ -1,0 +1,3 @@
+const KTCardHeader = () => {}
+
+export {KTCardHeader}

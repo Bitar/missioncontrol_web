@@ -1,5 +1,4 @@
-import {FC} from 'react'
-import {MenuInner} from './MenuInner'
+import React, {FC} from 'react'
 
 const Header: FC<React.PropsWithChildren<unknown>> = () => {
   return (

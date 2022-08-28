@@ -33,7 +33,7 @@ const TeamDetails: FC<Props> = ({activity, setActivity}) => {
       </div>
 
       <div className='row mb-6'>
-        <label className='col-lg-4 col-form-label required fw-bold fs-6'>Minimum Players</label>
+        <label className='col-lg-4 col-form-label required fw-bold fs-6'>Minimum Teams</label>
         <div className='col-lg-8 fv-row'>
           <Field
             type='number'

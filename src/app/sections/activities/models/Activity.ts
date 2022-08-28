@@ -74,6 +74,8 @@ export type Activity = {
     teams_count: number
     players_count: number
   }
+  game_mode_id?: number
+  type_id?: number
 }
 export type ActivityQueryResponse = Response<Array<Activity>>
 
@@ -93,13 +95,13 @@ export function formOnChange(
       setActivity,
       activity
     )
-  } else if(targetName === 'location.location') {
+  } else if (targetName === 'location.location') {
     updateData(
-        {
-          location: {...activity?.location, ...{location: targetValue}},
-        },
-        setActivity,
-        activity
+      {
+        location: {...activity?.location, ...{location: targetValue}},
+      },
+      setActivity,
+      activity
     )
   } else if (targetName === 'entry_fee.amount') {
     updateData(

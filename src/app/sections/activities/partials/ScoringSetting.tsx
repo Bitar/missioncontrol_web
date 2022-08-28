@@ -1,18 +1,18 @@
-import { Box, Container, List, ListItem, ListItemText } from "@mui/material";
-import React, { FC } from "react";
-import { ScoringSettings } from "../../../models/game/scoring/ScoringSettings";
+import {Box, List, ListItem, ListItemText} from '@mui/material'
+import React, {FC} from 'react'
+import {ScoringSettings} from '../../../models/game/scoring/ScoringSettings'
 
 type Props = {
   settings: ScoringSettings
 }
 
-const ScoringSetting: FC<Props> = ({ settings }) => {
+const ScoringSetting: FC<Props> = ({settings}) => {
   // console.log(settings);
 
   function ordinal(n: number) {
-    let s = ["th", "st", "nd", "rd"];
-    let v = n%100;
-    return n + (s[(v-20)%10] || s[v] || s[0]);
+    let s = ['th', 'st', 'nd', 'rd']
+    let v = n % 100
+    return n + (s[(v - 20) % 10] || s[v] || s[0])
   }
 
   return (
@@ -21,9 +21,10 @@ const ScoringSetting: FC<Props> = ({ settings }) => {
         <>
           <Box>
             <div>
-              <h6>{settings?.key?.key} Point worth {settings?.values[0].value}</h6>
+              <h6>
+                {settings?.key?.key} Point worth {settings?.values[0].value}
+              </h6>
             </div>
-
           </Box>
         </>
       ) : (
@@ -42,12 +43,11 @@ const ScoringSetting: FC<Props> = ({ settings }) => {
                 overflow: 'auto',
                 maxHeight: 300,
               }}
-
             >
               {settings?.values?.map((value) => (
-                <ListItem>
+                <ListItem key={value.id}>
                   <ListItemText
-                    primary={ordinal(value.key) + " " + settings?.key?.key + ": " + value.value}
+                    primary={ordinal(value.key) + ' ' + settings?.key?.key + ': ' + value.value}
                   />
                 </ListItem>
               ))}
@@ -57,7 +57,7 @@ const ScoringSetting: FC<Props> = ({ settings }) => {
       )}
       <br />
     </>
-  );
-};
+  )
+}
 
-export { ScoringSetting };
+export {ScoringSetting}

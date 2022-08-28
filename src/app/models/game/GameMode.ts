@@ -1,6 +1,6 @@
 import {ID, Response} from '../../../_metronic/helpers'
-import { GameSettings } from "./GameSettings";
-import { ScoringSettings } from "./scoring/ScoringSettings";
+import {GameSettings} from './GameSettings'
+import {ScoringSettings} from './scoring/ScoringSettings'
 
 export type GameMode = {
   id?: ID
@@ -32,7 +32,7 @@ export const initialGameMode = (gameMode?: GameMode) => {
     max_players: gameMode?.max_players || 0,
     game_time: gameMode?.game_time || 0,
     settings: gameMode?.settings,
-    score_settings: gameMode?.scoring_settings
+    score_settings: gameMode?.scoring_settings,
   }
 }
 

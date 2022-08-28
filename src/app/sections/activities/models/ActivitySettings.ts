@@ -1,4 +1,4 @@
-import {ID} from "../../../../_metronic/helpers";
+import {ID} from '../../../../_metronic/helpers'
 
 export type ActivitySettings = {
   rounds: number
@@ -13,7 +13,7 @@ export const initialActivitySettings = (activitySettings?: ActivitySettings) => 
     rounds: activitySettings?.rounds || 0,
     is_cross_play: activitySettings?.is_cross_play || false,
     frequency: activitySettings?.frequency || 0,
-    time_of_day: activitySettings?.time_of_day || "",
+    time_of_day: activitySettings?.time_of_day || '',
     timezone: activitySettings?.timezone || 0,
   }
 }

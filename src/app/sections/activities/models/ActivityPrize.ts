@@ -1,20 +1,18 @@
 import {ID, Response} from '../../../../_metronic/helpers'
+import {PrizeBundle} from './PrizeBundle'
+import {PrizeItem} from './PrizeItem'
 
 export type ActivityPrize = {
   id?: ID
-  prize_type: string
-  item_type: string
-  item_name: string
-  item_value: string
-  item_value_type: string
+  type: number
+  bundle?: PrizeBundle
+  item?: PrizeItem
 }
 
-export const initialActivityPrize = {
-  prize_type: '',
-  item_type: '',
-  item_name: '',
-  item_value: '',
-  item_value_type: '',
+export const initialActivityPrize = (activityPrize?: ActivityPrize) => {
+  return {
+    type: activityPrize?.type || 1,
+  }
 }
 
 export type ActivityLocationQueryResponse = Response<Array<ActivityPrize>>

@@ -31,14 +31,14 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
     }
 
     updateData(
-        {
-          matchplay_dates: {
-            ...activity?.matchplay_dates,
-            ...{start_date: startDate, end_date: endDate},
-          },
+      {
+        matchplay_dates: {
+          ...activity?.matchplay_dates,
+          ...{start_date: startDate, end_date: endDate},
         },
-        setActivity,
-        activity
+      },
+      setActivity,
+      activity
     )
   }
 
@@ -51,26 +51,25 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
   }, [activity?.registration_dates?.end_date])
 
   return (
-      <>
-        <div className='text-center'>
-          <LocalizationProvider dateAdapter={AdapterDayjs} localeText={{start: 'From', end: 'To'}}>
-            <DateRangePicker
-
-                disablePast
-                value={value}
-                onChange={onDateChange}
-                minDate={minDate}
-                renderInput={(startProps, endProps) => (
-                    <React.Fragment>
-                      <TextField {...startProps} size={"small"} />
-                      <Box sx={{ mx: 2 }}> to </Box>
-                      <TextField {...endProps} size={"small"} />
-                    </React.Fragment>
-                )}
-            />
-          </LocalizationProvider>
-        </div>
-      </>
+    <>
+      <div className='text-center'>
+        <LocalizationProvider dateAdapter={AdapterDayjs} localeText={{start: 'From', end: 'To'}}>
+          <DateRangePicker
+            disablePast
+            value={value}
+            onChange={onDateChange}
+            minDate={minDate}
+            renderInput={(startProps, endProps) => (
+              <React.Fragment>
+                <TextField {...startProps} size={'small'} />
+                <Box sx={{mx: 2}}> to </Box>
+                <TextField {...endProps} size={'small'} />
+              </React.Fragment>
+            )}
+          />
+        </LocalizationProvider>
+      </div>
+    </>
   )
 }
 

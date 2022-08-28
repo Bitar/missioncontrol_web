@@ -11,10 +11,10 @@ import dayjs, {Dayjs} from 'dayjs'
 import {getTheme} from '../../../../_metronic/partials'
 import FormControl from '@mui/material/FormControl'
 import Box from '@mui/material/Box'
-import {InputLabel, MenuItem, Select} from "@mui/material";
-import {getTimeZones} from "../../misc/core/_requests";
-import {TimeZone} from "../../../models/misc/TimeZone";
-import {updateData} from "../../../helpers/form/FormHelper";
+import {InputLabel, MenuItem, Select} from '@mui/material'
+import {getTimeZones} from '../../misc/core/_requests'
+import {TimeZone} from '../../../models/misc/TimeZone'
+import {updateData} from '../../../helpers/form/FormHelper'
 
 type Props = {
   activity: Activity | undefined
@@ -35,134 +35,148 @@ const Schedule: FC<Props> = ({activity, setActivity}) => {
   }, [])
 
   return (
-      <>
-        <div className='row mb-6'>
-          <div className='col-12'>
-            <h4 className='text-dark'>Schedule</h4>
-          </div>
+    <>
+      <div className='row mb-6'>
+        <div className='col-12'>
+          <h4 className='text-dark'>Schedule</h4>
         </div>
+      </div>
 
-        <div className='row mb-6'>
-          <div className='col-lg-4'>
-            <span className='required fw-bold fs-6'>Registration Dates</span>
-          </div>
-          <div className='col-lg-8 fv-row'>
-            <RegistrationDatePicker activity={activity} setActivity={setActivity}/>
-          </div>
+      <div className='row mb-6'>
+        <div className='col-lg-4'>
+          <span className='required fw-bold fs-6'>Registration Dates</span>
         </div>
-        <div className='row mb-6'>
-          <div className='col-lg-4'>
-            <span className='required fw-bold fs-6'>Match Play Dates</span>
-          </div>
-          <div className='col-lg-8 fv-row'>
-            <MatchPlayDatePicker activity={activity} setActivity={setActivity}/>
-          </div>
+        <div className='col-lg-8 fv-row'>
+          <RegistrationDatePicker activity={activity} setActivity={setActivity} />
         </div>
-        <div className='row mb-6'>
-          <div className='col-lg-4'>
-            <span className='required fw-bold fs-6'>Match Frequency</span>
-          </div>
-          <div className='col-lg-8'>
-            <Box sx={{minWidth: 120}}>
-              <FormControl fullWidth size="small">
-                <InputLabel id="timezone-select-label">Match Frequency</InputLabel>
-                <Select
-                    labelId="timezone-select-label"
-                    id="timezone-select"
-                    value={frequency}
-                    label="Match Frequency"
-                    onChange={(e) => {
-                      setFrequency(e.target.value as string)
+      </div>
+      <div className='row mb-6'>
+        <div className='col-lg-4'>
+          <span className='required fw-bold fs-6'>Match Play Dates</span>
+        </div>
+        <div className='col-lg-8 fv-row'>
+          <MatchPlayDatePicker activity={activity} setActivity={setActivity} />
+        </div>
+      </div>
+      <div className='row mb-6'>
+        <div className='col-lg-4'>
+          <span className='required fw-bold fs-6'>Match Frequency</span>
+        </div>
+        <div className='col-lg-8'>
+          <Box sx={{minWidth: 120}}>
+            <FormControl fullWidth size='small'>
+              <InputLabel id='timezone-select-label'>Match Frequency</InputLabel>
+              <Select
+                labelId='timezone-select-label'
+                id='timezone-select'
+                value={frequency}
+                label='Match Frequency'
+                onChange={(e) => {
+                  setFrequency(e.target.value as string)
 
-                      updateData({
-                        settings: {
-                          ...activity?.settings,
-                          ...{
-                            frequency: e.target.value
-                          },
+                  updateData(
+                    {
+                      settings: {
+                        ...activity?.settings,
+                        ...{
+                          frequency: e.target.value,
                         },
-                      }, setActivity, activity)
-                    }}
-                >
-                  <MenuItem value={1}>Daily</MenuItem>
-                  <MenuItem value={2}>Weekly</MenuItem>
-                  {/*<MenuItem value="3">Custom</MenuItem>*/}
-                </Select>
-              </FormControl>
-            </Box>
-          </div>
+                      },
+                    },
+                    setActivity,
+                    activity
+                  )
+                }}
+              >
+                <MenuItem value={1}>Daily</MenuItem>
+                <MenuItem value={2}>Weekly</MenuItem>
+                {/*<MenuItem value="3">Custom</MenuItem>*/}
+              </Select>
+            </FormControl>
+          </Box>
         </div>
-        <div className='row mb-6'>
-          <div className='col-lg-4'>
-            <span className='required fw-bold fs-6'>Time of Day</span>
-          </div>
-          <div className='col-lg-6'>
-            <ThemeProvider theme={createTheme({palette: {mode: theme}})}>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <StaticTimePicker
-                    label={' '}
-                    ampm
-                    orientation='landscape'
-                    openTo='minutes'
-                    value={value}
-                    onChange={(newValue: any) => {
-                      setValue(newValue)
+      </div>
+      <div className='row mb-6'>
+        <div className='col-lg-4'>
+          <span className='required fw-bold fs-6'>Time of Day</span>
+        </div>
+        <div className='col-lg-6'>
+          <ThemeProvider theme={createTheme({palette: {mode: theme}})}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <StaticTimePicker
+                label={' '}
+                ampm
+                orientation='landscape'
+                openTo='minutes'
+                value={value}
+                onChange={(newValue: any) => {
+                  setValue(newValue)
 
-                      let timeOfDay = (new Date(newValue.$d).getTime() / 1000).toString()
+                  let timeOfDay = (new Date(newValue.$d).getTime() / 1000).toString()
 
-                      updateData({
-                        settings: {
-                          ...activity?.settings,
-                          ...{
-                            time_of_day: timeOfDay
-                          },
+                  updateData(
+                    {
+                      settings: {
+                        ...activity?.settings,
+                        ...{
+                          time_of_day: timeOfDay,
                         },
-                      }, setActivity, activity)
-                    }}
-                    componentsProps={{actionBar: {actions: []}}}
-                    renderInput={(params) => <TextField {...params} />}
-                />
-              </LocalizationProvider>
-            </ThemeProvider>
-          </div>
+                      },
+                    },
+                    setActivity,
+                    activity
+                  )
+                }}
+                componentsProps={{actionBar: {actions: []}}}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
+          </ThemeProvider>
         </div>
-        <div className="row mb-6">
-          <div className='col-lg-4'>
-            <span className='required fw-bold fs-6'>Time Zone</span>
-          </div>
-          <div className="col-lg-8">
-            <Box sx={{minWidth: 120}}>
-              <FormControl fullWidth size="small">
-                <InputLabel id="timezone-select-label">Timezones</InputLabel>
-                <Select
-                    labelId="timezone-select-label"
-                    id="timezone-select"
-                    value={selectedTimeZone}
-                    label="Timezones"
-                    onChange={(e) => {
-                      setSelectedTimeZone(e.target.value as string)
+      </div>
+      <div className='row mb-6'>
+        <div className='col-lg-4'>
+          <span className='required fw-bold fs-6'>Time Zone</span>
+        </div>
+        <div className='col-lg-8'>
+          <Box sx={{minWidth: 120}}>
+            <FormControl fullWidth size='small'>
+              <InputLabel id='timezone-select-label'>Timezones</InputLabel>
+              <Select
+                labelId='timezone-select-label'
+                id='timezone-select'
+                value={selectedTimeZone}
+                label='Timezones'
+                onChange={(e) => {
+                  setSelectedTimeZone(e.target.value as string)
 
-                      updateData({
-                        settings: {
-                          ...activity?.settings,
-                          ...{
-                            timezone: e.target.value
-                          },
+                  updateData(
+                    {
+                      settings: {
+                        ...activity?.settings,
+                        ...{
+                          timezone: e.target.value,
                         },
-                      }, setActivity, activity)
-                    }}
-                >
-                  {timeZones && timeZones.length > 0 && (
-                      timeZones.map((row: any, i) => (
-                          <MenuItem key={row.id} value={row.id}>{row.name}</MenuItem>
-                      ))
-                  )}
-                </Select>
-              </FormControl>
-            </Box>
-          </div>
+                      },
+                    },
+                    setActivity,
+                    activity
+                  )
+                }}
+              >
+                {timeZones &&
+                  timeZones.length > 0 &&
+                  timeZones.map((row: any, i) => (
+                    <MenuItem key={row.id} value={row.id}>
+                      {row.name}
+                    </MenuItem>
+                  ))}
+              </Select>
+            </FormControl>
+          </Box>
         </div>
-      </>
+      </div>
+    </>
   )
 }
 export {Schedule}

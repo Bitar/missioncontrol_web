@@ -59,7 +59,7 @@ const ThemeModeContext = createContext<ThemeModeContextType>({
 export const getTheme = () => {
   let systemMode = ThemeModeComponent.getSystemMode() as 'light' | 'dark'
   let mode = getThemeModeFromLocalStorage(themeModeLSKey)
-  return mode === 'system' ? systemMode : mode;
+  return mode === 'system' ? systemMode : mode
 }
 
 const useThemeMode = () => useContext(ThemeModeContext)
