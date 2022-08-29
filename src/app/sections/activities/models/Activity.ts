@@ -75,7 +75,9 @@ export type Activity = {
     players_count: number
   }
   game_mode_id?: number
+  game_id?: number
   type_id?: number
+  platform_ids?: number[]
 }
 export type ActivityQueryResponse = Response<Array<Activity>>
 

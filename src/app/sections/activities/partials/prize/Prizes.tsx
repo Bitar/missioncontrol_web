@@ -1,33 +1,44 @@
-import React, {Dispatch, FC, SetStateAction, useState} from 'react'
-import {Activity} from '../../models/Activity'
+import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
 import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl'
 import {Grid, InputLabel, MenuItem, Select} from '@mui/material'
-import {PrizeItemSingle} from './PrizeItemSingle'
+import {PrizeSingle} from './PrizeSingle'
 import {initialPrizeItem, PrizeItem as PrizeItemModel} from '../../models/PrizeItem'
 import TextField from '@mui/material/TextField'
-import {ActivityPrize} from '../../models/ActivityPrize'
+import {ActivityPrize, initialActivityPrize} from '../../models/ActivityPrize'
+import {updateData} from '../../../../helpers/form/FormHelper'
 
 type Props = {
   hasDelete?: boolean
   disableDelete?: boolean
   removeRank?: any
-  activity: Activity | undefined
-  setActivity: Dispatch<SetStateAction<Activity>>
-  activityPrize?: ActivityPrize
   index?: number
+  activityPrizes: ActivityPrize[]
+  setActivityPrizes: Dispatch<SetStateAction<ActivityPrize[]>>
 }
 
 const Prizes: FC<Props> = ({
-  hasDelete,
-  index,
-  disableDelete,
-  activity,
-  setActivity,
-  removeRank,
-}) => {
-  const [prizeType, setPrizeType] = useState('')
+                             hasDelete,
+                             index,
+                             disableDelete,
+                             removeRank,
+                             setActivityPrizes,
+                             activityPrizes,
+                           }) => {
+  const [prizeType, setPrizeType] = useState('1')
   const [prizes, setPrizes] = useState<PrizeItemModel[]>([initialPrizeItem()])
+  const [activityPrize, setActivityPrize] = useState<ActivityPrize>(initialActivityPrize)
+
+  useEffect(() => {
+    updateData(
+      {
+        ...activityPrizes,
+        ...[activityPrize],
+      },
+      setActivityPrizes,
+      activityPrizes
+    )
+  }, [activityPrize])
 
   const addItem = () => {
     setPrizes([...prizes, initialPrizeItem()])
@@ -39,42 +50,48 @@ const Prizes: FC<Props> = ({
     setPrizes(newFormValues)
   }
 
-  // console.log(prizes);
-
   return (
     <>
-      <div className='row mb-6'>
-        <div className='col-lg-4'>
-          <span className='required fw-bold fs-6'>Type</span>
-        </div>
-        <div className='col-lg-8'>
-          <Box sx={{minWidth: 120}}>
-            <FormControl fullWidth size='small'>
-              <InputLabel id='timezone-select-label'>Type</InputLabel>
-              <Select
-                labelId='timezone-select-label'
-                id='timezone-select'
-                value={prizeType}
-                label='Type'
-                onChange={(e) => {
-                  setPrizeType(e.target.value as string)
-                  // updateData({
-                  //   settings: {
-                  //     ...activity?.settings,
-                  //     ...{
-                  //       frequency: e.target.value
-                  //     },
-                  //   },
-                  // }, setActivity, activity)
-                }}
-              >
-                <MenuItem value={'1'}>Single</MenuItem>
-                <MenuItem value={'2'}>Bundle</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-        </div>
-      </div>
+      {/*<div className='row mb-6'>*/}
+      {/*  <div className='col-lg-4'>*/}
+      {/*    <span className='required fw-bold fs-6'>Type</span>*/}
+      {/*  </div>*/}
+      {/*  <div className='col-lg-8'>*/}
+      {/*    <Box sx={{minWidth: 120}}>*/}
+      {/*      <FormControl fullWidth size='small'>*/}
+      {/*        <InputLabel id='timezone-select-label'>Type</InputLabel>*/}
+      {/*        <Select*/}
+      {/*          labelId='timezone-select-label'*/}
+      {/*          id='timezone-select'*/}
+      {/*          value={prizeType}*/}
+      {/*          label='Type'*/}
+      {/*          onChange={(e) => {*/}
+      {/*            let targetValue = e.target.value as string*/}
+      {/*            setPrizeType(targetValue)*/}
+      {/*            updateData(*/}
+      {/*              {*/}
+      {/*                type: targetValue,*/}
+      {/*              },*/}
+      {/*              setActivityPrize,*/}
+      {/*              activityPrize*/}
+      {/*            )*/}
+      {/*            // updateData({*/}
+      {/*            //   settings: {*/}
+      {/*            //     ...activity?.settings,*/}
+      {/*            //     ...{*/}
+      {/*            //       frequency: e.target.value*/}
+      {/*            //     },*/}
+      {/*            //   },*/}
+      {/*            // }, setActivity, activity)*/}
+      {/*          }}*/}
+      {/*        >*/}
+      {/*          <MenuItem value={'1'}>Single</MenuItem>*/}
+      {/*          <MenuItem value={'2'}>Bundle</MenuItem>*/}
+      {/*        </Select>*/}
+      {/*      </FormControl>*/}
+      {/*    </Box>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
 
       {prizeType === '1' && (
         <>
@@ -84,7 +101,11 @@ const Prizes: FC<Props> = ({
             </div>
           </div>
 
-          <PrizeItemSingle activity={activity} setActivity={setActivity} removeItem={removeRank} />
+          <PrizeSingle
+            activityPrize={activityPrize}
+            setActivityPrize={setActivityPrize}
+            removeItem={removeRank}
+          />
         </>
       )}
 
@@ -121,15 +142,14 @@ const Prizes: FC<Props> = ({
           </div>
 
           {prizes?.map((el, index) => (
-            <PrizeItemSingle
+            <PrizeSingle
               hasDelete={true}
-              prizeItem={el}
               index={index}
               key={index}
-              activity={activity}
-              setActivity={setActivity}
               removeItem={removeItem}
               disableDelete={prizes.length <= 1}
+              activityPrize={activityPrize}
+              setActivityPrize={setActivityPrize}
             />
           ))}
         </>
@@ -153,4 +173,4 @@ const Prizes: FC<Props> = ({
   )
 }
 
-export {Prizes}
+export { Prizes };

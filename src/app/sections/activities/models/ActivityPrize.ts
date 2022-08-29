@@ -11,7 +11,7 @@ export type ActivityPrize = {
 
 export const initialActivityPrize = (activityPrize?: ActivityPrize) => {
   return {
-    type: activityPrize?.type || 1,
+    type: activityPrize?.type || 0,
   }
 }
 

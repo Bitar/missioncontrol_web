@@ -7,7 +7,7 @@ export type PrizeItem = {
     name: string
   }
   name: string
-  description: string
+  description?: string
   value: number
   value_type?: {
     id: ID
@@ -19,7 +19,6 @@ export type PrizeItem = {
 export const initialPrizeItem = (prizeItem?: PrizeItem) => {
   return {
     name: prizeItem?.name || '',
-    description: prizeItem?.description || '',
     value: prizeItem?.value || 0,
   }
 }

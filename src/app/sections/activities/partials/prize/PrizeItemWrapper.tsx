@@ -1,16 +1,18 @@
-import React, {FC, useState} from 'react'
-import {Activity} from '../../models/Activity'
-import {Dispatch, SetStateAction} from 'react'
+import React, { Dispatch, FC, SetStateAction, useState } from "react";
 import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl'
 import {InputLabel, MenuItem, Select} from '@mui/material'
+import { PrizeItem } from "../../models/PrizeItem";
+import { updateData } from "../../../../helpers/form/FormHelper";
 
 type Props = {
-  activity: Activity | undefined
-  setActivity: Dispatch<SetStateAction<Activity>>
+  prizeItem: PrizeItem,
+  setPrizeItem: Dispatch<SetStateAction<PrizeItem>>
+  // activity: Activity | undefined
+  // setActivity: Dispatch<SetStateAction<Activity>>
 }
 
-const PrizeItemWrapper: FC<Props> = ({activity, setActivity}) => {
+const PrizeItemWrapper: FC<Props> = ({prizeItem, setPrizeItem}) => {
   const [prizeTypes, setPrizeTypes] = useState('')
 
   return (
@@ -25,6 +27,9 @@ const PrizeItemWrapper: FC<Props> = ({activity, setActivity}) => {
             label='Prize Type'
             onChange={(e) => {
               setPrizeTypes(e.target.value as string)
+              updateData({
+                type: e.target.value
+              }, setPrizeItem, prizeItem)
             }}
           >
             <MenuItem value={1}>Cash</MenuItem>

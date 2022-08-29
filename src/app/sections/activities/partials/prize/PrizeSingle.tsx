@@ -1,33 +1,39 @@
-import React, {Dispatch, FC, useState} from 'react'
+import React, { Dispatch, FC, useEffect, useState } from "react";
 import {SetStateAction} from 'react'
-import {Activity} from '../../models/Activity'
 import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl'
 import TextField from '@mui/material/TextField'
-import {InputLabel, MenuItem, Select} from '@mui/material'
-import {PrizeItem} from '../../models/PrizeItem'
 import {PrizeItemWrapper} from './PrizeItemWrapper'
+import {ActivityPrize} from '../../models/ActivityPrize'
+import { initialPrizeItem, PrizeItem } from "../../models/PrizeItem";
+import { InputLabel, MenuItem, Select } from "@mui/material";
+import { updateData } from "../../../../helpers/form/FormHelper";
 
 type Props = {
   index?: number
-  activity: Activity | undefined
-  setActivity: Dispatch<SetStateAction<Activity>>
   removeItem?: any
-  prizeItem?: PrizeItem
   hasDelete?: boolean
   disableDelete?: boolean
+  activityPrize: ActivityPrize
+  setActivityPrize: Dispatch<SetStateAction<ActivityPrize>>
 }
 
-const PrizeItemSingle: FC<Props> = ({
-  prizeItem,
+const PrizeSingle: FC<Props> = ({
   index,
-  activity,
-  setActivity,
   removeItem,
   hasDelete = false,
   disableDelete = false,
+  activityPrize,
+  setActivityPrize,
 }) => {
   const [valueSuffix, setValueSuffix] = useState('')
+  const [prizeItem, setPrizeItem ] = useState<PrizeItem>(initialPrizeItem)
+
+  useEffect(() => {
+    updateData({
+      item: prizeItem
+    }, setActivityPrize, activityPrize)
+  }, [prizeItem])
 
   return (
     <>
@@ -37,7 +43,7 @@ const PrizeItemSingle: FC<Props> = ({
             <div className='col-lg-3'>
               <Box sx={{minWidth: 120}}>
                 <FormControl fullWidth size='small'>
-                  <PrizeItemWrapper activity={activity} setActivity={setActivity} />
+                  <PrizeItemWrapper prizeItem={prizeItem} setPrizeItem={setPrizeItem} />
                 </FormControl>
               </Box>
             </div>
@@ -48,9 +54,20 @@ const PrizeItemSingle: FC<Props> = ({
                 name='name'
                 className='w-100'
                 size='small'
-                // onChange={(e) => prizeItem.name = e.target.value }
+                onChange={(e) =>  updateData({
+                    name: e.target.value
+                }, setPrizeItem, prizeItem)}
               />
             </div>
+
+            {/*updateData({*/}
+            {/*   settings: {*/}
+            {/*     ...activity?.settings,*/}
+            {/*     ...{*/}
+            {/*       frequency: e.target.value*/}
+            {/*     },*/}
+            {/*   },*/}
+            {/* }, setActivity, activity)*/}
             <div className='col-lg-3'>
               <TextField
                 type={'number'}
@@ -59,6 +76,7 @@ const PrizeItemSingle: FC<Props> = ({
                 name='amount'
                 className='w-100'
                 size='small'
+                onChange={(e) => updateData({value: parseInt(e.target.value)}, setPrizeItem, prizeItem)}
               />
             </div>
             <div className='col-lg-3'>
@@ -71,6 +89,9 @@ const PrizeItemSingle: FC<Props> = ({
                   label='Amount Suffix'
                   onChange={(e) => {
                     setValueSuffix(e.target.value as string)
+                    updateData({
+                      value_type: e.target.value
+                    }, setPrizeItem, prizeItem)
                   }}
                 >
                   <MenuItem value={1}>($) Dollars </MenuItem>
@@ -97,4 +118,4 @@ const PrizeItemSingle: FC<Props> = ({
   )
 }
 
-export {PrizeItemSingle}
+export { PrizeSingle };

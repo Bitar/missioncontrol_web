@@ -212,7 +212,6 @@ const GameDetails: FC<Props> = ({activity, setActivity}) => {
           <div className='row mb-6'>
             <label className='col-lg-4 col-form-label required fw-bold fs-6'>Platforms</label>
             <div className='col-lg-8 fv-row'>
-              {/* Check issue with select open. */}
               <Box sx={{minWidth: 120}}>
                 <FormControl fullWidth size='small'>
                   <InputLabel id='platforms-select-label'>Platforms</InputLabel>
@@ -226,17 +225,23 @@ const GameDetails: FC<Props> = ({activity, setActivity}) => {
 
                       if (activity?.settings?.is_cross_play) {
                         setPlatforms(targetValue)
+                        console.log(targetValue)
+                        updateData({platform_ids: targetValue}, setActivity, activity)
                       } else {
                         if (platforms.length === 0) {
                           setPlatforms(targetValue)
+                          console.log(targetValue)
+                          updateData({platform_ids: targetValue}, setActivity, activity)
                         } else {
                           let lastPlatform = targetValue[targetValue.length - 1]
                           setPlatforms([lastPlatform])
+                          updateData({platform_ids: [lastPlatform]}, setActivity, activity)
                         }
                       }
 
                       if (targetValue.length === 0) {
                         setPlatforms([])
+                        updateData({platform_ids: []}, setActivity, activity)
                       }
                     }}
                   >
@@ -258,4 +263,4 @@ const GameDetails: FC<Props> = ({activity, setActivity}) => {
   )
 }
 
-export {GameDetails}
+export { GameDetails };
