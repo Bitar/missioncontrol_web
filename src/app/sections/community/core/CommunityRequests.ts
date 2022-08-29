@@ -25,7 +25,7 @@ const getCommunityById = (id: any, query?: String | undefined): Promise<Communit
     url += `?${query}`
   }
   return axios
-    .get(`${url}`)
+    .get(url)
     .then((response: AxiosResponse<Response<Community>>) => response.data)
     .then((response: Response<Community>) => response.data)
 }

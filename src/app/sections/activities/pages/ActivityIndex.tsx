@@ -11,7 +11,6 @@ import {ActivityTable} from '../ActivityTable'
 const ActivitiesList = () => {
   return (
     <>
-      <PageTitle breadcrumbs={[]}>{'Activities'}</PageTitle>
       <KTCard>
         <TableHeader name='Activity' url='/activities' />
         <ActivityTable />
@@ -22,7 +21,7 @@ const ActivitiesList = () => {
 
 const ActivityIndex = () => (
   <QueryRequestProvider>
-    <QueryResponseProvider id={QUERIES.ROLES_LIST} requestFunction={getActivities}>
+    <QueryResponseProvider id={QUERIES.ACTIVITIES_LIST} requestFunction={getActivities}>
       <ListViewProvider>
         <ActivitiesList />
       </ListViewProvider>

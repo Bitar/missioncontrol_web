@@ -1,6 +1,7 @@
 import axios, {AxiosResponse} from 'axios'
 import {Response} from '../../../../_metronic/helpers'
 import {Activity, ActivityQueryResponse} from '../models/Activity'
+import { MatchQueryResponse } from "../models/matches/Match";
 // import process from "process";
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -18,6 +19,27 @@ const createActivity = (formData: FormData): Promise<Activity | undefined> => {
     .post(`${ACTIVITIES_URL}`, formData)
     .then((response: AxiosResponse<Response<Activity>>) => response.data)
     .then((response: Response<Activity>) => response.data)
+}
+
+const getActivityById = (id: any, query?: String): Promise<Activity | undefined> => {
+  let url = `${ACTIVITIES_URL}/${id}`
+
+  if (query) {
+    url += `?${query}`
+  }
+
+  return axios
+    .get(url)
+    .then((response: AxiosResponse<Response<Activity>>) => response.data)
+    .then((response: Response<Activity>) => response.data)
+}
+
+const getActivityMatches = (id: any, query?: string): Promise<MatchQueryResponse> => {
+  let url = `${ACTIVITIES_URL}/${id}/matches`
+
+  return axios
+    .get(url)
+    .then((response: AxiosResponse<MatchQueryResponse>) => response.data)
 }
 
 // const createUser = (identity: User): Promise<User | undefined> => {
@@ -43,4 +65,4 @@ const createActivity = (formData: FormData): Promise<Activity | undefined> => {
 //     return axios.all(requests).then(() => {})
 // }
 
-export {getActivities, createActivity, ACTIVITIES_URL}
+export {getActivities, createActivity, getActivityById, getActivityMatches}

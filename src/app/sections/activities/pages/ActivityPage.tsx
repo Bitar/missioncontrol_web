@@ -3,11 +3,12 @@ import {PageLink, PageTitle} from '../../../../_metronic/layout/core'
 import {Navigate, Route, Routes} from 'react-router-dom'
 import {ActivityIndex} from './ActivityIndex'
 import {ActivityCreate} from '../ActivityCreate'
+import {ActivityView} from './ActivityView'
 
 const activityBreadCrumbs: Array<PageLink> = [
   {
     title: 'Activities',
-    path: '/Activities/overview',
+    path: '/activities/overview',
     isSeparator: false,
     isActive: false,
   },
@@ -45,6 +46,7 @@ const ActivityPage: FC = () => {
         element={
           <>
             <PageTitle breadcrumbs={activityBreadCrumbs}>{'View Community'}</PageTitle>
+            <ActivityView />
           </>
         }
       />
@@ -53,4 +55,4 @@ const ActivityPage: FC = () => {
   )
 }
 
-export {ActivityPage}
+export { ActivityPage };

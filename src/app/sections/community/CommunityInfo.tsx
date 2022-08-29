@@ -7,7 +7,7 @@ type Props = {
   community: Community | undefined
 }
 
-const CommunityInfo: FC<React.PropsWithChildren<Props>> = ({community}) => {
+const CommunityInfo: FC<Props> = ({community}) => {
   const location = useLocation()
   const [image, setImage] = useState<string>('')
 
