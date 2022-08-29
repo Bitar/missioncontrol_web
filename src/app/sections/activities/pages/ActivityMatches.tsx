@@ -5,6 +5,9 @@ import {Activity} from '../models/Activity'
 import {Match} from '../models/matches/Match'
 import {getActivityMatches} from '../core/ActivityRequests'
 import {ActivityObject} from '../../identity/user/objects/activity/ActivityObject'
+import {Card, CardActionArea, CardContent, CardMedia, Typography} from '@mui/material'
+import {Grid} from '@mui/material'
+import {getDateFromTimestamp} from '../../../helpers/MCHelper'
 
 type Props = {
   activity: Activity | undefined
@@ -38,76 +41,104 @@ const ActivityMatches: FC<Props> = ({activity}) => {
 
   return (
     <>
-      <KTCard className='bg-light'>
-        <h3 className='fw-bold my-2'>Matches</h3>
-        <KTCardBody className='py-4 px-0'>
+      <KTCard>
+        <div className='card-header'>
+          <div className='card-title'>
+            <h3 className='card-label'>Matches</h3>
+          </div>
+        </div>
+        <KTCardBody className='py-4'>
           <div className='d-flex flex-column pt-5'>
             {matches?.map((match) => (
-              <div className='row mb-5' key={match.id}>
-                <div className='col-md-6 col-lg-4'>
-                  {match?.teams && match?.teams[0] && (
-                    <div className='d-flex align-items-center'>
-                      <div className='symbol symbol-50px me-3'>
-                        <img src={match?.teams[0].image} className='' alt='' />
-                      </div>
-                      <div className='d-flex justify-content-start flex-column'>
-                        <span className='text-gray-800 fw-bold text-hover-primary mb-1 fs-6'>
-                          {match?.teams[0].name}
-                        </span>
-                        <span className='text-gray-400 fw-semibold d-block fs-7'>
-                          {match?.teams[0].users?.map((user, index) => (
-                            <div
-                              key={'potato-' + index}
-                              className='symbol symbol-20px symbol-circle'
-                              data-bs-toggle='tooltip'
-                              title={user.name}
-                            >
-                              {user.meta?.image ? (
-                                <img alt='Pic' src={toAbsoluteUrl(user.meta?.image)} />
-                              ) : (
-                                <img alt='Pic' src={toAbsoluteUrl('/media/avatars/blank.png')} />
-                              )}
+              <React.Fragment key={match.id}>
+                <div className='row'>
+                  <div className='col-md-6 col-lg-5'>
+                    {match?.teams && match?.teams[0] && (
+                      <div className='card card-dashed h-xl-100 flex-row flex-stack flex-wrap pe-6'>
+                        <div className='d-flex flex-column'>
+                          <div className='d-flex align-items-center'>
+                            <img src={match?.teams[0].image} alt='' className='me-4' />
+                            <div>
+                              <div className='fs-4 fw-bold'>{match?.teams[0].name}</div>
+                              <div className='fs-6 fw-semibold text-gray-400'>
+                                {getDateFromTimestamp(match?.start_date)}
+                              </div>
+                              <div className='fs-6 fw-semibold text-gray-400'>
+                                {match?.teams[1].users?.map((user, index) => (
+                                  <div
+                                    className='symbol symbol-20px symbol-circle'
+                                    data-bs-toggle='tooltip'
+                                    title={user.name}
+                                    key={'something-' + index}
+                                  >
+                                    {user.meta?.image ? (
+                                      <img alt='Pic' src={toAbsoluteUrl(user.meta?.image)} />
+                                    ) : (
+                                      <img alt='Pic' src={toAbsoluteUrl('/media/avatars/blank.png')} />
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
                             </div>
-                          ))}
-                        </span>
+                          </div>
+                        </div>
+                        <div className='d-flex align-items-center py-2'>
+                          <div className='fs-4 fw-bold'>
+                            {calculateTeamScore(match, match?.teams[1])}
+                          </div>
+                        </div>
                       </div>
-                      <div className='potato'>{calculateTeamScore(match, match?.teams[0])}</div>
-                    </div>
-                  )}
-                </div>
-                <div className='col-md-2'>VS</div>
-                <div className='col-md-6'>
-                  {match?.teams && match?.teams[1] && (
-                    <div className='d-flex align-items-center text-end'>
-                      <div className='potato'>{calculateTeamScore(match, match?.teams[1])}</div>
-                      <div className='d-flex flex-column text-end'>
-                        <span className='text-gray-800 fw-bold text-hover-primary mb-1 fs-6'>
-                          {match?.teams[1].name}
-                        </span>
-                        <span className='text-gray-400 fw-semibold d-block fs-7'>
-                          {match?.teams[1].users?.map((user, index) => (
-                            <div
-                              className='symbol symbol-20px symbol-circle'
-                              data-bs-toggle='tooltip'
-                              title={user.name}
-                              key={'something-' + index}
-                            >
-                              {user.meta?.image ? (
-                                <img alt='Pic' src={toAbsoluteUrl(user.meta?.image)} />
-                              ) : (
-                                <img alt='Pic' src={toAbsoluteUrl('/media/avatars/blank.png')} />
-                              )}
-                            </div>
-                          ))}
-                        </span>
-                      </div>
-                      <div className='symbol symbol-50px me-3'>
-                        <img src={match?.teams[1].image} className='' alt='' />
+                    )}
+                  </div>
+                  <div className='col-md-2'>
+                    <div className='d-flex h-xl-100'>
+                      <div className='d-flex align-items-center py-2'>
+                        <div className='fs-4 fw-bold'>VS</div>
                       </div>
                     </div>
-                  )}
+                  </div>
+                  <div className='col-md-6 col-lg-5'>
+                    {match?.teams && match?.teams[1] && (
+                      <div className='card card-dashed h-xl-100 flex-row flex-stack flex-wrap ps-6'>
+                        <div className='d-flex align-items-center py-2'>
+                          <div className='fs-4 fw-bold'>
+                            {calculateTeamScore(match, match?.teams[1])}
+                          </div>
+                        </div>
+                        <div className='d-flex flex-column'>
+                          <div className='d-flex align-items-center text-end'>
+                            <div>
+                              <div className='fs-4 fw-bold'>{match?.teams[1].name}</div>
+                              <div className='fs-6 fw-semibold text-gray-400'>
+                                {getDateFromTimestamp(match?.start_date)}
+                              </div>
+                              <div className='fs-6 fw-semibold text-gray-400'>
+                                {match?.teams[1].users?.map((user, index) => (
+                                  <div
+                                    className='symbol symbol-20px symbol-circle'
+                                    data-bs-toggle='tooltip'
+                                    title={user.name}
+                                    key={'something-' + index}
+                                  >
+                                    {user.meta?.image ? (
+                                      <img alt='Pic' src={toAbsoluteUrl(user.meta?.image)} />
+                                    ) : (
+                                      <img alt='Pic' src={toAbsoluteUrl('/media/avatars/blank.png')} />
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                            <img src={match?.teams[1].image} alt='' className='ms-4' />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
+
+                <div className='separator separator-dashed my-6'></div>
+              </React.Fragment>
             ))}
           </div>
         </KTCardBody>

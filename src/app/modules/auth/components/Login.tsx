@@ -1,8 +1,7 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useState} from 'react'
+import React from 'react'
 import * as Yup from 'yup'
 import {Link} from 'react-router-dom'
-import {ErrorMessage, Field, Form, Formik, useFormik} from 'formik'
+import {ErrorMessage, Field, Form, Formik} from 'formik'
 import {getUserByToken, login} from '../core/_requests'
 import {useAuth} from '../core/Auth'
 
@@ -19,15 +18,9 @@ const loginSchema = Yup.object().shape({
 })
 
 const initialValues = {
-  email: 'admin@demo.com',
-  password: 'demo',
+  email: '',
+  password: '',
 }
-
-/*
-  Formik+YUP+Typescript:
-  https://jaredpalmer.com/formik/docs/tutorial#getfieldprops
-  https://medium.com/@maurice.de.beijer/yup-validation-and-typescript-and-formik-6c342578a20e
-*/
 
 const Login = () => {
   const {saveAuth, setCurrentUser} = useAuth()
