@@ -1,15 +1,25 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Form, Field, Formik} from 'formik'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {useNavigate} from 'react-router-dom'
 import {Role, roleInitial, roleSchema} from './models/Role'
 import {createRole} from './core/RoleRequests'
 import {submitForm, updateData} from '../../../helpers/form/FormHelper'
+import {getAllPermissions} from '../permission/core/PermissionRequests'
+import {Permission} from '../permission/models/Permission'
+import {Switch} from '@mui/material'
 
 const RoleCreate = () => {
   const [role, setRole] = useState<Role>(roleInitial)
-
+  const [permissions, setPermissions] = useState<Permission[] | undefined>([])
+  const [selectedPermissions, setSelectedPermissions] = useState<number[]>([])
   const navigate = useNavigate()
+
+  useEffect(() => {
+    getAllPermissions().then((response) => {
+      setPermissions(response.data)
+    })
+  }, [])
 
   const toIndex = () => {
     navigate('/roles')
@@ -55,6 +65,40 @@ const RoleCreate = () => {
                     </div>
                   </div>
                 </KTCardBody>
+                <KTCardBody>
+                  <div className='d-flex flex-column pt-5'>
+                    <div className='row'>
+                      <label className='col-lg-4 col-form-label required fw-bold fs-6'>
+                        Permissions
+                      </label>
+                    </div>
+                    <div className='row'>
+                      {permissions?.map((permission, index) => (
+                        <div className='col-md-4 mb-3' key={index}>
+                          <div className='form-check form-check-custom form-check-solid form-switch'>
+                            <Switch
+                              value={permission?.id}
+                              onChange={(e: any) => {
+                                let targetValue = e.target.value
+
+                                if (selectedPermissions?.includes(targetValue)) {
+                                  setSelectedPermissions(
+                                    selectedPermissions.filter((itemId) => itemId !== targetValue)
+                                  )
+                                } else {
+                                  const updatedSelected = [...selectedPermissions]
+                                  updatedSelected.push(targetValue)
+                                  setSelectedPermissions(updatedSelected)
+                                }
+                              }}
+                            />{' '}
+                            {permission.name}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </KTCardBody>
                 <div className='card-footer d-flex justify-content-end py-6 px-9'>
                   <button
                     type='submit'
@@ -80,4 +124,4 @@ const RoleCreate = () => {
   )
 }
 
-export {RoleCreate}
+export { RoleCreate };

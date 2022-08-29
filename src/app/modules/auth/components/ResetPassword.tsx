@@ -1,0 +1,164 @@
+import React, {useState} from 'react'
+import * as Yup from 'yup'
+import { useNavigate, useParams } from "react-router-dom";
+import { Field, Form, Formik, useFormik } from "formik";
+import { requestPassword, resetPassword } from "../core/_requests";
+import { activitySchema } from "../../../sections/activities/models/Activity";
+import { jsonToFormData } from "../../../helpers/form/FormHelper";
+
+const forgotPasswordSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Wrong email format')
+    .min(3, 'Minimum 3 symbols')
+    .max(50, 'Maximum 50 symbols')
+    .required('Email is required'),
+})
+
+const initialValues = {
+  email: "",
+  password: "",
+  password_confirmation: ""
+}
+
+const ResetPassword = () => {
+  const params = useParams();
+  const navigate = useNavigate()
+  const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined)
+
+  const handleSubmit = async (values: any, {setStatus, setSubmitting}: any) => {
+    values.token = params.token
+    let data = jsonToFormData(values)
+
+    await resetPassword(data).then(()=> {
+      setHasErrors(false)
+      navigate('/')
+    }).catch(() => {
+      setHasErrors(true)
+    });
+    // try {
+    //
+    //   // const {data: auth} = await login(values.email, values.password)
+    //   // saveAuth(auth)
+    //   // const {data: profile} = await getUserByToken(auth.token)
+    //   // setCurrentUser(profile.user)
+    // } catch (error) {
+    //   // console.error(error)
+    //   // saveAuth(undefined)
+    //   // setStatus('The login detail is incorrect')
+    //   // setSubmitting(false)
+    // }
+  }
+
+  return (
+    <>
+      <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={activitySchema}>
+        {({isSubmitting, isValid, touched}) => (
+          <Form className='form w-100'>
+            <div className='text-center mb-10'>
+              {/* begin::Title */}
+              <h1 className='text-dark mb-3'>Reset Password</h1>
+              {/* end::Title */}
+
+              {/* begin::Link */}
+              <div className='text-gray-400 fw-bold fs-4'>
+                Enter your email to reset your password.
+              </div>
+            </div>
+
+            {/* begin::Title */}
+            {hasErrors === true && (
+              <div className='mb-lg-15 alert alert-danger'>
+                <div className='alert-text font-weight-bold'>
+                  Sorry, looks like there are some errors detected, please try again.
+                </div>
+              </div>
+            )}
+
+            {hasErrors === false && (
+              <div className='mb-10 bg-light-info p-8 rounded'>
+                <div className='text-info'>Sent password reset. Please check your email</div>
+              </div>
+            )}
+            {/* end::Title */}
+
+            <div className='fv-row mb-10'>
+              <label className='form-label fw-bolder text-gray-900 fs-6'>Email</label>
+              <Field
+                type='text'
+                name='email'
+                placeholder='Email'
+                className={'form-control mb-3 mb-lg-0'}
+                autoComplete='off'
+              />
+            </div>
+
+            <div className='fv-row mb-10'>
+              <label className='form-label fw-bolder text-gray-900 fs-6'>Password</label>
+              <Field
+                type='password'
+                name='password'
+                placeholder='Password'
+                className={'form-control mb-3 mb-lg-0'}
+                autoComplete='off'
+              />
+            </div>
+            <div className='fv-row mb-10'>
+              <label className='form-label fw-bolder text-gray-900 fs-6'>Password Confirmation</label>
+              <Field
+                type='password'
+                name='password_confirmation'
+                placeholder='Password'
+                className={'form-control mb-3 mb-lg-0'}
+                autoComplete='off'
+              />
+            </div>
+
+            <div className='d-flex flex-wrap justify-content-center pb-lg-0'>
+              <button
+                type='submit'
+                id='kt_password_reset_submit'
+                className='btn btn-lg btn-primary fw-bolder'>
+                <span className='indicator-label'>Submit</span>
+                {/*{loading && (*/}
+                {/*  <span className='indicator-progress'>*/}
+                {/*    Please wait...*/}
+                {/*    <span className='spinner-border spinner-border-sm align-middle ms-2'></span>*/}
+                {/*  </span>*/}
+                {/*)}*/}
+              </button>
+            </div>
+            {/* end::Form group */}
+          </Form>
+        )}
+      </Formik>
+    </>
+  )
+}
+
+export {ResetPassword}
+
+export function ForgotPassword() {
+  const [loading, setLoading] = useState(false)
+  const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined)
+  const formik = useFormik({
+    initialValues,
+    validationSchema: forgotPasswordSchema,
+    onSubmit: (values, {setStatus, setSubmitting}) => {
+      setLoading(true)
+      setHasErrors(undefined)
+      setTimeout(() => {
+        requestPassword(values.email)
+          .then(({data: {result}}) => {
+            setHasErrors(false)
+            setLoading(false)
+          })
+          .catch(() => {
+            setHasErrors(true)
+            setLoading(false)
+            setSubmitting(false)
+            setStatus('The login detail is incorrect')
+          })
+      }, 1000)
+    },
+  })
+}

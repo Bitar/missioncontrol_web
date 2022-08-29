@@ -7,7 +7,8 @@ const API_URL = process.env.REACT_APP_API_URL
 export const GET_USER_BY_PROFILE = `${API_URL}/profile`
 export const LOGIN_URL = `${API_URL}/login`
 export const REGISTER_URL = `${API_URL}/register`
-export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`
+export const REQUEST_PASSWORD_URL = `${API_URL}/password/forget`
+export const RESET_PASSWORD_URL = `${API_URL}/password/reset`
 
 // Server should return AuthModel
 export function login(email: string, password: string) {
@@ -62,3 +63,14 @@ export function getUserByToken(token: string) {
     ],
   })
 }
+
+export const resetPassword = (formData: FormData) => {
+  return axios.post(`${RESET_PASSWORD_URL}`, formData)
+    .then((response) => console.log(response))
+}
+// const createActivity = (formData: FormData): Promise<Activity | undefined> => {
+//   return axios
+//     .post(`${ACTIVITIES_URL}`, formData)
+//     .then((response: AxiosResponse<Response<Activity>>) => response.data)
+//     .then((response: Response<Activity>) => response.data)
+// }

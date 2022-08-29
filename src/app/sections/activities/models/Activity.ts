@@ -39,6 +39,7 @@ export const initialActivity = (activity?: Activity) => {
 
     team_settings: initialActivityTeamSetting(activity?.team_settings),
 
+    ready_to_submit: false
     // team: initialActivityTeam,
     // prize: initialActivityPrize,
   }
@@ -78,13 +79,12 @@ export type Activity = {
   game_id?: number
   type_id?: number
   platform_ids?: number[]
+  ready_to_submit: boolean
 }
 export type ActivityQueryResponse = Response<Array<Activity>>
 
-export function prepareForStore(
-  activity: Activity | undefined,
-  setActivity: Dispatch<SetStateAction<Activity>>
-) {
+
+export const prepareForStore = (activity: Activity, setActivity: Dispatch<SetStateAction<Activity>>) => {
   updateData(
     {
       rounds: activity?.settings?.rounds,
@@ -93,6 +93,7 @@ export function prepareForStore(
       game_id: activity?.game?.id,
       game_mode_id: activity?.game_mode?.id,
       team: activity?.team_settings,
+      ready_to_submit: true,
       schedule: {
         registration_dates: {
           start_date: activity?.registration_dates?.start_date,
@@ -108,6 +109,9 @@ export function prepareForStore(
     activity
   )
 }
+
+// export function prepareForStore(activity: Activity) {
+// }
 
 export function formOnChange(
   event: any,

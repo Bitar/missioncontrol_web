@@ -38,6 +38,7 @@ const ActivityForm: FC<React.PropsWithChildren<Props>> = ({activity, setActivity
         <label className='col-lg-4 col-form-label required fw-bold fs-6'>Title</label>
         <div className='col-lg-8 fv-row'>
           <TextField label='Title' variant='outlined' name='title' className='w-100' size='small' />
+          <TextField label='Type' variant='outlined' name='type_id' className='w-100' size='small' value={1} hidden={true}/>
           <div className='text-danger mt-2'>
             <ErrorMessage name='title' />
           </div>

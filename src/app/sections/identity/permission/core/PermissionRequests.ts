@@ -33,4 +33,10 @@ const updatePermission = (id: any, permission: Permission): Promise<Permission |
     .then((response: Response<Permission>) => response.data)
 }
 
-export {getPermissions, getPermissionById, createPermission, updatePermission}
+const getAllPermissions = (): Promise<PermissionQueryResponse> => {
+  return axios
+    .get(`${GET_PERMISSIONS_URL}/all`)
+    .then((response: AxiosResponse<PermissionQueryResponse>) => response.data)
+}
+
+export {getPermissions, getPermissionById, createPermission, updatePermission, getAllPermissions}
