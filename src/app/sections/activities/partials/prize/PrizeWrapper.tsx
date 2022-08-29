@@ -32,9 +32,6 @@ const PrizeWrapper: FC<Props> = ({activity, setActivity}) => {
       setActivity,
       activity
     )
-    // updateData(() => {
-    //
-    // }, setActivity, activity)
   }, [activityPrizes])
 
   return (

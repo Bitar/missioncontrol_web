@@ -31,6 +31,7 @@ const PrizeSingle: FC<Props> = ({
 
   useEffect(() => {
     updateData({
+      type: 1,
       item: prizeItem
     }, setActivityPrize, activityPrize)
   }, [prizeItem])

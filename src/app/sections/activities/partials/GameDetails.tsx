@@ -225,12 +225,10 @@ const GameDetails: FC<Props> = ({activity, setActivity}) => {
 
                       if (activity?.settings?.is_cross_play) {
                         setPlatforms(targetValue)
-                        console.log(targetValue)
                         updateData({platform_ids: targetValue}, setActivity, activity)
                       } else {
                         if (platforms.length === 0) {
                           setPlatforms(targetValue)
-                          console.log(targetValue)
                           updateData({platform_ids: targetValue}, setActivity, activity)
                         } else {
                           let lastPlatform = targetValue[targetValue.length - 1]

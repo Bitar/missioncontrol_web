@@ -81,6 +81,34 @@ export type Activity = {
 }
 export type ActivityQueryResponse = Response<Array<Activity>>
 
+export function prepareForStore(
+  activity: Activity | undefined,
+  setActivity: Dispatch<SetStateAction<Activity>>
+) {
+  updateData(
+    {
+      rounds: activity?.settings?.rounds,
+      type_id: 1,
+      is_cross_play: activity?.settings?.is_cross_play,
+      game_id: activity?.game?.id,
+      game_mode_id: activity?.game_mode?.id,
+      team: activity?.team_settings,
+      schedule: {
+        registration_dates: {
+          start_date: activity?.registration_dates?.start_date,
+          end_date: activity?.registration_dates?.end_date,
+        },
+        match_play_dates: {
+          start_date: activity?.matchplay_dates?.start_date,
+          end_date: activity?.matchplay_dates?.end_date,
+        },
+      },
+    },
+    setActivity,
+    activity
+  )
+}
+
 export function formOnChange(
   event: any,
   activity: Activity | undefined,
