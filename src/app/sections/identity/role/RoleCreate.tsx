@@ -4,11 +4,10 @@ import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {useNavigate} from 'react-router-dom'
 import {Role, roleInitial, roleSchema} from './models/Role'
 import {createRole} from './core/RoleRequests'
-import { jsonToFormData, submitForm, updateData } from "../../../helpers/form/FormHelper";
+import { jsonToFormData, updateData } from "../../../helpers/form/FormHelper";
 import {getAllPermissions} from '../permission/core/PermissionRequests'
 import {Permission} from '../permission/models/Permission'
 import {Switch} from '@mui/material'
-import { createCommunity } from "../../community/core/CommunityRequests";
 
 const RoleCreate = () => {
   const [role, setRole] = useState<Role>(roleInitial)

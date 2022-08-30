@@ -14,7 +14,6 @@ const RoleEdit = () => {
   const [role, setRole] = useState<Role | undefined>()
   const [permissions, setPermissions] = useState<Permission[] | undefined>([])
   const [selectedPermissions, setSelectedPermissions] = useState<number[]>([])
-  const [loaded, setLoaded] = useState(false)
   const navigate = useNavigate()
   const params = useParams()
 
@@ -24,40 +23,21 @@ const RoleEdit = () => {
     })
   }, [])
 
-  // useEffect(() => {
-  //   if(!loaded) {
-  //     const updatedSelected = [...selectedPermissions]
-  //
-  //     role?.permissions?.forEach((value, index, array) => {
-  //       if (value?.id && !selectedPermissions.includes(value?.id)) {
-  //         updatedSelected.push(value?.id)
-  //       }
-  //     })
-  //
-  //     setSelectedPermissions(updatedSelected)
-  //
-  //     if(updatedSelected.length > 0) {
-  //       setLoaded(true)
-  //     }
-  //   }
-  // }, [role?.permissions])
-
   useEffect(() => {
+    const updatedSelected: any[] = []
 
-    //     const updatedSelected = [...selectedPermissions]
-    //
-    //     role?.permissions?.forEach((value, index, array) => {
-    //       if (value?.id && !selectedPermissions.includes(value?.id)) {
-    //         updatedSelected.push(value?.id)
-    //       }
-    //     })
-    //
-    //     setSelectedPermissions(updatedSelected)
+    role?.permissions?.forEach((value, index, array) => {
+      if (value?.id && !selectedPermissions.includes(value?.id)) {
+        updatedSelected.push(value?.id)
+      }
+    })
 
-    updateData({
-      permissions: selectedPermissions
-    }, setRole, role)
-  }, [selectedPermissions])
+    setSelectedPermissions(updatedSelected)
+  }, [role?.permissions])
+
+  const isChecked = (value: any) => {
+    return selectedPermissions?.includes(value)
+  }
 
   useEffect(() => {
     getRoleById(params.id).then((response) => {
@@ -66,10 +46,13 @@ const RoleEdit = () => {
   }, [params.id])
 
   const handleSubmit = async () => {
-    let data = jsonToFormData(role)
-    await updateRole(params.id, data).then((response) =>
-      navigate('/roles/' + response?.id + '/edit')
-    )
+    let data = jsonToFormData({
+      name: role?.name,
+      permissions: selectedPermissions,
+      ready_to_submit: true,
+      _method: 'PUT',
+    })
+    await updateRole(params.id, data).then((response) => navigate('/roles/' + response?.id + '/edit'))
   }
 
   const handleOnChange = (event: any) => {
@@ -129,9 +112,10 @@ const RoleEdit = () => {
                         <div className='col-md-4 mb-3' key={index}>
                           <div className='form-check form-check-custom form-check-solid form-switch'>
                             <Switch
+                              checked={isChecked(permission.id)}
                               value={permission?.id}
                               onChange={(e: any) => {
-                                let targetValue = e.target.value
+                                let targetValue = parseInt(e.target.value)
 
                                 if (selectedPermissions?.includes(targetValue)) {
                                   setSelectedPermissions(

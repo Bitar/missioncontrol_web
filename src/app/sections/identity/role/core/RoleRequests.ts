@@ -31,7 +31,7 @@ const createRole = (formData: FormData): Promise<Role | undefined> => {
 
 const updateRole = (id: any, formData: FormData): Promise<Role | undefined> => {
   return axios
-    .put(`${GET_ROLES_URL}/${id}`, formData)
+    .post(`${GET_ROLES_URL}/${id}`, formData)
     .then((response: AxiosResponse<Response<Role>>) => response.data)
     .then((response: Response<Role>) => response.data)
 }

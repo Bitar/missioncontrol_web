@@ -21,6 +21,7 @@ const rolesColumns: ReadonlyArray<Column<Role>> = [
         id={props.data[props.row.index].id}
         path={'roles'}
         queryKey={QUERIES.ROLES_LIST}
+        showEdit={true}
       />
     ),
   },
