@@ -6,12 +6,13 @@ export const permissionSchema = Yup.object().shape({
 })
 
 export type Permission = {
-  id?: ID
+  id: ID
   name: string
 }
 
 export const permissionInitial = (permission?: Permission) => {
   return {
+    id: permission?.id || 0,
     name: permission?.name || '',
   }
 }

@@ -12,7 +12,7 @@ const Step4: FC<React.PropsWithChildren<unknown>> = () => {
         <div className='text-gray-400 fw-bold fs-6'>
           If you need more info, please check out
           <a href='/dashboard' className='text-primary fw-bolder'>
-            {' '}
+            
             Help Page
           </a>
           .

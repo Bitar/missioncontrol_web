@@ -90,7 +90,7 @@ const PermissionEdit = () => {
                     <span className='indicator-label'>Submit</span>
                     {isSubmitting && (
                       <span className='indicator-progress'>
-                        Please wait...{' '}
+                        Please wait...
                         <span className='spinner-border spinner-border-sm align-middle ms-2' />
                       </span>
                     )}

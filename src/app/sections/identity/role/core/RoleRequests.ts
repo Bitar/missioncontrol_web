@@ -22,16 +22,16 @@ const getRoleById = (id: any): Promise<Role | undefined> => {
     .then((response: Response<Role>) => response.data)
 }
 
-const createRole = (role: Role): Promise<Role | undefined> => {
+const createRole = (formData: FormData): Promise<Role | undefined> => {
   return axios
-    .post(`${GET_ROLES_URL}`, role)
+    .post(`${GET_ROLES_URL}`, formData)
     .then((response: AxiosResponse<Response<Role>>) => response.data)
     .then((response: Response<Role>) => response.data)
 }
 
-const updateRole = (id: any, role: Role): Promise<Role | undefined> => {
+const updateRole = (id: any, formData: FormData): Promise<Role | undefined> => {
   return axios
-    .put(`${GET_ROLES_URL}/${id}`, role)
+    .put(`${GET_ROLES_URL}/${id}`, formData)
     .then((response: AxiosResponse<Response<Role>>) => response.data)
     .then((response: Response<Role>) => response.data)
 }

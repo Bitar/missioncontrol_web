@@ -58,7 +58,7 @@ const HeaderNotificationsMenu: FC<React.PropsWithChildren<unknown>> = () => (
               <div className='d-flex align-items-center'>
                 <div className='symbol symbol-35px me-4'>
                   <span className={clsx('symbol-label', `bg-light-${alert.state}`)}>
-                    {' '}
+                    
                     <KTSVG
                       path={`/media/${alert.icon}`}
                       className={`svg-icon-2 svg-icon-${alert.state}`}

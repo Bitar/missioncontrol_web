@@ -69,7 +69,7 @@ const CommunityCreate = () => {
                   <span className='indicator-label'>Add Community</span>
                   {isSubmitting && (
                     <span className='indicator-progress'>
-                      Please wait...{' '}
+                      Please wait...
                       <span className='spinner-border spinner-border-sm align-middle ms-2' />
                     </span>
                   )}

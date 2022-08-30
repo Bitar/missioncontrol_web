@@ -1,34 +1,80 @@
 import React, {useEffect, useState} from 'react'
 import {Role, roleInitial, roleSchema} from './models/Role'
 import {useNavigate, useParams} from 'react-router-dom'
-import {Form, Field, Formik} from 'formik'
+import {Field, Form, Formik} from 'formik'
 import {getRoleById, updateRole} from './core/RoleRequests'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import clsx from 'clsx'
-import {submitForm, updateData} from '../../../helpers/form/FormHelper'
+import {jsonToFormData, updateData} from '../../../helpers/form/FormHelper'
+import {Switch} from '@mui/material'
+import {Permission} from '../permission/models/Permission'
+import {getAllPermissions} from '../permission/core/PermissionRequests'
 
 const RoleEdit = () => {
   const [role, setRole] = useState<Role | undefined>()
+  const [permissions, setPermissions] = useState<Permission[] | undefined>([])
+  const [selectedPermissions, setSelectedPermissions] = useState<number[]>([])
+  const [loaded, setLoaded] = useState(false)
   const navigate = useNavigate()
   const params = useParams()
 
-  const toIndex = () => {
-    navigate('/roles')
-  }
+  useEffect(() => {
+    getAllPermissions().then((response) => {
+      setPermissions(response.data)
+    })
+  }, [])
 
-  const handleSubmit = async () => {
-    await submitForm(updateRole, role, toIndex, params.id)
-  }
+  // useEffect(() => {
+  //   if(!loaded) {
+  //     const updatedSelected = [...selectedPermissions]
+  //
+  //     role?.permissions?.forEach((value, index, array) => {
+  //       if (value?.id && !selectedPermissions.includes(value?.id)) {
+  //         updatedSelected.push(value?.id)
+  //       }
+  //     })
+  //
+  //     setSelectedPermissions(updatedSelected)
+  //
+  //     if(updatedSelected.length > 0) {
+  //       setLoaded(true)
+  //     }
+  //   }
+  // }, [role?.permissions])
 
-  const handleOnChange = (event: any) => {
-    updateData({[event.target.name]: event.target.value}, setRole, role)
-  }
+  useEffect(() => {
+
+    //     const updatedSelected = [...selectedPermissions]
+    //
+    //     role?.permissions?.forEach((value, index, array) => {
+    //       if (value?.id && !selectedPermissions.includes(value?.id)) {
+    //         updatedSelected.push(value?.id)
+    //       }
+    //     })
+    //
+    //     setSelectedPermissions(updatedSelected)
+
+    updateData({
+      permissions: selectedPermissions
+    }, setRole, role)
+  }, [selectedPermissions])
 
   useEffect(() => {
     getRoleById(params.id).then((response) => {
       setRole(response)
     })
   }, [params.id])
+
+  const handleSubmit = async () => {
+    let data = jsonToFormData(role)
+    await updateRole(params.id, data).then((response) =>
+      navigate('/roles/' + response?.id + '/edit')
+    )
+  }
+
+  const handleOnChange = (event: any) => {
+    updateData({[event.target.name]: event.target.value}, setRole, role)
+  }
 
   return (
     <>
@@ -45,7 +91,7 @@ const RoleEdit = () => {
           initialValues={roleInitial(role)}
           onSubmit={handleSubmit}
           validationSchema={roleSchema}
-          enableReinitialize={true}
+          enableReinitialize
         >
           {({isSubmitting, isValid, touched, errors}) => (
             <>
@@ -71,6 +117,40 @@ const RoleEdit = () => {
                     </div>
                   </div>
                 </KTCardBody>
+                <KTCardBody>
+                  <div className='d-flex flex-column pt-5'>
+                    <div className='row'>
+                      <label className='col-lg-4 col-form-label required fw-bold fs-6'>
+                        Permissions
+                      </label>
+                    </div>
+                    <div className='row'>
+                      {permissions?.map((permission, index) => (
+                        <div className='col-md-4 mb-3' key={index}>
+                          <div className='form-check form-check-custom form-check-solid form-switch'>
+                            <Switch
+                              value={permission?.id}
+                              onChange={(e: any) => {
+                                let targetValue = e.target.value
+
+                                if (selectedPermissions?.includes(targetValue)) {
+                                  setSelectedPermissions(
+                                    selectedPermissions.filter((itemId) => itemId !== targetValue)
+                                  )
+                                } else {
+                                  const updatedSelected = [...selectedPermissions]
+                                  updatedSelected.push(targetValue)
+                                  setSelectedPermissions(updatedSelected)
+                                }
+                              }}
+                            />
+                            {permission.name}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </KTCardBody>
                 <div className='card-footer d-flex justify-content-end py-6 px-9'>
                   <button
                     type='submit'
@@ -78,10 +158,10 @@ const RoleEdit = () => {
                     data-kt-users-modal-action='submit'
                     disabled={isSubmitting || !isValid || !touched}
                   >
-                    <span className='indicator-label'>Save Changes</span>
+                    <span className='indicator-label'>Update Role</span>
                     {isSubmitting && (
                       <span className='indicator-progress'>
-                        Please wait...{' '}
+                        Please wait...
                         <span className='spinner-border spinner-border-sm align-middle ms-2' />
                       </span>
                     )}
@@ -96,4 +176,4 @@ const RoleEdit = () => {
   )
 }
 
-export {RoleEdit}
+export { RoleEdit };

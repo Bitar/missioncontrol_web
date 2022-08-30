@@ -134,7 +134,7 @@ const InboxCompose: React.FC<React.PropsWithChildren<Props>> = ({show, handleClo
                 <div className='dropzone-item' style={{display: 'none'}}>
                   <div className='dropzone-file'>
                     <div className='dropzone-filename' title='some_image_file_name.jpg'>
-                      <span data-dz-name>some_image_file_name.jpg</span>{' '}
+                      <span data-dz-name>some_image_file_name.jpg</span>
                       <strong>
                         (<span data-dz-size>340kb</span>)
                       </strong>

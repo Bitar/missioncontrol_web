@@ -12,7 +12,7 @@ const Step5: FC<React.PropsWithChildren<unknown>> = () => {
         <div className='text-gray-400 fw-bold fs-6'>
           If you need more info, please
           <Link to='/auth/login' className='link-primary fw-bolder'>
-            {' '}
+            
             Sign In
           </Link>
           .
@@ -37,7 +37,7 @@ const Step5: FC<React.PropsWithChildren<unknown>> = () => {
               <div className='fs-6 text-gray-600'>
                 To start using great tools, please, please
                 <a href='/dashboard' className='fw-bolder'>
-                  {' '}
+                  
                   Create Team Platform
                 </a>
               </div>

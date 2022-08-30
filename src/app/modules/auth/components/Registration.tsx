@@ -216,7 +216,7 @@ const Registration = () => {
                   name={'acceptTerms'}
                 />
                 <label className='form-check-label fw-bold text-gray-700 fs-6'>
-                  I agree the{' '}
+                  I agree the
                   <Link to='/auth/terms' className='ms-1 link-primary'>
                     terms and conditions
                   </Link>
@@ -233,7 +233,7 @@ const Registration = () => {
                 <span className='indicator-label'>Register</span>
                 {isSubmitting && (
                   <span className='indicator-progress'>
-                    Please wait...{' '}
+                    Please wait...
                     <span className='spinner-border spinner-border-sm align-middle ms-2' />
                   </span>
                 )}

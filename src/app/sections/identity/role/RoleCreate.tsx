@@ -4,10 +4,11 @@ import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {useNavigate} from 'react-router-dom'
 import {Role, roleInitial, roleSchema} from './models/Role'
 import {createRole} from './core/RoleRequests'
-import {submitForm, updateData} from '../../../helpers/form/FormHelper'
+import { jsonToFormData, submitForm, updateData } from "../../../helpers/form/FormHelper";
 import {getAllPermissions} from '../permission/core/PermissionRequests'
 import {Permission} from '../permission/models/Permission'
 import {Switch} from '@mui/material'
+import { createCommunity } from "../../community/core/CommunityRequests";
 
 const RoleCreate = () => {
   const [role, setRole] = useState<Role>(roleInitial)
@@ -21,13 +22,16 @@ const RoleCreate = () => {
     })
   }, [])
 
-  const toIndex = () => {
-    navigate('/roles')
+  const handleSubmit = async () => {
+    let data = jsonToFormData(role)
+    await createRole(data).then((response) => navigate('/roles/' + response?.id + '/edit'))
   }
 
-  const handleSubmit = async () => {
-    await submitForm(createRole, role, toIndex)
-  }
+  useEffect(() => {
+    updateData({
+      permissions: selectedPermissions
+    }, setRole, role)
+  }, [selectedPermissions])
 
   const handleOnChange = (event: any) => {
     updateData({[event.target.name]: event.target.value}, setRole, role)
@@ -91,7 +95,7 @@ const RoleCreate = () => {
                                   setSelectedPermissions(updatedSelected)
                                 }
                               }}
-                            />{' '}
+                            />
                             {permission.name}
                           </div>
                         </div>
@@ -109,7 +113,7 @@ const RoleCreate = () => {
                     <span className='indicator-label'>Add Role</span>
                     {isSubmitting && (
                       <span className='indicator-progress'>
-                        Please wait...{' '}
+                        Please wait...
                         <span className='spinner-border spinner-border-sm align-middle ms-2' />
                       </span>
                     )}

@@ -21,7 +21,7 @@ const Step1: FC<React.PropsWithChildren<unknown>> = () => {
         <div className='text-gray-400 fw-bold fs-6'>
           If you need more info, please check out
           <a href='/dashboard' className='link-primary fw-bolder' target={'_blank'}>
-            {' '}
+            
             Help Page
           </a>
           .

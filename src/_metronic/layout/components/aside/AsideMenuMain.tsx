@@ -2,6 +2,7 @@ import React from 'react'
 import {useIntl} from 'react-intl'
 import {AsideMenuItemWithSub} from './AsideMenuItemWithSub'
 import {AsideMenuItem} from './AsideMenuItem'
+import {Restricted} from '../../../../app/modules/auth/core/AuthPermission'
 
 export function AsideMenuMain() {
   const intl = useIntl()
@@ -34,12 +35,14 @@ export function AsideMenuMain() {
         </div>
       </div>
 
-      <AsideMenuItem
-        to='/plans'
-        title='Plans'
-        // fontIcon='bi-archive'
-        icon='/media/icons/duotune/gen022.svg'
-      ></AsideMenuItem>
+      <Restricted to='manage-plans'>
+        <AsideMenuItem
+          to='/plans'
+          title='Plans'
+          // fontIcon='bi-archive'
+          icon='/media/icons/duotune/gen022.svg'
+        ></AsideMenuItem>
+      </Restricted>
 
       <AsideMenuItem
         to='/subscriptions'
@@ -48,16 +51,18 @@ export function AsideMenuMain() {
         icon='/media/icons/duotune/gen022.svg'
       ></AsideMenuItem>
 
-      <AsideMenuItemWithSub
-        to={['/users', '/roles', '/permissions']}
-        title='Identity'
-        fontIcon={'fa-users'}
-        menuIcon='font'
-      >
-        <AsideMenuItem to='/users' title='Users' hasBullet={true} />
-        <AsideMenuItem to='/roles' title='Roles' hasBullet={true} />
-        <AsideMenuItem to='/permissions' title='Permissions' hasBullet={true} />
-      </AsideMenuItemWithSub>
+      <Restricted to='manage-users'>
+        <AsideMenuItemWithSub
+          to={['/users', '/roles', '/permissions']}
+          title='Identity'
+          fontIcon={'fa-users'}
+          menuIcon='font'
+        >
+          <AsideMenuItem to='/users' title='Users' hasBullet={true} />
+          <AsideMenuItem to='/roles' title='Roles' hasBullet={true} />
+          <AsideMenuItem to='/permissions' title='Permissions' hasBullet={true} />
+        </AsideMenuItemWithSub>
+      </Restricted>
     </>
   )
 }

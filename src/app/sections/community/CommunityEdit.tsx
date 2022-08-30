@@ -77,7 +77,7 @@ const CommunityEdit: FC<React.PropsWithChildren<Props>> = ({community, setCommun
                   <span className='indicator-label'>Save Changes</span>
                   {isSubmitting && (
                     <span className='indicator-progress'>
-                      Please wait...{' '}
+                      Please wait...
                       <span className='spinner-border spinner-border-sm align-middle ms-2' />
                     </span>
                   )}
