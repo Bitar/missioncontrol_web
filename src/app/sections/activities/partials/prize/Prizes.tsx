@@ -18,13 +18,13 @@ type Props = {
 }
 
 const Prizes: FC<Props> = ({
-                             hasDelete,
-                             index,
-                             disableDelete,
-                             removeRank,
-                             setActivityPrizes,
-                             activityPrizes,
-                           }) => {
+  hasDelete,
+  index,
+  disableDelete,
+  removeRank,
+  setActivityPrizes,
+  activityPrizes,
+}) => {
   const [prizeType, setPrizeType] = useState('1')
   const [prizes, setPrizes] = useState<PrizeItemModel[]>([initialPrizeItem()])
   const [activityPrize, setActivityPrize] = useState<ActivityPrize>(initialActivityPrize)

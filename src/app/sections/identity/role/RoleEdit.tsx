@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { FC, useEffect, useState } from "react";
 import {Role, roleInitial, roleSchema} from './models/Role'
 import {useNavigate, useParams} from 'react-router-dom'
 import {Field, Form, Formik} from 'formik'
@@ -10,7 +10,7 @@ import {Switch} from '@mui/material'
 import {Permission} from '../permission/models/Permission'
 import {getAllPermissions} from '../permission/core/PermissionRequests'
 
-const RoleEdit = () => {
+const RoleEdit: FC = () => {
   const [role, setRole] = useState<Role | undefined>()
   const [permissions, setPermissions] = useState<Permission[] | undefined>([])
   const [selectedPermissions, setSelectedPermissions] = useState<number[]>([])

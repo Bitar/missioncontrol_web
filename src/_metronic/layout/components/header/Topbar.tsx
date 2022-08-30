@@ -1,8 +1,9 @@
 import clsx from 'clsx'
 import React, {FC} from 'react'
-import {KTSVG, toAbsoluteUrl} from '../../../helpers'
+import {KTSVG} from '../../../helpers'
 import {HeaderUserMenu, ThemeModeSwitcher} from '../../../partials'
 import {useLayout} from '../../core'
+import { useAuth } from "../../../../app/modules/auth";
 
 const toolbarButtonMarginClass = 'ms-1 ms-lg-3',
   toolbarButtonHeightClass = 'w-30px h-30px w-md-40px h-md-40px',
@@ -10,14 +11,16 @@ const toolbarButtonMarginClass = 'ms-1 ms-lg-3',
 
 const Topbar: FC<React.PropsWithChildren<unknown>> = () => {
   const {config} = useLayout()
+  const {currentUser} = useAuth()
 
   return (
     <div className='d-flex align-items-stretch flex-shrink-0'>
       {/* begin::Theme mode */}
       <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
-        <ThemeModeSwitcher
-          toggleBtnClass={clsx('btn-active-light-primary btn-custom', toolbarButtonHeightClass)}
-        />
+        {/* TODO_v3.1: Dark Mode Switcher */}
+        {/*<ThemeModeSwitcher*/}
+        {/*  toggleBtnClass={clsx('btn-active-light-primary btn-custom', toolbarButtonHeightClass)}*/}
+        {/*/>*/}
       </div>
       {/* end::Theme mode */}
 
@@ -34,7 +37,7 @@ const Topbar: FC<React.PropsWithChildren<unknown>> = () => {
           data-kt-menu-placement='bottom-end'
           data-kt-menu-flip='bottom'
         >
-          <img src={toAbsoluteUrl('/media/avatars/300-1.jpg')} alt='metronic' />
+          <img src={currentUser?.meta?.image} alt={currentUser?.name} />
         </div>
         <HeaderUserMenu />
         {/* end::Toggle */}

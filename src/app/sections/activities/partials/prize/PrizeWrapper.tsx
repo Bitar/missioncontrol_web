@@ -22,6 +22,18 @@ const PrizeWrapper: FC<Props> = ({activity, setActivity}) => {
   const [activityPrizes, setActivityPrizes] = useState<ActivityPrize[]>([])
 
   useEffect(() => {
+    if(winningWay === '1') {
+      updateData(
+        {
+          prize: {},
+        },
+        setActivity,
+        activity
+      )
+    }
+  }, [winningWay])
+
+  useEffect(() => {
     updateData(
       {
         prize: {

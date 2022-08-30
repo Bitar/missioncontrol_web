@@ -23,6 +23,7 @@ type Props = {
 
 const Schedule: FC<Props> = ({activity, setActivity}) => {
   const [frequency, setFrequency] = useState('')
+  const [day, setDay] = useState('')
   const [value, setValue] = useState<Dayjs | null>(dayjs())
   const [selectedTimeZone, setSelectedTimeZone] = useState('')
   const [timeZones, setTimeZones] = useState<TimeZone[]>()
@@ -96,6 +97,50 @@ const Schedule: FC<Props> = ({activity, setActivity}) => {
           </Box>
         </div>
       </div>
+      {activity?.settings?.frequency === 2 && (
+        <div className='row mb-6'>
+          <div className='col-lg-4'>
+            <span className='required fw-bold fs-6'>Day Of Week</span>
+          </div>
+          <div className='col-lg-8'>
+            <Box sx={{minWidth: 120}}>
+              <FormControl fullWidth size='small'>
+                <InputLabel id='timezone-select-label'>Day Of Week</InputLabel>
+                <Select
+                  labelId='timezone-select-label'
+                  id='timezone-select'
+                  value={day}
+                  label='Match Frequency'
+                  onChange={(e) => {
+                    setDay(e.target.value as string)
+
+                    updateData(
+                      {
+                        settings: {
+                          ...activity?.settings,
+                          ...{
+                            day: e.target.value,
+                          },
+                        },
+                      },
+                      setActivity,
+                      activity
+                    )
+                  }}
+                >
+                  <MenuItem value={1}>Monday</MenuItem>
+                  <MenuItem value={2}>Tuesday</MenuItem>
+                  <MenuItem value={3}>Wednesday</MenuItem>
+                  <MenuItem value={4}>Thursday</MenuItem>
+                  <MenuItem value={5}>Friday</MenuItem>
+                  <MenuItem value={6}>Saturday</MenuItem>
+                  <MenuItem value={7}>Sunday</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </div>
+        </div>
+      )}
       <div className='row mb-6'>
         <div className='col-lg-4'>
           <span className='required fw-bold fs-6'>Time of Day</span>
@@ -179,4 +224,4 @@ const Schedule: FC<Props> = ({activity, setActivity}) => {
     </>
   )
 }
-export {Schedule}
+export { Schedule };
