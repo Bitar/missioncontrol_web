@@ -53,7 +53,7 @@ const GameCreate = () => {
 
         <KTCardBody className='py-4'>
           <div className='d-flex flex-column pt-5'>
-            <div className='row mb-6'>
+            <div className='row'>
               <label className='col-lg-4 col-form-label required fw-bold fs-6'>Game</label>
               <div className='col-lg-8 fv-row'>
                 <TextField
@@ -66,34 +66,36 @@ const GameCreate = () => {
                 />
               </div>
             </div>
-          </div>
 
-          <div className='row g-6 g-xl-9'>
-            {games?.map((game) => (
-              <div className='col-md-6 col-lg-3' key={game.id}>
-                <div className='card card-stretch card-bordered mb-5'>
-                  <div
-                    className='card-header rounded bgi-no-repeat bgi-size-cover bgi-position-y-top bgi-position-x-center align-items-start h-350px'
-                    style={{
-                      backgroundImage: `url(${
-                        game.image ? game.image : toAbsoluteUrl('/media/svg/avatars/AstroLearn.svg')
-                      })`,
-                    }}
-                    data-theme='light'
-                  ></div>
+            <div className='row mt-6 g-6 g-xl-9'>
+              {games?.map((game) => (
+                <div className='col-md-6 col-lg-3' key={game.id}>
+                  <div className='card card-stretch card-bordered mb-5'>
+                    <div
+                      className='card-header rounded bgi-no-repeat bgi-size-cover bgi-position-y-top bgi-position-x-center align-items-start h-350px'
+                      style={{
+                        backgroundImage: `url(${
+                          game.image
+                            ? game.image
+                            : toAbsoluteUrl('/media/svg/avatars/AstroLearn.svg')
+                        })`,
+                      }}
+                      data-theme='light'
+                    ></div>
 
-                  <div className='card-body'>
-                    <div className='game-container' onClick={() => sendRequest(game.id)}>
-                      <div className='game-title'>
-                        <div className='text-center fs-5 fw-bold text-black mt-auto '>
-                          {game.title}
+                    <div className='card-body'>
+                      <div className='game-container' onClick={() => sendRequest(game.id)}>
+                        <div className='game-title'>
+                          <div className='text-center fs-5 fw-bold text-black mt-auto '>
+                            {game.title}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </KTCardBody>
       </KTCard>
