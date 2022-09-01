@@ -3,7 +3,8 @@ import {PageLink, PageTitle} from '../../../../_metronic/layout/core'
 import {Navigate, Route, Routes} from 'react-router-dom'
 import {GameIndex} from '../GameIndex'
 import {GameCreate} from '../GameCreate'
-import {GameEdit} from '../GameEdit'
+import {GameEdit} from './GameEdit'
+import {GameView} from './GameView'
 
 const gameBreadCrumbs: Array<PageLink> = [
   {
@@ -42,11 +43,11 @@ const GamePage: FC = () => {
         }
       />
       <Route
-        path='/:id/edit'
+        path='/:id/*'
         element={
           <>
-            <PageTitle breadcrumbs={gameBreadCrumbs}>{'Update Game'}</PageTitle>
-            <GameEdit />
+            <PageTitle breadcrumbs={gameBreadCrumbs}>{'View Game'}</PageTitle>
+            <GameView />
           </>
         }
       />
@@ -55,4 +56,5 @@ const GamePage: FC = () => {
   )
 }
 
-export {GamePage}
+export { GamePage };
+

@@ -18,9 +18,9 @@ const Topbar: FC<React.PropsWithChildren<unknown>> = () => {
       {/* begin::Theme mode */}
       <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
         {/* TODO_v3.1: Dark Mode Switcher */}
-        {/*<ThemeModeSwitcher*/}
-        {/*  toggleBtnClass={clsx('btn-active-light-primary btn-custom', toolbarButtonHeightClass)}*/}
-        {/*/>*/}
+        <ThemeModeSwitcher
+          toggleBtnClass={clsx('btn-active-light-primary btn-custom', toolbarButtonHeightClass)}
+        />
       </div>
       {/* end::Theme mode */}
 

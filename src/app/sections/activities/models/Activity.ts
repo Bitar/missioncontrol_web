@@ -110,9 +110,6 @@ export const prepareForStore = (activity: Activity, setActivity: Dispatch<SetSta
   )
 }
 
-// export function prepareForStore(activity: Activity) {
-// }
-
 export function formOnChange(
   event: any,
   activity: Activity | undefined,

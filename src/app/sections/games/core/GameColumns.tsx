@@ -4,6 +4,7 @@ import {CustomHeader} from '../../../modules/table/columns/CustomHeader'
 import {ActionsCell} from '../../../modules/table/columns/ActionsCell'
 import {QUERIES, toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {Game} from '../../../models/game/Game'
+import {Platform} from '../../../models/game/Platform'
 
 const gamesColumns: ReadonlyArray<Column<Game>> = [
   {
@@ -11,10 +12,10 @@ const gamesColumns: ReadonlyArray<Column<Game>> = [
     id: 'title',
     Cell: ({...props}) => (
       <div className='d-flex align-items-center'>
-        <div className='w-75px me-3'>
+        <div className='w-100px me-3'>
           <img
             src={toAbsoluteUrl(props.data[props.row.index].image)}
-            alt=''
+            alt={props.data[props.row.index].title + ' poster'}
             className='w-100 h-100vh rounded'
           />
         </div>
@@ -24,16 +25,15 @@ const gamesColumns: ReadonlyArray<Column<Game>> = [
       </div>
     ),
   },
-
-  {
-    Header: (props) => (
-      <CustomHeader tableProps={props} title='Crossplay' className='min-w-125px' />
-    ),
-    id: 'is_crossplay',
-    Cell: ({...props}) => (
-      <TextCell dObject={props.data[props.row.index].is_crossplay === 0 ? 'True' : 'False'} />
-    ),
-  },
+  // {
+  //   Header: (props) => (
+  //     <CustomHeader tableProps={props} title='Crossplay' className='min-w-125px' />
+  //   ),
+  //   id: 'is_crossplay',
+  //   Cell: ({...props}) => (
+  //     <TextCell dObject={props.data[props.row.index].is_crossplay === 0 ? 'True' : 'False'} />
+  //   ),
+  // },
   {
     Header: (props) => (
       <CustomHeader tableProps={props} title='Platforms' className='min-w-125px' />
@@ -41,9 +41,9 @@ const gamesColumns: ReadonlyArray<Column<Game>> = [
     id: 'platforms',
     Cell: ({...props}) => (
       <TextCell
-        dObject={props.data[props.row.index].platforms.map((platform: {abbreviation: string}) => {
-          return platform.abbreviation + ' '
-        })}
+        dObject={props.data[props.row.index].platforms?.map((platform: Platform) => (
+          <span key={platform.id} className='badge badge-mc-secondary me-2 mb-1'>{platform.abbreviation}</span>
+        ))}
       />
     ),
   },
@@ -57,7 +57,7 @@ const gamesColumns: ReadonlyArray<Column<Game>> = [
         id={props.data[props.row.index].id}
         path={'games'}
         queryKey={QUERIES.GAMES_LIST}
-        showEdit={true}
+        showView={true}
       />
     ),
   },

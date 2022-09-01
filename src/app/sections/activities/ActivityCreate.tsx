@@ -37,7 +37,7 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
           </div>
         </div>
         <Formik initialValues={activity} onSubmit={handleSubmit} validationSchema={activitySchema}>
-          {({isSubmitting, isValid, touched}) => (
+          {({isSubmitting}) => (
             <Form onChange={handleOnChange} className='form'>
               <KTCardBody className='py-4'>
                 <div className='d-flex flex-column pt-5'>

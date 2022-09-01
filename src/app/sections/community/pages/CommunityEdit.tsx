@@ -1,13 +1,13 @@
 import React, {Dispatch, FC, SetStateAction} from 'react'
-import {Community, communitySchema, formOnChange, initialCommunity} from './models/Community'
+import {Community, communitySchema, formOnChange, initialCommunity} from '../models/Community'
 import {useNavigate, useParams} from 'react-router-dom'
 import {Form, Formik} from 'formik'
-import {KTCard, KTCardBody} from '../../../_metronic/helpers'
-import {LogoImage} from './partials/LogoImage'
-import {BannerImage} from './partials/BannerImage'
-import {CommunityForm} from './CommunityForm'
-import {jsonToFormData} from '../../helpers/form/FormHelper'
-import {updateCommunity} from './core/CommunityRequests'
+import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
+import {LogoImage} from '../partials/LogoImage'
+import {BannerImage} from '../partials/BannerImage'
+import {CommunityForm} from '../CommunityForm'
+import {jsonToFormData} from '../../../helpers/form/FormHelper'
+import {updateCommunity} from '../core/CommunityRequests'
 
 type Props = {
   community: Community | undefined

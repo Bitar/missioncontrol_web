@@ -1,5 +1,4 @@
 import React from 'react'
-import {PageTitle} from '../../../_metronic/layout/core'
 import {KTCard, QUERIES} from '../../../_metronic/helpers'
 import {TableHeader} from '../../modules/table/TableHeader'
 import {QueryRequestProvider} from '../../modules/table/QueryRequestProvider'
@@ -11,7 +10,6 @@ import {GameTable} from './GameTable'
 const GamesList = () => {
   return (
     <>
-      <PageTitle breadcrumbs={[]}>{'Games'}</PageTitle>
       <KTCard>
         <TableHeader name='Game' url='/games' />
         <GameTable />

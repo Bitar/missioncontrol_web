@@ -6,7 +6,7 @@ import {getActivityById} from '../core/ActivityRequests'
 import {CommunityInfo} from '../../community/CommunityInfo'
 import {CommunityActivities} from '../../community/pages/CommunityActivities'
 import {CommunityUsers} from '../../community/pages/CommunityUsers'
-import {CommunityEdit} from '../../community/CommunityEdit'
+import {CommunityEdit} from '../../community/pages/CommunityEdit'
 import {ActivityInfo} from '../ActivityInfo'
 import {ActivityMatches} from './ActivityMatches'
 

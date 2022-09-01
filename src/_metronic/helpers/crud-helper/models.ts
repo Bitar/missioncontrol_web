@@ -22,6 +22,10 @@ export type SearchState = {
   search?: string
 }
 
+export type IncludeState = {
+  include?: string
+}
+
 export type Response<T> = {
   data?: T
   meta?: PaginationState
@@ -34,7 +38,7 @@ export type Response<T> = {
   }
 }
 
-export type QueryState = PaginationState & SortState & FilterState & SearchState
+export type QueryState = PaginationState & SortState & FilterState & SearchState & IncludeState
 
 export type QueryRequestContextProps = {
   state: QueryState

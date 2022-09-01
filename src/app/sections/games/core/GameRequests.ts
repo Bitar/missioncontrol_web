@@ -14,9 +14,14 @@ const getIgdb = (query: string): Promise<IgdbQueryResponse> => {
     .then((response: AxiosResponse<IgdbQueryResponse>) => response.data)
 }
 
-const getGames = (query: string): Promise<GameQueryResponse> => {
+const getGames = (query?: string): Promise<GameQueryResponse> => {
+  let url = `${GET_GAMES_URL}`
+
+  if (query) {
+    url += `?${query}`
+  }
   return axios
-    .get(`${GET_GAMES_URL}?${query}`)
+    .get(url)
     .then((response: AxiosResponse<GameQueryResponse>) => response.data)
 }
 
@@ -26,9 +31,14 @@ const getAllGames = (): Promise<GameQueryResponse> => {
     .then((response: AxiosResponse<GameQueryResponse>) => response.data)
 }
 
-const getGameById = (id: any): Promise<Game | undefined> => {
+const getGameById = (id: any, query?: string): Promise<Game | undefined> => {
+  let url = `${GET_GAMES_URL}/${id}`
+
+  if (query) {
+    url += `?${query}`
+  }
   return axios
-    .get(`${GET_GAMES_URL}/${id}`)
+    .get(url)
     .then((response: AxiosResponse<Response<Game>>) => response.data)
     .then((response: Response<Game>) => response.data)
 }
@@ -40,9 +50,9 @@ const createGame = (igdb_id: number): Promise<Game | undefined> => {
     .then((response: Response<Game>) => response.data)
 }
 
-const updateGame = (id: any, game: Game): Promise<Game | undefined> => {
+const updateGame = (id: any, formData: FormData): Promise<Game | undefined> => {
   return axios
-    .put(`${GET_GAMES_URL}/${id}`, {title: game.title, description: game.description})
+    .post(`${GET_GAMES_URL}/${id}`, formData)
     .then((response: AxiosResponse<Response<Game>>) => response.data)
     .then((response: Response<Game>) => response.data)
 }

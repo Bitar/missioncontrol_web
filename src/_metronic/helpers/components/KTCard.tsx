@@ -1,6 +1,5 @@
 import React, {FC} from 'react'
 import clsx from 'clsx'
-import {WithChildren} from '../react18MigrationHelpers'
 
 // Wrapper on html card:
 // https://preview.keenthemes.com/metronic8/demo1/documentation/base/cards.html
@@ -20,7 +19,7 @@ type Props = {
   utilityPX?: number
 }
 
-const KTCard: FC<React.PropsWithChildren<Props & WithChildren>> = (props) => {
+const KTCard: FC<React.PropsWithChildren<Props>> = (props) => {
   const {
     className,
     shadow,
