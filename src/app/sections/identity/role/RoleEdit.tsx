@@ -26,7 +26,7 @@ const RoleEdit: FC = () => {
   useEffect(() => {
     const updatedSelected: any[] = []
 
-    role?.permissions?.forEach((value, index, array) => {
+    role?.permissions?.forEach((value) => {
       if (value?.id && !selectedPermissions.includes(value?.id)) {
         updatedSelected.push(value?.id)
       }

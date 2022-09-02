@@ -3,7 +3,6 @@ import clsx from 'clsx'
 import {Link} from 'react-router-dom'
 import {useLocation} from 'react-router'
 import {checkIsActive, KTSVG, WithChildren} from '../../../helpers'
-import {useLayout} from '../../core'
 
 type Props = {
   to: string

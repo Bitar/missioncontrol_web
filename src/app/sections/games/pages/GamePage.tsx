@@ -3,7 +3,6 @@ import {PageLink, PageTitle} from '../../../../_metronic/layout/core'
 import {Navigate, Route, Routes} from 'react-router-dom'
 import {GameIndex} from '../GameIndex'
 import {GameCreate} from '../GameCreate'
-import {GameEdit} from './GameEdit'
 import {GameView} from './GameView'
 
 const gameBreadCrumbs: Array<PageLink> = [

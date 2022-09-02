@@ -1,5 +1,4 @@
 import React from 'react'
-import {PageTitle} from '../../../../_metronic/layout/core'
 import {KTCard, QUERIES} from '../../../../_metronic/helpers'
 import {TableHeader} from '../../../modules/table/TableHeader'
 import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'

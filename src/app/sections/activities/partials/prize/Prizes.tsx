@@ -1,7 +1,5 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
-import Box from '@mui/material/Box'
-import FormControl from '@mui/material/FormControl'
-import {Grid, InputLabel, MenuItem, Select} from '@mui/material'
+import {Grid} from '@mui/material'
 import {PrizeSingle} from './PrizeSingle'
 import {initialPrizeItem, PrizeItem as PrizeItemModel} from '../../models/PrizeItem'
 import TextField from '@mui/material/TextField'

@@ -1,6 +1,5 @@
 import {Game} from '../../../models/game/Game'
-import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
-import {GameMode} from '../../../models/game/GameMode'
+import React, {Dispatch, FC, SetStateAction, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import {getAllGameModes} from '../core/GameRequests'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
@@ -12,7 +11,6 @@ type Props = {
 }
 
 const GameModes: FC<Props> = ({game, setGame}) => {
-  // const [modes, setModes] = useState<GameMode[] | undefined>([])
   const params = useParams()
 
   useEffect(() => {
@@ -44,9 +42,9 @@ const GameModes: FC<Props> = ({game, setGame}) => {
           <div key={gameMode?.id} className='col-12 col-xl'>
             <KTCard className='h-100'>
               <KTCardBody className='d-flex justify-content-center flex-column p-8'>
-                <a href='#' className='text-gray-800 text-hover-primary d-flex flex-column'>
+                <span className='text-gray-800 text-hover-primary d-flex flex-column'>
                   <div className='fs-5 fw-bolder mb-2'>{gameMode?.name}</div>
-                </a>
+                </span>
                 <div className='fs-7 fw-bold text-gray-400 mt-auto mb-2'>
                   {gameMode?.description}
                 </div>

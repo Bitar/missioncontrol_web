@@ -1,18 +1,17 @@
 import React, {useState} from 'react'
-import * as Yup from 'yup'
 import { useNavigate, useParams } from "react-router-dom";
-import { Field, Form, Formik, useFormik } from "formik";
-import { requestPassword, resetPassword } from "../core/_requests";
+import { Field, Form, Formik } from "formik";
+import { resetPassword } from "../core/_requests";
 import { activitySchema } from "../../../sections/activities/models/Activity";
 import { jsonToFormData } from "../../../helpers/form/FormHelper";
 
-const forgotPasswordSchema = Yup.object().shape({
-  email: Yup.string()
-    .email('Wrong email format')
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
-    .required('Email is required'),
-})
+// const forgotPasswordSchema = Yup.object().shape({
+//   email: Yup.string()
+//     .email('Wrong email format')
+//     .min(3, 'Minimum 3 symbols')
+//     .max(50, 'Maximum 50 symbols')
+//     .required('Email is required'),
+// })
 
 const initialValues = {
   email: "",
@@ -25,7 +24,7 @@ const ResetPassword = () => {
   const navigate = useNavigate()
   const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined)
 
-  const handleSubmit = async (values: any, {setStatus, setSubmitting}: any) => {
+  const handleSubmit = async (values: any) => {
     values.token = params.token
     let data = jsonToFormData(values)
 
@@ -35,24 +34,12 @@ const ResetPassword = () => {
     }).catch(() => {
       setHasErrors(true)
     });
-    // try {
-    //
-    //   // const {data: auth} = await login(values.email, values.password)
-    //   // saveAuth(auth)
-    //   // const {data: profile} = await getUserByToken(auth.token)
-    //   // setCurrentUser(profile.user)
-    // } catch (error) {
-    //   // console.error(error)
-    //   // saveAuth(undefined)
-    //   // setStatus('The login detail is incorrect')
-    //   // setSubmitting(false)
-    // }
   }
 
   return (
     <>
       <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={activitySchema}>
-        {({isSubmitting, isValid, touched}) => (
+        {/*{({isSubmitting, isValid, touched}) => (*/}
           <Form className='form w-100'>
             <div className='text-center mb-10'>
               {/* begin::Title */}
@@ -129,7 +116,7 @@ const ResetPassword = () => {
             </div>
             {/* end::Form group */}
           </Form>
-        )}
+        {/*)}*/}
       </Formik>
     </>
   )
@@ -137,28 +124,28 @@ const ResetPassword = () => {
 
 export {ResetPassword}
 
-export function ForgotPassword() {
-  const [loading, setLoading] = useState(false)
-  const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined)
-  const formik = useFormik({
-    initialValues,
-    validationSchema: forgotPasswordSchema,
-    onSubmit: (values, {setStatus, setSubmitting}) => {
-      setLoading(true)
-      setHasErrors(undefined)
-      setTimeout(() => {
-        requestPassword(values.email)
-          .then(({data: {result}}) => {
-            setHasErrors(false)
-            setLoading(false)
-          })
-          .catch(() => {
-            setHasErrors(true)
-            setLoading(false)
-            setSubmitting(false)
-            setStatus('The login detail is incorrect')
-          })
-      }, 1000)
-    },
-  })
-}
+// export function ForgotPassword() {
+//   const [loading, setLoading] = useState(false)
+//   const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined)
+//   const formik = useFormik({
+//     initialValues,
+//     validationSchema: forgotPasswordSchema,
+//     onSubmit: (values, {setStatus, setSubmitting}) => {
+//       setLoading(true)
+//       setHasErrors(undefined)
+//       setTimeout(() => {
+//         requestPassword(values.email)
+//           .then(({data: {result}}) => {
+//             setHasErrors(false)
+//             setLoading(false)
+//           })
+//           .catch(() => {
+//             setHasErrors(true)
+//             setLoading(false)
+//             setSubmitting(false)
+//             setStatus('The login detail is incorrect')
+//           })
+//       }, 1000)
+//     },
+//   })
+// }

@@ -1,6 +1,6 @@
 import {ID, Response} from '../../../_metronic/helpers'
 import {Platform} from './Platform'
-import {GameMode} from './GameMode'
+import { GameMode, initialGameMode } from "./GameMode";
 import * as Yup from "yup";
 import { Dispatch, SetStateAction } from "react";
 import { updateData } from "../../helpers/form/FormHelper";
@@ -30,7 +30,7 @@ export const initialGame = (game?: Game) => {
     description: game?.description || '',
     image: game?.image || '',
     platforms: game?.platforms || [],
-    game_modes: game?.game_modes || [],
+    game_modes: game?.game_modes || [initialGameMode()],
   }
 }
 

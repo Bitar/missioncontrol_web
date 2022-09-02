@@ -1,35 +1,46 @@
-import React, {FC, useEffect, useState} from 'react'
+import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom'
 import {KTCard, KTCardBody, toAbsoluteUrl} from '../../../../_metronic/helpers'
-import {Activity} from '../models/Activity'
 import {Match} from '../models/matches/Match'
 import {getActivityMatches} from '../core/ActivityRequests'
-import {ActivityObject} from '../../identity/user/objects/activity/ActivityObject'
-import {Card, CardActionArea, CardContent, CardMedia, Typography} from '@mui/material'
-import {Grid} from '@mui/material'
 import {getDateFromTimestamp} from '../../../helpers/MCHelper'
+import {Activity} from '../models/Activity'
+
+let matchesLoaded = false
 
 type Props = {
   activity: Activity | undefined
+  setActivity: Dispatch<SetStateAction<Activity | undefined>>
 }
 
-const ActivityMatches: FC<Props> = ({activity}) => {
+const ActivityMatches: FC<Props> = ({activity, setActivity}) => {
   const [matches, setMatches] = useState<Match[] | undefined>([])
   const params = useParams()
 
   useEffect(() => {
-    getActivityMatches(params.id).then((response) => {
-      setMatches(response.data)
-    })
+    if (!matchesLoaded) {
+      getActivityMatches(params.id).then((response) => {
+        setMatches(response.data)
+        matchesLoaded = true
+        //TODO: Check this one
+        // updateData(
+        //   {
+        //     matches: response.data,
+        //   },
+        //   setActivity,
+        //   activity
+        // )
+      })
+    }
   }, [params.id])
 
   const calculateTeamScore = (match: any, team: any) => {
     let totalScore = 0
 
-    match?.rounds.map((round: any) => {
+    match?.rounds.forEach((round: any) => {
       let scores = round.scores
 
-      scores.map((score: any) => {
+      scores.forEach((score: any) => {
         if (score.team_id === team.id) {
           totalScore += score.score
         }
@@ -74,7 +85,10 @@ const ActivityMatches: FC<Props> = ({activity}) => {
                                     {user.meta?.image ? (
                                       <img alt='Pic' src={toAbsoluteUrl(user.meta?.image)} />
                                     ) : (
-                                      <img alt='Pic' src={toAbsoluteUrl('/media/avatars/blank.png')} />
+                                      <img
+                                        alt='Pic'
+                                        src={toAbsoluteUrl('/media/avatars/blank.png')}
+                                      />
                                     )}
                                   </div>
                                 ))}
@@ -123,7 +137,10 @@ const ActivityMatches: FC<Props> = ({activity}) => {
                                     {user.meta?.image ? (
                                       <img alt='Pic' src={toAbsoluteUrl(user.meta?.image)} />
                                     ) : (
-                                      <img alt='Pic' src={toAbsoluteUrl('/media/avatars/blank.png')} />
+                                      <img
+                                        alt='Pic'
+                                        src={toAbsoluteUrl('/media/avatars/blank.png')}
+                                      />
                                     )}
                                   </div>
                                 ))}

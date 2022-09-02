@@ -2,6 +2,8 @@ import axios, {AxiosResponse} from 'axios'
 import {Response} from '../../../../_metronic/helpers'
 import {Activity, ActivityQueryResponse} from '../models/Activity'
 import { MatchQueryResponse } from "../models/matches/Match";
+import { Announcement } from "../../../models/announcement/Announcements";
+import { ChatMessage, ChatMessageQueryResponse } from "../../../models/chat/ChatMessage";
 // import process from "process";
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -42,27 +44,30 @@ const getActivityMatches = (id: any, query?: string): Promise<MatchQueryResponse
     .then((response: AxiosResponse<MatchQueryResponse>) => response.data)
 }
 
-// const createUser = (identity: User): Promise<User | undefined> => {
-//     return axios
-//         .put(ROLE_URL, identity)
-//         .then((response: AxiosResponse<Response<User>>) => response.data)
-//         .then((response: Response<User>) => response.data)
-// }
-//
-// const updateUser = (identity: User): Promise<User | undefined> => {
-//     return axios
-//         .post(`${ROLE_URL}/${identity.id}`, identity)
-//         .then((response: AxiosResponse<Response<User>>) => response.data)
-//         .then((response: Response<User>) => response.data)
-// }
-//
-// const deleteUser = (userId: ID): Promise<void> => {
-//     return axios.delete(`${ROLE_URL}/${userId}`).then(() => {})
-// }
-//
-// const deleteSelectedUsers = (userIds: Array<ID>): Promise<void> => {
-//     const requests = userIds.map((id) => axios.delete(`${ROLE_URL}/${id}`))
-//     return axios.all(requests).then(() => {})
-// }
+const createActivityAnnouncement = (id: any, formData: FormData): Promise<Announcement | undefined> => {
+  let url = `${ACTIVITIES_URL}/${id}/announcements`
 
-export {getActivities, createActivity, getActivityById, getActivityMatches}
+  return axios
+    .post(url, formData)
+    .then((response: AxiosResponse<Response<Announcement>>) => response.data)
+    .then((response: Response<Announcement>) => response.data)
+}
+
+const getActivityChat = (id: any): Promise<ChatMessageQueryResponse> => {
+  let url = `${ACTIVITIES_URL}/${id}/chat`
+
+  return axios
+    .get(url)
+    .then((response: AxiosResponse<ChatMessageQueryResponse>) => response.data)
+}
+
+const sendActivityChat = (id: any, formData: FormData): Promise<ChatMessage | undefined> => {
+  let url = `${ACTIVITIES_URL}/${id}/chat`
+
+  return axios
+    .post(url, formData)
+    .then((response: AxiosResponse<Response<ChatMessage>>) => response.data)
+    .then((response: Response<ChatMessage>) => response.data)
+}
+
+export {getActivities, createActivity, getActivityById, getActivityMatches, createActivityAnnouncement, getActivityChat, sendActivityChat}

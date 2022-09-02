@@ -10,6 +10,8 @@ import {ActivityType, initialActivityType} from './ActivityType'
 import {ActivitySettings, initialActivitySettings} from './ActivitySettings'
 import {GameMode} from '../../../models/game/GameMode'
 import {ActivityTeamSetting, initialActivityTeamSetting} from './AvtivityTeamSetting'
+import { Team } from "../../../models/squad/Team";
+import { Announcement } from "../../../models/announcement/Announcements";
 
 export const activitySchema = Yup.object().shape({})
 
@@ -51,6 +53,7 @@ export type Activity = {
   description?: string
   type: ActivityType
   status: number
+  teams?: Team[]
   settings: ActivitySettings
   community?: Community
   game?: Game
@@ -65,12 +68,15 @@ export type Activity = {
   }
   prize?: []
   location?: ActivityLocation
-  // platforms?: Platform,
-  announcements?: []
+  platforms?: [],
+  announcements?: Announcement[]
   entry_fee?: ActivityFee
   team_settings?: ActivityTeamSetting
   rules?: []
   // standings: []
+
+
+
   additional_data?: {
     teams_count: number
     players_count: number

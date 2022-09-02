@@ -6,12 +6,14 @@ type Props = {
   className?: string
   scroll?: boolean
   height?: number
+  id?: string
 }
 
 const KTCardBody: FC<React.PropsWithChildren<Props & WithChildren>> = (props) => {
-  const {className, scroll, height, children} = props
+  const {className, scroll, height, id, children} = props
   return (
     <div
+      id={id}
       className={clsx(
         'card-body',
         className && className,

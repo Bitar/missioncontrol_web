@@ -7,9 +7,8 @@ import {
   Select,
 } from '@mui/material'
 import Box from '@mui/material/Box'
-import {ActivityPrize, initialActivityPrize} from '../../models/ActivityPrize'
+import {ActivityPrize} from '../../models/ActivityPrize'
 import {PrizeSingleWrapper} from './PrizeSingleWrapper'
-import {PrizeBundleWrapper} from './PrizeBundleWrapper'
 import { updateData } from '../../../../helpers/form/FormHelper'
 
 type Props = {
@@ -20,18 +19,6 @@ type Props = {
 const PrizeWrapper: FC<Props> = ({activity, setActivity}) => {
   const [winningWay, setWinningWay] = useState('')
   const [activityPrizes, setActivityPrizes] = useState<ActivityPrize[]>([])
-
-  useEffect(() => {
-    if(winningWay === '1') {
-      updateData(
-        {
-          prize: {},
-        },
-        setActivity,
-        activity
-      )
-    }
-  }, [winningWay])
 
   useEffect(() => {
     updateData(
@@ -68,7 +55,17 @@ const PrizeWrapper: FC<Props> = ({activity, setActivity}) => {
                 value={winningWay}
                 label='Winning Way'
                 onChange={(e) => {
-                  setWinningWay(e.target.value as string)
+                  let targetValue = e.target.value
+                  setWinningWay(targetValue as string)
+                  if(targetValue === '1') {
+                    updateData(
+                      {
+                        prize: {},
+                      },
+                      setActivity,
+                      activity
+                    )
+                  }
                 }}
               >
                 <MenuItem value={'1'}>No Prize</MenuItem>

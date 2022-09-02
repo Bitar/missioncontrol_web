@@ -1,14 +1,10 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useState, useEffect} from 'react'
-import {ErrorMessage, Field, Form, Formik, useFormik} from 'formik'
+import React, {useEffect} from 'react'
+import {ErrorMessage, Field, Form, Formik} from 'formik'
 import * as Yup from 'yup'
-import clsx from 'clsx'
 import {getUserByToken, register} from '../core/_requests'
 import {Link} from 'react-router-dom'
-import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {PasswordMeterComponent} from '../../../../_metronic/assets/ts/components'
 import {useAuth} from '../core/Auth'
-import {communitySchema} from '../../../sections/community/models/Community'
 
 const initialValues = {
   firstname: '',
@@ -40,14 +36,13 @@ const registrationSchema = Yup.object().shape({
   changepassword: Yup.string()
     .required('Password confirmation is required')
     .when('password', {
-      is: (val: string) => (val && val.length > 0 ? true : false),
+      is: (val: string) => val && val.length > 0,
       then: Yup.string().oneOf([Yup.ref('password')], "Password and Confirm Password didn't match"),
     }),
   acceptTerms: Yup.bool().required('You must accept the terms and conditions'),
 })
 
 const Registration = () => {
-  const [loading, setLoading] = useState(false)
   const {saveAuth, setCurrentUser} = useAuth()
 
   useEffect(() => {
@@ -74,7 +69,7 @@ const Registration = () => {
       saveAuth(undefined)
       // setStatus('The registration details is incorrect')
       // setSubmitting(false)
-      setLoading(false)
+      // setLoading(false)
     }
   }
 
@@ -85,7 +80,7 @@ const Registration = () => {
         onSubmit={handleSubmit}
         validationSchema={registrationSchema}
       >
-        {({isSubmitting, isValid, touched}) => (
+        {({isSubmitting}) => (
           <Form className='form w-100 fv-plugins-bootstrap5 fv-plugins-framework'>
             {/* begin::Heading */}
             <div className='mb-10 text-center'>

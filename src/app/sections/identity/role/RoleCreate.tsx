@@ -48,7 +48,7 @@ const RoleCreate = () => {
           </div>
         </div>
         <Formik initialValues={role} onSubmit={handleSubmit} validationSchema={roleSchema}>
-          {({isSubmitting, isValid, touched, errors}) => (
+          {({isSubmitting, isValid, touched}) => (
             <>
               <Form onChange={handleOnChange} className='form'>
                 <KTCardBody className='py-4'>

@@ -3,12 +3,11 @@ import {Activity} from '../models/Activity'
 import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../../_metronic/layout/core'
 import {getActivityById} from '../core/ActivityRequests'
-import {CommunityInfo} from '../../community/CommunityInfo'
-import {CommunityActivities} from '../../community/pages/CommunityActivities'
-import {CommunityUsers} from '../../community/pages/CommunityUsers'
-import {CommunityEdit} from '../../community/pages/CommunityEdit'
 import {ActivityInfo} from '../ActivityInfo'
 import {ActivityMatches} from './ActivityMatches'
+import {ActivityTeams} from './ActivityTeams'
+import { ActivityOverview } from './ActivityOverview'
+import { ActivityChat } from "./ActivityChat";
 
 const ActivityView: React.FC = () => {
   const [activity, setActivity] = useState<Activity | undefined>()
@@ -62,6 +61,7 @@ const ActivityView: React.FC = () => {
           element={
             <>
               <PageTitle breadcrumbs={activityViewBreadcrumbs}>Overview</PageTitle>
+              <ActivityOverview activity={activity} setActivity={setActivity}/>
             </>
           }
         />
@@ -70,7 +70,7 @@ const ActivityView: React.FC = () => {
           element={
             <>
               <PageTitle breadcrumbs={activityViewBreadcrumbs}>Matches</PageTitle>
-              <ActivityMatches activity={activity} />
+              <ActivityMatches activity={activity} setActivity={setActivity}/>
             </>
           }
         />
@@ -79,6 +79,16 @@ const ActivityView: React.FC = () => {
           element={
             <>
               <PageTitle breadcrumbs={activityViewBreadcrumbs}>Teams</PageTitle>
+              <ActivityTeams activity={activity} setActivity={setActivity}/>
+            </>
+          }
+        />
+        <Route
+          path='chat'
+          element={
+            <>
+              <PageTitle breadcrumbs={activityViewBreadcrumbs}>Chat</PageTitle>
+              <ActivityChat activity={activity} setActivity={setActivity}/>
             </>
           }
         />

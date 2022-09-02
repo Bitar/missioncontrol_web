@@ -1,6 +1,5 @@
 import {FC} from 'react'
 import {Activity} from './models/Activity'
-import {KTSVG} from '../../../_metronic/helpers'
 import {Link, useLocation} from 'react-router-dom'
 
 type Props = {
@@ -83,11 +82,11 @@ const ActivityInfo: FC<Props> = ({activity}) => {
                 <Link
                   className={
                     `nav-link text-active-primary me-6 ` +
-                    (location.pathname === '/activities/' + activity?.id + '/members' && 'active')
+                    (location.pathname === '/activities/' + activity?.id + '/chat' && 'active')
                   }
-                  to={'/activities/' + activity?.id + '/members'}
+                  to={'/activities/' + activity?.id + '/chat'}
                 >
-                  Members
+                  Chat
                 </Link>
               </li>
               <li className='nav-item'>

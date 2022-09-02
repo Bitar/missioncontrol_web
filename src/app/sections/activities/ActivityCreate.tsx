@@ -17,7 +17,7 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
       let data = jsonToFormData(activity)
       createActivity(data).then((response) => navigate('/activities/' + response?.id))
     }
-  }, [activity])
+  }, [navigate, activity])
 
   const handleSubmit = async () => {
     prepareForStore(activity, setActivity);
