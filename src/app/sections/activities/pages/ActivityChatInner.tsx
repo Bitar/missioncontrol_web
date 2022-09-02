@@ -7,10 +7,10 @@ import TextField from '@mui/material/TextField'
 import {IconButton} from '@mui/material'
 import SendIcon from '@mui/icons-material/Send'
 import {Form, Formik} from 'formik'
-import {jsonToFormData, updateData} from '../../../helpers/form/FormHelper'
+import {jsonToFormData} from '../../../helpers/form/FormHelper'
 import {sendActivityChat} from '../core/ActivityRequests'
 import {useParams} from 'react-router-dom'
-import { useAuth } from "../../../modules/auth";
+import {useAuth} from '../../../modules/auth'
 
 type Props = {
   chat: ChatMessage[] | undefined
@@ -19,9 +19,9 @@ type Props = {
 }
 
 const ActivityChatInner: FC<Props> = ({chat, setChat, isDrawer = false}) => {
+  dayjs.extend(relativeTime)
   const params = useParams()
   const {currentUser} = useAuth()
-  dayjs.extend(relativeTime)
   const [message, setMessage] = useState<ChatMessage>(initialChat())
   const handleSubmit = async () => {
     let data = jsonToFormData(message)
@@ -32,7 +32,7 @@ const ActivityChatInner: FC<Props> = ({chat, setChat, isDrawer = false}) => {
       setMessage(initialChat())
     })
   }
-  
+
   return (
     <div className='card-body' id={'kt_chat_messenger_body'}>
       <div
