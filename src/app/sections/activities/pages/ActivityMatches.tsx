@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom'
 import {KTCard, KTCardBody, toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {Match} from '../models/matches/Match'
 import {getActivityMatches} from '../core/ActivityRequests'
-import {getDateFromTimestamp} from '../../../helpers/MCHelper'
+import {getDateFromTimestamp, getTimeFromTimestamp} from '../../../helpers/MCHelper'
 import {Activity} from '../models/Activity'
 
 let matchesLoaded = false
@@ -58,105 +58,63 @@ const ActivityMatches: FC<Props> = ({activity, setActivity}) => {
             <h3 className='card-label'>Matches</h3>
           </div>
         </div>
-        <KTCardBody className='py-4'>
-          <div className='d-flex flex-column pt-5'>
-            {matches?.map((match) => (
-              <React.Fragment key={match.id}>
-                <div className='row'>
-                  <div className='col-md-6 col-lg-5'>
+        <KTCardBody className='py-5' id='activity_matches_body'>
+          <div
+            className={'scroll-y me-n5 pe-5 h-300px h-lg-auto'}
+            data-kt-element='matches'
+            data-kt-scroll='true'
+            data-kt-scroll-activate='{default: false, lg: true}'
+            data-kt-scroll-max-height='600px'
+            data-kt-scroll-dependencies={
+              '#kt_header, #kt_toolbar, #kt_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer'
+            }
+            data-kt-scroll-wrappers={'#kt_content, #activity_matches_body'}
+            data-kt-scroll-offset={'-2px'}
+          >
+            <div className='d-flex flex-column'>
+              {matches?.map((match) => (
+                <React.Fragment key={match.id}>
+                  <div className='d-flex flex-stack text-center'>
                     {match?.teams && match?.teams[0] && (
-                      <div className='card card-dashed h-xl-100 flex-row flex-stack flex-wrap pe-6'>
-                        <div className='d-flex flex-column'>
-                          <div className='d-flex align-items-center'>
-                            <img src={match?.teams[0].image} alt='' className='me-4' />
-                            <div>
-                              <div className='fs-4 fw-bold'>{match?.teams[0].name}</div>
-                              <div className='fs-6 fw-semibold text-gray-400'>
-                                {getDateFromTimestamp(match?.start_date)}
-                              </div>
-                              <div className='fs-6 fw-semibold text-gray-400'>
-                                {match?.teams[1].users?.map((user, index) => (
-                                  <div
-                                    className='symbol symbol-20px symbol-circle'
-                                    data-bs-toggle='tooltip'
-                                    title={user.name}
-                                    key={'something-' + index}
-                                  >
-                                    {user.meta?.image ? (
-                                      <img alt='Pic' src={toAbsoluteUrl(user.meta?.image)} />
-                                    ) : (
-                                      <img
-                                        alt='Pic'
-                                        src={toAbsoluteUrl('/media/avatars/blank.png')}
-                                      />
-                                    )}
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
+                      <div className='flex-grow-1'>
+                        <div className='d-inline-block'>
+                          <div className='symbol symbol-60px symbol-circle mb-3'>
+                            <img
+                              alt={match?.teams[0].name + ' team image'}
+                              src={match?.teams[0].image}
+                              className='mw-100px'
+                            />
                           </div>
-                        </div>
-                        <div className='d-flex align-items-center py-2'>
-                          <div className='fs-4 fw-bold'>
-                            {calculateTeamScore(match, match?.teams[1])}
-                          </div>
+                          <div className='fs-6 fw-bold'>{match?.teams[0].name}</div>
                         </div>
                       </div>
                     )}
-                  </div>
-                  <div className='col-md-2'>
-                    <div className='d-flex h-xl-100'>
-                      <div className='d-flex align-items-center py-2'>
-                        <div className='fs-4 fw-bold'>VS</div>
+                    <div className='flex-shrink-1'>
+                      <div className='fs-6 fw-semibold text-gray-600 px-5'>
+                        <p className='m-0'>{getTimeFromTimestamp(match?.start_date)}</p>
+                        <p className='m-0'>{getDateFromTimestamp(match?.start_date)}</p>
                       </div>
                     </div>
-                  </div>
-                  <div className='col-md-6 col-lg-5'>
                     {match?.teams && match?.teams[1] && (
-                      <div className='card card-dashed h-xl-100 flex-row flex-stack flex-wrap ps-6'>
-                        <div className='d-flex align-items-center py-2'>
-                          <div className='fs-4 fw-bold'>
-                            {calculateTeamScore(match, match?.teams[1])}
+                      <div className='flex-grow-1'>
+                        <div className='d-inline-block'>
+                          <div className='symbol symbol-60px symbol-circle mb-3'>
+                            <img
+                              alt={match?.teams[1].name + ' team image'}
+                              src={match?.teams[1].image}
+                              className='mw-100px'
+                            />
                           </div>
-                        </div>
-                        <div className='d-flex flex-column'>
-                          <div className='d-flex align-items-center text-end'>
-                            <div>
-                              <div className='fs-4 fw-bold'>{match?.teams[1].name}</div>
-                              <div className='fs-6 fw-semibold text-gray-400'>
-                                {getDateFromTimestamp(match?.start_date)}
-                              </div>
-                              <div className='fs-6 fw-semibold text-gray-400'>
-                                {match?.teams[1].users?.map((user, index) => (
-                                  <div
-                                    className='symbol symbol-20px symbol-circle'
-                                    data-bs-toggle='tooltip'
-                                    title={user.name}
-                                    key={'something-' + index}
-                                  >
-                                    {user.meta?.image ? (
-                                      <img alt='Pic' src={toAbsoluteUrl(user.meta?.image)} />
-                                    ) : (
-                                      <img
-                                        alt='Pic'
-                                        src={toAbsoluteUrl('/media/avatars/blank.png')}
-                                      />
-                                    )}
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                            <img src={match?.teams[1].image} alt='' className='ms-4' />
-                          </div>
+                          <div className='fs-6 fw-bold'>{match?.teams[1].name}</div>
                         </div>
                       </div>
                     )}
                   </div>
-                </div>
-
-                <div className='separator separator-dashed my-6'></div>
-              </React.Fragment>
-            ))}
+                  {/*</div>*/}
+                  <div className='separator my-3'></div>
+                </React.Fragment>
+              ))}
+            </div>
           </div>
         </KTCardBody>
       </KTCard>

@@ -1,7 +1,7 @@
 import {useMemo} from 'react'
 import {useTable, ColumnInstance, Row} from 'react-table'
 import {KTCardBody} from '../../../_metronic/helpers'
-import {activitiesColumns} from './core/ActivityColumns'
+import {ActivityColumns} from './core/ActivityColumns'
 import {Activity} from './models/Activity'
 import {
   useQueryResponseData,
@@ -16,7 +16,7 @@ const ActivityTable = () => {
   const activities = useQueryResponseData()
   const isLoading = useQueryResponseLoading()
   const data = useMemo(() => activities, [activities])
-  const columns = useMemo(() => activitiesColumns, [])
+  const columns = useMemo(() => ActivityColumns, [])
   const {getTableProps, getTableBodyProps, headers, rows, prepareRow} = useTable({
     columns,
     data,

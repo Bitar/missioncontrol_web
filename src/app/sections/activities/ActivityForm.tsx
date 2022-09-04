@@ -3,14 +3,13 @@ import {Activity} from './models/Activity'
 import {ErrorMessage} from 'formik'
 import {updateData} from '../../helpers/form/FormHelper'
 import {getAllCommunities} from '../community/core/CommunityRequests'
-import {GameDetails, Location, EntryFee, Schedule, TeamDetails, Scoring} from './partials'
+import {GameDetails, Location, EntryFee, Schedule, TeamDetails, Scoring} from './components'
 import TextField from '@mui/material/TextField'
 import FormControl from '@mui/material/FormControl'
 import {InputLabel, MenuItem, Select} from '@mui/material'
 import Box from '@mui/material/Box'
 import {Community} from '../community/models/Community'
-import {PrizeWrapper} from './partials/prize/PrizeWrapper'
-// import { PrizeWrapper } from "./partials/prize/PrizeWrapper";
+import {PrizeWrapper} from './components/prize/PrizeWrapper'
 
 type Props = {
   activity: Activity | undefined

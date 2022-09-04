@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import {FC} from 'react'
+import React, {FC} from 'react'
 import {Row} from 'react-table'
 
 type Props = {
@@ -12,7 +12,7 @@ const CustomRow: FC<React.PropsWithChildren<Props>> = ({row}) => (
       return (
         <td
           {...cell.getCellProps()}
-          className={clsx({'text-end min-w-100px': cell.column.id === 'actions'})}
+          className={clsx({'text-end': cell.column.id === 'actions'})}
         >
           {cell.render('Cell')}
         </td>

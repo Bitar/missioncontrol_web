@@ -12,6 +12,7 @@ import {GameMode} from '../../../models/game/GameMode'
 import {ActivityTeamSetting, initialActivityTeamSetting} from './AvtivityTeamSetting'
 import { Team } from "../../../models/squad/Team";
 import { Announcement } from "../../../models/announcement/Announcements";
+import { ActivityStanding } from "./ActivityStanding";
 
 export const activitySchema = Yup.object().shape({})
 
@@ -73,7 +74,7 @@ export type Activity = {
   entry_fee?: ActivityFee
   team_settings?: ActivityTeamSetting
   rules?: []
-  // standings: []
+  standings?: ActivityStanding[]
 
 
 

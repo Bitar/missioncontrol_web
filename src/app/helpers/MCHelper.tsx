@@ -1,5 +1,11 @@
-const getDateFromTimestamp = ($timestamp: any) => {
-  return new Date($timestamp * 1000).toDateString()
+import dayjs from "dayjs";
+
+const getTimeFromTimestamp = ($timestamp: any) => {
+  return dayjs(new Date($timestamp * 1000)).format('LT')
 }
 
-export {getDateFromTimestamp}
+const getDateFromTimestamp = ($timestamp: any) => {
+  return dayjs(new Date($timestamp * 1000)).format('ddd, ll')
+}
+
+export {getDateFromTimestamp, getTimeFromTimestamp}

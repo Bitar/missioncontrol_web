@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import {FC, PropsWithChildren, useMemo} from 'react'
+import React, {FC, PropsWithChildren, useMemo} from 'react'
 import {HeaderProps} from 'react-table'
 import {useQueryRequest} from '../QueryRequestProvider'
 import {initialQueryState} from '../../../../_metronic/helpers'

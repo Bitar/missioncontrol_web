@@ -20,9 +20,9 @@ const ActivityTeams: FC<Props> = ({activity, setActivity}) => {
         </div>
         <KTCardBody className='py-4'>
           <div className='row g-6 g-xl-9'>
-          {activity?.teams?.map((team) => (
-            <div key={team.id} className='col-md-6 col-xl-4'>
-              <TeamCard team={team}></TeamCard>
+          {activity?.standings?.map((standing) => (
+            <div key={standing.team.id} className='col-md-6 col-xl-4'>
+              <TeamCard standing={standing} team={standing.team}></TeamCard>
               {/*<TeamCard team={team}></TeamCard>*/}
             </div>
           ))}

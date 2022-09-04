@@ -7,7 +7,7 @@ import {Activity} from '../models/Activity'
 import {BadgeCell} from '../../../modules/table/columns/BadgeCell'
 import {formatDates, formatStatus} from '../../../helpers/ActivityHelper'
 
-const activitiesColumns: ReadonlyArray<Column<Activity>> = [
+const ActivityColumns: ReadonlyArray<Column<Activity>> = [
   {
     Header: (props) => <CustomHeader tableProps={props} title='Title' className='min-w-125px' />,
     id: 'title',
@@ -91,4 +91,4 @@ const activitiesColumns: ReadonlyArray<Column<Activity>> = [
   },
 ]
 
-export {activitiesColumns}
+export {ActivityColumns}
