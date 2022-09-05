@@ -1,26 +1,21 @@
-import React, {FC} from 'react'
+import React, {Dispatch, FC, SetStateAction} from 'react'
 import {Match} from '../models/matches/Match'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
+import {calculateTeamScore} from '../../../helpers/MCHelper'
+import {Link, useNavigate, useParams} from 'react-router-dom'
 
 type Props = {
   matches: Match[] | undefined
+  setMatch: Dispatch<SetStateAction<Match | undefined>>
 }
 
-const MatchResults: FC<Props> = ({matches}) => {
-  const calculateTeamScore = (match: any, team: any) => {
-    let totalScore = 0
+const MatchResults: FC<Props> = ({matches, setMatch}) => {
+  const params = useParams()
+  const navigate = useNavigate()
 
-    match?.rounds.forEach((round: any) => {
-      let scores = round.scores
-
-      scores.forEach((score: any) => {
-        if (score.team_id === team.id) {
-          totalScore += score.score
-        }
-      })
-    })
-
-    return totalScore
+  const handleMatchClick = (match: Match, to: string) => {
+    setMatch(match)
+    navigate(to)
   }
 
   function closedMatches(element: Match) {
@@ -30,7 +25,7 @@ const MatchResults: FC<Props> = ({matches}) => {
   return (
     <>
       <KTCard>
-        <div className='card-header bg-success' id='activities_recent_matches_header'>
+        <div className='card-header bg-info' id='activities_recent_matches_header'>
           <div className='card-title'>
             <h3 className='card-label text-white'>Recent Matches</h3>
           </div>
@@ -50,7 +45,13 @@ const MatchResults: FC<Props> = ({matches}) => {
           >
             <div className='d-flex flex-column'>
               {matches?.filter(closedMatches).map((match) => (
-                <React.Fragment key={match.id}>
+                <div
+                  key={match.id}
+                  className='nav-link text-active-primary me-6 cursor-pointer'
+                  onClick={() =>
+                    handleMatchClick(match, '/activities/' + params.id + '/matches/' + match?.id)
+                  }
+                >
                   <div className='d-flex flex-stack '>
                     {match?.teams && match?.teams[0] && (
                       <div className='flex-grow-1'>
@@ -88,7 +89,7 @@ const MatchResults: FC<Props> = ({matches}) => {
                     )}
                   </div>
                   <div className='separator my-3'></div>
-                </React.Fragment>
+                </div>
               ))}
             </div>
           </div>

@@ -1,6 +1,7 @@
 import { ID, Response } from "../../../../../_metronic/helpers";
 import { Round } from "./Round";
 import { Team } from "../../../../models/squad/Team";
+import { Activity } from "../Activity";
 
 export type Match = {
   id?: ID
@@ -8,14 +9,17 @@ export type Match = {
   end_date: number
   timezone: string,
   status: number,
-  rounds: Round[],
   teams?: Team[],
+  rounds: Round[],
+
   additional_data?: {
     session: {
       current: number,
       total: number
     }
   }
+  activity?: Activity
+  actions?: []
 }
 
 export const initialMatch = (match?: Match) => {

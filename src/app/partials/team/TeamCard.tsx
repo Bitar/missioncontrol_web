@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
 import {Team} from '../../models/squad/Team'
 import {KTCard, KTCardBody, toAbsoluteUrl} from '../../../_metronic/helpers'
-import {ActivityStanding} from '../../sections/activities/models/ActivityStanding'
+import {ActivityStanding} from '../../sections/activity/models/ActivityStanding'
 
 type Props = {
   standing?: ActivityStanding
@@ -11,22 +11,22 @@ type Props = {
 const TeamCard: FC<Props> = ({standing, team}) => {
   return (
     <>
-      <KTCard className='border border-2 border-gray-300 border-hover'>
-        <KTCardBody className='p-9'>
-          <div
-            className='bgi-no-repeat bgi-size-cover rounded min-h-250px mb-5'
-            style={{
-              backgroundImage: `url('${team.image}')`,
-            }}
-          ></div>
+      <KTCard>
+        <div
+          className='bgi-no-repeat bgi-size-cover rounded min-h-150px'
+          style={{
+            backgroundImage: `url('${team.image}')`,
+          }}
+        ></div>
+        <KTCardBody className='px-5 py-2'>
           <div className='fs-3 fw-bolder text-dark mb-7'>{team.name}</div>
           <div className='d-flex mb-5'>
-            <div className='flex-grow-1 border bg-light-success border-success rounded min-w-125px py-3 px-4 me-7 mb-3 text-center'>
+            <div className='flex-grow-1 border bg-light-success border-success rounded min-w-50px py-3 px-4 me-7 mb-3 text-center'>
               <div className='fw-bold text-gray-400'>Wins</div>
               <div className='fs-3 text-grey-800 fw-bolder'>{standing?.score.win || 0}</div>
             </div>
 
-            <div className='flex-grow-1 border bg-light-danger border-danger rounded min-w-125px py-3 px-4 mb-3 text-center'>
+            <div className='flex-grow-1 border bg-light-danger border-danger rounded min-w-50px py-3 px-4 mb-3 text-center'>
               <div className='fw-bold text-gray-400'>Loses</div>
               <div className='fs-3 text-gray-800 fw-bolder'>{standing?.score.lose || 0}</div>
             </div>

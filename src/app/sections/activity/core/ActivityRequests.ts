@@ -1,9 +1,10 @@
 import axios, {AxiosResponse} from 'axios'
 import {Response} from '../../../../_metronic/helpers'
 import {Activity, ActivityQueryResponse} from '../models/Activity'
-import { MatchQueryResponse } from "../models/matches/Match";
-import { Announcement } from "../../../models/announcement/Announcements";
-import { ChatMessage, ChatMessageQueryResponse } from "../../../models/chat/ChatMessage";
+import {Match, MatchQueryResponse} from '../models/matches/Match'
+import {Announcement} from '../../../models/announcement/Announcements'
+import {ChatMessage, ChatMessageQueryResponse} from '../../../models/chat/ChatMessage'
+import {UserQueryResponse} from '../../identity/user/models/User'
 // import process from "process";
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -39,12 +40,28 @@ const getActivityById = (id: any, query?: String): Promise<Activity | undefined>
 const getActivityMatches = (id: any, query?: string): Promise<MatchQueryResponse> => {
   let url = `${ACTIVITIES_URL}/${id}/matches`
 
-  return axios
-    .get(url)
-    .then((response: AxiosResponse<MatchQueryResponse>) => response.data)
+  return axios.get(url).then((response: AxiosResponse<MatchQueryResponse>) => response.data)
 }
 
-const createActivityAnnouncement = (id: any, formData: FormData): Promise<Announcement | undefined> => {
+const getActivityMatch = (id: any, matchId: any): Promise<Match | undefined> => {
+  let url = `${ACTIVITIES_URL}/${id}/matches/${matchId}`
+
+  return axios
+    .get(url)
+    .then((response: AxiosResponse<Response<Match>>) => response.data)
+    .then((response: Response<Match>) => response.data)
+}
+
+const getActivityMembers = (id: any, query?: string): Promise<UserQueryResponse> => {
+  let url = `${ACTIVITIES_URL}/${id}/members`
+
+  return axios.get(url).then((response: AxiosResponse<UserQueryResponse>) => response.data)
+}
+
+const createActivityAnnouncement = (
+  id: any,
+  formData: FormData
+): Promise<Announcement | undefined> => {
   let url = `${ACTIVITIES_URL}/${id}/announcements`
 
   return axios
@@ -56,9 +73,7 @@ const createActivityAnnouncement = (id: any, formData: FormData): Promise<Announ
 const getActivityChat = (id: any): Promise<ChatMessageQueryResponse> => {
   let url = `${ACTIVITIES_URL}/${id}/chat`
 
-  return axios
-    .get(url)
-    .then((response: AxiosResponse<ChatMessageQueryResponse>) => response.data)
+  return axios.get(url).then((response: AxiosResponse<ChatMessageQueryResponse>) => response.data)
 }
 
 const sendActivityChat = (id: any, formData: FormData): Promise<ChatMessage | undefined> => {
@@ -70,4 +85,14 @@ const sendActivityChat = (id: any, formData: FormData): Promise<ChatMessage | un
     .then((response: Response<ChatMessage>) => response.data)
 }
 
-export {getActivities, createActivity, getActivityById, getActivityMatches, createActivityAnnouncement, getActivityChat, sendActivityChat}
+export {
+  getActivities,
+  createActivity,
+  getActivityChat,
+  getActivityById,
+  sendActivityChat,
+  getActivityMatch,
+  getActivityMatches,
+  getActivityMembers,
+  createActivityAnnouncement,
+}

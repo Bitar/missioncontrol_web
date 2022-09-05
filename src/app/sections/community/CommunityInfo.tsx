@@ -79,7 +79,7 @@ const CommunityInfo: FC<Props> = ({community}) => {
                   </div>
                 </div>
                 {/*<div className='card-toolbar'>*/}
-                {/*  <Link className='btn btn-sm btn-primary' to='/activities/create'>*/}
+                {/*  <Link className='btn btn-sm btn-primary' to='/activity/create'>*/}
                 {/*    <KTSVG path='/media/icons/duotune/arr075.svg' className='svg-icon-2' />*/}
                 {/*    New Activity*/}
                 {/*  </Link>*/}
@@ -114,10 +114,10 @@ const CommunityInfo: FC<Props> = ({community}) => {
                 <Link
                   className={
                     `nav-link text-active-primary me-6 ` +
-                    (location.pathname === '/communities/' + community?.id + '/activities' &&
+                    (location.pathname === '/communities/' + community?.id + '/activity' &&
                       'active')
                   }
-                  to={'/communities/' + community?.id + '/activities'}
+                  to={'/communities/' + community?.id + '/activity'}
                 >
                   Activities
                 </Link>

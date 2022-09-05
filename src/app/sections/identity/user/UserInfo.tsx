@@ -115,9 +115,9 @@ const UserInfo: FC<Props> = ({user}) => {
                 <Link
                   className={
                     `nav-link text-active-primary me-6 ` +
-                    (location.pathname === '/users/' + user?.id + '/activities' && 'active')
+                    (location.pathname === '/users/' + user?.id + '/activity' && 'active')
                   }
-                  to={'/users/' + user?.id + '/activities'}
+                  to={'/users/' + user?.id + '/activity'}
                 >
                   Activities
                 </Link>

@@ -29,6 +29,15 @@ const ActivityStandingsColumns: ReadonlyArray<Column<ActivityStanding>> = [
     ),
   },
   {
+    Header: (props) => <CustomHeader tableProps={props} title='W - L' />,
+    id: 'record',
+    Cell: ({...props}) => (
+      <TextCell
+        dObject={props.data[props.row.index].score?.win + ' - ' + props.data[props.row.index].score?.lose}
+      />
+    ),
+  },
+  {
     Header: (props) => <CustomHeader tableProps={props} title='Score' className='text-mc-secondary' />,
     id: 'Score',
     Cell: ({...props}) => <BadgeCell color='mc-secondary' status={props.data[props.row.index].score?.score_win + props.data[props.row.index].score?.score_lose} />,

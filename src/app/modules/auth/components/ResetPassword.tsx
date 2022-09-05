@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { useNavigate, useParams } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
 import { resetPassword } from "../core/_requests";
-import { activitySchema } from "../../../sections/activities/models/Activity";
+import { activitySchema } from "../../../sections/activity/models/Activity";
 import { jsonToFormData } from "../../../helpers/form/FormHelper";
 
 // const forgotPasswordSchema = Yup.object().shape({

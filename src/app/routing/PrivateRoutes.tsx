@@ -12,7 +12,10 @@ import {PlansPage} from '../sections/billing/plan/pages/PlansPage'
 import {CommunityPage} from '../sections/community/pages/CommunityPage'
 import {GamePage} from '../sections/games/pages/GamePage'
 import {SuspenseView} from '../layout/SuspenseView'
-import {ActivityPage} from '../sections/activities/pages/ActivityPage'
+import {ActivityPage} from '../sections/activity/pages/ActivityPage'
+import {PageTitle} from '../../_metronic/layout/core'
+import React from 'react'
+import {MatchPage} from '../sections/match/MatchPage'
 
 const PrivateRoutes = () => {
   return (
@@ -54,6 +57,16 @@ const PrivateRoutes = () => {
         />
         <Route path='permissions/*' element={<PermissionPage />} />
 
+        {/*<Route*/}
+        {/*  path='activities/:id/matches/:matchId/*'*/}
+        {/*  element={*/}
+        {/*    <>*/}
+        {/*      <SuspenseView>*/}
+        {/*        <MatchPage />*/}
+        {/*      </SuspenseView>*/}
+        {/*    </>*/}
+        {/*  }*/}
+        {/*/>*/}
         <Route
           path='activities/*'
           element={

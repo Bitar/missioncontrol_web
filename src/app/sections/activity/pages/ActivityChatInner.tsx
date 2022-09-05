@@ -1,4 +1,4 @@
-import React, {Dispatch, FC, SetStateAction, useState} from 'react'
+import React, {Dispatch, FC, SetStateAction, useState, useRef, useEffect} from 'react'
 import clsx from 'clsx'
 import {ChatMessage, chatSchema, initialChat} from '../../../models/chat/ChatMessage'
 import dayjs from 'dayjs'
@@ -20,9 +20,11 @@ type Props = {
 
 const ActivityChatInner: FC<Props> = ({chat, setChat, isDrawer = false}) => {
   dayjs.extend(relativeTime)
+  const bottomRef = useRef<null | HTMLDivElement>(null)
   const params = useParams()
   const {currentUser} = useAuth()
   const [message, setMessage] = useState<ChatMessage>(initialChat())
+
   const handleSubmit = async () => {
     let data = jsonToFormData(message)
     await sendActivityChat(params.id, data).then((response) => {
@@ -32,6 +34,10 @@ const ActivityChatInner: FC<Props> = ({chat, setChat, isDrawer = false}) => {
       setMessage(initialChat())
     })
   }
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({behavior: 'smooth'})
+  }, [chat])
 
   return (
     <div className='card-body' id={'kt_chat_messenger_body'}>
@@ -45,7 +51,7 @@ const ActivityChatInner: FC<Props> = ({chat, setChat, isDrawer = false}) => {
           '#kt_header, #kt_toolbar, #kt_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer'
         }
         data-kt-scroll-wrappers={'#kt_content, #kt_chat_messenger_body'}
-        data-kt-scroll-offset={'-2px'}
+        data-kt-scroll-offset={0}
       >
         {chat?.map((message, index) => {
           const userInfo = message?.user
@@ -108,6 +114,7 @@ const ActivityChatInner: FC<Props> = ({chat, setChat, isDrawer = false}) => {
             </div>
           )
         })}
+        <div ref={bottomRef} />
       </div>
 
       <Formik

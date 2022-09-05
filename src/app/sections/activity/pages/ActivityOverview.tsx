@@ -10,9 +10,10 @@ type Props = {
   activity: Activity | undefined
   setActivity: Dispatch<SetStateAction<Activity | undefined>>
   matches: Match[] | undefined
+  setMatch: Dispatch<SetStateAction<Match | undefined>>
 }
 
-const ActivityOverview: FC<Props> = ({activity, matches}) => {
+const ActivityOverview: FC<Props> = ({activity, matches, setMatch}) => {
   return (
     <>
       <div className='row g-5 g-xxl-8'>
@@ -20,10 +21,10 @@ const ActivityOverview: FC<Props> = ({activity, matches}) => {
           <div className='mb-5'>
             <ActivityStandings activity={activity} />
           </div>
-          <MatchResults matches={matches}></MatchResults>
+          <MatchResults matches={matches} setMatch={setMatch}></MatchResults>
         </div>
         <div className='col-lg-6 col-md-12'>
-          <ActivityMatches matches={matches} />
+          <ActivityMatches matches={matches} setMatch={setMatch}/>
         </div>
         <div className='col-lg-6 col-md-12'>
           {/*<ActivityMatches activity={activity} setActivity={setActivity}/>*/}

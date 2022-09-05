@@ -39,7 +39,7 @@ const CommunityUsers: FC<Props> = ({community}) => {
                 <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
                   <th className='ps-4 min-w-325px rounded-start'>Members</th>
                   <th className='min-w-125px'>username</th>
-                  {/*<th className='min-w-125px'>activities</th>*/}
+                  {/*<th className='min-w-125px'>activity</th>*/}
                   {/*<th className='min-w-200px text-end rounded-end' />*/}
                 </tr>
               </thead>

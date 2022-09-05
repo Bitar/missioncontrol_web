@@ -5,7 +5,7 @@ import {ActionsCell} from '../../../modules/table/columns/ActionsCell'
 import {QUERIES, toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {Activity} from '../models/Activity'
 import {BadgeCell} from '../../../modules/table/columns/BadgeCell'
-import {formatDates, formatStatus} from '../../../helpers/ActivityHelper'
+import {formatDates, formatActivityStatus} from '../../../helpers/ActivityHelper'
 
 const ActivityColumns: ReadonlyArray<Column<Activity>> = [
   {
@@ -30,7 +30,7 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
     Header: (props) => <CustomHeader tableProps={props} title='Status' className='min-w-125px' />,
     id: 'status',
     Cell: ({...props}) => {
-      const {status, color} = formatStatus(props.data[props.row.index].status)
+      const {status, color} = formatActivityStatus(props.data[props.row.index].status)
       return <BadgeCell status={status} color={color} />
     },
   },

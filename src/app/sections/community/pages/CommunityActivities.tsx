@@ -2,7 +2,7 @@ import {Community} from '../models/Community'
 import React, {FC, useEffect, useState} from 'react'
 import {getCommunityActivities} from '../core/CommunityRequests'
 import {useParams} from 'react-router-dom'
-import {Activity} from '../../activities/models/Activity'
+import {Activity} from '../../activity/models/Activity'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {ActivityObject} from '../../identity/user/objects/activity/ActivityObject'
 

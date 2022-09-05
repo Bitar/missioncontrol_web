@@ -60,7 +60,7 @@ const GameInfo: FC<Props> = ({game}) => {
                   </div>
                 </div>
                 {/*<div className='card-toolbar'>*/}
-                {/*  <Link className='btn btn-sm btn-primary' to='/activities/create'>*/}
+                {/*  <Link className='btn btn-sm btn-primary' to='/activity/create'>*/}
                 {/*    <KTSVG path='/media/icons/duotune/arr075.svg' className='svg-icon-2' />*/}
                 {/*    New Activity*/}
                 {/*  </Link>*/}

@@ -2,7 +2,7 @@ import React, {FC} from 'react'
 import {Activity} from './models/Activity'
 import {Link, useLocation} from 'react-router-dom'
 import {BadgeCell} from '../../modules/table/columns/BadgeCell'
-import {formatStatus} from '../../helpers/ActivityHelper'
+import {formatActivityStatus} from '../../helpers/ActivityHelper'
 import CountUp from 'react-countup'
 import dayjs from "dayjs";
 
@@ -14,7 +14,7 @@ const ActivityInfo: FC<Props> = ({activity}) => {
   const location = useLocation()
 
   const getStatus = (activityStatus: any) => {
-    const {status, color} = formatStatus(activityStatus)
+    const {status, color} = formatActivityStatus(activityStatus)
     return <BadgeCell status={status} color={color} />
   }
 
@@ -107,17 +107,17 @@ const ActivityInfo: FC<Props> = ({activity}) => {
                   Overview
                 </Link>
               </li>
-              {/*<li className='nav-item'>*/}
-              {/*  <Link*/}
-              {/*    className={*/}
-              {/*      `nav-link text-active-primary me-6 ` +*/}
-              {/*      (location.pathname === '/activities/' + activity?.id + '/matches' && 'active')*/}
-              {/*    }*/}
-              {/*    to={'/activities/' + activity?.id + '/matches'}*/}
-              {/*  >*/}
-              {/*    Matches*/}
-              {/*  </Link>*/}
-              {/*</li>*/}
+              <li className='nav-item'>
+                <Link
+                  className={
+                    `nav-link text-active-primary me-6 ` +
+                    (location.pathname === '/activities/' + activity?.id + '/members' && 'active')
+                  }
+                  to={'/activities/' + activity?.id + '/members'}
+                >
+                  Members
+                </Link>
+              </li>
               <li className='nav-item'>
                 <Link
                   className={

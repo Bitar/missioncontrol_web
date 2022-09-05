@@ -1,19 +1,26 @@
 import React, {useEffect, useState} from 'react'
 import {Activity} from '../models/Activity'
-import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
+import {Navigate, Outlet, Route, Routes, useLocation, useParams} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../../_metronic/layout/core'
-import { getActivityById, getActivityMatches } from "../core/ActivityRequests";
+import {getActivityById, getActivityMatches, getActivityMembers} from '../core/ActivityRequests'
 import {ActivityInfo} from '../ActivityInfo'
-import {ActivityMatches} from './ActivityMatches'
 import {ActivityTeams} from './ActivityTeams'
-import { ActivityOverview } from './ActivityOverview'
-import { ActivityChat } from "./ActivityChat";
-import { Match } from "../models/matches/Match";
+import {ActivityOverview} from './ActivityOverview'
+import {ActivityChat} from './ActivityChat'
+import {Match} from '../models/matches/Match'
+import {ActivityMembers} from './ActivityMembers'
+import {User} from '../../identity/user/models/User'
+import {MatchPage} from '../../match/MatchPage'
 
 const ActivityView: React.FC = () => {
   const [activity, setActivity] = useState<Activity | undefined>()
   const [matches, setMatches] = useState<Match[] | undefined>([])
+  const [members, setMembers] = useState<User[] | undefined>([])
+  const [match, setMatch] = useState<Match | undefined>()
+  const [showActivityInfo, setShowActivityInfo] = useState(true)
+
   const params = useParams()
+  const location = useLocation()
 
   const activityViewBreadcrumbs: Array<PageLink> = [
     {
@@ -48,67 +55,77 @@ const ActivityView: React.FC = () => {
 
       getActivityMatches(params.id).then((response) => {
         setMatches(response.data)
-        // matchesLoaded = true
-        //TODO: Check this one
-        // updateData(
-        //   {
-        //     matches: response.data,
-        //   },
-        //   setActivity,
-        //   activity
-        // )
+      })
+
+      getActivityMembers(params.id).then((response) => {
+        setMembers(response.data)
       })
     })
   }, [params.id])
+
+  useEffect(() => {
+    if (location.pathname.includes('matches')) {
+      setShowActivityInfo(false)
+    } else {
+      setShowActivityInfo(true)
+    }
+  }, [location])
 
   return (
     <Routes>
       <Route
         element={
           <>
-            <ActivityInfo activity={activity} />
+            {/*{showActivityInfo && */}
+              <ActivityInfo activity={activity} />
+            {/*}*/}
             <Outlet />
           </>
         }
       >
         <Route
-          path='overview'
+          path='/overview'
           element={
             <>
               <PageTitle breadcrumbs={activityViewBreadcrumbs}>Overview</PageTitle>
-              <ActivityOverview activity={activity} setActivity={setActivity} matches={matches}/>
+              <ActivityOverview
+                activity={activity}
+                setActivity={setActivity}
+                matches={matches}
+                setMatch={setMatch}
+              />
             </>
           }
         />
         <Route
-          path='matches'
+          path='/members'
           element={
             <>
-              <PageTitle breadcrumbs={activityViewBreadcrumbs}>Matches</PageTitle>
-              {/*<ActivityMatches activity={activity} setActivity={setActivity}/>*/}
+              <PageTitle breadcrumbs={activityViewBreadcrumbs}>Members</PageTitle>
+              <ActivityMembers members={members} />
             </>
           }
         />
         <Route
-          path='teams'
+          path='/teams'
           element={
             <>
               <PageTitle breadcrumbs={activityViewBreadcrumbs}>Teams</PageTitle>
-              <ActivityTeams activity={activity} setActivity={setActivity}/>
+              <ActivityTeams activity={activity} setActivity={setActivity} />
             </>
           }
         />
         <Route
-          path='chat'
+          path='/chat'
           element={
             <>
               <PageTitle breadcrumbs={activityViewBreadcrumbs}>Chat</PageTitle>
-              <ActivityChat activity={activity} setActivity={setActivity}/>
+              <ActivityChat activity={activity} setActivity={setActivity} />
             </>
           }
         />
         <Route
-          path='members'
+          path='/members'
           element={
             <>
               <PageTitle breadcrumbs={activityViewBreadcrumbs}>Members</PageTitle>
@@ -116,10 +133,23 @@ const ActivityView: React.FC = () => {
           }
         />
         <Route
-          path='settings'
+          path='/settings'
           element={
             <>
               <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>
+            </>
+          }
+        />
+        <Route
+          path='/matches/:matchId/*'
+          element={
+            <>
+              <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>
+              <MatchPage
+                match={match}
+                setMatch={setMatch}
+                setShowActivityInfo={setShowActivityInfo}
+              />
             </>
           }
         />
