@@ -56,17 +56,17 @@ const ActivityInfo: FC<Props> = ({activity}) => {
                   Overview
                 </Link>
               </li>
-              <li className='nav-item'>
-                <Link
-                  className={
-                    `nav-link text-active-primary me-6 ` +
-                    (location.pathname === '/activities/' + activity?.id + '/matches' && 'active')
-                  }
-                  to={'/activities/' + activity?.id + '/matches'}
-                >
-                  Matches
-                </Link>
-              </li>
+              {/*<li className='nav-item'>*/}
+              {/*  <Link*/}
+              {/*    className={*/}
+              {/*      `nav-link text-active-primary me-6 ` +*/}
+              {/*      (location.pathname === '/activities/' + activity?.id + '/matches' && 'active')*/}
+              {/*    }*/}
+              {/*    to={'/activities/' + activity?.id + '/matches'}*/}
+              {/*  >*/}
+              {/*    Matches*/}
+              {/*  </Link>*/}
+              {/*</li>*/}
               <li className='nav-item'>
                 <Link
                   className={

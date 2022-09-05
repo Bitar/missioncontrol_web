@@ -1,39 +1,16 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom'
-import {KTCard, KTCardBody, toAbsoluteUrl} from '../../../../_metronic/helpers'
+import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {Match} from '../models/matches/Match'
-import {getActivityMatches} from '../core/ActivityRequests'
 import {getDateFromTimestamp, getTimeFromTimestamp} from '../../../helpers/MCHelper'
-import {Activity} from '../models/Activity'
 
-let matchesLoaded = false
+// let matchesLoaded = false
 
 type Props = {
-  activity: Activity | undefined
-  setActivity: Dispatch<SetStateAction<Activity | undefined>>
+  matches: Match[] | undefined
 }
 
-const ActivityMatches: FC<Props> = ({activity, setActivity}) => {
-  const [matches, setMatches] = useState<Match[] | undefined>([])
-  const params = useParams()
-
-  useEffect(() => {
-    if (!matchesLoaded) {
-      getActivityMatches(params.id).then((response) => {
-        setMatches(response.data)
-        matchesLoaded = true
-        //TODO: Check this one
-        // updateData(
-        //   {
-        //     matches: response.data,
-        //   },
-        //   setActivity,
-        //   activity
-        // )
-      })
-    }
-  }, [params.id])
-
+const ActivityMatches: FC<Props> = ({matches}) => {
   const calculateTeamScore = (match: any, team: any) => {
     let totalScore = 0
 
@@ -50,12 +27,37 @@ const ActivityMatches: FC<Props> = ({activity, setActivity}) => {
     return totalScore
   }
 
+  function openMatches(element: Match) {
+    return element.status !== 3
+  }
+
   return (
     <>
+      {/*<KTCard>*/}
+      {/*  <KTCardBody>*/}
+      {/*    <Tabs defaultActiveKey='home' id='noanim-tab-example' className='mb-3 flex-nowrap text-nowrap scroll-x' >*/}
+      {/*      <Tab eventKey='home' title='Home'>*/}
+      {/*        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto, perferendis.*/}
+      {/*      </Tab>*/}
+      {/*      <Tab eventKey='profile' title='Profile'>*/}
+      {/*        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius et impedit praesentium*/}
+      {/*        quia repellat saepe. Beatae ipsam modi odit quis?*/}
+      {/*      </Tab>*/}
+      {/*      <Tab eventKey='contact' title='Contact'>*/}
+      {/*        /!*<Sonnet />*!/*/}
+      {/*        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusantium aut culpa*/}
+      {/*        delectus distinctio, dolores earum est ipsum laborum nesciunt nobis quas quos,*/}
+      {/*        repellendus reprehenderit sapiente sunt suscipit totam. Accusantium at beatae dolore,*/}
+      {/*        exercitationem facere fugit id incidunt ipsam ipsum laboriosam, minima omnis pariatur*/}
+      {/*        praesentium qui recusandae reprehenderit similique, sint.*/}
+      {/*      </Tab>*/}
+      {/*    </Tabs>*/}
+      {/*  </KTCardBody>*/}
+      {/*</KTCard>*/}
       <KTCard>
-        <div className='card-header'>
+        <div className='card-header bg-mc-primary' id='activities_matches_header'>
           <div className='card-title'>
-            <h3 className='card-label'>Matches</h3>
+            <h3 className='card-label text-white'>Upcoming Matches</h3>
           </div>
         </div>
         <KTCardBody className='py-5' id='activity_matches_body'>
@@ -65,14 +67,12 @@ const ActivityMatches: FC<Props> = ({activity, setActivity}) => {
             data-kt-scroll='true'
             data-kt-scroll-activate='{default: false, lg: true}'
             data-kt-scroll-max-height='600px'
-            data-kt-scroll-dependencies={
-              '#kt_header, #kt_toolbar, #kt_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer'
-            }
+            data-kt-scroll-dependencies={'#kt_header, #kt_toolbar, #kt_footer, #activities_matches_header'}
             data-kt-scroll-wrappers={'#kt_content, #activity_matches_body'}
             data-kt-scroll-offset={'-2px'}
           >
             <div className='d-flex flex-column'>
-              {matches?.map((match) => (
+              {matches?.filter(openMatches).map((match) => (
                 <React.Fragment key={match.id}>
                   <div className='d-flex flex-stack text-center'>
                     {match?.teams && match?.teams[0] && (
@@ -82,7 +82,6 @@ const ActivityMatches: FC<Props> = ({activity, setActivity}) => {
                             <img
                               alt={match?.teams[0].name + ' team image'}
                               src={match?.teams[0].image}
-                              className='mw-100px'
                             />
                           </div>
                           <div className='fs-6 fw-bold'>{match?.teams[0].name}</div>
@@ -91,8 +90,12 @@ const ActivityMatches: FC<Props> = ({activity, setActivity}) => {
                     )}
                     <div className='flex-shrink-1'>
                       <div className='fs-6 fw-semibold text-gray-600 px-5'>
-                        <p className='m-0'>{getTimeFromTimestamp(match?.start_date)}</p>
-                        <p className='m-0'>{getDateFromTimestamp(match?.start_date)}</p>
+                        <p className='m-0'>
+                          {getTimeFromTimestamp(match?.start_date, match?.timezone)}
+                        </p>
+                        <p className='m-0'>
+                          {getDateFromTimestamp(match?.start_date, match?.timezone)}
+                        </p>
                       </div>
                     </div>
                     {match?.teams && match?.teams[1] && (
@@ -102,7 +105,6 @@ const ActivityMatches: FC<Props> = ({activity, setActivity}) => {
                             <img
                               alt={match?.teams[1].name + ' team image'}
                               src={match?.teams[1].image}
-                              className='mw-100px'
                             />
                           </div>
                           <div className='fs-6 fw-bold'>{match?.teams[1].name}</div>
@@ -110,7 +112,6 @@ const ActivityMatches: FC<Props> = ({activity, setActivity}) => {
                       </div>
                     )}
                   </div>
-                  {/*</div>*/}
                   <div className='separator my-3'></div>
                 </React.Fragment>
               ))}

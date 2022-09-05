@@ -4,6 +4,8 @@ export type ActivityStanding = {
   team: Team,
   score: {
     win: number,
-    lose: number
+    score_win: number,
+    lose: number,
+    score_lose: number
   }
 }

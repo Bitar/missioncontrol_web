@@ -2,15 +2,17 @@ import React, {useEffect, useState} from 'react'
 import {Activity} from '../models/Activity'
 import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../../_metronic/layout/core'
-import {getActivityById} from '../core/ActivityRequests'
+import { getActivityById, getActivityMatches } from "../core/ActivityRequests";
 import {ActivityInfo} from '../ActivityInfo'
 import {ActivityMatches} from './ActivityMatches'
 import {ActivityTeams} from './ActivityTeams'
 import { ActivityOverview } from './ActivityOverview'
 import { ActivityChat } from "./ActivityChat";
+import { Match } from "../models/matches/Match";
 
 const ActivityView: React.FC = () => {
   const [activity, setActivity] = useState<Activity | undefined>()
+  const [matches, setMatches] = useState<Match[] | undefined>([])
   const params = useParams()
 
   const activityViewBreadcrumbs: Array<PageLink> = [
@@ -43,6 +45,19 @@ const ActivityView: React.FC = () => {
   useEffect(() => {
     getActivityById(params.id).then((response) => {
       setActivity(response)
+
+      getActivityMatches(params.id).then((response) => {
+        setMatches(response.data)
+        // matchesLoaded = true
+        //TODO: Check this one
+        // updateData(
+        //   {
+        //     matches: response.data,
+        //   },
+        //   setActivity,
+        //   activity
+        // )
+      })
     })
   }, [params.id])
 
@@ -61,7 +76,7 @@ const ActivityView: React.FC = () => {
           element={
             <>
               <PageTitle breadcrumbs={activityViewBreadcrumbs}>Overview</PageTitle>
-              <ActivityOverview activity={activity} setActivity={setActivity}/>
+              <ActivityOverview activity={activity} setActivity={setActivity} matches={matches}/>
             </>
           }
         />
@@ -70,7 +85,7 @@ const ActivityView: React.FC = () => {
           element={
             <>
               <PageTitle breadcrumbs={activityViewBreadcrumbs}>Matches</PageTitle>
-              <ActivityMatches activity={activity} setActivity={setActivity}/>
+              {/*<ActivityMatches activity={activity} setActivity={setActivity}/>*/}
             </>
           }
         />
