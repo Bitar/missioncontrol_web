@@ -11,6 +11,9 @@ const formatStatus = (statusId: number) => {
   } else if (statusId === 3) {
     status = 'Pending'
     color = 'secondary'
+  } else if (statusId === 5) {
+    status = 'Generating Matches'
+    color = 'info'
   } else {
     status = 'Closed'
     color = 'danger'

@@ -38,6 +38,7 @@ export const initialActivity = (activity?: Activity) => {
     additional_data: {
       teams_count: 0,
       players_count: 0,
+      total_sessions: 0
     },
 
     team_settings: initialActivityTeamSetting(activity?.team_settings),
@@ -76,11 +77,10 @@ export type Activity = {
   rules?: []
   standings?: ActivityStanding[]
 
-
-
   additional_data?: {
     teams_count: number
     players_count: number
+    total_sessions: number
   }
   game_mode_id?: number
   game_id?: number
