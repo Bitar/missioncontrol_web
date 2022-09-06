@@ -3,7 +3,6 @@ import {User} from '../../identity/user/models/User'
 import {ColumnInstance, Row, useTable} from 'react-table'
 import {ActivityMembersColumns} from '../core/ActivityMembersColumns'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
-import {ActivityStanding} from '../models/ActivityStanding'
 import {CustomHeaderColumn} from '../../../modules/table/columns/CustomHeaderColumn'
 import {CustomRow} from '../../../modules/table/columns/CustomRow'
 
@@ -21,7 +20,7 @@ const ActivityMembers: FC<Props> = ({members}) => {
 
   return (
     <KTCard>
-      <div className='card-header bg-mc-secondary'>
+      <div className='card-header bg-info'>
         <div className='card-title'>
           <h3 className='card-label text-white'>Members</h3>
         </div>

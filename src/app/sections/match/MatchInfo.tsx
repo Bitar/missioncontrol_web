@@ -1,10 +1,6 @@
-import React, {FC, useState} from 'react'
+import React, {FC} from 'react'
 import {Link, useLocation} from 'react-router-dom'
-import {BadgeCell} from '../../modules/table/columns/BadgeCell'
-import {formatActivityStatus, formatMatchStatus} from '../../helpers/ActivityHelper'
-import CountUp from 'react-countup'
-import dayjs from 'dayjs'
-import {Activity} from '../activity/models/Activity'
+import {formatMatchStatus} from '../../helpers/ActivityHelper'
 import {Match} from '../activity/models/matches/Match'
 import {
   calculateTeamScore,
@@ -17,10 +13,9 @@ import clsx from 'clsx'
 
 type Props = {
   match?: Match | undefined
-  activity?: Activity | undefined
 }
 
-const MatchInfo: FC<Props> = ({match, activity}) => {
+const MatchInfo: FC<Props> = ({match}) => {
   const location = useLocation()
 
   const getStatus = (matchStatus: any) => {

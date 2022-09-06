@@ -1,18 +1,19 @@
 import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../_metronic/layout/core'
-import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
+import React, {Dispatch, FC, SetStateAction, useEffect} from 'react'
 import {MatchInfo} from './MatchInfo'
-import {initialMatch, Match} from '../activity/models/matches/Match'
+import {Match} from '../activity/models/matches/Match'
 import {MatchOverview} from './MatchOverview'
 import {getActivityMatch} from '../activity/core/ActivityRequests'
+import { Activity } from "../activity/models/Activity";
 
 type Props = {
   match: Match | undefined
   setMatch: Dispatch<SetStateAction<Match | undefined>>
-  setShowActivityInfo: Dispatch<SetStateAction<boolean>>
+  activity: Activity | undefined
 }
 
-const MatchPage: FC<Props> = ({match, setMatch, setShowActivityInfo}) => {
+const MatchPage: FC<Props> = ({match, setMatch, activity}) => {
   const params = useParams()
   // const [match, setMatch] = useState<Match | undefined>(initialMatch)
 
@@ -78,7 +79,7 @@ const MatchPage: FC<Props> = ({match, setMatch, setShowActivityInfo}) => {
           element={
             <>
               <PageTitle breadcrumbs={matchBreadCrumbs}>{'Overview'}</PageTitle>
-              <MatchOverview />
+              <MatchOverview activity={activity} match={match}/>
             </>
           }
         />

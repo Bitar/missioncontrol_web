@@ -1,8 +1,6 @@
 import {Column} from 'react-table'
 import {TextCell} from '../../../modules/table/columns/TextCell'
 import {CustomHeader} from '../../../modules/table/columns/CustomHeader'
-import {ActivityStanding} from '../models/ActivityStanding'
-import {BadgeCell} from '../../../modules/table/columns/BadgeCell'
 import {User} from '../../identity/user/models/User'
 import React from 'react'
 

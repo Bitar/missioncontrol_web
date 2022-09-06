@@ -5,6 +5,8 @@ import {BadgeCell} from '../../modules/table/columns/BadgeCell'
 import {formatActivityStatus} from '../../helpers/ActivityHelper'
 import CountUp from 'react-countup'
 import dayjs from "dayjs";
+import { KTCard, KTCardBody } from "../../../_metronic/helpers";
+import clsx from "clsx";
 
 type Props = {
   activity: Activity | undefined
@@ -18,10 +20,33 @@ const ActivityInfo: FC<Props> = ({activity}) => {
     return <BadgeCell status={status} color={color} />
   }
 
+  const links = [
+    {
+      text: 'Overview',
+      link: '/activities/' + activity?.id + '/overview',
+    },
+    {
+      text: 'Members',
+      link: '/activities/' + activity?.id + '/members',
+    },
+    {
+      text: 'Teams',
+      link: '/activities/' + activity?.id + '/teams',
+    },
+    {
+      text: 'Chat',
+      link: '/activities/' + activity?.id + '/chat',
+    },
+    {
+      text: 'Settings',
+      link: '/activities/' + activity?.id + '/settings',
+    },
+  ]
+
   return (
     <>
-      <div className='card mb-5 mb-xl-10'>
-        <div className='card-body pt-9 pb-0'>
+      <KTCard className='mb-5 mb-xl-10'>
+        <KTCardBody>
           <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
             <div className='me-7 mb-4'>
               <div className='w-150px'>
@@ -91,70 +116,28 @@ const ActivityInfo: FC<Props> = ({activity}) => {
               </div>
             </div>
           </div>
-
-          <div className='separator'></div>
-
-          <div className='d-flex overflow-auto h-55px'>
-            <ul className='nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap'>
-              <li className='nav-item'>
+        </KTCardBody>
+        <div className='separator mt-10'></div>
+        <KTCardBody className='p-0 rounded-3 rounded-bottom'>
+          <ul className='nav nav-fill nav-line-tabs nav-line-tabs-2x fs-5 fw-bolder flex-nowrap text-center border-transparent'>
+            {links.map((link, index) => (
+              <li className='nav-item' key={index}>
                 <Link
-                  className={
-                    `nav-link text-active-primary me-6 ` +
-                    (location.pathname === '/activities/' + activity?.id + '/overview' && 'active')
-                  }
-                  to={'/activities/' + activity?.id + '/overview'}
+                  className={clsx(
+                    `m-0 nav-link bg-active-mc-secondary text-active-white border-active-mc-secondary border-hover-mc-secondary py-5 `,
+                    {
+                      active: location.pathname === link.link,
+                    }
+                  )}
+                  to={link.link}
                 >
-                  Overview
+                  {link.text}
                 </Link>
               </li>
-              <li className='nav-item'>
-                <Link
-                  className={
-                    `nav-link text-active-primary me-6 ` +
-                    (location.pathname === '/activities/' + activity?.id + '/members' && 'active')
-                  }
-                  to={'/activities/' + activity?.id + '/members'}
-                >
-                  Members
-                </Link>
-              </li>
-              <li className='nav-item'>
-                <Link
-                  className={
-                    `nav-link text-active-primary me-6 ` +
-                    (location.pathname === '/activities/' + activity?.id + '/teams' && 'active')
-                  }
-                  to={'/activities/' + activity?.id + '/teams'}
-                >
-                  Teams
-                </Link>
-              </li>
-              <li className='nav-item'>
-                <Link
-                  className={
-                    `nav-link text-active-primary me-6 ` +
-                    (location.pathname === '/activities/' + activity?.id + '/chat' && 'active')
-                  }
-                  to={'/activities/' + activity?.id + '/chat'}
-                >
-                  Chat
-                </Link>
-              </li>
-              <li className='nav-item'>
-                <Link
-                  className={
-                    `nav-link text-active-primary me-6 ` +
-                    (location.pathname === '/activities/' + activity?.id + '/settings' && 'active')
-                  }
-                  to={'/activities/' + activity?.id + '/settings'}
-                >
-                  Settings
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+            ))}
+          </ul>
+        </KTCardBody>
+      </KTCard>
     </>
   )
 }

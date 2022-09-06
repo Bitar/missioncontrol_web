@@ -1,14 +1,15 @@
 import { ID } from "../../../../../_metronic/helpers";
+import { ScoreSheet } from "./ScoreSheet";
 
 export type Score = {
   id?: ID,
   round: number,
   score: number,
   user_id?: number,
-  team_id?: number,
+  team_id: number,
   is_approved: number,
   images: [],
-  score_sheet: []
+  score_sheet: ScoreSheet[]
 }
 
 export const initialScore = (score?: Score) => {

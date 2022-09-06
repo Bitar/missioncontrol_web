@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {Activity} from '../models/Activity'
-import {Navigate, Outlet, Route, Routes, useLocation, useParams} from 'react-router-dom'
+import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../../_metronic/layout/core'
 import {getActivityById, getActivityMatches, getActivityMembers} from '../core/ActivityRequests'
 import {ActivityInfo} from '../ActivityInfo'
@@ -17,10 +17,8 @@ const ActivityView: React.FC = () => {
   const [matches, setMatches] = useState<Match[] | undefined>([])
   const [members, setMembers] = useState<User[] | undefined>([])
   const [match, setMatch] = useState<Match | undefined>()
-  const [showActivityInfo, setShowActivityInfo] = useState(true)
 
   const params = useParams()
-  const location = useLocation()
 
   const activityViewBreadcrumbs: Array<PageLink> = [
     {
@@ -63,22 +61,12 @@ const ActivityView: React.FC = () => {
     })
   }, [params.id])
 
-  useEffect(() => {
-    if (location.pathname.includes('matches')) {
-      setShowActivityInfo(false)
-    } else {
-      setShowActivityInfo(true)
-    }
-  }, [location])
-
   return (
     <Routes>
       <Route
         element={
           <>
-            {/*{showActivityInfo && */}
-              <ActivityInfo activity={activity} />
-            {/*}*/}
+            <ActivityInfo activity={activity} />
             <Outlet />
           </>
         }
@@ -145,11 +133,7 @@ const ActivityView: React.FC = () => {
           element={
             <>
               <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>
-              <MatchPage
-                match={match}
-                setMatch={setMatch}
-                setShowActivityInfo={setShowActivityInfo}
-              />
+              <MatchPage activity={activity} match={match} setMatch={setMatch} />
             </>
           }
         />

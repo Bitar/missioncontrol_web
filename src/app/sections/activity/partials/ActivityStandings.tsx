@@ -22,7 +22,7 @@ const ActivityStandings: FC<Props> = ({activity}) => {
   return (
     <>
       <KTCard>
-        <div className='card-header bg-mc-secondary' id='activities_standings_header'>
+        <div className='card-header bg-info' id='activities_standings_header'>
           <div className='card-title'>
             <h3 className='card-label text-white'>Standings</h3>
           </div>

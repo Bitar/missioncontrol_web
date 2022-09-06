@@ -2,7 +2,7 @@ import React, {Dispatch, FC, SetStateAction} from 'react'
 import {Match} from '../models/matches/Match'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {calculateTeamScore} from '../../../helpers/MCHelper'
-import {Link, useNavigate, useParams} from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
 
 type Props = {
   matches: Match[] | undefined
@@ -25,7 +25,7 @@ const MatchResults: FC<Props> = ({matches, setMatch}) => {
   return (
     <>
       <KTCard>
-        <div className='card-header bg-info' id='activities_recent_matches_header'>
+        <div className='card-header bg-mc-secondary' id='activities_recent_matches_header'>
           <div className='card-title'>
             <h3 className='card-label text-white'>Recent Matches</h3>
           </div>
