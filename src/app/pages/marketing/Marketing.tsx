@@ -22,48 +22,6 @@ const Marketing = () => {
     <>
       <PageTitle breadcrumbs={[]}>{'Marketing & Support'}</PageTitle>
       <div className='card mb-10'>
-        <div className='card-body d-flex align-items-center py-8 '>
-          {/* begin::Icon */}
-          <div className='d-flex h-80px w-80px flex-shrink-0 flex-center position-relative'>
-            <KTSVG
-              path='/media/icons/duotune/abs051.svg'
-              className='svg-icon-primary position-absolute opacity-15'
-              svgClassName='h-80px w-80px'
-            />
-            <KTSVG
-              path='/media/icons/duotune/com013.svg'
-              className='svg-icon-3x svg-icon-primary position-absolute'
-            />
-          </div>
-
-          <div className='ms-6 '>
-            <h1>Community Invite Link</h1>
-            <p className='list-unstyled text-gray-600 fw-bold fs-6 p-0 m-0'>
-              Share the link below to invite players directly to your community! If players do not
-              have the Mission Control app, this link will first prompt them to download the app and
-              then invite them to join your community. If players do have the app, this link will
-              bring them straight your community on Mission Control. If players click access the
-              link via desktop, they will be asked for a mobile number to receive the direct link
-              invite.
-            </p>
-            <button type='submit' className='mt-2 btn btn-primary' onClick={notify}>
-              {/* TODO: Change below Toast to be uniform across app*/}
-              {/*<Toaster*/}
-              {/*    position={"top-right"}*/}
-              {/*    toastOptions={{*/}
-              {/*        // Default options for specific types*/}
-              {/*        success: {*/}
-              {/*            duration: 3000,*/}
-              {/*            className: 'bg-success text-light',*/}
-              {/*        },*/}
-              {/*    }}*/}
-              {/*/>*/}
-              Invite Link
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className='card mb-10'>
         <div className='card-body d-flex align-items-center py-8'>
           <div className='d-flex h-80px w-80px flex-shrink-0 flex-center position-relative'>
             <KTSVG
@@ -132,42 +90,6 @@ const Marketing = () => {
       </div>
 
       <div className='d-flex flex-wrap flex-stack mb-6'>
-        <h3 className='fw-bolder my-2'>Support Events</h3>
-      </div>
-      <div className='card mb-10'>
-        <div className='card-body d-flex align-items-center py-8 '>
-          <div className='d-flex h-80px w-80px flex-shrink-0 flex-center position-relative'>
-            <KTSVG
-              path='/media/icons/duotune/abs051.svg'
-              className='svg-icon-primary position-absolute opacity-15'
-              svgClassName='h-80px w-80px'
-            />
-            <KTSVG
-              path='/media/icons/duotune/gen002.svg'
-              className='svg-icon-3x svg-icon-primary position-absolute'
-            />
-          </div>
-          <div className='ms-6'>
-            <h1>Town Hall with CEO Austin Smith</h1>
-            <p className='list-unstyled text-gray-600 fw-bold fs-6 p-0 m-0'>
-              Join us every quarter to hear from and ask questions of Mission Control CEO Austin
-              Smith on the state of the platform, upcoming product focuses, and more!
-            </p>
-            <div className='mt-2'>
-              <a
-                href='https://us06web.zoom.us/j/86411098294#success'
-                target='_blank'
-                rel='noreferrer'
-              >
-                <button type='submit' className='btn btn-primary'>
-                  Register
-                </button>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className='d-flex flex-wrap flex-stack mb-6'>
         <h3 className='fw-bolder my-2'>Contact Support</h3>
       </div>
 
@@ -195,25 +117,6 @@ const Marketing = () => {
               </a>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className='d-flex flex-wrap flex-stack mb-6'>
-        <h3 className='fw-bolder my-2'>Quick Links</h3>
-      </div>
-
-      <div className='row g-6 g-xl-9 mb-6 mb-xl-9'>
-        <div className='col-12 col-sm-12 col-xl'>
-          <Card7 icon='/media/support/OrgAnnouncement.png' link='/#' title='Org Announcements' />
-        </div>
-        <div className='col-12 col-sm-12 col-xl'>
-          <Card7 icon='/media/support/CreateLeague.png' link='/#' title='Create League' />
-        </div>
-        <div className='col-12 col-sm-12 col-xl'>
-          <Card7 icon='/media/support/AdminIcon.png' link='/#' title='Admin Preferences' />
-        </div>
-        <div className='col-12 col-sm-12 col-xl'>
-          <Card7 icon='/media/support/AccountBilling.png' link='/#' title='Account and Billing' />
         </div>
       </div>
     </>

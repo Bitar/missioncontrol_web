@@ -11,7 +11,8 @@ type Props = {
 const TableHeader: FC<React.PropsWithChildren<Props>> = ({name, url, showAdd = true}) => {
   return (
     <div className='card-header border-0 pt-6'>
-      <TableSearchComponent />
+      {/*<TableSearchComponent />*/}
+      <div className='card-title'></div>
       <div className='card-toolbar'>
         <TableListToolbar name={name} url={url} showAdd={showAdd} />
       </div>
