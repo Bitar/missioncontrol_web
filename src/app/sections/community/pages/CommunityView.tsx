@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {FC, useEffect, useRef, useState} from 'react'
 import {PageLink, PageTitle} from '../../../../_metronic/layout/core'
 import {getCommunityById} from '../core/CommunityRequests'
 import {Community} from '../models/Community'
@@ -7,10 +7,17 @@ import {CommunityUsers} from './CommunityUsers'
 import {CommunityInfo} from '../CommunityInfo'
 import {CommunityEdit} from './CommunityEdit'
 import {CommunityActivities} from './CommunityActivities'
+import {ID} from '../../../../_metronic/helpers'
 
-const CommunityView: React.FC = () => {
+type Props = {
+  communityId?: ID
+  links?: {text: string; link: string}[]
+}
+
+const CommunityView: FC<Props> = ({communityId, links}) => {
   const [community, setCommunity] = useState<Community | undefined>()
   const params = useParams()
+  const indexLink = useRef('')
 
   const communityViewBreadCrumbs: Array<PageLink> = [
     {
@@ -40,17 +47,25 @@ const CommunityView: React.FC = () => {
   ]
 
   useEffect(() => {
-    getCommunityById(params.id).then((response) => {
-      setCommunity(response)
-    })
-  }, [params.id])
+    if (params.id) {
+      getCommunityById(params.id).then((response) => {
+        setCommunity(response)
+      })
+      indexLink.current = '/communities/' + params.id + '/overview'
+    } else {
+      getCommunityById(communityId).then((response) => {
+        setCommunity(response)
+      })
+      indexLink.current = '/dashboard/overview'
+    }
+  }, [communityId, params.id])
 
   return (
     <Routes>
       <Route
         element={
           <>
-            <CommunityInfo community={community} />
+            <CommunityInfo community={community} links={links} />
             <Outlet />
           </>
         }
@@ -92,7 +107,7 @@ const CommunityView: React.FC = () => {
             </>
           }
         />
-        <Route index element={<Navigate to={'/communities/' + params.id + '/overview'} />} />
+        <Route index element={<Navigate to={indexLink.current} />} />
       </Route>
     </Routes>
   )

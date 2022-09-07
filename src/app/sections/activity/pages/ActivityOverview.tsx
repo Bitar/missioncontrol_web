@@ -20,7 +20,7 @@ const ActivityOverview: FC<Props> = ({activity, matches, setActivity, setMatch})
       <div className='row g-5 g-xxl-8'>
         <div className='col-lg-6 col-md-12'>
           <div className='mb-5'>
-            <ActivityStandings activity={activity} minimal={true}/>
+            <ActivityStandings activity={activity} minimal={true} />
           </div>
           <div>
             <ActivityAnnouncement activity={activity} setActivity={setActivity} />

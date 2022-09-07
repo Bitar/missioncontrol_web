@@ -3,9 +3,12 @@ import {useIntl} from 'react-intl'
 import {AsideMenuItemWithSub} from './AsideMenuItemWithSub'
 import {AsideMenuItem} from './AsideMenuItem'
 import {Restricted} from '../../../../app/modules/auth/core/AuthPermission'
+import {useAuth} from '../../../../app/modules/auth'
+import {isUserCommunityAdmin} from '../../../../app/sections/identity/user/models/User'
 
 export function AsideMenuMain() {
   const intl = useIntl()
+  const {currentUser} = useAuth()
 
   return (
     <>
@@ -14,11 +17,15 @@ export function AsideMenuMain() {
         icon='/media/icons/duotune/gen001.svg'
         title={intl.formatMessage({id: 'MENU.DASHBOARD'})}
       />
-      <div className='menu-item'>
-        <div className='menu-content pt-8 pb-2'>
-          <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Sections</span>
+
+      {currentUser && !isUserCommunityAdmin(currentUser) && (
+        <div className='menu-item'>
+          <div className='menu-content pt-8 pb-2'>
+            <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Sections</span>
+          </div>
         </div>
-      </div>
+      )}
+
       <Restricted to='view-communities'>
         <AsideMenuItem
           to='/communities'
@@ -34,11 +41,13 @@ export function AsideMenuMain() {
         <AsideMenuItem to='/games' title='Games' fontIcon={'fa-gamepad'} menuIcon='font' />
       </Restricted>
 
-      <div className='menu-item'>
-        <div className='menu-content pt-8 pb-2'>
-          <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Settings</span>
+      {currentUser && !isUserCommunityAdmin(currentUser) && (
+        <div className='menu-item'>
+          <div className='menu-content pt-8 pb-2'>
+            <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Settings</span>
+          </div>
         </div>
-      </div>
+      )}
 
       <Restricted to='view-plans'>
         <AsideMenuItem

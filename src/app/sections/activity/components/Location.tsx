@@ -49,7 +49,7 @@ const Location: FC<Props> = ({activity, setActivity}) => {
                   <span className='d-flex flex-column'>
                     <span className='fw-bolder fs-6 text-white'>Online</span>
 
-                    <span className='fs-7 text-white'>On the line</span>
+                    <span className='fs-7 text-white'>Players Play Online On Their Own Consoles</span>
                   </span>
                 </div>
               </div>
@@ -71,7 +71,7 @@ const Location: FC<Props> = ({activity, setActivity}) => {
                   <span className='d-flex flex-column'>
                     <span className='fw-bolder fs-6 text-white'>Local</span>
 
-                    <span className='fs-7 text-white'>Good Ol' Days</span>
+                    <span className='fs-7 text-white'>Players Play at a Location You Choose</span>
                   </span>
                 </div>
               </div>

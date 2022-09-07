@@ -13,16 +13,20 @@ const TextImageCell: FC<React.PropsWithChildren<Props>> = ({dImage, dText, dExtr
   return (
     <div className='d-flex align-items-center'>
       <div className='symbol symbol-circle symbol-50px overflow-hidden me-3'>
-        {link ? (
-          <Link to={`${link}`}>
-            <div className='symbol-label'>
-              <img src={toAbsoluteUrl(dImage!)} alt='Emma Smith' className='w-100' />
-            </div>
-          </Link>
-        ) : (
-          <div className='symbol-label'>
-            <img src={toAbsoluteUrl(dImage!)} alt='Emma Smith' className='w-100' />
-          </div>
+        {dImage && (
+          <>
+            {link ? (
+              <Link to={`${link}`}>
+                <div className='symbol-label'>
+                  <img src={toAbsoluteUrl(dImage)} alt='Emma Smith' className='w-100' />
+                </div>
+              </Link>
+            ) : (
+              <div className='symbol-label'>
+                <img src={toAbsoluteUrl(dImage)} alt='Emma Smith' className='w-100' />
+              </div>
+            )}
+          </>
         )}
       </div>
       <div className='d-flex flex-column'>

@@ -4,6 +4,7 @@ import {KTSVG} from '../../../helpers'
 import {HeaderUserMenu, ThemeModeSwitcher} from '../../../partials'
 import {useLayout} from '../../core'
 import {useAuth} from '../../../../app/modules/auth'
+import {CommunityPicker} from '../../../../app/layout/partials/community-picker/CommunityPicker'
 
 const toolbarButtonMarginClass = 'ms-1 ms-lg-3',
   toolbarButtonHeightClass = 'w-30px h-30px w-md-40px h-md-40px',
@@ -15,6 +16,9 @@ const Topbar: FC<React.PropsWithChildren<unknown>> = () => {
 
   return (
     <div className='d-flex align-items-stretch flex-shrink-0'>
+      <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
+        <CommunityPicker />
+      </div>
       {/* begin::Theme mode */}
       <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
         {/* TODO_v3.1: Dark Mode Switcher */}

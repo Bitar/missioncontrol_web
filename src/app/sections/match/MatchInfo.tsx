@@ -122,4 +122,4 @@ const MatchInfo: FC<Props> = ({match}) => {
   )
 }
 
-export { MatchInfo };
+export {MatchInfo}

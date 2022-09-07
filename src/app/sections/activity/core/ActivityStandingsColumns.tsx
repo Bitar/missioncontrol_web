@@ -45,4 +45,4 @@ const ActivityStandingsColumns: ReadonlyArray<Column<ActivityStanding>> = [
   },
 ]
 
-export { ActivityStandingsColumns };
+export {ActivityStandingsColumns}

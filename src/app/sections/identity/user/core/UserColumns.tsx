@@ -6,6 +6,7 @@ import {QUERIES} from '../../../../../_metronic/helpers'
 import {User} from '../models/User'
 import {Role} from '../../role/models/Role'
 import {TextImageCell} from '../../../../modules/table/columns/TextImageCell'
+import dayjs from 'dayjs'
 
 const usersColumns: ReadonlyArray<Column<User>> = [
   {
@@ -13,7 +14,7 @@ const usersColumns: ReadonlyArray<Column<User>> = [
     id: 'name',
     Cell: ({...props}) => (
       <TextImageCell
-        dImage={props.data[props.row.index].meta.image}
+        dImage={props.data[props.row.index]?.meta?.image}
         dText={props.data[props.row.index].name}
         link={`/users/${props.data[props.row.index].id}`}
         dExtraText={props.data[props.row.index].email}
@@ -37,7 +38,9 @@ const usersColumns: ReadonlyArray<Column<User>> = [
     ),
     id: 'last_login',
     Cell: ({...props}) => (
-      <div className='badge badge-light fw-bolder'>{props.data[props.row.index].created_at}</div>
+      <div className='badge badge-light fw-bolder'>
+        {dayjs(new Date(props.data[props.row.index].created_at * 1000)).format('lll')}
+      </div>
     ),
   },
   {

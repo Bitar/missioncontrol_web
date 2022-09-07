@@ -93,3 +93,9 @@ export function formOnChange(
     updateData({[target_name]: event.target.value}, setUser, user)
   }
 }
+
+export const isUserCommunityAdmin = (user: User) => {
+  return !!user.roles.find(function (role) {
+    return role.id === 3
+  })
+}

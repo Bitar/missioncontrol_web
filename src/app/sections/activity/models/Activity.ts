@@ -13,7 +13,7 @@ import {ActivityTeamSetting, initialActivityTeamSetting} from './AvtivityTeamSet
 import {Team} from '../../../models/squad/Team'
 import {Announcement} from '../../../models/announcement/Announcements'
 import {ActivityStanding} from './ActivityStanding'
-import { ActivityRegistration } from "./ActivityRegistration";
+import {ActivityRegistration} from './ActivityRegistration'
 
 export const activitySchema = Yup.object().shape({})
 

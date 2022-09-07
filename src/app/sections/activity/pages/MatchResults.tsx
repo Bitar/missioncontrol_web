@@ -99,4 +99,4 @@ const MatchResults: FC<Props> = ({matches, setMatch}) => {
   )
 }
 
-export { MatchResults };
+export {MatchResults}

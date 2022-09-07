@@ -47,7 +47,7 @@ const Login = () => {
             <div className='text-center mb-10'>
               <h1 className='text-dark mb-3'>Sign In to Mission Control</h1>
               <div className='text-gray-400 fw-bold fs-4'>
-                New Here?
+                New Here?{' '}
                 <Link to='/auth/registration' className='link-primary fw-bolder'>
                   Create an Account
                 </Link>
@@ -64,7 +64,7 @@ const Login = () => {
                 autoComplete='off'
               />
               <div className='text-danger mt-2'>
-                <ErrorMessage name='name' />
+                <ErrorMessage name='email' />
               </div>
             </div>
 

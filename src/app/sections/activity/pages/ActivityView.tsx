@@ -11,7 +11,7 @@ import {Match} from '../models/matches/Match'
 import {ActivityRegistrations} from './ActivityRegistrations'
 import {User} from '../../identity/user/models/User'
 import {MatchPage} from '../../match/MatchPage'
-import { Team } from '../../../models/squad/Team'
+import {Team} from '../../../models/squad/Team'
 
 const ActivityView: React.FC = () => {
   const [activity, setActivity] = useState<Activity | undefined>()

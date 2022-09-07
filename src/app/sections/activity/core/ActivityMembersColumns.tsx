@@ -5,7 +5,7 @@ import React from 'react'
 import {ActivityRegistration} from '../models/ActivityRegistration'
 import dayjs from 'dayjs'
 import {BadgeCell} from '../../../modules/table/columns/BadgeCell'
-import { getTeamStatus } from "../../../models/squad/Team";
+import {getTeamStatus} from '../../../models/squad/Team'
 
 const ActivityMembersColumns: ReadonlyArray<Column<ActivityRegistration>> = [
   {
@@ -50,10 +50,12 @@ const ActivityMembersColumns: ReadonlyArray<Column<ActivityRegistration>> = [
     id: 'registered_on',
     Cell: ({...props}) => (
       <TextCell
-        dObject={dayjs(new Date(props.data[props.row.index].created_at * 1000)).format('ddd, ll @ LT')}
+        dObject={dayjs(new Date(props.data[props.row.index].created_at * 1000)).format(
+          'ddd, ll @ LT'
+        )}
       />
     ),
   },
 ]
 
-export { ActivityMembersColumns };
+export {ActivityMembersColumns}

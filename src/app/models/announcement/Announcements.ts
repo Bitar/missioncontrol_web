@@ -18,6 +18,6 @@ export type Announcement = {
 export const initialAnnouncement = (announcement?: Announcement) => {
   return {
     title: announcement?.title || '',
-    body: announcement?.body || ''
+    body: announcement?.body || '',
   }
 }

@@ -9,12 +9,6 @@ type Props = {
 }
 
 const CommunityUsers: FC<Props> = ({community}) => {
-  const [members, setMembers] = useState<User[] | undefined>([])
-
-  useEffect(() => {
-    setMembers(community?.users)
-  }, [community])
-
   return (
     <>
       <KTCard>
@@ -44,7 +38,7 @@ const CommunityUsers: FC<Props> = ({community}) => {
                 </tr>
               </thead>
               <tbody className='text-gray-600 fw-bold role=rowgroup'>
-                {members?.map((member) => (
+                {community?.users?.map((member) => (
                   <tr key={member.id} role='row'>
                     <td role='cell'>
                       <TextImageCell

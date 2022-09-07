@@ -7,16 +7,15 @@ import {PasswordMeterComponent} from '../../../../_metronic/assets/ts/components
 import {useAuth} from '../core/Auth'
 
 const initialValues = {
-  firstname: '',
-  lastname: '',
+  first_name: '',
+  last_name: '',
   email: '',
   password: '',
-  changepassword: '',
-  acceptTerms: false,
+  password_confirmation: '',
 }
 
 const registrationSchema = Yup.object().shape({
-  firstname: Yup.string()
+  first_name: Yup.string()
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
     .required('First name is required'),
@@ -25,7 +24,7 @@ const registrationSchema = Yup.object().shape({
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
     .required('Email is required'),
-  lastname: Yup.string()
+  last_name: Yup.string()
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
     .required('Last name is required'),
@@ -33,13 +32,12 @@ const registrationSchema = Yup.object().shape({
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
     .required('Password is required'),
-  changepassword: Yup.string()
+  password_confirmation: Yup.string()
     .required('Password confirmation is required')
     .when('password', {
       is: (val: string) => val && val.length > 0,
       then: Yup.string().oneOf([Yup.ref('password')], "Password and Confirm Password didn't match"),
     }),
-  acceptTerms: Yup.bool().required('You must accept the terms and conditions'),
 })
 
 const Registration = () => {
@@ -53,23 +51,16 @@ const Registration = () => {
     try {
       const {data: auth} = await register(
         values.email,
-        values.firstname,
-        values.lastname,
+        values.first_name,
+        values.last_name,
         values.password,
-        values.changepassword
+        values.password_confirmation
       )
       saveAuth(auth)
       const {data: profile} = await getUserByToken(auth.api_token)
       setCurrentUser(profile.user)
-      // console.log(user);
-      // console.log('registration')
-      // setCurrentUser(user)
     } catch (error) {
-      console.error(error)
       saveAuth(undefined)
-      // setStatus('The registration details is incorrect')
-      // setSubmitting(false)
-      // setLoading(false)
     }
   }
 
@@ -82,13 +73,9 @@ const Registration = () => {
       >
         {({isSubmitting}) => (
           <Form className='form w-100 fv-plugins-bootstrap5 fv-plugins-framework'>
-            {/* begin::Heading */}
             <div className='mb-10 text-center'>
-              {/* begin::Title */}
               <h1 className='text-dark mb-3'>Create an Account</h1>
-              {/* end::Title */}
 
-              {/* begin::Link */}
               <div className='text-gray-400 fw-bold fs-4'>
                 Already have an account?
                 <Link
@@ -96,16 +83,14 @@ const Registration = () => {
                   className='link-primary fw-bolder'
                   style={{marginLeft: '5px'}}
                 >
-                  Forgot Password ?
+                  Login
                 </Link>
               </div>
-              {/* end::Link */}
             </div>
 
-            {/* begin::Form group Firstname */}
             <div className='row fv-row mb-7'>
               <div className='col-xl-6'>
-                <label className='class="form-label fw-bolder text-dark fs-6'>First name</label>
+                <label className='form-label fw-bolder text-dark fs-6'>First name</label>
                 <Field
                   type='text'
                   name='first_name'
@@ -118,26 +103,20 @@ const Registration = () => {
                 </div>
               </div>
               <div className='col-xl-6'>
-                {/* begin::Form group Lastname */}
-                <div className='fv-row mb-5'>
-                  <label className='form-label fw-bolder text-dark fs-6'>Last name</label>
-                  <Field
-                    type='text'
-                    name='last_name'
-                    placeholder='Last name'
-                    className='form-control form-control-lg form-control-solid'
-                    autoComplete='off'
-                  />
-                  <div className='text-danger mt-2'>
-                    <ErrorMessage name='last_name' />
-                  </div>
+                <label className='form-label fw-bolder text-dark fs-6'>Last name</label>
+                <Field
+                  type='text'
+                  name='last_name'
+                  placeholder='Last name'
+                  className='form-control form-control-lg form-control-solid'
+                  autoComplete='off'
+                />
+                <div className='text-danger mt-2'>
+                  <ErrorMessage name='last_name' />
                 </div>
-                {/* end::Form group */}
               </div>
             </div>
-            {/* end::Form group */}
 
-            {/* begin::Form group Email */}
             <div className='fv-row mb-7'>
               <label className='form-label fw-bolder text-dark fs-6'>Email</label>
               <Field
@@ -151,9 +130,7 @@ const Registration = () => {
                 <ErrorMessage name='email' />
               </div>
             </div>
-            {/* end::Form group */}
 
-            {/* begin::Form group Password */}
             <div className='mb-10 fv-row' data-kt-password-meter='true'>
               <div className='mb-1'>
                 <label className='form-label fw-bolder text-dark fs-6'>Password</label>
@@ -169,7 +146,6 @@ const Registration = () => {
                     <ErrorMessage name='password' />
                   </div>
                 </div>
-                {/* begin::Meter */}
                 <div
                   className='d-flex align-items-center mb-3'
                   data-kt-password-meter-control='highlight'
@@ -179,15 +155,11 @@ const Registration = () => {
                   <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
                   <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px'></div>
                 </div>
-                {/* end::Meter */}
               </div>
               <div className='text-muted'>
                 Use 8 or more characters with a mix of letters, numbers & symbols.
               </div>
             </div>
-            {/* end::Form group */}
-
-            {/* begin::Form group Confirm password */}
             <div className='fv-row mb-5'>
               <label className='form-label fw-bolder text-dark fs-6'>Confirm Password</label>
               <Field
@@ -201,25 +173,30 @@ const Registration = () => {
                 <ErrorMessage name='password_confirmation' />
               </div>
             </div>
-            {/* end::Form group */}
 
             <div className='fv-row mb-10'>
               <div className='form-check form-check-custom form-check-solid form-switch'>
-                <Field
-                  className='form-check-input w-45px h-30px'
-                  type='checkbox'
-                  name={'acceptTerms'}
-                />
-                <label className='form-check-label fw-bold text-gray-700 fs-6'>
-                  I agree the
-                  <Link to='/auth/terms' className='ms-1 link-primary'>
-                    terms and conditions
-                  </Link>
+                <span className='form-check-label fw-bold text-gray-700 fs-6'>
+                  By signing up, you agree with the
+                  <a
+                    rel={'noreferrer'}
+                    href='https://app.termly.io/document/terms-of-use-for-website/15087e11-678e-49c8-9fb9-feff372268de'
+                    target='_blank'
+                    className='ms-1 link-primary'
+                  >
+                    Terms of Service
+                  </a>{' '}
+                  and
+                  <a
+                    rel={'noreferrer'}
+                    href='https://app.termly.io/document/privacy-policy/61d2c399-55ab-4ba8-b7bf-9c704dd6330c'
+                    target='_blank'
+                    className='ms-1 link-primary'
+                  >
+                    Private Policy
+                  </a>
                   .
-                </label>
-              </div>
-              <div className='text-danger mt-2'>
-                <ErrorMessage name='is_cross_play' />
+                </span>
               </div>
             </div>
 
@@ -250,4 +227,4 @@ const Registration = () => {
   )
 }
 
-export {Registration}
+export { Registration };

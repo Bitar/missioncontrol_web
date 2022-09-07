@@ -13,9 +13,7 @@ import {CommunityPage} from '../sections/community/pages/CommunityPage'
 import {GamePage} from '../sections/games/pages/GamePage'
 import {SuspenseView} from '../layout/SuspenseView'
 import {ActivityPage} from '../sections/activity/pages/ActivityPage'
-import {PageTitle} from '../../_metronic/layout/core'
 import React from 'react'
-import {MatchPage} from '../sections/match/MatchPage'
 import {Restricted} from '../modules/auth/core/AuthPermission'
 
 const PrivateRoutes = () => {
@@ -25,7 +23,7 @@ const PrivateRoutes = () => {
         <Route path='auth/*' element={<Navigate to='/dashboard' />} />
 
         {/* Pages */}
-        <Route path='dashboard' element={<DashboardWrapper />} />
+        <Route path='dashboard/*' element={<DashboardWrapper />} />
         <Route path='marketing-support' element={<Marketing />} />
         {/* Pages */}
 
@@ -34,9 +32,9 @@ const PrivateRoutes = () => {
           path='communities/*'
           element={
             <Restricted to='view-communities'>
-            <SuspenseView>
-              <CommunityPage />
-            </SuspenseView>
+              <SuspenseView>
+                <CommunityPage />
+              </SuspenseView>
             </Restricted>
           }
         />

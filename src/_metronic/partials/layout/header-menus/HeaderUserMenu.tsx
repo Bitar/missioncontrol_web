@@ -14,28 +14,26 @@ const HeaderUserMenu: FC<React.PropsWithChildren<unknown>> = () => {
       <div className='menu-item px-3'>
         <div className='menu-content d-flex align-items-center px-3'>
           <div className='symbol symbol-50px me-5'>
-            <img alt='Logo' src={toAbsoluteUrl('/media/avatars/300-1.jpg')} />
+            <img alt='Logo' src={currentUser?.meta?.image} />
           </div>
 
           <div className='d-flex flex-column'>
-            <div className='fw-bolder d-flex align-items-center fs-5'>
+            <div className='fw-bolder text-mc-primary d-flex align-items-center fs-5'>
               {currentUser?.first_name} {currentUser?.last_name}
               {/*<span className='badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2'>Pro</span>*/}
             </div>
-            <a href='#' className='fw-bold text-muted text-hover-primary fs-7'>
-              {currentUser?.email}
-            </a>
+            <span className='fw-bold text-muted fs-7'>{currentUser?.email}</span>
           </div>
         </div>
       </div>
 
-      <div className='separator my-2'></div>
+      {/*<div className='separator my-2'></div>*/}
 
-      <div className='menu-item px-5'>
-        <Link to={'/crafted/pages/profile'} className='menu-link px-5'>
-          My Profile
-        </Link>
-      </div>
+      {/*<div className='menu-item px-5'>*/}
+      {/*  <Link to={'/crafted/pages/profile'} className='menu-link px-5'>*/}
+      {/*    My Profile*/}
+      {/*  </Link>*/}
+      {/*</div>*/}
 
       {/*<div className='menu-item px-5'>*/}
       {/*  <a href='#' className='menu-link px-5'>*/}

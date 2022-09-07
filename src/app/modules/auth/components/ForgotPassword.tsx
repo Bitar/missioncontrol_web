@@ -52,7 +52,7 @@ export function ForgotPassword() {
       >
         <div className='text-center mb-10'>
           {/* begin::Title */}
-          <h1 className='text-dark mb-3'>Forgot Password ?</h1>
+          <h1 className='text-dark mb-3'>Forgot Password?</h1>
           {/* end::Title */}
 
           {/* begin::Link */}

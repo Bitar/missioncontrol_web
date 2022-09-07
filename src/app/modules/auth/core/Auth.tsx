@@ -88,7 +88,7 @@ const AuthProvider: FC<WithChildren> = ({children}) => {
 }
 
 const AuthInit: FC<WithChildren> = ({children}) => {
-  const {auth, logout, setCurrentUser, setSubscription} = useAuth()
+  const {auth, logout, setCurrentUser, setSubscription, setCommunityAdmin} = useAuth()
   const didRequest = useRef(false)
   const [showSplashScreen, setShowSplashScreen] = useState(true)
   // We should request user by authToken (IN OUR EXAMPLE IT'S API_TOKEN) before rendering the application
@@ -100,6 +100,7 @@ const AuthInit: FC<WithChildren> = ({children}) => {
           if (data) {
             setSubscription(data.subscription)
             setCurrentUser(data.user)
+            setCommunityAdmin(data.admin)
           }
         }
       } catch (error) {

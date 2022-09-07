@@ -71,7 +71,7 @@ const EntryFee: FC<Props> = ({activity, setActivity}) => {
                   <span className='d-flex flex-column'>
                     <span className='fw-bolder fs-6 text-white'>Paid</span>
 
-                    <span className='fs-7 text-white'>Make the money rain</span>
+                    <span className='fs-7 text-white'>You Choose The Price Per Player</span>
                   </span>
                 </div>
               </div>

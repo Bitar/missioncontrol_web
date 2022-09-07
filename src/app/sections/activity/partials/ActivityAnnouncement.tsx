@@ -172,4 +172,4 @@ const ActivityAnnouncement: FC<Props> = ({activity, setActivity}) => {
   )
 }
 
-export { ActivityAnnouncement };
+export {ActivityAnnouncement}

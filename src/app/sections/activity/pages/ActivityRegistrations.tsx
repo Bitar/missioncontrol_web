@@ -5,7 +5,7 @@ import {ActivityMembersColumns} from '../core/ActivityMembersColumns'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {CustomHeaderColumn} from '../../../modules/table/columns/CustomHeaderColumn'
 import {CustomRow} from '../../../modules/table/columns/CustomRow'
-import { ActivityRegistration } from "../models/ActivityRegistration";
+import {ActivityRegistration} from '../models/ActivityRegistration'
 
 type Props = {
   members: User[] | undefined

@@ -39,17 +39,17 @@ const PrizeWrapper: FC<Props> = ({activity, setActivity}) => {
 
       <div className='row mb-6'>
         <div className='col-lg-4'>
-          <span className='required fw-bold fs-6'>Winning Way</span>
+          <span className='required fw-bold fs-6'>Prize Distribution Type</span>
         </div>
         <div className='col-lg-8'>
           <Box sx={{minWidth: 120}}>
             <FormControl fullWidth size='small'>
-              <InputLabel id='winning-way-select-label'>Winning Way</InputLabel>
+              <InputLabel id='distribution_type-select-label'>Prize Distribution Type</InputLabel>
               <Select
-                labelId='winning-way-select-label'
+                labelId='distribution_type-select-label'
                 id='winning-way-select'
                 value={winningWay}
-                label='Winning Way'
+                label='Prize Distribution Type'
                 onChange={(e) => {
                   let targetValue = e.target.value
                   setWinningWay(targetValue as string)
