@@ -1,4 +1,4 @@
-import React, {Dispatch, FC, SetStateAction, useState} from 'react'
+import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import TextField from '@mui/material/TextField'
 import {Activity} from '../models/Activity'
@@ -21,9 +21,14 @@ const ActivityAnnouncement: FC<Props> = ({activity, setActivity}) => {
   const params = useParams()
   const [announcement, setAnnouncement] = useState<Announcement>(initialAnnouncement())
 
+  useEffect(() => {
+    console.log(announcement)
+  }, [announcement])
+
   const handleSubmit = async () => {
     let data = jsonToFormData(announcement)
     await createActivityAnnouncement(params.id, data).then((response) => {
+      console.log(initialAnnouncement())
       setAnnouncement(initialAnnouncement())
 
       if (response && activity?.announcements) {
@@ -38,7 +43,9 @@ const ActivityAnnouncement: FC<Props> = ({activity, setActivity}) => {
     })
   }
 
-  const handleOnChange = (e: any) =>
+  const handleOnChange = (e: any) => {
+    console.log(e.target.name)
+    console.log(e.target.value)
     updateData(
       {
         [e.target.name]: e.target.value,
@@ -46,18 +53,19 @@ const ActivityAnnouncement: FC<Props> = ({activity, setActivity}) => {
       setAnnouncement,
       announcement
     )
+  }
 
   return (
     <>
-      <KTCard>
+      <KTCard className=''>
         <div
-          className='card-header collapsible cursor-pointer rotate border-0'
+          className='card-header collapsible cursor-pointer rotate border-0 bg-primary'
           id='activity_announcement_card_header'
           data-bs-toggle='collapse'
           data-bs-target='#activity_announcement_card_collapsible'
         >
           <h3 className='card-title'>
-            <span className='card-label fw-bold fs-3 mb-1'>Announcements</span>
+            <span className='card-label fw-bold fs-3 mb-1 text-white'>Announcements</span>
           </h3>
           <div className='card-toolbar rotate-180'>
             <span className='svg-icon svg-icon-1'>
@@ -70,7 +78,7 @@ const ActivityAnnouncement: FC<Props> = ({activity, setActivity}) => {
             <div className='row'>
               <div className='col-12'>
                 <div
-                  className='mb-7 scroll-y'
+                  className='mb-7 scroll-y pt-5'
                   data-kt-scroll='true'
                   data-kt-scroll-activate='{default: false, lg: true}'
                   data-kt-scroll-max-height='300px'
@@ -84,9 +92,11 @@ const ActivityAnnouncement: FC<Props> = ({activity, setActivity}) => {
                         <div className='d-flex align-items-center flex-wrap mb-1'>
                           <span className='text-gray-800 fw-bold me-2'>{announcement?.title}</span>
 
-                          <span className='text-gray-400 fw-semibold fs-7'>
-                            {dayjs(new Date(announcement?.created_at * 1000)).format('LL')}
-                          </span>
+                          {announcement?.created_at && (
+                            <span className='text-gray-400 fw-semibold fs-7'>
+                              {dayjs(new Date(announcement?.created_at * 1000)).format('LL')}
+                            </span>
+                          )}
                         </div>
                         <span className='text-gray-800 fs-7 fw-normal pt-1'>
                           {announcement?.body}
@@ -103,11 +113,10 @@ const ActivityAnnouncement: FC<Props> = ({activity, setActivity}) => {
             <Formik
               initialValues={initialAnnouncement()}
               onSubmit={handleSubmit}
-              validationSchema={announcementSchema}
               enableReinitialize
             >
-              {({isSubmitting, isValid, touched, errors, values}) => (
-                <Form className='form'>
+              {({isSubmitting, isValid, touched, errors}) => (
+                <Form onChange={handleOnChange} className='form'>
                   <div className='row'>
                     <div className='col-12 mb-6'>
                       <TextField
@@ -117,8 +126,7 @@ const ActivityAnnouncement: FC<Props> = ({activity, setActivity}) => {
                         label='Title'
                         className='w-100'
                         variant='standard'
-                        value={values.title}
-                        onChange={handleOnChange}
+                        value={announcement?.title}
                         error={touched.title && Boolean(errors.title)}
                         helperText={touched.title && errors.title}
                       />
@@ -129,11 +137,10 @@ const ActivityAnnouncement: FC<Props> = ({activity, setActivity}) => {
                         id='body'
                         size='small'
                         name='body'
-                        label='body'
+                        label='Body'
                         className='w-100'
                         variant='standard'
-                        value={values.body}
-                        onChange={handleOnChange}
+                        value={announcement?.body}
                         error={touched.body && Boolean(errors.body)}
                         helperText={touched.body && errors.body}
                       />

@@ -55,4 +55,4 @@ const ActivityPage: FC = () => {
   )
 }
 
-export { ActivityPage };
+export {ActivityPage}

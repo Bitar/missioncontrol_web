@@ -25,7 +25,7 @@ const TeamDetails: FC<Props> = ({activity, setActivity}) => {
         <div className='col-lg-8 fv-row'>
           <ButtonGroup size='small' aria-label='small outlined button group'>
             <button
-              type={"button"}
+              type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
               onClick={() => (players !== 0 ? setPlayers(players - 1) : setPlayers(0))}
             >
@@ -35,7 +35,7 @@ const TeamDetails: FC<Props> = ({activity, setActivity}) => {
               {players}
             </Button>
             <button
-              type={"button"}
+              type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
               onClick={() => setPlayers(players + 1)}
             >
@@ -50,7 +50,7 @@ const TeamDetails: FC<Props> = ({activity, setActivity}) => {
         <div className='col-lg-8 fv-row'>
           <ButtonGroup size='small' aria-label='small outlined button group'>
             <button
-              type={"button"}
+              type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
               onClick={() => (minTeam !== 0 ? setMinTeam(minTeam - 1) : setMinTeam(0))}
             >
@@ -60,7 +60,7 @@ const TeamDetails: FC<Props> = ({activity, setActivity}) => {
               {minTeam}
             </Button>
             <button
-              type={"button"}
+              type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
               onClick={() => setMinTeam(minTeam + 1)}
             >
@@ -75,7 +75,7 @@ const TeamDetails: FC<Props> = ({activity, setActivity}) => {
         <div className='col-lg-8 fv-row'>
           <ButtonGroup size='small' aria-label='small outlined button group'>
             <button
-              type={"button"}
+              type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
               onClick={() => (maxTeam !== 0 ? setMaxTeam(maxTeam - 1) : setMaxTeam(0))}
             >
@@ -85,7 +85,7 @@ const TeamDetails: FC<Props> = ({activity, setActivity}) => {
               {maxTeam}
             </Button>
             <button
-              type={"button"}
+              type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
               onClick={() => setMaxTeam(maxTeam + 1)}
             >
@@ -128,4 +128,4 @@ const TeamDetails: FC<Props> = ({activity, setActivity}) => {
   )
 }
 
-export { TeamDetails };
+export {TeamDetails}

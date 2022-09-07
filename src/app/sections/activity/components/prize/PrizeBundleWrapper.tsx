@@ -1,17 +1,16 @@
-import Box from "@mui/material/Box";
-import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Prizes } from "./Prizes";
+import Box from '@mui/material/Box'
+import {Accordion, AccordionDetails, AccordionSummary, Typography} from '@mui/material'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import {Prizes} from './Prizes'
 import React, {Dispatch, SetStateAction, FC} from 'react'
-import { ActivityPrize, initialActivityPrize } from "../../models/ActivityPrize";
+import {ActivityPrize, initialActivityPrize} from '../../models/ActivityPrize'
 
 type Props = {
-  activityPrizes: ActivityPrize[],
+  activityPrizes: ActivityPrize[]
   setActivityPrizes: Dispatch<SetStateAction<ActivityPrize[]>>
 }
 
 const PrizeBundleWrapper: FC<Props> = ({activityPrizes, setActivityPrizes}) => {
-
   const addRank = () => {
     setActivityPrizes([...activityPrizes, initialActivityPrize()])
   }

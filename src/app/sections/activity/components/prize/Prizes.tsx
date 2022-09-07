@@ -171,4 +171,4 @@ const Prizes: FC<Props> = ({
   )
 }
 
-export { Prizes };
+export {Prizes}

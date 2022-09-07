@@ -3,7 +3,7 @@ import {Outlet} from 'react-router-dom'
 import {I18nProvider} from '../_metronic/i18n/i18nProvider'
 import {LayoutProvider, LayoutSplashScreen} from '../_metronic/layout/core'
 import {MasterInit} from '../_metronic/layout/MasterInit'
-import { AuthInit, useAuth } from "./modules/auth";
+import {AuthInit, useAuth} from './modules/auth'
 // import * as PusherPushNotifications from '@pusher/push-notifications-web'
 import {LicenseInfo} from '@mui/x-license-pro'
 import {PermissionProvider} from './modules/auth/core/AuthPermission'

@@ -90,4 +90,4 @@ const GameView: React.FC = () => {
   )
 }
 
-export { GameView };
+export {GameView}

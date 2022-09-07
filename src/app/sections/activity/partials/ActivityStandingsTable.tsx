@@ -1,10 +1,5 @@
-
-
 const ActivityStandingsTable = () => {
-  return (
-    <>
-    </>
-  )
+  return <></>
 }
 
 export {ActivityStandingsTable}

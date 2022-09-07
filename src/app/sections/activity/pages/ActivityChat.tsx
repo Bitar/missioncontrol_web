@@ -32,4 +32,4 @@ const ActivityChat: FC<Props> = ({activity, setActivity}) => {
   )
 }
 
-export { ActivityChat };
+export {ActivityChat}

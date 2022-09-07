@@ -8,14 +8,16 @@ import {ActivityTeams} from './ActivityTeams'
 import {ActivityOverview} from './ActivityOverview'
 import {ActivityChat} from './ActivityChat'
 import {Match} from '../models/matches/Match'
-import {ActivityMembers} from './ActivityMembers'
+import {ActivityRegistrations} from './ActivityRegistrations'
 import {User} from '../../identity/user/models/User'
 import {MatchPage} from '../../match/MatchPage'
+import { Team } from '../../../models/squad/Team'
 
 const ActivityView: React.FC = () => {
   const [activity, setActivity] = useState<Activity | undefined>()
   const [matches, setMatches] = useState<Match[] | undefined>([])
   const [members, setMembers] = useState<User[] | undefined>([])
+  const [teams, setTeams] = useState<Team[] | undefined>([])
   const [match, setMatch] = useState<Match | undefined>()
 
   const params = useParams()
@@ -50,6 +52,8 @@ const ActivityView: React.FC = () => {
   useEffect(() => {
     getActivityById(params.id).then((response) => {
       setActivity(response)
+
+      setTeams(response?.teams)
 
       getActivityMatches(params.id).then((response) => {
         setMatches(response.data)
@@ -86,11 +90,11 @@ const ActivityView: React.FC = () => {
           }
         />
         <Route
-          path='/members'
+          path='/registrations'
           element={
             <>
-              <PageTitle breadcrumbs={activityViewBreadcrumbs}>Members</PageTitle>
-              <ActivityMembers members={members} />
+              <PageTitle breadcrumbs={activityViewBreadcrumbs}>Registrations</PageTitle>
+              <ActivityRegistrations members={members} registrations={activity?.registrations} />
             </>
           }
         />
@@ -109,14 +113,6 @@ const ActivityView: React.FC = () => {
             <>
               <PageTitle breadcrumbs={activityViewBreadcrumbs}>Chat</PageTitle>
               <ActivityChat activity={activity} setActivity={setActivity} />
-            </>
-          }
-        />
-        <Route
-          path='/members'
-          element={
-            <>
-              <PageTitle breadcrumbs={activityViewBreadcrumbs}>Members</PageTitle>
             </>
           }
         />
@@ -143,4 +139,4 @@ const ActivityView: React.FC = () => {
   )
 }
 
-export { ActivityView };
+export {ActivityView}

@@ -1,5 +1,11 @@
-import React, { FC, useEffect, useState } from "react";
-import { Activity, activitySchema, formOnChange, initialActivity, prepareForStore } from "./models/Activity";
+import React, {FC, useEffect, useState} from 'react'
+import {
+  Activity,
+  activitySchema,
+  formOnChange,
+  initialActivity,
+  prepareForStore,
+} from './models/Activity'
 import {useNavigate} from 'react-router-dom'
 import {jsonToFormData} from '../../helpers/form/FormHelper'
 import {createActivity} from './core/ActivityRequests'
@@ -13,14 +19,14 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(activity?.ready_to_submit) {
+    if (activity?.ready_to_submit) {
       let data = jsonToFormData(activity)
       createActivity(data).then((response) => navigate('/activities/' + response?.id))
     }
   }, [navigate, activity])
 
   const handleSubmit = async () => {
-    prepareForStore(activity, setActivity);
+    prepareForStore(activity, setActivity)
   }
 
   const handleOnChange = (e: any) => formOnChange(e, activity, setActivity)

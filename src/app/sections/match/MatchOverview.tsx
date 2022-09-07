@@ -2,9 +2,9 @@ import {KTCard, KTCardBody, KTSVG} from '../../../_metronic/helpers'
 import React, {FC} from 'react'
 import {KTCardHeader} from '../../../_metronic/helpers/components/KTCardHeader'
 import {Match} from '../activity/models/matches/Match'
-import { calculateTeamScore, getDateFromTimestamp, getTimeFromTimestamp } from "../../helpers/MCHelper";
-import { Activity } from "../activity/models/Activity";
-import { ScoreSheet } from "../activity/models/matches/ScoreSheet";
+import {calculateTeamScore} from '../../helpers/MCHelper'
+import {Activity} from '../activity/models/Activity'
+import {ScoreSheet} from '../activity/models/matches/ScoreSheet'
 
 type Props = {
   activity: Activity | undefined
@@ -19,14 +19,24 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
   }
 
   const getScoringKey = (scoringSheet: ScoreSheet) => {
-    const scoringKey =  activity?.game_mode?.scoring_settings?.find(function(element: any) {
-        return element.id === scoringSheet.score_settings_id
-    });
+    const scoringKey = activity?.game_mode?.scoring_settings?.find(function (element: any) {
+      return element.id === scoringSheet.score_settings_id
+    })
 
-    if(scoringKey?.key.type === 1) {
-      return scoringKey?.key.key + ': ' + scoringSheet.value * (scoringKey?.values?.find((e:any) => e.id === scoringSheet?.scoring_value_id)?.value || 0)
+    if (scoringKey?.key.type === 1) {
+      return (
+        scoringKey?.key.key +
+        ': ' +
+        scoringSheet.value *
+          (scoringKey?.values?.find((e: any) => e.id === scoringSheet?.scoring_value_id)?.value ||
+            0)
+      )
     } else {
-      return scoringKey?.key.key + ': ' + scoringKey?.values.find((e:any) => e.id === scoringSheet.scoring_value_id)?.value
+      return (
+        scoringKey?.key.key +
+        ': ' +
+        scoringKey?.values.find((e: any) => e.id === scoringSheet.scoring_value_id)?.value
+      )
     }
   }
 
@@ -37,7 +47,7 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
   return (
     <>
       <div className='row g-5 g-xxl-8'>
-        <div className='col-lg-6 col-md-12' style={{marginBottom: '500px'}}>
+        <div className='col-lg-12 col-md-12' style={{marginBottom: '500px'}}>
           <KTCard>
             <KTCardHeader text={'Scores'} bg='mc-primary' text_color='white' />
             <KTCardBody>
@@ -61,45 +71,51 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
                       </div>
                       <div className='fs-4 text-dark fw-bold me-3'>Round {round.round}:</div>
                       <div className='symbol symbol-30px symbol-circle me-3'>
-                        <img src={getTeam(round?.scores[0].team_id)?.image} alt={getTeam(round?.scores[0].team_id)?.name + ' team image'} />
+                        <img
+                          src={getTeam(round?.scores[0]?.team_id)?.image}
+                          alt={getTeam(round?.scores[0]?.team_id)?.name + ' team image'}
+                        />
                       </div>
                       <div className='me-3'>
                         <div className='d-flex align-items-center fw-bold'>
-                          {getTeam(round?.scores[0].team_id)?.name}
+                          {getTeam(round?.scores[0]?.team_id)?.name}
                         </div>
                       </div>
                       <div className='me-5'>
                         <span className='badge badge-circle badge-mc-secondary'>
-                          {calculateTeamScore(match, getTeam(round?.scores[0].team_id))}
+                          {calculateTeamScore(match, getTeam(round?.scores[0]?.team_id))}
                         </span>
                       </div>
                     </div>
                   </div>
-                  <div id={`mc_match_${match?.id}_scores_round_${round.round}`} className='collapse fs-6 ps-10'>
+                  <div
+                    id={`mc_match_${match?.id}_scores_round_${round.round}`}
+                    className='collapse fs-6 ps-10'
+                  >
                     <div className='d-flex flex-stack text-center mb-3'>
-                      {getTeam(round.scores[0].team_id) && (
+                      {getTeam(round.scores[0]?.team_id) && (
                         <div className='flex-grow-1'>
                           <div className='d-inline-block'>
                             {/*<div className='symbol symbol-30px symbol-circle mb-3'>*/}
-                            {/*  <img alt={getTeam(round.scores[0].team_id)?.name + ' team image'} src={getTeam(round.scores[0].team_id)?.image} />*/}
+                            {/*  <img alt={getTeam(round.scores[0]?.team_id)?.name + ' team image'} src={getTeam(round.scores[0]?.team_id)?.image} />*/}
                             {/*</div>*/}
-                            <div className='fs-6 fw-bold'>{getTeam(round.scores[0].team_id)?.name}</div>
+                            <div className='fs-6 fw-bold'>
+                              {getTeam(round.scores[0]?.team_id)?.name}
+                            </div>
                             <div>
-                              {round?.scores[0].score_sheet.map((scoreSheet, index) => (
-                                <div key={index}>
-                                  {getScoringKey(scoreSheet)}
-                                </div>
+                              {round?.scores[0]?.score_sheet.map((scoreSheet, index) => (
+                                <div key={index}>{getScoringKey(scoreSheet)}</div>
                               ))}
                             </div>
                           </div>
                         </div>
                       )}
 
-                      {getTeam(round.scores[0].team_id) && getTeam(round.scores[1].team_id) && (
+                      {getTeam(round.scores[0]?.team_id) && getTeam(round.scores[1]?.team_id) && (
                         <div className='flex-grow-1'>
                           <div className='d-flex flex-stack'>
                             <div className='display-5 text-mc-primary'>
-                              {calculateTeamScore(match, getTeam(round.scores[0].team_id))}
+                              {calculateTeamScore(match, getTeam(round.scores[0]?.team_id))}
                             </div>
                             <div className='fs-6 fw-semibold text-gray-600 px-5'>
                               <p className='display-6 text-dark m-0'>-</p>
@@ -111,23 +127,23 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
                               {/*</p>*/}
                             </div>
                             <div className='display-5 text-mc-primary'>
-                              {calculateTeamScore(match, getTeam(round.scores[1].team_id))}
+                              {calculateTeamScore(match, getTeam(round.scores[1]?.team_id))}
                             </div>
                           </div>
                         </div>
                       )}
-                      {getTeam(round.scores[1].team_id) && (
+                      {getTeam(round.scores[1]?.team_id) && (
                         <div className='flex-grow-1'>
                           <div className='d-inline-block'>
                             {/*<div className='symbol symbol-30px symbol-circle mb-3'>*/}
-                            {/*  <img alt={getTeam(round.scores[1].team_id)?.name + ' team image'} src={getTeam(round.scores[1].team_id)?.image} />*/}
+                            {/*  <img alt={getTeam(round.scores[1]?.team_id)?.name + ' team image'} src={getTeam(round.scores[1]?.team_id)?.image} />*/}
                             {/*</div>*/}
-                            <div className='fs-6 fw-bold'>{getTeam(round.scores[1].team_id)?.name}</div>
+                            <div className='fs-6 fw-bold'>
+                              {getTeam(round.scores[1]?.team_id)?.name}
+                            </div>
                             <div>
-                              {round?.scores[1].score_sheet.map((scoreSheet, index) => (
-                                <div key={index}>
-                                  {getScoringKey(scoreSheet)}
-                                </div>
+                              {round?.scores[1]?.score_sheet.map((scoreSheet, index) => (
+                                <div key={index}>{getScoringKey(scoreSheet)}</div>
                               ))}
                             </div>
                           </div>
@@ -145,4 +161,4 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
   )
 }
 
-export { MatchOverview };
+export {MatchOverview}

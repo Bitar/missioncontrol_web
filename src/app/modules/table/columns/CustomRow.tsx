@@ -10,10 +10,7 @@ const CustomRow: FC<React.PropsWithChildren<Props>> = ({row}) => (
   <tr {...row.getRowProps()}>
     {row.cells.map((cell) => {
       return (
-        <td
-          {...cell.getCellProps()}
-          className={clsx({'text-end': cell.column.id === 'actions'})}
-        >
+        <td {...cell.getCellProps()} className={clsx({'text-end': cell.column.id === 'actions'})}>
           {cell.render('Cell')}
         </td>
       )

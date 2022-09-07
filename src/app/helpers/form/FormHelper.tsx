@@ -46,7 +46,14 @@ function buildFormData(formData: FormData, data: any, parentKey?: any) {
       buildFormData(formData, data[key], parentKey ? `${parentKey}[${key}]` : key)
     })
   } else {
-    if (data !== null && data !== '' && parentKey !== 'id' && parentKey !== 'created_at' && parentKey !== 'ready_to_submit' && parentKey !== "") {
+    if (
+      data !== null &&
+      data !== '' &&
+      parentKey !== 'id' &&
+      parentKey !== 'created_at' &&
+      parentKey !== 'ready_to_submit' &&
+      parentKey !== ''
+    ) {
       if (data instanceof Moment) {
         formData.append(parentKey, moment(data).format('X'))
       } else {

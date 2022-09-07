@@ -4,9 +4,9 @@ import {Link, useLocation} from 'react-router-dom'
 import {BadgeCell} from '../../modules/table/columns/BadgeCell'
 import {formatActivityStatus} from '../../helpers/ActivityHelper'
 import CountUp from 'react-countup'
-import dayjs from "dayjs";
-import { KTCard, KTCardBody } from "../../../_metronic/helpers";
-import clsx from "clsx";
+import dayjs from 'dayjs'
+import {KTCard, KTCardBody} from '../../../_metronic/helpers'
+import clsx from 'clsx'
 
 type Props = {
   activity: Activity | undefined
@@ -26,8 +26,8 @@ const ActivityInfo: FC<Props> = ({activity}) => {
       link: '/activities/' + activity?.id + '/overview',
     },
     {
-      text: 'Members',
-      link: '/activities/' + activity?.id + '/members',
+      text: 'Registrations',
+      link: '/activities/' + activity?.id + '/registrations',
     },
     {
       text: 'Teams',
@@ -45,7 +45,7 @@ const ActivityInfo: FC<Props> = ({activity}) => {
 
   return (
     <>
-      <KTCard className='mb-5 mb-xl-10'>
+      <KTCard className='mb-5 mb-xl-10 overflow-hidden'>
         <KTCardBody>
           <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
             <div className='me-7 mb-4'>
@@ -70,18 +70,20 @@ const ActivityInfo: FC<Props> = ({activity}) => {
 
               <div className='d-flex flex-wrap justify-content-start'>
                 <div className='d-flex flex-wrap'>
-                  {activity?.matchplay_dates &&
+                  {activity?.matchplay_dates && (
                     <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                       <div className='d-flex align-items-center'>
                         <i className='fa fa-gamepad text-info fs-2 me-2'></i>
                         <div className='fs-4 fw-bold'>
-                          {dayjs(new Date(activity?.matchplay_dates?.start_date * 1000)).format('ll')}
+                          {dayjs(new Date(activity?.matchplay_dates?.start_date * 1000)).format(
+                            'll'
+                          )}
                           {/*29 Jan, 2022*/}
                         </div>
                       </div>
                       <div className='fw-semibold fs-6 text-gray-400'>Game Date</div>
                     </div>
-                  }
+                  )}
                   {activity?.additional_data && (
                     <>
                       <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
@@ -142,4 +144,4 @@ const ActivityInfo: FC<Props> = ({activity}) => {
   )
 }
 
-export { ActivityInfo };
+export {ActivityInfo}

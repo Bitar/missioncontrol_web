@@ -19,15 +19,20 @@ export function AsideMenuMain() {
           <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Sections</span>
         </div>
       </div>
-      <AsideMenuItem
-        to='/communities'
-        title='Communities'
-        fontIcon={'fa-people-group'}
-        menuIcon='font'
-      />
-      <AsideMenuItem to='/activities' title='Activities' fontIcon={'fa-burger'} menuIcon='font' />
-
-      <AsideMenuItem to='/games' title='Games' fontIcon={'fa-gamepad'} menuIcon='font' />
+      <Restricted to='view-communities'>
+        <AsideMenuItem
+          to='/communities'
+          title='Communities'
+          fontIcon={'fa-people-group'}
+          menuIcon='font'
+        />
+      </Restricted>
+      <Restricted to='view-activities'>
+        <AsideMenuItem to='/activities' title='Activities' fontIcon={'fa-burger'} menuIcon='font' />
+      </Restricted>
+      <Restricted to='view-games'>
+        <AsideMenuItem to='/games' title='Games' fontIcon={'fa-gamepad'} menuIcon='font' />
+      </Restricted>
 
       <div className='menu-item'>
         <div className='menu-content pt-8 pb-2'>
@@ -35,23 +40,24 @@ export function AsideMenuMain() {
         </div>
       </div>
 
-      <Restricted to='manage-plans'>
+      <Restricted to='view-plans'>
         <AsideMenuItem
           to='/plans'
           title='Plans'
+          icon='/media/icons/duotune/gen022.svg'
+        ></AsideMenuItem>
+      </Restricted>
+
+      <Restricted to='view-subscriptions'>
+        <AsideMenuItem
+          to='/subscriptions'
+          title='Subscriptions'
           // fontIcon='bi-archive'
           icon='/media/icons/duotune/gen022.svg'
         ></AsideMenuItem>
       </Restricted>
 
-      <AsideMenuItem
-        to='/subscriptions'
-        title='Subscriptions'
-        // fontIcon='bi-archive'
-        icon='/media/icons/duotune/gen022.svg'
-      ></AsideMenuItem>
-
-      <Restricted to='manage-users'>
+      <Restricted to='view-users'>
         <AsideMenuItemWithSub
           to={['/users', '/roles', '/permissions']}
           title='Identity'

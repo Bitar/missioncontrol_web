@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, {FC, useEffect, useState} from 'react'
 import {Role, roleInitial, roleSchema} from './models/Role'
 import {useNavigate, useParams} from 'react-router-dom'
 import {Field, Form, Formik} from 'formik'
@@ -52,7 +52,9 @@ const RoleEdit: FC = () => {
       ready_to_submit: true,
       _method: 'PUT',
     })
-    await updateRole(params.id, data).then((response) => navigate('/roles/' + response?.id + '/edit'))
+    await updateRole(params.id, data).then((response) =>
+      navigate('/roles/' + response?.id + '/edit')
+    )
   }
 
   const handleOnChange = (event: any) => {
@@ -160,4 +162,4 @@ const RoleEdit: FC = () => {
   )
 }
 
-export { RoleEdit };
+export {RoleEdit}

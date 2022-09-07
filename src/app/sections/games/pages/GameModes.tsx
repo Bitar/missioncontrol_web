@@ -63,4 +63,4 @@ const GameModes: FC<Props> = ({game, setGame}) => {
   )
 }
 
-export { GameModes };
+export {GameModes}

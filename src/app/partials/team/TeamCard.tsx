@@ -64,4 +64,4 @@ const TeamCard: FC<Props> = ({standing, team}) => {
   )
 }
 
-export { TeamCard };
+export {TeamCard}

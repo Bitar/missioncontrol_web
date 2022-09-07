@@ -25,8 +25,8 @@ const PermissionProvider: FC<React.PropsWithChildren<PermissionProviderProps>> =
 
     roles?.forEach((role: Role) => {
       role?.permissions?.forEach((p: Permission) => {
-        if(p.name === permission && !exists) {
-          exists = true;
+        if (p.name === permission && !exists) {
+          exists = true
         }
       })
     })
@@ -60,4 +60,4 @@ const Restricted: FC<React.PropsWithChildren<RestrictedProps>> = ({to, children}
   return null
 }
 
-export { PermissionProvider, Restricted, usePermissions };
+export {PermissionProvider, Restricted, usePermissions}

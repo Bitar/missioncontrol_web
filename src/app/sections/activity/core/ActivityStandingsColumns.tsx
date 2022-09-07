@@ -2,19 +2,23 @@ import {Column} from 'react-table'
 import {TextCell} from '../../../modules/table/columns/TextCell'
 import {CustomHeader} from '../../../modules/table/columns/CustomHeader'
 import {ActivityStanding} from '../models/ActivityStanding'
-import {BadgeCell} from '../../../modules/table/columns/BadgeCell'
+import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 
 const ActivityStandingsColumns: ReadonlyArray<Column<ActivityStanding>> = [
   {
-    Header: (props) => <CustomHeader tableProps={props} title='Team' className='min-w-125px' />,
-    id: 'team',
+    Header: (props) => <CustomHeader tableProps={props} title='Team' />,
+    id: 'image',
     Cell: ({...props}) => (
       <div className='d-flex align-items-center'>
+        <div className='w-100px me-3'>
+          <img
+            src={toAbsoluteUrl(props.data[props.row.index].team?.image)}
+            alt={props.data[props.row.index].team?.name + ' team image'}
+            className='w-100 h-100vh rounded'
+          />
+        </div>
         <div className='d-flex flex-column'>
-          <span className='text-gray-800'>
-            <span className='pe-none mb-1 me-4'>{props.row.index + 1}</span>
-            <span className='pe-none mb-1'>{props.data[props.row.index].team?.name}</span>
-          </span>
+          <span className='text-gray-800 mb-1'>{props.data[props.row.index].team?.name}</span>
         </div>
       </div>
     ),
@@ -33,14 +37,11 @@ const ActivityStandingsColumns: ReadonlyArray<Column<ActivityStanding>> = [
     id: 'record',
     Cell: ({...props}) => (
       <TextCell
-        dObject={props.data[props.row.index].score?.win + ' - ' + props.data[props.row.index].score?.lose}
+        dObject={
+          props.data[props.row.index].score?.win + ' - ' + props.data[props.row.index].score?.lose
+        }
       />
     ),
-  },
-  {
-    Header: (props) => <CustomHeader tableProps={props} title='Score' className='text-mc-secondary' />,
-    id: 'Score',
-    Cell: ({...props}) => <BadgeCell color='mc-secondary' status={props.data[props.row.index].score?.score_win + props.data[props.row.index].score?.score_lose} />,
   },
 ]
 

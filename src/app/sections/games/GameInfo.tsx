@@ -131,4 +131,4 @@ const GameInfo: FC<Props> = ({game}) => {
   )
 }
 
-export { GameInfo };
+export {GameInfo}

@@ -10,9 +10,10 @@ import {ActivityType, initialActivityType} from './ActivityType'
 import {ActivitySettings, initialActivitySettings} from './ActivitySettings'
 import {GameMode} from '../../../models/game/GameMode'
 import {ActivityTeamSetting, initialActivityTeamSetting} from './AvtivityTeamSetting'
-import { Team } from "../../../models/squad/Team";
-import { Announcement } from "../../../models/announcement/Announcements";
-import { ActivityStanding } from "./ActivityStanding";
+import {Team} from '../../../models/squad/Team'
+import {Announcement} from '../../../models/announcement/Announcements'
+import {ActivityStanding} from './ActivityStanding'
+import { ActivityRegistration } from "./ActivityRegistration";
 
 export const activitySchema = Yup.object().shape({})
 
@@ -38,12 +39,12 @@ export const initialActivity = (activity?: Activity) => {
     additional_data: {
       teams_count: 0,
       players_count: 0,
-      total_sessions: 0
+      total_sessions: 0,
     },
 
     team_settings: initialActivityTeamSetting(activity?.team_settings),
 
-    ready_to_submit: false
+    ready_to_submit: false,
     // team: initialActivityTeam,
     // prize: initialActivityPrize,
   }
@@ -56,6 +57,7 @@ export type Activity = {
   type: ActivityType
   status: number
   teams?: Team[]
+  registrations?: ActivityRegistration[]
   settings: ActivitySettings
   community?: Community
   game?: Game
@@ -70,7 +72,7 @@ export type Activity = {
   }
   prize?: []
   location?: ActivityLocation
-  platforms?: [],
+  platforms?: []
   announcements?: Announcement[]
   entry_fee?: ActivityFee
   team_settings?: ActivityTeamSetting
@@ -90,8 +92,10 @@ export type Activity = {
 }
 export type ActivityQueryResponse = Response<Array<Activity>>
 
-
-export const prepareForStore = (activity: Activity, setActivity: Dispatch<SetStateAction<Activity>>) => {
+export const prepareForStore = (
+  activity: Activity,
+  setActivity: Dispatch<SetStateAction<Activity>>
+) => {
   updateData(
     {
       rounds: activity?.settings?.rounds,

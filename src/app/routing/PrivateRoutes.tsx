@@ -16,6 +16,7 @@ import {ActivityPage} from '../sections/activity/pages/ActivityPage'
 import {PageTitle} from '../../_metronic/layout/core'
 import React from 'react'
 import {MatchPage} from '../sections/match/MatchPage'
+import {Restricted} from '../modules/auth/core/AuthPermission'
 
 const PrivateRoutes = () => {
   return (
@@ -32,9 +33,11 @@ const PrivateRoutes = () => {
         <Route
           path='communities/*'
           element={
+            <Restricted to='view-communities'>
             <SuspenseView>
               <CommunityPage />
             </SuspenseView>
+            </Restricted>
           }
         />
         <Route path='games/*' element={<GamePage />} />

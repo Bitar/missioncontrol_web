@@ -10,23 +10,23 @@ $black: #000000 !default;
 // Bootstrap grey colors
 $gray-100: #f5f8fa !default;
 $gray-200: #eff2f5 !default;
-$gray-300: #E4E6EF !default;
-$gray-400: #B5B5C3 !default;
-$gray-500: #A1A5B7 !default;
-$gray-600: #7E8299 !default;
-$gray-700: #5E6278 !default;
-$gray-800: #3F4254 !default;
-$gray-900: #181C32 !default;
+$gray-300: #e4e6ef !default;
+$gray-400: #b5b5c3 !default;
+$gray-500: #a1a5b7 !default;
+$gray-600: #7e8299 !default;
+$gray-700: #5e6278 !default;
+$gray-800: #3f4254 !default;
+$gray-900: #181c32 !default;
 
-$gray-100-dark:  #1b1b29 !default;
-$gray-200-dark:  #2B2B40 !default;
-$gray-300-dark:  #323248 !default;
-$gray-400-dark:  #474761 !default;
-$gray-500-dark:  #565674 !default;
-$gray-600-dark:  #6D6D80 !default;
-$gray-700-dark:  #92929F !default;
-$gray-800-dark:  #CDCDDE !default;
-$gray-900-dark:  #FFFFFF !default;
+$gray-100-dark: #1b1b29 !default;
+$gray-200-dark: #2b2b40 !default;
+$gray-300-dark: #323248 !default;
+$gray-400-dark: #474761 !default;
+$gray-500-dark: #565674 !default;
+$gray-600-dark: #6d6d80 !default;
+$gray-700-dark: #92929f !default;
+$gray-800-dark: #cdcdde !default;
+$gray-900-dark: #ffffff !default;
 
 // Bootstrap muted color
 $text-muted: $gray-500 !default;
@@ -124,7 +124,8 @@ $dark-inverse-dark: $gray-100-dark !default;
 
 // Contextual colors
 $theme-colors: (
-  'white': $white, // custom color type
+  'white': $white,
+  // custom color type
   'light': $light,
   'primary': $primary,
   'secondary': $secondary,
@@ -536,7 +537,7 @@ $gutters: (
 // Font, line-height, and color for body text, headings, and more.
 // Font family
 //$font-family-sans-serif: Poppins, Helvetica, "sans-serif" !default;
-$font-family-sans-serif: Inter, Helvetica, "sans-serif" !default;
+$font-family-sans-serif: Inter, Helvetica, 'sans-serif' !default;
 
 $font-size-base: 1rem !default; // Assumes the browser default, typically `13px`
 $font-size-lg: $font-size-base * 1.075 !default; // 14.04px
@@ -630,7 +631,7 @@ $font-sizes: (
   // 68.25px
   5hx: $font-size-base * 5.5,
   // 71.5px
-  5tx: $font-size-base * 5.75 // 74.75px,,,,,,,,
+  5tx: $font-size-base * 5.75 // 74.75px,,,,,,,,,
 ) !default;
 
 $headings-font-weight: 600 !default;

@@ -42,7 +42,9 @@ const gamesColumns: ReadonlyArray<Column<Game>> = [
     Cell: ({...props}) => (
       <TextCell
         dObject={props.data[props.row.index].platforms?.map((platform: Platform) => (
-          <span key={platform.id} className='badge badge-mc-secondary me-2 mb-1'>{platform.abbreviation}</span>
+          <span key={platform.id} className='badge badge-mc-secondary me-2 mb-1'>
+            {platform.abbreviation}
+          </span>
         ))}
       />
     ),

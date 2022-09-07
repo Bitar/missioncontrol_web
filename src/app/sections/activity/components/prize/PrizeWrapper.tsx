@@ -1,15 +1,11 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
 import {Activity} from '../../models/Activity'
 import FormControl from '@mui/material/FormControl'
-import {
-  InputLabel,
-  MenuItem,
-  Select,
-} from '@mui/material'
+import {InputLabel, MenuItem, Select} from '@mui/material'
 import Box from '@mui/material/Box'
 import {ActivityPrize} from '../../models/ActivityPrize'
 import {PrizeSingleWrapper} from './PrizeSingleWrapper'
-import { updateData } from '../../../../helpers/form/FormHelper'
+import {updateData} from '../../../../helpers/form/FormHelper'
 
 type Props = {
   activity: Activity | undefined
@@ -57,7 +53,7 @@ const PrizeWrapper: FC<Props> = ({activity, setActivity}) => {
                 onChange={(e) => {
                   let targetValue = e.target.value
                   setWinningWay(targetValue as string)
-                  if(targetValue === '1') {
+                  if (targetValue === '1') {
                     updateData(
                       {
                         prize: {},
@@ -77,11 +73,13 @@ const PrizeWrapper: FC<Props> = ({activity, setActivity}) => {
         </div>
       </div>
 
-      {winningWay === '2' && <PrizeSingleWrapper activityPrizes={activityPrizes} setActivityPrizes={setActivityPrizes}  />}
+      {winningWay === '2' && (
+        <PrizeSingleWrapper activityPrizes={activityPrizes} setActivityPrizes={setActivityPrizes} />
+      )}
 
       {/*{winningWay === '3' && <PrizeBundleWrapper activityPrizes={activityPrizes} setActivityPrizes={setActivityPrizes} />}*/}
     </>
   )
 }
 
-export { PrizeWrapper };
+export {PrizeWrapper}

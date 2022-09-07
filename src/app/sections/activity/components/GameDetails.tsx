@@ -261,4 +261,4 @@ const GameDetails: FC<Props> = ({activity, setActivity}) => {
   )
 }
 
-export { GameDetails };
+export {GameDetails}

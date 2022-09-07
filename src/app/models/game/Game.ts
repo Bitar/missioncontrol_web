@@ -1,9 +1,9 @@
 import {ID, Response} from '../../../_metronic/helpers'
 import {Platform} from './Platform'
-import { GameMode, initialGameMode } from "./GameMode";
-import * as Yup from "yup";
-import { Dispatch, SetStateAction } from "react";
-import { updateData } from "../../helpers/form/FormHelper";
+import {GameMode, initialGameMode} from './GameMode'
+import * as Yup from 'yup'
+import {Dispatch, SetStateAction} from 'react'
+import {updateData} from '../../helpers/form/FormHelper'
 
 export const gameSchema = Yup.object().shape({
   title: Yup.string().required('Name is required'),
@@ -51,5 +51,4 @@ export function formOnChange(
   let targetValue = event.target.value
 
   updateData({[targetName]: targetValue}, setGame, game)
-
 }

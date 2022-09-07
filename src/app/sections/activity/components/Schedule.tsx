@@ -225,4 +225,4 @@ const Schedule: FC<Props> = ({activity, setActivity}) => {
     </>
   )
 }
-export { Schedule };
+export {Schedule}

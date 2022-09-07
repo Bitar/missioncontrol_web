@@ -2,22 +2,22 @@ import React, {FC, useMemo} from 'react'
 import {Activity} from '../models/Activity'
 import {ActivityStandingsColumns} from '../core/ActivityStandingsColumns'
 import {ColumnInstance, Row, useTable} from 'react-table'
-import {CustomHeaderColumn} from '../../../modules/table/columns/CustomHeaderColumn'
 import {ActivityStanding} from '../models/ActivityStanding'
-import {CustomRow} from '../../../modules/table/columns/CustomRow'
-import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
+import { ID, KTCard, KTCardBody, toAbsoluteUrl } from "../../../../_metronic/helpers";
+import clsx from 'clsx'
 
 type Props = {
   activity: Activity | undefined
+  minimal?: boolean
 }
 
-const ActivityStandings: FC<Props> = ({activity}) => {
-  const data = useMemo(() => activity?.standings || [], [activity?.standings])
-  const columns = useMemo(() => ActivityStandingsColumns, [])
-  const {getTableProps, getTableBodyProps, headers, rows, prepareRow} = useTable({
-    columns,
-    data,
-  })
+const ActivityStandings: FC<Props> = ({activity, minimal = false}) => {
+
+  const getTeam = (teamId: ID) => {
+    return activity?.teams?.filter(function(e: any) {
+        return e.id === teamId
+    })[0]
+  }
 
   return (
     <>
@@ -30,10 +30,10 @@ const ActivityStandings: FC<Props> = ({activity}) => {
         <KTCardBody className='py-1' id='activities_standings_body'>
           <div
             className={'scroll-y me-n5 pe-5 h-300px h-lg-auto'}
-            data-kt-element='matches'
-            data-kt-scroll='true'
+            data-kt-element='standings'
+            data-kt-scroll={minimal}
             data-kt-scroll-activate='{default: false, lg: true}'
-            data-kt-scroll-max-height='300px'
+            data-kt-scroll-max-height='500px'
             data-kt-scroll-dependencies={
               '#kt_header, #kt_toolbar, #kt_footer, #activities_standings_header'
             }
@@ -43,24 +43,93 @@ const ActivityStandings: FC<Props> = ({activity}) => {
             <div className='table-responsive'>
               <table
                 className='table align-middle table-row-bordered fs-6 gy-5 dataTable no-footer'
-                {...getTableProps()}
+                role='table'
               >
                 <thead>
                 <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
-                  {headers.map((column: ColumnInstance<ActivityStanding>) => (
-                    <CustomHeaderColumn key={column.id} column={column} />
-                  ))}
+                  <th colSpan={2}>Team</th>
+                  {!minimal && <th colSpan={1}>Players</th>}
+                  <th colSpan={1}>M</th>
+                  <th colSpan={1}>W-L</th>
                 </tr>
                 </thead>
-                <tbody className='text-gray-600 fw-bold' {...getTableBodyProps()}>
-                {rows.length > 0 ? (
-                  rows.map((row: Row<ActivityStanding>, i) => {
-                    prepareRow(row)
-                    return <CustomRow row={row} key={`row-${i}-${row.id}`} />
-                  })
+                <tbody className='text-gray-600 fw-bold'>
+                {activity?.standings?.length && activity?.standings?.length > 0 ? (
+                  activity?.standings?.map((standing, i) => (
+                      <tr key={`standing-header-${i}`}>
+                        <td colSpan={2}>
+                          <div className='d-flex align-items-center'>
+                            <div
+                              className={clsx(
+                                'symbol symbol-circle me-3',
+                                {'symbol-30px': minimal},
+                                {'symbol-100px': !minimal}
+                              )}
+                            >
+                              <img
+                                src={toAbsoluteUrl(standing.team?.image)}
+                                alt={standing.team?.name + ' team image'}
+                              />
+                            </div>
+                            <div className='d-flex flex-column'>
+                              <span className='text-gray-800 mb-1'>{standing.team?.name}</span>
+                            </div>
+                          </div>
+                        </td>
+                        {!minimal && (
+                          <td colSpan={1}>
+                            {getTeam(standing?.team?.id)?.users?.map((user) => (
+                              <div key={`standing-user-${user.id}`} className='d-flex align-items-center mb-2'>
+                                <div className='symbol symbol-circle me-3 symbol-30px'>
+                                  <img
+                                    src={user?.meta?.image}
+                                    alt={user?.name + ' profile image'}
+                                  />
+                                </div>
+                                <div className='d-flex flex-column'>
+                                  <span className='text-gray-800 mb-1'>{user?.name}</span>
+                                </div>
+                              </div>
+                            ))}
+
+                            {getTeam(standing?.team?.id)?.users?.map((user) => (
+                              <div key={`standing-user-${user.id}`} className='d-flex align-items-center mb-2'>
+                                <div className='symbol symbol-circle me-3 symbol-30px'>
+                                  <img
+                                    src={user?.meta?.image}
+                                    alt={user?.name + ' profile image'}
+                                  />
+                                </div>
+                                <div className='d-flex flex-column'>
+                                  <span className='text-gray-800 mb-1'>{user?.name}</span>
+                                </div>
+                              </div>
+                            ))}
+
+                            {getTeam(standing?.team?.id)?.users?.map((user) => (
+                              <div key={`standing-user-${user.id}`} className='d-flex align-items-center mb-2'>
+                                <div className='symbol symbol-circle me-3 symbol-30px'>
+                                  <img
+                                    src={user?.meta?.image}
+                                    alt={user?.name + ' profile image'}
+                                  />
+                                </div>
+                                <div className='d-flex flex-column'>
+                                  <span className='text-gray-800 mb-1'>{user?.name}</span>
+                                </div>
+                              </div>
+                            ))}
+                          </td>
+                        )}
+
+                        <td>{standing.score?.win + standing.score?.lose}</td>
+                        <td>{standing.score?.win + ' - ' + standing.score?.lose}</td>
+                      </tr>
+
+                  ))
                 ) : (
                   <tr>
-                    <td colSpan={3}>
+                    <td colSpan={4}>
                       <div className='d-flex text-center w-100 align-content-center justify-content-center'>
                         No records found
                       </div>

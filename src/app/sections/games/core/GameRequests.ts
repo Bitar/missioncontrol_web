@@ -20,9 +20,7 @@ const getGames = (query?: string): Promise<GameQueryResponse> => {
   if (query) {
     url += `?${query}`
   }
-  return axios
-    .get(url)
-    .then((response: AxiosResponse<GameQueryResponse>) => response.data)
+  return axios.get(url).then((response: AxiosResponse<GameQueryResponse>) => response.data)
 }
 
 const getAllGames = (): Promise<GameQueryResponse> => {

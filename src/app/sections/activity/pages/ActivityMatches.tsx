@@ -112,4 +112,4 @@ const ActivityMatches: FC<Props> = ({matches, setMatch}) => {
   )
 }
 
-export { ActivityMatches };
+export {ActivityMatches}

@@ -166,4 +166,4 @@ const ActivityChatInner: FC<Props> = ({chat, setChat, isDrawer = false}) => {
   )
 }
 
-export { ActivityChatInner };
+export {ActivityChatInner}

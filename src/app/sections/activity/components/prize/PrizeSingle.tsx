@@ -1,13 +1,13 @@
-import React, { Dispatch, FC, useEffect, useState } from "react";
+import React, {Dispatch, FC, useEffect, useState} from 'react'
 import {SetStateAction} from 'react'
 import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl'
 import TextField from '@mui/material/TextField'
 import {PrizeItemWrapper} from './PrizeItemWrapper'
 import {ActivityPrize} from '../../models/ActivityPrize'
-import { initialPrizeItem, PrizeItem } from "../../models/PrizeItem";
-import { InputLabel, MenuItem, Select } from "@mui/material";
-import { updateData } from "../../../../helpers/form/FormHelper";
+import {initialPrizeItem, PrizeItem} from '../../models/PrizeItem'
+import {InputLabel, MenuItem, Select} from '@mui/material'
+import {updateData} from '../../../../helpers/form/FormHelper'
 
 type Props = {
   index?: number
@@ -27,13 +27,17 @@ const PrizeSingle: FC<Props> = ({
   setActivityPrize,
 }) => {
   const [valueSuffix, setValueSuffix] = useState('')
-  const [prizeItem, setPrizeItem ] = useState<PrizeItem>(initialPrizeItem)
+  const [prizeItem, setPrizeItem] = useState<PrizeItem>(initialPrizeItem)
 
   useEffect(() => {
-    updateData({
-      type: 1,
-      item: prizeItem
-    }, setActivityPrize, activityPrize)
+    updateData(
+      {
+        type: 1,
+        item: prizeItem,
+      },
+      setActivityPrize,
+      activityPrize
+    )
   }, [prizeItem])
 
   return (
@@ -55,9 +59,15 @@ const PrizeSingle: FC<Props> = ({
                 name='name'
                 className='w-100'
                 size='small'
-                onChange={(e) =>  updateData({
-                    name: e.target.value
-                }, setPrizeItem, prizeItem)}
+                onChange={(e) =>
+                  updateData(
+                    {
+                      name: e.target.value,
+                    },
+                    setPrizeItem,
+                    prizeItem
+                  )
+                }
               />
             </div>
 
@@ -77,7 +87,9 @@ const PrizeSingle: FC<Props> = ({
                 name='amount'
                 className='w-100'
                 size='small'
-                onChange={(e) => updateData({value: parseInt(e.target.value)}, setPrizeItem, prizeItem)}
+                onChange={(e) =>
+                  updateData({value: parseInt(e.target.value)}, setPrizeItem, prizeItem)
+                }
               />
             </div>
             <div className='col-lg-3'>
@@ -90,9 +102,13 @@ const PrizeSingle: FC<Props> = ({
                   label='Amount Suffix'
                   onChange={(e) => {
                     setValueSuffix(e.target.value as string)
-                    updateData({
-                      value_type: e.target.value
-                    }, setPrizeItem, prizeItem)
+                    updateData(
+                      {
+                        value_type: e.target.value,
+                      },
+                      setPrizeItem,
+                      prizeItem
+                    )
                   }}
                 >
                   <MenuItem value={1}>($) Dollars </MenuItem>
@@ -119,4 +135,4 @@ const PrizeSingle: FC<Props> = ({
   )
 }
 
-export { PrizeSingle };
+export {PrizeSingle}

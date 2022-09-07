@@ -5,7 +5,7 @@ import {Registration} from './components/Registration'
 import {ForgotPassword} from './components/ForgotPassword'
 import {Login} from './components/Login'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
-import { ResetPassword } from "./components/ResetPassword";
+import {ResetPassword} from './components/ResetPassword'
 
 const AuthLayout = () => {
   useEffect(() => {

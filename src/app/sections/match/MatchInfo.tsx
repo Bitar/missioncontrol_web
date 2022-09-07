@@ -31,21 +31,27 @@ const MatchInfo: FC<Props> = ({match}) => {
       text: 'Chat',
       link: '/activities/' + match?.activity?.id + '/matches/' + match?.id + '/chat',
     },
-    {
-      text: 'Settings',
-      link: '/activities/' + match?.activity?.id + '/matches/' + match?.id + '/settings',
-    },
+    // {
+    //   text: 'Settings',
+    //   link: '/activities/' + match?.activity?.id + '/matches/' + match?.id + '/settings',
+    // },
   ]
 
   return (
     <>
       <KTCard className='mb-5 mb-xl-10 overflow-hidden'>
-        <KTCardBody className='pb-0'>
+        <KTCardBody className='pb-0 pt-20'>
           <div className='d-flex flex-stack text-center mb-3'>
             {match?.teams && match?.teams[0] && (
               <div className='flex-grow-1'>
                 <div className='d-inline-block'>
                   <div className='symbol symbol-100px symbol-circle mb-3'>
+                    {match?.result?.winner?.team_id === match?.teams[0].id && (
+                      <span className='position-absolute w-100 text-center ' style={{top: '-35px'}}>
+                        <i className='fas fa-trophy text-warning display-6'></i>
+                      </span>
+                    )}
+
                     <img alt={match?.teams[0].name + ' team image'} src={match?.teams[0].image} />
                   </div>
                   <div className='fs-6 fw-bold'>{match?.teams[0].name}</div>
@@ -78,6 +84,11 @@ const MatchInfo: FC<Props> = ({match}) => {
               <div className='flex-grow-1'>
                 <div className='d-inline-block'>
                   <div className='symbol symbol-100px symbol-circle mb-3'>
+                    {match?.result?.winner?.team_id === match?.teams[1].id && (
+                      <span className='position-absolute w-100 text-center ' style={{top: '-15px'}}>
+                        <i className='fas fa-trophy text-warning display-6'></i>
+                      </span>
+                    )}
                     <img alt={match?.teams[1].name + ' team image'} src={match?.teams[1].image} />
                   </div>
                   <div className='fs-6 fw-bold'>{match?.teams[1].name}</div>

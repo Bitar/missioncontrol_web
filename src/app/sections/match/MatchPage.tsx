@@ -5,7 +5,7 @@ import {MatchInfo} from './MatchInfo'
 import {Match} from '../activity/models/matches/Match'
 import {MatchOverview} from './MatchOverview'
 import {getActivityMatch} from '../activity/core/ActivityRequests'
-import { Activity } from "../activity/models/Activity";
+import {Activity} from '../activity/models/Activity'
 
 type Props = {
   match: Match | undefined
@@ -79,7 +79,7 @@ const MatchPage: FC<Props> = ({match, setMatch, activity}) => {
           element={
             <>
               <PageTitle breadcrumbs={matchBreadCrumbs}>{'Overview'}</PageTitle>
-              <MatchOverview activity={activity} match={match}/>
+              <MatchOverview activity={activity} match={match} />
             </>
           }
         />
@@ -115,4 +115,4 @@ const MatchPage: FC<Props> = ({match, setMatch, activity}) => {
   )
 }
 
-export { MatchPage };
+export {MatchPage}

@@ -3,7 +3,7 @@ import React, {FC} from 'react'
 import {KTSVG} from '../../../helpers'
 import {HeaderUserMenu, ThemeModeSwitcher} from '../../../partials'
 import {useLayout} from '../../core'
-import { useAuth } from "../../../../app/modules/auth";
+import {useAuth} from '../../../../app/modules/auth'
 
 const toolbarButtonMarginClass = 'ms-1 ms-lg-3',
   toolbarButtonHeightClass = 'w-30px h-30px w-md-40px h-md-40px',
