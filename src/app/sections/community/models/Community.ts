@@ -97,17 +97,21 @@ export function formOnChange(
         community
       )
     } else {
-      if (accessField !== 'key') {
-        let updateStuff = {type: targetValue, key: 2}
-
-        updateData(
-          {
-            access: {...community?.access, ...updateStuff},
-          },
-          setCommunity,
-          community
-        )
+      let updateStuff;
+      if (accessField !== 'value') {
+        updateStuff = {type: 2, key: 2, value: '' }
+      } else {
+        updateStuff = {type: 2, key: 2, value: targetValue }
       }
+
+      updateData(
+        {
+          access: {...community?.access, ...updateStuff},
+        },
+        setCommunity,
+        community
+      )
+
     }
   } else {
     if (targetName === 'logo' || targetName === 'banner_image') {

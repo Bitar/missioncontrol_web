@@ -87,7 +87,7 @@ const PrivateRoutes = () => {
         <Route path='subscriptions' element={<SubscriptionIndex />} />
 
         {/* Page Not Found */}
-        <Route path='*' element={<Navigate to='/error/404' />} />
+        <Route path='*' element={<Navigate to='/auth/login' />} />
       </Route>
     </Routes>
   )

@@ -23,14 +23,20 @@ const initialValues = {
 }
 
 const Login = () => {
-  const {saveAuth, setCurrentUser} = useAuth()
+  const {saveAuth, setCurrentUser, setSubscription, setCommunityAdmin} = useAuth()
 
   const handleSubmit = async (values: any, {setStatus, setSubmitting}: any) => {
     try {
       const {data: auth} = await login(values.email, values.password)
       saveAuth(auth)
-      const {data: profile} = await getUserByToken(auth.token)
-      setCurrentUser(profile.user)
+      const {data} = await getUserByToken(auth.token)
+
+      if (data) {
+        setSubscription(data.subscription)
+        setCurrentUser(data.user)
+        setCommunityAdmin(data.admin)
+      }
+      // setCurrentUser(profile.user)
     } catch (error) {
       console.error(error)
       saveAuth(undefined)

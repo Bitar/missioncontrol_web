@@ -43,7 +43,7 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
     },
   },
   {
-    Header: (props) => <CustomHeader tableProps={props} title='Dates' className='min-w-200px' />,
+    Header: (props) => <CustomHeader tableProps={props} title='Registration Dates' className='min-w-200px' />,
     id: 'Registration',
     Cell: ({...props}) => {
       const {startDate, endDate} = formatDates(props.data[props.row.index].registration_dates)
@@ -63,7 +63,7 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
     },
   },
   {
-    Header: (props) => <CustomHeader tableProps={props} title='Dates' className='min-w-200px' />,
+    Header: (props) => <CustomHeader tableProps={props} title='MatchPlay Dates' className='min-w-200px' />,
     id: 'Game Day',
     Cell: ({...props}) => {
       const {startDate, endDate} = formatDates(props.data[props.row.index].matchplay_dates)
