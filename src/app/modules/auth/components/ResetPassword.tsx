@@ -83,6 +83,14 @@ const ResetPassword = () => {
               className={'form-control mb-3 mb-lg-0'}
               autoComplete='off'
             />
+            <Field
+              type='text'
+              name='token'
+              value={params.token}
+              className={'form-control mb-3 mb-lg-0'}
+              autoComplete='off'
+              hidden={true}
+            />
           </div>
 
           <div className='fv-row mb-10'>

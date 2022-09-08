@@ -11,7 +11,7 @@ const ActivitiesList = () => {
   return (
     <>
       <KTCard>
-        <TableHeader name='Activity' url='/activities' />
+        <TableHeader name='Activity' url='/activities' showAdd={false} />
         <ActivityTable />
       </KTCard>
     </>

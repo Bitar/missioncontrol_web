@@ -67,10 +67,6 @@ const ActivityInfo: FC<Props> = ({activity}) => {
                     {activity?.description}
                   </div>
                 </div>
-
-                <div className='d-flex my-4'>
-                  <button type={'button'} className="btn btn-sm btn-bg-light btn-active-color-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">Community Link</button>
-                </div>
               </div>
 
 
