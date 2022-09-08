@@ -15,7 +15,25 @@ import {Announcement} from '../../../models/announcement/Announcements'
 import {ActivityStanding} from './ActivityStanding'
 import {ActivityRegistration} from './ActivityRegistration'
 
-export const activitySchema = Yup.object().shape({})
+export const activitySchema = Yup.object().shape({
+  // title: Yup.string().required('Activity title is required'),
+  // description: Yup.string().required('Activity Description is required'),
+  // community_id: Yup.number().required('Community Id is required'),
+  // game: Yup.string(),
+  // contact: Yup.object().shape({
+  //   name: Yup.string().required('Contact name is required'),
+  //   email: Yup.string().email('Please enter a valid email').required('Contact email is required'),
+  //   phone_number: Yup.string().required('Contact phone number is required'),
+  // }),
+  // address: Yup.object().shape({
+  //   address_one: Yup.string().required('Contact address is required'),
+  //   // address_two: Yup.string(),
+  //   city: Yup.string().required('City is required'),
+  //   // state_province: Yup.string().required('State Province is required'),
+  //   postal_code: Yup.string().required('Postal Code is required'),
+  //   // country_code: Yup.string().required('Country Code is required'),
+  // }),
+})
 
 export const initialActivity = (activity?: Activity) => {
   return {
@@ -45,6 +63,7 @@ export const initialActivity = (activity?: Activity) => {
     team_settings: initialActivityTeamSetting(activity?.team_settings),
 
     ready_to_submit: false,
+    community_id: 0
     // team: initialActivityTeam,
     // prize: initialActivityPrize,
   }
@@ -56,6 +75,7 @@ export type Activity = {
   description?: string
   created_at?: number
   type: ActivityType
+  community_id: number
   status: number
   teams?: Team[]
   registrations?: ActivityRegistration[]
@@ -129,6 +149,9 @@ export function formOnChange(
 ) {
   let targetName = event.target.name
   let targetValue = event.target.value
+
+  console.log(targetName)
+  console.log(targetValue)
 
   if (targetName === 'is_cross_play') {
     updateData(

@@ -1,5 +1,4 @@
 import React, {FC} from 'react'
-
 type Props = {
   text: string
   isSubmitting: boolean

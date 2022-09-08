@@ -20,7 +20,6 @@ const ActivityAnnouncement: FC<Props> = ({activity, setActivity}) => {
   const handleSubmit = async () => {
     let data = jsonToFormData(announcement)
     await createActivityAnnouncement(params.id, data).then((response) => {
-      console.log(initialAnnouncement())
       setAnnouncement(initialAnnouncement())
 
       if (response && activity?.announcements) {
@@ -36,8 +35,6 @@ const ActivityAnnouncement: FC<Props> = ({activity, setActivity}) => {
   }
 
   const handleOnChange = (e: any) => {
-    console.log(e.target.name)
-    console.log(e.target.value)
     updateData(
       {
         [e.target.name]: e.target.value,
