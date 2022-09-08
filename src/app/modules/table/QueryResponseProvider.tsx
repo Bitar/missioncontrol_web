@@ -1,8 +1,9 @@
-import {FC, useContext, useState, useEffect, useMemo} from 'react'
+import React, {FC, useContext, useState, useEffect, useMemo} from 'react'
 import {useQuery} from 'react-query'
 import {useQueryRequest} from './QueryRequestProvider'
 import {
   createResponseContext,
+  ID,
   initialQueryResponse,
   initialQueryState,
   PaginationState,
@@ -12,14 +13,16 @@ import {
 type Props = {
   id: string
   requestFunction: any
+  requestId?: string
 }
 
 const QueryResponseContext = createResponseContext<any>(initialQueryResponse)
 const QueryResponseProvider: FC<React.PropsWithChildren<Props>> = ({
-  id,
-  requestFunction,
-  children,
-}) => {
+                                                                     id,
+                                                                     requestFunction,
+                                                                     requestId,
+                                                                     children,
+                                                                   }) => {
   const {state} = useQueryRequest()
 
   const [query, setQuery] = useState<string>(stringifyRequestQuery(state))
@@ -31,6 +34,8 @@ const QueryResponseProvider: FC<React.PropsWithChildren<Props>> = ({
     }
   }, [query, updatedQuery])
 
+  // console.log(requestFunction)
+  // console.log(requestId)
   const {
     isFetching,
     refetch,
@@ -38,7 +43,11 @@ const QueryResponseProvider: FC<React.PropsWithChildren<Props>> = ({
   } = useQuery(
     `${id}-${query}`,
     () => {
-      return requestFunction(query)
+      if (requestId) {
+        return requestFunction(query, requestId)
+      } else {
+        return requestFunction(query)
+      }
     },
     {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
   )

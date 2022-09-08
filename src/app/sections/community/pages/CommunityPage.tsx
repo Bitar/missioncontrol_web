@@ -42,7 +42,7 @@ const CommunityPage: FC = () => {
         }
       />
       <Route
-        path='/:id/*'
+        path='/:communityId/*'
         element={
           <>
             <PageTitle breadcrumbs={communityBreadCrumbs}>{'View Community'}</PageTitle>
@@ -55,4 +55,4 @@ const CommunityPage: FC = () => {
   )
 }
 
-export {CommunityPage}
+export { CommunityPage };

@@ -52,7 +52,6 @@ export function requestPassword(email: string) {
 
 export function getUserByToken(token: string) {
   return axios.get<Profile>(GET_USER_BY_PROFILE, {
-    // return axios.get<UserModel>(GET_USER_BY_PROFILE, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

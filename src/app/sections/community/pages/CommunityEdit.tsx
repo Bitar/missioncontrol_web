@@ -22,7 +22,7 @@ const CommunityEdit: FC<React.PropsWithChildren<Props>> = ({community, setCommun
     let data = jsonToFormData(community)
     data.append('_method', 'PUT')
 
-    await updateCommunity(params.id, data).then((response) => {
+    await updateCommunity(params.communityId, data).then((response) => {
       setCommunity(response)
       navigate('/communities/' + response?.id)
     })

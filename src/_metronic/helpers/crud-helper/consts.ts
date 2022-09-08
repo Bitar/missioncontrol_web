@@ -1,6 +1,7 @@
 const QUERIES = {
   ACTIVITIES_LIST: 'activity-list',
   COMMUNITIES_LIST: 'communities-list',
+  COMMUNITIES_USERS_LIST: 'communities-list-users',
   USERS_LIST: 'users-list',
   USER_ACTIVITIES_LIST: 'users-activity-list',
   ROLES_LIST: 'roles-list',

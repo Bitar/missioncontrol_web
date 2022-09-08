@@ -34,7 +34,7 @@ const CommunityView: FC<Props> = ({communityId, links}) => {
     },
     {
       title: community?.name || '',
-      path: '/communities/' + params.id + '/overview',
+      path: '/communities/' + params.communityId + '/overview',
       isSeparator: false,
       isActive: false,
     },
@@ -47,18 +47,18 @@ const CommunityView: FC<Props> = ({communityId, links}) => {
   ]
 
   useEffect(() => {
-    if (params.id) {
-      getCommunityById(params.id).then((response) => {
+    if (params.communityId) {
+      getCommunityById(params.communityId).then((response) => {
         setCommunity(response)
       })
-      indexLink.current = '/communities/' + params.id + '/overview'
+      indexLink.current = '/communities/' + params.communityId + '/overview'
     } else {
       getCommunityById(communityId).then((response) => {
         setCommunity(response)
       })
       indexLink.current = '/dashboard/overview'
     }
-  }, [communityId, params.id])
+  }, [communityId, params.communityId])
 
   return (
     <Routes>
