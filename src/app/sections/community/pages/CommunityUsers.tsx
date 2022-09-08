@@ -74,13 +74,10 @@ const CommunityUsersTable = () => {
 }
 
 const CommunityUsers: FC<Props> = ({community}) => {
-  const params = useParams()
-
-
   return (
     <>
       <QueryRequestProvider>
-        <QueryResponseProvider id={QUERIES.COMMUNITIES_USERS_LIST} requestFunction={getCommunityUsers} requestId={params.communityId}>
+        <QueryResponseProvider id={QUERIES.COMMUNITIES_USERS_LIST} requestFunction={getCommunityUsers} requestId={community?.id}>
           <ListViewProvider>
             <CommunityUsersTable/>
           </ListViewProvider>
