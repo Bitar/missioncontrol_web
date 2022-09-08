@@ -1,4 +1,4 @@
-import React, {FC, useMemo} from 'react'
+import React, {FC} from 'react'
 import {Activity} from '../models/Activity'
 import {ID, KTCard, KTCardBody, toAbsoluteUrl} from '../../../../_metronic/helpers'
 import clsx from 'clsx'

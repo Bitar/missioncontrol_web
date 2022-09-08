@@ -25,9 +25,8 @@ const GameModes: FC<Props> = ({game, setGame}) => {
         )
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id])
-
-  // console.log(modes)
 
   return (
     <>

@@ -10,9 +10,8 @@ import {useNavigate} from 'react-router-dom'
 import {jsonToFormData, updateData} from '../../helpers/form/FormHelper'
 import {createActivity} from './core/ActivityRequests'
 import {KTCard, KTCardBody} from '../../../_metronic/helpers'
-import {ErrorMessage, Form, Formik} from 'formik'
+import {Form, Formik} from 'formik'
 import {FormAction} from '../../helpers/form/FormAction'
-import {ActivityForm} from './ActivityForm'
 import TextField from '@mui/material/TextField'
 import {isUserCommunityAdmin} from '../identity/user/models/User'
 import Box from '@mui/material/Box'
@@ -44,7 +43,7 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
     if (activity?.ready_to_submit) {
       let data = jsonToFormData(activity)
       createActivity(data)
-        .then((response) => {
+        .then(() => {
           console.log('done')
         })
         .catch((error) => {
@@ -55,6 +54,7 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
         })
       // navigate('/activities/' + response?.id)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navigate, activity?.ready_to_submit])
 
   useEffect(() => {
@@ -67,6 +67,7 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
         activity
       )
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [communityAdmin, currentUser])
 
   useEffect(() => {

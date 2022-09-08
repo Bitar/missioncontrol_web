@@ -36,6 +36,7 @@ const Prizes: FC<Props> = ({
       setActivityPrizes,
       activityPrizes
     )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activityPrize])
 
   const addItem = () => {

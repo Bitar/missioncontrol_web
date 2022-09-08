@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {FC, useEffect, useState} from 'react'
 import {Activity} from '../models/Activity'
 import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../../_metronic/layout/core'
@@ -11,13 +11,11 @@ import {Match} from '../models/matches/Match'
 import {ActivityRegistrations} from './ActivityRegistrations'
 import {User} from '../../identity/user/models/User'
 import {MatchPage} from '../../match/MatchPage'
-import {Team} from '../../../models/squad/Team'
 
-const ActivityView: React.FC = () => {
+const ActivityView: FC = () => {
   const [activity, setActivity] = useState<Activity | undefined>()
   const [matches, setMatches] = useState<Match[] | undefined>([])
   const [members, setMembers] = useState<User[] | undefined>([])
-  const [teams, setTeams] = useState<Team[] | undefined>([])
   const [match, setMatch] = useState<Match | undefined>()
 
   const params = useParams()
@@ -53,7 +51,7 @@ const ActivityView: React.FC = () => {
     getActivityById(params.id).then((response) => {
       setActivity(response)
 
-      setTeams(response?.teams)
+      // setTeams(response?.teams)
 
       getActivityMatches(params.id).then((response) => {
         setMatches(response.data)
@@ -103,7 +101,7 @@ const ActivityView: React.FC = () => {
           element={
             <>
               <PageTitle breadcrumbs={activityViewBreadcrumbs}>Teams</PageTitle>
-              <ActivityTeams activity={activity} setActivity={setActivity} />
+              <ActivityTeams activity={activity}/>
             </>
           }
         />

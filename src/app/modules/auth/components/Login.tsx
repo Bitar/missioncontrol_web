@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import * as Yup from 'yup'
 import {Link} from 'react-router-dom'
 import {ErrorMessage, Field, Form, Formik} from 'formik'
 import {getUserByToken, login} from '../core/_requests'
 import {useAuth} from '../core/Auth'
+import {FormErrorAlert} from '../../errors/partials/FormErrorAlert'
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -23,26 +24,31 @@ const initialValues = {
 }
 
 const Login = () => {
-  const {saveAuth, setCurrentUser, setSubscription, setCommunityAdmin} = useAuth()
+  const {saveAuth, logout, setCurrentUser, setSubscription, setCommunityAdmin} = useAuth()
+  const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined)
+  const [alertMessage, setAlertMessage] = useState<string | undefined>(undefined)
 
-  const handleSubmit = async (values: any, {setStatus, setSubmitting}: any) => {
-    try {
-      const {data: auth} = await login(values.email, values.password)
-      saveAuth(auth)
-      const {data} = await getUserByToken(auth.token)
+  const handleSubmit = async (values: any, {setSubmitting}: any) => {
+    await login(values.email, values.password)
+      .then((response) => {
+        saveAuth(response.data)
 
-      if (data) {
-        setSubscription(data.subscription)
-        setCurrentUser(data.user)
-        setCommunityAdmin(data.admin)
-      }
-      // setCurrentUser(profile.user)
-    } catch (error) {
-      console.error(error)
-      saveAuth(undefined)
-      setStatus('The login detail is incorrect')
-      setSubmitting(false)
-    }
+        getUserByToken(response.data.token).then((response) => {
+          if (response.data.user.roles.length === 0) {
+            logout()
+          } else {
+            setSubscription(response.data.subscription)
+            setCurrentUser(response.data.user)
+            setCommunityAdmin(response.data.admin)
+          }
+        })
+      })
+      .catch(() => {
+        saveAuth(undefined)
+        setSubmitting(false)
+        setHasErrors(true)
+        setAlertMessage('These credentials do not match our records.')
+      })
   }
 
   return (
@@ -59,6 +65,8 @@ const Login = () => {
                 </Link>
               </div>
             </div>
+
+            <FormErrorAlert hasErrors={hasErrors} message={alertMessage} />
 
             <div className='fv-row mb-10'>
               <label className='form-label fs-6 fw-bolder text-dark'>Email</label>
@@ -117,4 +125,4 @@ const Login = () => {
   )
 }
 
-export {Login}
+export { Login };

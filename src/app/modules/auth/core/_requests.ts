@@ -34,11 +34,6 @@ export function register(
       last_name: lastname,
       password,
       password_confirmation,
-    },
-    {
-      validateStatus: function (status) {
-        return status < 500 // Resolve only if the status code is less than 500
-      },
     }
   )
 }

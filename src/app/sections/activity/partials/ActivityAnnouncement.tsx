@@ -1,4 +1,4 @@
-import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
+import React, {Dispatch, FC, SetStateAction, useState} from 'react'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import TextField from '@mui/material/TextField'
 import {Activity} from '../models/Activity'

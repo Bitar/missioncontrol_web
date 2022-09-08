@@ -1,6 +1,6 @@
 import {TableListToolbar} from './TableListToolbar'
 import React, {FC} from 'react'
-import {TableSearchComponent} from './TableSearchComponent'
+// import {TableSearchComponent} from './TableSearchComponent'
 
 type Props = {
   name: string

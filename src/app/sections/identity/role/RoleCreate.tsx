@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Form, Field, Formik} from 'formik'
+import {Field, Form, Formik} from 'formik'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {useNavigate} from 'react-router-dom'
 import {Role, roleInitial, roleSchema} from './models/Role'
@@ -34,6 +34,7 @@ const RoleCreate = () => {
       setRole,
       role
     )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedPermissions])
 
   const handleOnChange = (event: any) => {
@@ -131,4 +132,4 @@ const RoleCreate = () => {
   )
 }
 
-export {RoleCreate}
+export { RoleCreate };

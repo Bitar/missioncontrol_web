@@ -1,8 +1,5 @@
 import {ID, Response} from '../../../_metronic/helpers'
 import {User} from '../../sections/identity/user/models/User'
-import {formatActivityStatus} from '../../helpers/ActivityHelper'
-import {BadgeCell} from '../../modules/table/columns/BadgeCell'
-import React from 'react'
 
 export type Team = {
   id?: ID
@@ -15,23 +12,23 @@ export type Team = {
   share_link?: string
 }
 
-export const teamInitial = (team?: Team) => {
-  return {
-    name: team?.name || '',
-    image: team?.image || '',
-    captain_id: team?.captain_id || 0,
-    users: team?.users || [],
-    status: team?.status || 0,
-    is_home: team?.is_home || false,
-    share_link: team?.share_link || '',
-  }
-}
+// export const teamInitial = (team?: Team) => {
+//   return {
+//     name: team?.name || '',
+//     image: team?.image || '',
+//     captain_id: team?.captain_id || 0,
+//     users: team?.users || [],
+//     status: team?.status || 0,
+//     is_home: team?.is_home || false,
+//     share_link: team?.share_link || '',
+//   }
+// }
 
 export type TeamQueryResponse = Response<Array<Team>>
 
 export const getTeamStatus = (statusId: number) => {
-  let color = ''
-  let status = ''
+  let color: string
+  let status: string
 
   if (statusId === 1) {
     status = 'Complete'

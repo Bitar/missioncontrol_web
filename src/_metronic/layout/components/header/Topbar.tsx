@@ -1,13 +1,13 @@
 import clsx from 'clsx'
 import React, {FC} from 'react'
 import {KTSVG} from '../../../helpers'
-import {HeaderUserMenu, ThemeModeSwitcher} from '../../../partials'
+import {HeaderUserMenu} from '../../../partials'
 import {useLayout} from '../../core'
 import {useAuth} from '../../../../app/modules/auth'
 import {CommunityPicker} from '../../../../app/layout/partials/community-picker/CommunityPicker'
 
 const toolbarButtonMarginClass = 'ms-1 ms-lg-3',
-  toolbarButtonHeightClass = 'w-30px h-30px w-md-40px h-md-40px',
+  // toolbarButtonHeightClass = 'w-30px h-30px w-md-40px h-md-40px',
   toolbarUserAvatarHeightClass = 'symbol-30px symbol-md-40px'
 
 const Topbar: FC<React.PropsWithChildren<unknown>> = () => {

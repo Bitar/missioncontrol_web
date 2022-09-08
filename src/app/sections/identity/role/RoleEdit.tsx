@@ -33,6 +33,7 @@ const RoleEdit: FC = () => {
     })
 
     setSelectedPermissions(updatedSelected)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [role?.permissions])
 
   const isChecked = (value: any) => {
@@ -162,4 +163,4 @@ const RoleEdit: FC = () => {
   )
 }
 
-export {RoleEdit}
+export { RoleEdit };

@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC} from 'react'
-import {Link} from 'react-router-dom'
+import React, {FC} from 'react'
 import {useAuth} from '../../../../app/modules/auth'
-import {toAbsoluteUrl} from '../../../helpers'
 
 const HeaderUserMenu: FC<React.PropsWithChildren<unknown>> = () => {
   const {currentUser, logout} = useAuth()

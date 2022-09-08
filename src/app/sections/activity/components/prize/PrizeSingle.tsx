@@ -38,6 +38,7 @@ const PrizeSingle: FC<Props> = ({
       setActivityPrize,
       activityPrize
     )
+// eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prizeItem])
 
   return (

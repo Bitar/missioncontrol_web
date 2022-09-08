@@ -96,15 +96,18 @@ const AuthInit: FC<WithChildren> = ({children}) => {
     const requestUser = async (apiToken: string) => {
       try {
         if (!didRequest.current) {
-          const {data} = await getUserByToken(apiToken)
-          if (data) {
-            setSubscription(data.subscription)
-            setCurrentUser(data.user)
-            setCommunityAdmin(data.admin)
-          }
+          getUserByToken(apiToken).then((response) => {
+
+            if(response.data.user.roles.length === 0) {
+              logout()
+            } else {
+              setSubscription(response.data.subscription)
+              setCurrentUser(response.data.user)
+              setCommunityAdmin(response.data.admin)
+            }
+          })
         }
       } catch (error) {
-        console.error(error)
         if (!didRequest.current) {
           logout()
         }
@@ -112,11 +115,11 @@ const AuthInit: FC<WithChildren> = ({children}) => {
         setShowSplashScreen(false)
       }
 
-      return () => (didRequest.current = true)
+      didRequest.current = true
     }
 
     if (auth && auth.token) {
-      requestUser(auth.token)
+      requestUser(auth.token).then()
     } else {
       logout()
       setShowSplashScreen(false)

@@ -1,27 +1,25 @@
-import { FC, useEffect, useMemo, useState } from "react";
-import { KTCard, KTCardBody, QUERIES } from "../../../../_metronic/helpers";
+import {FC, useMemo} from 'react'
+import {KTCard, KTCardBody, QUERIES} from '../../../../_metronic/helpers'
 import {Community} from '../models/Community'
 import {User} from '../../identity/user/models/User'
-import {TextImageCell} from '../../../modules/table/columns/TextImageCell'
-import { QueryRequestProvider } from "../../../modules/table/QueryRequestProvider";
-import { QueryResponseProvider, useQueryResponseData, useQueryResponseLoading } from "../../../modules/table/QueryResponseProvider";
-import {getCommunities, getCommunityUsers} from '../core/CommunityRequests'
-import { ListViewProvider } from "../../../modules/table/ListViewProvider";
-import { TableHeader } from "../../../modules/table/TableHeader";
-import { CommunityTable } from "../CommunityTable";
-import { ColumnInstance, Row, useTable } from "react-table";
-import { CustomHeaderColumn } from "../../../modules/table/columns/CustomHeaderColumn";
-import { CustomRow } from "../../../modules/table/columns/CustomRow";
-import { TableListPagination } from "../../../modules/table/TableListPagination";
-import { TableListLoading } from "../../../modules/table/TableListLoading";
-import { communitiesColumns } from "../core/CommunityColumns";
-import { useParams } from "react-router-dom";
-import { CommunityUsersColumns } from "../core/CommunityUsersColumns";
+import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
+import {
+  QueryResponseProvider,
+  useQueryResponseData,
+  useQueryResponseLoading,
+} from '../../../modules/table/QueryResponseProvider'
+import {getCommunityUsers} from '../core/CommunityRequests'
+import {ListViewProvider} from '../../../modules/table/ListViewProvider'
+import {ColumnInstance, Row, useTable} from 'react-table'
+import {CustomHeaderColumn} from '../../../modules/table/columns/CustomHeaderColumn'
+import {CustomRow} from '../../../modules/table/columns/CustomRow'
+import {TableListPagination} from '../../../modules/table/TableListPagination'
+import {TableListLoading} from '../../../modules/table/TableListLoading'
+import {CommunityUsersColumns} from '../core/CommunityUsersColumns'
 
 type Props = {
   community: Community | undefined
 }
-
 
 const CommunityUsersTable = () => {
   const communityUsers = useQueryResponseData()
@@ -77,9 +75,13 @@ const CommunityUsers: FC<Props> = ({community}) => {
   return (
     <>
       <QueryRequestProvider>
-        <QueryResponseProvider id={QUERIES.COMMUNITIES_USERS_LIST} requestFunction={getCommunityUsers} requestId={community?.id}>
+        <QueryResponseProvider
+          id={QUERIES.COMMUNITIES_USERS_LIST}
+          requestFunction={getCommunityUsers}
+          requestId={community?.id}
+        >
           <ListViewProvider>
-            <CommunityUsersTable/>
+            <CommunityUsersTable />
           </ListViewProvider>
         </QueryResponseProvider>
       </QueryRequestProvider>
@@ -99,8 +101,7 @@ const CommunityUsers: FC<Props> = ({community}) => {
       {/*    /!*  </a>*!/*/}
       {/*    /!*</div>*!/*/}
       {/*  </div>*/}
-      
-      
+
       {/*  <div className='card-body py-3'>*/}
       {/*    <div className='table-responsive'>*/}
       {/*      <table className='table align-middle gs-0 gy-4 table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer'>*/}

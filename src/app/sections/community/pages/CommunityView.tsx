@@ -6,7 +6,6 @@ import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
 import {CommunityUsers} from './CommunityUsers'
 import {CommunityInfo} from '../CommunityInfo'
 import {CommunityEdit} from './CommunityEdit'
-import {CommunityActivities} from './CommunityActivities'
 import {ID} from '../../../../_metronic/helpers'
 
 type Props = {

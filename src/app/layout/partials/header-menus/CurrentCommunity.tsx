@@ -1,6 +1,5 @@
 import React from 'react'
 import {useAuth} from '../../../modules/auth'
-import {useLocation, useParams} from 'react-router-dom'
 
 const CurrentCommunity = () => {
   const {communityAdmin} = useAuth()

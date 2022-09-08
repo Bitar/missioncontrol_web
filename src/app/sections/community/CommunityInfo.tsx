@@ -33,6 +33,14 @@ const CommunityInfo: FC<Props> = ({
   const location = useLocation()
   const [image, setImage] = useState<string>('')
 
+  //import toast from 'react-hot-toast'
+  // const notify = async () => {
+  //   let text = 'Invite Link copied!'
+  //   // TODO: Update Link for clipboard
+  //   await navigator.clipboard.writeText(text)
+  //   toast.success(text)
+  // }
+
   useEffect(() => {
     if (community?.logo) {
       if (community?.logo !== '') {
@@ -70,6 +78,7 @@ const CommunityInfo: FC<Props> = ({
                 {/*<div className='d-flex my-4'>*/}
                 {/*  <button type={'button'} className="btn btn-sm btn-bg-light btn-active-color-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">Community Link</button>*/}
                 {/*</div>*/}
+
 
                 <div className='d-flex flex-wrap fw-bold fs-6 mb-4 pe-2'>
                   {community?.contact && (

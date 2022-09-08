@@ -1,10 +1,11 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {ErrorMessage, Field, Form, Formik} from 'formik'
 import * as Yup from 'yup'
 import {getUserByToken, register} from '../core/_requests'
-import {Link} from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
 import {PasswordMeterComponent} from '../../../../_metronic/assets/ts/components'
 import {useAuth} from '../core/Auth'
+import {FormErrorAlert} from '../../errors/partials/FormErrorAlert'
 
 const initialValues = {
   first_name: '',
@@ -41,27 +42,43 @@ const registrationSchema = Yup.object().shape({
 })
 
 const Registration = () => {
-  const {saveAuth, setCurrentUser} = useAuth()
+  const navigate = useNavigate()
+  const {saveAuth, setCurrentUser, setSubscription, setCommunityAdmin} = useAuth()
+  const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined)
+  const [alertMessage, setAlertMessage] = useState<string | undefined>(undefined)
 
   useEffect(() => {
     PasswordMeterComponent.bootstrap()
   }, [])
 
   const handleSubmit = async (values: any) => {
-    try {
-      const {data: auth} = await register(
-        values.email,
-        values.first_name,
-        values.last_name,
-        values.password,
-        values.password_confirmation
-      )
-      saveAuth(auth)
-      const {data: profile} = await getUserByToken(auth.api_token)
-      setCurrentUser(profile.user)
-    } catch (error) {
-      saveAuth(undefined)
-    }
+    setHasErrors(false)
+    await register(
+      values.email,
+      values.first_name,
+      values.last_name,
+      values.password,
+      values.password_confirmation
+    )
+      .then((response) => {
+        saveAuth(response.data)
+
+        getUserByToken(response.data.token).then((response) => {
+          setSubscription(response.data.subscription)
+          setCurrentUser(response.data.user)
+          setCommunityAdmin(response.data.admin)
+          navigate('/');
+        })
+      })
+      .catch((error) => {
+        saveAuth(undefined)
+        setHasErrors(true)
+        if (error.response) {
+          if (error.response.data.error.validation?.email) {
+            setAlertMessage(error.response.data.error.validation?.email[0])
+          }
+        }
+      })
   }
 
   return (
@@ -87,6 +104,8 @@ const Registration = () => {
                 </Link>
               </div>
             </div>
+
+            <FormErrorAlert hasErrors={hasErrors} message={alertMessage} />
 
             <div className='row fv-row mb-7'>
               <div className='col-xl-6'>

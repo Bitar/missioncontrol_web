@@ -3,20 +3,11 @@ import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
 import {PageTitle} from '../../../_metronic/layout/core'
 import {marketingData} from './data/MarketingData'
 import {support} from './data/SupportData'
-import {Card7} from '../../../_metronic/partials/content/cards/Card7'
-import toast from 'react-hot-toast'
 
 const Marketing = () => {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
-
-  const notify = async () => {
-    let text = 'Invite Link copied!'
-    // TODO: Update Link for clipboard
-    await navigator.clipboard.writeText(text)
-    toast.success(text)
-  }
 
   return (
     <>

@@ -4,7 +4,6 @@ import {updateData} from '../../helpers/form/FormHelper'
 import {Community} from './models/Community'
 import {getCountries, getStates} from '../misc/core/_requests'
 import Select from 'react-select'
-import clsx from 'clsx'
 
 type Props = {
   method: string

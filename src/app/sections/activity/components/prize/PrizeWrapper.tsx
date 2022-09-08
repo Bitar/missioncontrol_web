@@ -27,6 +27,7 @@ const PrizeWrapper: FC<Props> = ({activity, setActivity}) => {
       setActivity,
       activity
     )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activityPrizes])
 
   return (

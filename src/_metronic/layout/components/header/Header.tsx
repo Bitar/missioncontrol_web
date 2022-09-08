@@ -1,6 +1,4 @@
 import React, {FC} from 'react'
-import {CommunityPicker} from '../../../../app/layout/partials/community-picker/CommunityPicker'
-import {MenuInner} from './MenuInner'
 import {CurrentCommunity} from '../../../../app/layout/partials/header-menus/CurrentCommunity'
 
 const Header: FC<React.PropsWithChildren<unknown>> = () => {
@@ -24,9 +22,7 @@ const Header: FC<React.PropsWithChildren<unknown>> = () => {
         id='#kt_header_menu'
         data-kt-menu='true'
       >
-        {/*TODO: Community Picker here maybe? */}
         <CurrentCommunity />
-        {/*<MenuInner />*/}
       </div>
     </div>
   )

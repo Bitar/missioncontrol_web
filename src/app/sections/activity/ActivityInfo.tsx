@@ -3,9 +3,8 @@ import {Activity} from './models/Activity'
 import {Link, useLocation} from 'react-router-dom'
 import {BadgeCell} from '../../modules/table/columns/BadgeCell'
 import {formatActivityStatus} from '../../helpers/ActivityHelper'
-import CountUp from 'react-countup'
 import dayjs from 'dayjs'
-import { KTCard, KTCardBody, KTSVG } from "../../../_metronic/helpers";
+import { KTCard, KTCardBody} from "../../../_metronic/helpers";
 import clsx from 'clsx'
 
 type Props = {
