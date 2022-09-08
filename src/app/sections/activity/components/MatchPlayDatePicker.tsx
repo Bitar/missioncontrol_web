@@ -46,7 +46,14 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
     let registrationEndDate = activity?.registration_dates?.end_date
 
     if (registrationEndDate) {
-      setMinDate(dayjs(new Date(registrationEndDate * 1000)).add(1, 'd'))
+      let minMatchDate = dayjs(new Date(registrationEndDate * 1000)).add(1, 'd')
+      let launchDate = dayjs(new Date(2022, 8, 12))
+
+      if (minMatchDate.isBefore(launchDate)) {
+        setMinDate(launchDate)
+      } else {
+        setMinDate(minMatchDate)
+      }
     }
   }, [activity?.registration_dates?.end_date])
 
@@ -73,4 +80,4 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
   )
 }
 
-export {MatchPlayDatePicker}
+export { MatchPlayDatePicker };

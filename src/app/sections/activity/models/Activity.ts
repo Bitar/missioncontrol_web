@@ -54,6 +54,7 @@ export type Activity = {
   id?: ID
   title: string
   description?: string
+  created_at?: number
   type: ActivityType
   status: number
   teams?: Team[]

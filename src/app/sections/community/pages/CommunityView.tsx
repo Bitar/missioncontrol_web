@@ -79,15 +79,15 @@ const CommunityView: FC<Props> = ({communityId, links}) => {
             </>
           }
         />
-        <Route
-          path='activities'
-          element={
-            <>
-              <PageTitle breadcrumbs={communityViewBreadCrumbs}>Activities</PageTitle>
-              <CommunityActivities community={community} />
-            </>
-          }
-        />
+        {/*<Route*/}
+        {/*  path='activities'*/}
+        {/*  element={*/}
+        {/*    <>*/}
+        {/*      <PageTitle breadcrumbs={communityViewBreadCrumbs}>Activities</PageTitle>*/}
+        {/*      <CommunityActivities community={community} />*/}
+        {/*    </>*/}
+        {/*  }*/}
+        {/*/>*/}
         <Route
           path='members'
           element={

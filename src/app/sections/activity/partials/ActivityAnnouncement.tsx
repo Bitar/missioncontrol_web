@@ -3,11 +3,7 @@ import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import TextField from '@mui/material/TextField'
 import {Activity} from '../models/Activity'
 import dayjs from 'dayjs'
-import {
-  Announcement,
-  announcementSchema,
-  initialAnnouncement,
-} from '../../../models/announcement/Announcements'
+import {Announcement, initialAnnouncement} from '../../../models/announcement/Announcements'
 import {useParams} from 'react-router-dom'
 import {createActivityAnnouncement} from '../core/ActivityRequests'
 import {Form, Formik} from 'formik'
@@ -20,10 +16,6 @@ type Props = {
 const ActivityAnnouncement: FC<Props> = ({activity, setActivity}) => {
   const params = useParams()
   const [announcement, setAnnouncement] = useState<Announcement>(initialAnnouncement())
-
-  useEffect(() => {
-    console.log(announcement)
-  }, [announcement])
 
   const handleSubmit = async () => {
     let data = jsonToFormData(announcement)
@@ -75,40 +67,46 @@ const ActivityAnnouncement: FC<Props> = ({activity, setActivity}) => {
         </div>
         <div id='activity_announcement_card_collapsible' className='collapse show'>
           <KTCardBody className='pt-0' id='activity_announcement_card_body'>
-            <div className='row'>
-              <div className='col-12'>
-                <div
-                  className='mb-7 scroll-y pt-5'
-                  data-kt-scroll='true'
-                  data-kt-scroll-activate='{default: false, lg: true}'
-                  data-kt-scroll-max-height='300px'
-                  data-kt-scroll-dependencies='#kt_header, #kt_toolbar, #kt_footer, #activity_announcement_card_header'
-                  data-kt-scroll-wrappers='#kt_content, #activity_announcement_card_body'
-                  data-kt-scroll-offset='0px'
-                >
-                  {activity?.announcements?.map((announcement) => (
-                    <div key={announcement?.id} className='d-flex mb-5'>
-                      <div className='d-flex flex-column flex-row-fluid'>
-                        <div className='d-flex align-items-center flex-wrap mb-1'>
-                          <span className='text-gray-800 fw-bold me-2'>{announcement?.title}</span>
+            {activity?.announcements && activity?.announcements?.length > 0 && (
+              <>
+                <div className='row'>
+                  <div className='col-12'>
+                    <div
+                      className='mb-7 scroll-y pt-5'
+                      data-kt-scroll='true'
+                      data-kt-scroll-activate='{default: false, lg: true}'
+                      data-kt-scroll-max-height='300px'
+                      data-kt-scroll-dependencies='#kt_header, #kt_toolbar, #kt_footer, #activity_announcement_card_header'
+                      data-kt-scroll-wrappers='#kt_content, #activity_announcement_card_body'
+                      data-kt-scroll-offset='0px'
+                    >
+                      {activity?.announcements?.map((announcement) => (
+                        <div key={announcement?.id} className='d-flex mb-5'>
+                          <div className='d-flex flex-column flex-row-fluid'>
+                            <div className='d-flex align-items-center flex-wrap mb-1'>
+                              <span className='text-gray-800 fw-bold me-2'>
+                                {announcement?.title}
+                              </span>
 
-                          {announcement?.created_at && (
-                            <span className='text-gray-400 fw-semibold fs-7'>
-                              {dayjs(new Date(announcement?.created_at * 1000)).format('LL')}
+                              {announcement?.created_at && (
+                                <span className='text-gray-400 fw-semibold fs-7'>
+                                  {dayjs(new Date(announcement?.created_at * 1000)).format('LL')}
+                                </span>
+                              )}
+                            </div>
+                            <span className='text-gray-800 fs-7 fw-normal pt-1'>
+                              {announcement?.body}
                             </span>
-                          )}
+                          </div>
                         </div>
-                        <span className='text-gray-800 fs-7 fw-normal pt-1'>
-                          {announcement?.body}
-                        </span>
-                      </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
                 </div>
-              </div>
-            </div>
 
-            <div className='separator separator-dashed my-6'></div>
+                <div className='separator separator-dashed mt-6'></div>
+              </>
+            )}
 
             <Formik
               initialValues={initialAnnouncement()}
@@ -116,7 +114,7 @@ const ActivityAnnouncement: FC<Props> = ({activity, setActivity}) => {
               enableReinitialize
             >
               {({isSubmitting, isValid, touched, errors}) => (
-                <Form onChange={handleOnChange} className='form'>
+                <Form onChange={handleOnChange} className='form mt-6'>
                   <div className='row'>
                     <div className='col-12 mb-6'>
                       <TextField
@@ -172,4 +170,4 @@ const ActivityAnnouncement: FC<Props> = ({activity, setActivity}) => {
   )
 }
 
-export {ActivityAnnouncement}
+export { ActivityAnnouncement };

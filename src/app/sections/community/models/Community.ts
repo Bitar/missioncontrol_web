@@ -97,19 +97,17 @@ export function formOnChange(
         community
       )
     } else {
-      let updateStuff = {[accessField]: targetValue}
+      if (accessField !== 'key') {
+        let updateStuff = {type: targetValue, key: 2}
 
-      if (accessField !== 'value') {
-        updateStuff = {...updateStuff, ...{value: ''}}
+        updateData(
+          {
+            access: {...community?.access, ...updateStuff},
+          },
+          setCommunity,
+          community
+        )
       }
-
-      updateData(
-        {
-          access: {...community?.access, ...updateStuff},
-        },
-        setCommunity,
-        community
-      )
     }
   } else {
     if (targetName === 'logo' || targetName === 'banner_image') {

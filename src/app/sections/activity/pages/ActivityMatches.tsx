@@ -1,4 +1,4 @@
-import React, {Dispatch, FC, SetStateAction} from 'react'
+import React, {Dispatch, FC, SetStateAction, useEffect, useRef} from 'react'
 import {useNavigate, useParams} from 'react-router-dom'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {Match} from '../models/matches/Match'
@@ -14,6 +14,12 @@ type Props = {
 const ActivityMatches: FC<Props> = ({matches, setMatch}) => {
   const params = useParams()
   const navigate = useNavigate()
+  const openMatches = useRef<Match[] | undefined>([])
+
+  useEffect(() => {
+    openMatches.current = matches?.filter(filterOpenMatches)
+  }, [matches])
+
   // const calculateTeamScore = (match: any, team: any) => {
   //   let totalScore = 0
   //
@@ -35,7 +41,7 @@ const ActivityMatches: FC<Props> = ({matches, setMatch}) => {
     navigate(to)
   }
 
-  function openMatches(element: Match) {
+  function filterOpenMatches(element: Match) {
     return element.status !== 3
   }
 
@@ -59,51 +65,57 @@ const ActivityMatches: FC<Props> = ({matches, setMatch}) => {
             data-kt-scroll-offset='0'
           >
             <div className='d-flex flex-column'>
-              {matches?.filter(openMatches).map((match) => (
-                <div
-                  key={match.id}
-                  className='nav-link text-active-primary me-6 cursor-pointer'
-                  onClick={() =>
-                    handleMatchClick(match, '/activities/' + params.id + '/matches/' + match?.id)
-                  }
-                >
-                  <div className='d-flex flex-stack text-center'>
-                    {match?.teams && match?.teams[0] && (
-                      <div className='flex-grow-1'>
-                        <div className='d-inline-block'>
-                          <div className='symbol symbol-60px symbol-circle mb-3'>
-                            <img
-                              alt={match?.teams[0].name + ' team image'}
-                              src={match?.teams[0].image}
-                            />
+              {openMatches.current && openMatches.current?.length > 0 ? (
+                openMatches.current?.map((match) => (
+                  <div
+                    key={match.id}
+                    className='nav-link text-active-primary me-6 cursor-pointer'
+                    onClick={() =>
+                      handleMatchClick(match, '/activities/' + params.id + '/matches/' + match?.id)
+                    }
+                  >
+                    <div className='d-flex flex-stack text-center'>
+                      {match?.teams && match?.teams[0] && (
+                        <div className='flex-grow-1'>
+                          <div className='d-inline-block'>
+                            <div className='symbol symbol-60px symbol-circle mb-3'>
+                              <img
+                                alt={match?.teams[0].name + ' team image'}
+                                src={match?.teams[0].image}
+                              />
+                            </div>
+                            <div className='fs-6 fw-bold'>{match?.teams[0].name}</div>
                           </div>
-                          <div className='fs-6 fw-bold'>{match?.teams[0].name}</div>
+                        </div>
+                      )}
+                      <div className='flex-shrink-1'>
+                        <div className='fs-6 fw-semibold text-gray-600 px-5'>
+                          <p className='m-0'>{getTimeFromTimestamp(match?.start_date)}</p>
+                          <p className='m-0'>{getDateFromTimestamp(match?.start_date)}</p>
                         </div>
                       </div>
-                    )}
-                    <div className='flex-shrink-1'>
-                      <div className='fs-6 fw-semibold text-gray-600 px-5'>
-                        <p className='m-0'>{getTimeFromTimestamp(match?.start_date)}</p>
-                        <p className='m-0'>{getDateFromTimestamp(match?.start_date)}</p>
-                      </div>
+                      {match?.teams && match?.teams[1] && (
+                        <div className='flex-grow-1'>
+                          <div className='d-inline-block'>
+                            <div className='symbol symbol-60px symbol-circle mb-3'>
+                              <img
+                                alt={match?.teams[1].name + ' team image'}
+                                src={match?.teams[1].image}
+                              />
+                            </div>
+                            <div className='fs-6 fw-bold'>{match?.teams[1].name}</div>
+                          </div>
+                        </div>
+                      )}
                     </div>
-                    {match?.teams && match?.teams[1] && (
-                      <div className='flex-grow-1'>
-                        <div className='d-inline-block'>
-                          <div className='symbol symbol-60px symbol-circle mb-3'>
-                            <img
-                              alt={match?.teams[1].name + ' team image'}
-                              src={match?.teams[1].image}
-                            />
-                          </div>
-                          <div className='fs-6 fw-bold'>{match?.teams[1].name}</div>
-                        </div>
-                      </div>
-                    )}
+                    <div className='separator my-3'></div>
                   </div>
-                  <div className='separator my-3'></div>
+                ))
+              ) : (
+                <div className='d-flex text-center w-100 align-content-center justify-content-center'>
+                  <span className='text-gray-600 fw-bold'>Matches are not scheduled yet</span>
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </KTCardBody>
@@ -112,4 +124,4 @@ const ActivityMatches: FC<Props> = ({matches, setMatch}) => {
   )
 }
 
-export {ActivityMatches}
+export { ActivityMatches };

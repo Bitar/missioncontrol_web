@@ -16,10 +16,10 @@ const CommunityInfo: FC<Props> = ({
       text: 'Overview',
       link: '/communities/' + community?.id + '/overview',
     },
-    {
-      text: 'Activities',
-      link: '/activities',
-    },
+    // {
+    //   text: 'Activities',
+    //   link: '/activities',
+    // },
     {
       text: 'Members',
       link: '/communities/' + community?.id + '/members',

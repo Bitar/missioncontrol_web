@@ -4,6 +4,7 @@ import {Role} from '../../role/models/Role'
 import {initialUserMeta, UserMeta} from './UserMeta'
 import {Dispatch, SetStateAction} from 'react'
 import {updateData} from '../../../../helpers/form/FormHelper'
+import { useAuth } from "../../../../modules/auth";
 
 let schema = {
   first_name: Yup.string().required('First name is required'),
@@ -52,11 +53,11 @@ export type User = {
 
 export const initialUser = (user?: User) => {
   return {
-    first_name: user?.first_name || 'ayman',
-    last_name: user?.last_name || 'bitar',
-    email: user?.email || 'ayman@mc.com',
-    password: '123123123',
-    password_confirmation: '123123123',
+    first_name: user?.first_name || '',
+    last_name: user?.last_name || '',
+    email: user?.email || '',
+    password: '',
+    password_confirmation: '',
     created_at: user?.created_at || 0,
     roles: [],
     meta: initialUserMeta(user?.meta),

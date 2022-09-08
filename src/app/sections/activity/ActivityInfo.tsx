@@ -5,7 +5,7 @@ import {BadgeCell} from '../../modules/table/columns/BadgeCell'
 import {formatActivityStatus} from '../../helpers/ActivityHelper'
 import CountUp from 'react-countup'
 import dayjs from 'dayjs'
-import {KTCard, KTCardBody} from '../../../_metronic/helpers'
+import { KTCard, KTCardBody, KTSVG } from "../../../_metronic/helpers";
 import clsx from 'clsx'
 
 type Props = {
@@ -26,21 +26,23 @@ const ActivityInfo: FC<Props> = ({activity}) => {
       link: '/activities/' + activity?.id + '/overview',
     },
     {
-      text: 'Registrations',
+      icon: 'fa-solid fa-person',
+      text: `Registrations (${activity?.additional_data?.players_count || 0})`,
       link: '/activities/' + activity?.id + '/registrations',
     },
     {
-      text: 'Teams',
+      icon: 'fa-solid fa-rocket',
+      text: `Teams (${activity?.additional_data?.teams_count || 0})`,
       link: '/activities/' + activity?.id + '/teams',
     },
     {
       text: 'Chat',
       link: '/activities/' + activity?.id + '/chat',
     },
-    {
-      text: 'Settings',
-      link: '/activities/' + activity?.id + '/settings',
-    },
+    // {
+    //   text: 'Settings',
+    //   link: '/activities/' + activity?.id + '/settings',
+    // },
   ]
 
   return (
@@ -61,59 +63,71 @@ const ActivityInfo: FC<Props> = ({activity}) => {
                     <div className='text-gray-800 fs-2 fw-bolder me-3'>{activity?.title}</div>
                     {getStatus(activity?.status)}
                   </div>
-
                   <div className='d-flex flex-wrap fw-semibold fs-6 mb-4 text-gray-400'>
                     {activity?.description}
                   </div>
                 </div>
+
+                <div className='d-flex my-4'>
+                  <button type={'button'} className="btn btn-sm btn-bg-light btn-active-color-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">Community Link</button>
+                </div>
               </div>
+
 
               <div className='d-flex flex-wrap justify-content-start'>
                 <div className='d-flex flex-wrap'>
+                  {activity?.community && (
+                    <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
+                      <div className='d-flex align-items-center'>
+                        <i className='fa fa-people-group text-mc-primary fs-2 me-2'></i>
+                        <div className='fs-4 text-gray-400'>Community</div>
+                      </div>
+                      <div className='fw-semibold fs-6 fw-bold'>
+                        {activity?.community?.name}
+                      </div>
+                    </div>
+                  )}
                   {activity?.matchplay_dates && (
                     <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                       <div className='d-flex align-items-center'>
-                        <i className='fa fa-gamepad text-info fs-2 me-2'></i>
-                        <div className='fs-4 fw-bold'>
-                          {dayjs(new Date(activity?.matchplay_dates?.start_date * 1000)).format(
-                            'll'
-                          )}
-                          {/*29 Jan, 2022*/}
-                        </div>
+                        <i className='fa-solid fa-calendar-days fs-2 me-2 text-mc-secondary'></i>
+                        <div className='fs-4 text-gray-400'>Game Date</div>
                       </div>
-                      <div className='fw-semibold fs-6 text-gray-400'>Game Date</div>
+                      <div className='fw-semibold fs-6 fw-bold'>
+                        {dayjs(new Date(activity?.matchplay_dates?.start_date * 1000)).format('ll')}
+                      </div>
                     </div>
                   )}
-                  {activity?.additional_data && (
-                    <>
-                      <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
-                        <div className='d-flex align-items-center'>
-                          <i className='fab fa-steam text-mc-secondary fs-2 me-2'></i>
+                  {/*{activity?.additional_data && (*/}
+                  {/*  <>*/}
+                  {/*    <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>*/}
+                  {/*      <div className='d-flex align-items-center'>*/}
+                  {/*        <i className='fab fa-steam text-mc-secondary fs-2 me-2'></i>*/}
 
-                          <div className='fs-4 fw-bold'>
-                            <CountUp
-                              useEasing={false}
-                              end={activity?.additional_data?.players_count}
-                            />
-                          </div>
-                        </div>
-                        <div className='fw-semibold fs-6 text-gray-400'>Registrations</div>
-                      </div>
-                      <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
-                        <div className='d-flex align-items-center'>
-                          <i className='fab fa-discord text-mc-primary fs-2 me-2'></i>
+                  {/*        <div className='fs-4 fw-bold'>*/}
+                  {/*          <CountUp*/}
+                  {/*            useEasing={false}*/}
+                  {/*            end={activity?.additional_data?.players_count}*/}
+                  {/*          />*/}
+                  {/*        </div>*/}
+                  {/*      </div>*/}
+                  {/*      <div className='fw-semibold fs-6 text-gray-400'>Registrations</div>*/}
+                  {/*    </div>*/}
+                  {/*    <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>*/}
+                  {/*      <div className='d-flex align-items-center'>*/}
+                  {/*        <i className='fab fa-discord text-mc-primary fs-2 me-2'></i>*/}
 
-                          <div className='fs-4 fw-bold'>
-                            <CountUp
-                              useEasing={false}
-                              end={activity?.additional_data?.teams_count}
-                            />
-                          </div>
-                        </div>
-                        <div className='fw-semibold fs-6 text-gray-400'>Teams</div>
-                      </div>
-                    </>
-                  )}
+                  {/*        <div className='fs-4 fw-bold'>*/}
+                  {/*          <CountUp*/}
+                  {/*            useEasing={false}*/}
+                  {/*            end={activity?.additional_data?.teams_count}*/}
+                  {/*          />*/}
+                  {/*        </div>*/}
+                  {/*      </div>*/}
+                  {/*      <div className='fw-semibold fs-6 text-gray-400'>Teams</div>*/}
+                  {/*    </div>*/}
+                  {/*  </>*/}
+                  {/*)}*/}
                 </div>
               </div>
             </div>
@@ -133,6 +147,9 @@ const ActivityInfo: FC<Props> = ({activity}) => {
                   )}
                   to={link.link}
                 >
+                  {link.icon &&
+                    <span> <i className={clsx('fs-4 me-2', link.icon)}></i> </span>
+                  }
                   {link.text}
                 </Link>
               </li>
@@ -144,4 +161,4 @@ const ActivityInfo: FC<Props> = ({activity}) => {
   )
 }
 
-export {ActivityInfo}
+export { ActivityInfo };

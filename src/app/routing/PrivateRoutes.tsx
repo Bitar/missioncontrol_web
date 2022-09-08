@@ -72,7 +72,9 @@ const PrivateRoutes = () => {
           path='activities/*'
           element={
             <SuspenseView>
-              <ActivityPage />
+              <Restricted to='view-activities'>
+                <ActivityPage />
+              </Restricted>
             </SuspenseView>
           }
         />

@@ -15,12 +15,12 @@ export type CommunityAddress = {
 
 export const initialCommunityAddress = (address?: CommunityAddress) => {
   return {
-    address_one: address?.address_one || '246 Over There',
+    address_one: address?.address_one || '',
     address_two: address?.address_two || '',
-    city: address?.city || 'Someplace',
-    state: initialState(address?.state),
-    postal_code: address?.postal_code || '12345',
-    country: initialCountry(address?.country),
+    city: address?.city || '',
+    state: initialState(address?.state) || initialState(),
+    postal_code: address?.postal_code || '',
+    country: initialCountry(address?.country) || initialCountry(),
   }
 }
 

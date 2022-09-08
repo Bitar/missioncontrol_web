@@ -56,7 +56,6 @@ const Schedule: FC<Props> = ({activity, setActivity}) => {
           <span className='required fw-bold fs-6'>Match Play Dates</span>
         </div>
         <div className='col-lg-8 fv-row'>
-          {/*TODO: Only Allow after 15th September */}
           <MatchPlayDatePicker activity={activity} setActivity={setActivity} />
         </div>
       </div>

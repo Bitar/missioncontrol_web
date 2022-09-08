@@ -115,7 +115,9 @@ class ThemeMode {
   }
 
   private initMode = (): void => {
-    this.setMode(this.getMode(), this.getMenuMode())
+    //TODO_v3.1: Dark Mode here.
+    // this.setMode(this.getMode(), this.getMenuMode())
+    this.setMode('light', this.getMenuMode())
     if (this.element) {
       EventHandlerUtil.trigger(this.element, 'kt.thememode.init')
     }

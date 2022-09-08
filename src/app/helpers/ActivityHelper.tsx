@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 const formatActivityStatus = (statusId: number) => {
   let color = ''
   let status = ''
@@ -44,8 +46,8 @@ const formatMatchStatus = (statusId: number) => {
 }
 
 const formatDates = (matchplayDates: any) => {
-  const startDate = new Date(matchplayDates?.start_date * 1000).toDateString()
-  const endDate = new Date(matchplayDates?.end_date * 1000).toDateString()
+  const startDate = dayjs(new Date(matchplayDates?.start_date * 1000)).format('ll')
+  const endDate = dayjs(new Date(matchplayDates?.end_date * 1000)).format('ll')
 
   return {startDate, endDate}
 }

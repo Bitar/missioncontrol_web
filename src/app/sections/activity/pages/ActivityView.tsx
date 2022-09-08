@@ -116,14 +116,14 @@ const ActivityView: React.FC = () => {
             </>
           }
         />
-        <Route
-          path='/settings'
-          element={
-            <>
-              <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>
-            </>
-          }
-        />
+        {/*<Route*/}
+        {/*  path='/settings'*/}
+        {/*  element={*/}
+        {/*    <>*/}
+        {/*      <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>*/}
+        {/*    </>*/}
+        {/*  }*/}
+        {/*/>*/}
         <Route
           path='/matches/:matchId/*'
           element={
@@ -139,4 +139,4 @@ const ActivityView: React.FC = () => {
   )
 }
 
-export {ActivityView}
+export { ActivityView };

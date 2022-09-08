@@ -11,9 +11,9 @@ export type CommunityContact = {
 
 export const initialCommunityContact = (contact?: CommunityContact) => {
   return {
-    name: contact?.name || 'Mr. Support',
-    email: contact?.email || 'support@missioncontrol.gg',
-    phone_number: contact?.phone_number || '1231231234',
+    name: contact?.name || '',
+    email: contact?.email || '',
+    phone_number: contact?.phone_number || '',
   }
 }
 

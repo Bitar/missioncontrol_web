@@ -6,6 +6,7 @@ import {QUERIES, toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {Activity} from '../models/Activity'
 import {BadgeCell} from '../../../modules/table/columns/BadgeCell'
 import {formatDates, formatActivityStatus} from '../../../helpers/ActivityHelper'
+import dayjs from 'dayjs'
 
 const ActivityColumns: ReadonlyArray<Column<Activity>> = [
   {
@@ -27,6 +28,13 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
     ),
   },
   {
+    Header: (props) => (
+      <CustomHeader tableProps={props} title='Community' className='min-w-200px' />
+    ),
+    id: 'community',
+    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index]?.community?.name} />,
+  },
+  {
     Header: (props) => <CustomHeader tableProps={props} title='Status' className='min-w-125px' />,
     id: 'status',
     Cell: ({...props}) => {
@@ -39,7 +47,19 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
     id: 'Registration',
     Cell: ({...props}) => {
       const {startDate, endDate} = formatDates(props.data[props.row.index].registration_dates)
-      return <TextCell dObject={startDate + ' - ' + endDate} />
+      return (
+        <>
+          <div className='d-flex align-items-center'>
+            <div className='d-flex flex-column text-center'>
+              <span className='text-gray-800 pe-none'>{startDate}</span>
+              <span className='my-1'>
+                <i className='fa fa-arrow-circle-down text-mc-secondary'></i>
+              </span>
+              <span className='text-gray-800 pe-none'>{endDate}</span>
+            </div>
+          </div>
+        </>
+      )
     },
   },
   {
@@ -47,7 +67,19 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
     id: 'Game Day',
     Cell: ({...props}) => {
       const {startDate, endDate} = formatDates(props.data[props.row.index].matchplay_dates)
-      return <TextCell dObject={startDate + ' - ' + endDate} />
+      return (
+        <>
+          <div className='d-flex align-items-center'>
+            <div className='d-flex flex-column text-center'>
+              <span className='text-gray-800 pe-none'>{startDate}</span>
+              <span className='my-1'>
+                <i className='fa fa-arrow-circle-down text-mc-secondary'></i>
+              </span>
+              <span className='text-gray-800 pe-none'>{endDate}</span>
+            </div>
+          </div>
+        </>
+      )
     },
   },
   {
@@ -77,6 +109,19 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
   },
   {
     Header: (props) => (
+      <CustomHeader tableProps={props} title='Created On' className='min-w-125px' />
+    ),
+    id: 'created_at',
+    Cell: ({...props}) => (
+      <TextCell
+        dObject={dayjs(new Date(props.data[props.row.index].created_at * 1000)).format(
+          'ddd, ll @ H:m a'
+        )}
+      />
+    ),
+  },
+  {
+    Header: (props) => (
       <CustomHeader tableProps={props} title='Actions' className='text-end min-w-100px' />
     ),
     id: 'actions',
@@ -86,6 +131,7 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
         path={'activities'}
         queryKey={QUERIES.ACTIVITIES_LIST}
         showView={true}
+        showDelete={false}
       />
     ),
   },

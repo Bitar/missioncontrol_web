@@ -386,41 +386,12 @@ const CommunityForm: FC<React.PropsWithChildren<Props>> = ({method, community, s
           <div className='col-lg-8 fv-row'>
             <div className='row'>
               <div className='col-lg-6'>
-                <label className='d-flex flex-stack cursor-pointer mb-5'>
-                  <span className='d-flex align-items-center me-2'>
-                    <span className='symbol symbol-50px me-6'>
-                      <span className='symbol-label bg-mc-primary'>
-                        <i className='fa fa-envelope text-mc-secondary fs-3'></i>
-                      </span>
-                    </span>
-
-                    <span className='d-flex flex-column'>
-                      <span className='fw-bolder fs-6'>Email</span>
-
-                      <span className='fs-7 text-muted'>
-                        Based on email's domain '@example.com'
-                      </span>
-                    </span>
-                  </span>
-
-                  <span className='form-check form-check-custom form-check-solid'>
-                    <Field
-                      className='form-check-input'
-                      type='radio'
-                      name='access.key'
-                      value={1}
-                      checked={community?.access?.key === 1}
-                    />
-                  </span>
-                </label>
-              </div>
-              <div className='col-lg-6'>
-                <label className='d-flex flex-stack cursor-pointer mb-5'>
+                <label className='d-flex flex-stack mb-5'>
                   <span className='d-flex align-items-center me-2'>
                     <span className='symbol symbol-50px me-6'>
                       <span className='symbol-label bg-mc-primary'>
                         <i className='fa fa-key text-mc-secondary fs-3'></i>
-                        <i className={clsx('fa fs-3', '')}></i>
+                        <i className='fa fs-3'></i>
                       </span>
                     </span>
 
@@ -429,40 +400,8 @@ const CommunityForm: FC<React.PropsWithChildren<Props>> = ({method, community, s
                       <span className='fs-7 text-muted'>Good ol' fashion password</span>
                     </span>
                   </span>
-
-                  <span className='form-check form-check-custom form-check-solid'>
-                    <Field
-                      className='form-check-input'
-                      type='radio'
-                      name='access.key'
-                      value={2}
-                      checked={community?.access?.key === 2}
-                    />
-                  </span>
                 </label>
               </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {community?.access?.key === 1 && (
-        <div className='row mb-6'>
-          <label className='col-lg-4 col-form-label required fw-bold fs-6'>Email</label>
-          <div className='col-lg-8 fv-row'>
-            <Field
-              type='text'
-              name='access.value'
-              className='form-control mb-3 mb-lg-0'
-              placeholder='Email Address'
-              value={
-                community?.access?.type === 2 && community?.access?.key === 1
-                  ? community?.access?.value
-                  : ''
-              }
-            />
-            <div className='text-danger mt-2'>
-              <ErrorMessage name='access.value' />
             </div>
           </div>
         </div>

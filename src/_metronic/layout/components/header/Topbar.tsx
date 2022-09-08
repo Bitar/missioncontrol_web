@@ -19,21 +19,18 @@ const Topbar: FC<React.PropsWithChildren<unknown>> = () => {
       <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
         <CommunityPicker />
       </div>
-      {/* begin::Theme mode */}
+
       <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
         {/* TODO_v3.1: Dark Mode Switcher */}
-        <ThemeModeSwitcher
-          toggleBtnClass={clsx('btn-active-light-primary btn-custom', toolbarButtonHeightClass)}
-        />
+        {/*<ThemeModeSwitcher*/}
+        {/*  toggleBtnClass={clsx('btn-active-light-primary btn-custom', toolbarButtonHeightClass)}*/}
+        {/*/>*/}
       </div>
-      {/* end::Theme mode */}
 
-      {/* begin::User */}
       <div
         className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}
         id='kt_header_user_menu_toggle'
       >
-        {/* begin::Toggle */}
         <div
           className={clsx('cursor-pointer symbol', toolbarUserAvatarHeightClass)}
           data-kt-menu-trigger='click'
@@ -44,11 +41,8 @@ const Topbar: FC<React.PropsWithChildren<unknown>> = () => {
           <img src={currentUser?.meta?.image} alt={currentUser?.name} />
         </div>
         <HeaderUserMenu />
-        {/* end::Toggle */}
       </div>
-      {/* end::User */}
 
-      {/* begin::Aside Toggler */}
       {config.header.left === 'menu' && (
         <div className='d-flex align-items-center d-lg-none ms-2 me-n3' title='Show header menu'>
           <div
