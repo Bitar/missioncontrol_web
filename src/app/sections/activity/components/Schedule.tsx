@@ -48,7 +48,7 @@ const Schedule: FC<Props> = ({activity, setActivity}) => {
           <span className='required fw-bold fs-6'>Registration Dates</span>
         </div>
         <div className='col-lg-8 fv-row'>
-          <RegistrationDatePicker activity={activity} setActivity={setActivity} />
+          {/*<RegistrationDatePicker activity={activity} setActivity={setActivity} />*/}
         </div>
       </div>
       <div className='row mb-6'>
@@ -56,7 +56,7 @@ const Schedule: FC<Props> = ({activity, setActivity}) => {
           <span className='required fw-bold fs-6'>Match Play Dates</span>
         </div>
         <div className='col-lg-8 fv-row'>
-          <MatchPlayDatePicker activity={activity} setActivity={setActivity} />
+          {/*<MatchPlayDatePicker activity={activity} setActivity={setActivity} />*/}
         </div>
       </div>
       <div className='row mb-6'>

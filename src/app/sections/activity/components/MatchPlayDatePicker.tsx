@@ -1,5 +1,5 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
-import {Activity} from '../models/Activity'
+import { Activity, ActivityForm } from "../models/Activity";
 import {updateData} from '../../../helpers/form/FormHelper'
 import {DateRange, DateRangePicker} from '@mui/x-date-pickers-pro/DateRangePicker'
 import dayjs, {Dayjs} from 'dayjs'
@@ -9,8 +9,8 @@ import TextField from '@mui/material/TextField'
 import {Box} from '@mui/material'
 
 type Props = {
-  activity: Activity | undefined
-  setActivity: Dispatch<SetStateAction<Activity>>
+  activity: ActivityForm,
+  setActivity: Dispatch<SetStateAction<ActivityForm >>
 }
 
 const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
@@ -32,9 +32,12 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
 
     updateData(
       {
-        matchplay_dates: {
-          ...activity?.matchplay_dates,
-          ...{start_date: startDate, end_date: endDate},
+        schedule: {
+          ...activity?.schedule,
+          ...{matchplay_dates: {
+              ...activity?.schedule.matchplay_dates,
+              ...{start_date: startDate, end_date: endDate},
+            }}
         },
       },
       setActivity,
@@ -43,7 +46,7 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
   }
 
   useEffect(() => {
-    let registrationEndDate = activity?.registration_dates?.end_date
+    let registrationEndDate = activity?.schedule?.registration_dates?.end_date
 
     if (registrationEndDate) {
       let minMatchDate = dayjs(new Date(registrationEndDate * 1000)).add(1, 'd')
@@ -55,7 +58,7 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
         setMinDate(minMatchDate)
       }
     }
-  }, [activity?.registration_dates?.end_date])
+  }, [activity?.schedule?.registration_dates?.end_date])
 
   return (
     <>
@@ -68,9 +71,9 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
             minDate={minDate}
             renderInput={(startProps, endProps) => (
               <React.Fragment>
-                <TextField {...startProps} size={'small'} />
+                <TextField required {...startProps} size={'small'} name='settings.registration_dates.start_date' />
                 <Box sx={{mx: 2}}> to </Box>
-                <TextField {...endProps} size={'small'} />
+                <TextField required {...endProps} size={'small'} name='settings.registration_dates.end_Date' />
               </React.Fragment>
             )}
           />

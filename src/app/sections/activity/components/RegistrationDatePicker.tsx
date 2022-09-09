@@ -1,16 +1,16 @@
 import React, {Dispatch, FC, SetStateAction, useState} from 'react'
-import {Activity} from '../models/Activity'
+import {ActivityForm} from '../models/Activity'
 import {Dayjs} from 'dayjs'
 import {LocalizationProvider} from '@mui/x-date-pickers-pro'
 import {AdapterDayjs} from '@mui/x-date-pickers-pro/AdapterDayjs'
-import {DateRangePicker, DateRange} from '@mui/x-date-pickers-pro/DateRangePicker'
+import {DateRange, DateRangePicker} from '@mui/x-date-pickers-pro/DateRangePicker'
 import {Box} from '@mui/material'
 import TextField from '@mui/material/TextField'
 import {updateData} from '../../../helpers/form/FormHelper'
 
 type Props = {
-  activity: Activity | undefined
-  setActivity: Dispatch<SetStateAction<Activity>>
+  activity: ActivityForm
+  setActivity: Dispatch<SetStateAction<ActivityForm>>
 }
 
 const RegistrationDatePicker: FC<Props> = ({activity, setActivity}) => {
@@ -31,9 +31,14 @@ const RegistrationDatePicker: FC<Props> = ({activity, setActivity}) => {
 
     updateData(
       {
-        registration_dates: {
-          ...activity?.registration_dates,
-          ...{start_date: startDate, end_date: endDate},
+        schedule: {
+          ...activity?.schedule,
+          ...{
+            registration_dates: {
+              ...activity?.schedule.registration_dates,
+              ...{start_date: startDate, end_date: endDate},
+            },
+          },
         },
       },
       setActivity,
@@ -48,12 +53,18 @@ const RegistrationDatePicker: FC<Props> = ({activity, setActivity}) => {
         <DateRangePicker
           disablePast
           value={value}
-          onChange={onDateChange}
+          onChange={(e) => {
+            onDateChange(e)
+          }}
           renderInput={(startProps, endProps) => (
             <>
-              <TextField {...startProps} size={'small'} />
+              <TextField
+                {...startProps}
+                size={'small'}
+                name='schedule.registration_dates.start_date'
+              />
               <Box sx={{mx: 2}}> to </Box>
-              <TextField {...endProps} size={'small'} />
+              <TextField {...endProps} size={'small'} name='schedule.registration_dates.end_date' />
             </>
           )}
         />
@@ -63,4 +74,4 @@ const RegistrationDatePicker: FC<Props> = ({activity, setActivity}) => {
   )
 }
 
-export {RegistrationDatePicker}
+export { RegistrationDatePicker };

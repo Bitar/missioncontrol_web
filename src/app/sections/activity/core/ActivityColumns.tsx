@@ -10,8 +10,8 @@ import dayjs from 'dayjs'
 
 const ActivityColumns: ReadonlyArray<Column<Activity>> = [
   {
-    Header: (props) => <CustomHeader tableProps={props} title='Title' className='min-w-125px' />,
-    id: 'title',
+    Header: (props) => <CustomHeader tableProps={props} title='' className='min-w-75px' />,
+    id: 'image',
     Cell: ({...props}) => (
       <div className='d-flex align-items-center'>
         <div className='w-75px me-3'>
@@ -21,6 +21,14 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
             className='w-100 h-100vh rounded'
           />
         </div>
+      </div>
+    ),
+  },
+  {
+    Header: (props) => <CustomHeader tableProps={props} title='Title' className='min-w-125px' />,
+    id: 'title',
+    Cell: ({...props}) => (
+      <div className='d-flex align-items-center'>
         <div className='d-flex flex-column'>
           <span className='text-gray-800 mb-1'>{props.data[props.row.index].title}</span>
         </div>

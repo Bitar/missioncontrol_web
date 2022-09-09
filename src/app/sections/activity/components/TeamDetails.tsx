@@ -1,14 +1,17 @@
-import {Activity} from '../models/Activity'
+import {Activity, ActivityForm} from '../models/Activity'
 import React, {Dispatch, FC, SetStateAction, useState} from 'react'
 import {Button, ButtonGroup} from '@mui/material'
+import {GameMode} from '../../../models/game/GameMode'
+import {updateData} from '../../../helpers/form/FormHelper'
 
 type Props = {
-  activity: Activity | undefined
-  setActivity: Dispatch<SetStateAction<Activity>>
+  activity: ActivityForm
+  setActivity: Dispatch<SetStateAction<ActivityForm>>
+  gameMode: GameMode | undefined
 }
 
-const TeamDetails: FC<Props> = ({activity, setActivity}) => {
-  const [players, setPlayers] = useState(0)
+const TeamDetails: FC<Props> = ({activity, setActivity, gameMode}) => {
+  const [players, setPlayers] = useState(gameMode?.min_players || 0)
   const [minTeam, setMinTeam] = useState(0)
   const [maxTeam, setMaxTeam] = useState(0)
 
@@ -27,7 +30,38 @@ const TeamDetails: FC<Props> = ({activity, setActivity}) => {
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-              onClick={() => (players !== 0 ? setPlayers(players - 1) : setPlayers(0))}
+              onClick={() => {
+                if (players !== 0) {
+                  if (gameMode?.min_players) {
+                    if (players - 1 >= gameMode?.min_players) {
+                      setPlayers(players - 1)
+
+                      updateData(
+                        {
+                          team: {
+                            ...activity?.team,
+                            ...{players: players - 1},
+                          },
+                        },
+                        setActivity,
+                        activity
+                      )
+                    }
+                  }
+                } else {
+                  setPlayers(0)
+                  updateData(
+                    {
+                      team: {
+                        ...activity?.team,
+                        ...{players: 0},
+                      },
+                    },
+                    setActivity,
+                    activity
+                  )
+                }
+              }}
             >
               <i className='fa fa-minus'></i>
             </button>
@@ -37,7 +71,23 @@ const TeamDetails: FC<Props> = ({activity, setActivity}) => {
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-              onClick={() => setPlayers(players + 1)}
+              onClick={() => {
+                if (gameMode?.max_players) {
+                  if (players + 1 <= gameMode?.max_players) {
+                    setPlayers(players + 1)
+                    updateData(
+                      {
+                        team: {
+                          ...activity?.team,
+                          ...{players: players + 1},
+                        },
+                      },
+                      setActivity,
+                      activity
+                    )
+                  }
+                }
+              }}
             >
               <i className='fa fa-plus'></i>
             </button>
@@ -52,7 +102,32 @@ const TeamDetails: FC<Props> = ({activity, setActivity}) => {
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-              onClick={() => (minTeam !== 0 ? setMinTeam(minTeam - 1) : setMinTeam(0))}
+              onClick={() => {
+                if (minTeam !== 0) {
+                  setMinTeam(minTeam - 1)
+                  updateData(
+                    {
+                      team: {
+                        ...activity?.team,
+                        ...{min: minTeam - 1},
+                      },
+                    },
+                    setActivity,
+                    activity
+                  )
+                } else {
+                  updateData(
+                    {
+                      team: {
+                        ...activity?.team,
+                        ...{min: 0},
+                      },
+                    },
+                    setActivity,
+                    activity
+                  )
+                }
+              }}
             >
               <i className='fa fa-minus'></i>
             </button>
@@ -62,7 +137,19 @@ const TeamDetails: FC<Props> = ({activity, setActivity}) => {
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-              onClick={() => setMinTeam(minTeam + 1)}
+              onClick={() => {
+                setMinTeam(minTeam + 1)
+                updateData(
+                  {
+                    team: {
+                      ...activity?.team,
+                      ...{min: minTeam + 1},
+                    },
+                  },
+                  setActivity,
+                  activity
+                )
+              }}
             >
               <i className='fa fa-plus'></i>
             </button>
@@ -77,7 +164,33 @@ const TeamDetails: FC<Props> = ({activity, setActivity}) => {
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-              onClick={() => (maxTeam !== 0 ? setMaxTeam(maxTeam - 1) : setMaxTeam(0))}
+              onClick={() => {
+                if (maxTeam !== 0) {
+                  setMaxTeam(maxTeam - 1)
+                  updateData(
+                    {
+                      team: {
+                        ...activity?.team,
+                        ...{max: maxTeam - 1},
+                      },
+                    },
+                    setActivity,
+                    activity
+                  )
+                } else {
+                  setMaxTeam(0)
+                  updateData(
+                    {
+                      team: {
+                        ...activity?.team,
+                        ...{max: 0},
+                      },
+                    },
+                    setActivity,
+                    activity
+                  )
+                }
+              }}
             >
               <i className='fa fa-minus'></i>
             </button>
@@ -87,7 +200,19 @@ const TeamDetails: FC<Props> = ({activity, setActivity}) => {
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-              onClick={() => setMaxTeam(maxTeam + 1)}
+              onClick={() => {
+                setMaxTeam(maxTeam + 1)
+                updateData(
+                  {
+                    team: {
+                      ...activity?.team,
+                      ...{max: maxTeam + 1},
+                    },
+                  },
+                  setActivity,
+                  activity
+                )
+              }}
             >
               <i className='fa fa-plus'></i>
             </button>
@@ -128,4 +253,4 @@ const TeamDetails: FC<Props> = ({activity, setActivity}) => {
   )
 }
 
-export {TeamDetails}
+export { TeamDetails };

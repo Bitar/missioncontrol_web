@@ -1,17 +1,19 @@
-import {Activity} from '../models/Activity'
+import { Activity, ActivityForm } from "../models/Activity";
 import React, {Dispatch, FC, SetStateAction} from 'react'
 import TextField from '@mui/material/TextField'
 import {ScoringSetting} from './ScoringSetting'
+import { GameMode } from "../../../models/game/GameMode";
 
 type Props = {
-  activity: Activity | undefined
-  setActivity: Dispatch<SetStateAction<Activity>>
+  activity: ActivityForm
+  setActivity: Dispatch<SetStateAction<ActivityForm>>
+  gameMode: GameMode | undefined
 }
 
-const Scoring: FC<Props> = ({activity}) => {
+const Scoring: FC<Props> = ({activity, gameMode}) => {
   const players = () => {
-    let minPlayers = activity?.game_mode?.min_players
-    let maxPlayers = activity?.game_mode?.max_players
+    let minPlayers = gameMode?.min_players
+    let maxPlayers = gameMode?.max_players
 
     if (minPlayers === maxPlayers) {
       return minPlayers
@@ -33,14 +35,15 @@ const Scoring: FC<Props> = ({activity}) => {
           <TextField
             label='Type'
             variant='outlined'
-            className='w-100'
+            fullWidth
             size='small'
             aria-readonly={true}
-            value={activity?.game_mode?.scoring_type?.name}
+            value={gameMode?.scoring_type?.name}
+            hiddenLabel={true}
           />
         </div>
       </div>
-
+      
       <div className='row mb-6'>
         <div className='col-12'>
           <TextField
@@ -50,10 +53,11 @@ const Scoring: FC<Props> = ({activity}) => {
             size='small'
             aria-readonly={true}
             value={players()}
+            hiddenLabel={true}
           />
         </div>
       </div>
-
+      
       <div className='row mb-6'>
         <div className='col-12'>
           <TextField
@@ -62,11 +66,12 @@ const Scoring: FC<Props> = ({activity}) => {
             className='w-100'
             size='small'
             aria-readonly={true}
-            value={activity?.game_mode?.game_time}
+            value={gameMode?.game_time}
+            hiddenLabel={true}
           />
         </div>
       </div>
-
+      
       <div className='row mb-6'>
         <div className='col-12'>
           <TextField
@@ -76,34 +81,36 @@ const Scoring: FC<Props> = ({activity}) => {
             multiline
             size='small'
             aria-readonly={true}
-            value={activity?.game_mode?.instructions}
+            value={gameMode?.instructions}
+            hiddenLabel={true}
           />
         </div>
       </div>
-
+      
       <div className='row mb-6'>
         <div className='col-12'>
           <TextField
-            label='Instructions'
+            label='Settings'
             variant='outlined'
             className='w-100'
             multiline
             size='small'
             aria-readonly={true}
-            value={activity?.game_mode?.settings.map((value) => {
+            defaultValue={gameMode?.settings.map((value) => {
               return value.setting
             })}
+            hiddenLabel={true}
           />
         </div>
       </div>
-
-      {activity?.game_mode?.scoring_settings && (
+      
+      {gameMode?.scoring_settings && (
         <div className='row mb-6'>
           <div className='col-12'>
             <span className='fs-6 fw-bold'>Scoring Settings</span>
           </div>
           <div className='col-12'>
-            {activity?.game_mode?.scoring_settings.map((value) => (
+            {gameMode?.scoring_settings.map((value) => (
               <ScoringSetting key={value.id} settings={value} />
             ))}
           </div>
