@@ -14,6 +14,7 @@ import {Team} from '../../../models/squad/Team'
 import {Announcement} from '../../../models/announcement/Announcements'
 import {ActivityStanding} from './ActivityStanding'
 import {ActivityRegistration} from './ActivityRegistration'
+import {ActivityPrize} from './ActivityPrize'
 
 export const activitySchema = Yup.object().shape({
   title: Yup.string().required('Activity title is required'),
@@ -26,43 +27,49 @@ export const activitySchema = Yup.object().shape({
   platform_ids: Yup.mixed().required('At least 1 platform is required'),
   schedule: Yup.object().shape({
     registration_dates: Yup.object().shape({
-      start_date: Yup.string().required("Registration Start Date is required"),
-      end_date: Yup.string().required("Registration End Date is required")
+      start_date: Yup.string().required('Registration Start Date is required'),
+      end_date: Yup.string().required('Registration End Date is required'),
     }),
-    matchplay_dates: Yup.object().shape({
-      start_date: Yup.string().required("GameDay Start Date is required"),
-      end_date: Yup.string().required("GameDay End Date is required")
+    match_play_dates: Yup.object().shape({
+      start_date: Yup.string().required('GameDay Start Date is required'),
+      end_date: Yup.string().required('GameDay End Date is required'),
     }),
     settings: Yup.object().shape({
-      frequency: Yup.string().required("Match Frequency is required"),
-      time_of_day: Yup.string().required("Time of Day is required"),
-      timezone: Yup.string().required("Timezone is required"),
-      day: Yup.string().required("WeekDay is required"),
+      frequency: Yup.string().required('Match Frequency is required'),
+      time: Yup.string().required('Time of Day is required'),
+      timezone: Yup.string().required('Timezone is required'),
+      day: Yup.number().when('settings.frequency', {
+        is: 2,
+        then: Yup.number().required('Amount required'),
+      }),
+
+      // day: Yup.string().required('WeekDay is required'),
+    }),
+  }),
+  location: Yup.object().shape({
+    type: Yup.number().required('Entry Fee Type required'),
+    location: Yup.number().when('entry_fee.type', {
+      is: 2,
+      then: Yup.number().required('Amount required'),
     }),
   }),
   team: Yup.object().shape({
-    min: Yup.number().required("Minimum Players is required"),
-    max: Yup.number().required("Maximum Players is required"),
-    players: Yup.number().required("Players Per team is required"),
+    min: Yup.number().required('Minimum Players is required'),
+    max: Yup.number().required('Maximum Players is required'),
+    players: Yup.number().required('Players Per team is required'),
   }),
   entry_fee: Yup.object().shape({
     type: Yup.number().required('Entry Fee Type required'),
-    amount: Yup.number().when('entry_fee.type', {is: 2, then: Yup.number().required('Amount required')})
-  })
-  // game: Yup.string(),
-  // contact: Yup.object().shape({
-  //   name: Yup.string().required('Contact name is required'),
-  //   email: Yup.string().email('Please enter a valid email').required('Contact email is required'),
-  //   phone_number: Yup.string().required('Contact phone number is required'),
-  // }),
-  // address: Yup.object().shape({
-  //   address_one: Yup.string().required('Contact address is required'),
-  //   // address_two: Yup.string(),
-  //   city: Yup.string().required('City is required'),
-  //   // state_province: Yup.string().required('State Province is required'),
-  //   postal_code: Yup.string().required('Postal Code is required'),
-  //   // country_code: Yup.string().required('Country Code is required'),
-  // }),
+    amount: Yup.number().when('entry_fee.type', {
+      is: 2,
+      then: Yup.number().required('Amount required'),
+    }),
+  }),
+  // prize: Yup.array().of(
+  //   Yup.object().shape({
+  //     type: Yup.string().required('Item type is required'),
+  //   })
+  // ),
 })
 
 export const initialActivity = (activity?: Activity) => {
@@ -76,7 +83,7 @@ export const initialActivity = (activity?: Activity) => {
       start_date: 0,
       end_date: 0,
     },
-    matchplay_dates: {
+    match_play_dates: {
       start_date: 0,
       end_date: 0,
     },
@@ -115,7 +122,7 @@ export type Activity = {
     start_date: number
     end_date: number
   }
-  matchplay_dates: {
+  match_play_dates: {
     start_date: number
     end_date: number
   }
@@ -152,30 +159,32 @@ export type ActivityForm = {
   game_mode_id?: string
   rounds?: string
   is_cross_play?: boolean
-  team?: ActivityTeamSetting
+  platform_ids?: number[]
   schedule: {
     registration_dates: {
       start_date: number
       end_date: number
     }
-    matchplay_dates: {
+    match_play_dates: {
       start_date: number
       end_date: number
-    },
+    }
     settings: {
-      frequency: string,
-      time_of_day: string,
-      timezone: string,
+      frequency: string
+      time: string
+      timezone: string
       day: string
     }
   }
-  entry_fee?: ActivityFee
   location?: ActivityLocation
-  platform_ids?: number[]
+  team?: ActivityTeamSetting
+  entry_fee?: ActivityFee
+  prize?: ActivityPrize[]
 }
 
 export const initialActivityForm = (activityForm?: ActivityForm) => {
   return {
+    type_id: activityForm?.type_id || 1,
     title: activityForm?.title || '',
     description: activityForm?.description || '',
     community_id: activityForm?.community_id || '',
@@ -189,16 +198,16 @@ export const initialActivityForm = (activityForm?: ActivityForm) => {
         start_date: activityForm?.schedule.registration_dates.start_date || 0,
         end_date: activityForm?.schedule.registration_dates.end_date || 0,
       },
-      matchplay_dates: {
-        start_date: activityForm?.schedule.matchplay_dates.start_date || 0,
-        end_date: activityForm?.schedule.matchplay_dates.end_date || 0,
+      match_play_dates: {
+        start_date: activityForm?.schedule.match_play_dates.start_date || 0,
+        end_date: activityForm?.schedule.match_play_dates.end_date || 0,
       },
       settings: {
         frequency: activityForm?.schedule.settings.frequency || '',
-        time_of_day: activityForm?.schedule.settings.time_of_day || '',
+        time: activityForm?.schedule.settings.time || '',
         timezone: activityForm?.schedule.settings.timezone || '',
-        day: activityForm?.schedule.settings.day || ''
-      }
+        day: activityForm?.schedule.settings.day || '',
+      },
     },
     team: {
       min: activityForm?.team?.min || 0,
@@ -211,85 +220,7 @@ export const initialActivityForm = (activityForm?: ActivityForm) => {
     },
     location: {
       type: activityForm?.location?.type || 1,
-      location: activityForm?.location?.location || ''
-    }
-  }
-}
-
-export const prepareForStore = (
-  activity: Activity,
-  setActivity: Dispatch<SetStateAction<Activity>>
-) => {
-  updateData(
-    {
-      rounds: activity?.settings?.rounds,
-      type_id: 1,
-      is_cross_play: activity?.settings?.is_cross_play,
-      game_id: activity?.game?.id,
-      game_mode_id: activity?.game_mode?.id,
-      team: activity?.team_settings,
-      ready_to_submit: true,
-      schedule: {
-        registration_dates: {
-          start_date: activity?.registration_dates?.start_date,
-          end_date: activity?.registration_dates?.end_date,
-        },
-        match_play_dates: {
-          start_date: activity?.matchplay_dates?.start_date,
-          end_date: activity?.matchplay_dates?.end_date,
-        },
-      },
+      location: activityForm?.location?.location || '',
     },
-    setActivity,
-    activity
-  )
-}
-
-export function formOnChange(
-  event: any,
-  activity: Activity | undefined,
-  setActivity: Dispatch<SetStateAction<Activity>>
-) {
-  let targetName = event.target.name
-  let targetValue = event.target.value
-
-  console.log(targetName)
-  console.log(targetValue)
-
-  if (targetName === 'is_cross_play') {
-    updateData(
-      {
-        settings: {...activity?.settings, ...{is_cross_play: !activity?.settings?.is_cross_play}},
-      },
-      setActivity,
-      activity
-    )
-  } else if (targetName === 'location.location') {
-    updateData(
-      {
-        location: {...activity?.location, ...{location: targetValue}},
-      },
-      setActivity,
-      activity
-    )
-  } else if (targetName === 'entry_fee.amount') {
-    updateData(
-      {
-        entry_fee: {...activity?.entry_fee, ...{amount: targetValue}},
-      },
-      setActivity,
-      activity
-    )
-  } else if (targetName.includes('team_settings.')) {
-    let targetField = targetName.split('team_settings.')[1]
-    updateData(
-      {
-        team_settings: {...activity?.team_settings, ...{[targetField]: targetValue}},
-      },
-      setActivity,
-      activity
-    )
-  } else {
-    updateData({[targetName]: targetValue}, setActivity, activity)
   }
 }

@@ -1,5 +1,5 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
-import {Activity} from '../../models/Activity'
+import {ActivityForm} from '../../models/Activity'
 import FormControl from '@mui/material/FormControl'
 import {InputLabel, MenuItem, Select} from '@mui/material'
 import Box from '@mui/material/Box'
@@ -8,13 +8,14 @@ import {PrizeSingleWrapper} from './PrizeSingleWrapper'
 import {updateData} from '../../../../helpers/form/FormHelper'
 
 type Props = {
-  activity: Activity | undefined
-  setActivity: Dispatch<SetStateAction<Activity>>
+  activity: ActivityForm
+  setActivity: Dispatch<SetStateAction<ActivityForm>>
 }
 
 const PrizeWrapper: FC<Props> = ({activity, setActivity}) => {
   const [winningWay, setWinningWay] = useState('')
   const [activityPrizes, setActivityPrizes] = useState<ActivityPrize[]>([])
+  // const [prize, setPrize] = useState<ActivityPrize
 
   useEffect(() => {
     updateData(
@@ -29,7 +30,7 @@ const PrizeWrapper: FC<Props> = ({activity, setActivity}) => {
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activityPrizes])
-
+  //
   return (
     <>
       <div className='row mb-6'>
@@ -83,4 +84,4 @@ const PrizeWrapper: FC<Props> = ({activity, setActivity}) => {
   )
 }
 
-export {PrizeWrapper}
+export { PrizeWrapper };

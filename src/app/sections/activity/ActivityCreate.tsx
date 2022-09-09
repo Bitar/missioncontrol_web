@@ -3,7 +3,7 @@ import {ActivityForm, activitySchema, initialActivityForm} from './models/Activi
 import {jsonToFormData, updateData} from '../../helpers/form/FormHelper'
 import {createActivity} from './core/ActivityRequests'
 import {KTCard, KTCardBody} from '../../../_metronic/helpers'
-import {ErrorMessage, Field, Form, Formik} from 'formik'
+import {Form, Formik} from 'formik'
 import {FormAction} from '../../helpers/form/FormAction'
 import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl'
@@ -36,6 +36,7 @@ import {TimeOfDayPicker} from './components/TimeOfDayPicker'
 import {getTimeZones} from '../misc/core/_requests'
 import {TimeZone} from '../../models/misc/TimeZone'
 import TextField from '@mui/material/TextField'
+import {PrizeWrapper} from './components/prize/PrizeWrapper'
 
 const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
   const [communities, setCommunities] = useState<Community[]>()
@@ -93,6 +94,8 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
   const handleSubmit = async () => {
     // prepareForStore(activity, setActivity)
 
+    console.log('here')
+
     let data = jsonToFormData(activity)
     createActivity(data)
       .then(() => {
@@ -126,7 +129,7 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
         setActivity,
         activity
       )
-    } else if(targetName === 'location.location') {
+    } else if (targetName === 'location.location') {
       updateData(
         {
           location: {
@@ -605,23 +608,13 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                           name='location.location'
                           variant={'outlined'}
                         />
-
-                        {/*<Field*/}
-                        {/*  type='text'*/}
-                        {/*  name='location.location'*/}
-                        {/*  className='form-control mb-3 mb-lg-0'*/}
-                        {/*  onChange={(e: any) => {}}*/}
-                        {/*  value={activity?.location?.location}*/}
-                        {/*/>*/}
                       </div>
                     </div>
                   )}
 
-                  {/*<TextFieldWrapper name='place' label='Place' />*/}
-
                   <div className='separator separator-dashed my-6'></div>
 
-                  {/*<PrizeWrapper {...ActivityProps} />*/}
+                  <PrizeWrapper activity={activity} setActivity={setActivity} />
 
                   {/*<div className='separator separator-dashed my-6'></div>*/}
                   {/*<Prizes {...ActivityProps} />*/}

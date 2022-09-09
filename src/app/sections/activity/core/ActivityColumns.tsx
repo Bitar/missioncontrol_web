@@ -5,8 +5,9 @@ import {ActionsCell} from '../../../modules/table/columns/ActionsCell'
 import {QUERIES, toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {Activity} from '../models/Activity'
 import {BadgeCell} from '../../../modules/table/columns/BadgeCell'
-import {formatDates, formatActivityStatus} from '../../../helpers/ActivityHelper'
+import {formatActivityStatus, formatDates} from '../../../helpers/ActivityHelper'
 import dayjs from 'dayjs'
+import React from 'react'
 
 const ActivityColumns: ReadonlyArray<Column<Activity>> = [
   {
@@ -51,42 +52,42 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
     },
   },
   {
-    Header: (props) => <CustomHeader tableProps={props} title='Registration Dates' className='min-w-200px' />,
+    Header: (props) => (
+      <CustomHeader tableProps={props} title='Registration Dates' className='min-w-200px' />
+    ),
     id: 'Registration',
     Cell: ({...props}) => {
       const {startDate, endDate} = formatDates(props.data[props.row.index].registration_dates)
       return (
-        <>
-          <div className='d-flex align-items-center'>
-            <div className='d-flex flex-column text-center'>
-              <span className='text-gray-800 pe-none'>{startDate}</span>
-              <span className='my-1'>
-                <i className='fa fa-arrow-circle-down text-mc-secondary'></i>
-              </span>
-              <span className='text-gray-800 pe-none'>{endDate}</span>
-            </div>
+        <div className='d-flex align-items-center'>
+          <div className='d-flex flex-column text-center'>
+            <span className='text-gray-800 pe-none'>{startDate}</span>
+            <span className='my-1'>
+              <i className='fa fa-arrow-circle-down text-mc-secondary'></i>
+            </span>
+            <span className='text-gray-800 pe-none'>{endDate}</span>
           </div>
-        </>
+        </div>
       )
     },
   },
   {
-    Header: (props) => <CustomHeader tableProps={props} title='MatchPlay Dates' className='min-w-200px' />,
+    Header: (props) => (
+      <CustomHeader tableProps={props} title='MatchPlay Dates' className='min-w-200px' />
+    ),
     id: 'Game Day',
     Cell: ({...props}) => {
-      const {startDate, endDate} = formatDates(props.data[props.row.index].matchplay_dates)
+      const {startDate, endDate} = formatDates(props.data[props.row.index].match_play_dates)
       return (
-        <>
-          <div className='d-flex align-items-center'>
-            <div className='d-flex flex-column text-center'>
-              <span className='text-gray-800 pe-none'>{startDate}</span>
-              <span className='my-1'>
-                <i className='fa fa-arrow-circle-down text-mc-secondary'></i>
-              </span>
-              <span className='text-gray-800 pe-none'>{endDate}</span>
-            </div>
+        <div className='d-flex align-items-center'>
+          <div className='d-flex flex-column text-center'>
+            <span className='text-gray-800 pe-none'>{startDate}</span>
+            <span className='my-1'>
+              <i className='fa fa-arrow-circle-down text-mc-secondary'></i>
+            </span>
+            <span className='text-gray-800 pe-none'>{endDate}</span>
           </div>
-        </>
+        </div>
       )
     },
   },
@@ -106,14 +107,24 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
   {
     Header: (props) => <CustomHeader tableProps={props} title='Players' className='min-w-125px' />,
     id: 'players',
-    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].data?.players_count} />,
+    Cell: ({...props}) => (
+      <div className='text-center'>
+        <span className='text-gray-800 pe-none mb-1'>
+          {props.data[props.row.index].additional_data?.players_count || 0}
+        </span>
+      </div>
+    ),
   },
   {
-    Header: (props) => (
-      <CustomHeader tableProps={props} title='# of Teams' className='min-w-125px' />
-    ),
+    Header: (props) => <CustomHeader tableProps={props} title='Teams' className='min-w-125px' />,
     id: 'teams',
-    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].data?.teams_count} />,
+    Cell: ({...props}) => (
+      <div className='text-center'>
+        <span className='text-gray-800 pe-none mb-1'>
+          {props.data[props.row.index].additional_data?.teams_count || 0}
+        </span>
+      </div>
+    ),
   },
   {
     Header: (props) => (
@@ -121,11 +132,13 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
     ),
     id: 'created_at',
     Cell: ({...props}) => (
-      <TextCell
-        dObject={dayjs(new Date(props.data[props.row.index].created_at * 1000)).format(
-          'ddd, ll @ H:m a'
-        )}
-      />
+      <div className='text-center'>
+        <span className='text-gray-800 pe-none mb-1'>
+          {dayjs(new Date(props.data[props.row.index].created_at * 1000)).format(
+            'ddd, ll @ h:mm a'
+          )}
+        </span>
+      </div>
     ),
   },
   {

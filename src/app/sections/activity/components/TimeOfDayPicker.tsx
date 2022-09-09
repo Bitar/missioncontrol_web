@@ -34,7 +34,7 @@ const TimeOfDayPicker: FC<Props> = ({activity, setActivity}) => {
                   ...activity?.schedule,
                   ...{settings: {
                       ...activity?.schedule.settings,
-                      ...{time_of_day: timeOfDay},
+                      ...{time: timeOfDay},
                     }}
                 },
               },

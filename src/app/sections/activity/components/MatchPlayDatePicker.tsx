@@ -34,8 +34,8 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
       {
         schedule: {
           ...activity?.schedule,
-          ...{matchplay_dates: {
-              ...activity?.schedule.matchplay_dates,
+          ...{match_play_dates: {
+              ...activity?.schedule.match_play_dates,
               ...{start_date: startDate, end_date: endDate},
             }}
         },

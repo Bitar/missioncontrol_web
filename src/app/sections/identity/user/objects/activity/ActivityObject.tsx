@@ -62,7 +62,7 @@ const ActivityObject: FC<Props> = ({activity}) => {
             </div>
             <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3'>
               <div className='fs-6 text-gray-800 fw-bolder'>
-                {Moment(activity?.matchplay_dates?.start_date * 1000).format('ddd, MMM D YYYY')}
+                {Moment(activity?.match_play_dates?.start_date * 1000).format('ddd, MMM D YYYY')}
               </div>
               <div className='fw-bold text-gray-400'>Game Day</div>
             </div>

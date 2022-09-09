@@ -29,6 +29,48 @@ const PrizeSingle: FC<Props> = ({
   const [valueSuffix, setValueSuffix] = useState('')
   const [prizeItem, setPrizeItem] = useState<PrizeItem>(initialPrizeItem)
 
+  const handleOnChange = (event: any) => {
+    let targetName = event.target.name
+    let targetValue = event.target.value
+
+    console.log(targetName)
+    console.log(targetValue)
+
+    // if (targetName === 'entry_fee.amount') {
+    //   updateData(
+    //     {
+    //       entry_fee: {
+    //         ...activity?.entry_fee,
+    //         ...{
+    //           amount: targetValue,
+    //         },
+    //       },
+    //     },
+    //     setActivity,
+    //     activity
+    //   )
+    // } else if (targetName === 'location.location') {
+    //   updateData(
+    //     {
+    //       location: {
+    //         ...activity?.location,
+    //         ...{
+    //           location: targetValue,
+    //         },
+    //       },
+    //     },
+    //     setActivity,
+    //     activity
+    //   )
+    // } else {
+    //   if (targetName === 'is_cross_play') {
+    //     targetValue = !activity?.is_cross_play
+    //   }
+    //
+    //   updateData({[targetName]: targetValue}, setActivity, activity)
+    // }
+  }
+
   useEffect(() => {
     updateData(
       {
@@ -55,20 +97,13 @@ const PrizeSingle: FC<Props> = ({
             </div>
             <div className='col-lg-3'>
               <TextField
+                required
                 label='Name'
                 variant='outlined'
-                name='name'
+                name='prizes.name'
                 className='w-100'
                 size='small'
-                onChange={(e) =>
-                  updateData(
-                    {
-                      name: e.target.value,
-                    },
-                    setPrizeItem,
-                    prizeItem
-                  )
-                }
+                onChange={handleOnChange}
               />
             </div>
 
