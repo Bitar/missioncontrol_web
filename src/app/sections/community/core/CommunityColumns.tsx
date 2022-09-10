@@ -5,6 +5,8 @@ import {Community} from '../models/Community'
 import {QUERIES} from '../../../../_metronic/helpers'
 import {ActionsCell} from '../../../modules/table/columns/ActionsCell'
 import {TextImageCell} from '../../../modules/table/columns/TextImageCell'
+import React from 'react'
+import { communityAccessType } from "../../../helpers/CommunityHelper";
 
 const communitiesColumns: ReadonlyArray<Column<Community>> = [
   {
@@ -28,11 +30,35 @@ const communitiesColumns: ReadonlyArray<Column<Community>> = [
     ),
   },
   {
-    Header: (props) => (
-      <CustomHeader tableProps={props} title='Description' className='min-w-125px' />
+    Header: (props) => <CustomHeader tableProps={props} title='Members' className='min-w-125px' />,
+    id: 'members',
+    Cell: ({...props}) => (
+      <TextCell dObject={props.data[props.row.index].additional_data.players_count} />
     ),
-    id: 'description',
-    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].description} />,
+  },
+  {
+    Header: (props) => (
+      <CustomHeader tableProps={props} title='Access Type' className='min-w-125px' />
+    ),
+    id: 'access_type',
+    Cell: ({...props}) => {
+      const {color, text} = communityAccessType(props.data[props.row.index]?.access?.type)
+
+      return (
+        <div className='d-flex align-items-center'>
+          <div className='d-flex flex-column'>
+            <span className={`badge badge-${color}`}>{text}</span>
+          </div>
+        </div>
+      )
+    },
+  },
+  {
+    Header: (props) => <CustomHeader tableProps={props} title='Activities In Progress' className='min-w-125px' />,
+    id: 'activities_count',
+    Cell: ({...props}) => (
+      <TextCell dObject={props.data[props.row.index].additional_data.activities_in_progress} />
+    ),
   },
   {
     Header: (props) => (
@@ -51,4 +77,4 @@ const communitiesColumns: ReadonlyArray<Column<Community>> = [
   },
 ]
 
-export {communitiesColumns}
+export { communitiesColumns };

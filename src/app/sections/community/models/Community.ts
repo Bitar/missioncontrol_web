@@ -50,6 +50,13 @@ export type Community = {
   users?: User[]
   games?: Game[]
   is_follow?: boolean
+  additional_data?: {
+    activities_count: number,
+    activities_in_progress: number,
+    in_active_league: boolean,
+    open_registrations: number,
+    players_count: number,
+  }
 }
 
 export type CommunityQueryResponse = Response<Array<Community>>
