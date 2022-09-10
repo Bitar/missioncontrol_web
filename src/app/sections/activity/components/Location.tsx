@@ -1,7 +1,6 @@
 import React, {Dispatch, FC, SetStateAction} from 'react'
-import { Activity, ActivityForm } from "../models/Activity";
+import { ActivityForm } from "../models/Activity";
 import clsx from 'clsx'
-import {ErrorMessage, Field} from 'formik'
 import {updateData} from '../../../helpers/form/FormHelper'
 
 type Props = {

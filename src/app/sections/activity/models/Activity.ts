@@ -1,15 +1,13 @@
 import {ID, Response} from '../../../../_metronic/helpers'
 import {Game} from '../../../models/game/Game'
-import {ActivityFee, initialActivityFee} from './ActivityFee'
-import {ActivityLocation, initialActivityLocation} from './ActivityLocation'
+import {ActivityFee} from './ActivityFee'
+import {ActivityLocation} from './ActivityLocation'
 import {Community} from '../../community/models/Community'
-import {Dispatch, SetStateAction} from 'react'
-import {updateData} from '../../../helpers/form/FormHelper'
 import * as Yup from 'yup'
-import {ActivityType, initialActivityType} from './ActivityType'
-import {ActivitySettings, initialActivitySettings} from './ActivitySettings'
+import {ActivityType} from './ActivityType'
+import {ActivitySettings} from './ActivitySettings'
 import {GameMode} from '../../../models/game/GameMode'
-import {ActivityTeamSetting, initialActivityTeamSetting} from './AvtivityTeamSetting'
+import {ActivityTeamSetting} from './AvtivityTeamSetting'
 import {Team} from '../../../models/squad/Team'
 import {Announcement} from '../../../models/announcement/Announcements'
 import {ActivityStanding} from './ActivityStanding'
@@ -30,7 +28,7 @@ export const activitySchema = Yup.object().shape({
       start_date: Yup.string().required('Registration Start Date is required'),
       end_date: Yup.string().required('Registration End Date is required'),
     }),
-    match_play_dates: Yup.object().shape({
+    matchplay_dates: Yup.object().shape({
       start_date: Yup.string().required('GameDay Start Date is required'),
       end_date: Yup.string().required('GameDay End Date is required'),
     }),
@@ -72,37 +70,37 @@ export const activitySchema = Yup.object().shape({
   // ),
 })
 
-export const initialActivity = (activity?: Activity) => {
-  return {
-    title: activity?.title || '',
-    description: activity?.description || '',
-    type: initialActivityType(activity?.type),
-    status: activity?.status || 0,
-    settings: initialActivitySettings(activity?.settings),
-    registration_dates: {
-      start_date: 0,
-      end_date: 0,
-    },
-    match_play_dates: {
-      start_date: 0,
-      end_date: 0,
-    },
-
-    location: initialActivityLocation(activity?.location),
-    entry_fee: initialActivityFee(activity?.entry_fee),
-
-    additional_data: {
-      teams_count: 0,
-      players_count: 0,
-      total_sessions: 0,
-    },
-
-    team_settings: initialActivityTeamSetting(activity?.team_settings),
-
-    ready_to_submit: false,
-    community_id: 0,
-  }
-}
+// export const initialActivity = (activity?: Activity) => {
+//   return {
+//     title: activity?.title || '',
+//     description: activity?.description || '',
+//     type: initialActivityType(activity?.type),
+//     status: activity?.status || 0,
+//     settings: initialActivitySettings(activity?.settings),
+//     registration_dates: {
+//       start_date: 0,
+//       end_date: 0,
+//     },
+//     matchplay_dates: {
+//       start_date: 0,
+//       end_date: 0,
+//     },
+//
+//     location: initialActivityLocation(activity?.location),
+//     entry_fee: initialActivityFee(activity?.entry_fee),
+//
+//     additional_data: {
+//       teams_count: 0,
+//       players_count: 0,
+//       total_sessions: 0,
+//     },
+//
+//     team_settings: initialActivityTeamSetting(activity?.team_settings),
+//
+//     ready_to_submit: false,
+//     community_id: 0,
+//   }
+// }
 
 export type Activity = {
   id?: ID
@@ -122,7 +120,7 @@ export type Activity = {
     start_date: number
     end_date: number
   }
-  match_play_dates: {
+  matchplay_dates: {
     start_date: number
     end_date: number
   }
@@ -165,7 +163,7 @@ export type ActivityForm = {
       start_date: number
       end_date: number
     }
-    match_play_dates: {
+    matchplay_dates: {
       start_date: number
       end_date: number
     }
@@ -198,9 +196,9 @@ export const initialActivityForm = (activityForm?: ActivityForm) => {
         start_date: activityForm?.schedule.registration_dates.start_date || 0,
         end_date: activityForm?.schedule.registration_dates.end_date || 0,
       },
-      match_play_dates: {
-        start_date: activityForm?.schedule.match_play_dates.start_date || 0,
-        end_date: activityForm?.schedule.match_play_dates.end_date || 0,
+      matchplay_dates: {
+        start_date: activityForm?.schedule.matchplay_dates.start_date || 0,
+        end_date: activityForm?.schedule.matchplay_dates.end_date || 0,
       },
       settings: {
         frequency: activityForm?.schedule.settings.frequency || '',

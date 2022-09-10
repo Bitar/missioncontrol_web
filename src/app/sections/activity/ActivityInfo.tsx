@@ -82,14 +82,14 @@ const ActivityInfo: FC<Props> = ({activity}) => {
                       </div>
                     </div>
                   )}
-                  {activity?.match_play_dates && (
+                  {activity?.matchplay_dates && (
                     <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                       <div className='d-flex align-items-center'>
                         <i className='fa-solid fa-calendar-days fs-2 me-2 text-mc-secondary'></i>
                         <div className='fs-4 text-gray-400'>Game Date</div>
                       </div>
                       <div className='fw-semibold fs-6 fw-bold'>
-                        {dayjs(new Date(activity?.match_play_dates?.start_date * 1000)).format('ll')}
+                        {dayjs(new Date(activity?.matchplay_dates?.start_date * 1000)).format('ll')}
                       </div>
                     </div>
                   )}

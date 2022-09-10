@@ -1,5 +1,5 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
-import { Activity, ActivityForm } from "../models/Activity";
+import { ActivityForm } from "../models/Activity";
 import {updateData} from '../../../helpers/form/FormHelper'
 import {DateRange, DateRangePicker} from '@mui/x-date-pickers-pro/DateRangePicker'
 import dayjs, {Dayjs} from 'dayjs'
@@ -34,8 +34,8 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
       {
         schedule: {
           ...activity?.schedule,
-          ...{match_play_dates: {
-              ...activity?.schedule.match_play_dates,
+          ...{matchplay_dates: {
+              ...activity?.schedule.matchplay_dates,
               ...{start_date: startDate, end_date: endDate},
             }}
         },

@@ -1,7 +1,5 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
 import {Activity} from '../models/Activity'
-import {RegistrationDatePicker} from './RegistrationDatePicker'
-import {MatchPlayDatePicker} from './MatchPlayDatePicker'
 import {createTheme, ThemeProvider} from '@mui/material/styles'
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider'
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
@@ -211,7 +209,7 @@ const Schedule: FC<Props> = ({activity, setActivity}) => {
               >
                 {timeZones &&
                   timeZones.length > 0 &&
-                  timeZones.map((row: any, i) => (
+                  timeZones.map((row: any) => (
                     <MenuItem key={row.id} value={row.id}>
                       {row.name}
                     </MenuItem>

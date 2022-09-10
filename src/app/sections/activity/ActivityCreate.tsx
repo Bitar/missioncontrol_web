@@ -37,6 +37,10 @@ import {getTimeZones} from '../misc/core/_requests'
 import {TimeZone} from '../../models/misc/TimeZone'
 import TextField from '@mui/material/TextField'
 import {PrizeWrapper} from './components/prize/PrizeWrapper'
+import {useNavigate} from 'react-router-dom'
+import toast from 'react-hot-toast'
+import {useAuth} from '../../modules/auth'
+import {isUserCommunityAdmin} from '../identity/user/models/User'
 
 const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
   const [communities, setCommunities] = useState<Community[]>()
@@ -76,30 +80,28 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
     })
   }
 
-  // const navigate = useNavigate()
-  // const {currentUser, communityAdmin} = useAuth()
+  const navigate = useNavigate()
+  const {currentUser, communityAdmin} = useAuth()
 
-  // useEffect(() => {
-  //   if (currentUser && isUserCommunityAdmin(currentUser) && communityAdmin) {
-  //     updateData(
-  //       {
-  //         community_id: communityAdmin?.id,
-  //       },
-  //       setActivity,
-  //       activity
-  //     )
-  //   }
-  // }, [communityAdmin, currentUser])
+  useEffect(() => {
+    if (currentUser && isUserCommunityAdmin(currentUser) && communityAdmin) {
+      updateData(
+        {
+          community_id: communityAdmin?.id,
+        },
+        setActivity,
+        activity
+      )
+    }
+  }, [communityAdmin, currentUser])
 
   const handleSubmit = async () => {
     // prepareForStore(activity, setActivity)
-
-    console.log('here')
-
     let data = jsonToFormData(activity)
     createActivity(data)
-      .then(() => {
-        console.log('done')
+      .then((response) => {
+        toast.success('Activity Created Successfully')
+        navigate(`/activities/${response?.id}/overview`)
       })
       .catch((error) => {
         if (error.response) {
@@ -112,9 +114,6 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
   const handleOnChange = (event: any) => {
     let targetName = event.target.name
     let targetValue = event.target.value
-
-    console.log(targetName)
-    console.log(targetValue)
 
     if (targetName === 'entry_fee.amount') {
       updateData(
@@ -197,43 +196,43 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                     </div>
                   </div>
 
-                  {/*{currentUser && !isUserCommunityAdmin(currentUser) && (*/}
-                  <div className='row mb-6'>
-                    <div className='col-lg-12 fv-row'>
-                      <Box sx={{minWidth: 120}}>
-                        <FormControl
-                          fullWidth
-                          size='small'
-                          error={touched.community_id && Boolean(errors.community_id)}
-                        >
-                          <InputLabel id='communities-select-label'>Community</InputLabel>
-                          <Select
-                            labelId='communities-select-label'
-                            id='communities-select'
-                            value={values.community_id}
-                            name='community_id'
-                            label='Community'
-                            MenuProps={{PaperProps: {sx: {maxHeight: 300}}}}
-                            onChange={handleOnChange}
+                  {currentUser && !isUserCommunityAdmin(currentUser) && (
+                    <div className='row mb-6'>
+                      <div className='col-lg-12 fv-row'>
+                        <Box sx={{minWidth: 120}}>
+                          <FormControl
+                            fullWidth
+                            size='small'
+                            error={touched.community_id && Boolean(errors.community_id)}
                           >
-                            {communities &&
-                              communities?.length > 0 &&
-                              communities?.map((community: any) => (
-                                <MenuItem key={community.id} value={community.id}>
-                                  {community.name}
-                                </MenuItem>
-                              ))}
-                          </Select>
-                          {touched.community_id && Boolean(errors.community_id) && (
-                            <FormHelperText>
-                              {touched.community_id && errors.community_id}
-                            </FormHelperText>
-                          )}
-                        </FormControl>
-                      </Box>
+                            <InputLabel id='communities-select-label'>Community</InputLabel>
+                            <Select
+                              labelId='communities-select-label'
+                              id='communities-select'
+                              value={values.community_id}
+                              name='community_id'
+                              label='Community'
+                              MenuProps={{PaperProps: {sx: {maxHeight: 300}}}}
+                              onChange={handleOnChange}
+                            >
+                              {communities &&
+                                communities?.length > 0 &&
+                                communities?.map((community: any) => (
+                                  <MenuItem key={community.id} value={community.id}>
+                                    {community.name}
+                                  </MenuItem>
+                                ))}
+                            </Select>
+                            {touched.community_id && Boolean(errors.community_id) && (
+                              <FormHelperText>
+                                {touched.community_id && errors.community_id}
+                              </FormHelperText>
+                            )}
+                          </FormControl>
+                        </Box>
+                      </div>
                     </div>
-                  </div>
-                  {/*)}*/}
+                  )}
 
                   <div className='separator separator-dashed my-6'></div>
 
@@ -557,7 +556,7 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
 
                   {activity?.game_mode_id && (
                     <>
-                      <Scoring activity={activity} setActivity={setActivity} gameMode={gameMode} />
+                      <Scoring gameMode={gameMode} />
 
                       <div className='separator separator-dashed my-6'></div>
 

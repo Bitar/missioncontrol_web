@@ -1,16 +1,13 @@
-import { Activity, ActivityForm } from "../models/Activity";
-import React, {Dispatch, FC, SetStateAction} from 'react'
+import React, {FC} from 'react'
 import TextField from '@mui/material/TextField'
 import {ScoringSetting} from './ScoringSetting'
 import { GameMode } from "../../../models/game/GameMode";
 
 type Props = {
-  activity: ActivityForm
-  setActivity: Dispatch<SetStateAction<ActivityForm>>
   gameMode: GameMode | undefined
 }
 
-const Scoring: FC<Props> = ({activity, gameMode}) => {
+const Scoring: FC<Props> = ({gameMode}) => {
   const players = () => {
     let minPlayers = gameMode?.min_players
     let maxPlayers = gameMode?.max_players

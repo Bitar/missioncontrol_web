@@ -1,6 +1,5 @@
 export * from './Location'
 export * from './EntryFee'
-export * from './GameDetails'
 export * from './MatchPlayDatePicker'
 export * from './RegistrationDatePicker'
 export * from './Schedule'

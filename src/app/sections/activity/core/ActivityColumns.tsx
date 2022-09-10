@@ -77,7 +77,7 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
     ),
     id: 'Game Day',
     Cell: ({...props}) => {
-      const {startDate, endDate} = formatDates(props.data[props.row.index].match_play_dates)
+      const {startDate, endDate} = formatDates(props.data[props.row.index].matchplay_dates)
       return (
         <div className='d-flex align-items-center'>
           <div className='d-flex flex-column text-center'>
