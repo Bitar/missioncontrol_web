@@ -95,7 +95,7 @@ const AuthInit: FC<WithChildren> = ({children}) => {
   useEffect(() => {
     const requestUser = async (apiToken: string) => {
       try {
-        if (!didRequest.current) {
+        if (!didRequest.current && apiToken) {
 
           const {data} = await getUserByToken(apiToken)
           if (data) {
