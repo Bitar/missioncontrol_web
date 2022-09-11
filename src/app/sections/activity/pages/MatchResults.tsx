@@ -1,4 +1,4 @@
-import React, {Dispatch, FC, SetStateAction, useEffect, useRef} from 'react'
+import React, { Dispatch, FC, SetStateAction, useEffect, useRef, useState } from "react";
 import {Match} from '../models/matches/Match'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {calculateTeamScore} from '../../../helpers/MCHelper'
@@ -12,7 +12,7 @@ type Props = {
 const MatchResults: FC<Props> = ({matches, setMatch}) => {
   const params = useParams()
   const navigate = useNavigate()
-  const closedMatches = useRef<Match[] | undefined>([])
+  const [closedMatches, setClosedMatches] = useState<Match[] | undefined>()
 
   const handleMatchClick = (match: Match, to: string) => {
     setMatch(match)
@@ -24,7 +24,7 @@ const MatchResults: FC<Props> = ({matches, setMatch}) => {
   }
 
   useEffect(() => {
-    closedMatches.current = matches?.filter(filterClosedMatches)
+    setClosedMatches(matches?.filter(filterClosedMatches))
   }, [matches])
 
   return (
@@ -49,7 +49,7 @@ const MatchResults: FC<Props> = ({matches, setMatch}) => {
             data-kt-scroll-offset={'-2px'}
           >
             <div className='d-flex flex-column'>
-              {closedMatches.current && closedMatches.current?.length > 0 ? (
+              {closedMatches && closedMatches?.length > 0 ? (
                 matches?.filter(filterClosedMatches).map((match) => (
                   <div
                     key={match.id}
@@ -60,7 +60,7 @@ const MatchResults: FC<Props> = ({matches, setMatch}) => {
                   >
                     <div className='d-flex flex-stack '>
                       {match?.teams && match?.teams[0] && (
-                        <div className='flex-grow-1'>
+                        <div className='flex-grow-1 mw-200px'>
                           <div className='d-flex justify-content-start flex-stack'>
                             <div className='symbol symbol-30px symbol-circle me-3'>
                               <img
@@ -81,7 +81,7 @@ const MatchResults: FC<Props> = ({matches, setMatch}) => {
                         </div>
                       )}
                       {match?.teams && match?.teams[1] && (
-                        <div className='flex-grow-1'>
+                        <div className='flex-grow-1 mw-200px'>
                           <div className='d-flex flex-stack justify-content-end'>
                             <div className='fs-6 fw-bold'>{match?.teams[1].name}</div>
                             <div className='symbol symbol-30px symbol-circle ms-3'>

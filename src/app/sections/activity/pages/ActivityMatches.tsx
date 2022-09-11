@@ -1,8 +1,9 @@
-import React, {Dispatch, FC, SetStateAction, useEffect, useRef} from 'react'
-import {useNavigate, useParams} from 'react-router-dom'
-import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
-import {Match} from '../models/matches/Match'
-import {getDateFromTimestamp, getTimeFromTimestamp} from '../../../helpers/MCHelper'
+import React, { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { KTCard, KTCardBody } from "../../../../_metronic/helpers";
+import { Match } from "../models/matches/Match";
+import { getDateFromTimestamp, getTimeFromTimestamp } from "../../../helpers/MCHelper";
+import { formatMatchStatus } from "../../../helpers/ActivityHelper";
 
 // let matchesLoaded = false
 
@@ -14,10 +15,10 @@ type Props = {
 const ActivityMatches: FC<Props> = ({matches, setMatch}) => {
   const params = useParams()
   const navigate = useNavigate()
-  const openMatches = useRef<Match[] | undefined>([])
+  const [openMatches, setOpenMatches] = useState<Match[] | undefined>()
 
   useEffect(() => {
-    openMatches.current = matches?.filter(filterOpenMatches)
+    setOpenMatches(matches?.filter(filterOpenMatches))
   }, [matches])
 
   // const calculateTeamScore = (match: any, team: any) => {
@@ -65,8 +66,8 @@ const ActivityMatches: FC<Props> = ({matches, setMatch}) => {
             data-kt-scroll-offset='0'
           >
             <div className='d-flex flex-column'>
-              {openMatches.current && openMatches.current?.length > 0 ? (
-                openMatches.current?.map((match) => (
+              {openMatches && openMatches?.length > 0 ? (
+                openMatches?.map((match) => (
                   <div
                     key={match.id}
                     className='nav-link text-active-primary me-6 cursor-pointer'
@@ -76,7 +77,7 @@ const ActivityMatches: FC<Props> = ({matches, setMatch}) => {
                   >
                     <div className='d-flex flex-stack text-center'>
                       {match?.teams && match?.teams[0] && (
-                        <div className='flex-grow-1'>
+                        <div className='flex-grow-1 mw-200px'>
                           <div className='d-inline-block'>
                             <div className='symbol symbol-60px symbol-circle mb-3'>
                               <img
@@ -92,10 +93,19 @@ const ActivityMatches: FC<Props> = ({matches, setMatch}) => {
                         <div className='fs-6 fw-semibold text-gray-600 px-5'>
                           <p className='m-0'>{getTimeFromTimestamp(match?.start_date)}</p>
                           <p className='m-0'>{getDateFromTimestamp(match?.start_date)}</p>
+                          <p className='m-0 text-center'>
+                            <span
+                              className={'badge badge-' + formatMatchStatus(match?.status)['color']}
+                            >
+                              {formatMatchStatus(match?.status)['status']}
+                            </span>
+                          </p>
+                          {/*const {status, color} = formatActivityStatus(props.data[props.row.index].status)*/}
+                          {/*return <BadgeCell status={status} color={color} />*/}
                         </div>
                       </div>
                       {match?.teams && match?.teams[1] && (
-                        <div className='flex-grow-1'>
+                        <div className='flex-grow-1 mw-200px'>
                           <div className='d-inline-block'>
                             <div className='symbol symbol-60px symbol-circle mb-3'>
                               <img
