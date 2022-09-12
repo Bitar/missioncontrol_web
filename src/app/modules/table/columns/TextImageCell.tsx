@@ -10,8 +10,8 @@ type Props = {
 }
 
 const TextImageCell: FC<React.PropsWithChildren<Props>> = ({dImage, dText, dExtraText, link}) => {
-  if(dText === 'Hestia') {
-  console.log(dImage)
+  if (dText === 'Hestia') {
+    console.log(dImage)
   }
   return (
     <div className='d-flex align-items-center'>

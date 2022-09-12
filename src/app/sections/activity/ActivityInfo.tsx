@@ -1,20 +1,15 @@
 import React, {FC} from 'react'
-import {Activity} from './models/Activity'
 import {Link, useLocation} from 'react-router-dom'
 import {BadgeCell} from '../../modules/table/columns/BadgeCell'
 import {formatActivityStatus} from '../../helpers/ActivityHelper'
 import dayjs from 'dayjs'
-import { KTCard, KTCardBody} from "../../../_metronic/helpers";
+import {KTCard, KTCardBody} from '../../../_metronic/helpers'
 import clsx from 'clsx'
+import {useActivity} from './AuthContext'
 
-type Props = {
-  activity: Activity | undefined
-}
-
-const ActivityInfo: FC<Props> = ({activity}) => {
+const ActivityInfo: FC = () => {
+  const {activity} = useActivity()
   const location = useLocation()
-
-  console.log(activity);
 
   const getStatus = (activityStatus: any) => {
     const {status, color} = formatActivityStatus(activityStatus)
@@ -70,7 +65,6 @@ const ActivityInfo: FC<Props> = ({activity}) => {
                 </div>
               </div>
 
-
               <div className='d-flex flex-wrap justify-content-start'>
                 <div className='d-flex flex-wrap'>
                   {activity?.community && (
@@ -79,9 +73,7 @@ const ActivityInfo: FC<Props> = ({activity}) => {
                         <i className='fa fa-people-group text-mc-primary fs-2 me-2'></i>
                         <div className='fs-4 text-gray-400'>Community</div>
                       </div>
-                      <div className='fw-semibold fs-6 fw-bold'>
-                        {activity?.community?.name}
-                      </div>
+                      <div className='fw-semibold fs-6 fw-bold'>{activity?.community?.name}</div>
                     </div>
                   )}
                   {activity?.matchplay_dates && (
@@ -144,9 +136,12 @@ const ActivityInfo: FC<Props> = ({activity}) => {
                   )}
                   to={link.link}
                 >
-                  {link.icon &&
-                    <span> <i className={clsx('fs-4 me-2', link.icon)}></i> </span>
-                  }
+                  {link.icon && (
+                    <span>
+                      {' '}
+                      <i className={clsx('fs-4 me-2', link.icon)}></i>{' '}
+                    </span>
+                  )}
                   {link.text}
                 </Link>
               </li>
@@ -158,4 +153,4 @@ const ActivityInfo: FC<Props> = ({activity}) => {
   )
 }
 
-export { ActivityInfo };
+export {ActivityInfo}

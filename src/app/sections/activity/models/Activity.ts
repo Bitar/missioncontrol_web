@@ -1,13 +1,13 @@
 import {ID, Response} from '../../../../_metronic/helpers'
 import {Game} from '../../../models/game/Game'
-import {ActivityFee} from './ActivityFee'
-import {ActivityLocation} from './ActivityLocation'
+import {ActivityFee, initialActivityFee} from './ActivityFee'
+import {ActivityLocation, initialActivityLocation} from './ActivityLocation'
 import {Community} from '../../community/models/Community'
 import * as Yup from 'yup'
-import {ActivityType} from './ActivityType'
-import {ActivitySettings} from './ActivitySettings'
+import {ActivityType, initialActivityType} from './ActivityType'
+import {ActivitySettings, initialActivitySettings} from './ActivitySettings'
 import {GameMode} from '../../../models/game/GameMode'
-import {ActivityTeamSetting} from './AvtivityTeamSetting'
+import {ActivityTeamSetting, initialActivityTeamSetting} from './AvtivityTeamSetting'
 import {Team} from '../../../models/squad/Team'
 import {Announcement} from '../../../models/announcement/Announcements'
 import {ActivityStanding} from './ActivityStanding'
@@ -70,37 +70,23 @@ export const activitySchema = Yup.object().shape({
   // ),
 })
 
-// export const initialActivity = (activity?: Activity) => {
-//   return {
-//     title: activity?.title || '',
-//     description: activity?.description || '',
-//     type: initialActivityType(activity?.type),
-//     status: activity?.status || 0,
-//     settings: initialActivitySettings(activity?.settings),
-//     registration_dates: {
-//       start_date: 0,
-//       end_date: 0,
-//     },
-//     matchplay_dates: {
-//       start_date: 0,
-//       end_date: 0,
-//     },
-//
-//     location: initialActivityLocation(activity?.location),
-//     entry_fee: initialActivityFee(activity?.entry_fee),
-//
-//     additional_data: {
-//       teams_count: 0,
-//       players_count: 0,
-//       total_sessions: 0,
-//     },
-//
-//     team_settings: initialActivityTeamSetting(activity?.team_settings),
-//
-//     ready_to_submit: false,
-//     community_id: 0,
-//   }
-// }
+export const initialActivity = (activity?: Activity) => {
+  return {
+    title: activity?.title || '',
+    description: activity?.description || '',
+    type: initialActivityType(activity?.type),
+    status: activity?.status || 0,
+    settings: initialActivitySettings(activity?.settings),
+    registration_dates: {
+      start_date: 0,
+      end_date: 0,
+    },
+    matchplay_dates: {
+      start_date: 0,
+      end_date: 0,
+    },
+  }
+}
 
 export type Activity = {
   id?: ID
@@ -108,7 +94,6 @@ export type Activity = {
   description?: string
   created_at?: number
   type: ActivityType
-  community_id: number
   status: number
   teams?: Team[]
   registrations?: ActivityRegistration[]
@@ -138,11 +123,6 @@ export type Activity = {
     players_count: number
     total_sessions: number
   }
-  game_mode_id?: number
-  game_id?: number
-  type_id?: number
-  platform_ids?: number[]
-  ready_to_submit: boolean
 }
 
 export type ActivityQueryResponse = Response<Array<Activity>>

@@ -4,6 +4,7 @@ import {Navigate, Route, Routes} from 'react-router-dom'
 import {ActivityIndex} from './ActivityIndex'
 import {ActivityCreate} from '../ActivityCreate'
 import {ActivityView} from './ActivityView'
+import {SuspenseView} from '../../../layout/SuspenseView'
 
 const activityBreadCrumbs: Array<PageLink> = [
   {
@@ -27,8 +28,10 @@ const ActivityPage: FC = () => {
         path='/overview'
         element={
           <>
-            <PageTitle breadcrumbs={activityBreadCrumbs}>{'Overview'}</PageTitle>
-            <ActivityIndex />
+            <SuspenseView>
+              <PageTitle breadcrumbs={activityBreadCrumbs}>{'Overview'}</PageTitle>
+              <ActivityIndex />
+            </SuspenseView>
           </>
         }
       />
@@ -36,8 +39,10 @@ const ActivityPage: FC = () => {
         path='/create'
         element={
           <>
-            <PageTitle breadcrumbs={activityBreadCrumbs}>{'Add Activity'}</PageTitle>
-            <ActivityCreate />
+            <SuspenseView>
+              <PageTitle breadcrumbs={activityBreadCrumbs}>{'Add Activity'}</PageTitle>
+              <ActivityCreate />
+            </SuspenseView>
           </>
         }
       />
@@ -45,8 +50,10 @@ const ActivityPage: FC = () => {
         path='/:id/*'
         element={
           <>
-            <PageTitle breadcrumbs={activityBreadCrumbs}>{'View Community'}</PageTitle>
-            <ActivityView />
+            <SuspenseView>
+              <PageTitle breadcrumbs={activityBreadCrumbs}>{'View Community'}</PageTitle>
+              <ActivityView />
+            </SuspenseView>
           </>
         }
       />
@@ -55,4 +62,4 @@ const ActivityPage: FC = () => {
   )
 }
 
-export {ActivityPage}
+export { ActivityPage };

@@ -1,4 +1,4 @@
-import {Route, Routes, Navigate} from 'react-router-dom'
+import {Navigate, Route, Routes} from 'react-router-dom'
 import {MasterLayout} from '../../_metronic/layout/MasterLayout'
 import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper'
 import {Marketing} from '../pages/marketing/Marketing'
@@ -58,16 +58,6 @@ const PrivateRoutes = () => {
         />
         <Route path='permissions/*' element={<PermissionPage />} />
 
-        {/*<Route*/}
-        {/*  path='activities/:id/matches/:matchId/*'*/}
-        {/*  element={*/}
-        {/*    <>*/}
-        {/*      <SuspenseView>*/}
-        {/*        <MatchPage />*/}
-        {/*      </SuspenseView>*/}
-        {/*    </>*/}
-        {/*  }*/}
-        {/*/>*/}
         <Route
           path='activities/*'
           element={

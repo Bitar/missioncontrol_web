@@ -132,4 +132,4 @@ const RoleCreate = () => {
   )
 }
 
-export { RoleCreate };
+export {RoleCreate}

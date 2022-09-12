@@ -79,7 +79,6 @@ const CommunityInfo: FC<Props> = ({
                 {/*  <button type={'button'} className="btn btn-sm btn-bg-light btn-active-color-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">Community Link</button>*/}
                 {/*</div>*/}
 
-
                 <div className='d-flex flex-wrap fw-bold fs-6 mb-4 pe-2'>
                   {community?.contact && (
                     <>

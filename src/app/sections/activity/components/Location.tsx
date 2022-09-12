@@ -1,5 +1,5 @@
 import React, {Dispatch, FC, SetStateAction} from 'react'
-import { ActivityForm } from "../models/Activity";
+import {ActivityForm} from '../models/Activity'
 import clsx from 'clsx'
 import {updateData} from '../../../helpers/form/FormHelper'
 
@@ -32,10 +32,9 @@ const Location: FC<Props> = ({activity, setActivity}) => {
           <div className='row'>
             <div className='col-lg-6'>
               <div
-                className={clsx(
-                  'bg-active-mc-secondary cursor-pointer mb-5',
-                  {active: activity?.location?.type === 1}
-                )}
+                className={clsx('bg-active-mc-secondary cursor-pointer mb-5', {
+                  active: activity?.location?.type === 1,
+                })}
                 onClick={(event) => handleLocationChange(event, 1)}
               >
                 <div
@@ -54,10 +53,9 @@ const Location: FC<Props> = ({activity, setActivity}) => {
             </div>
             <div className='col-lg-6'>
               <div
-                className={clsx(
-                  'bg-active-mc-secondary cursor-pointer mb-5',
-                  {active: activity?.location?.type === 2}
-                )}
+                className={clsx('bg-active-mc-secondary cursor-pointer mb-5', {
+                  active: activity?.location?.type === 2,
+                })}
                 onClick={(event) => handleLocationChange(event, 2)}
               >
                 <div

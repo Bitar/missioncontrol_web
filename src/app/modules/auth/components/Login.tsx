@@ -125,4 +125,4 @@ const Login = () => {
   )
 }
 
-export { Login };
+export {Login}

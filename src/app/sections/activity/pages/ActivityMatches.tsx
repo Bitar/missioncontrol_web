@@ -1,9 +1,9 @@
-import React, { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { KTCard, KTCardBody } from "../../../../_metronic/helpers";
-import { Match } from "../models/matches/Match";
-import { getDateFromTimestamp, getTimeFromTimestamp } from "../../../helpers/MCHelper";
-import { formatMatchStatus } from "../../../helpers/ActivityHelper";
+import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
+import {useNavigate, useParams} from 'react-router-dom'
+import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
+import {Match} from '../models/matches/Match'
+import {getDateFromTimestamp, getTimeFromTimestamp} from '../../../helpers/MCHelper'
+import {formatMatchStatus} from '../../../helpers/ActivityHelper'
 
 // let matchesLoaded = false
 
@@ -134,4 +134,4 @@ const ActivityMatches: FC<Props> = ({matches, setMatch}) => {
   )
 }
 
-export { ActivityMatches };
+export {ActivityMatches}

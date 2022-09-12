@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
 import TextField from '@mui/material/TextField'
 import {ScoringSetting} from './ScoringSetting'
-import { GameMode } from "../../../models/game/GameMode";
+import {GameMode} from '../../../models/game/GameMode'
 
 type Props = {
   gameMode: GameMode | undefined
@@ -40,7 +40,7 @@ const Scoring: FC<Props> = ({gameMode}) => {
           />
         </div>
       </div>
-      
+
       <div className='row mb-6'>
         <div className='col-12'>
           <TextField
@@ -54,7 +54,7 @@ const Scoring: FC<Props> = ({gameMode}) => {
           />
         </div>
       </div>
-      
+
       <div className='row mb-6'>
         <div className='col-12'>
           <TextField
@@ -68,7 +68,7 @@ const Scoring: FC<Props> = ({gameMode}) => {
           />
         </div>
       </div>
-      
+
       <div className='row mb-6'>
         <div className='col-12'>
           <TextField
@@ -83,7 +83,7 @@ const Scoring: FC<Props> = ({gameMode}) => {
           />
         </div>
       </div>
-      
+
       <div className='row mb-6'>
         <div className='col-12'>
           <TextField
@@ -100,7 +100,7 @@ const Scoring: FC<Props> = ({gameMode}) => {
           />
         </div>
       </div>
-      
+
       {gameMode?.scoring_settings && (
         <div className='row mb-6'>
           <div className='col-12'>

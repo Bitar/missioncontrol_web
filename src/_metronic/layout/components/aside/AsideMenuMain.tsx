@@ -35,7 +35,12 @@ export function AsideMenuMain() {
         />
       </Restricted>
       <Restricted to='view-activities'>
-        <AsideMenuItem to='/activities' title='Activities' fontIcon={'fa-gamepad'} menuIcon='font' />
+        <AsideMenuItem
+          to='/activities'
+          title='Activities'
+          fontIcon={'fa-gamepad'}
+          menuIcon='font'
+        />
       </Restricted>
       <Restricted to='view-games'>
         <AsideMenuItem to='/games' title='Games' fontIcon={'fa-chess-pawn'} menuIcon='font' />

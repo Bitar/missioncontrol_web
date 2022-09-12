@@ -1,5 +1,5 @@
 import React, {FC} from 'react'
-import { FormikErrors, FormikTouched, FormikValues, useField, useFormikContext } from "formik";
+import {FormikErrors, FormikTouched, FormikValues, useField, useFormikContext} from 'formik'
 import {FormControl, FormHelperText, InputLabel, MenuItem, Select} from '@mui/material'
 
 type Props = {
@@ -8,11 +8,19 @@ type Props = {
   options: any
   touched: FormikTouched<FormikValues>
   errors: FormikErrors<FormikValues>
-  values: FormikValues,
+  values: FormikValues
   setFieldValue: any
 }
 
-const SelectWrapper: FC<Props> = ({name, label, options, values, touched, errors, setFieldValue}) => {
+const SelectWrapper: FC<Props> = ({
+  name,
+  label,
+  options,
+  values,
+  touched,
+  errors,
+  setFieldValue,
+}) => {
   // console.log(field)
   // console.log(meta)
 
@@ -78,4 +86,4 @@ const SelectWrapper: FC<Props> = ({name, label, options, values, touched, errors
   )
 }
 
-export { SelectWrapper };
+export {SelectWrapper}

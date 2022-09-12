@@ -1,16 +1,10 @@
-import {Activity} from '../models/Activity'
-import {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
+import {FC, useEffect, useState} from 'react'
 import {ActivityChatInner} from './ActivityChatInner'
 import {useParams} from 'react-router-dom'
 import {ChatMessage} from '../../../models/chat/ChatMessage'
 import {getActivityChat} from '../core/ActivityRequests'
 
-type Props = {
-  activity: Activity | undefined
-  setActivity: Dispatch<SetStateAction<Activity | undefined>>
-}
-
-const ActivityChat: FC<Props> = ({activity, setActivity}) => {
+const ActivityChat: FC = () => {
   const params = useParams()
 
   const [chat, setChat] = useState<ChatMessage[] | undefined>([])

@@ -1,12 +1,10 @@
 import React, {FC} from 'react'
-import {Activity} from '../models/Activity'
 import {ActivityStandings} from '../partials/ActivityStandings'
+import {useActivity} from '../AuthContext'
 
-type Props = {
-  activity: Activity | undefined
-}
+const ActivityTeams: FC = () => {
+  const {activity} = useActivity()
 
-const ActivityTeams: FC<Props> = ({activity}) => {
   return (
     <>
       <div className='mb-5'>

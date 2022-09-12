@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction, useEffect, useRef, useState } from "react";
+import React, {Dispatch, FC, SetStateAction, useEffect, useRef, useState} from 'react'
 import {Match} from '../models/matches/Match'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {calculateTeamScore} from '../../../helpers/MCHelper'
@@ -110,4 +110,4 @@ const MatchResults: FC<Props> = ({matches, setMatch}) => {
   )
 }
 
-export { MatchResults };
+export {MatchResults}

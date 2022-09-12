@@ -76,4 +76,4 @@ const LayoutSplashScreen: FC<React.PropsWithChildren<{visible?: boolean}>> = ({v
   return null
 }
 
-export {MetronicSplashScreenProvider, LayoutSplashScreen}
+export {LayoutSplashScreen}

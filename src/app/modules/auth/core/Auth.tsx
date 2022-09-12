@@ -126,4 +126,4 @@ const AuthInit: FC<WithChildren> = ({children}) => {
   return showSplashScreen ? <LayoutSplashScreen /> : <>{children}</>
 }
 
-export { AuthProvider, AuthInit, useAuth };
+export {AuthProvider, AuthInit, useAuth}

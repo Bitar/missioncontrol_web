@@ -11,6 +11,7 @@ import {Match} from '../models/matches/Match'
 import {ActivityRegistrations} from './ActivityRegistrations'
 import {User} from '../../identity/user/models/User'
 import {MatchPage} from '../../match/MatchPage'
+import {ActivityContext} from '../AuthContext'
 
 const ActivityView: FC = () => {
   const [activity, setActivity] = useState<Activity | undefined>()
@@ -64,77 +65,85 @@ const ActivityView: FC = () => {
   }, [params.id])
 
   return (
-    <Routes>
-      <Route
-        element={
-          <>
-            <ActivityInfo activity={activity} />
-            <Outlet />
-          </>
-        }
-      >
+    <ActivityContext.Provider
+      value={{
+        activity,
+        setActivity,
+        matches,
+        setMatches,
+        members,
+        setMembers,
+        match,
+        setMatch,
+      }}
+    >
+      <Routes>
         <Route
-          path='/overview'
           element={
             <>
-              <PageTitle breadcrumbs={activityViewBreadcrumbs}>Overview</PageTitle>
-              <ActivityOverview
-                activity={activity}
-                setActivity={setActivity}
-                matches={matches}
-                setMatch={setMatch}
-              />
+              <ActivityInfo />
+              <Outlet />
             </>
           }
-        />
-        <Route
-          path='/registrations'
-          element={
-            <>
-              <PageTitle breadcrumbs={activityViewBreadcrumbs}>Registrations</PageTitle>
-              <ActivityRegistrations members={members} registrations={activity?.registrations} />
-            </>
-          }
-        />
-        <Route
-          path='/teams'
-          element={
-            <>
-              <PageTitle breadcrumbs={activityViewBreadcrumbs}>Teams</PageTitle>
-              <ActivityTeams activity={activity}/>
-            </>
-          }
-        />
-        <Route
-          path='/chat'
-          element={
-            <>
-              <PageTitle breadcrumbs={activityViewBreadcrumbs}>Chat</PageTitle>
-              <ActivityChat activity={activity} setActivity={setActivity} />
-            </>
-          }
-        />
-        {/*<Route*/}
-        {/*  path='/settings'*/}
-        {/*  element={*/}
-        {/*    <>*/}
-        {/*      <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>*/}
-        {/*    </>*/}
-        {/*  }*/}
-        {/*/>*/}
-        <Route
-          path='/matches/:matchId/*'
-          element={
-            <>
-              <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>
-              <MatchPage activity={activity} match={match} setMatch={setMatch} />
-            </>
-          }
-        />
-        <Route index element={<Navigate to={'/activities/' + params.id + '/overview'} />} />
-      </Route>
-    </Routes>
+        >
+          <Route
+            path='/overview'
+            element={
+              <>
+                <PageTitle breadcrumbs={activityViewBreadcrumbs}>Overview</PageTitle>
+                <ActivityOverview setMatch={setMatch} />
+              </>
+            }
+          />
+          <Route
+            path='/registrations'
+            element={
+              <>
+                <PageTitle breadcrumbs={activityViewBreadcrumbs}>Registrations</PageTitle>
+                <ActivityRegistrations registrations={activity?.registrations} />
+              </>
+            }
+          />
+          <Route
+            path='/teams'
+            element={
+              <>
+                <PageTitle breadcrumbs={activityViewBreadcrumbs}>Teams</PageTitle>
+                <ActivityTeams />
+              </>
+            }
+          />
+          <Route
+            path='/chat'
+            element={
+              <>
+                <PageTitle breadcrumbs={activityViewBreadcrumbs}>Chat</PageTitle>
+                <ActivityChat />
+              </>
+            }
+          />
+          {/*<Route*/}
+          {/*  path='/settings'*/}
+          {/*  element={*/}
+          {/*    <>*/}
+          {/*      <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>*/}
+          {/*    </>*/}
+          {/*  }*/}
+          {/*/>*/}
+          <Route
+            path='/matches/:matchId/*'
+            element={
+              <>
+                <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>
+                <MatchPage />
+              </>
+            }
+          />
+          <Route index element={<Navigate to={'/activities/' + params.id + '/overview'} />} />
+        </Route>
+      </Routes>
+    </ActivityContext.Provider>
   )
 }
 
-export { ActivityView };
+export {ActivityView}

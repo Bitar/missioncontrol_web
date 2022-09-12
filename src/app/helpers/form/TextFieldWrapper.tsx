@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField'
 import {useField} from 'formik'
 
 type Props = {
-  name: string,
+  name: string
   label: string
   multiline?: boolean
   rows?: number
@@ -18,22 +18,21 @@ const TextFieldWrapper: FC<Props> = (props) => {
     ...field,
     ...otherProps,
     fullWidth: true,
-    size: "small",
-    label: label
+    size: 'small',
+    label: label,
   }
 
-  if(multiline) {
+  if (multiline) {
     configTextField.multiline = true
     configTextField.minRows = rows
-
   }
 
-  if(meta && meta.touched && meta.error) {
-    configTextField.error = true;
+  if (meta && meta.touched && meta.error) {
+    configTextField.error = true
     configTextField.helperText = meta.error
   }
 
-  return <TextField variant={"outlined"} {...configTextField}/>
+  return <TextField variant={'outlined'} {...configTextField} />
 }
 
 export {TextFieldWrapper}

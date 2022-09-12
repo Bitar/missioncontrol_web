@@ -5,16 +5,15 @@ import {ActivityMatches} from './ActivityMatches'
 import {Match} from '../models/matches/Match'
 import {MatchResults} from './MatchResults'
 import {ActivityAnnouncement} from '../partials/ActivityAnnouncement'
+import {useActivity} from '../AuthContext'
 // import {ActivityAnnouncement} from '../partials/ActivityAnnouncement'
 
 type Props = {
-  activity: Activity | undefined
-  setActivity: Dispatch<SetStateAction<Activity | undefined>>
-  matches: Match[] | undefined
   setMatch: Dispatch<SetStateAction<Match | undefined>>
 }
 
-const ActivityOverview: FC<Props> = ({activity, matches, setActivity, setMatch}) => {
+const ActivityOverview: FC<Props> = ({setMatch}) => {
+  const {activity, setActivity, matches} = useActivity()
   return (
     <>
       <div className='row g-5 g-xxl-8'>

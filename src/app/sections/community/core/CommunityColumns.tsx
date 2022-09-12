@@ -6,7 +6,7 @@ import {QUERIES} from '../../../../_metronic/helpers'
 import {ActionsCell} from '../../../modules/table/columns/ActionsCell'
 import {TextImageCell} from '../../../modules/table/columns/TextImageCell'
 import React from 'react'
-import { communityAccessType } from "../../../helpers/CommunityHelper";
+import {communityAccessType} from '../../../helpers/CommunityHelper'
 
 const communitiesColumns: ReadonlyArray<Column<Community>> = [
   {
@@ -54,7 +54,9 @@ const communitiesColumns: ReadonlyArray<Column<Community>> = [
     },
   },
   {
-    Header: (props) => <CustomHeader tableProps={props} title='Activities In Progress' className='min-w-125px' />,
+    Header: (props) => (
+      <CustomHeader tableProps={props} title='Activities In Progress' className='min-w-125px' />
+    ),
     id: 'activities_count',
     Cell: ({...props}) => (
       <TextCell dObject={props.data[props.row.index].additional_data.activities_in_progress} />
@@ -77,4 +79,4 @@ const communitiesColumns: ReadonlyArray<Column<Community>> = [
   },
 ]
 
-export { communitiesColumns };
+export {communitiesColumns}

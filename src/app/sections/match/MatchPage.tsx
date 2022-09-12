@@ -5,15 +5,10 @@ import {MatchInfo} from './MatchInfo'
 import {Match} from '../activity/models/matches/Match'
 import {MatchOverview} from './MatchOverview'
 import {getActivityMatch} from '../activity/core/ActivityRequests'
-import {Activity} from '../activity/models/Activity'
+import {useActivity} from '../activity/AuthContext'
 
-type Props = {
-  match: Match | undefined
-  setMatch: Dispatch<SetStateAction<Match | undefined>>
-  activity: Activity | undefined
-}
-
-const MatchPage: FC<Props> = ({match, setMatch, activity}) => {
+const MatchPage: FC = () => {
+  const {activity, match, setMatch} = useActivity()
   const params = useParams()
   // const [match, setMatch] = useState<Match | undefined>(initialMatch)
 

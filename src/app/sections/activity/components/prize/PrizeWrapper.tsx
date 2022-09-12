@@ -84,4 +84,4 @@ const PrizeWrapper: FC<Props> = ({activity, setActivity}) => {
   )
 }
 
-export { PrizeWrapper };
+export {PrizeWrapper}

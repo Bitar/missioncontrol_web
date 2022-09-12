@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {ErrorMessage, Field, Form, Formik} from 'formik'
 import * as Yup from 'yup'
 import {getUserByToken, register} from '../core/_requests'
-import { Link, useNavigate } from "react-router-dom";
+import {Link, useNavigate} from 'react-router-dom'
 import {PasswordMeterComponent} from '../../../../_metronic/assets/ts/components'
 import {useAuth} from '../core/Auth'
 import {FormErrorAlert} from '../../errors/partials/FormErrorAlert'
@@ -67,7 +67,7 @@ const Registration = () => {
           setSubscription(response.data.subscription)
           setCurrentUser(response.data.user)
           setCommunityAdmin(response.data.admin)
-          navigate('/');
+          navigate('/')
         })
       })
       .catch((error) => {
@@ -246,4 +246,4 @@ const Registration = () => {
   )
 }
 
-export { Registration };
+export {Registration}

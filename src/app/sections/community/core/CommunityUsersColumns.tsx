@@ -20,7 +20,13 @@ const CommunityUsersColumns: ReadonlyArray<Column<User>> = [
   {
     Header: (props) => <CustomHeader tableProps={props} title='Username' className='min-w-125px' />,
     id: 'username',
-    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index]?.meta?.username + '#' + props.data[props.row.index]?.meta?.rng} />,
+    Cell: ({...props}) => (
+      <TextCell
+        dObject={
+          props.data[props.row.index]?.meta?.username + '#' + props.data[props.row.index]?.meta?.rng
+        }
+      />
+    ),
   },
 ]
 

@@ -163,4 +163,4 @@ const RoleEdit: FC = () => {
   )
 }
 
-export { RoleEdit };
+export {RoleEdit}

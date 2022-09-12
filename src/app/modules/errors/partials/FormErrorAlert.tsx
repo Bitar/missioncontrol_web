@@ -1,7 +1,7 @@
-import React, { FC } from "react";
+import React, {FC} from 'react'
 
 type Props = {
-  hasErrors: boolean | undefined,
+  hasErrors: boolean | undefined
   message: string | undefined
 }
 
@@ -10,10 +10,7 @@ const FormErrorAlert: FC<Props> = ({hasErrors, message}) => {
     <>
       {hasErrors === true && (
         <div className='mb-lg-15 alert alert-danger'>
-          <div className='alert-text font-weight-bold'>
-            {message}
-
-          </div>
+          <div className='alert-text font-weight-bold'>{message}</div>
         </div>
       )}
 

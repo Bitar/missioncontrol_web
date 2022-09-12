@@ -1,5 +1,4 @@
 import React, {FC, useMemo} from 'react'
-import {User} from '../../identity/user/models/User'
 import {ColumnInstance, Row, useTable} from 'react-table'
 import {ActivityMembersColumns} from '../core/ActivityMembersColumns'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
@@ -8,11 +7,10 @@ import {CustomRow} from '../../../modules/table/columns/CustomRow'
 import {ActivityRegistration} from '../models/ActivityRegistration'
 
 type Props = {
-  members: User[] | undefined
   registrations: ActivityRegistration[] | undefined
 }
 
-const ActivityRegistrations: FC<Props> = ({members, registrations}) => {
+const ActivityRegistrations: FC<Props> = ({registrations}) => {
   const data = useMemo(() => registrations || [], [registrations])
   const columns = useMemo(() => ActivityMembersColumns, [])
   const {getTableProps, getTableBodyProps, headers, rows, prepareRow} = useTable({

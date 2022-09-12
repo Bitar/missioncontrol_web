@@ -2,7 +2,7 @@ import axios, {AxiosResponse} from 'axios'
 import {Response} from '../../../../_metronic/helpers'
 import {Community, CommunityQueryResponse} from '../models/Community'
 import {ActivityQueryResponse} from '../../activity/models/Activity'
-import { UserQueryResponse } from "../../identity/user/models/User";
+import {UserQueryResponse} from '../../identity/user/models/User'
 
 const API_URL = process.env.REACT_APP_API_URL
 const GET_COMMUNITIES_URL = `${API_URL}/communities`
@@ -52,10 +52,12 @@ const getCommunityActivities = (id: any): Promise<ActivityQueryResponse> => {
 }
 
 const getCommunityUsers = (query: String, id: any): Promise<UserQueryResponse> => {
-  return axios
-    // .get(`${GET_COMMUNITIES_URL}/${id}/users`)
-    .get(`${GET_COMMUNITIES_URL}/${id}/users?${query}`)
-    .then((response: AxiosResponse<UserQueryResponse>) => response.data)
+  return (
+    axios
+      // .get(`${GET_COMMUNITIES_URL}/${id}/users`)
+      .get(`${GET_COMMUNITIES_URL}/${id}/users?${query}`)
+      .then((response: AxiosResponse<UserQueryResponse>) => response.data)
+  )
 }
 
 export {
@@ -65,5 +67,5 @@ export {
   updateCommunity,
   getCommunityActivities,
   getAllCommunities,
-  getCommunityUsers
+  getCommunityUsers,
 }

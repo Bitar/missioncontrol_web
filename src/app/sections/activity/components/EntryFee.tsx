@@ -32,10 +32,9 @@ const EntryFee: FC<Props> = ({activity, setActivity}) => {
           <div className='row'>
             <div className='col-lg-6'>
               <div
-                className={clsx(
-                  'bg-active-mc-secondary cursor-pointer mb-5',
-                  {active: activity?.entry_fee?.type === 1}
-                )}
+                className={clsx('bg-active-mc-secondary cursor-pointer mb-5', {
+                  active: activity?.entry_fee?.type === 1,
+                })}
                 onClick={(event) => handleEntryFeeChange(event, 1)}
               >
                 <div
@@ -54,10 +53,9 @@ const EntryFee: FC<Props> = ({activity, setActivity}) => {
             </div>
             <div className='col-lg-6'>
               <div
-                className={clsx(
-                  'bg-active-mc-secondary cursor-pointer mb-5',
-                  {active: activity?.entry_fee?.type === 2}
-                )}
+                className={clsx('bg-active-mc-secondary cursor-pointer mb-5', {
+                  active: activity?.entry_fee?.type === 2,
+                })}
                 onClick={(event) => handleEntryFeeChange(event, 2)}
               >
                 <div
@@ -81,4 +79,4 @@ const EntryFee: FC<Props> = ({activity, setActivity}) => {
   )
 }
 
-export { EntryFee };
+export {EntryFee}

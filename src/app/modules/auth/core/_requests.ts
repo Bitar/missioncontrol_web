@@ -26,16 +26,13 @@ export function register(
   password: string,
   password_confirmation: string
 ) {
-  return axios.post(
-    REGISTER_URL,
-    {
-      email,
-      first_name: firstname,
-      last_name: lastname,
-      password,
-      password_confirmation,
-    }
-  )
+  return axios.post(REGISTER_URL, {
+    email,
+    first_name: firstname,
+    last_name: lastname,
+    password,
+    password_confirmation,
+  })
 }
 
 // Server should return object => { result: boolean } (Is Email in DB)

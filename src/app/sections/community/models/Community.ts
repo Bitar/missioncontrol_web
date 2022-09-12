@@ -51,11 +51,11 @@ export type Community = {
   games?: Game[]
   is_follow?: boolean
   additional_data?: {
-    activities_count: number,
-    activities_in_progress: number,
-    in_active_league: boolean,
-    open_registrations: number,
-    players_count: number,
+    activities_count: number
+    activities_in_progress: number
+    in_active_league: boolean
+    open_registrations: number
+    players_count: number
   }
 }
 
@@ -104,11 +104,11 @@ export function formOnChange(
         community
       )
     } else {
-      let updateStuff;
+      let updateStuff
       if (accessField !== 'value') {
-        updateStuff = {type: 2, key: 2, value: '' }
+        updateStuff = {type: 2, key: 2, value: ''}
       } else {
-        updateStuff = {type: 2, key: 2, value: targetValue }
+        updateStuff = {type: 2, key: 2, value: targetValue}
       }
 
       updateData(
@@ -118,7 +118,6 @@ export function formOnChange(
         setCommunity,
         community
       )
-
     }
   } else {
     if (targetName === 'logo' || targetName === 'banner_image') {

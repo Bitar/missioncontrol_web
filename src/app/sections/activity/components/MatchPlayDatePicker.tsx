@@ -1,5 +1,5 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
-import { ActivityForm } from "../models/Activity";
+import {ActivityForm} from '../models/Activity'
 import {updateData} from '../../../helpers/form/FormHelper'
 import {DateRange, DateRangePicker} from '@mui/x-date-pickers-pro/DateRangePicker'
 import dayjs, {Dayjs} from 'dayjs'
@@ -9,8 +9,8 @@ import TextField from '@mui/material/TextField'
 import {Box} from '@mui/material'
 
 type Props = {
-  activity: ActivityForm,
-  setActivity: Dispatch<SetStateAction<ActivityForm >>
+  activity: ActivityForm
+  setActivity: Dispatch<SetStateAction<ActivityForm>>
 }
 
 const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
@@ -34,10 +34,12 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
       {
         schedule: {
           ...activity?.schedule,
-          ...{matchplay_dates: {
+          ...{
+            matchplay_dates: {
               ...activity?.schedule.matchplay_dates,
               ...{start_date: startDate, end_date: endDate},
-            }}
+            },
+          },
         },
       },
       setActivity,
@@ -71,9 +73,19 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
             minDate={minDate}
             renderInput={(startProps, endProps) => (
               <React.Fragment>
-                <TextField required {...startProps} size={'small'} name='settings.registration_dates.start_date' />
+                <TextField
+                  required
+                  {...startProps}
+                  size={'small'}
+                  name='settings.registration_dates.start_date'
+                />
                 <Box sx={{mx: 2}}> to </Box>
-                <TextField required {...endProps} size={'small'} name='settings.registration_dates.end_Date' />
+                <TextField
+                  required
+                  {...endProps}
+                  size={'small'}
+                  name='settings.registration_dates.end_Date'
+                />
               </React.Fragment>
             )}
           />
@@ -83,4 +95,4 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
   )
 }
 
-export { MatchPlayDatePicker };
+export {MatchPlayDatePicker}
