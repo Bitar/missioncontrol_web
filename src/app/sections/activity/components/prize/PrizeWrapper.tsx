@@ -13,7 +13,7 @@ type Props = {
 }
 
 const PrizeWrapper: FC<Props> = ({activity, setActivity}) => {
-  const [winningWay, setWinningWay] = useState('')
+  const [winningWay, setWinningWay] = useState('1')
   const [activityPrizes, setActivityPrizes] = useState<ActivityPrize[]>([])
   // const [prize, setPrize] = useState<ActivityPrize
 
@@ -45,10 +45,11 @@ const PrizeWrapper: FC<Props> = ({activity, setActivity}) => {
         </div>
         <div className='col-lg-8'>
           <Box sx={{minWidth: 120}}>
-            <FormControl fullWidth size='small'>
+            <FormControl fullWidth size='small' required>
               <InputLabel id='distribution_type-select-label'>Prize Distribution Type</InputLabel>
               <Select
                 labelId='distribution_type-select-label'
+                required
                 id='winning-way-select'
                 value={winningWay}
                 label='Prize Distribution Type'
@@ -66,7 +67,7 @@ const PrizeWrapper: FC<Props> = ({activity, setActivity}) => {
                   }
                 }}
               >
-                <MenuItem value={'1'}>No Prize</MenuItem>
+                <MenuItem value={'1'} selected={true}>No Prize</MenuItem>
                 <MenuItem value={'2'}>Sole Winner</MenuItem>
                 {/*<MenuItem value={'3'}>Per Rank</MenuItem>*/}
               </Select>

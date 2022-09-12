@@ -11,7 +11,7 @@ const ActivitiesList = () => {
   return (
     <>
       <KTCard>
-        <TableHeader name='Activity' url='/activities' showAdd={false} />
+        <TableHeader name='Activity' url='/activities' />
         <ActivityTable />
       </KTCard>
     </>
@@ -28,4 +28,4 @@ const ActivityIndex = () => (
   </QueryRequestProvider>
 )
 
-export {ActivityIndex}
+export { ActivityIndex };

@@ -1,18 +1,19 @@
 import {ID, Response} from '../../../../_metronic/helpers'
 import {Game} from '../../../models/game/Game'
-import {ActivityFee, initialActivityFee} from './ActivityFee'
-import {ActivityLocation, initialActivityLocation} from './ActivityLocation'
+import {ActivityFee} from './ActivityFee'
+import {ActivityLocation} from './ActivityLocation'
 import {Community} from '../../community/models/Community'
 import * as Yup from 'yup'
-import {ActivityType, initialActivityType} from './ActivityType'
-import {ActivitySettings, initialActivitySettings} from './ActivitySettings'
+import {ActivityType} from './ActivityType'
+import {ActivitySettings} from './ActivitySettings'
 import {GameMode} from '../../../models/game/GameMode'
-import {ActivityTeamSetting, initialActivityTeamSetting} from './AvtivityTeamSetting'
+import {ActivityTeamSetting} from './AvtivityTeamSetting'
 import {Team} from '../../../models/squad/Team'
 import {Announcement} from '../../../models/announcement/Announcements'
 import {ActivityStanding} from './ActivityStanding'
 import {ActivityRegistration} from './ActivityRegistration'
 import {ActivityPrize} from './ActivityPrize'
+import dayjs from 'dayjs'
 
 export const activitySchema = Yup.object().shape({
   title: Yup.string().required('Activity title is required'),
@@ -70,23 +71,23 @@ export const activitySchema = Yup.object().shape({
   // ),
 })
 
-export const initialActivity = (activity?: Activity) => {
-  return {
-    title: activity?.title || '',
-    description: activity?.description || '',
-    type: initialActivityType(activity?.type),
-    status: activity?.status || 0,
-    settings: initialActivitySettings(activity?.settings),
-    registration_dates: {
-      start_date: 0,
-      end_date: 0,
-    },
-    matchplay_dates: {
-      start_date: 0,
-      end_date: 0,
-    },
-  }
-}
+// export const initialActivity = (activity?: Activity) => {
+//   return {
+//     title: activity?.title || '',
+//     description: activity?.description || '',
+//     type: initialActivityType(activity?.type),
+//     status: activity?.status || 0,
+//     settings: initialActivitySettings(activity?.settings),
+//     registration_dates: {
+//       start_date: 0,
+//       end_date: 0,
+//     },
+//     matchplay_dates: {
+//       start_date: 0,
+//       end_date: 0,
+//     },
+//   }
+// }
 
 export type Activity = {
   id?: ID
@@ -182,7 +183,7 @@ export const initialActivityForm = (activityForm?: ActivityForm) => {
       },
       settings: {
         frequency: activityForm?.schedule.settings.frequency || '',
-        time: activityForm?.schedule.settings.time || '',
+        time: activityForm?.schedule.settings.time || dayjs(new Date()).format('HH:mm:ss'),
         timezone: activityForm?.schedule.settings.timezone || '',
         day: activityForm?.schedule.settings.day || '',
       },

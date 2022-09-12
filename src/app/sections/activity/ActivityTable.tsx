@@ -1,5 +1,5 @@
 import {useMemo} from 'react'
-import {useTable, ColumnInstance, Row} from 'react-table'
+import {ColumnInstance, Row, useTable} from 'react-table'
 import {KTCardBody} from '../../../_metronic/helpers'
 import {ActivityColumns} from './core/ActivityColumns'
 import {Activity} from './models/Activity'
@@ -30,27 +30,27 @@ const ActivityTable = () => {
           {...getTableProps()}
         >
           <thead>
-            <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
-              {headers.map((column: ColumnInstance<Activity>) => (
-                <CustomHeaderColumn key={column.id} column={column} />
-              ))}
-            </tr>
+          <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
+            {headers.map((column: ColumnInstance<Activity>) => (
+              <CustomHeaderColumn key={column.id} column={column} />
+            ))}
+          </tr>
           </thead>
           <tbody className='text-gray-600 fw-bold' {...getTableBodyProps()}>
-            {rows.length > 0 ? (
-              rows.map((row: Row<Activity>, i) => {
-                prepareRow(row)
-                return <CustomRow row={row} key={`row-${i}-${row.id}`} />
-              })
-            ) : (
-              <tr>
-                <td colSpan={7}>
-                  <div className='d-flex text-center w-100 align-content-center justify-content-center'>
-                    No matching records found
-                  </div>
-                </td>
-              </tr>
-            )}
+          {rows.length > 0 ? (
+            rows.map((row: Row<Activity>, i) => {
+              prepareRow(row)
+              return <CustomRow row={row} key={`row-${i}-${row.original.id}`}/>
+            })
+          ) : (
+            <tr>
+              <td colSpan={7}>
+                <div className='d-flex text-center w-100 align-content-center justify-content-center'>
+                  No matching records found
+                </div>
+              </td>
+            </tr>
+          )}
           </tbody>
         </table>
       </div>
@@ -60,4 +60,4 @@ const ActivityTable = () => {
   )
 }
 
-export {ActivityTable}
+export { ActivityTable };

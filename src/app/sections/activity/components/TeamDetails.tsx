@@ -12,8 +12,113 @@ type Props = {
 
 const TeamDetails: FC<Props> = ({activity, setActivity, gameMode}) => {
   const [players, setPlayers] = useState(gameMode?.min_players || 0)
-  const [minTeam, setMinTeam] = useState(0)
-  const [maxTeam, setMaxTeam] = useState(0)
+  const [minTeam, setMinTeam] = useState(1)
+  const [maxTeam, setMaxTeam] = useState(1)
+
+  const handleMinClick = (direction: string) => {
+    let updateObj: {min?: number; max?: number} = {min: minTeam, max: maxTeam}
+
+    if (direction === 'sub') {
+      if (minTeam > 1) {
+        setMinTeam(minTeam - 1)
+        updateObj = {min: minTeam - 1}
+      } else {
+        updateObj = {min: 1}
+      }
+    } else {
+      if (minTeam + 1 >= maxTeam) {
+        setMaxTeam(minTeam + 1)
+        updateObj.max = minTeam + 1
+      }
+
+      setMinTeam(minTeam + 1)
+    }
+
+    updateData(
+      {
+        team: {
+          ...activity?.team,
+          ...updateObj,
+        },
+      },
+      setActivity,
+      activity
+    )
+  }
+
+  const handleMaxClick = (direction: string) => {
+    let updateObj: {min?: number; max?: number} = {min: minTeam, max: maxTeam}
+
+    if (direction === 'sub') {
+      if (maxTeam > 1) {
+        if (maxTeam - 1 <= minTeam) {
+          setMinTeam(maxTeam - 1)
+          updateObj.min = maxTeam - 1
+        }
+
+        setMaxTeam(maxTeam - 1)
+        updateObj = {max: maxTeam - 1}
+      } else {
+        setMaxTeam(1)
+        setMinTeam(1)
+        updateObj = {max: 1, min: 1}
+      }
+    } else {
+      setMaxTeam(maxTeam + 1)
+      updateObj = {max: maxTeam + 1}
+    }
+
+    updateData(
+      {
+        team: {
+          ...activity?.team,
+          ...updateObj,
+        },
+      },
+      setActivity,
+      activity
+    )
+  }
+
+  const handlePlayersClick = (direction: string) => {
+    let updateObj: {min?: number; max?: number; players?: number} = {
+      min: minTeam,
+      max: maxTeam,
+      players: players,
+    }
+
+    if (direction === 'sub') {
+      if (players !== 0) {
+        if (gameMode?.min_players) {
+          if (players - 1 >= gameMode?.min_players) {
+            setPlayers(players - 1)
+            updateObj = {players: players - 1}
+          }
+        }
+      } else {
+        setPlayers(0)
+        updateObj = {players: 0}
+      }
+    } else {
+      if (gameMode?.max_players) {
+        if (players + 1 <= gameMode?.max_players) {
+          setPlayers(players + 1)
+          updateObj = {players: players + 1}
+        }
+      }
+    }
+
+    updateData(
+      {
+        team: {
+          ...activity?.team,
+          ...updateObj,
+        },
+      },
+      setActivity,
+      activity
+    )
+  }
 
   return (
     <>
@@ -30,64 +135,17 @@ const TeamDetails: FC<Props> = ({activity, setActivity, gameMode}) => {
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-              onClick={() => {
-                if (players !== 0) {
-                  if (gameMode?.min_players) {
-                    if (players - 1 >= gameMode?.min_players) {
-                      setPlayers(players - 1)
-
-                      updateData(
-                        {
-                          team: {
-                            ...activity?.team,
-                            ...{players: players - 1},
-                          },
-                        },
-                        setActivity,
-                        activity
-                      )
-                    }
-                  }
-                } else {
-                  setPlayers(0)
-                  updateData(
-                    {
-                      team: {
-                        ...activity?.team,
-                        ...{players: 0},
-                      },
-                    },
-                    setActivity,
-                    activity
-                  )
-                }
-              }}
+              onClick={() => handlePlayersClick('sub')}
             >
               <i className='fa fa-minus'></i>
             </button>
-            <Button disabled={true} className={'text-dark fs-4'}>
+            <Button disabled={true} className='text-dark fs-4 py-0'>
               {players}
             </Button>
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-              onClick={() => {
-                if (gameMode?.max_players) {
-                  if (players + 1 <= gameMode?.max_players) {
-                    setPlayers(players + 1)
-                    updateData(
-                      {
-                        team: {
-                          ...activity?.team,
-                          ...{players: players + 1},
-                        },
-                      },
-                      setActivity,
-                      activity
-                    )
-                  }
-                }
-              }}
+              onClick={() => handlePlayersClick('add')}
             >
               <i className='fa fa-plus'></i>
             </button>
@@ -102,54 +160,17 @@ const TeamDetails: FC<Props> = ({activity, setActivity, gameMode}) => {
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-              onClick={() => {
-                if (minTeam !== 0) {
-                  setMinTeam(minTeam - 1)
-                  updateData(
-                    {
-                      team: {
-                        ...activity?.team,
-                        ...{min: minTeam - 1},
-                      },
-                    },
-                    setActivity,
-                    activity
-                  )
-                } else {
-                  updateData(
-                    {
-                      team: {
-                        ...activity?.team,
-                        ...{min: 0},
-                      },
-                    },
-                    setActivity,
-                    activity
-                  )
-                }
-              }}
+              onClick={() => handleMinClick('sub')}
             >
               <i className='fa fa-minus'></i>
             </button>
-            <Button disabled={true} className={'text-dark fs-4'}>
+            <Button disabled={true} className='text-dark fs-4 py-0'>
               {minTeam}
             </Button>
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-              onClick={() => {
-                setMinTeam(minTeam + 1)
-                updateData(
-                  {
-                    team: {
-                      ...activity?.team,
-                      ...{min: minTeam + 1},
-                    },
-                  },
-                  setActivity,
-                  activity
-                )
-              }}
+              onClick={() => handleMinClick('add')}
             >
               <i className='fa fa-plus'></i>
             </button>
@@ -164,93 +185,25 @@ const TeamDetails: FC<Props> = ({activity, setActivity, gameMode}) => {
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-              onClick={() => {
-                if (maxTeam !== 0) {
-                  setMaxTeam(maxTeam - 1)
-                  updateData(
-                    {
-                      team: {
-                        ...activity?.team,
-                        ...{max: maxTeam - 1},
-                      },
-                    },
-                    setActivity,
-                    activity
-                  )
-                } else {
-                  setMaxTeam(0)
-                  updateData(
-                    {
-                      team: {
-                        ...activity?.team,
-                        ...{max: 0},
-                      },
-                    },
-                    setActivity,
-                    activity
-                  )
-                }
-              }}
+              onClick={() => handleMaxClick('sub')}
             >
               <i className='fa fa-minus'></i>
             </button>
-            <Button disabled={true} className={'text-dark fs-4'}>
+            <Button disabled={true} className='text-dark fs-4 py-0'>
               {maxTeam}
             </Button>
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-              onClick={() => {
-                setMaxTeam(maxTeam + 1)
-                updateData(
-                  {
-                    team: {
-                      ...activity?.team,
-                      ...{max: maxTeam + 1},
-                    },
-                  },
-                  setActivity,
-                  activity
-                )
-              }}
+              onClick={() => handleMaxClick('add')}
             >
               <i className='fa fa-plus'></i>
             </button>
           </ButtonGroup>
         </div>
       </div>
-
-      {/*<div className='row mb-6'>*/}
-      {/*  <label className='col-lg-4 col-form-label required fw-bold fs-6'>Minimum Teams</label>*/}
-      {/*  <div className='col-lg-8 fv-row'>*/}
-      {/*    <Field*/}
-      {/*      type='number'*/}
-      {/*      name='team_settings.min'*/}
-      {/*      className='form-control mb-3 mb-lg-0'*/}
-      {/*      value={activity?.team_settings?.min}*/}
-      {/*    />*/}
-      {/*    <div className='text-danger mt-2'>*/}
-      {/*      <ErrorMessage name='team_settings.min' />*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
-
-      {/*<div className='row mb-6'>*/}
-      {/*  <label className='col-lg-4 col-form-label required fw-bold fs-6'>Maximum Teams</label>*/}
-      {/*  <div className='col-lg-8 fv-row'>*/}
-      {/*    <Field*/}
-      {/*      type='number'*/}
-      {/*      name='team_settings.max'*/}
-      {/*      className='form-control mb-3 mb-lg-0'*/}
-      {/*      value={activity?.team_settings?.max}*/}
-      {/*    />*/}
-      {/*    <div className='text-danger mt-2'>*/}
-      {/*      <ErrorMessage name='team_settings.max' />*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
     </>
   )
 }
 
-export {TeamDetails}
+export { TeamDetails };

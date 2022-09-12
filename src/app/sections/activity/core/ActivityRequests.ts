@@ -12,7 +12,6 @@ const API_URL = process.env.REACT_APP_API_URL
 const ACTIVITIES_URL = `${API_URL}/activities`
 
 const getActivities = (query: string): Promise<ActivityQueryResponse> => {
-  query = query + '&include=entryFee,matchPlayDate'
   return axios
     .get(`${ACTIVITIES_URL}?${query}`)
     .then((d: AxiosResponse<ActivityQueryResponse>) => d.data)

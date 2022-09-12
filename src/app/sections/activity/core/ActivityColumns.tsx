@@ -8,6 +8,7 @@ import {BadgeCell} from '../../../modules/table/columns/BadgeCell'
 import {formatActivityStatus, formatDates} from '../../../helpers/ActivityHelper'
 import dayjs from 'dayjs'
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 const ActivityColumns: ReadonlyArray<Column<Activity>> = [
   {
@@ -16,11 +17,13 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
     Cell: ({...props}) => (
       <div className='d-flex align-items-center'>
         <div className='w-75px me-3'>
-          <img
-            src={toAbsoluteUrl(props.data[props.row.index].game?.image)}
-            alt=''
-            className='w-100 h-100vh rounded'
-          />
+          <Link to={'/activities/' + props.data[props.row.index].id} className='d-block'>
+            <img
+              src={toAbsoluteUrl(props.data[props.row.index].game?.image)}
+              alt=''
+              className='w-100 h-100vh rounded'
+            />
+          </Link>
         </div>
       </div>
     ),
@@ -31,7 +34,9 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
     Cell: ({...props}) => (
       <div className='d-flex align-items-center'>
         <div className='d-flex flex-column'>
+          <Link to={'/activities/' + props.data[props.row.index].id} className='d-block'>
           <span className='text-gray-800 mb-1'>{props.data[props.row.index].title}</span>
+          </Link>
         </div>
       </div>
     ),

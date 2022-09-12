@@ -13,7 +13,7 @@ type Props = {
 }
 
 const TimeOfDayPicker: FC<Props> = ({activity, setActivity}) => {
-  const [value, setValue] = useState<Dayjs | null>(dayjs())
+  const [value, setValue] = useState<Dayjs | null>(dayjs(new Date()))
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -26,7 +26,7 @@ const TimeOfDayPicker: FC<Props> = ({activity, setActivity}) => {
         onChange={(newValue: any) => {
           setValue(newValue)
 
-          let timeOfDay = (new Date(newValue.$d).getTime() / 1000).toString()
+          let timeOfDay = dayjs(new Date(newValue.$d)).format('HH:mm:ss')
 
           updateData(
             {
@@ -51,4 +51,4 @@ const TimeOfDayPicker: FC<Props> = ({activity, setActivity}) => {
   )
 }
 
-export {TimeOfDayPicker}
+export { TimeOfDayPicker };

@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef, useState} from 'react'
+import React, {FC, useEffect, useState} from 'react'
 import {ActivityForm, activitySchema, initialActivityForm} from './models/Activity'
 import {jsonToFormData, updateData} from '../../helpers/form/FormHelper'
 import {createActivity} from './core/ActivityRequests'
@@ -41,13 +41,14 @@ import {useNavigate} from 'react-router-dom'
 import toast from 'react-hot-toast'
 import {useAuth} from '../../modules/auth'
 import {isUserCommunityAdmin} from '../identity/user/models/User'
+import {FormErrorAlert} from '../../modules/errors/partials/FormErrorAlert'
 
 const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
   const [communities, setCommunities] = useState<Community[]>()
   const [activity, setActivity] = useState<ActivityForm>(initialActivityForm)
 
-  const requestError = useRef(undefined)
-  const [showAlert, setShowAlert] = useState<boolean>(false)
+  const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined)
+  const [alertMessage, setAlertMessage] = useState<string | undefined>(undefined)
 
   const [games, setGames] = useState<Game[]>()
   const [modes, setModes] = useState<GameMode[]>()
@@ -101,12 +102,12 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
     createActivity(data)
       .then((response) => {
         toast.success('Activity Created Successfully')
-        navigate(`/activities/${response?.id}/overview`)
+        // navigate(`/activities/${response?.id}/overview`)
       })
       .catch((error) => {
         if (error.response) {
-          requestError.current = error.response.data.error.validation
-          setShowAlert(true)
+          setAlertMessage(error.response.data.error.validation)
+          setHasErrors(true)
         }
       })
   }
@@ -163,26 +164,7 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
             <Form onChange={handleOnChange} className='form'>
               <KTCardBody className='py-4'>
                 <div className='d-flex flex-column pt-5'>
-                  {requestError.current && showAlert && (
-                    <div className='alert alert-danger d-flex align-items-center p-5 mb-10'>
-                      <span className='text-danger me-3'>
-                        <i className='fa fa-times-circle fs-3 text-danger'></i>
-                      </span>
-
-                      <div className='d-flex flex-column'>
-                        <h5 className='mb-1'>Validation Error</h5>
-                        <ul className='p-0 list-inline'>
-                          {Object.entries(requestError.current).map((value: any, index) => {
-                            return (
-                              <li key={`validation-error-${index}`}>
-                                <span>{value[1]}</span>
-                              </li>
-                            )
-                          })}
-                        </ul>
-                      </div>
-                    </div>
-                  )}
+                  <FormErrorAlert hasErrors={hasErrors} message={alertMessage} />
 
                   <div className='row mb-6'>
                     <div className='col-lg-12 fv-row'>
