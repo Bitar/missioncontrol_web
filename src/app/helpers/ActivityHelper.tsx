@@ -16,6 +16,9 @@ const formatActivityStatus = (statusId: number) => {
   } else if (statusId === 5) {
     status = 'Generating Matches'
     color = 'info'
+  } else if (statusId === 6) {
+    status = 'Invalid Registrations'
+    color = 'danger'
   } else {
     status = 'Closed'
     color = 'danger'

@@ -14,6 +14,8 @@ type Props = {
 const ActivityInfo: FC<Props> = ({activity}) => {
   const location = useLocation()
 
+  console.log(activity);
+
   const getStatus = (activityStatus: any) => {
     const {status, color} = formatActivityStatus(activityStatus)
     return <BadgeCell status={status} color={color} />
