@@ -12,6 +12,7 @@ import {ActivityRegistrations} from './ActivityRegistrations'
 import {User} from '../../identity/user/models/User'
 import {MatchPage} from '../../match/MatchPage'
 import {ActivityContext} from '../AuthContext'
+import {SuspenseView} from '../../../layout/SuspenseView'
 
 const ActivityView: FC = () => {
   const [activity, setActivity] = useState<Activity | undefined>()
@@ -81,8 +82,10 @@ const ActivityView: FC = () => {
         <Route
           element={
             <>
-              <ActivityInfo />
-              <Outlet />
+              <SuspenseView>
+                <ActivityInfo />
+                <Outlet />
+              </SuspenseView>
             </>
           }
         >
@@ -90,8 +93,10 @@ const ActivityView: FC = () => {
             path='/overview'
             element={
               <>
-                <PageTitle breadcrumbs={activityViewBreadcrumbs}>Overview</PageTitle>
-                <ActivityOverview setMatch={setMatch} />
+                <SuspenseView>
+                  <PageTitle breadcrumbs={activityViewBreadcrumbs}>Overview</PageTitle>
+                  <ActivityOverview setMatch={setMatch} />
+                </SuspenseView>
               </>
             }
           />
@@ -99,8 +104,10 @@ const ActivityView: FC = () => {
             path='/registrations'
             element={
               <>
-                <PageTitle breadcrumbs={activityViewBreadcrumbs}>Registrations</PageTitle>
-                <ActivityRegistrations registrations={activity?.registrations} />
+                <SuspenseView>
+                  <PageTitle breadcrumbs={activityViewBreadcrumbs}>Registrations</PageTitle>
+                  <ActivityRegistrations registrations={activity?.registrations} />
+                </SuspenseView>
               </>
             }
           />
@@ -108,8 +115,10 @@ const ActivityView: FC = () => {
             path='/teams'
             element={
               <>
-                <PageTitle breadcrumbs={activityViewBreadcrumbs}>Teams</PageTitle>
-                <ActivityTeams />
+                <SuspenseView>
+                  <PageTitle breadcrumbs={activityViewBreadcrumbs}>Teams</PageTitle>
+                  <ActivityTeams />
+                </SuspenseView>
               </>
             }
           />
@@ -117,8 +126,10 @@ const ActivityView: FC = () => {
             path='/chat'
             element={
               <>
-                <PageTitle breadcrumbs={activityViewBreadcrumbs}>Chat</PageTitle>
-                <ActivityChat />
+                <SuspenseView>
+                  <PageTitle breadcrumbs={activityViewBreadcrumbs}>Chat</PageTitle>
+                  <ActivityChat />
+                </SuspenseView>
               </>
             }
           />
@@ -134,8 +145,10 @@ const ActivityView: FC = () => {
             path='/matches/:matchId/*'
             element={
               <>
-                <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>
-                <MatchPage />
+                <SuspenseView>
+                  <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>
+                  <MatchPage />
+                </SuspenseView>
               </>
             }
           />
@@ -146,4 +159,4 @@ const ActivityView: FC = () => {
   )
 }
 
-export {ActivityView}
+export { ActivityView };
