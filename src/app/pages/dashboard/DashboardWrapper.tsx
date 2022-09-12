@@ -1,6 +1,6 @@
 import React, {FC} from 'react'
 import {useIntl} from 'react-intl'
-import {PageTitle} from '../../../_metronic/layout/core'
+import {PageTitle} from '../../layout/core'
 import {useAuth} from '../../modules/auth'
 import {isUserCommunityAdmin} from '../../sections/identity/user/models/User'
 import {CommunityView} from '../../sections/community/pages/CommunityView'

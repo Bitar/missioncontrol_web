@@ -4,7 +4,7 @@ import {FC} from 'react'
 import {Link} from 'react-router-dom'
 import {KTSVG, toAbsoluteUrl, defaultAlerts, defaultLogs} from '../../../helpers'
 
-const HeaderNotificationsMenu: FC<React.PropsWithChildren<unknown>> = () => (
+const HeaderNotificationsMenu: FC = () => (
   <div
     className='menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px'
     data-kt-menu='true'
@@ -58,6 +58,7 @@ const HeaderNotificationsMenu: FC<React.PropsWithChildren<unknown>> = () => (
               <div className='d-flex align-items-center'>
                 <div className='symbol symbol-35px me-4'>
                   <span className={clsx('symbol-label', `bg-light-${alert.state}`)}>
+                    {' '}
                     <KTSVG
                       path={`/media/${alert.icon}`}
                       className={`svg-icon-2 svg-icon-${alert.state}`}
@@ -83,7 +84,7 @@ const HeaderNotificationsMenu: FC<React.PropsWithChildren<unknown>> = () => (
             to='/crafted/pages/profile'
             className='btn btn-color-gray-600 btn-active-color-primary'
           >
-            View All <KTSVG path='/media/icons/duotune/arr064.svg' className='svg-icon-5' />
+            View All <KTSVG path='/media/icons/duotune/arrows/arr064.svg' className='svg-icon-5' />
           </Link>
         </div>
       </div>
@@ -142,7 +143,7 @@ const HeaderNotificationsMenu: FC<React.PropsWithChildren<unknown>> = () => (
             to='/crafted/pages/profile'
             className='btn btn-color-gray-600 btn-active-color-primary'
           >
-            View All <KTSVG path='/media/icons/duotune/arr064.svg' className='svg-icon-5' />
+            View All <KTSVG path='/media/icons/duotune/arrows/arr064.svg' className='svg-icon-5' />
           </Link>
         </div>
       </div>

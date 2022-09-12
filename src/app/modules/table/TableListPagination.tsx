@@ -41,10 +41,10 @@ const TableListPagination = () => {
       <div className='col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'>
         <ul className='pagination'>
           {pagination.links
-            ?.map((link) => {
+            ?.map((link: any) => {
               return {...link, label: mappedLabel(link.label)}
             })
-            .map((link) => (
+            .map((link: any ) => (
               <li
                 key={link.label}
                 className={clsx('page-item', {

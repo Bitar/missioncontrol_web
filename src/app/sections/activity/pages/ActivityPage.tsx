@@ -1,5 +1,5 @@
 import React, {FC} from 'react'
-import {PageLink, PageTitle} from '../../../../_metronic/layout/core'
+import {PageLink, PageTitle} from '../../../layout/core'
 import {Navigate, Route, Routes} from 'react-router-dom'
 import {ActivityIndex} from './ActivityIndex'
 import {ActivityCreate} from '../ActivityCreate'
@@ -62,4 +62,4 @@ const ActivityPage: FC = () => {
   )
 }
 
-export { ActivityPage };
+export  default  ActivityPage;

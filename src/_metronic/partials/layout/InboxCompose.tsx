@@ -8,7 +8,7 @@ export type Props = {
   handleClose: () => void
 }
 
-const InboxCompose: React.FC<React.PropsWithChildren<Props>> = ({show, handleClose}) => {
+const InboxCompose: React.FC<Props> = ({show, handleClose}) => {
   const composeToRef = useRef<HTMLInputElement | null>(null)
   const formRef = useRef<HTMLFormElement | null>(null)
   const [composeCC, setComposeCC] = useState('')
@@ -39,7 +39,7 @@ const InboxCompose: React.FC<React.PropsWithChildren<Props>> = ({show, handleClo
                 data-bs-dismiss='modal'
                 onClick={handleClose}
               >
-                <KTSVG className='svg-icon-1' path='/media/icons/duotune/arr061.svg' />
+                <KTSVG className='svg-icon-1' path='/media/icons/duotune/arrows/arr061.svg' />
               </div>
               {/*end::Close*/}
             </div>
@@ -134,7 +134,7 @@ const InboxCompose: React.FC<React.PropsWithChildren<Props>> = ({show, handleClo
                 <div className='dropzone-item' style={{display: 'none'}}>
                   <div className='dropzone-file'>
                     <div className='dropzone-filename' title='some_image_file_name.jpg'>
-                      <span data-dz-name>some_image_file_name.jpg</span>
+                      <span data-dz-name>some_image_file_name.jpg</span>{' '}
                       <strong>
                         (<span data-dz-size>340kb</span>)
                       </strong>
@@ -160,7 +160,10 @@ const InboxCompose: React.FC<React.PropsWithChildren<Props>> = ({show, handleClo
                         className='btn btn-icon btn-sm btn-active-light-primary ms-2'
                         data-bs-dismiss='modal'
                       >
-                        <KTSVG className='svg-icon-1' path='/media/icons/duotune/arr061.svg' />
+                        <KTSVG
+                          className='svg-icon-1'
+                          path='/media/icons/duotune/arrows/arr061.svg'
+                        />
                       </span>
                       {/*end::Close*/}
                     </span>
@@ -186,10 +189,10 @@ const InboxCompose: React.FC<React.PropsWithChildren<Props>> = ({show, handleClo
                 className='btn btn-icon btn-active-light-primary me-2'
                 id='kt_inbox_compose_attachments_select'
               >
-                <KTSVG className='svg-icon-1' path='/media/icons/duotune/fil022.svg' />
+                <KTSVG className='svg-icon-1' path='/media/icons/duotune/files/fil022.svg' />
               </a>
               <a href='#' className='btn btn-icon btn-active-light-primary'>
-                <KTSVG className='svg-icon-1' path='/media/icons/duotune/gen018.svg' />
+                <KTSVG className='svg-icon-1' path='/media/icons/duotune/general/gen018.svg' />
               </a>
               {/*end::Other*/}
             </div>
@@ -202,7 +205,7 @@ const InboxCompose: React.FC<React.PropsWithChildren<Props>> = ({show, handleClo
                 data-bs-toggle='tooltip'
                 title='More actions'
               >
-                <KTSVG className='svg-icon-1' path='/media/icons/duotune/cod001.svg' />
+                <KTSVG className='svg-icon-1' path='/media/icons/duotune/coding/cod001.svg' />
               </button>
             </div>
             {/*end::Toolbar*/}

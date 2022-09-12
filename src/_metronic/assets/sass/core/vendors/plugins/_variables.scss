@@ -2,47 +2,6 @@
 // 3rd-party config
 //
 
-.DateInput_input__focused {
-  border-bottom-color: #ff8e32; //#008489
-}
-
-.CalendarDay__default:hover {
-  background: #fff2e4; //background #e4e7e7
-  border: 1px solid #fff2e4; //default styles include a border #e4e7e7
-  color: white; //text
-}
-
-//// Will edit everything selected including everything between a range of dates
-.CalendarDay__selected_span {
-  background: #ffb974; //background #66e2da
-  border: 1px solid #ffaa55; //33dacd
-  color: white; //text
-}
-
-.CalendarDay__selected_span:active,
-.CalendarDay__selected_span:hover {
-  background: #ffaa55; //background #33dacd
-  border: 1px solid #ffaa55; //default styles include a border 33dacd
-  color: white; //text
-}
-
-//// Will edit selected date or the endpoints of a range of dates
-.CalendarDay__selected,
-.CalendarDay__selected:hover,
-.CalendarDay__selected:active {
-  background: $mc-secondary; //#00a699
-  border-color: $mc-secondary; //#00a699
-  color: white;
-}
-
-//// Will edit when the second date (end date) in a range of dates
-//// is not yet selected. Edits the dates between your mouse and said date
-.CalendarDay__hovered_span:hover,
-.CalendarDay__hovered_span {
-  background: #ffdfbf; //#b2f1ec
-  border-color: #ffcd9b; //#80e8e0
-  color: #ffffff;
-}
 
 // Prismjs
 $highlight-bg: #1e1e3f;
@@ -68,3 +27,9 @@ $highlight-scrollbar-hover-color-dark: lighten($highlight-bg-dark, 15%);
 
 // Bootstrap Maxlength
 $bootstrap-maxlength-z-index: 1040;
+
+// Daterangepicker
+$daterangepicker-ranges-list-height: 260px;
+$daterangepicker-ranges-list-width: 150px;
+
+	

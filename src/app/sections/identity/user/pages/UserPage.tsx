@@ -1,7 +1,7 @@
 import {Navigate, Route, Routes} from 'react-router-dom'
 import {UserIndex} from './UserIndex'
 import {UserCreate} from '../UserCreate'
-import {PageLink, PageTitle} from '../../../../../_metronic/layout/core'
+import {PageLink, PageTitle} from '../../../../layout/core'
 import React from 'react'
 import {UserView} from './UserView'
 import {SuspenseView} from '../../../../layout/SuspenseView'
@@ -62,4 +62,4 @@ const UserPage: React.FC = () => {
   )
 }
 
-export {UserPage}
+export default UserPage;

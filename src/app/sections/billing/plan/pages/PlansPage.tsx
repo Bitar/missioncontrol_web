@@ -1,5 +1,5 @@
 import {Navigate, Route, Routes} from 'react-router-dom'
-import {PageLink, PageTitle} from '../../../../../_metronic/layout/core'
+import {PageLink, PageTitle} from '../../../../layout/core'
 import React from 'react'
 import {PlansIndex} from '../PlansIndex'
 import {PlansCreate} from '../PlansCreate'
@@ -55,4 +55,4 @@ const PlansPage: React.FC = () => {
   )
 }
 
-export {PlansPage}
+export default  PlansPage

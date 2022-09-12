@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {PageTitle} from '../../../_metronic/layout/core'
+import {PageTitle} from '../../layout/core'
 import {CheckoutModalProvider, useCheckoutModal} from './core/CheckoutModal'
 import React, {useEffect, useState} from 'react'
 import clsx from 'clsx'

@@ -3,6 +3,9 @@ import {ThemeModeComponent} from '../../../assets/ts/layout'
 import {toAbsoluteUrl} from '../../../helpers'
 
 export type ThemeModeType = 'dark' | 'light' | 'system'
+export const themeModelSKey = 'kt_theme_mode_value'
+export const themeMenuModeLSKey = 'kt_theme_mode_menu'
+
 const systemMode = ThemeModeComponent.getSystemMode() as 'light' | 'dark'
 
 type ThemeModeContextType = {
@@ -18,9 +21,6 @@ const themeModeSwitchHelper = (_mode: ThemeModeType) => {
   const imageUrl = '/media/patterns/header-bg' + (mode === 'light' ? '.jpg' : '-dark.png')
   document.body.style.backgroundImage = `url("${toAbsoluteUrl(imageUrl)}")`
 }
-
-const themeModeLSKey = 'kt_theme_mode_value'
-const themeMenuModeLSKey = 'kt_theme_mode_menu'
 
 const getThemeModeFromLocalStorage = (lsKey: string): ThemeModeType => {
   if (!localStorage) {
@@ -43,7 +43,7 @@ const getThemeModeFromLocalStorage = (lsKey: string): ThemeModeType => {
 }
 
 const defaultThemeMode: ThemeModeContextType = {
-  mode: getThemeModeFromLocalStorage(themeModeLSKey),
+  mode: getThemeModeFromLocalStorage(themeModelSKey),
   menuMode: getThemeModeFromLocalStorage(themeMenuModeLSKey),
   updateMode: (_mode: ThemeModeType) => {},
   updateMenuMode: (_menuMode: ThemeModeType) => {},
@@ -56,12 +56,6 @@ const ThemeModeContext = createContext<ThemeModeContextType>({
   updateMenuMode: (_menuMode: ThemeModeType) => {},
 })
 
-export const getTheme = () => {
-  let systemMode = ThemeModeComponent.getSystemMode() as 'light' | 'dark'
-  let mode = getThemeModeFromLocalStorage(themeModeLSKey)
-  return mode === 'system' ? systemMode : mode
-}
-
 const useThemeMode = () => useContext(ThemeModeContext)
 
 const ThemeModeProvider = ({children}: {children: React.ReactNode}) => {
@@ -72,7 +66,7 @@ const ThemeModeProvider = ({children}: {children: React.ReactNode}) => {
     setMode(_mode)
     // themeModeSwitchHelper(updatedMode)
     if (saveInLocalStorage && localStorage) {
-      localStorage.setItem(themeModeLSKey, _mode)
+      localStorage.setItem(themeModelSKey, _mode)
     }
 
     if (saveInLocalStorage) {

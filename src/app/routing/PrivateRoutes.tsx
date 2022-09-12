@@ -1,22 +1,23 @@
 import {Navigate, Route, Routes} from 'react-router-dom'
-import {MasterLayout} from '../../_metronic/layout/MasterLayout'
+import {MasterLayout} from '../layout/MasterLayout'
 import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper'
 import {Marketing} from '../pages/marketing/Marketing'
 import {BillingPlanWrapper} from '../sections/billing/BillingPlanWrapper'
 import {BillingComplete} from '../sections/billing/BillingComplete'
 import {SubscriptionIndex} from '../sections/billing/subscriptions/SubscriptionIndex'
-import {UserPage} from '../sections/identity/user/pages/UserPage'
-import {RolePage} from '../sections/identity/role/pages/RolePage'
 import {PermissionPage} from '../sections/identity/permission/pages/PermissionPage'
-import {PlansPage} from '../sections/billing/plan/pages/PlansPage'
-import {CommunityPage} from '../sections/community/pages/CommunityPage'
-import {GamePage} from '../sections/games/pages/GamePage'
 import {SuspenseView} from '../layout/SuspenseView'
-import {ActivityPage} from '../sections/activity/pages/ActivityPage'
-import React from 'react'
+import React, { lazy } from "react";
 import {Restricted} from '../modules/auth/core/AuthPermission'
 
 const PrivateRoutes = () => {
+  const CommunityPage = lazy(() => import('../sections/community/pages/CommunityPage'))
+  const GamePage = lazy(() => import('../sections/games/pages/GamePage'))
+  const PlansPage = lazy(() => import('../sections/billing/plan/pages/PlansPage'))
+  const ActivityPage = lazy(() => import('../sections/activity/pages/ActivityPage'))
+  const RolePage = lazy(() => import('../sections/identity/role/pages/RolePage'))
+  const UserPage = lazy(() => import('../sections/identity/user/pages/UserPage'))
+
   return (
     <Routes>
       <Route element={<MasterLayout />}>

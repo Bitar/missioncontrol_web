@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
-import {PageTitle} from '../../../_metronic/layout/core'
+import {PageTitle} from '../../layout/core'
 import {marketingData} from './data/MarketingData'
 import {support} from './data/SupportData'
 

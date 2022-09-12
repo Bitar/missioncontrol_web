@@ -1,5 +1,5 @@
 import React, {FC} from 'react'
-import {PageLink, PageTitle} from '../../../../_metronic/layout/core'
+import {PageLink, PageTitle} from '../../../layout/core'
 import {Navigate, Route, Routes} from 'react-router-dom'
 import {GameIndex} from '../GameIndex'
 import {GameCreate} from '../GameCreate'
@@ -55,4 +55,4 @@ const GamePage: FC = () => {
   )
 }
 
-export {GamePage}
+export default  GamePage

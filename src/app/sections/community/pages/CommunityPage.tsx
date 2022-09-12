@@ -1,6 +1,6 @@
 import React, {FC} from 'react'
 import {Navigate, Route, Routes} from 'react-router-dom'
-import {PageLink, PageTitle} from '../../../../_metronic/layout/core'
+import {PageLink, PageTitle} from '../../../layout/core'
 import {CommunityIndex} from './CommunityIndex'
 import {CommunityCreate} from '../CommunityCreate'
 import {CommunityView} from './CommunityView'
@@ -55,4 +55,4 @@ const CommunityPage: FC = () => {
   )
 }
 
-export {CommunityPage}
+export default CommunityPage;

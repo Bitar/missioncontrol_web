@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useRef, useState} from 'react'
-import {PageLink, PageTitle} from '../../../../_metronic/layout/core'
+import {PageLink, PageTitle} from '../../../layout/core'
 import {getCommunityById} from '../core/CommunityRequests'
 import {Community} from '../models/Community'
 import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'

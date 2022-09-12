@@ -9,7 +9,7 @@ type Props = {
   handleClose: () => void
 }
 
-const SearchModal: React.FC<React.PropsWithChildren<Props>> = ({show, handleClose}) => {
+const SearchModal: React.FC<Props> = ({show, handleClose}) => {
   return (
     <Modal
       className='bg-body'
@@ -23,7 +23,7 @@ const SearchModal: React.FC<React.PropsWithChildren<Props>> = ({show, handleClos
           <div className='modal-header d-flex justify-content-end border-0'>
             {/* begin::Close */}
             <div className='btn btn-icon btn-sm btn-light-primary ms-2' onClick={handleClose}>
-              <KTSVG className='svg-icon-2' path='/media/icons/duotune/arr061.svg' />
+              <KTSVG className='svg-icon-2' path='/media/icons/duotune/arrows/arr061.svg' />
             </div>
             {/* end::Close */}
           </div>

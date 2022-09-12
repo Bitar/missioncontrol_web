@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Game} from '../../../models/game/Game'
 import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
-import {PageLink, PageTitle} from '../../../../_metronic/layout/core'
+import {PageLink, PageTitle} from '../../../layout/core'
 import {getGameById} from '../core/GameRequests'
 import {GameEdit} from './GameEdit'
 import {GameInfo} from '../GameInfo'

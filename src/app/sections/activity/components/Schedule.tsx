@@ -1,12 +1,10 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
 import {Activity} from '../models/Activity'
-import {createTheme, ThemeProvider} from '@mui/material/styles'
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider'
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
 import {StaticTimePicker} from '@mui/x-date-pickers/StaticTimePicker'
 import TextField from '@mui/material/TextField'
 import dayjs, {Dayjs} from 'dayjs'
-import {getTheme} from '../../../../_metronic/partials'
 import FormControl from '@mui/material/FormControl'
 import Box from '@mui/material/Box'
 import {InputLabel, MenuItem, Select} from '@mui/material'
@@ -25,7 +23,6 @@ const Schedule: FC<Props> = ({activity, setActivity}) => {
   const [value, setValue] = useState<Dayjs | null>(dayjs())
   const [selectedTimeZone, setSelectedTimeZone] = useState('')
   const [timeZones, setTimeZones] = useState<TimeZone[]>()
-  const theme = getTheme()
 
   useEffect(() => {
     getTimeZones().then((response) => {
@@ -144,37 +141,35 @@ const Schedule: FC<Props> = ({activity, setActivity}) => {
           <span className='required fw-bold fs-6'>Time of Day</span>
         </div>
         <div className='col-lg-6'>
-          <ThemeProvider theme={createTheme({palette: {mode: theme}})}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <StaticTimePicker
-                label={' '}
-                ampm
-                orientation='landscape'
-                openTo='minutes'
-                value={value}
-                onChange={(newValue: any) => {
-                  setValue(newValue)
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <StaticTimePicker
+              label={' '}
+              ampm
+              orientation='landscape'
+              openTo='minutes'
+              value={value}
+              onChange={(newValue: any) => {
+                setValue(newValue)
 
-                  let timeOfDay = (new Date(newValue.$d).getTime() / 1000).toString()
+                let timeOfDay = (new Date(newValue.$d).getTime() / 1000).toString()
 
-                  updateData(
-                    {
-                      settings: {
-                        ...activity?.settings,
-                        ...{
-                          time_of_day: timeOfDay,
-                        },
+                updateData(
+                  {
+                    settings: {
+                      ...activity?.settings,
+                      ...{
+                        time_of_day: timeOfDay,
                       },
                     },
-                    setActivity,
-                    activity
-                  )
-                }}
-                componentsProps={{actionBar: {actions: []}}}
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </LocalizationProvider>
-          </ThemeProvider>
+                  },
+                  setActivity,
+                  activity
+                )
+              }}
+              componentsProps={{actionBar: {actions: []}}}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
         </div>
       </div>
       <div className='row mb-6'>
@@ -222,4 +217,4 @@ const Schedule: FC<Props> = ({activity, setActivity}) => {
     </>
   )
 }
-export {Schedule}
+export { Schedule };

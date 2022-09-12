@@ -9,7 +9,7 @@ const SuspenseView: FC<React.PropsWithChildren<unknown>> = ({children}) => {
     barColors: {
       '0': baseColor,
     },
-    barThickness: 1,
+    barThickness: 5,
     shadowBlur: 5,
   })
   return <Suspense fallback={<TopBarProgress />}>{children}</Suspense>

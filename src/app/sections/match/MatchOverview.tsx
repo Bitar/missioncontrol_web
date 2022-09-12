@@ -1,6 +1,6 @@
 import {KTCard, KTCardBody, KTSVG} from '../../../_metronic/helpers'
 import React, {FC} from 'react'
-import {KTCardHeader} from '../../../_metronic/helpers/components/KTCardHeader'
+import {KTCardHeader} from '../../helpers/components/KTCardHeader'
 import {Match} from '../activity/models/matches/Match'
 import {calculateTeamScore} from '../../helpers/MCHelper'
 import {Activity} from '../activity/models/Activity'

@@ -3,7 +3,7 @@ import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvide
 import {KTCard, QUERIES} from '../../../../_metronic/helpers'
 import {ListViewProvider} from '../../../modules/table/ListViewProvider'
 import React from 'react'
-import {PageLink, PageTitle} from '../../../../_metronic/layout/core'
+import {PageLink, PageTitle} from '../../../layout/core'
 import {TableHeader} from '../../../modules/table/TableHeader'
 import {getSubscriptions} from './core/_requests'
 import {SubscriptionTable} from './SubscriptionTable'

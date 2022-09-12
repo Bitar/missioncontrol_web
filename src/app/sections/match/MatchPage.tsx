@@ -1,5 +1,5 @@
 import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
-import {PageLink, PageTitle} from '../../../_metronic/layout/core'
+import {PageLink, PageTitle} from '../../layout/core'
 import React, {Dispatch, FC, SetStateAction, useEffect} from 'react'
 import {MatchInfo} from './MatchInfo'
 import {Match} from '../activity/models/matches/Match'

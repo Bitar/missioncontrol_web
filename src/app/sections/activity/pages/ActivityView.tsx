@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react'
 import {Activity} from '../models/Activity'
 import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
-import {PageLink, PageTitle} from '../../../../_metronic/layout/core'
+import {PageLink, PageTitle} from '../../../layout/core'
 import {getActivityById, getActivityMatches, getActivityMembers} from '../core/ActivityRequests'
 import {ActivityInfo} from '../ActivityInfo'
 import {ActivityTeams} from './ActivityTeams'

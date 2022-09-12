@@ -34,7 +34,7 @@ const useLang = () => {
   return useContext(I18nContext).selectedLang
 }
 
-const MetronicI18nProvider: FC<React.PropsWithChildren<WithChildren>> = ({children}) => {
+const MetronicI18nProvider: FC<WithChildren> = ({children}) => {
   const lang = getConfig()
   return <I18nContext.Provider value={lang}>{children}</I18nContext.Provider>
 }

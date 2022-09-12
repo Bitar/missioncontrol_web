@@ -1,5 +1,5 @@
 import {Navigate, Route, Routes} from 'react-router-dom'
-import {PageLink, PageTitle} from '../../../../../_metronic/layout/core'
+import {PageLink, PageTitle} from '../../../../layout/core'
 import React from 'react'
 import {RoleIndex} from '../RoleIndex'
 import {RoleCreate} from '../RoleCreate'
@@ -55,4 +55,4 @@ const RolePage: React.FC = () => {
   )
 }
 
-export {RolePage}
+export default  RolePage

@@ -37,7 +37,7 @@ const languages = [
   },
 ]
 
-const Languages: FC<React.PropsWithChildren<unknown>> = () => {
+const Languages: FC = () => {
   const lang = useLang()
   const currentLanguage = languages.find((x) => x.lang === lang)
   return (
@@ -51,7 +51,7 @@ const Languages: FC<React.PropsWithChildren<unknown>> = () => {
         <span className='menu-title position-relative'>
           Language
           <span className='fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0'>
-            {currentLanguage?.name}
+            {currentLanguage?.name}{' '}
             <img
               className='w-15px h-15px rounded-1 ms-2'
               src={currentLanguage?.flag}
