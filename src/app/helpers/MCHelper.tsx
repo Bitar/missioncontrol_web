@@ -16,15 +16,20 @@ const getDateFromTimestamp = ($timestamp: any) => {
 const calculateTeamScore = (match: any, team: any) => {
   let totalScore = 0
 
-  match?.rounds.forEach((round: any) => {
-    let scores = round.scores
+  // console.log(match)
+  console.log(team)
 
-    scores.forEach((score: any) => {
-      if (score.team_id === team.id) {
-        totalScore += score.score
-      }
+  if (team) {
+    match?.rounds.forEach((round: any) => {
+      let scores = round.scores
+
+      scores.forEach((score: any) => {
+        if (score.team_id === team.id) {
+          totalScore += score.score
+        }
+      })
     })
-  })
+  }
 
   return totalScore
 }

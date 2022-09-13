@@ -1,5 +1,5 @@
 import {KTCard, KTCardBody, KTSVG} from '../../../_metronic/helpers'
-import React, {FC} from 'react'
+import React, { FC, useState } from "react";
 import {KTCardHeader} from '../../helpers/components/KTCardHeader'
 import {Match} from '../activity/models/matches/Match'
 import {calculateTeamScore} from '../../helpers/MCHelper'
@@ -12,6 +12,10 @@ type Props = {
 }
 
 const MatchOverview: FC<Props> = ({match, activity}) => {
+  // const [teamAScore, setTeamAScore] = useState(0)
+  // const [teamBScore, setTeamBScore] = useState(0)
+  // const [teams, setTeams] = useState()
+
   const getTeam = (teamId: number) => {
     return match?.teams?.find(function (element: any) {
       return element.id === teamId
