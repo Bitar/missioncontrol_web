@@ -206,4 +206,4 @@ const TeamDetails: FC<Props> = ({activity, setActivity, gameMode}) => {
   )
 }
 
-export { TeamDetails };
+export {TeamDetails}

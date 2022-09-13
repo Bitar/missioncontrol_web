@@ -28,4 +28,4 @@ const KTCardBody: FC<Props & WithChildren> = (props) => {
   )
 }
 
-export { KTCardBody };
+export {KTCardBody}

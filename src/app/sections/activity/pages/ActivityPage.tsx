@@ -62,4 +62,4 @@ const ActivityPage: FC = () => {
   )
 }
 
-export  default  ActivityPage;
+export default ActivityPage

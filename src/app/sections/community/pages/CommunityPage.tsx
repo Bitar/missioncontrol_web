@@ -55,4 +55,4 @@ const CommunityPage: FC = () => {
   )
 }
 
-export default CommunityPage;
+export default CommunityPage

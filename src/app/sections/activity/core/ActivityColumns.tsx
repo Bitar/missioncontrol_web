@@ -35,7 +35,7 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
       <div className='d-flex align-items-center'>
         <div className='d-flex flex-column'>
           <Link to={'/activities/' + props.data[props.row.index].id} className='d-block'>
-          <span className='text-gray-800 mb-1'>{props.data[props.row.index].title}</span>
+            <span className='text-gray-800 mb-1'>{props.data[props.row.index].title}</span>
           </Link>
         </div>
       </div>

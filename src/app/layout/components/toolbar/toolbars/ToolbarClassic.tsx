@@ -1,29 +1,29 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import clsx from "clsx";
-import { KTSVG } from "../../../../../_metronic/helpers";
-import { Dropdown1 } from "../../../../../_metronic/partials";
-import { useLayout } from "../../../core";
+import clsx from 'clsx'
+import {KTSVG} from '../../../../../_metronic/helpers'
+import {Dropdown1} from '../../../../../_metronic/partials'
+import {useLayout} from '../../../core'
 
 const ToolbarClassic = () => {
-  const { config } = useLayout();
+  const {config} = useLayout()
   // const [showCreateAppModal, setShowCreateAppModal] = useState<boolean>(false)
   const daterangepickerButtonClass = config.app?.toolbar?.fixed?.desktop
-    ? "btn-light"
-    : "bg-body btn-color-gray-700 btn-active-color-primary";
+    ? 'btn-light'
+    : 'bg-body btn-color-gray-700 btn-active-color-primary'
 
   return (
-    <div className="d-flex align-items-center gap-2 gap-lg-3">
+    <div className='d-flex align-items-center gap-2 gap-lg-3'>
       {config.app?.toolbar?.filterButton && (
-        <div className="m-0">
+        <div className='m-0'>
           <a
-            href="src/app/layout/components/toolbar/toolbars/ToolbarClassic#"
-            className={clsx("btn btn-sm btn-flex fw-bold", daterangepickerButtonClass)}
-            data-kt-menu-trigger="click"
-            data-kt-menu-placement="bottom-end"
+            href='src/app/layout/components/toolbar/toolbars/ToolbarClassic#'
+            className={clsx('btn btn-sm btn-flex fw-bold', daterangepickerButtonClass)}
+            data-kt-menu-trigger='click'
+            data-kt-menu-placement='bottom-end'
           >
             <KTSVG
-              path="/media/icons/duotune/gen031.svg"
-              className="svg-icon-6 svg-icon-muted me-1"
+              path='/media/icons/duotune/gen031.svg'
+              className='svg-icon-6 svg-icon-muted me-1'
             />
             Filter
           </a>
@@ -33,20 +33,23 @@ const ToolbarClassic = () => {
 
       {config.app?.toolbar?.daterangepickerButton && (
         <div
-          data-kt-daterangepicker="true"
-          data-kt-daterangepicker-opens="left"
+          data-kt-daterangepicker='true'
+          data-kt-daterangepicker-opens='left'
           className={clsx(
-            "btn btn-sm fw-bold  d-flex align-items-center px-4",
+            'btn btn-sm fw-bold  d-flex align-items-center px-4',
             daterangepickerButtonClass
           )}
         >
-          <div className="text-gray-600 fw-bold">Loading date range...</div>
-          <KTSVG path="/media/icons/duotune/general/gen014.svg" className="svg-icon-1 ms-2 me-0" />
+          <div className='text-gray-600 fw-bold'>Loading date range...</div>
+          <KTSVG path='/media/icons/duotune/general/gen014.svg' className='svg-icon-1 ms-2 me-0' />
         </div>
       )}
 
       {config.app?.toolbar?.secondaryButton && (
-        <a href="src/app/layout/components/toolbar/toolbars/ToolbarClassic#" className="btn btn-sm btn-flex btn-light fw-bold">
+        <a
+          href='src/app/layout/components/toolbar/toolbars/ToolbarClassic#'
+          className='btn btn-sm btn-flex btn-light fw-bold'
+        >
           Filter
         </a>
       )}
@@ -63,7 +66,7 @@ const ToolbarClassic = () => {
       {/*  </a>*/}
       {/*)}*/}
     </div>
-  );
-};
+  )
+}
 
-export { ToolbarClassic };
+export {ToolbarClassic}

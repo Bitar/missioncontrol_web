@@ -43,7 +43,6 @@ $warning-light: #fff8dd;
 $warning-light-dark: #392f28;
 $warning-inverse: $white;
 
-
 $mc-primary: #110055;
 $mc-primary-active: darken(#110055, 3%);
 $mc-primary-light: if(isDarkMode(), darken(#110055, 42%), lighten(#110055, 80%));

@@ -55,4 +55,4 @@ const RolePage: React.FC = () => {
   )
 }
 
-export default  RolePage
+export default RolePage

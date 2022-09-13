@@ -70,7 +70,10 @@ const ToolbarExtended: FC = () => {
           data-bs-trigger='hover'
           title='Invite a team member'
         >
-          <a href='src/app/layout/components/toolbar/toolbars/ToolbarExtended#' className='btn btn-sm btn-icon'>
+          <a
+            href='src/app/layout/components/toolbar/toolbars/ToolbarExtended#'
+            className='btn btn-sm btn-icon'
+          >
             <KTSVG
               path='/media/icons/duotune/general/gen035.svg'
               className='svg-icon-2hx svg-icon-success'

@@ -13,13 +13,13 @@ type Props = {
 }
 
 const SidebarMenuItemWithSub: React.FC<Props & WithChildren> = ({
-                                                                  children,
-                                                                  to,
-                                                                  title,
-                                                                  icon,
-                                                                  fontIcon,
-                                                                  hasBullet,
-                                                                }) => {
+  children,
+  to,
+  title,
+  icon,
+  fontIcon,
+  hasBullet,
+}) => {
   const {pathname} = useLocation()
   const {config} = useLayout()
   const {app} = config
@@ -59,4 +59,4 @@ const SidebarMenuItemWithSub: React.FC<Props & WithChildren> = ({
   )
 }
 
-export { SidebarMenuItemWithSub };
+export {SidebarMenuItemWithSub}

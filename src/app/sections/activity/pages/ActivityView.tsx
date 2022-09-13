@@ -159,4 +159,4 @@ const ActivityView: FC = () => {
   )
 }
 
-export { ActivityView };
+export {ActivityView}

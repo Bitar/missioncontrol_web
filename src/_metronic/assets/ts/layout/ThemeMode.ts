@@ -15,7 +15,7 @@ class ThemeMode {
       return defaultMode
     }
 
-    return menuMode;
+    return menuMode
     // if (!localStorage) {
     //   return defaultMode
     // }
@@ -196,6 +196,6 @@ class ThemeMode {
   }
 }
 
-const ThemeModeComponent = new ThemeMode();
+const ThemeModeComponent = new ThemeMode()
 // Initialize app on document ready => ThemeModeComponent.init()
-export { ThemeModeComponent };
+export {ThemeModeComponent}

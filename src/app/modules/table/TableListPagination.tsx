@@ -44,7 +44,7 @@ const TableListPagination = () => {
             ?.map((link: any) => {
               return {...link, label: mappedLabel(link.label)}
             })
-            .map((link: any ) => (
+            .map((link: any) => (
               <li
                 key={link.label}
                 className={clsx('page-item', {

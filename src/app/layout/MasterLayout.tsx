@@ -43,4 +43,4 @@ const MasterLayout = () => {
   )
 }
 
-export { MasterLayout };
+export {MasterLayout}

@@ -55,4 +55,4 @@ const GamePage: FC = () => {
   )
 }
 
-export default  GamePage
+export default GamePage

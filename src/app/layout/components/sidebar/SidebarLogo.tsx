@@ -12,8 +12,8 @@ const SidebarLogo = () => {
   const toggleType = appSidebarDefaultCollapseDesktopEnabled
     ? 'collapse'
     : appSidebarDefaultMinimizeDesktopEnabled
-      ? 'minimize'
-      : ''
+    ? 'minimize'
+    : ''
   const toggleState = appSidebarDefaultMinimizeDesktopEnabled ? 'active' : ''
   const appSidebarDefaultMinimizeDefault = config.app?.sidebar?.default?.minimize?.desktop?.default
   return (
@@ -66,4 +66,4 @@ const SidebarLogo = () => {
   )
 }
 
-export { SidebarLogo };
+export {SidebarLogo}

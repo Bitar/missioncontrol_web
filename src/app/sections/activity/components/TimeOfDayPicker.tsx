@@ -51,4 +51,4 @@ const TimeOfDayPicker: FC<Props> = ({activity, setActivity}) => {
   )
 }
 
-export { TimeOfDayPicker };
+export {TimeOfDayPicker}

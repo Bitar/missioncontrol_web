@@ -25,10 +25,8 @@ const initActivityContextPropsState = {
   setMatch: () => {},
 }
 
-const ActivityContext = createContext<ActivityContextProps>(initActivityContextPropsState)
+export const ActivityContext = createContext<ActivityContextProps>(initActivityContextPropsState)
 
-const useActivity = () => {
+export const useActivity = () => {
   return useContext(ActivityContext)
 }
-
-export {useActivity, ActivityContext}

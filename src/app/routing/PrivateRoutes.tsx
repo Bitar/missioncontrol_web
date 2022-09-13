@@ -7,7 +7,7 @@ import {BillingComplete} from '../sections/billing/BillingComplete'
 import {SubscriptionIndex} from '../sections/billing/subscriptions/SubscriptionIndex'
 import {PermissionPage} from '../sections/identity/permission/pages/PermissionPage'
 import {SuspenseView} from '../layout/SuspenseView'
-import React, { lazy } from "react";
+import React, {lazy} from 'react'
 import {Restricted} from '../modules/auth/core/AuthPermission'
 
 const PrivateRoutes = () => {

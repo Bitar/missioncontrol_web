@@ -86,4 +86,4 @@ const updateDOM = (config: ILayout) => {
   }, 0)
 }
 
-export { Header };
+export {Header}

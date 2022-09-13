@@ -67,7 +67,9 @@ const PrizeWrapper: FC<Props> = ({activity, setActivity}) => {
                   }
                 }}
               >
-                <MenuItem value={'1'} selected={true}>No Prize</MenuItem>
+                <MenuItem value={'1'} selected={true}>
+                  No Prize
+                </MenuItem>
                 <MenuItem value={'2'}>Sole Winner</MenuItem>
                 {/*<MenuItem value={'3'}>Per Rank</MenuItem>*/}
               </Select>

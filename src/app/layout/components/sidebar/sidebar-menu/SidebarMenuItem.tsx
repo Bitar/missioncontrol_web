@@ -14,13 +14,13 @@ type Props = {
 }
 
 const SidebarMenuItem: FC<Props & WithChildren> = ({
-                                                     children,
-                                                     to,
-                                                     title,
-                                                     icon,
-                                                     fontIcon,
-                                                     hasBullet = false,
-                                                   }) => {
+  children,
+  to,
+  title,
+  icon,
+  fontIcon,
+  hasBullet = false,
+}) => {
   const {pathname} = useLocation()
   const isActive = checkIsActive(pathname, to)
   const {config} = useLayout()
@@ -51,4 +51,4 @@ const SidebarMenuItem: FC<Props & WithChildren> = ({
   )
 }
 
-export { SidebarMenuItem };
+export {SidebarMenuItem}

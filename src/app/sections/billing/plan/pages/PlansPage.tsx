@@ -55,4 +55,4 @@ const PlansPage: React.FC = () => {
   )
 }
 
-export default  PlansPage
+export default PlansPage
