@@ -102,7 +102,7 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
     createActivity(data)
       .then((response) => {
         toast.success('Activity Created Successfully')
-        // navigate(`/activities/${response?.id}/overview`)
+        navigate(`/activities/${response?.id}/overview`)
       })
       .catch((error) => {
         if (error.response) {

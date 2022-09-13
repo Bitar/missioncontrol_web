@@ -28,4 +28,4 @@ const ActivityIndex = () => (
   </QueryRequestProvider>
 )
 
-export {ActivityIndex}
+export { ActivityIndex };
