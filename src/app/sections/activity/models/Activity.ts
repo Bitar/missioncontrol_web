@@ -138,6 +138,7 @@ export type ActivityForm = {
   game_mode_id?: string
   rounds?: string
   is_cross_play?: boolean
+  platform_id?: string
   platform_ids?: number[]
   schedule: {
     registration_dates: {
@@ -171,6 +172,7 @@ export const initialActivityForm = (activityForm?: ActivityForm) => {
     game_mode_id: activityForm?.game_mode_id || '',
     rounds: activityForm?.rounds || '',
     is_cross_play: activityForm?.is_cross_play || false,
+    platform_id: activityForm?.platform_id || '',
     platform_ids: activityForm?.platform_ids || [],
     schedule: {
       registration_dates: {

@@ -336,6 +336,7 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                                   value={values.is_cross_play}
                                   onChange={(e) => {
                                     values.platform_ids = []
+                                    values.platform_id = ''
                                     handleOnChange(e)
                                   }}
                                 />
@@ -351,23 +352,42 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                           <Box sx={{minWidth: 120}}>
                             <FormControl fullWidth size='small'>
                               <InputLabel id='platforms-select-label'>Platforms</InputLabel>
-                              <Select
-                                labelId='platforms-select-label'
-                                label='Platforms'
-                                required
-                                multiple={values.is_cross_play}
-                                value={values.platform_ids}
-                                name={'platform_ids'}
-                                onChange={handleOnChange}
-                              >
-                                {platforms &&
-                                  platforms.length > 0 &&
-                                  platforms.map((platform: any) => (
-                                    <MenuItem key={platform.id} value={platform.id}>
-                                      {platform.name}
-                                    </MenuItem>
-                                  ))}
-                              </Select>
+                              {values.is_cross_play ? (
+                                <Select
+                                  labelId='platforms-select-label'
+                                  label='Platforms'
+                                  required
+                                  multiple
+                                  value={values.platform_ids}
+                                  name={'platform_ids'}
+                                  onChange={handleOnChange}
+                                >
+                                  {platforms &&
+                                    platforms.length > 0 &&
+                                    platforms.map((platform: any, index) => (
+                                      <MenuItem key={`${index}-${platform.id}`} value={platform.id}>
+                                        {platform.name}
+                                      </MenuItem>
+                                    ))}
+                                </Select>
+                              ) : (
+                                <Select
+                                  labelId='platforms-select-label'
+                                  label='Platforms'
+                                  required
+                                  value={values.platform_id}
+                                  name={'platform_id'}
+                                  onChange={handleOnChange}
+                                >
+                                  {platforms &&
+                                    platforms.length > 0 &&
+                                    platforms.map((platform: any, index) => (
+                                      <MenuItem key={`${index}-${platform.id}`} value={platform.id}>
+                                        {platform.name}
+                                      </MenuItem>
+                                    ))}
+                                </Select>
+                              )}
                             </FormControl>
                           </Box>
                         </div>

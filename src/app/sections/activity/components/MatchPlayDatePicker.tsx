@@ -74,14 +74,14 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
             renderInput={(startProps, endProps) => (
               <React.Fragment>
                 <TextField
-                  required
+                  // required
                   {...startProps}
                   size={'small'}
                   name='settings.registration_dates.start_date'
                 />
                 <Box sx={{mx: 2}}> to </Box>
                 <TextField
-                  required
+                  // required
                   {...endProps}
                   size={'small'}
                   name='settings.registration_dates.end_Date'

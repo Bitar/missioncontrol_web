@@ -23,8 +23,9 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
         case 'Elimination':
           return 'fa-crosshairs'
         case 'Place':
-          // return 'fa-ranking-star'
           return 'fa-ranking-star'
+        case 'Round':
+          return 'fa-futbol'
         default:
           return key
       }
