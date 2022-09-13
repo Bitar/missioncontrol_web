@@ -16,9 +16,6 @@ const getDateFromTimestamp = ($timestamp: any) => {
 const calculateTeamScore = (match: any, team: any) => {
   let totalScore = 0
 
-  // console.log(match)
-  console.log(team)
-
   if (team) {
     match?.rounds.forEach((round: any) => {
       let scores = round.scores

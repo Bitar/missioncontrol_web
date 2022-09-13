@@ -3,6 +3,7 @@ import {Match} from '../models/matches/Match'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {calculateTeamScore} from '../../../helpers/MCHelper'
 import {useNavigate, useParams} from 'react-router-dom'
+import { TeamImage } from "../components/TeamImage";
 
 type Props = {
   matches: Match[] | undefined
@@ -62,12 +63,7 @@ const MatchResults: FC<Props> = ({matches, setMatch}) => {
                       {match?.teams && match?.teams[0] && (
                         <div className='flex-grow-1 mw-200px'>
                           <div className='d-flex justify-content-start flex-stack'>
-                            <div className='symbol symbol-30px symbol-circle me-3'>
-                              <img
-                                alt={match?.teams[0].name + ' team image'}
-                                src={match?.teams[0].image}
-                              />
-                            </div>
+                            <TeamImage team={match?.teams[0]} className='me-3'/>
                             <div className='fs-6 fw-bold'>{match?.teams[0].name}</div>
                           </div>
                         </div>
@@ -84,12 +80,7 @@ const MatchResults: FC<Props> = ({matches, setMatch}) => {
                         <div className='flex-grow-1 mw-200px'>
                           <div className='d-flex flex-stack justify-content-end'>
                             <div className='fs-6 fw-bold'>{match?.teams[1].name}</div>
-                            <div className='symbol symbol-30px symbol-circle ms-3'>
-                              <img
-                                alt={match?.teams[1].name + ' team image'}
-                                src={match?.teams[1].image}
-                              />
-                            </div>
+                            <TeamImage team={match?.teams[1]} className='me-3'/>
                           </div>
                         </div>
                       )}

@@ -1,10 +1,11 @@
-import {KTCard, KTCardBody, KTSVG} from '../../../_metronic/helpers'
+import { KTCard, KTCardBody, KTSVG } from "../../../_metronic/helpers";
 import React, {FC} from 'react'
 import {KTCardHeader} from '../../helpers/components/KTCardHeader'
 import {Match} from '../activity/models/matches/Match'
-import {calculateTeamScore} from '../../helpers/MCHelper'
 import {Activity} from '../activity/models/Activity'
 import {ScoreSheet} from '../activity/models/matches/ScoreSheet'
+import { calculateTeamScore } from "../../helpers/MCHelper";
+import { TeamImage } from "../activity/components/TeamImage";
 
 type Props = {
   activity: Activity | undefined
@@ -44,10 +45,6 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
     }
   }
 
-  // function sortWinner(a: Score, b: Score) {
-  //   return a.score - b.score
-  // }
-
   return (
     <>
       <div className='row g-5 g-xxl-8'>
@@ -56,6 +53,7 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
             <KTCardHeader text={'Scores'} bg='mc-primary' text_color='white' />
             <KTCardBody>
               {match?.rounds.map((round) => (
+                round?.scores.length > 0 && (
                 <div className='py-1' key={round.round}>
                   <div className='py-3 d-flex flex-stack flex-wrap'>
                     <div
@@ -74,12 +72,7 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
                         />
                       </div>
                       <div className='fs-4 text-dark fw-bold me-3'>Round {round.round}:</div>
-                      <div className='symbol symbol-30px symbol-circle me-3'>
-                        <img
-                          src={getTeam(round?.scores[0]?.team_id)?.image}
-                          alt={getTeam(round?.scores[0]?.team_id)?.name + ' team image'}
-                        />
-                      </div>
+                      <TeamImage team={getTeam(round?.scores[0]?.team_id)} className='me-3'/>
                       <div className='me-3'>
                         <div className='d-flex align-items-center fw-bold'>
                           {getTeam(round?.scores[0]?.team_id)?.name}
@@ -156,6 +149,7 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
                     </div>
                   </div>
                 </div>
+                )
               ))}
             </KTCardBody>
           </KTCard>

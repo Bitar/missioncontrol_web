@@ -7,9 +7,9 @@ import {
   getDateFromTimestamp,
   getTimeFromTimestamp,
 } from '../../helpers/MCHelper'
-import {KTCardBody} from '../../../_metronic/helpers'
-import {KTCard} from '../../../_metronic/helpers'
+import {KTCard, KTCardBody} from '../../../_metronic/helpers'
 import clsx from 'clsx'
+import {TeamImage} from '../activity/components/TeamImage'
 
 type Props = {
   match?: Match | undefined
@@ -45,15 +45,12 @@ const MatchInfo: FC<Props> = ({match}) => {
             {match?.teams && match?.teams[0] && (
               <div className='flex-grow-1'>
                 <div className='d-inline-block'>
-                  <div className='symbol symbol-100px symbol-circle mb-3'>
-                    {match?.result?.winner?.team_id === match?.teams[0].id && (
-                      <span className='position-absolute w-100 text-center ' style={{top: '-35px'}}>
-                        <i className='fas fa-trophy text-warning display-6'></i>
-                      </span>
-                    )}
-
-                    <img alt={match?.teams[0].name + ' team image'} src={match?.teams[0].image} />
-                  </div>
+                  <TeamImage
+                    team={match?.teams[0]}
+                    size='100px'
+                    className='mb-3'
+                    isWinner={match?.result?.winner?.team_id === match?.teams[0].id}
+                  />
                   <div className='fs-6 fw-bold'>{match?.teams[0].name}</div>
                 </div>
               </div>
@@ -83,14 +80,12 @@ const MatchInfo: FC<Props> = ({match}) => {
             {match?.teams && match?.teams[1] && (
               <div className='flex-grow-1'>
                 <div className='d-inline-block'>
-                  <div className='symbol symbol-100px symbol-circle mb-3'>
-                    {match?.result?.winner?.team_id === match?.teams[1].id && (
-                      <span className='position-absolute w-100 text-center ' style={{top: '-15px'}}>
-                        <i className='fas fa-trophy text-warning display-6'></i>
-                      </span>
-                    )}
-                    <img alt={match?.teams[1].name + ' team image'} src={match?.teams[1].image} />
-                  </div>
+                  <TeamImage
+                    team={match?.teams[1]}
+                    size='100px'
+                    className='mb-3'
+                    isWinner={match?.result?.winner?.team_id === match?.teams[1].id}
+                  />
                   <div className='fs-6 fw-bold'>{match?.teams[1].name}</div>
                 </div>
               </div>
@@ -122,4 +117,4 @@ const MatchInfo: FC<Props> = ({match}) => {
   )
 }
 
-export {MatchInfo}
+export { MatchInfo };

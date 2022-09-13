@@ -1,9 +1,10 @@
-import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
-import {useNavigate, useParams} from 'react-router-dom'
-import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
-import {Match} from '../models/matches/Match'
-import {getDateFromTimestamp, getTimeFromTimestamp} from '../../../helpers/MCHelper'
-import {formatMatchStatus} from '../../../helpers/ActivityHelper'
+import React, { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { KTCard, KTCardBody } from "../../../../_metronic/helpers";
+import { Match } from "../models/matches/Match";
+import { getDateFromTimestamp, getTimeFromTimestamp } from "../../../helpers/MCHelper";
+import { formatMatchStatus } from "../../../helpers/ActivityHelper";
+import { TeamImage } from "../components/TeamImage";
 
 // let matchesLoaded = false
 
@@ -76,16 +77,17 @@ const ActivityMatches: FC<Props> = ({matches, setMatch}) => {
                     }
                   >
                     <div className='d-flex flex-stack text-center'>
-                      {match?.teams && match?.teams[0] && (
+                      {match?.teams && match?.teams[0] ? (
                         <div className='flex-grow-1 mw-200px'>
                           <div className='d-inline-block'>
-                            <div className='symbol symbol-60px symbol-circle mb-3'>
-                              <img
-                                alt={match?.teams[0].name + ' team image'}
-                                src={match?.teams[0].image}
-                              />
-                            </div>
+                            <TeamImage team={match?.teams[0]} className='mb-3' size='60px'/>
                             <div className='fs-6 fw-bold'>{match?.teams[0].name}</div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className='flex-grow-1 mw-200px'>
+                          <div className='d-inline-block'>
+                            <div className='fs-6 fw-bold'>BYE</div>
                           </div>
                         </div>
                       )}
@@ -104,16 +106,21 @@ const ActivityMatches: FC<Props> = ({matches, setMatch}) => {
                           {/*return <BadgeCell status={status} color={color} />*/}
                         </div>
                       </div>
-                      {match?.teams && match?.teams[1] && (
+                      {match?.teams && match?.teams[1] ? (
                         <div className='flex-grow-1 mw-200px'>
                           <div className='d-inline-block'>
-                            <div className='symbol symbol-60px symbol-circle mb-3'>
-                              <img
-                                alt={match?.teams[1].name + ' team image'}
-                                src={match?.teams[1].image}
-                              />
-                            </div>
+                            <TeamImage team={match?.teams[1]} className='mb-3' size='60px'/>
                             <div className='fs-6 fw-bold'>{match?.teams[1].name}</div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className='flex-grow-1 mw-200px'>
+                          <div className='d-inline-block'>
+                            <div className='symbol symbol-60px symbol-circle mb-3 overflow-hidden'>
+                              <div className='bg-mc-secondary w-60px h-60px'>
+                                <div className='pt-6 fs-6 fw-bold text-center text-white'>BYE</div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       )}
@@ -134,4 +141,4 @@ const ActivityMatches: FC<Props> = ({matches, setMatch}) => {
   )
 }
 
-export {ActivityMatches}
+export { ActivityMatches };
