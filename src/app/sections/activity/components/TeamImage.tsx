@@ -3,28 +3,43 @@ import React, {FC} from 'react'
 import clsx from 'clsx'
 
 type Props = {
-  team: Team | undefined
+  team?: Team | undefined
   size?: string
   className?: string
   isWinner?: boolean
+  textPosition?: 'up' | 'down'
 }
 
-const TeamImage: FC<Props> = ({team, size = '30px', className, isWinner = false}) => {
+const TeamImage: FC<Props> = ({
+                                team,
+                                size = '30px',
+                                className,
+                                isWinner = false,
+                                textPosition = 'down',
+                              }) => {
   return (
     <>
       {team ? (
-        <div className={clsx(`symbol symbol-${size} symbol-circle`, className && className)}>
-          {isWinner && (
-            <span className={`position-absolute w-100 text-center`} style={{top: '-35px'}}>
-              <i className='fas fa-trophy text-warning display-6'></i>
-            </span>
-          )}
-          <img
-            alt={team.name + ' team image'}
-            src={team.image}
-            className='border border-1 border-mc-secondary'
-          />
-        </div>
+        <>
+          {textPosition === 'up' &&
+            <div className='fs-6 fw-bold'>{team.name}</div>
+          }
+          <div className={clsx(`symbol symbol-${size} symbol-circle`, className && className)}>
+            {isWinner && (
+              <span className={`position-absolute w-100 text-center`} style={{top: '-35px'}}>
+                <i className='fas fa-trophy text-warning display-6'></i>
+              </span>
+            )}
+            <img
+              alt={team.name + ' team image'}
+              src={team.image}
+              className='border border-1 border-mc-secondary'
+            />
+          </div>
+          {textPosition === 'down' &&
+            <div className='fs-6 fw-bold'>{team.name}</div>
+          }
+        </>
       ) : (
         <div
           className={clsx(

@@ -51,7 +51,6 @@ const MatchInfo: FC<Props> = ({match}) => {
                     className='mb-3'
                     isWinner={match?.result?.winner?.team_id === match?.teams[0].id}
                   />
-                  <div className='fs-6 fw-bold'>{match?.teams[0].name}</div>
                 </div>
               </div>
             )}
@@ -86,7 +85,6 @@ const MatchInfo: FC<Props> = ({match}) => {
                     className='mb-3'
                     isWinner={match?.result?.winner?.team_id === match?.teams[1].id}
                   />
-                  <div className='fs-6 fw-bold'>{match?.teams[1].name}</div>
                 </div>
               </div>
             )}

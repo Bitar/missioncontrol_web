@@ -13,7 +13,7 @@ type Props = {
   setMatch: Dispatch<SetStateAction<Match | undefined>>
 }
 
-const ActivityMatches: FC<Props> = ({matches, setMatch}) => {
+const UpcomingMatches: FC<Props> = ({matches, setMatch}) => {
   const params = useParams()
   const navigate = useNavigate()
   const [openMatches, setOpenMatches] = useState<Match[] | undefined>()
@@ -77,17 +77,10 @@ const ActivityMatches: FC<Props> = ({matches, setMatch}) => {
                     }
                   >
                     <div className='d-flex flex-stack text-center'>
-                      {match?.teams && match?.teams[0] ? (
+                      {match?.teams && match?.teams[0] && (
                         <div className='flex-grow-1 mw-200px'>
                           <div className='d-inline-block'>
-                            <TeamImage team={match?.teams[0]} className='mb-3' size='60px'/>
-                            <div className='fs-6 fw-bold'>{match?.teams[0].name}</div>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className='flex-grow-1 mw-200px'>
-                          <div className='d-inline-block'>
-                            <div className='fs-6 fw-bold'>BYE</div>
+                            <TeamImage team={match?.teams[0]} className='mb-3' size='60px' />
                           </div>
                         </div>
                       )}
@@ -102,25 +95,12 @@ const ActivityMatches: FC<Props> = ({matches, setMatch}) => {
                               {formatMatchStatus(match?.status)['status']}
                             </span>
                           </p>
-                          {/*const {status, color} = formatActivityStatus(props.data[props.row.index].status)*/}
-                          {/*return <BadgeCell status={status} color={color} />*/}
                         </div>
                       </div>
-                      {match?.teams && match?.teams[1] ? (
+                      {match?.teams && match?.teams[1] && (
                         <div className='flex-grow-1 mw-200px'>
                           <div className='d-inline-block'>
-                            <TeamImage team={match?.teams[1]} className='mb-3' size='60px'/>
-                            <div className='fs-6 fw-bold'>{match?.teams[1].name}</div>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className='flex-grow-1 mw-200px'>
-                          <div className='d-inline-block'>
-                            <div className='symbol symbol-60px symbol-circle mb-3 overflow-hidden'>
-                              <div className='bg-mc-secondary w-60px h-60px'>
-                                <div className='pt-6 fs-6 fw-bold text-center text-white'>BYE</div>
-                              </div>
-                            </div>
+                            <TeamImage team={match?.teams[1]} className='mb-3' size='60px' />
                           </div>
                         </div>
                       )}
@@ -141,4 +121,4 @@ const ActivityMatches: FC<Props> = ({matches, setMatch}) => {
   )
 }
 
-export { ActivityMatches };
+export { UpcomingMatches };

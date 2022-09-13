@@ -1,8 +1,8 @@
 import React, {Dispatch, FC, SetStateAction} from 'react'
 import {ActivityStandings} from '../partials/ActivityStandings'
-import {ActivityMatches} from './ActivityMatches'
+import {UpcomingMatches} from './UpcomingMatches'
 import {Match} from '../models/matches/Match'
-import {MatchResults} from './MatchResults'
+import {RecentMatches} from './RecentMatches'
 import {ActivityAnnouncement} from '../partials/ActivityAnnouncement'
 import {useActivity} from '../AuthContext'
 // import {ActivityAnnouncement} from '../partials/ActivityAnnouncement'
@@ -27,10 +27,10 @@ const ActivityOverview: FC<Props> = ({setMatch}) => {
 
         <div className='col-lg-6 col-md-12'>
           <div className='mb-5'>
-            <ActivityMatches matches={matches} setMatch={setMatch} />
+            <UpcomingMatches matches={matches} setMatch={setMatch} />
           </div>
           <div className='mt-5'>
-            <MatchResults matches={matches} setMatch={setMatch}></MatchResults>
+            <RecentMatches matches={matches} setMatch={setMatch}></RecentMatches>
           </div>
         </div>
         <div className='col-lg-6 col-md-12'>
