@@ -15,8 +15,6 @@ const ActivityStandings: FC<Props> = ({activity, minimal = false}) => {
     })[0]
   }
 
-  const mathing = () => {}
-
   return (
     <>
       <KTCard>

@@ -3,7 +3,6 @@ import clsx from 'clsx'
 import {Link} from 'react-router-dom'
 import {useLocation} from 'react-router'
 import {checkIsActive, KTSVG, WithChildren} from '../../../../../_metronic/helpers'
-import {useLayout} from '../../../core'
 
 type Props = {
   to: string
@@ -23,7 +22,6 @@ const SidebarMenuItem: FC<Props & WithChildren> = ({
 }) => {
   const {pathname} = useLocation()
   const isActive = checkIsActive(pathname, to)
-  const {config} = useLayout()
 
   return (
     <div className='menu-item'>

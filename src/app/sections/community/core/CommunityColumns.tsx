@@ -73,6 +73,7 @@ const communitiesColumns: ReadonlyArray<Column<Community>> = [
         path={'communities'}
         showView={true}
         showEdit={false}
+        showDelete={false}
         queryKey={QUERIES.COMMUNITIES_LIST}
       />
     ),

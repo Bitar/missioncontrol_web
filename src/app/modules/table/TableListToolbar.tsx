@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom'
-import {FC} from 'react'
+import React, {FC} from 'react'
 import clsx from 'clsx'
 
 type Props = {

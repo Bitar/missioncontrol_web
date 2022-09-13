@@ -1,5 +1,4 @@
 import React, {Dispatch, FC, SetStateAction} from 'react'
-import {Activity} from '../models/Activity'
 import {ActivityStandings} from '../partials/ActivityStandings'
 import {ActivityMatches} from './ActivityMatches'
 import {Match} from '../models/matches/Match'

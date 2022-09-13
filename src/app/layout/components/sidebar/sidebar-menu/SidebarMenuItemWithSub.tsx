@@ -2,7 +2,6 @@ import React from 'react'
 import clsx from 'clsx'
 import {useLocation} from 'react-router'
 import {checkIsActive, KTSVG, WithChildren} from '../../../../../_metronic/helpers'
-import {useLayout} from '../../../core'
 
 type Props = {
   to: string[]
@@ -21,8 +20,6 @@ const SidebarMenuItemWithSub: React.FC<Props & WithChildren> = ({
   hasBullet,
 }) => {
   const {pathname} = useLocation()
-  const {config} = useLayout()
-  const {app} = config
 
   let isActive = false
 
