@@ -42,7 +42,7 @@ const MatchInfo: FC<Props> = ({match}) => {
       <KTCard className='mb-5 mb-xl-10 overflow-hidden'>
         <KTCardBody className='pb-0 pt-20'>
           <div className='d-flex flex-stack text-center mb-3'>
-            {match?.teams && match?.teams[0] && (
+            {match?.teams && match?.teams[0] ? (
               <div className='flex-grow-1'>
                 <div className='d-inline-block'>
                   <TeamImage
@@ -50,7 +50,14 @@ const MatchInfo: FC<Props> = ({match}) => {
                     size='100px'
                     className='mb-3'
                     isWinner={match?.result?.winner?.team_id === match?.teams[0].id}
+                    iconTop={'-21px'}
                   />
+                </div>
+              </div>
+            ) : (
+              <div className='flex-grow-1'>
+                <div className='d-inline-block'>
+                  <TeamImage size='100px' className='mb-3' />
                 </div>
               </div>
             )}
@@ -76,7 +83,7 @@ const MatchInfo: FC<Props> = ({match}) => {
                 </div>
               </div>
             )}
-            {match?.teams && match?.teams[1] && (
+            {match?.teams && match?.teams[1] ? (
               <div className='flex-grow-1'>
                 <div className='d-inline-block'>
                   <TeamImage
@@ -84,7 +91,14 @@ const MatchInfo: FC<Props> = ({match}) => {
                     size='100px'
                     className='mb-3'
                     isWinner={match?.result?.winner?.team_id === match?.teams[1].id}
+                    iconTop={'-21px'}
                   />
+                </div>
+              </div>
+            ) : (
+              <div className='flex-grow-1'>
+                <div className='d-inline-block'>
+                  <TeamImage size='100px' className='mb-3' />
                 </div>
               </div>
             )}

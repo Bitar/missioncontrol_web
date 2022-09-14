@@ -3,7 +3,7 @@ import {Match} from '../models/matches/Match'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {calculateTeamScore} from '../../../helpers/MCHelper'
 import {useNavigate, useParams} from 'react-router-dom'
-import { TeamImage } from "../components/TeamImage";
+import {TeamImage} from '../components/TeamImage'
 
 type Props = {
   matches: Match[] | undefined
@@ -60,10 +60,16 @@ const RecentMatches: FC<Props> = ({matches, setMatch}) => {
                     }
                   >
                     <div className='d-flex flex-stack '>
-                      {match?.teams && match?.teams[0] && (
+                      {match?.teams && match?.teams[0] ? (
                         <div className='flex-grow-1 mw-200px'>
                           <div className='d-flex justify-content-start flex-stack'>
-                            <TeamImage team={match?.teams[0]} className='me-3'/>
+                            <TeamImage team={match?.teams[0]} className='me-3' />
+                          </div>
+                        </div>
+                      ) : (
+                        <div className='flex-grow-1 mw-200px'>
+                          <div className='d-inline-block'>
+                            <TeamImage className='mb-3' />
                           </div>
                         </div>
                       )}
@@ -75,10 +81,16 @@ const RecentMatches: FC<Props> = ({matches, setMatch}) => {
                           </div>
                         </div>
                       )}
-                      {match?.teams && match?.teams[1] && (
+                      {match?.teams && match?.teams[1] ? (
                         <div className='flex-grow-1 mw-200px'>
                           <div className='d-flex flex-stack justify-content-end'>
-                            <TeamImage team={match?.teams[1]} className='me-3'/>
+                            <TeamImage team={match?.teams[1]} className='ms-3' textPosition='up' />
+                          </div>
+                        </div>
+                      ) : (
+                        <div className='flex-grow-1 mw-200px'>
+                          <div className='text-end'>
+                            <TeamImage textPosition='up' />
                           </div>
                         </div>
                       )}
@@ -99,4 +111,4 @@ const RecentMatches: FC<Props> = ({matches, setMatch}) => {
   )
 }
 
-export {RecentMatches}
+export { RecentMatches };

@@ -77,13 +77,19 @@ const UpcomingMatches: FC<Props> = ({matches, setMatch}) => {
                     }
                   >
                     <div className='d-flex flex-stack text-center'>
-                      {match?.teams && match?.teams[0] && (
+                      {match?.teams && match?.teams[0] ? (
                         <div className='flex-grow-1 mw-200px'>
                           <div className='d-inline-block'>
                             <TeamImage team={match?.teams[0]} className='mb-3' size='60px' />
                           </div>
                         </div>
-                      )}
+                      ) : (
+                        <div className='flex-grow-1 mw-200px'>
+                        <div className='d-inline-block'>
+                        <TeamImage className='mb-3' size='60px' />
+                        </div>
+                        </div>
+                        )}
                       <div className='flex-shrink-1'>
                         <div className='fs-6 fw-semibold text-gray-600 px-5'>
                           <p className='m-0'>{getTimeFromTimestamp(match?.start_date)}</p>
@@ -97,10 +103,16 @@ const UpcomingMatches: FC<Props> = ({matches, setMatch}) => {
                           </p>
                         </div>
                       </div>
-                      {match?.teams && match?.teams[1] && (
+                      {match?.teams && match?.teams[1] ? (
                         <div className='flex-grow-1 mw-200px'>
                           <div className='d-inline-block'>
                             <TeamImage team={match?.teams[1]} className='mb-3' size='60px' />
+                          </div>
+                        </div>
+                      ) : (
+                        <div className='flex-grow-1 mw-200px'>
+                          <div className='d-inline-block'>
+                            <TeamImage className='mb-3' size='60px' />
                           </div>
                         </div>
                       )}

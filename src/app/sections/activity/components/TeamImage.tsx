@@ -8,6 +8,7 @@ type Props = {
   className?: string
   isWinner?: boolean
   textPosition?: 'up' | 'down'
+  iconTop?: string
 }
 
 const TeamImage: FC<Props> = ({
@@ -16,6 +17,7 @@ const TeamImage: FC<Props> = ({
                                 className,
                                 isWinner = false,
                                 textPosition = 'down',
+                                iconTop= "0"
                               }) => {
   return (
     <>
@@ -24,7 +26,7 @@ const TeamImage: FC<Props> = ({
           {textPosition === 'up' && <div className='fs-6 fw-bold'>{team.name}</div>}
           <div className={clsx(`symbol symbol-${size} symbol-circle`, className && className)}>
             {isWinner && (
-              <span className={`position-absolute w-100 text-center`} style={{top: '-21px'}}>
+              <span className={`position-absolute w-100 text-center`} style={{top: iconTop}}>
                 <i className='fas fa-trophy text-warning fs-1'></i>
               </span>
             )}
