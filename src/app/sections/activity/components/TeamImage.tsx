@@ -45,8 +45,8 @@ const TeamImage: FC<Props> = ({
             className && className
           )}
         >
-          <div className={`bg-mc-secondary w-${size} h-${size}`}>
-            <div className='pt-6 fs-6 fw-bold text-center text-white'>BYE</div>
+          <div className={`bg-mc-secondary w-${size} h-${size} team-bye`}>
+            <div className='fs-6 fw-bold text-center text-white'>BYE</div>
           </div>
         </div>
       )}

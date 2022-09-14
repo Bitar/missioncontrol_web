@@ -55,17 +55,7 @@ const UpcomingMatches: FC<Props> = ({matches, setMatch}) => {
             <h3 className='card-label text-white'>Upcoming Matches</h3>
           </div>
         </div>
-        <KTCardBody className='py-5' id='activity_matches_body'>
-          <div
-            className='scroll-y me-n5 pe-5 h-300px h-lg-auto'
-            data-kt-element='matches'
-            data-kt-scroll='true'
-            data-kt-scroll-activate='{default: false, lg: true}'
-            data-kt-scroll-max-height='600px'
-            data-kt-scroll-dependencies='#kt_header, #kt_toolbar, #kt_footer, #activities_matches_header'
-            data-kt-scroll-wrappers='#kt_content, #activity_matches_body'
-            data-kt-scroll-offset='0'
-          >
+        <KTCardBody className='py-5 scroll-y mh-600px' id='activity_matches_body'>
             <div className='d-flex flex-column'>
               {openMatches && openMatches?.length > 0 ? (
                 openMatches?.map((match) => (
@@ -126,7 +116,6 @@ const UpcomingMatches: FC<Props> = ({matches, setMatch}) => {
                 </div>
               )}
             </div>
-          </div>
         </KTCardBody>
       </KTCard>
     </>

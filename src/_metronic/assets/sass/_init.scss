@@ -120,3 +120,5 @@ $theme-light-colors: map-merge(
 // Custom layout variables
 @import './core/layout/base/variables';
 @import 'layout/variables.custom';
+@import 'layout/mc.styles.custom';
+

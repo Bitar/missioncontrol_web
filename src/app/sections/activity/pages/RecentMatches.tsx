@@ -36,19 +36,7 @@ const RecentMatches: FC<Props> = ({matches, setMatch}) => {
             <h3 className='card-label text-white'>Recent Matches</h3>
           </div>
         </div>
-        <KTCardBody className='py-5' id='activity_recent_matches_body'>
-          <div
-            className={'scroll-y me-n5 pe-5 h-300px h-lg-auto'}
-            data-kt-element='matches'
-            data-kt-scroll='true'
-            data-kt-scroll-activate='{default: false, lg: true}'
-            data-kt-scroll-max-height='300px'
-            data-kt-scroll-dependencies={
-              '#kt_header, #kt_toolbar, #kt_footer, #activities_recent_matches_header'
-            }
-            data-kt-scroll-wrappers={'#kt_content, #activity_recent_matches_body'}
-            data-kt-scroll-offset={'-2px'}
-          >
+        <KTCardBody className='py-5 scroll-y mh-300px' id='activity_recent_matches_body'>
             <div className='d-flex flex-column'>
               {closedMatches && closedMatches?.length > 0 ? (
                 matches?.filter(filterClosedMatches).map((match) => (
@@ -104,7 +92,6 @@ const RecentMatches: FC<Props> = ({matches, setMatch}) => {
                 </div>
               )}
             </div>
-          </div>
         </KTCardBody>
       </KTCard>
     </>

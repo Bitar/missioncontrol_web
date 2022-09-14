@@ -25,14 +25,16 @@ const ActivityOverview: FC<Props> = ({setMatch}) => {
           </div>
         </div>
 
-        <div className='col-lg-6 col-md-12'>
-          <div className='mb-5'>
-            <UpcomingMatches matches={matches} setMatch={setMatch} />
+        {/*{matches && matches.length > 0 &&*/}
+          <div className='col-lg-6 col-md-12'>
+            <div className='mb-5'>
+              <UpcomingMatches matches={matches} setMatch={setMatch} />
+            </div>
+            <div className='mt-5'>
+              <RecentMatches matches={matches} setMatch={setMatch}></RecentMatches>
+            </div>
           </div>
-          <div className='mt-5'>
-            <RecentMatches matches={matches} setMatch={setMatch}></RecentMatches>
-          </div>
-        </div>
+        {/*}*/}
         <div className='col-lg-6 col-md-12'>
           {/*<ActivityMatches activity={activity} setActivity={setActivity}/>*/}
         </div>
