@@ -38,6 +38,10 @@ const RegistrationDatePicker: FC<Props> = ({activity, setActivity}) => {
               ...activity?.schedule.registration_dates,
               ...{start_date: startDate, end_date: endDate},
             },
+            matchplay_dates: {
+              start_date: 0,
+              end_date: 0,
+            },
           },
         },
       },
@@ -59,12 +63,18 @@ const RegistrationDatePicker: FC<Props> = ({activity, setActivity}) => {
           renderInput={(startProps, endProps) => (
             <>
               <TextField
+                required
                 {...startProps}
                 size={'small'}
                 name='schedule.registration_dates.start_date'
               />
               <Box sx={{mx: 2}}> to </Box>
-              <TextField {...endProps} size={'small'} name='schedule.registration_dates.end_date' />
+              <TextField
+                required
+                {...endProps}
+                size={'small'}
+                name='schedule.registration_dates.end_date'
+              />
             </>
           )}
         />
@@ -74,4 +84,4 @@ const RegistrationDatePicker: FC<Props> = ({activity, setActivity}) => {
   )
 }
 
-export {RegistrationDatePicker}
+export { RegistrationDatePicker };

@@ -269,11 +269,15 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                       <div className='row mb-6'>
                         <div className='col-lg-12 fv-row'>
                           <Box sx={{minWidth: 120}}>
-                            <FormControl fullWidth size='small'>
+                            <FormControl
+                              fullWidth
+                              size='small'
+                              error={touched.game_mode_id && Boolean(errors.game_mode_id)}
+                            >
                               <InputLabel id='games-select-label'>Game Mode</InputLabel>
                               <Select
                                 labelId='game-mode-select-label'
-                                required
+                                // required
                                 id='game-mode-select'
                                 value={values.game_mode_id}
                                 name='game_mode_id'
@@ -297,6 +301,11 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                                     </MenuItem>
                                   ))}
                               </Select>
+                              {touched.game_mode_id && Boolean(errors.game_mode_id) && (
+                                <FormHelperText>
+                                  {touched.game_mode_id && errors.game_mode_id}
+                                </FormHelperText>
+                              )}
                             </FormControl>
                           </Box>
                         </div>
@@ -305,12 +314,16 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                       <div className='row mb-6'>
                         <div className='col-lg-12 fv-row'>
                           <Box sx={{minWidth: 120}}>
-                            <FormControl fullWidth size='small'>
+                            <FormControl
+                              fullWidth
+                              size='small'
+                              error={touched.rounds && Boolean(errors.rounds)}
+                            >
                               <InputLabel id='rounds-select-label'>Rounds</InputLabel>
                               <Select
                                 labelId='rounds-select-label'
                                 id='rounds-select'
-                                required
+                                // required
                                 value={values.rounds}
                                 name='rounds'
                                 label='Rounds'
@@ -321,6 +334,9 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                                 <MenuItem value={5}>5</MenuItem>
                                 <MenuItem value={7}>7</MenuItem>
                               </Select>
+                              {touched.rounds && Boolean(errors.rounds) && (
+                                <FormHelperText>{touched.rounds && errors.rounds}</FormHelperText>
+                              )}
                             </FormControl>
                           </Box>
                         </div>
@@ -350,13 +366,16 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                       <div className='row mb-6'>
                         <div className='col-lg-12 fv-row'>
                           <Box sx={{minWidth: 120}}>
-                            <FormControl fullWidth size='small'>
-                              <InputLabel id='platforms-select-label'>Platforms</InputLabel>
-                              {values.is_cross_play ? (
+                            {values.is_cross_play ? (
+                              <FormControl
+                                fullWidth
+                                size='small'
+                                error={touched.platform_ids && Boolean(errors.platform_ids)}
+                              >
+                                <InputLabel id='platforms-select-label'>Platforms</InputLabel>
                                 <Select
                                   labelId='platforms-select-label'
                                   label='Platforms'
-                                  required
                                   multiple
                                   value={values.platform_ids}
                                   name={'platform_ids'}
@@ -370,11 +389,23 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                                       </MenuItem>
                                     ))}
                                 </Select>
-                              ) : (
+                                {touched.platform_ids && Boolean(errors.platform_ids) && (
+                                  <FormHelperText>
+                                    {touched.platform_ids && errors.platform_ids}
+                                  </FormHelperText>
+                                )}
+                              </FormControl>
+                            ) : (
+                              <FormControl
+                                fullWidth
+                                size='small'
+                                error={touched.platform_id && Boolean(errors.platform_id)}
+                              >
+                                <InputLabel id='platforms-select-label'>Platforms</InputLabel>
                                 <Select
                                   labelId='platforms-select-label'
                                   label='Platforms'
-                                  required
+                                  // required
                                   value={values.platform_id}
                                   name={'platform_id'}
                                   onChange={handleOnChange}
@@ -387,8 +418,13 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                                       </MenuItem>
                                     ))}
                                 </Select>
-                              )}
-                            </FormControl>
+                                {touched.platform_id && Boolean(errors.platform_id) && (
+                                  <FormHelperText>
+                                    {touched.platform_id && errors.platform_id}
+                                  </FormHelperText>
+                                )}
+                              </FormControl>
+                            )}
                           </Box>
                         </div>
                       </div>
@@ -421,14 +457,23 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                   </div>
 
                   <div className='row mb-6'>
-                    <div className='col-lg-12'>
+                    <div className='col-lg-4'>
+                      <span className='required fw-bold fs-6'>Match Frequency</span>
+                    </div>
+                    <div className='col-lg-8'>
                       <Box sx={{minWidth: 120}}>
-                        <FormControl fullWidth size='small'>
+                        <FormControl
+                          fullWidth
+                          size='small'
+                          error={
+                            touched.schedule?.settings?.frequency &&
+                            Boolean(errors.schedule?.settings?.frequency)
+                          }
+                        >
                           <InputLabel id='frequency-select-label'>Match Frequency</InputLabel>
                           <Select
                             labelId='frequency-select-label'
                             id='frequency-select'
-                            required
                             name='schedule.settings.frequency'
                             value={values.schedule.settings.frequency}
                             label='Match Frequency'
@@ -453,6 +498,13 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                             <MenuItem value={'1'}>Daily</MenuItem>
                             <MenuItem value={'2'}>Weekly</MenuItem>
                           </Select>
+                          {touched.schedule?.settings?.frequency &&
+                            Boolean(errors.schedule?.settings?.frequency) && (
+                              <FormHelperText>
+                                {touched.schedule?.settings?.frequency &&
+                                  errors.schedule?.settings?.frequency}
+                              </FormHelperText>
+                            )}
                         </FormControl>
                       </Box>
                     </div>
@@ -460,16 +512,28 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
 
                   {activity?.schedule.settings.frequency === '2' && (
                     <div className='row mb-6'>
-                      <div className='col-lg-12'>
+                      <div className='col-lg-4'>
+                        <span className='required fw-bold fs-6'>Day Of Week</span>
+                      </div>
+                      <div className='col-lg-8'>
                         <Box sx={{minWidth: 120}}>
-                          <FormControl fullWidth size='small'>
+                          <FormControl
+                            fullWidth
+                            size='small'
+                            error={
+                              activity?.schedule.settings.frequency === '2' &&
+                              touched.schedule?.settings?.day &&
+                              Boolean(errors.schedule?.settings?.day)
+                            }
+                          >
                             <InputLabel id='day-of-week-select-label'>Day Of Week</InputLabel>
                             <Select
                               labelId='day-of-week-select-label'
                               id='day-of-week-select'
                               value={values.schedule.settings.day}
                               label='Day of Week'
-                              required={activity?.schedule.settings.frequency === '2'}
+                              required
+                              name='schedule.settings.day'
                               onChange={(e) => {
                                 updateData(
                                   {
@@ -496,6 +560,13 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                               <MenuItem value={'6'}>Saturday</MenuItem>
                               <MenuItem value={'7'}>Sunday</MenuItem>
                             </Select>
+                            {touched.schedule?.settings?.day &&
+                              Boolean(errors.schedule?.settings?.day) && (
+                                <FormHelperText>
+                                  {touched.schedule?.settings?.day &&
+                                    errors.schedule?.settings?.day}
+                                </FormHelperText>
+                              )}
                           </FormControl>
                         </Box>
                       </div>
@@ -512,14 +583,17 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                   </div>
 
                   <div className='row mb-6'>
-                    <div className='col-lg-12'>
+                    <div className='col-lg-4'>
+                      <span className='required fw-bold fs-6'>Timezone</span>
+                    </div>
+                    <div className='col-lg-8'>
                       <Box sx={{minWidth: 120}}>
                         <FormControl fullWidth size='small'>
                           <InputLabel id='timezone-select-label'>Timezones</InputLabel>
                           <Select
                             labelId='timezone-select-label'
                             id='timezone-select'
-                            required
+                            // required
                             name='schedule.settings.timezone'
                             value={values.schedule.settings.timezone}
                             label='Timezones'

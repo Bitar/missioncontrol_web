@@ -23,7 +23,18 @@ export const activitySchema = Yup.object().shape({
   game_mode_id: Yup.string().required('Game Mode is required'),
   rounds: Yup.string().required('Rounds is required'),
   is_cross_play: Yup.boolean(),
-  platform_ids: Yup.mixed().required('At least 1 platform is required'),
+  platform_ids: Yup.array()
+    .ensure()
+    .when('is_cross_play', {
+      is: true,
+      then: Yup.array().min(1).required('At least 1 platform is required'),
+    }),
+  platform_id: Yup.string()
+    .ensure()
+    .when('is_cross_play', {
+      is: false,
+      then: Yup.string().required('Platform is required'),
+    }),
   schedule: Yup.object().shape({
     registration_dates: Yup.object().shape({
       start_date: Yup.string().required('Registration Start Date is required'),
@@ -36,13 +47,11 @@ export const activitySchema = Yup.object().shape({
     settings: Yup.object().shape({
       frequency: Yup.string().required('Match Frequency is required'),
       time: Yup.string().required('Time of Day is required'),
-      timezone: Yup.string().required('Timezone is required'),
-      day: Yup.number().when('settings.frequency', {
-        is: 2,
-        then: Yup.number().required('Amount required'),
+      day: Yup.string().when('schedule.settings.frequency', {
+        is: 2 || '2',
+        then: Yup.string().required('Day required'),
       }),
-
-      // day: Yup.string().required('WeekDay is required'),
+      timezone: Yup.string().required('Timezone is required'),
     }),
   }),
   location: Yup.object().shape({

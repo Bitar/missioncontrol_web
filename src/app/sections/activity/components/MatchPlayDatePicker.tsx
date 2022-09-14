@@ -49,6 +49,7 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
 
   useEffect(() => {
     let registrationEndDate = activity?.schedule?.registration_dates?.end_date
+    setValue([null, null])
 
     if (registrationEndDate) {
       let minMatchDate = dayjs(new Date(registrationEndDate * 1000)).add(1, 'd')
@@ -74,14 +75,14 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
             renderInput={(startProps, endProps) => (
               <React.Fragment>
                 <TextField
-                  // required
+                  required
                   {...startProps}
                   size={'small'}
                   name='settings.registration_dates.start_date'
                 />
                 <Box sx={{mx: 2}}> to </Box>
                 <TextField
-                  // required
+                  required
                   {...endProps}
                   size={'small'}
                   name='settings.registration_dates.end_Date'
