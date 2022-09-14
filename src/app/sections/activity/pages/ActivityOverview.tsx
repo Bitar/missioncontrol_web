@@ -28,9 +28,6 @@ const ActivityOverview: FC = () => {
           </div>
         </div>
         {/*}*/}
-        <div className='col-lg-6 col-md-12'>
-          {/*<ActivityMatches activity={activity} setActivity={setActivity}/>*/}
-        </div>
       </div>
     </>
   )
