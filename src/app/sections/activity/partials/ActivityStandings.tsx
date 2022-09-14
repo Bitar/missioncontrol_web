@@ -1,14 +1,14 @@
 import React, {FC} from 'react'
-import {Activity} from '../models/Activity'
 import {ID, KTCard, KTCardBody, toAbsoluteUrl} from '../../../../_metronic/helpers'
 import clsx from 'clsx'
+import { useActivity } from "../AuthContext";
 
 type Props = {
-  activity: Activity | undefined
   minimal?: boolean
 }
 
-const ActivityStandings: FC<Props> = ({activity, minimal = false}) => {
+const ActivityStandings: FC<Props> = ({minimal = false}) => {
+  const {activity} = useActivity()
   const getTeam = (teamId: ID) => {
     return activity?.teams?.filter(function (e: any) {
       return e.id === teamId

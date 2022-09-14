@@ -1,16 +1,13 @@
-import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
+import React, {FC, useEffect, useState} from 'react'
 import {Match} from '../models/matches/Match'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {calculateTeamScore} from '../../../helpers/MCHelper'
 import {useNavigate, useParams} from 'react-router-dom'
 import {TeamImage} from '../components/TeamImage'
+import { useActivity } from "../AuthContext";
 
-type Props = {
-  matches: Match[] | undefined
-  setMatch: Dispatch<SetStateAction<Match | undefined>>
-}
-
-const RecentMatches: FC<Props> = ({matches, setMatch}) => {
+const RecentMatches: FC = () => {
+  const { matches, setMatch} = useActivity()
   const params = useParams()
   const navigate = useNavigate()
   const [closedMatches, setClosedMatches] = useState<Match[] | undefined>()

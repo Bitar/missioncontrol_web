@@ -95,7 +95,7 @@ const ActivityView: FC = () => {
               <>
                 <SuspenseView>
                   <PageTitle breadcrumbs={activityViewBreadcrumbs}>Overview</PageTitle>
-                  <ActivityOverview setMatch={setMatch} />
+                  <ActivityOverview/>
                 </SuspenseView>
               </>
             }
