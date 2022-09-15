@@ -1,6 +1,6 @@
 import React, {Dispatch, FC, SetStateAction, useState} from 'react'
 import {ActivityForm} from '../models/Activity'
-import {Dayjs} from 'dayjs'
+import dayjs, {Dayjs} from 'dayjs'
 import {LocalizationProvider} from '@mui/x-date-pickers-pro'
 import {AdapterDayjs} from '@mui/x-date-pickers-pro/AdapterDayjs'
 import {DateRange, DateRangePicker} from '@mui/x-date-pickers-pro/DateRangePicker'
@@ -16,7 +16,10 @@ type Props = {
 const RegistrationDatePicker: FC<Props> = ({activity, setActivity}) => {
   const [value, setValue] = useState<DateRange<Dayjs>>([null, null])
 
+  console.log(dayjs(new Date(activity?.schedule?.registration_dates?.start_date)))
+
   const onDateChange = (newValue: any) => {
+    console.log(newValue);
     setValue(newValue)
 
     let startDate = newValue[0].$d

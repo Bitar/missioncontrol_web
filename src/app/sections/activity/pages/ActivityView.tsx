@@ -13,6 +13,7 @@ import {User} from '../../identity/user/models/User'
 import {MatchPage} from '../../match/MatchPage'
 import {ActivityContext} from '../AuthContext'
 import {SuspenseView} from '../../../layout/SuspenseView'
+import { ActivitySettings } from "./ActivitySettings";
 
 const ActivityView: FC = () => {
   const [activity, setActivity] = useState<Activity | undefined>()
@@ -133,14 +134,17 @@ const ActivityView: FC = () => {
               </>
             }
           />
-          {/*<Route*/}
-          {/*  path='/settings'*/}
-          {/*  element={*/}
-          {/*    <>*/}
-          {/*      <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>*/}
-          {/*    </>*/}
-          {/*  }*/}
-          {/*/>*/}
+          <Route
+            path='/settings'
+            element={
+              <>
+                <SuspenseView>
+                  <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>
+                  <ActivitySettings/>
+                </SuspenseView>
+              </>
+            }
+          />
           <Route
             path='/matches/:matchId/*'
             element={
