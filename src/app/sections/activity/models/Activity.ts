@@ -110,7 +110,7 @@ export type Activity = {
   platforms?: []
   announcements?: Announcement[]
   entry_fee?: ActivityFee
-  team_settings?: ActivityTeamSetting
+  team_setting?: ActivityTeamSetting
   rules?: []
   standings?: ActivityStanding[]
 
@@ -254,9 +254,9 @@ export const initialActivityFormByActivity = (activity?: Activity) => {
       },
     },
     team: {
-      min: activity?.team_settings?.min || 0,
-      max: activity?.team_settings?.max || 0,
-      players: activity?.team_settings?.players || 0,
+      min: activity?.team_setting?.min || 0,
+      max: activity?.team_setting?.max || 0,
+      players: activity?.team_setting?.players || 0,
     },
     entry_fee: {
       type: activity?.entry_fee?.type || 1,
