@@ -13,7 +13,7 @@ import {User} from '../../identity/user/models/User'
 import {MatchPage} from '../../match/MatchPage'
 import {ActivityContext} from '../AuthContext'
 import {SuspenseView} from '../../../layout/SuspenseView'
-import { ActivitySettings } from "./ActivitySettings";
+import {ActivitySettings} from './ActivitySettings'
 
 const ActivityView: FC = () => {
   const [activity, setActivity] = useState<Activity | undefined>()
@@ -96,7 +96,7 @@ const ActivityView: FC = () => {
               <>
                 <SuspenseView>
                   <PageTitle breadcrumbs={activityViewBreadcrumbs}>Overview</PageTitle>
-                  <ActivityOverview/>
+                  <ActivityOverview />
                 </SuspenseView>
               </>
             }
@@ -140,7 +140,7 @@ const ActivityView: FC = () => {
               <>
                 <SuspenseView>
                   <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>
-                  <ActivitySettings/>
+                  <ActivitySettings />
                 </SuspenseView>
               </>
             }

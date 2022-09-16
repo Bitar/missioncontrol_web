@@ -4,8 +4,9 @@ import {Form, Formik} from 'formik'
 import {useActivity} from '../AuthContext'
 import {
   ActivityForm,
-  activityScheduleSchema, initialActivityFormByActivity,
-} from "../models/Activity";
+  activityScheduleSchema,
+  initialActivityFormByActivity,
+} from '../models/Activity'
 import {KTCardBody} from '../../../helpers/components/KTCardBody'
 import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl'
@@ -13,8 +14,8 @@ import {FormHelperText, InputLabel, MenuItem, Select} from '@mui/material'
 import {updateData} from '../../../helpers/form/FormHelper'
 import {TimeZone} from '../../../models/misc/TimeZone'
 import {getTimeZones} from '../../misc/core/_requests'
-import { MatchPlayDatePicker, RegistrationDatePicker } from "../components";
-import { TimeOfDayPicker } from "../components/TimeOfDayPicker";
+import {MatchPlayDatePicker, RegistrationDatePicker} from '../components'
+import {TimeOfDayPicker} from '../components/TimeOfDayPicker'
 
 const ActivitySettings = () => {
   const {activity} = useActivity()
@@ -77,7 +78,10 @@ const ActivitySettings = () => {
                       <FormControl
                         fullWidth
                         size='small'
-                        error={touched?.schedule?.settings?.frequency && Boolean(errors?.schedule?.settings?.frequency)}
+                        error={
+                          touched?.schedule?.settings?.frequency &&
+                          Boolean(errors?.schedule?.settings?.frequency)
+                        }
                       >
                         <InputLabel id='frequency-select-label'>Match Frequency</InputLabel>
                         <Select
@@ -107,11 +111,13 @@ const ActivitySettings = () => {
                           <MenuItem value={'1'}>Daily</MenuItem>
                           <MenuItem value={'2'}>Weekly</MenuItem>
                         </Select>
-                        {touched?.schedule?.settings?.frequency && Boolean(errors?.schedule?.settings?.frequency) && (
-                          <FormHelperText>
-                            {touched?.schedule?.settings?.frequency && errors?.schedule?.settings?.frequency}
-                          </FormHelperText>
-                        )}
+                        {touched?.schedule?.settings?.frequency &&
+                          Boolean(errors?.schedule?.settings?.frequency) && (
+                            <FormHelperText>
+                              {touched?.schedule?.settings?.frequency &&
+                                errors?.schedule?.settings?.frequency}
+                            </FormHelperText>
+                          )}
                       </FormControl>
                     </Box>
                   </div>
@@ -167,11 +173,13 @@ const ActivitySettings = () => {
                             <MenuItem value={'6'}>Saturday</MenuItem>
                             <MenuItem value={'7'}>Sunday</MenuItem>
                           </Select>
-                          {touched?.schedule?.settings?.day && Boolean(errors?.schedule?.settings?.day) && (
-                            <FormHelperText>
-                              {touched?.schedule?.settings?.day && errors?.schedule?.settings?.day}
-                            </FormHelperText>
-                          )}
+                          {touched?.schedule?.settings?.day &&
+                            Boolean(errors?.schedule?.settings?.day) && (
+                              <FormHelperText>
+                                {touched?.schedule?.settings?.day &&
+                                  errors?.schedule?.settings?.day}
+                              </FormHelperText>
+                            )}
                         </FormControl>
                       </Box>
                     </div>
@@ -242,4 +250,4 @@ const ActivitySettings = () => {
   )
 }
 
-export { ActivitySettings };
+export {ActivitySettings}

@@ -200,7 +200,6 @@ const ActivityInfo: FC = () => {
                 </div>
               </div>
 
-
               {activity?.teams && activity?.team_setting && (
                 <div className='d-flex align-items-center w-200px w-sm-300px flex-column mt-3'>
                   <div className='d-flex justify-content-between w-100 mt-auto mb-2'>
@@ -213,7 +212,9 @@ const ActivityInfo: FC = () => {
                     <div
                       className='bg-success rounded h-5px'
                       role='progressbar'
-                      style={{width: `${(activity?.teams?.length / activity?.team_setting?.max) * 100}%`}}
+                      style={{
+                        width: `${(activity?.teams?.length / activity?.team_setting?.max) * 100}%`,
+                      }}
                     ></div>
                   </div>
                 </div>
@@ -252,4 +253,4 @@ const ActivityInfo: FC = () => {
   )
 }
 
-export { ActivityInfo };
+export {ActivityInfo}

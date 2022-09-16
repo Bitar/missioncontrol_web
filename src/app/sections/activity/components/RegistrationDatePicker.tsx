@@ -19,7 +19,7 @@ const RegistrationDatePicker: FC<Props> = ({activity, setActivity}) => {
   console.log(dayjs(new Date(activity?.schedule?.registration_dates?.start_date)))
 
   const onDateChange = (newValue: any) => {
-    console.log(newValue);
+    console.log(newValue)
     setValue(newValue)
 
     let startDate = newValue[0].$d
@@ -87,4 +87,4 @@ const RegistrationDatePicker: FC<Props> = ({activity, setActivity}) => {
   )
 }
 
-export { RegistrationDatePicker };
+export {RegistrationDatePicker}

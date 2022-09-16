@@ -1,8 +1,8 @@
-import React, { FC } from "react";
-import { ActivityStandings } from "../partials/ActivityStandings";
-import { UpcomingMatches } from "./UpcomingMatches";
-import { RecentMatches } from "./RecentMatches";
-import { ActivityAnnouncement } from "../partials/ActivityAnnouncement";
+import React, {FC} from 'react'
+import {ActivityStandings} from '../partials/ActivityStandings'
+import {UpcomingMatches} from './UpcomingMatches'
+import {RecentMatches} from './RecentMatches'
+import {ActivityAnnouncement} from '../partials/ActivityAnnouncement'
 // import {ActivityAnnouncement} from '../partials/ActivityAnnouncement'
 
 const ActivityOverview: FC = () => {
@@ -33,4 +33,4 @@ const ActivityOverview: FC = () => {
   )
 }
 
-export { ActivityOverview };
+export {ActivityOverview}

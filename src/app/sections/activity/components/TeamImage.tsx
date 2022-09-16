@@ -12,13 +12,13 @@ type Props = {
 }
 
 const TeamImage: FC<Props> = ({
-                                team,
-                                size = '30px',
-                                className,
-                                isWinner = false,
-                                textPosition = 'down',
-                                iconTop= "0"
-                              }) => {
+  team,
+  size = '30px',
+  className,
+  isWinner = false,
+  textPosition = 'down',
+  iconTop = '0',
+}) => {
   return (
     <>
       {team ? (
@@ -54,4 +54,4 @@ const TeamImage: FC<Props> = ({
   )
 }
 
-export { TeamImage };
+export {TeamImage}
