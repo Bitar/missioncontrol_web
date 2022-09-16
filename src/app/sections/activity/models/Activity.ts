@@ -14,6 +14,7 @@ import {ActivityStanding} from './ActivityStanding'
 import {ActivityRegistration} from './ActivityRegistration'
 import {ActivityPrize} from './ActivityPrize'
 import dayjs from 'dayjs'
+import { Platform } from "../../../models/game/Platform";
 
 export const activityScheduleSchema = Yup.object().shape({
   schedule: Yup.object().shape({
@@ -107,7 +108,7 @@ export type Activity = {
   }
   prize?: []
   location?: ActivityLocation
-  platforms?: []
+  platforms?: Platform[]
   announcements?: Announcement[]
   entry_fee?: ActivityFee
   team_setting?: ActivityTeamSetting

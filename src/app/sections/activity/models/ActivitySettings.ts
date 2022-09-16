@@ -5,7 +5,7 @@ export type ActivitySettings = {
   is_cross_play: boolean
   frequency: number
   day: number
-  time: string
+  time: number
   timezone: ID
 }
 
