@@ -1,12 +1,14 @@
 import dayjs from 'dayjs'
-// import utc from 'dayjs/plugin/utc'
+import utc from 'dayjs/plugin/utc'
 // import timezone from 'dayjs/plugin/timezone'
-//
-// dayjs.extend(utc)
+
+dayjs.extend(utc)
 // dayjs.extend(timezone)
 
 const getTimeFromTimestamp = (timestamp: any) => {
-  return dayjs(new Date(timestamp * 1000)).format('LT')
+  return dayjs(new Date(timestamp * 1000))
+    .utc(true)
+    .format('LT')
 }
 
 const getDateFromTimestamp = ($timestamp: any) => {

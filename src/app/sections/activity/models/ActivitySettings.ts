@@ -5,8 +5,13 @@ export type ActivitySettings = {
   is_cross_play: boolean
   frequency: number
   day: number
-  time: string
-  timezone: ID
+  time: number
+  timezone_id: ID
+  timezone: {
+    id: ID
+    name: string
+    value: string
+  }
 }
 
 export const initialActivitySettings = (activitySettings?: ActivitySettings) => {
@@ -16,6 +21,6 @@ export const initialActivitySettings = (activitySettings?: ActivitySettings) => 
     frequency: activitySettings?.frequency || 0,
     day: activitySettings?.day || 0,
     time: activitySettings?.time || '',
-    timezone: activitySettings?.timezone || 0,
+    timezone_id: activitySettings?.timezone_id || 0,
   }
 }

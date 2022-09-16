@@ -14,6 +14,7 @@ import {ActivityStanding} from './ActivityStanding'
 import {ActivityRegistration} from './ActivityRegistration'
 import {ActivityPrize} from './ActivityPrize'
 import dayjs from 'dayjs'
+import {Platform} from '../../../models/game/Platform'
 
 export const activityScheduleSchema = Yup.object().shape({
   schedule: Yup.object().shape({
@@ -57,7 +58,25 @@ export const activitySchema = Yup.object().shape({
       is: false,
       then: Yup.string().required('Platform is required'),
     }),
-  activityScheduleSchema,
+  schedule: Yup.object().shape({
+    registration_dates: Yup.object().shape({
+      start_date: Yup.string().required('Registration Start Date is required'),
+      end_date: Yup.string().required('Registration End Date is required'),
+    }),
+    matchplay_dates: Yup.object().shape({
+      start_date: Yup.string().required('GameDay Start Date is required'),
+      end_date: Yup.string().required('GameDay End Date is required'),
+    }),
+    settings: Yup.object().shape({
+      frequency: Yup.string().required('Match Frequency is required'),
+      time: Yup.string().required('Time of Day is required'),
+      day: Yup.string().when('schedule.settings.frequency', {
+        is: 2 || '2',
+        then: Yup.string().required('Day required'),
+      }),
+      timezone: Yup.string().required('Timezone is required'),
+    }),
+  }),
   location: Yup.object().shape({
     type: Yup.number().required('Entry Fee Type required'),
     location: Yup.number().when('entry_fee.type', {
@@ -107,7 +126,7 @@ export type Activity = {
   }
   prize?: []
   location?: ActivityLocation
-  platforms?: []
+  platforms?: Platform[]
   announcements?: Announcement[]
   entry_fee?: ActivityFee
   team_setting?: ActivityTeamSetting
@@ -175,7 +194,7 @@ export const initialActivityFormSchedule = (activity?: Activity) => {
     settings: {
       frequency: activity?.settings.frequency || '',
       time: activity?.settings.time || '',
-      timezone: activity?.settings.timezone || '',
+      timezone: activity?.settings.timezone_id || '',
       day: activity?.settings.day || '',
     },
   }
@@ -249,7 +268,7 @@ export const initialActivityFormByActivity = (activity?: Activity) => {
       settings: {
         frequency: activity?.settings.frequency || '',
         time: activity?.settings.time || dayjs(new Date()).format('HH:mm:ss'),
-        timezone: activity?.settings.timezone || '',
+        timezone: activity?.settings.timezone_id || '',
         day: activity?.settings.day || '',
       },
     },

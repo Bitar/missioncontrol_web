@@ -14,6 +14,7 @@ import {MatchPage} from '../../match/MatchPage'
 import {ActivityContext} from '../AuthContext'
 import {SuspenseView} from '../../../layout/SuspenseView'
 import {ActivitySettings} from './ActivitySettings'
+import {ActivityMatches} from './ActivityMatches'
 
 const ActivityView: FC = () => {
   const [activity, setActivity] = useState<Activity | undefined>()
@@ -108,6 +109,17 @@ const ActivityView: FC = () => {
                 <SuspenseView>
                   <PageTitle breadcrumbs={activityViewBreadcrumbs}>Registrations</PageTitle>
                   <ActivityRegistrations registrations={activity?.registrations} />
+                </SuspenseView>
+              </>
+            }
+          />
+          <Route
+            path='/matches'
+            element={
+              <>
+                <SuspenseView>
+                  <PageTitle breadcrumbs={activityViewBreadcrumbs}>Matches</PageTitle>
+                  <ActivityMatches />
                 </SuspenseView>
               </>
             }
