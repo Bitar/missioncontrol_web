@@ -45,15 +45,15 @@ $warning-inverse: $white;
 
 $mc-primary: #110055;
 $mc-primary-active: darken(#110055, 3%);
-$mc-primary-light: if(isDarkMode(), darken(#110055, 42%), lighten(#110055, 80%));
+$mc-primary-light: lighten(#110055, 80%);
 $mc-primary-inverse: #ffffff;
 
 $mc-secondary: #ff9933;
 $mc-secondary-active: darken(#ff9933, 3%);
-$mc-secondary-light: if(isDarkMode(), darken(#ff9933, 42%), #fff2e5);
+$mc-secondary-light: #fff2e5;
 $mc-secondary-inverse: #ffffff;
 
 $mc-dark: #272727;
 $mc-dark-active: darken(#272727, 3%);
-$mc-dark-light: if(isDarkMode(), darken(#272727, 42%), lighten(#272727, 42%));
+$mc-dark-light: lighten(#272727, 42%);
 $mc-dark-inverse: #ffffff;

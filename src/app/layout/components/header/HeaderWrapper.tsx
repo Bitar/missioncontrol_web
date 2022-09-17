@@ -29,7 +29,7 @@ export function HeaderWrapper() {
               title='Show sidebar menu'
             >
               <div
-                className='btn btn-icon btn-active-color-mc-primary w-35px h-35px'
+                className='btn btn-icon btn-active-color-mc-secondary w-35px h-35px'
                 id='kt_app_sidebar_mobile_toggle'
               >
                 <KTSVG path='/media/icons/duotune/abs015.svg' className=' svg-icon-1' />

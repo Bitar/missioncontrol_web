@@ -14,6 +14,29 @@ import {ActivityStanding} from './ActivityStanding'
 import {ActivityRegistration} from './ActivityRegistration'
 import {ActivityPrize} from './ActivityPrize'
 import dayjs from 'dayjs'
+import {Platform} from '../../../models/game/Platform'
+
+export const activityScheduleSchema = Yup.object().shape({
+  schedule: Yup.object().shape({
+    registration_dates: Yup.object().shape({
+      start_date: Yup.string().required('Registration Start Date is required'),
+      end_date: Yup.string().required('Registration End Date is required'),
+    }),
+    matchplay_dates: Yup.object().shape({
+      start_date: Yup.string().required('GameDay Start Date is required'),
+      end_date: Yup.string().required('GameDay End Date is required'),
+    }),
+    settings: Yup.object().shape({
+      frequency: Yup.string().required('Match Frequency is required'),
+      time: Yup.string().required('Time of Day is required'),
+      day: Yup.string().when('schedule.settings.frequency', {
+        is: 2 || '2',
+        then: Yup.string().required('Day required'),
+      }),
+      timezone: Yup.string().required('Timezone is required'),
+    }),
+  }),
+})
 
 export const activitySchema = Yup.object().shape({
   title: Yup.string().required('Activity title is required'),
@@ -80,24 +103,6 @@ export const activitySchema = Yup.object().shape({
   // ),
 })
 
-// export const initialActivity = (activity?: Activity) => {
-//   return {
-//     title: activity?.title || '',
-//     description: activity?.description || '',
-//     type: initialActivityType(activity?.type),
-//     status: activity?.status || 0,
-//     settings: initialActivitySettings(activity?.settings),
-//     registration_dates: {
-//       start_date: 0,
-//       end_date: 0,
-//     },
-//     matchplay_dates: {
-//       start_date: 0,
-//       end_date: 0,
-//     },
-//   }
-// }
-
 export type Activity = {
   id?: ID
   title: string
@@ -121,10 +126,10 @@ export type Activity = {
   }
   prize?: []
   location?: ActivityLocation
-  platforms?: []
+  platforms?: Platform[]
   announcements?: Announcement[]
   entry_fee?: ActivityFee
-  team_settings?: ActivityTeamSetting
+  team_setting?: ActivityTeamSetting
   rules?: []
   standings?: ActivityStanding[]
 
@@ -142,33 +147,57 @@ export type ActivityForm = {
   title: string
   description: string
   type_id?: number
-  community_id?: string
-  game_id?: string
-  game_mode_id?: string
-  rounds?: string
+  community_id?: string | number
+  game_id?: string | number
+  game_mode_id?: string | number
+  rounds?: string | number
   is_cross_play?: boolean
   platform_id?: string
   platform_ids?: number[]
-  schedule: {
-    registration_dates: {
-      start_date: number
-      end_date: number
-    }
-    matchplay_dates: {
-      start_date: number
-      end_date: number
-    }
-    settings: {
-      frequency: string
-      time: string
-      timezone: string
-      day: string
-    }
-  }
+  schedule: ActivityFormSchedule
   location?: ActivityLocation
   team?: ActivityTeamSetting
   entry_fee?: ActivityFee
   prize?: ActivityPrize[]
+}
+
+export type ActivityFormSchedule = {
+  registration_dates: {
+    start_date: number
+    end_date: number
+  }
+  matchplay_dates: {
+    start_date: number
+    end_date: number
+  }
+  settings: {
+    frequency: string | number
+    time: string | number
+    timezone: string | number
+    day: string | number
+  }
+}
+
+export const initialActivityFormSchedule = (activity?: Activity) => {
+  console.info(activity?.settings.time || dayjs(new Date()).format('HH:mm:ss'))
+  console.info(activity?.settings.time)
+  console.info(dayjs(new Date()).format('HH:mm:ss'))
+  return {
+    registration_dates: {
+      start_date: activity?.registration_dates.start_date || 0,
+      end_date: activity?.registration_dates.end_date || 0,
+    },
+    matchplay_dates: {
+      start_date: activity?.matchplay_dates.start_date || 0,
+      end_date: activity?.matchplay_dates.end_date || 0,
+    },
+    settings: {
+      frequency: activity?.settings.frequency || '',
+      time: activity?.settings.time || '',
+      timezone: activity?.settings.timezone_id || '',
+      day: activity?.settings.day || '',
+    },
+  }
 }
 
 export const initialActivityForm = (activityForm?: ActivityForm) => {
@@ -177,7 +206,7 @@ export const initialActivityForm = (activityForm?: ActivityForm) => {
     title: activityForm?.title || '',
     description: activityForm?.description || '',
     community_id: activityForm?.community_id || '',
-    game_id: activityForm?.community_id || '',
+    game_id: activityForm?.game_id || '',
     game_mode_id: activityForm?.game_mode_id || '',
     rounds: activityForm?.rounds || '',
     is_cross_play: activityForm?.is_cross_play || false,
@@ -211,6 +240,50 @@ export const initialActivityForm = (activityForm?: ActivityForm) => {
     location: {
       type: activityForm?.location?.type || 1,
       location: activityForm?.location?.location || '',
+    },
+  }
+}
+
+export const initialActivityFormByActivity = (activity?: Activity) => {
+  return {
+    type_id: activity?.type?.id || 1,
+    title: activity?.title || '',
+    description: activity?.description || '',
+    community_id: activity?.community?.id || '',
+    game_id: activity?.game?.id || '',
+    game_mode_id: activity?.game_mode?.id || '',
+    rounds: activity?.settings?.rounds || '',
+    is_cross_play: activity?.settings?.is_cross_play || false,
+    // platform_id: activity?.platform_id || '',
+    // platform_ids: activity?.platform_ids || [],
+    schedule: {
+      registration_dates: {
+        start_date: activity?.registration_dates.start_date || 0,
+        end_date: activity?.registration_dates.end_date || 0,
+      },
+      matchplay_dates: {
+        start_date: activity?.matchplay_dates.start_date || 0,
+        end_date: activity?.matchplay_dates.end_date || 0,
+      },
+      settings: {
+        frequency: activity?.settings.frequency || '',
+        time: activity?.settings.time || dayjs(new Date()).format('HH:mm:ss'),
+        timezone: activity?.settings.timezone_id || '',
+        day: activity?.settings.day || '',
+      },
+    },
+    team: {
+      min: activity?.team_setting?.min || 0,
+      max: activity?.team_setting?.max || 0,
+      players: activity?.team_setting?.players || 0,
+    },
+    entry_fee: {
+      type: activity?.entry_fee?.type || 1,
+      amount: activity?.entry_fee?.amount || 0,
+    },
+    location: {
+      type: activity?.location?.type || 1,
+      location: activity?.location?.location || '',
     },
   }
 }

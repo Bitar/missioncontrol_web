@@ -1,19 +1,16 @@
-import React, {Dispatch, FC, SetStateAction, useState} from 'react'
+import React, {FC, useState} from 'react'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import TextField from '@mui/material/TextField'
-import {Activity} from '../models/Activity'
 import dayjs from 'dayjs'
 import {Announcement, initialAnnouncement} from '../../../models/announcement/Announcements'
 import {useParams} from 'react-router-dom'
 import {createActivityAnnouncement} from '../core/ActivityRequests'
 import {Form, Formik} from 'formik'
 import {jsonToFormData, updateData} from '../../../helpers/form/FormHelper'
+import {useActivity} from '../AuthContext'
 
-type Props = {
-  activity: Activity | undefined
-  setActivity: Dispatch<SetStateAction<Activity | undefined>>
-}
-const ActivityAnnouncement: FC<Props> = ({activity, setActivity}) => {
+const ActivityAnnouncement: FC = () => {
+  const {activity, setActivity} = useActivity()
   const params = useParams()
   const [announcement, setAnnouncement] = useState<Announcement>(initialAnnouncement())
 

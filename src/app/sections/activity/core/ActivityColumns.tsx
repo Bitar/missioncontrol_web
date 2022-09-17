@@ -62,7 +62,10 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
     ),
     id: 'Registration',
     Cell: ({...props}) => {
-      const {startDate, endDate} = formatDates(props.data[props.row.index].registration_dates)
+      const {startDate, endDate} = formatDates(
+        props.data[props.row.index].registration_dates,
+        props.data[props.row.index].settings.timezone.value
+      )
       return (
         <div className='d-flex align-items-center'>
           <div className='d-flex flex-column text-center'>
@@ -82,7 +85,10 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
     ),
     id: 'Game Day',
     Cell: ({...props}) => {
-      const {startDate, endDate} = formatDates(props.data[props.row.index].matchplay_dates)
+      const {startDate, endDate} = formatDates(
+        props.data[props.row.index].matchplay_dates,
+        props.data[props.row.index].settings.timezone.value
+      )
       return (
         <div className='d-flex align-items-center'>
           <div className='d-flex flex-column text-center'>

@@ -158,7 +158,7 @@ const Schedule: FC<Props> = ({activity, setActivity}) => {
                     settings: {
                       ...activity?.settings,
                       ...{
-                        time_of_day: timeOfDay,
+                        time: timeOfDay,
                       },
                     },
                   },

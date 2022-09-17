@@ -1,8 +1,13 @@
 import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import Timezone from 'dayjs/plugin/timezone'
+
+dayjs.extend(utc)
+dayjs.extend(Timezone)
 
 const formatActivityStatus = (statusId: number) => {
-  let color = ''
-  let status = ''
+  let color: string
+  let status: string
 
   if (statusId === 1) {
     status = 'Registration'
@@ -28,8 +33,8 @@ const formatActivityStatus = (statusId: number) => {
 }
 
 const formatMatchStatus = (statusId: number) => {
-  let color = ''
-  let status = ''
+  let color: string
+  let status: string
 
   if (statusId === 1) {
     status = 'Scheduled'
@@ -48,9 +53,16 @@ const formatMatchStatus = (statusId: number) => {
   return {status, color}
 }
 
-const formatDates = (matchplayDates: any) => {
-  const startDate = dayjs(new Date(matchplayDates?.start_date * 1000)).format('ll')
-  const endDate = dayjs(new Date(matchplayDates?.end_date * 1000)).format('ll')
+const formatDates = (dates: any, tz: string) => {
+  const startDate = dayjs(new Date(dates?.start_date * 1000))
+    .utc(false)
+    .tz(tz, true)
+    .format('DD MMM YY')
+  const endDate = dayjs(new Date(dates?.end_date * 1000))
+    .subtract(1, 'second')
+    .utc(false)
+    .tz(tz, true)
+    .format('DD MMM YY')
 
   return {startDate, endDate}
 }

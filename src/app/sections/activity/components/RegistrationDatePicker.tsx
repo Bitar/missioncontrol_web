@@ -16,7 +16,10 @@ type Props = {
 const RegistrationDatePicker: FC<Props> = ({activity, setActivity}) => {
   const [value, setValue] = useState<DateRange<Dayjs>>([null, null])
 
+  // console.log(dayjs(new Date(activity?.schedule?.registration_dates?.start_date)))
+
   const onDateChange = (newValue: any) => {
+    // console.log(newValue)
     setValue(newValue)
 
     let startDate = newValue[0].$d
@@ -84,4 +87,4 @@ const RegistrationDatePicker: FC<Props> = ({activity, setActivity}) => {
   )
 }
 
-export { RegistrationDatePicker };
+export {RegistrationDatePicker}

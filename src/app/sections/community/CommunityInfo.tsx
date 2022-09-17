@@ -3,6 +3,7 @@ import {Link, useLocation} from 'react-router-dom'
 import {Community} from './models/Community'
 import React, {FC, useEffect, useState} from 'react'
 import clsx from 'clsx'
+import toast from 'react-hot-toast'
 
 type Props = {
   community: Community | undefined
@@ -34,12 +35,13 @@ const CommunityInfo: FC<Props> = ({
   const [image, setImage] = useState<string>('')
 
   //import toast from 'react-hot-toast'
-  // const notify = async () => {
-  //   let text = 'Invite Link copied!'
-  //   // TODO: Update Link for clipboard
-  //   await navigator.clipboard.writeText(text)
-  //   toast.success(text)
-  // }
+  const notify = async () => {
+    const REACT_APP_MOBILE_APP_URL = process.env.REACT_APP_MOBILE_APP_URL
+    let text = `${REACT_APP_MOBILE_APP_URL}/communities/${community?.id}`
+    let toastText = 'Community Share link copied!'
+    await navigator.clipboard.writeText(text)
+    toast.success(toastText)
+  }
 
   useEffect(() => {
     if (community?.logo) {
@@ -75,9 +77,9 @@ const CommunityInfo: FC<Props> = ({
                   <div className='text-gray-800 fs-2 fw-bolder me-1'>{community?.name}</div>
                 </div>
 
-                {/*<div className='d-flex my-4'>*/}
-                {/*  <button type={'button'} className="btn btn-sm btn-bg-light btn-active-color-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">Community Link</button>*/}
-                {/*</div>*/}
+                {/*<Link to='/crafted/account/settings' className='btn btn-primary align-self-center'>*/}
+                {/*  Edit Profile*/}
+                {/*</Link>*/}
 
                 <div className='d-flex flex-wrap fw-bold fs-6 mb-4 pe-2'>
                   {community?.contact && (
@@ -103,6 +105,12 @@ const CommunityInfo: FC<Props> = ({
                       {community?.address?.city}
                     </div>
                   )}
+                </div>
+
+                <div className='d-flex my-4'>
+                  <button type='button' className='btn btn-sm btn-mc-primary' onClick={notify}>
+                    Community Share Link
+                  </button>
                 </div>
               </div>
               {/*<div className='card-toolbar'>*/}

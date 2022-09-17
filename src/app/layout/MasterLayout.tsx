@@ -9,6 +9,7 @@ import {ThemeModeProvider} from '../../_metronic/partials'
 import {PageDataProvider} from './core'
 import {reInitMenu} from '../../_metronic/helpers'
 import {ToolbarWrapper} from './components/toolbar'
+import {MCToaster} from '../helpers/ToastHelper'
 
 const MasterLayout = () => {
   const location = useLocation()
@@ -21,6 +22,7 @@ const MasterLayout = () => {
       <ThemeModeProvider>
         <div className='d-flex flex-column flex-root app-root' id='kt_app_root'>
           <div className='app-page flex-column flex-column-fluid' id='kt_app_page'>
+            <MCToaster />
             <HeaderWrapper />
             <div className='app-wrapper flex-column flex-row-fluid' id='kt_app_wrapper'>
               <Sidebar />
