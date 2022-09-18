@@ -16,6 +16,7 @@ import {TimeZone} from '../../../models/misc/TimeZone'
 import {getTimeZones} from '../../misc/core/_requests'
 import {MatchPlayDatePicker, RegistrationDatePicker} from '../components'
 import {TimeOfDayPicker} from '../components/TimeOfDayPicker'
+import { FormAction } from "../../../helpers/form/FormAction";
 
 const ActivitySettings = () => {
   const {activity} = useActivity()
@@ -25,7 +26,10 @@ const ActivitySettings = () => {
 
   const [timeZones, setTimeZones] = useState<TimeZone[]>()
 
-  const handleSubmit = () => {}
+  const handleSubmit = () => {
+    console.log('submitting');
+    console.log(activityForm);
+  }
   const handleOnChange = () => {}
 
   useEffect(() => {
@@ -48,7 +52,7 @@ const ActivitySettings = () => {
           validationSchema={activityScheduleSchema}
           enableReinitialize
         >
-          {({touched, errors, values}) => (
+          {({isSubmitting, touched, errors, values}) => (
             <Form onChange={handleOnChange} className='form' encType='multipart/form-data'>
               <KTCardBody className='py-10'>
                 <div className='row mb-6'>
@@ -191,7 +195,7 @@ const ActivitySettings = () => {
                     <span className='required fw-bold fs-6'>Time of Day</span>
                   </div>
                   <div className='col-lg-6'>
-                    <TimeOfDayPicker activity={activityForm} setActivity={setActivityForm} />
+                    <TimeOfDayPicker activityForm={activityForm} setActivityForm={setActivityForm} />
                   </div>
                 </div>
 
@@ -242,6 +246,7 @@ const ActivitySettings = () => {
                   </div>
                 )}
               </KTCardBody>
+              <FormAction text={'Update Schedule'} isSubmitting={isSubmitting} />
             </Form>
           )}
         </Formik>

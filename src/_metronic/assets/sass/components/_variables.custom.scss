@@ -57,3 +57,7 @@ $mc-dark: #272727;
 $mc-dark-active: darken(#272727, 3%);
 $mc-dark-light: lighten(#272727, 42%);
 $mc-dark-inverse: #ffffff;
+
+.MuiTimePickerToolbar-ampmLabel.Mui-selected {
+  color: $mc-secondary
+}

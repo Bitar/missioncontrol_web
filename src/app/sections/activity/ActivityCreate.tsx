@@ -582,7 +582,7 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                       <span className='required fw-bold fs-6'>Time of Day</span>
                     </div>
                     <div className='col-lg-6'>
-                      <TimeOfDayPicker activity={activity} setActivity={setActivity} />
+                      <TimeOfDayPicker activityForm={activity} setActivityForm={setActivity} />
                     </div>
                   </div>
 
