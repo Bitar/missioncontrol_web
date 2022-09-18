@@ -447,7 +447,7 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                       <span className='required fw-bold fs-6'>Registration Dates</span>
                     </div>
                     <div className='col-lg-8 fv-row'>
-                      <RegistrationDatePicker activity={activity} setActivity={setActivity} />
+                      <RegistrationDatePicker activityForm={activity} setActivityForm={setActivity} />
                     </div>
                   </div>
 
@@ -456,7 +456,7 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                       <span className='required fw-bold fs-6'>Match Play Dates</span>
                     </div>
                     <div className='col-lg-8 fv-row'>
-                      <MatchPlayDatePicker activity={activity} setActivity={setActivity} />
+                      <MatchPlayDatePicker activityForm={activity} setActivityForm={setActivity} />
                     </div>
                   </div>
 

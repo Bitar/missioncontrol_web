@@ -7,13 +7,15 @@ import {LocalizationProvider} from '@mui/x-date-pickers-pro'
 import {AdapterDayjs} from '@mui/x-date-pickers-pro/AdapterDayjs'
 import TextField from '@mui/material/TextField'
 import {Box} from '@mui/material'
+import { useActivity } from "../AuthContext";
 
 type Props = {
-  activity: ActivityForm
-  setActivity: Dispatch<SetStateAction<ActivityForm>>
+  activityForm: ActivityForm
+  setActivityForm: Dispatch<SetStateAction<ActivityForm>>
 }
 
-const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
+const MatchPlayDatePicker: FC<Props> = ({activityForm, setActivityForm}) => {
+  const {activity} = useActivity()
   const [value, setValue] = useState<DateRange<Dayjs>>([null, null])
   const [minDate, setMinDate] = useState<Dayjs | null>(dayjs())
 
@@ -33,22 +35,22 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
     updateData(
       {
         schedule: {
-          ...activity?.schedule,
+          ...activityForm?.schedule,
           ...{
             matchplay_dates: {
-              ...activity?.schedule.matchplay_dates,
+              ...activityForm?.schedule.matchplay_dates,
               ...{start_date: startDate, end_date: endDate},
             },
           },
         },
       },
-      setActivity,
-      activity
+      setActivityForm,
+      activityForm
     )
   }
 
   useEffect(() => {
-    let registrationEndDate = activity?.schedule?.registration_dates?.end_date
+    let registrationEndDate = activityForm?.schedule?.registration_dates?.end_date
     setValue([null, null])
 
     if (registrationEndDate) {
@@ -61,7 +63,15 @@ const MatchPlayDatePicker: FC<Props> = ({activity, setActivity}) => {
         setMinDate(minMatchDate)
       }
     }
-  }, [activity?.schedule?.registration_dates?.end_date])
+  }, [activityForm?.schedule?.registration_dates?.end_date])
+
+  useEffect(() => {
+    if (activity?.matchplay_dates.start_date && activity?.matchplay_dates?.end_date) {
+      let startDate = dayjs(activity?.matchplay_dates?.start_date * 1000)
+      let endDate = dayjs(activity?.matchplay_dates?.end_date * 1000)
+      setValue([startDate, endDate])
+    }
+  }, [activity?.matchplay_dates])
 
   return (
     <>

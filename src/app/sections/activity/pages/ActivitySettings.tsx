@@ -56,7 +56,7 @@ const ActivitySettings = () => {
                     <span className='required fw-bold fs-6'>Registration Dates</span>
                   </div>
                   <div className='col-lg-8 fv-row'>
-                    <RegistrationDatePicker activity={activityForm} setActivity={setActivityForm} />
+                    <RegistrationDatePicker activityForm={activityForm} setActivityForm={setActivityForm} />
                   </div>
                 </div>
 
@@ -65,7 +65,7 @@ const ActivitySettings = () => {
                     <span className='required fw-bold fs-6'>Match Play Dates</span>
                   </div>
                   <div className='col-lg-8 fv-row'>
-                    <MatchPlayDatePicker activity={activityForm} setActivity={setActivityForm} />
+                    <MatchPlayDatePicker activityForm={activityForm} setActivityForm={setActivityForm} />
                   </div>
                 </div>
 

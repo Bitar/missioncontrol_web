@@ -1,25 +1,24 @@
-import React, {Dispatch, FC, SetStateAction, useState} from 'react'
+import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
 import {ActivityForm} from '../models/Activity'
-import {Dayjs} from 'dayjs'
+import dayjs, {Dayjs} from 'dayjs'
 import {LocalizationProvider} from '@mui/x-date-pickers-pro'
 import {AdapterDayjs} from '@mui/x-date-pickers-pro/AdapterDayjs'
 import {DateRange, DateRangePicker} from '@mui/x-date-pickers-pro/DateRangePicker'
 import {Box} from '@mui/material'
 import TextField from '@mui/material/TextField'
 import {updateData} from '../../../helpers/form/FormHelper'
+import {useActivity} from '../AuthContext'
 
 type Props = {
-  activity: ActivityForm
-  setActivity: Dispatch<SetStateAction<ActivityForm>>
+  activityForm: ActivityForm
+  setActivityForm: Dispatch<SetStateAction<ActivityForm>>
 }
 
-const RegistrationDatePicker: FC<Props> = ({activity, setActivity}) => {
+const RegistrationDatePicker: FC<Props> = ({activityForm, setActivityForm}) => {
+  const {activity} = useActivity()
   const [value, setValue] = useState<DateRange<Dayjs>>([null, null])
 
-  // console.log(dayjs(new Date(activity?.schedule?.registration_dates?.start_date)))
-
   const onDateChange = (newValue: any) => {
-    // console.log(newValue)
     setValue(newValue)
 
     let startDate = newValue[0].$d
@@ -35,10 +34,10 @@ const RegistrationDatePicker: FC<Props> = ({activity, setActivity}) => {
     updateData(
       {
         schedule: {
-          ...activity?.schedule,
+          ...activityForm?.schedule,
           ...{
             registration_dates: {
-              ...activity?.schedule.registration_dates,
+              ...activityForm?.schedule.registration_dates,
               ...{start_date: startDate, end_date: endDate},
             },
             matchplay_dates: {
@@ -48,17 +47,24 @@ const RegistrationDatePicker: FC<Props> = ({activity, setActivity}) => {
           },
         },
       },
-      setActivity,
-      activity
+      setActivityForm,
+      activityForm
     )
   }
+
+  useEffect(() => {
+    if (activity?.registration_dates.start_date && activity?.registration_dates?.end_date) {
+      let startDate = dayjs(activity?.registration_dates?.start_date * 1000)
+      let endDate = dayjs(activity?.registration_dates?.end_date * 1000)
+      setValue([startDate, endDate])
+    }
+  }, [activity?.registration_dates])
 
   return (
     <>
       {/*<div className='text-center'>*/}
       <LocalizationProvider dateAdapter={AdapterDayjs} localeText={{start: 'From', end: 'To'}}>
         <DateRangePicker
-          disablePast
           value={value}
           onChange={(e) => {
             onDateChange(e)
@@ -87,4 +93,4 @@ const RegistrationDatePicker: FC<Props> = ({activity, setActivity}) => {
   )
 }
 
-export {RegistrationDatePicker}
+export { RegistrationDatePicker };
