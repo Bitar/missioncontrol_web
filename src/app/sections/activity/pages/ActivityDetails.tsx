@@ -145,7 +145,7 @@ const ActivityDetails = () => {
 
           <div className='col-lg-8'>
             <span className='fw-bold fs-6'>
-              {activity?.location?.type === 1 ? 'Online' : 'In-Person'}
+              {activity?.location?.type === 1 ? 'Online' : 'In-Person: ' + activity?.location?.locate}
             </span>
           </div>
         </div>

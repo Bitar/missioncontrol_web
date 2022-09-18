@@ -79,9 +79,9 @@ export const activitySchema = Yup.object().shape({
   }),
   location: Yup.object().shape({
     type: Yup.number().required('Entry Fee Type required'),
-    location: Yup.number().when('entry_fee.type', {
+    locate: Yup.string().when('location.type', {
       is: 2,
-      then: Yup.number().required('Amount required'),
+      then: Yup.string().required('Location required'),
     }),
   }),
   team: Yup.object().shape({
@@ -239,7 +239,7 @@ export const initialActivityForm = (activityForm?: ActivityForm) => {
     },
     location: {
       type: activityForm?.location?.type || 1,
-      location: activityForm?.location?.location || '',
+      locate: activityForm?.location?.locate || '',
     },
   }
 }
@@ -283,7 +283,7 @@ export const initialActivityFormByActivity = (activity?: Activity) => {
     },
     location: {
       type: activity?.location?.type || 1,
-      location: activity?.location?.location || '',
+      locate: activity?.location?.locate || '',
     },
   }
 }

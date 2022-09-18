@@ -94,6 +94,7 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
         activity
       )
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [communityAdmin, currentUser])
 
   const handleSubmit = async () => {
@@ -106,7 +107,10 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
       })
       .catch((error) => {
         if (error.response) {
-          setAlertMessage(error.response.data.error.validation)
+          // let obj = error.response.data.error.validation;
+          // console.log((error.response.data.error.validation))
+          // console.log(obj.stringify())
+          setAlertMessage('Error occurred!')
           setHasErrors(true)
         }
       })
@@ -129,13 +133,13 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
         setActivity,
         activity
       )
-    } else if (targetName === 'location.location') {
+    } else if (targetName === 'location.locate') {
       updateData(
         {
           location: {
             ...activity?.location,
             ...{
-              location: targetValue,
+              locate: targetValue,
             },
           },
         },
@@ -676,11 +680,11 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                     <div className='row mb-6'>
                       <div className='col-lg-12 fv-row'>
                         <TextField
-                          required
+                          required={activity?.location?.type === 2}
                           fullWidth
                           size='small'
                           label='Location'
-                          name='location.location'
+                          name='location.locate'
                           variant={'outlined'}
                         />
                       </div>
@@ -705,4 +709,4 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
   )
 }
 
-export {ActivityCreate}
+export { ActivityCreate };

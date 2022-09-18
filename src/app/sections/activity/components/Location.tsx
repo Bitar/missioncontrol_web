@@ -16,7 +16,7 @@ const Location: FC<Props> = ({activity, setActivity}) => {
           ...activity?.location,
           ...{
             type: type,
-            location: '',
+            locate: '',
           },
         },
       },

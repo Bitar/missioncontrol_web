@@ -64,7 +64,7 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
     Cell: ({...props}) => {
       const {startDate, endDate} = formatDates(
         props.data[props.row.index].registration_dates,
-        props.data[props.row.index].settings.timezone.value
+        props.data[props.row.index].settings?.timezone.value
       )
       return (
         <div className='d-flex align-items-center'>
