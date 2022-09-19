@@ -9,6 +9,7 @@ import {PermissionPage} from '../sections/identity/permission/pages/PermissionPa
 import {SuspenseView} from '../layout/SuspenseView'
 import React, {lazy} from 'react'
 import {Restricted} from '../modules/auth/core/AuthPermission'
+import { AdminCommunityCreate } from "../sections/community-admin/AdminCommunityCreate";
 
 const PrivateRoutes = () => {
   const CommunityPage = lazy(() => import('../sections/community/pages/CommunityPage'))
@@ -29,6 +30,14 @@ const PrivateRoutes = () => {
         {/* Pages */}
 
         {/* Sections */}
+        <Route
+        path='admin/communities/create'
+        element={
+          <SuspenseView>
+            <AdminCommunityCreate/>
+          </SuspenseView>
+        }
+        />
         <Route
           path='communities/*'
           element={

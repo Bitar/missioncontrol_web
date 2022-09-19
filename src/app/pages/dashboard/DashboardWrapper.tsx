@@ -1,9 +1,11 @@
-import React, {FC} from 'react'
-import {useIntl} from 'react-intl'
-import {PageTitle} from '../../layout/core'
-import {useAuth} from '../../modules/auth'
-import {isUserCommunityAdmin} from '../../sections/identity/user/models/User'
-import {CommunityView} from '../../sections/community/pages/CommunityView'
+import React, { FC } from "react";
+import { useIntl } from "react-intl";
+import { PageTitle } from "../../layout/core";
+import { useAuth } from "../../modules/auth";
+import { isUserCommunityAdmin } from "../../sections/identity/user/models/User";
+import { CommunityView } from "../../sections/community/pages/CommunityView";
+import { EngageWidget3 } from "../../layout/widgets/EngageWidget3";
+import { EngageWidget4 } from "../../layout/widgets/EngageWidget4";
 // import Pusher from "pusher-js";
 
 // const DashboardPage: FC<React.PropsWithChildren<unknown>> = () => {
@@ -47,8 +49,21 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
     <>
       <PageTitle breadcrumbs={[]}>{intl.formatMessage({id: 'MENU.DASHBOARD'})}</PageTitle>
 
-      {currentUser && isUserCommunityAdmin(currentUser) && (
+      {currentUser && isUserCommunityAdmin(currentUser) && communityAdmin ? (
         <CommunityView communityId={communityAdmin?.id} links={communityLinks}></CommunityView>
+      ) : (
+        <div className='row gy-5 g-xl-8'>
+          <div className='col-xl-12'>
+            {!communityAdmin ? (
+              <>
+                <EngageWidget3 bgHex={'#FFFFFF'} />
+                <EngageWidget4 bgHex={'#110055'} />
+              </>
+            ) : (
+              <div></div>
+            )}
+          </div>
+        </div>
       )}
 
       {/*<DashboardPage />*/}

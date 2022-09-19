@@ -20,6 +20,7 @@ export const communitySchema = Yup.object().shape({
     // address_two: Yup.string(),
     city: Yup.string().required('City is required'),
     // state_province: Yup.string().required('State Province is required'),
+    state_province: Yup.string().required('State is required'),
     postal_code: Yup.string().required('Postal Code is required'),
     // country_code: Yup.string().required('Country Code is required'),
   }),

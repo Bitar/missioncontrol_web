@@ -273,6 +273,7 @@ const CommunityForm: FC<React.PropsWithChildren<Props>> = ({method, community, s
               defaultValue={roleSelected}
               options={statesOptions}
               onChange={handleRoleChange}
+              name='address.state_province'
             />
           )}
           <div className='text-danger mt-2'>

@@ -38,6 +38,13 @@ const createCommunity = (formData: FormData): Promise<Community | undefined> => 
     .then((response: Response<Community>) => response.data)
 }
 
+const createAdminCommunity = (formData: FormData): Promise<Community | undefined> => {
+  return axios
+    .post(`${GET_COMMUNITIES_URL}/create`, formData)
+    .then((response: AxiosResponse<Response<Community>>) => response.data)
+    .then((response: Response<Community>) => response.data)
+}
+
 const updateCommunity = (id: any, formData: FormData): Promise<Community | undefined> => {
   return axios
     .post(`${GET_COMMUNITIES_URL}/${id}`, formData)
@@ -64,6 +71,7 @@ export {
   getCommunities,
   getCommunityById,
   createCommunity,
+  createAdminCommunity,
   updateCommunity,
   getCommunityActivities,
   getAllCommunities,
