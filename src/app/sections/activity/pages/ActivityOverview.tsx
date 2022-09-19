@@ -15,7 +15,7 @@ const ActivityOverview: FC = () => {
 
       <div className='col-lg-6 col-md-12'>
         <div className='mb-5'>
-          <ActivityStandings minimal={true} />
+          <ActivityStandings minimal={true} scroll={true} />
         </div>
         <div className='mt-5'>
           <ActivityAnnouncement />

@@ -5,9 +5,10 @@ import {useActivity} from '../AuthContext'
 
 type Props = {
   minimal?: boolean
+  scroll?: boolean
 }
 
-const ActivityStandings: FC<Props> = ({minimal = false}) => {
+const ActivityStandings: FC<Props> = ({minimal = false, scroll = false}) => {
   const {activity} = useActivity()
   const getTeam = (teamId: ID) => {
     return activity?.teams?.filter(function (e: any) {
@@ -23,7 +24,10 @@ const ActivityStandings: FC<Props> = ({minimal = false}) => {
             <h3 className='card-label text-white'>Standings</h3>
           </div>
         </div>
-        <KTCardBody className='py-1 scroll-y mh-400px' id='activities_standings_body'>
+        <KTCardBody
+          className={clsx('py-1', {'scroll-y mh-400px': scroll })}
+          id='activities_standings_body'
+        >
           <div className='table-responsive'>
             <table
               className='table align-middle table-row-bordered fs-6 gy-5 dataTable no-footer'
