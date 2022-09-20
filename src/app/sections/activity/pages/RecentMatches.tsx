@@ -4,7 +4,7 @@ import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {calculateTeamScore} from '../../../helpers/MCHelper'
 import {useNavigate, useParams} from 'react-router-dom'
 import {TeamImage} from '../components/TeamImage'
-import {useActivity} from '../AuthContext'
+import {useActivity} from '../ActivityContext'
 
 const RecentMatches: FC = () => {
   const {matches, setMatch} = useActivity()

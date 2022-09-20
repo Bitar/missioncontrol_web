@@ -6,6 +6,7 @@ import {UserQueryResponse} from '../../identity/user/models/User'
 
 const API_URL = process.env.REACT_APP_API_URL
 const GET_COMMUNITIES_URL = `${API_URL}/communities`
+const GET_ADMIN_COMMUNITIES_URL = `${API_URL}/admin/communities`
 
 const getCommunities = (query: String): Promise<CommunityQueryResponse> => {
   return axios
@@ -40,7 +41,7 @@ const createCommunity = (formData: FormData): Promise<Community | undefined> => 
 
 const createAdminCommunity = (formData: FormData): Promise<Community | undefined> => {
   return axios
-    .post(`${GET_COMMUNITIES_URL}/create`, formData)
+    .post(`${GET_ADMIN_COMMUNITIES_URL}/create`, formData)
     .then((response: AxiosResponse<Response<Community>>) => response.data)
     .then((response: Response<Community>) => response.data)
 }

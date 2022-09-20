@@ -101,3 +101,9 @@ export const isUserCommunityAdmin = (user: User) => {
     return role.id === 3
   })
 }
+
+export const isUserSuperAdmin = (user: User) => {
+  return !!user.roles.find(function (role) {
+    return role.id === 1
+  })
+}

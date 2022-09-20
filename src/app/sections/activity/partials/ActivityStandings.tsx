@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
 import {ID, KTCard, KTCardBody, toAbsoluteUrl} from '../../../../_metronic/helpers'
 import clsx from 'clsx'
-import {useActivity} from '../AuthContext'
+import {useActivity} from '../ActivityContext'
 
 type Props = {
   minimal?: boolean
@@ -89,7 +89,7 @@ const ActivityStandings: FC<Props> = ({minimal = false, scroll = false}) => {
                         {standing.score?.win + standing.score?.lose !== 0
                           ? (standing.score?.win / (standing.score?.win + standing.score?.lose)) *
                             100
-                          : 0}
+                          : 0}%
                       </td>
                     </tr>
                   ))

@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { useIntl } from "react-intl";
 import { PageTitle } from "../../layout/core";
 import { useAuth } from "../../modules/auth";
-import { isUserCommunityAdmin } from "../../sections/identity/user/models/User";
+import { isUserCommunityAdmin, isUserSuperAdmin } from "../../sections/identity/user/models/User";
 import { CommunityView } from "../../sections/community/pages/CommunityView";
 import { EngageWidget3 } from "../../layout/widgets/EngageWidget3";
 import { EngageWidget4 } from "../../layout/widgets/EngageWidget4";
@@ -26,8 +26,6 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
   const intl = useIntl()
   const {currentUser, communityAdmin} = useAuth()
 
-  console.log(currentUser);
-
   const communityLinks = [
     {
       text: 'Overview',
@@ -41,10 +39,10 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
       text: 'Members',
       link: '/dashboard/members',
     },
-    {
-      text: 'Settings',
-      link: '/dashboard/settings',
-    },
+    // {
+    //   text: 'Settings',
+    //   link: '/dashboard/settings',
+    // },
   ]
 
   return (
@@ -58,7 +56,7 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
           ) : (
             <div className='row gy-5 g-xl-8'>
               <div className='col-xl-12'>
-                {!communityAdmin ? (
+                {!communityAdmin && !isUserSuperAdmin(currentUser) ? (
                   <>
                     <EngageWidget3 bgHex={'#FFFFFF'} />
                     <EngageWidget4 bgHex={'#110055'} />

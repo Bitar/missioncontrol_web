@@ -4,7 +4,7 @@ import React, {FC, useEffect} from 'react'
 import {MatchInfo} from './MatchInfo'
 import {MatchOverview} from './MatchOverview'
 import {getActivityMatch} from '../activity/core/ActivityRequests'
-import {useActivity} from '../activity/AuthContext'
+import {useActivity} from '../activity/ActivityContext'
 
 const MatchPage: FC = () => {
   const {activity, match, setMatch} = useActivity()

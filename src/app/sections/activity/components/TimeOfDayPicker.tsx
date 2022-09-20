@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField'
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider'
 import dayjs, {Dayjs} from 'dayjs'
 import {updateData} from '../../../helpers/form/FormHelper'
-import { useActivity } from "../AuthContext";
+import { useActivity } from "../ActivityContext";
 
 type Props = {
   activityForm: ActivityForm

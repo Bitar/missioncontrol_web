@@ -1,6 +1,5 @@
 import {FC, useMemo} from 'react'
 import {KTCard, KTCardBody, QUERIES} from '../../../../_metronic/helpers'
-import {Community} from '../models/Community'
 import {User} from '../../identity/user/models/User'
 import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
 import {
@@ -16,10 +15,7 @@ import {CustomRow} from '../../../modules/table/columns/CustomRow'
 import {TableListPagination} from '../../../modules/table/TableListPagination'
 import {TableListLoading} from '../../../modules/table/TableListLoading'
 import {CommunityUsersColumns} from '../core/CommunityUsersColumns'
-
-type Props = {
-  community: Community | undefined
-}
+import {useCommunity} from '../CommunityContext'
 
 const CommunityUsersTable = () => {
   const communityUsers = useQueryResponseData()
@@ -71,7 +67,8 @@ const CommunityUsersTable = () => {
   )
 }
 
-const CommunityUsers: FC<Props> = ({community}) => {
+const CommunityUsers: FC = () => {
+  const {community} = useCommunity()
   return (
     <>
       <QueryRequestProvider>

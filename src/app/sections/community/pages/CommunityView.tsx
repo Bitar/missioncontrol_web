@@ -7,6 +7,8 @@ import {CommunityUsers} from './CommunityUsers'
 import {CommunityInfo} from '../CommunityInfo'
 import {CommunityEdit} from './CommunityEdit'
 import {ID} from '../../../../_metronic/helpers'
+import {CommunityContext} from '../CommunityContext'
+import {User} from '../../identity/user/models/User'
 
 type Props = {
   communityId?: ID
@@ -15,8 +17,22 @@ type Props = {
 
 const CommunityView: FC<Props> = ({communityId, links}) => {
   const [community, setCommunity] = useState<Community | undefined>()
+  const [members, setMembers] = useState<User[] | undefined>([])
   const params = useParams()
   const indexLink = useRef('')
+
+  if (!links) {
+    links = [
+      {
+        text: 'Overview',
+        link: '/communities/' + community?.id + '/overview',
+      },
+      {
+        text: 'Members',
+        link: '/communities/' + community?.id + '/members',
+      },
+    ]
+  }
 
   const communityViewBreadCrumbs: Array<PageLink> = [
     {
@@ -60,55 +76,67 @@ const CommunityView: FC<Props> = ({communityId, links}) => {
   }, [communityId, params.communityId])
 
   return (
-    <Routes>
-      <Route
-        element={
-          <>
-            <CommunityInfo community={community} links={links} />
-            <Outlet />
-          </>
-        }
-      >
+    <CommunityContext.Provider
+      value={{
+        community,
+        setCommunity,
+        members,
+        setMembers,
+      }}
+    >
+      <Routes>
         <Route
-          path='overview'
           element={
-            <>
-              <PageTitle breadcrumbs={communityViewBreadCrumbs}>Overview</PageTitle>
-              {/*<Overview />*/}
-            </>
+            community && (
+              <>
+                <CommunityInfo links={links} />
+                <Outlet />
+              </>
+            )
           }
-        />
-        {/*<Route*/}
-        {/*  path='activities'*/}
-        {/*  element={*/}
-        {/*    <>*/}
-        {/*      <PageTitle breadcrumbs={communityViewBreadCrumbs}>Activities</PageTitle>*/}
-        {/*      <CommunityActivities community={community} />*/}
-        {/*    </>*/}
-        {/*  }*/}
-        {/*/>*/}
-        <Route
-          path='members'
-          element={
-            <>
-              <PageTitle breadcrumbs={communityViewBreadCrumbs}>Members</PageTitle>
-              {/* TODO: Work on the members tab to be a separate component*/}
-              <CommunityUsers community={community} />
-            </>
-          }
-        />
-        <Route
-          path='settings'
-          element={
-            <>
-              <PageTitle breadcrumbs={communityViewBreadCrumbs}>Settings</PageTitle>
-              <CommunityEdit community={community} setCommunity={setCommunity} />
-            </>
-          }
-        />
-        <Route index element={<Navigate to={indexLink.current} />} />
-      </Route>
-    </Routes>
+        >
+          <Route
+            path='overview'
+            element={
+              !!params.communityId && (
+                <>
+                  <PageTitle breadcrumbs={communityViewBreadCrumbs}>Overview</PageTitle>
+                  {/*<Overview />*/}
+                </>
+              )
+            }
+          />
+          {/*<Route*/}
+          {/*  path='activities'*/}
+          {/*  element={*/}
+          {/*    <>*/}
+          {/*      <PageTitle breadcrumbs={communityViewBreadCrumbs}>Activities</PageTitle>*/}
+          {/*      <CommunityActivities community={community} />*/}
+          {/*    </>*/}
+          {/*  }*/}
+          {/*/>*/}
+          <Route
+            path='members'
+            element={
+              <>
+                <PageTitle breadcrumbs={communityViewBreadCrumbs}>Members</PageTitle>
+                <CommunityUsers />
+              </>
+            }
+          />
+          <Route
+            path='settings'
+            element={
+              <>
+                <PageTitle breadcrumbs={communityViewBreadCrumbs}>Settings</PageTitle>
+                <CommunityEdit />
+              </>
+            }
+          />
+          <Route index element={<Navigate to={indexLink.current} />} />
+        </Route>
+      </Routes>
+    </CommunityContext.Provider>
   )
 }
 

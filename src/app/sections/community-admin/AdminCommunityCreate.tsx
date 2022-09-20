@@ -1,6 +1,11 @@
 import {KTCard, KTCardBody} from '../../../_metronic/helpers'
 import {Form, Formik} from 'formik'
-import {Community, communitySchema, formOnChange, initialCommunity} from '../community/models/Community'
+import {
+  Community,
+  communitySchema,
+  formOnChange,
+  initialCommunity,
+} from '../community/models/Community'
 import {createAdminCommunity} from '../community/core/CommunityRequests'
 import {useNavigate} from 'react-router-dom'
 import React, {useState} from 'react'
@@ -36,7 +41,7 @@ const AdminCommunityCreate = () => {
           onSubmit={handleSubmit}
           validationSchema={communitySchema}
         >
-          {({isSubmitting, isValid, touched}) => (
+          {({isSubmitting}) => (
             <Form onChange={handleOnChange} className='form'>
               <KTCardBody className='py-4'>
                 <div className='d-flex flex-column pt-5'>
@@ -64,7 +69,7 @@ const AdminCommunityCreate = () => {
                   type='submit'
                   className='btn btn-light-mc-secondary btn-active-mc-secondary btn-sm'
                   data-kt-users-modal-action='submit'
-                  disabled={isSubmitting || !isValid || !touched}
+                  disabled={isSubmitting}
                 >
                   <span className='indicator-label'>Add Community</span>
                   {isSubmitting && (
@@ -83,4 +88,4 @@ const AdminCommunityCreate = () => {
   )
 }
 
-export {AdminCommunityCreate}
+export { AdminCommunityCreate };

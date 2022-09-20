@@ -7,7 +7,7 @@ import {useParams} from 'react-router-dom'
 import {createActivityAnnouncement} from '../core/ActivityRequests'
 import {Form, Formik} from 'formik'
 import {jsonToFormData, updateData} from '../../../helpers/form/FormHelper'
-import {useActivity} from '../AuthContext'
+import {useActivity} from '../ActivityContext'
 
 const ActivityAnnouncement: FC = () => {
   const {activity, setActivity} = useActivity()

@@ -178,28 +178,6 @@ export type ActivityFormSchedule = {
   }
 }
 
-export const initialActivityFormSchedule = (activity?: Activity) => {
-  console.info(activity?.settings.time || dayjs(new Date()).format('HH:mm:ss'))
-  console.info(activity?.settings.time)
-  console.info(dayjs(new Date()).format('HH:mm:ss'))
-  return {
-    registration_dates: {
-      start_date: activity?.registration_dates.start_date || 0,
-      end_date: activity?.registration_dates.end_date || 0,
-    },
-    matchplay_dates: {
-      start_date: activity?.matchplay_dates.start_date || 0,
-      end_date: activity?.matchplay_dates.end_date || 0,
-    },
-    settings: {
-      frequency: activity?.settings.frequency || '',
-      time: activity?.settings.time || '',
-      timezone: activity?.settings.timezone_id || '',
-      day: activity?.settings.day || '',
-    },
-  }
-}
-
 export const initialActivityForm = (activityForm?: ActivityForm) => {
   return {
     type_id: activityForm?.type_id || 1,

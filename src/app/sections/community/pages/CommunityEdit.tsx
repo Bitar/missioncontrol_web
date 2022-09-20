@@ -1,5 +1,5 @@
-import React, {Dispatch, FC, SetStateAction} from 'react'
-import {Community, communitySchema, formOnChange, initialCommunity} from '../models/Community'
+import React, {FC} from 'react'
+import {communitySchema, formOnChange, initialCommunity} from '../models/Community'
 import {useNavigate, useParams} from 'react-router-dom'
 import {Form, Formik} from 'formik'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
@@ -8,13 +8,10 @@ import {BannerImage} from '../partials/BannerImage'
 import {CommunityForm} from '../CommunityForm'
 import {jsonToFormData} from '../../../helpers/form/FormHelper'
 import {updateCommunity} from '../core/CommunityRequests'
+import {useCommunity} from '../CommunityContext'
 
-type Props = {
-  community: Community | undefined
-  setCommunity: Dispatch<SetStateAction<Community | undefined>>
-}
-
-const CommunityEdit: FC<React.PropsWithChildren<Props>> = ({community, setCommunity}) => {
+const CommunityEdit: FC = () => {
+  const {community, setCommunity} = useCommunity()
   const navigate = useNavigate()
   const params = useParams()
 

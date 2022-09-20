@@ -1,40 +1,19 @@
 import {KTCard, KTCardBody, KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
 import {Link, useLocation} from 'react-router-dom'
-import {Community} from './models/Community'
 import React, {FC, useEffect, useState} from 'react'
 import clsx from 'clsx'
 import toast from 'react-hot-toast'
+import {useCommunity} from './CommunityContext'
 
 type Props = {
-  community: Community | undefined
   links?: {text: string; link: string}[]
 }
 
-const CommunityInfo: FC<Props> = ({
-  community,
-  links = [
-    {
-      text: 'Overview',
-      link: '/communities/' + community?.id + '/overview',
-    },
-    // {
-    //   text: 'Activities',
-    //   link: '/activities',
-    // },
-    {
-      text: 'Members',
-      link: '/communities/' + community?.id + '/members',
-    },
-    {
-      text: 'Settings',
-      link: '/communities/' + community?.id + '/settings',
-    },
-  ],
-}) => {
+const CommunityInfo: FC<Props> = ({links}) => {
+  const {community} = useCommunity()
   const location = useLocation()
   const [image, setImage] = useState<string>('')
 
-  //import toast from 'react-hot-toast'
   const notify = async () => {
     const REACT_APP_MOBILE_APP_URL = process.env.REACT_APP_MOBILE_APP_URL
     let text = `${REACT_APP_MOBILE_APP_URL}/communities/${community?.id}`
@@ -134,7 +113,7 @@ const CommunityInfo: FC<Props> = ({
       <div className='separator mt-10'></div>
       <KTCardBody className='p-0 rounded-3 rounded-bottom'>
         <ul className='nav nav-fill nav-line-tabs nav-line-tabs-2x fs-5 fw-bolder flex-nowrap text-center border-transparent'>
-          {links.map((link, index) => (
+          {links?.map((link, index) => (
             <li className='nav-item' key={index}>
               <Link
                 className={clsx(
@@ -155,4 +134,4 @@ const CommunityInfo: FC<Props> = ({
   )
 }
 
-export {CommunityInfo}
+export { CommunityInfo };

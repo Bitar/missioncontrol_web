@@ -5,7 +5,7 @@ import {Match} from '../models/matches/Match'
 import {getDateFromTimestamp, getTimeFromTimestamp} from '../../../helpers/MCHelper'
 import {formatMatchStatus} from '../../../helpers/ActivityHelper'
 import {TeamImage} from '../components/TeamImage'
-import {useActivity} from '../AuthContext'
+import {useActivity} from '../ActivityContext'
 
 // let matchesLoaded = false
 
