@@ -42,6 +42,7 @@ export type User = {
   first_name: string
   last_name: string
   name?: string
+  is_verified: boolean
   email: string
   password?: string
   password_confirmation?: string
@@ -55,6 +56,7 @@ export const initialUser = (user?: User) => {
     first_name: user?.first_name || '',
     last_name: user?.last_name || '',
     email: user?.email || '',
+    is_verified: user?.is_verified || false,
     password: '',
     password_confirmation: '',
     created_at: user?.created_at || 0,

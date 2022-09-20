@@ -26,6 +26,8 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
   const intl = useIntl()
   const {currentUser, communityAdmin} = useAuth()
 
+  console.log(currentUser);
+
   const communityLinks = [
     {
       text: 'Overview',
@@ -47,23 +49,27 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
 
   return (
     <>
-      <PageTitle breadcrumbs={[]}>{intl.formatMessage({id: 'MENU.DASHBOARD'})}</PageTitle>
+      {currentUser && currentUser?.is_verified && (
+        <>
+          <PageTitle breadcrumbs={[]}>{intl.formatMessage({id: 'MENU.DASHBOARD'})}</PageTitle>
 
-      {currentUser && isUserCommunityAdmin(currentUser) && communityAdmin ? (
-        <CommunityView communityId={communityAdmin?.id} links={communityLinks}></CommunityView>
-      ) : (
-        <div className='row gy-5 g-xl-8'>
-          <div className='col-xl-12'>
-            {!communityAdmin ? (
-              <>
-                <EngageWidget3 bgHex={'#FFFFFF'} />
-                <EngageWidget4 bgHex={'#110055'} />
-              </>
-            ) : (
-              <div></div>
-            )}
-          </div>
-        </div>
+          {currentUser && isUserCommunityAdmin(currentUser) && communityAdmin ? (
+            <CommunityView communityId={communityAdmin?.id} links={communityLinks}></CommunityView>
+          ) : (
+            <div className='row gy-5 g-xl-8'>
+              <div className='col-xl-12'>
+                {!communityAdmin ? (
+                  <>
+                    <EngageWidget3 bgHex={'#FFFFFF'} />
+                    <EngageWidget4 bgHex={'#110055'} />
+                  </>
+                ) : (
+                  <div></div>
+                )}
+              </div>
+            </div>
+          )}
+        </>
       )}
 
       {/*<DashboardPage />*/}
@@ -71,4 +77,4 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
   )
 }
 
-export {DashboardWrapper}
+export { DashboardWrapper };

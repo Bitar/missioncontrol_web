@@ -91,9 +91,21 @@ const ActivityDetails = () => {
             <div className='col-lg-8 d-flex align-items-center'>
               <span className='fw-bolder fs-6 me-2'>
                 {dayjs(new Date(activity?.settings?.time * 1000))
-                  .utc(false)
-                  .format('HH:mm:ss')}{' '}
-                - {activity?.settings?.timezone_id}
+                  .utc(true)
+                  .format('h:mm a')}{' '}
+                - {activity?.settings?.timezone?.name}
+              </span>
+            </div>
+          </div>
+        )}
+
+        {activity?.settings?.day && (
+          <div className='row mb-5'>
+            <label className='col-lg-4 fw-bold text-muted'>Day</label>
+
+            <div className='col-lg-8 d-flex align-items-center'>
+              <span className='fw-bolder fs-6 me-2'>
+                {dayjs(new Date()).day(activity?.settings?.day - 1).format('dddd')}
               </span>
             </div>
           </div>
@@ -123,7 +135,7 @@ const ActivityDetails = () => {
           <label className='col-lg-4 fw-bold text-muted'>Max Teams</label>
 
           <div className='col-lg-8'>
-            <span className='fw-bold fs-6'>{activity?.team_setting?.max}</span>
+            <span className='fw-bold fs-6'>{activity?.team_setting?.max ?? '-'}</span>
           </div>
         </div>
 

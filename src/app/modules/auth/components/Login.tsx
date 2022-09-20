@@ -9,12 +9,10 @@ import {FormErrorAlert} from '../../errors/partials/FormErrorAlert'
 const loginSchema = Yup.object().shape({
   email: Yup.string()
     .email('Wrong email format')
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
     .required('Email is required'),
   password: Yup.string()
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
+    .min(3, 'Minimum length: 3')
+    .max(50, 'Maximum length: 50')
     .required('Password is required'),
 })
 

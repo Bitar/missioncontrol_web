@@ -9,7 +9,8 @@ import {PermissionPage} from '../sections/identity/permission/pages/PermissionPa
 import {SuspenseView} from '../layout/SuspenseView'
 import React, {lazy} from 'react'
 import {Restricted} from '../modules/auth/core/AuthPermission'
-import { AdminCommunityCreate } from "../sections/community-admin/AdminCommunityCreate";
+import {AdminCommunityCreate} from '../sections/community-admin/AdminCommunityCreate'
+import { VerifyEmail } from "../modules/auth/components/VerifyEmail";
 
 const PrivateRoutes = () => {
   const CommunityPage = lazy(() => import('../sections/community/pages/CommunityPage'))
@@ -23,11 +24,13 @@ const PrivateRoutes = () => {
     <Routes>
       <Route element={<MasterLayout />}>
         <Route path='auth/*' element={<Navigate to='/dashboard' />} />
+        <Route path='email-verify' element={<VerifyEmail />} />
 
         {/* Pages */}
         <Route path='dashboard/*' element={<DashboardWrapper />} />
         <Route path='marketing-support' element={<Marketing />} />
         {/* Pages */}
+
 
         {/* Sections */}
         <Route
