@@ -623,7 +623,7 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                               timeZones.length > 0 &&
                               timeZones.map((row: any) => (
                                 <MenuItem key={row.id} value={row.id}>
-                                  {row.name}
+                                  {row.name} - {row.value}
                                 </MenuItem>
                               ))}
                           </Select>

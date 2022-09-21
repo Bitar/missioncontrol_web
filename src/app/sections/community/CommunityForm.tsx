@@ -411,6 +411,7 @@ const CommunityForm: FC<React.PropsWithChildren<Props>> = ({method, community, s
           <label className='col-lg-4 col-form-label required fw-bold fs-6'>Passcode</label>
           <div className='col-lg-8 fv-row'>
             <Field
+
               type='password'
               name='access.value'
               className='form-control mb-3 mb-lg-0'
