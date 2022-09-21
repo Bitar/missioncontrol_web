@@ -24,7 +24,7 @@ export const initialPlan: Plan = {
 export type Plan = {
   id?: ID
   name: string
-  description: string
+  description?: string
   contact_type: number
   price_per_member: number,
   cm_service_percentage?: number,
@@ -38,3 +38,9 @@ export type Plan = {
 }
 
 export type PlanQueryResponse = Response<Array<Plan>>
+
+export const getOption = (plan: Plan, optionId: ID) => {
+  return plan?.options?.find(function (element: any) {
+    return element.id === optionId
+  })
+}

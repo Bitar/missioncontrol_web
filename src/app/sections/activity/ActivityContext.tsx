@@ -1,5 +1,5 @@
 import {Activity} from './models/Activity'
-import {createContext, Dispatch, SetStateAction, useContext} from 'react'
+import  { createContext, Dispatch, SetStateAction, useContext } from "react";
 import {Match} from './models/matches/Match'
 import {User} from '../identity/user/models/User'
 
@@ -27,6 +27,28 @@ const initActivityContextPropsState = {
 
 export const ActivityContext = createContext<ActivityContextProps>(initActivityContextPropsState)
 
-export const useActivity = () => {
-  return useContext(ActivityContext)
-}
+export const useActivity = () => useContext(ActivityContext)
+
+// export const ActivityProvider: FC<React.PropsWithChildren<unknown>> = ({children}) => {
+//   const [activity, setActivity] = useState<Activity | undefined>()
+//   const [matches, setMatches] = useState<Match[] | undefined>([])
+//   const [members, setMembers] = useState<User[] | undefined>([])
+//   const [match, setMatch] = useState<Match | undefined>()
+//
+//   return (
+//     <ActivityContext.Provider
+//       value={{
+//         activity,
+//         setActivity,
+//         matches,
+//         setMatches,
+//         members,
+//         setMembers,
+//         match,
+//         setMatch,
+//       }}
+//     >
+//       {children}
+//     </ActivityContext.Provider>
+//   )
+// }

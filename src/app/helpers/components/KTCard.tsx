@@ -1,11 +1,12 @@
 import {FC} from 'react'
 import clsx from 'clsx'
-import {WithChildren} from '../../../_metronic/helpers/react18MigrationHelpers'
+import {WithChildren} from "../../../_metronic/helpers"
 
 // Wrapper on html card:
 // https://preview.keenthemes.com/metronic8/demo1/documentation/base/cards.html
 
 type Props = {
+  id?: string
   className?: string
   shadow?: boolean
   flush?: boolean // https://preview.keenthemes.com/metronic8/demo1/documentation/base/cards.html#flush
@@ -22,6 +23,7 @@ type Props = {
 
 const KTCard: FC<Props & WithChildren> = (props) => {
   const {
+    id,
     className,
     shadow,
     flush,
@@ -37,6 +39,7 @@ const KTCard: FC<Props & WithChildren> = (props) => {
   } = props
   return (
     <div
+      id={id}
       className={clsx(
         'card',
         className && className,
