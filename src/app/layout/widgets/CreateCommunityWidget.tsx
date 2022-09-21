@@ -12,7 +12,7 @@ type Props = {
   lg?: string
 }
 
-const EngageWidget3: React.FC<Props> = ({className, bgHex = ''}) => {
+const CreateCommunityWidget: React.FC<Props> = ({className, bgHex = ''}) => {
   return (
     <div className={`card ${className}`} style={{backgroundColor: bgHex}}>
       <div className={`content d-flex flex-column flex-column-fluid" id="kt_content`}>
@@ -44,4 +44,4 @@ const EngageWidget3: React.FC<Props> = ({className, bgHex = ''}) => {
   )
 }
 
-export {EngageWidget3}
+export {CreateCommunityWidget}

@@ -127,70 +127,70 @@ const PlansCreate = () => {
               </div>
               {/* end::Input group */}
               {/* begin::Input group */}
-              <div className='fv-row mb-7'>
-                {/* begin::Label */}
-                <label className='required fw-bold fs-6 mb-2'>Price</label>
-                {/* end::Label */}
-
-                {/* begin::Input */}
-                <input
-                  placeholder='Price'
-                  {...formik.getFieldProps('price')}
-                  type='text'
-                  name='price'
-                  className={clsx(
-                    'form-control form-control-solid mb-3 mb-lg-0',
-                    {'is-invalid': formik.touched.price && formik.errors.price},
-                    {
-                      'is-valid': formik.touched.price && !formik.errors.price,
-                    }
-                  )}
-                  autoComplete='off'
-                  disabled={formik.isSubmitting}
-                />
-                {formik.touched.price && formik.errors.price && (
-                  <div className='fv-plugins-message-container'>
-                    <div className='fv-help-block'>
-                      <span role='alert'>{formik.errors.price}</span>
-                    </div>
-                  </div>
-                )}
-                {/* end::Input */}
-              </div>
-              {/* end::Input group */}
-              {/* begin::Input group */}
-              <div className='fv-row mb-7'>
-                {/* begin::Label */}
-                <label className='required fw-bold fs-6 mb-2'>Launch</label>
-                {/* end::Label */}
-
-                {/* begin::Input */}
-                <input
-                  placeholder='Launch'
-                  {...formik.getFieldProps('launch')}
-                  type='text'
-                  name='launch'
-                  className={clsx(
-                    'form-control form-control-solid mb-3 mb-lg-0',
-                    {
-                      'is-invalid': formik.touched.launch && formik.errors.launch,
-                    },
-                    {
-                      'is-valid': formik.touched.launch && !formik.errors.launch,
-                    }
-                  )}
-                  autoComplete='off'
-                  disabled={formik.isSubmitting}
-                />
-                {formik.touched.launch && formik.errors.launch && (
-                  <div className='fv-plugins-message-container'>
-                    <div className='fv-help-block'>
-                      <span role='alert'>{formik.errors.launch}</span>
-                    </div>
-                  </div>
-                )}
-                {/* end::Input */}
-              </div>
+              {/*<div className='fv-row mb-7'>*/}
+              {/*  /!* begin::Label *!/*/}
+              {/*  <label className='required fw-bold fs-6 mb-2'>Price</label>*/}
+              {/*  /!* end::Label *!/*/}
+              
+              {/*  /!* begin::Input *!/*/}
+              {/*  <input*/}
+              {/*    placeholder='Price'*/}
+              {/*    {...formik.getFieldProps('price')}*/}
+              {/*    type='text'*/}
+              {/*    name='price'*/}
+              {/*    className={clsx(*/}
+              {/*      'form-control form-control-solid mb-3 mb-lg-0',*/}
+              {/*      {'is-invalid': formik.touched.price && formik.errors.price},*/}
+              {/*      {*/}
+              {/*        'is-valid': formik.touched.price && !formik.errors.price,*/}
+              {/*      }*/}
+              {/*    )}*/}
+              {/*    autoComplete='off'*/}
+              {/*    disabled={formik.isSubmitting}*/}
+              {/*  />*/}
+              {/*  {formik.touched.price && formik.errors.price && (*/}
+              {/*    <div className='fv-plugins-message-container'>*/}
+              {/*      <div className='fv-help-block'>*/}
+              {/*        <span role='alert'>{formik.errors.price}</span>*/}
+              {/*      </div>*/}
+              {/*    </div>*/}
+              {/*  )}*/}
+              {/*  /!* end::Input *!/*/}
+              {/*</div>*/}
+              {/*/!* end::Input group *!/*/}
+              {/*/!* begin::Input group *!/*/}
+              {/*<div className='fv-row mb-7'>*/}
+              {/*  /!* begin::Label *!/*/}
+              {/*  <label className='required fw-bold fs-6 mb-2'>Launch</label>*/}
+              {/*  /!* end::Label *!/*/}
+              
+              {/*  /!* begin::Input *!/*/}
+              {/*  <input*/}
+              {/*    placeholder='Launch'*/}
+              {/*    {...formik.getFieldProps('launch')}*/}
+              {/*    type='text'*/}
+              {/*    name='launch'*/}
+              {/*    className={clsx(*/}
+              {/*      'form-control form-control-solid mb-3 mb-lg-0',*/}
+              {/*      {*/}
+              {/*        'is-invalid': formik.touched.launch && formik.errors.launch,*/}
+              {/*      },*/}
+              {/*      {*/}
+              {/*        'is-valid': formik.touched.launch && !formik.errors.launch,*/}
+              {/*      }*/}
+              {/*    )}*/}
+              {/*    autoComplete='off'*/}
+              {/*    disabled={formik.isSubmitting}*/}
+              {/*  />*/}
+              {/*  {formik.touched.launch && formik.errors.launch && (*/}
+              {/*    <div className='fv-plugins-message-container'>*/}
+              {/*      <div className='fv-help-block'>*/}
+              {/*        <span role='alert'>{formik.errors.launch}</span>*/}
+              {/*      </div>*/}
+              {/*    </div>*/}
+              {/*  )}*/}
+              {/*  /!* end::Input *!/*/}
+              {/*</div>*/}
               {/* end::Input group */}
             </div>
             {/* end::Scroll */}

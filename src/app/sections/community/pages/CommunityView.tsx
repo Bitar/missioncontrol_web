@@ -15,24 +15,22 @@ type Props = {
   links?: {text: string; link: string}[]
 }
 
-const CommunityView: FC<Props> = ({communityId, links}) => {
+const CommunityView: FC<Props> = ({communityId}) => {
   const [community, setCommunity] = useState<Community | undefined>()
   const [members, setMembers] = useState<User[] | undefined>([])
   const params = useParams()
   const indexLink = useRef('')
-
-  if (!links) {
-    links = [
-      {
-        text: 'Overview',
-        link: '/communities/' + community?.id + '/overview',
-      },
-      {
-        text: 'Members',
-        link: '/communities/' + community?.id + '/members',
-      },
-    ]
-  }
+  const link = useRef('')
+  const links = [
+    {
+      text: 'Overview',
+      link: link.current + '/overview',
+    },
+    {
+      text: 'Members',
+      link: link.current + '/members',
+    },
+  ]
 
   const communityViewBreadCrumbs: Array<PageLink> = [
     {
@@ -66,11 +64,15 @@ const CommunityView: FC<Props> = ({communityId, links}) => {
       getCommunityById(params.communityId).then((response) => {
         setCommunity(response)
       })
+
+      link.current = '/communities/' + params.communityId
       indexLink.current = '/communities/' + params.communityId + '/overview'
     } else {
       getCommunityById(communityId).then((response) => {
         setCommunity(response)
       })
+
+      link.current = '/dashboard'
       indexLink.current = '/dashboard/overview'
     }
   }, [communityId, params.communityId])

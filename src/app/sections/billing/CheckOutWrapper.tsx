@@ -110,7 +110,7 @@ const CheckOut: FC<React.PropsWithChildren<CheckOutProps>> = ({plan, paymentReq}
                               Recurring Amount
                             </div>
                           </td>
-                          <td className='fw-bolder text-end'>${plan.price.toFixed(2)}</td>
+                          <td className='fw-bolder text-end'>${(plan.price_per_member * plan.max_members * 1.1).toFixed(2)}</td>
                         </tr>
 
                         <tr>
@@ -123,7 +123,7 @@ const CheckOut: FC<React.PropsWithChildren<CheckOutProps>> = ({plan, paymentReq}
                               Launch Cost
                             </div>
                           </td>
-                          <td className='fw-bolder text-end'>${plan.launch.toFixed(2)}</td>
+                          <td className='fw-bolder text-end'>${(plan.price_per_member * plan.max_members * 12 *  (plan.launch_percentage / 100) ).toFixed(2)}</td>
                         </tr>
                       </tbody>
                     </table>

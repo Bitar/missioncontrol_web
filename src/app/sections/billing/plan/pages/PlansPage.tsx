@@ -3,7 +3,7 @@ import {PageLink, PageTitle} from '../../../../layout/core'
 import React from 'react'
 import {PlansIndex} from '../PlansIndex'
 import {PlansCreate} from '../PlansCreate'
-import {PlansEdit} from '../PlansEdit'
+// import {PlansEdit} from '../PlansEdit'
 
 const plansBreadCrumbs: Array<PageLink> = [
   {
@@ -46,7 +46,7 @@ const PlansPage: React.FC = () => {
         element={
           <>
             <PageTitle breadcrumbs={plansBreadCrumbs}>{'Update Plan'}</PageTitle>
-            <PlansEdit />
+            {/*<PlansEdit />*/}
           </>
         }
       />
