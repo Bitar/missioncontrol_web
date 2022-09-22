@@ -18,11 +18,11 @@ type Props = {
 
 const QueryResponseContext = createResponseContext<any>(initialQueryResponse)
 const QueryResponseProvider: FC<React.PropsWithChildren<Props>> = ({
-  id,
-  requestFunction,
-  requestId,
-  children,
-}) => {
+                                                                     id,
+                                                                     requestFunction,
+                                                                     requestId,
+                                                                     children,
+                                                                   }) => {
   const {state} = useQueryRequest()
 
   const [query, setQuery] = useState<string>(stringifyRequestQuery(state))
@@ -44,7 +44,7 @@ const QueryResponseProvider: FC<React.PropsWithChildren<Props>> = ({
     `${id}-${query}`,
     () => {
       if (requestId) {
-        return requestFunction(query, requestId)
+        return requestFunction(requestId, query)
       } else {
         return requestFunction(query)
       }

@@ -1,7 +1,7 @@
 import {KTCard} from '../../../helpers/components/KTCard'
 import React, {useEffect, useState} from 'react'
 import {Form, Formik} from 'formik'
-import {useActivity} from '../AuthContext'
+import {useActivity} from '../ActivityContext'
 import {
   ActivityForm,
   activityScheduleSchema,

@@ -7,7 +7,7 @@ import {DateRange, DateRangePicker} from '@mui/x-date-pickers-pro/DateRangePicke
 import {Box} from '@mui/material'
 import TextField from '@mui/material/TextField'
 import {updateData} from '../../../helpers/form/FormHelper'
-import {useActivity} from '../AuthContext'
+import {useActivity} from '../ActivityContext'
 
 type Props = {
   activityForm: ActivityForm

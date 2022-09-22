@@ -1,10 +1,11 @@
-import axios, {AxiosResponse} from 'axios'
-import {Response} from '../../../../_metronic/helpers'
-import {Activity, ActivityQueryResponse} from '../models/Activity'
-import {Match, MatchQueryResponse} from '../models/matches/Match'
-import {Announcement} from '../../../models/announcement/Announcements'
-import {ChatMessage, ChatMessageQueryResponse} from '../../../models/chat/ChatMessage'
-import {UserQueryResponse} from '../../identity/user/models/User'
+import axios, { AxiosResponse } from "axios";
+import { Response } from "../../../../_metronic/helpers";
+import { Activity, ActivityQueryResponse } from "../models/Activity";
+import { Match, MatchQueryResponse } from "../models/matches/Match";
+import { Announcement } from "../../../models/announcement/Announcements";
+import { ChatMessage, ChatMessageQueryResponse } from "../../../models/chat/ChatMessage";
+import { TeamQueryResponse } from "../../../models/squad/Team";
+import { ActivityRegistrationsQueryResponse } from "../models/ActivityRegistration";
 // import process from "process";
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -37,7 +38,7 @@ const getActivityById = (id: any, query?: String): Promise<Activity | undefined>
 }
 
 const getActivityMatches = (id: any, query?: string): Promise<MatchQueryResponse> => {
-  let url = `${ACTIVITIES_URL}/${id}/matches`
+  let url = `${ACTIVITIES_URL}/${id}/matches?${query}`
 
   return axios.get(url).then((response: AxiosResponse<MatchQueryResponse>) => response.data)
 }
@@ -51,10 +52,16 @@ const getActivityMatch = (id: any, matchId: any): Promise<Match | undefined> => 
     .then((response: Response<Match>) => response.data)
 }
 
-const getActivityMembers = (id: any, query?: string): Promise<UserQueryResponse> => {
-  let url = `${ACTIVITIES_URL}/${id}/members`
+const getActivityTeams = (id: any, query?: string): Promise<TeamQueryResponse> => {
+  let url = `${ACTIVITIES_URL}/${id}/teams?${query}`
 
-  return axios.get(url).then((response: AxiosResponse<UserQueryResponse>) => response.data)
+  return axios.get(url).then((response: AxiosResponse<TeamQueryResponse>) => response.data)
+}
+
+const getActivityRegistrations = (id: any, query?: string): Promise<ActivityRegistrationsQueryResponse> => {
+  let url = `${ACTIVITIES_URL}/${id}/registrations?${query}`
+
+  return axios.get(url).then((response: AxiosResponse<ActivityRegistrationsQueryResponse>) => response.data)
 }
 
 const createActivityAnnouncement = (
@@ -91,7 +98,8 @@ export {
   getActivityById,
   sendActivityChat,
   getActivityMatch,
+  getActivityTeams,
   getActivityMatches,
-  getActivityMembers,
+  getActivityRegistrations,
   createActivityAnnouncement,
 }

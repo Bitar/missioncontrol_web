@@ -5,13 +5,14 @@ import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {CustomHeaderColumn} from '../../../modules/table/columns/CustomHeaderColumn'
 import {CustomRow} from '../../../modules/table/columns/CustomRow'
 import {ActivityRegistration} from '../models/ActivityRegistration'
+import { useQueryResponseData, useQueryResponseLoading } from "../../../modules/table/QueryResponseProvider";
+import { TableListPagination } from "../../../modules/table/TableListPagination";
+import { TableListLoading } from "../../../modules/table/TableListLoading";
 
-type Props = {
-  registrations: ActivityRegistration[] | undefined
-}
-
-const ActivityRegistrations: FC<Props> = ({registrations}) => {
-  const data = useMemo(() => registrations || [], [registrations])
+const ActivityRegistrations: FC = () => {
+  const registrations = useQueryResponseData()
+  const isLoading = useQueryResponseLoading()
+  const data = useMemo(() => registrations, [registrations])
   const columns = useMemo(() => ActivityMembersColumns, [])
   const {getTableProps, getTableBodyProps, headers, rows, prepareRow} = useTable({
     columns,
@@ -32,33 +33,35 @@ const ActivityRegistrations: FC<Props> = ({registrations}) => {
             {...getTableProps()}
           >
             <thead>
-              <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
-                {headers.map((column: ColumnInstance<ActivityRegistration>) => (
-                  <CustomHeaderColumn key={column.id} column={column} />
-                ))}
-              </tr>
+            <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
+              {headers.map((column: ColumnInstance<ActivityRegistration>) => (
+                <CustomHeaderColumn key={column.id} column={column} />
+              ))}
+            </tr>
             </thead>
             <tbody className='text-gray-600 fw-bold' {...getTableBodyProps()}>
-              {rows.length > 0 ? (
-                rows.map((row: Row<ActivityRegistration>, i) => {
-                  prepareRow(row)
-                  return <CustomRow row={row} key={`row-${i}-${row.id}`} />
-                })
-              ) : (
-                <tr>
-                  <td colSpan={3}>
-                    <div className='d-flex text-center w-100 align-content-center justify-content-center'>
-                      No records found
-                    </div>
-                  </td>
-                </tr>
-              )}
+            {rows.length > 0 ? (
+              rows.map((row: Row<ActivityRegistration>, i) => {
+                prepareRow(row)
+                return <CustomRow row={row} key={`row-${i}-${row.id}`} />
+              })
+            ) : (
+              <tr>
+                <td colSpan={3}>
+                  <div className='d-flex text-center w-100 align-content-center justify-content-center'>
+                    No records found
+                  </div>
+                </td>
+              </tr>
+            )}
             </tbody>
           </table>
         </div>
+        <TableListPagination />
+        {isLoading && <TableListLoading />}
       </KTCardBody>
     </KTCard>
   )
 }
 
-export {ActivityRegistrations}
+export { ActivityRegistrations };

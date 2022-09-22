@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
 import {ID, KTCard, KTCardBody, toAbsoluteUrl} from '../../../../_metronic/helpers'
 import clsx from 'clsx'
-import {useActivity} from '../AuthContext'
+import {useActivity} from '../ActivityContext'
 
 type Props = {
   minimal?: boolean
