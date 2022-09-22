@@ -26,7 +26,7 @@ const ActivityRegistrations: FC = () => {
           <h3 className='card-label text-white'>Registrations</h3>
         </div>
       </div>
-      <KTCardBody className='py-1'>
+      <KTCardBody className='pt-1'>
         <div className='table-responsive'>
           <table
             className='table align-middle table-row-bordered fs-6 gy-5 dataTable no-footer'

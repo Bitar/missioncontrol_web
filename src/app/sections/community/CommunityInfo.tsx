@@ -90,7 +90,7 @@ const CommunityInfo: FC<Props> = ({
                       </div>
 
                       <a
-                        href='mailto:`{community.contact?.email}`'
+                        href={`mailto:${community.contact?.email}`}
                         className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'
                       >
                         <KTSVG path='/media/icons/duotune/com011.svg' className='svg-icon-4 me-1' />

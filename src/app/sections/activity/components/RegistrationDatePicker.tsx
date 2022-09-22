@@ -73,6 +73,7 @@ const RegistrationDatePicker: FC<Props> = ({activityForm, setActivityForm}) => {
             <>
               <TextField
                 required
+                autoComplete='off'
                 {...startProps}
                 size={'small'}
                 name='schedule.registration_dates.start_date'
@@ -80,6 +81,7 @@ const RegistrationDatePicker: FC<Props> = ({activityForm, setActivityForm}) => {
               <Box sx={{mx: 2}}> to </Box>
               <TextField
                 required
+                autoComplete='off'
                 {...endProps}
                 size={'small'}
                 name='schedule.registration_dates.end_date'

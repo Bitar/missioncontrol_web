@@ -83,21 +83,23 @@ const MatchPlayDatePicker: FC<Props> = ({activityForm, setActivityForm}) => {
             onChange={onDateChange}
             minDate={minDate}
             renderInput={(startProps, endProps) => (
-              <React.Fragment>
+              <>
                 <TextField
+                  autoComplete='off'
                   required
                   {...startProps}
                   size={'small'}
-                  name='settings.registration_dates.start_date'
+                  name='settings.matchplay_dates.start_date'
                 />
                 <Box sx={{mx: 2}}> to </Box>
                 <TextField
+                  autoComplete='off'
                   required
                   {...endProps}
                   size={'small'}
-                  name='settings.registration_dates.end_Date'
+                  name='settings.matchplay_dates.end_Date'
                 />
-              </React.Fragment>
+              </>
             )}
           />
         </LocalizationProvider>

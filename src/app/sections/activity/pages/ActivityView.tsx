@@ -1,81 +1,76 @@
-import React, {FC, useEffect, useState} from 'react'
-import {Activity} from '../models/Activity'
-import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
-import {PageLink, PageTitle} from '../../../layout/core'
-import {
-  getActivityById,
-  getActivityMatches,
-  getActivityRegistrations,
-  getActivityTeams,
-} from '../core/ActivityRequests'
-import {ActivityInfo} from '../ActivityInfo'
-import {ActivityTeams} from './ActivityTeams'
-import {ActivityOverview} from './ActivityOverview'
-import {ActivityChat} from './ActivityChat'
-import {Match} from '../models/matches/Match'
-import {ActivityRegistrations} from './ActivityRegistrations'
-import {MatchPage} from '../../match/MatchPage'
-import {ActivityContext} from '../ActivityContext'
-import {SuspenseView} from '../../../layout/SuspenseView'
-import {ActivitySettings} from './ActivitySettings'
-import {ActivityMatches} from './ActivityMatches'
-import {Team} from '../../../models/squad/Team'
-import {QUERIES} from '../../../helpers/crud-helper/consts'
-import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvider'
-import {ListViewProvider} from '../../../modules/table/ListViewProvider'
-import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
-import {ActivityRegistration} from '../models/ActivityRegistration'
+import React, { FC, useEffect, useState } from "react";
+import { Activity } from "../models/Activity";
+import { Navigate, Outlet, Route, Routes, useParams } from "react-router-dom";
+import { PageLink, PageTitle } from "../../../layout/core";
+import { getActivityById, getActivityMatches, getActivityRegistrations, getActivityTeams } from "../core/ActivityRequests";
+import { ActivityInfo } from "../ActivityInfo";
+import { ActivityTeams } from "./ActivityTeams";
+import { ActivityOverview } from "./ActivityOverview";
+import { ActivityChat } from "./ActivityChat";
+import { Match } from "../models/matches/Match";
+import { ActivityRegistrations } from "./ActivityRegistrations";
+import { MatchPage } from "../../match/MatchPage";
+import { ActivityContext } from "../ActivityContext";
+import { SuspenseView } from "../../../layout/SuspenseView";
+import { ActivitySettings } from "./ActivitySettings";
+import { ActivityMatches } from "./ActivityMatches";
+import { Team } from "../../../models/squad/Team";
+import { QUERIES } from "../../../helpers/crud-helper/consts";
+import { QueryResponseProvider } from "../../../modules/table/QueryResponseProvider";
+import { ListViewProvider } from "../../../modules/table/ListViewProvider";
+import { QueryRequestProvider } from "../../../modules/table/QueryRequestProvider";
+import { ActivityRegistration } from "../models/ActivityRegistration";
 
 const ActivityView: FC = () => {
-  const [activity, setActivity] = useState<Activity | undefined>()
-  const [matches, setMatches] = useState<Match[] | undefined>([])
-  const [match, setMatch] = useState<Match | undefined>()
-  const [registrations, setRegistrations] = useState<ActivityRegistration[] | undefined>()
-  const [teams, setTeams] = useState<Team[] | undefined>()
+  const [activity, setActivity] = useState<Activity | undefined>();
+  const [matches, setMatches] = useState<Match[] | undefined>([]);
+  const [match, setMatch] = useState<Match | undefined>();
+  const [registrations, setRegistrations] = useState<ActivityRegistration[] | undefined>();
+  const [teams, setTeams] = useState<Team[] | undefined>();
 
-  const params = useParams()
+  const params = useParams();
 
   const activityViewBreadcrumbs: Array<PageLink> = [
     {
-      title: 'Activities',
-      path: '/activities/overview',
+      title: "Activities",
+      path: "/activities/overview",
       isSeparator: false,
-      isActive: false,
+      isActive: false
     },
     {
-      title: '',
-      path: '',
+      title: "",
+      path: "",
       isSeparator: true,
-      isActive: false,
+      isActive: false
     },
     {
-      title: activity?.title || '',
-      path: '/activities/' + params.id + '/overview',
+      title: activity?.title || "",
+      path: "/activities/" + params.id + "/overview",
       isSeparator: false,
-      isActive: false,
+      isActive: false
     },
     {
-      title: '',
-      path: '',
+      title: "",
+      path: "",
       isSeparator: true,
-      isActive: false,
-    },
-  ]
+      isActive: false
+    }
+  ];
 
   useEffect(() => {
     getActivityById(params.id).then((response) => {
-      setActivity(response)
+      setActivity(response);
 
       // setTeams(response?.teams)
       getActivityMatches(params.id).then((response) => {
-        setMatches(response.data)
-      })
+        setMatches(response.data);
+      });
 
       getActivityTeams(params.id).then((response) => {
-        setTeams(response.data)
-      })
-    })
-  }, [params.id])
+        setTeams(response.data);
+      });
+    });
+  }, [params.id]);
 
   return (
     <ActivityContext.Provider
@@ -91,7 +86,7 @@ const ActivityView: FC = () => {
         registrations,
         setRegistrations,
         teams,
-        setTeams,
+        setTeams
       }}
     >
       <Routes>
@@ -106,7 +101,7 @@ const ActivityView: FC = () => {
           }
         >
           <Route
-            path='/overview'
+            path="/overview"
             element={
               <>
                 <SuspenseView>
@@ -117,7 +112,7 @@ const ActivityView: FC = () => {
             }
           />
           <Route
-            path='/registrations'
+            path="/registrations"
             element={
               <>
                 <SuspenseView>
@@ -140,7 +135,7 @@ const ActivityView: FC = () => {
             }
           />
           <Route
-            path='/matches'
+            path="/matches"
             element={
               <>
                 <SuspenseView>
@@ -151,18 +146,30 @@ const ActivityView: FC = () => {
             }
           />
           <Route
-            path='/teams'
+            path="/teams"
             element={
               <>
                 <SuspenseView>
                   <PageTitle breadcrumbs={activityViewBreadcrumbs}>Teams</PageTitle>
-                  <ActivityTeams />
+                  {activity && (
+                    <QueryRequestProvider>
+                      <QueryResponseProvider
+                        id={QUERIES.TEAMS_LIST}
+                        requestFunction={getActivityTeams}
+                        requestId={activity?.id}
+                      >
+                        <ListViewProvider>
+                          <ActivityTeams />
+                        </ListViewProvider>
+                      </QueryResponseProvider>
+                    </QueryRequestProvider>
+                  )}
                 </SuspenseView>
               </>
             }
           />
           <Route
-            path='/chat'
+            path="/chat"
             element={
               <>
                 <SuspenseView>
@@ -173,7 +180,7 @@ const ActivityView: FC = () => {
             }
           />
           <Route
-            path='/settings'
+            path="/settings"
             element={
               <>
                 <SuspenseView>
@@ -184,7 +191,7 @@ const ActivityView: FC = () => {
             }
           />
           <Route
-            path='/matches/:matchId/*'
+            path="/matches/:matchId/*"
             element={
               <>
                 <SuspenseView>
@@ -194,11 +201,11 @@ const ActivityView: FC = () => {
               </>
             }
           />
-          <Route index element={<Navigate to={'/activities/' + params.id + '/overview'} />} />
+          <Route index element={<Navigate to={"/activities/" + params.id + "/overview"} />} />
         </Route>
       </Routes>
     </ActivityContext.Provider>
-  )
-}
+  );
+};
 
 export { ActivityView };

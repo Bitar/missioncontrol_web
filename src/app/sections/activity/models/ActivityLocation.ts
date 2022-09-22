@@ -5,4 +5,5 @@ export type ActivityLocation = {
   activity_id?: ID
   type: number
   locate: string
+  location?: string
 }
