@@ -44,20 +44,33 @@ const PrivateRoutes = () => {
         <Route
           path='users/*'
           element={
-            <SuspenseView>
-              <UserPage />
-            </SuspenseView>
+            <Restricted to='view-users'>
+              <SuspenseView>
+                <UserPage />
+              </SuspenseView>
+            </Restricted>
           }
         />
         <Route
           path='roles/*'
           element={
-            <SuspenseView>
-              <RolePage />
-            </SuspenseView>
+            <Restricted to='view-users'>
+              <SuspenseView>
+                <RolePage />
+              </SuspenseView>
+            </Restricted>
           }
         />
-        <Route path='permissions/*' element={<PermissionPage />} />
+        <Route
+          path='permissions/*'
+          element={
+            <Restricted to='view-users'>
+              <SuspenseView>
+                <PermissionPage />
+              </SuspenseView>
+            </Restricted>
+          }
+        />
 
         <Route
           path='activities/*'
@@ -84,4 +97,4 @@ const PrivateRoutes = () => {
   )
 }
 
-export {PrivateRoutes}
+export { PrivateRoutes };
