@@ -54,6 +54,10 @@ const CommunityInfo: FC<Props> = ({links}) => {
               <div className='d-flex flex-column'>
                 <div className='d-flex align-items-center mb-2'>
                   <div className='text-gray-800 fs-2 fw-bolder me-1'>{community?.name}</div>
+                  {/*<KTSVG*/}
+                  {/*  path='/media/icons/duotune/gen026.svg'*/}
+                  {/*  className='svg-icon-1 svg-icon-primary'*/}
+                  {/*/>*/}
                 </div>
 
                 {/*<Link to='/crafted/account/settings' className='btn btn-primary align-self-center'>*/}

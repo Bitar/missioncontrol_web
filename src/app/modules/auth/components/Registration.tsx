@@ -42,7 +42,7 @@ const registrationSchema = Yup.object().shape({
 const Registration = () => {
   const navigate = useNavigate()
   const {saveAuth, setCurrentUser, setSubscription, setCommunityAdmin} = useAuth()
-  const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined)
+  const [hasErrors, setHasErrors] = useState<boolean>(false)
   const [alertMessage, setAlertMessage] = useState<string | undefined>(undefined)
 
   useEffect(() => {

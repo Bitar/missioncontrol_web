@@ -88,7 +88,7 @@ const BillingPlan: FC<Props> = ({ plan, plans, setPlan }) => {
           </div>
         </div>
 
-        {showCheckout && plan !== undefined && <CheckOutWrapper plan={plan} />}
+        {showCheckout && plan !== undefined && <CheckOutWrapper plan={plan} paymentTerms={paymentTerms} />}
       </KTCardBody>
 
     </>
@@ -156,10 +156,10 @@ const BillingPlanWrapper = () => {
                         getOption(plan, planOption?.id)?.value === "true" ? (
                           <i className="fs-2 fa fa-check-circle text-success"></i>
                         ) : (
-                          '-'
+                          "-"
                         )
                       ) : (
-                        <span className='fw-bold'>{getOption(plan, planOption?.id)?.value ?? "-"}</span>
+                        <span className="fw-bold">{getOption(plan, planOption?.id)?.value ?? "-"}</span>
                       )}
                     </td>
                   ))}

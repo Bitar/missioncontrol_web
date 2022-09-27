@@ -1,6 +1,6 @@
 import {useNavigate, useParams} from 'react-router-dom'
 import {useEffect, useState} from 'react'
-import {getPaymentResponse} from './core/_requests'
+import {getPaymentResponse} from './core/BillingRequests'
 import {PaymentResponse} from '../../models/billing/PaymentResponse'
 import {useAuth} from '../../modules/auth'
 

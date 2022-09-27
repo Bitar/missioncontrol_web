@@ -14,11 +14,11 @@ const FormErrorAlert: FC<Props> = ({hasErrors, message}) => {
         </div>
       )}
 
-      {hasErrors === false && (
-        <div className='mb-10 bg-light-info p-8 rounded'>
-          <div className='text-info'>{message}</div>
-        </div>
-      )}
+      {/*{hasErrors === false && (*/}
+      {/*  <div className='mb-10 bg-light-info p-8 rounded'>*/}
+      {/*    <div className='text-info'>{message}</div>*/}
+      {/*  </div>*/}
+      {/*)}*/}
     </>
   )
 }
