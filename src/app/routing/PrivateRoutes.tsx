@@ -10,7 +10,7 @@ import {SuspenseView} from '../layout/SuspenseView'
 import React, {lazy} from 'react'
 import {Restricted} from '../modules/auth/core/AuthPermission'
 import {AdminCommunityCreate} from '../sections/community-admin/AdminCommunityCreate'
-import { VerifyEmail } from "../modules/auth/components/VerifyEmail";
+import {VerifyEmail} from '../modules/auth/components/VerifyEmail'
 
 const PrivateRoutes = () => {
   const CommunityPage = lazy(() => import('../sections/community/pages/CommunityPage'))
@@ -31,15 +31,14 @@ const PrivateRoutes = () => {
         <Route path='marketing-support' element={<Marketing />} />
         {/* Pages */}
 
-
         {/* Sections */}
         <Route
-        path='admin/communities/create'
-        element={
-          <SuspenseView>
-            <AdminCommunityCreate/>
-          </SuspenseView>
-        }
+          path='admin/communities/create'
+          element={
+            <SuspenseView>
+              <AdminCommunityCreate />
+            </SuspenseView>
+          }
         />
         <Route
           path='communities/*'
@@ -74,11 +73,11 @@ const PrivateRoutes = () => {
         <Route
           path='activities/*'
           element={
-            <SuspenseView>
-              <Restricted to='view-activities'>
+            <Restricted to='view-activities'>
+              <SuspenseView>
                 <ActivityPage />
-              </Restricted>
-            </SuspenseView>
+              </SuspenseView>
+            </Restricted>
           }
         />
 
@@ -96,4 +95,4 @@ const PrivateRoutes = () => {
   )
 }
 
-export {PrivateRoutes}
+export { PrivateRoutes };

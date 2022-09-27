@@ -13,14 +13,19 @@ import {jsonToFormData} from '../../helpers/form/FormHelper'
 import {LogoImage} from '../community/partials/LogoImage'
 import {BannerImage} from '../community/partials/BannerImage'
 import {CommunityForm} from '../community/CommunityForm'
+import { useAuth } from "../../modules/auth";
 
 const AdminCommunityCreate = () => {
   const [community, setCommunity] = useState<Community>(initialCommunity)
+  const {updateAuth} = useAuth()
   const navigate = useNavigate()
 
   const handleSubmit = async () => {
     let data = jsonToFormData(community)
-    await createAdminCommunity(data).then((response) => navigate('/communities/' + response?.id))
+    await createAdminCommunity(data).then((response) => {
+      updateAuth();
+      navigate('/dashboard');
+    })
   }
 
   const handleOnChange = (e: any) => formOnChange(e, community, setCommunity)

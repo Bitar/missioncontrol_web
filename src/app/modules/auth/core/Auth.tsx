@@ -20,6 +20,7 @@ import {User} from '../../../sections/identity/user/models/User'
 type AuthContextProps = {
   auth: AuthModel | undefined
   saveAuth: (auth: AuthModel | undefined) => void
+  updateAuth: () => void
   currentUser: User | undefined
   setCurrentUser: Dispatch<SetStateAction<User | undefined>>
   communityAdmin: Community | undefined
@@ -32,6 +33,7 @@ type AuthContextProps = {
 const initAuthContextPropsState = {
   auth: authHelper.getAuth(),
   saveAuth: () => {},
+  updateAuth: () => {},
   currentUser: undefined,
   setCurrentUser: () => {},
   communityAdmin: undefined,
@@ -68,11 +70,23 @@ const AuthProvider: FC<WithChildren> = ({children}) => {
     setSubscription(undefined)
   }
 
+  const updateAuth = async () => {
+    if(auth) {
+      const {data} = await getUserByToken(auth.token)
+      if (data) {
+        setSubscription(data.subscription)
+        setCurrentUser(data.user)
+        setCommunityAdmin(data.admin)
+      }
+    }
+  }
+
   return (
     <AuthContext.Provider
       value={{
         auth,
         saveAuth,
+        updateAuth,
         currentUser,
         setCurrentUser,
         communityAdmin,
@@ -91,7 +105,7 @@ const AuthInit: FC<WithChildren> = ({children}) => {
   const {auth, logout, setCurrentUser, setSubscription, setCommunityAdmin} = useAuth()
   const didRequest = useRef(false)
   const [showSplashScreen, setShowSplashScreen] = useState(true)
-  // We should request user by authToken (IN OUR EXAMPLE IT'S API_TOKEN) before rendering the application
+
   useEffect(() => {
     const requestUser = async (apiToken: string) => {
       try {
