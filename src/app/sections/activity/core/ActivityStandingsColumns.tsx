@@ -12,13 +12,13 @@ const ActivityStandingsColumns: ReadonlyArray<Column<ActivityStanding>> = [
       <div className='d-flex align-items-center'>
         <div className='w-100px me-3'>
           <img
-            src={toAbsoluteUrl(props.data[props.row.index].team?.image)}
-            alt={props.data[props.row.index].team?.name + ' team image'}
+            src={toAbsoluteUrl(props.data[props.row.index].image)}
+            alt={props.data[props.row.index].name + ' team image'}
             className='w-100 h-100vh rounded'
           />
         </div>
         <div className='d-flex flex-column'>
-          <span className='text-gray-800 mb-1'>{props.data[props.row.index].team?.name}</span>
+          <span className='text-gray-800 mb-1'>{props.data[props.row.index].name}</span>
         </div>
       </div>
     ),

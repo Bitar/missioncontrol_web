@@ -1,20 +1,32 @@
-import React, {FC} from 'react'
-import {ID, KTCard, KTCardBody, toAbsoluteUrl} from '../../../../_metronic/helpers'
+import React, {FC, useMemo} from 'react'
+import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import clsx from 'clsx'
-import {useActivity} from '../ActivityContext'
+import {
+  useQueryResponseData,
+  useQueryResponseLoading,
+} from '../../../modules/table/QueryResponseProvider'
+import {ColumnInstance, Row, useTable} from 'react-table'
+import {ActivityStandingsColumns} from '../core/ActivityStandingsColumns'
+import {Team} from '../../../models/squad/Team'
+import {CustomHeaderColumn} from '../../../modules/table/columns/CustomHeaderColumn'
+import {CustomRow} from '../../../modules/table/columns/CustomRow'
+import {TableListPagination} from '../../../modules/table/TableListPagination'
+import {TableListLoading} from '../../../modules/table/TableListLoading'
 
 type Props = {
   minimal?: boolean
   scroll?: boolean
 }
 
-const ActivityStandings: FC<Props> = ({minimal = false, scroll = false}) => {
-  const {activity} = useActivity()
-  const getTeam = (teamId: ID) => {
-    return activity?.teams?.filter(function (e: any) {
-      return e.id === teamId
-    })[0]
-  }
+const ActivityStandings: FC<Props> = ({scroll = false}) => {
+  const teams = useQueryResponseData()
+  const isLoading = useQueryResponseLoading()
+  const data = useMemo(() => teams, [teams])
+  const columns = useMemo(() => ActivityStandingsColumns, [])
+  const {getTableProps, getTableBodyProps, headers, rows, prepareRow} = useTable({
+    columns,
+    data,
+  })
 
   return (
     <>
@@ -24,92 +36,44 @@ const ActivityStandings: FC<Props> = ({minimal = false, scroll = false}) => {
             <h3 className='card-label text-white'>Standings</h3>
           </div>
         </div>
-        <KTCardBody
-          className={clsx('py-1', {'scroll-y mh-400px': scroll})}
-          id='activities_standings_body'
-        >
+
+        <KTCardBody className={clsx('py-1', {'scroll-y mh-400px': scroll})}>
           <div className='table-responsive'>
             <table
               className='table align-middle table-row-bordered fs-6 gy-5 dataTable no-footer'
-              role='table'
+              {...getTableProps()}
             >
               <thead>
-                <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
-                  <th colSpan={2}>Team</th>
-                  {!minimal && <th colSpan={1}>Players</th>}
-                  <th colSpan={1}>M</th>
-                  <th colSpan={1}>W - L</th>
-                  <th colSpan={1}>W %</th>
-                </tr>
+              <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
+                {headers.map((column: ColumnInstance<Team>) => (
+                  <CustomHeaderColumn key={column.id} column={column} />
+                ))}
+              </tr>
               </thead>
-              <tbody className='text-gray-600 fw-bold'>
-                {activity?.standings?.length && activity?.standings?.length > 0 ? (
-                  activity?.standings?.map((standing, i) => (
-                    <tr key={`standing-header-${i}`}>
-                      <td colSpan={2}>
-                        <div className='d-flex align-items-center'>
-                          <div
-                            className={clsx(
-                              'symbol symbol-circle me-3',
-                              {'symbol-30px': minimal},
-                              {'symbol-100px': !minimal}
-                            )}
-                          >
-                            <img
-                              src={toAbsoluteUrl(standing.team?.image)}
-                              alt={standing.team?.name + ' team image'}
-                            />
-                          </div>
-                          <div className='d-flex flex-column'>
-                            <span className='text-gray-800 mb-1'>{standing.team?.name}</span>
-                          </div>
-                        </div>
-                      </td>
-                      {!minimal && (
-                        <td colSpan={1}>
-                          {getTeam(standing?.team?.id)?.users?.map((user) => (
-                            <div
-                              key={`standing-user-${user.id}`}
-                              className='d-flex align-items-center mb-2'
-                            >
-                              <div className='symbol symbol-circle me-3 symbol-30px'>
-                                <img src={user?.meta?.image} alt={user?.name + ' profile image'} />
-                              </div>
-                              <div className='d-flex flex-column'>
-                                <span className='text-gray-800 mb-1'>{user?.name}</span>
-                              </div>
-                            </div>
-                          ))}
-                        </td>
-                      )}
-
-                      <td>{standing.score?.win + standing.score?.lose}</td>
-                      <td>{standing.score?.win + ' - ' + standing.score?.lose}</td>
-                      <td>
-                        {standing.score?.win + standing.score?.lose !== 0
-                          ? (standing.score?.win / (standing.score?.win + standing.score?.lose)) *
-                            100
-                          : 0}
-                        %
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan={5}>
-                      <div className='d-flex text-center w-100 align-content-center justify-content-center'>
-                        No records found
-                      </div>
-                    </td>
-                  </tr>
-                )}
+              <tbody className='text-gray-600 fw-bold' {...getTableBodyProps()}>
+              {rows.length > 0 ? (
+                rows.map((row: Row<Team>, i) => {
+                  prepareRow(row)
+                  return <CustomRow row={row} key={`row-${i}-${row.id}`} />
+                })
+              ) : (
+                <tr>
+                  <td colSpan={3}>
+                    <div className='d-flex text-center w-100 align-content-center justify-content-center'>
+                      No records found
+                    </div>
+                  </td>
+                </tr>
+              )}
               </tbody>
             </table>
           </div>
+          <TableListPagination />
+          {isLoading && <TableListLoading />}
         </KTCardBody>
       </KTCard>
     </>
   )
 }
 
-export {ActivityStandings}
+export { ActivityStandings };

@@ -58,10 +58,21 @@ const getActivityTeams = (id: any, query?: string): Promise<TeamQueryResponse> =
   return axios.get(url).then((response: AxiosResponse<TeamQueryResponse>) => response.data)
 }
 
-const getActivityRegistrations = (id: any, query?: string): Promise<ActivityRegistrationsQueryResponse> => {
+const getActivityStandings = (id: any, query?: string): Promise<TeamQueryResponse> => {
+  let url = `${ACTIVITIES_URL}/${id}/standings?${query}`
+
+  return axios.get(url).then((response: AxiosResponse<TeamQueryResponse>) => response.data)
+}
+
+const getActivityRegistrations = (
+  id: any,
+  query?: string
+): Promise<ActivityRegistrationsQueryResponse> => {
   let url = `${ACTIVITIES_URL}/${id}/registrations?${query}`
 
-  return axios.get(url).then((response: AxiosResponse<ActivityRegistrationsQueryResponse>) => response.data)
+  return axios
+    .get(url)
+    .then((response: AxiosResponse<ActivityRegistrationsQueryResponse>) => response.data)
 }
 
 const createActivityAnnouncement = (
@@ -100,6 +111,7 @@ export {
   getActivityMatch,
   getActivityTeams,
   getActivityMatches,
+  getActivityStandings,
   getActivityRegistrations,
   createActivityAnnouncement,
 }
