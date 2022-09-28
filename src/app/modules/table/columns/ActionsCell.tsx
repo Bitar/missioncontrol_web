@@ -42,8 +42,8 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
   return (
     <>
       {showView && (
-        <Link to={'/' + path + '/' + id} className='btn btn-icon btn-sm btn-active-light-success'>
-          <i className={clsx('fa fs-2 text-success', 'fa-eye')}></i>
+        <Link to={'/' + path + '/' + id} className='btn btn-icon btn-sm btn-active-light-info'>
+          <i className={clsx('fa fs-2 text-info', 'fa-eye')}></i>
         </Link>
       )}
 
