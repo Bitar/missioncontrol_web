@@ -3,6 +3,8 @@ import {TextCell} from '../../../modules/table/columns/TextCell'
 import {CustomHeader} from '../../../modules/table/columns/CustomHeader'
 import {ActivityStanding} from '../models/ActivityStanding'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
+import { TeamImage } from "../components/TeamImage";
+import React from "react";
 
 const ActivityStandingsColumns: ReadonlyArray<Column<ActivityStanding>> = [
   {
@@ -10,16 +12,7 @@ const ActivityStandingsColumns: ReadonlyArray<Column<ActivityStanding>> = [
     id: 'image',
     Cell: ({...props}) => (
       <div className='d-flex align-items-center'>
-        <div className='w-100px me-3'>
-          <img
-            src={toAbsoluteUrl(props.data[props.row.index].image)}
-            alt={props.data[props.row.index].name + ' team image'}
-            className='w-100 h-100vh rounded'
-          />
-        </div>
-        <div className='d-flex flex-column'>
-          <span className='text-gray-800 mb-1'>{props.data[props.row.index].name}</span>
-        </div>
+        <TeamImage team={props.data[props.row.index]} className='me-3' />
       </div>
     ),
   },
