@@ -59,13 +59,10 @@ const getCommunityActivities = (id: any): Promise<ActivityQueryResponse> => {
     .then((response: AxiosResponse<ActivityQueryResponse>) => response.data)
 }
 
-const getCommunityUsers = (query: String, id: any): Promise<UserQueryResponse> => {
-  return (
-    axios
-      // .get(`${GET_COMMUNITIES_URL}/${id}/users`)
-      .get(`${GET_COMMUNITIES_URL}/${id}/users?${query}`)
-      .then((response: AxiosResponse<UserQueryResponse>) => response.data)
-  )
+const getCommunityUsers = (id: any, query?: string): Promise<UserQueryResponse> => {
+  let url = `${GET_COMMUNITIES_URL}/${id}/users?${query}`
+
+  return axios.get(url).then((response: AxiosResponse<UserQueryResponse>) => response.data)
 }
 
 export {
