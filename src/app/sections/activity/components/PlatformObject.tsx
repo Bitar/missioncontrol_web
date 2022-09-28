@@ -23,10 +23,12 @@ const PlatformObject: FC<Props> = ({platform}) => {
 
   return (
     <div className='d-flex align-items-center'>
-      <i className={`${getPlatformIcon(platform?.abbreviation)} me-2 text-mc-secondary`}></i>
+      {getPlatformIcon(platform?.abbreviation) !== '' && (
+        <i className={`${getPlatformIcon(platform?.abbreviation)} me-2 text-mc-secondary`}></i>
+      )}
       <div className='fw-bold fs-6'>{platform?.name}</div>
     </div>
   )
 }
 
-export {PlatformObject}
+export { PlatformObject };

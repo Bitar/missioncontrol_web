@@ -87,8 +87,8 @@ const ActivityStandings: FC<Props> = ({minimal = false, scroll = false}) => {
                       <td>{standing.score?.win + ' - ' + standing.score?.lose}</td>
                       <td>
                         {standing.score?.win + standing.score?.lose !== 0
-                          ? (standing.score?.win / (standing.score?.win + standing.score?.lose)) *
-                            100
+                          ? Math.round((standing.score?.win / (standing.score?.win + standing.score?.lose)) *
+                            100)
                           : 0}
                         %
                       </td>
