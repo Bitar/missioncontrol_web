@@ -20,9 +20,7 @@ const registrationSchema = Yup.object().shape({
     .min(3, 'Minimum 3 letters')
     .max(50, 'Maximum 50 letters')
     .required('First name is required'),
-  email: Yup.string()
-    .email('Wrong email format')
-    .required('Email is required'),
+  email: Yup.string().email('Wrong email format').required('Email is required'),
   last_name: Yup.string()
     .min(3, 'Minimum 3 letters')
     .max(50, 'Maximum 50 letters')
@@ -177,6 +175,7 @@ const Registration = () => {
                 Use 8 or more characters with a mix of letters, numbers & symbols.
               </div>
             </div>
+
             <div className='fv-row mb-5'>
               <label className='form-label fw-bolder text-dark fs-6'>Confirm Password</label>
               <Field
@@ -218,11 +217,14 @@ const Registration = () => {
             </div>
 
             <div className='text-center'>
-              <button type='submit' className='btn btn-lg btn-mc-secondary w-100 mb-5'>
+              <button
+                type='submit'
+                className='btn btn-lg btn-mc-secondary w-100 mb-5'
+                disabled={isSubmitting}
+              >
                 <span className='indicator-label'>Register</span>
                 {isSubmitting && (
-                  <span className='indicator-progress'>
-                    Please wait...
+                  <span className='indicator-progress float-end' style={{display: 'inline-block'}}>
                     <span className='spinner-border spinner-border-sm align-middle ms-2' />
                   </span>
                 )}
@@ -244,4 +246,4 @@ const Registration = () => {
   )
 }
 
-export {Registration}
+export { Registration };

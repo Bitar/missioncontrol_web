@@ -63,13 +63,12 @@ const CommunityCreate = () => {
                 <button
                   type='submit'
                   className='btn btn-light-mc-secondary btn-active-mc-secondary btn-sm'
-                  data-kt-users-modal-action='submit'
                   disabled={isSubmitting || !isValid || !touched}
                 >
                   <span className='indicator-label'>Add Community</span>
+
                   {isSubmitting && (
-                    <span className='indicator-progress'>
-                      Please wait...
+                    <span className='indicator-progress' style={{display: 'inline-block'}}>
                       <span className='spinner-border spinner-border-sm align-middle ms-2' />
                     </span>
                   )}
@@ -83,4 +82,4 @@ const CommunityCreate = () => {
   )
 }
 
-export {CommunityCreate}
+export { CommunityCreate };

@@ -1,4 +1,5 @@
 import React, {FC} from 'react'
+
 type Props = {
   text: string
   isSubmitting: boolean
@@ -11,12 +12,12 @@ const FormAction: FC<Props> = ({text, isSubmitting}) => {
         <button
           type='submit'
           className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'
-          data-kt-users-modal-action='submit'
+          disabled={isSubmitting}
         >
           <span className='indicator-label'>{text}</span>
           {isSubmitting && (
-            <span className='indicator-progress'>
-              Please wait... <span className='spinner-border spinner-border-sm align-middle ms-2' />
+            <span className='indicator-progress' style={{display: 'inline-block'}}>
+              <span className='spinner-border spinner-border-sm align-middle ms-2' />
             </span>
           )}
         </button>
@@ -25,4 +26,4 @@ const FormAction: FC<Props> = ({text, isSubmitting}) => {
   )
 }
 
-export {FormAction}
+export { FormAction };

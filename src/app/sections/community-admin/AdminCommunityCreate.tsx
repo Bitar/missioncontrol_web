@@ -22,7 +22,7 @@ const AdminCommunityCreate = () => {
 
   const handleSubmit = async () => {
     let data = jsonToFormData(community)
-    await createAdminCommunity(data).then((response) => {
+    await createAdminCommunity(data).then(() => {
       updateAuth();
       navigate('/dashboard');
     })
@@ -78,8 +78,7 @@ const AdminCommunityCreate = () => {
                 >
                   <span className='indicator-label'>Add Community</span>
                   {isSubmitting && (
-                    <span className='indicator-progress'>
-                      Please wait...
+                    <span className='indicator-progress' style={{display: "inline-block"}}>
                       <span className='spinner-border spinner-border-sm align-middle ms-2' />
                     </span>
                   )}
