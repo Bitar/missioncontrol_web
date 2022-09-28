@@ -18,11 +18,9 @@ export const communitySchema = Yup.object().shape({
   }),
   address: Yup.object().shape({
     address_one: Yup.string().required('Contact address is required'),
-    // address_two: Yup.string(),
     city: Yup.string().required('City is required'),
-    // state_province: Yup.string().required('State Province is required'),
+    state: Yup.string().required('State is required'),
     postal_code: Yup.string().required('Postal Code is required'),
-    // country_code: Yup.string().required('Country Code is required'),
   }),
 })
 
@@ -61,6 +59,15 @@ export type Community = {
 }
 
 export type CommunityQueryResponse = Response<Array<Community>>
+
+export type CommunityForm = {
+  id?: ID
+  name: string
+  description?: string
+  logo?: string
+  banner_image?: string
+  is_featured?: boolean
+}
 
 export function formOnChange(
   event: any,

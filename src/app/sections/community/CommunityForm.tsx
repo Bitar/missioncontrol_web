@@ -1,9 +1,7 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
 import {ErrorMessage, Field} from 'formik'
-import {updateData} from '../../helpers/form/FormHelper'
 import {Community} from './models/Community'
-import {getCountries, getStates} from '../misc/core/_requests'
-import Select from 'react-select'
+import {getStates} from '../misc/core/_requests'
 
 type Props = {
   method: string
@@ -12,13 +10,9 @@ type Props = {
 }
 
 let statesOptions: any[] = []
-let countriesOptions: any[] = []
 
-const CommunityForm: FC<React.PropsWithChildren<Props>> = ({method, community, setCommunity}) => {
-  const [roleSelected, setRoleSelected] = useState<any | null>(null)
-  const [countrySelected, setCountrySelected] = useState<any | null>(null)
-  const [rolesLoaded, setRolesLoaded] = useState(false)
-  const [countriesLoaded, setCountriesLoaded] = useState(false)
+const CommunityForm: FC<React.PropsWithChildren<Props>> = ({method, community}) => {
+  const [statesLoaded, setStatesLoaded] = useState(false)
 
   useEffect(() => {
     if (statesOptions.length === 0) {
@@ -35,24 +29,24 @@ const CommunityForm: FC<React.PropsWithChildren<Props>> = ({method, community, s
       })
     }
 
-    if (countriesOptions.length === 0) {
-      getCountries().then((response) => {
-        response?.data?.forEach(function (value) {
-          let option = {
-            value: value.id,
-            label: value.name,
-            code: value.code,
-            isSelected: false,
-          }
-          countriesOptions.push(option)
-        })
-      })
-    }
+    // if (countriesOptions.length === 0) {
+    //   getCountries().then((response) => {
+    //     response?.data?.forEach(function (value) {
+    //       let option = {
+    //         value: value.id,
+    //         label: value.name,
+    //         code: value.code,
+    //         isSelected: false,
+    //       }
+    //       countriesOptions.push(option)
+    //     })
+    //   })
+    // }
   }, [])
 
   useEffect(() => {
     if (community?.address?.state) {
-      let stateObject = community?.address?.state
+      // let stateObject = community?.address?.state
       let selectedOption = statesOptions.find(
         (element) => element.value === community?.address?.state?.id
       )
@@ -60,69 +54,15 @@ const CommunityForm: FC<React.PropsWithChildren<Props>> = ({method, community, s
         selectedOption.isSelected = true
       }
 
-      setRoleSelected({
-        value: stateObject?.id,
-        label: stateObject?.name,
-        code: stateObject?.code,
-        isSelected: true,
-      })
-      setRolesLoaded(true)
-    }
-
-    if (community?.address?.country) {
-      let countryObject = community?.address?.country
-      let selectedOption = statesOptions.find(
-        (element) => element.value === community?.address?.country?.id
-      )
-      if (selectedOption) {
-        selectedOption.isSelected = true
-      }
-
-      setCountrySelected({
-        value: countryObject?.id,
-        label: countryObject?.name,
-        code: countryObject?.code,
-        isSelected: true,
-      })
-      setCountriesLoaded(true)
+      // setStateSelected({
+      //   value: stateObject?.id,
+      //   label: stateObject?.name,
+      //   code: stateObject?.code,
+      //   isSelected: true,
+      // })
+      setStatesLoaded(true)
     }
   }, [community])
-
-  const handleRoleChange = (selectedOption: any) => {
-    setRoleSelected(selectedOption)
-
-    let stateObject = {
-      id: selectedOption.value,
-      name: selectedOption.label,
-      code: selectedOption.code,
-    }
-
-    updateData(
-      {
-        address: {...community?.address, ...{state: stateObject}},
-      },
-      setCommunity,
-      community
-    )
-  }
-
-  const handleCountryChange = (selectedOption: any) => {
-    setRoleSelected(selectedOption)
-
-    let countryObject = {
-      id: selectedOption.value,
-      name: selectedOption.label,
-      code: selectedOption.code,
-    }
-
-    updateData(
-      {
-        address: {...community?.address, ...{country: countryObject}},
-      },
-      setCommunity,
-      community
-    )
-  }
 
   return (
     <>
@@ -267,32 +207,17 @@ const CommunityForm: FC<React.PropsWithChildren<Props>> = ({method, community, s
       <div className='row mb-6'>
         <label className='col-lg-4 col-form-label required fw-bold fs-6'>State</label>
         <div className='col-lg-8 fv-row'>
-          {(rolesLoaded || method === 'create') && (
-            <Select
-              isSearchable
-              defaultValue={roleSelected}
-              options={statesOptions}
-              onChange={handleRoleChange}
-            />
+          {(statesLoaded || method === 'create') && (
+            <Field as='select' className='form-select' name='address.state'>
+              {statesOptions.map((stateProvince) => (
+                <option key={`state-options-${stateProvince?.value}`} value={stateProvince?.value}>
+                  {stateProvince?.label}
+                </option>
+              ))}
+            </Field>
           )}
           <div className='text-danger mt-2'>
-            <ErrorMessage name='address.state_province' />
-          </div>
-        </div>
-      </div>
-
-      <div className='row mb-6 d-none'>
-        <label className='col-lg-4 col-form-label fw-bold fs-6'>Country</label>
-        <div className='col-lg-8 fv-row'>
-          {(countriesLoaded || method === 'create') && (
-            <Select
-              defaultValue={countrySelected}
-              options={countriesOptions}
-              onChange={handleCountryChange}
-            />
-          )}
-          <div className='text-danger mt-2'>
-            <ErrorMessage name='address.state_province' />
+            <ErrorMessage name='address.state' />
           </div>
         </div>
       </div>

@@ -25,7 +25,7 @@ const ActivityStandings: FC<Props> = ({minimal = false, scroll = false}) => {
           </div>
         </div>
         <KTCardBody
-          className={clsx('py-1', {'scroll-y mh-400px': scroll })}
+          className={clsx('py-1', {'scroll-y mh-400px': scroll})}
           id='activities_standings_body'
         >
           <div className='table-responsive'>
@@ -90,6 +90,7 @@ const ActivityStandings: FC<Props> = ({minimal = false, scroll = false}) => {
                           ? (standing.score?.win / (standing.score?.win + standing.score?.lose)) *
                             100
                           : 0}
+                        %
                       </td>
                     </tr>
                   ))

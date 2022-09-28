@@ -16,7 +16,7 @@ import {TimeZone} from '../../../models/misc/TimeZone'
 import {getTimeZones} from '../../misc/core/_requests'
 import {MatchPlayDatePicker, RegistrationDatePicker} from '../components'
 import {TimeOfDayPicker} from '../components/TimeOfDayPicker'
-import { FormAction } from "../../../helpers/form/FormAction";
+import {FormAction} from '../../../helpers/form/FormAction'
 
 const ActivitySettings = () => {
   const {activity} = useActivity()
@@ -27,8 +27,8 @@ const ActivitySettings = () => {
   const [timeZones, setTimeZones] = useState<TimeZone[]>()
 
   const handleSubmit = () => {
-    console.log('submitting');
-    console.log(activityForm);
+    console.log('submitting')
+    console.log(activityForm)
   }
   const handleOnChange = () => {}
 
@@ -60,7 +60,10 @@ const ActivitySettings = () => {
                     <span className='required fw-bold fs-6'>Registration Dates</span>
                   </div>
                   <div className='col-lg-8 fv-row'>
-                    <RegistrationDatePicker activityForm={activityForm} setActivityForm={setActivityForm} />
+                    <RegistrationDatePicker
+                      activityForm={activityForm}
+                      setActivityForm={setActivityForm}
+                    />
                   </div>
                 </div>
 
@@ -69,7 +72,10 @@ const ActivitySettings = () => {
                     <span className='required fw-bold fs-6'>Match Play Dates</span>
                   </div>
                   <div className='col-lg-8 fv-row'>
-                    <MatchPlayDatePicker activityForm={activityForm} setActivityForm={setActivityForm} />
+                    <MatchPlayDatePicker
+                      activityForm={activityForm}
+                      setActivityForm={setActivityForm}
+                    />
                   </div>
                 </div>
 
@@ -195,7 +201,10 @@ const ActivitySettings = () => {
                     <span className='required fw-bold fs-6'>Time of Day</span>
                   </div>
                   <div className='col-lg-6'>
-                    <TimeOfDayPicker activityForm={activityForm} setActivityForm={setActivityForm} />
+                    <TimeOfDayPicker
+                      activityForm={activityForm}
+                      setActivityForm={setActivityForm}
+                    />
                   </div>
                 </div>
 

@@ -1,4 +1,4 @@
-import {createContext, Dispatch, FC, SetStateAction, useContext, useState} from 'react'
+import React, {createContext, Dispatch, FC, SetStateAction, useContext, useState} from 'react'
 
 export type CheckoutModalContextProps = {
   showCheckout: boolean

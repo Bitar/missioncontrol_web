@@ -1,27 +1,30 @@
-import React, {FC} from 'react'
-import {communitySchema, formOnChange, initialCommunity} from '../models/Community'
-import {useNavigate, useParams} from 'react-router-dom'
+import {KTCard, KTCardBody} from '../../../_metronic/helpers'
 import {Form, Formik} from 'formik'
-import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
-import {LogoImage} from '../partials/LogoImage'
-import {BannerImage} from '../partials/BannerImage'
-import {CommunityForm} from '../CommunityForm'
-import {jsonToFormData} from '../../../helpers/form/FormHelper'
-import {updateCommunity} from '../core/CommunityRequests'
-import {useCommunity} from '../CommunityContext'
+import {
+  Community,
+  communitySchema,
+  formOnChange,
+  initialCommunity,
+} from '../community/models/Community'
+import {createAdminCommunity} from '../community/core/CommunityRequests'
+import {useNavigate} from 'react-router-dom'
+import React, {useState} from 'react'
+import {jsonToFormData} from '../../helpers/form/FormHelper'
+import {LogoImage} from '../community/partials/LogoImage'
+import {BannerImage} from '../community/partials/BannerImage'
+import {CommunityForm} from '../community/CommunityForm'
+import {useAuth} from '../../modules/auth'
 
-const CommunityEdit: FC = () => {
-  const {community, setCommunity} = useCommunity()
+const AdminCommunityCreate = () => {
+  const [community, setCommunity] = useState<Community>(initialCommunity)
+  const {updateAuth} = useAuth()
   const navigate = useNavigate()
-  const params = useParams()
 
   const handleSubmit = async () => {
     let data = jsonToFormData(community)
-    data.append('_method', 'PUT')
-
-    await updateCommunity(params.communityId, data).then((response) => {
-      setCommunity(response)
-      navigate('/communities/' + response?.id)
+    await createAdminCommunity(data).then(() => {
+      updateAuth()
+      navigate('/dashboard')
     })
   }
 
@@ -32,16 +35,18 @@ const CommunityEdit: FC = () => {
       <KTCard>
         <div className='card-header'>
           <div className='card-title'>
-            <h3 className='card-label'>Update Community</h3>
+            <span className='card-icon'>
+              <i className='las la-plus fs-2' />
+            </span>
+            <h3 className='card-label'>Add Community</h3>
           </div>
         </div>
         <Formik
-          initialValues={initialCommunity(community)}
+          initialValues={community}
           onSubmit={handleSubmit}
           validationSchema={communitySchema}
-          enableReinitialize
         >
-          {({isSubmitting, isValid, touched}) => (
+          {({isSubmitting}) => (
             <Form onChange={handleOnChange} className='form'>
               <KTCardBody className='py-4'>
                 <div className='d-flex flex-column pt-5'>
@@ -58,7 +63,7 @@ const CommunityEdit: FC = () => {
                   </div>
 
                   <CommunityForm
-                    method={'edit'}
+                    method={'create'}
                     community={community}
                     setCommunity={setCommunity}
                   />
@@ -69,12 +74,11 @@ const CommunityEdit: FC = () => {
                   type='submit'
                   className='btn btn-light-mc-secondary btn-active-mc-secondary btn-sm'
                   data-kt-users-modal-action='submit'
-                  disabled={isSubmitting || !isValid || !touched}
+                  disabled={isSubmitting}
                 >
-                  <span className='indicator-label'>Save Changes</span>
+                  <span className='indicator-label'>Add Community</span>
                   {isSubmitting && (
-                    <span className='indicator-progress'>
-                      Please wait...
+                    <span className='indicator-progress' style={{display: 'inline-block'}}>
                       <span className='spinner-border spinner-border-sm align-middle ms-2' />
                     </span>
                   )}
@@ -88,4 +92,4 @@ const CommunityEdit: FC = () => {
   )
 }
 
-export {CommunityEdit}
+export {AdminCommunityCreate}

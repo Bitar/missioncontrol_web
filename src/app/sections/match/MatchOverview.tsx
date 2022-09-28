@@ -17,7 +17,6 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
   // const [teams, setTeams] = useState()
 
   const getScoringKeyIcon = (key?: string) => {
-    console.log(key)
     if (key) {
       switch (key) {
         case 'Elimination':
@@ -52,7 +51,7 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
         ''
     } else {
       returnValue =
-        scoringKey?.values.find((e: any) => e.id === scoringSheet.scoring_value_id)?.value + ''
+        scoringKey?.values.find((e: any) => e.id === scoringSheet.scoring_value_id)?.key + ''
     }
 
     let scoringKeyIcon = getScoringKeyIcon(scoringKey?.key.key)
@@ -140,25 +139,30 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
                             </div>
                           )}
 
-                          {getTeam(round.scores[0]?.team_id) && getTeam(round.scores[1]?.team_id) && (
-                            <div className='flex-grow-1'>
-                              <div className='d-flex flex-stack'>
+                          <div className='flex-grow-1'>
+                            <div className='d-flex flex-stack'>
+                              {getTeam(round.scores[0]?.team_id) && (
                                 <div className='fs-1 text-mc-primary'>
                                   {round?.scores[0]?.score_sheet.map((scoreSheet, index) => (
                                     <div key={index}>{getScoringKey(scoreSheet, true)}</div>
                                   ))}
                                 </div>
-                                <div className='fs-6 fw-semibold text-gray-600 px-5'>
-                                  <p className='display-6 text-dark m-0'>-</p>
-                                </div>
+                              )}
+                              {getTeam(round.scores[0]?.team_id) &&
+                                getTeam(round.scores[1]?.team_id) && (
+                                  <div className='fs-6 fw-semibold text-gray-600 px-5'>
+                                    <p className='display-6 text-dark m-0'>-</p>
+                                  </div>
+                                )}
+                              {getTeam(round.scores[1]?.team_id) && (
                                 <div className='fs-1 text-mc-primary'>
                                   {round?.scores[1]?.score_sheet.map((scoreSheet, index) => (
                                     <div key={index}>{getScoringKey(scoreSheet)}</div>
                                   ))}
                                 </div>
-                              </div>
+                              )}
                             </div>
-                          )}
+                          </div>
 
                           {getTeam(round.scores[1]?.team_id) && (
                             <div className='flex-grow-1'>

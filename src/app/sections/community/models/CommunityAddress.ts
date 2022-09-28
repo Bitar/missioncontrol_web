@@ -18,9 +18,9 @@ export const initialCommunityAddress = (address?: CommunityAddress) => {
     address_one: address?.address_one || '',
     address_two: address?.address_two || '',
     city: address?.city || '',
-    state: initialState(address?.state) || initialState(),
+    state: initialState(address?.state),
     postal_code: address?.postal_code || '',
-    country: initialCountry(address?.country) || initialCountry(),
+    country: initialCountry(address?.country),
   }
 }
 

@@ -1,9 +1,9 @@
 import React, {FC} from 'react'
-import {useIntl} from 'react-intl'
-import {PageTitle} from '../../layout/core'
+// import { useIntl } from "react-intl";
 import {useAuth} from '../../modules/auth'
-import {isUserCommunityAdmin} from '../../sections/identity/user/models/User'
+import {isUserCommunityAdmin, isUserSuperAdmin} from '../../sections/identity/user/models/User'
 import {CommunityView} from '../../sections/community/pages/CommunityView'
+import {CreateCommunityWidget} from '../../layout/widgets/CreateCommunityWidget'
 // import Pusher from "pusher-js";
 
 // const DashboardPage: FC<React.PropsWithChildren<unknown>> = () => {
@@ -21,37 +21,40 @@ import {CommunityView} from '../../sections/community/pages/CommunityView'
 // }
 
 const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
-  const intl = useIntl()
-  const {currentUser, communityAdmin} = useAuth()
+  // const intl = useIntl()
+  const {currentUser, communityAdmin, subscription} = useAuth()
 
   const communityLinks = [
     {
       text: 'Overview',
       link: '/dashboard/overview',
     },
-    // {
-    //   text: 'Activities',
-    //   link: '/activities',
-    // },
     {
       text: 'Members',
       link: '/dashboard/members',
-    },
-    {
-      text: 'Settings',
-      link: '/dashboard/settings',
     },
   ]
 
   return (
     <>
-      <PageTitle breadcrumbs={[]}>{intl.formatMessage({id: 'MENU.DASHBOARD'})}</PageTitle>
-
-      {currentUser && isUserCommunityAdmin(currentUser) && (
-        <CommunityView communityId={communityAdmin?.id} links={communityLinks}></CommunityView>
-      )}
-
-      {/*<DashboardPage />*/}
+      {currentUser &&
+        (currentUser && isUserCommunityAdmin(currentUser) && communityAdmin ? (
+          <CommunityView communityId={communityAdmin?.id} links={communityLinks}></CommunityView>
+        ) : (
+          <div className='row gy-5 g-xl-8'>
+            <div className='col-xl-12'>
+              {!communityAdmin && !isUserSuperAdmin(currentUser) ? (
+                subscription ? (
+                  <CreateCommunityWidget bgHex={'#FFFFFF'} type='create-community' />
+                ) : (
+                  <CreateCommunityWidget bgHex={'#FFFFFF'} />
+                )
+              ) : (
+                <div></div>
+              )}
+            </div>
+          </div>
+        ))}
     </>
   )
 }

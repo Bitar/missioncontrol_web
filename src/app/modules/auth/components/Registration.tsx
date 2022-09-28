@@ -17,21 +17,17 @@ const initialValues = {
 
 const registrationSchema = Yup.object().shape({
   first_name: Yup.string()
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
+    .min(3, 'Minimum 3 letters')
+    .max(50, 'Maximum 50 letters')
     .required('First name is required'),
-  email: Yup.string()
-    .email('Wrong email format')
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
-    .required('Email is required'),
+  email: Yup.string().email('Wrong email format').required('Email is required'),
   last_name: Yup.string()
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
+    .min(3, 'Minimum 3 letters')
+    .max(50, 'Maximum 50 letters')
     .required('Last name is required'),
   password: Yup.string()
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
+    .min(3, 'Minimum length: 3')
+    .max(50, 'Maximum length: 50')
     .required('Password is required'),
   password_confirmation: Yup.string()
     .required('Password confirmation is required')
@@ -44,7 +40,7 @@ const registrationSchema = Yup.object().shape({
 const Registration = () => {
   const navigate = useNavigate()
   const {saveAuth, setCurrentUser, setSubscription, setCommunityAdmin} = useAuth()
-  const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined)
+  const [hasErrors, setHasErrors] = useState<boolean>(false)
   const [alertMessage, setAlertMessage] = useState<string | undefined>(undefined)
 
   useEffect(() => {
@@ -179,6 +175,7 @@ const Registration = () => {
                 Use 8 or more characters with a mix of letters, numbers & symbols.
               </div>
             </div>
+
             <div className='fv-row mb-5'>
               <label className='form-label fw-bolder text-dark fs-6'>Confirm Password</label>
               <Field
@@ -220,11 +217,14 @@ const Registration = () => {
             </div>
 
             <div className='text-center'>
-              <button type='submit' className='btn btn-lg btn-mc-secondary w-100 mb-5'>
+              <button
+                type='submit'
+                className='btn btn-lg btn-mc-secondary w-100 mb-5'
+                disabled={isSubmitting}
+              >
                 <span className='indicator-label'>Register</span>
                 {isSubmitting && (
-                  <span className='indicator-progress'>
-                    Please wait...
+                  <span className='indicator-progress float-end' style={{display: 'inline-block'}}>
                     <span className='spinner-border spinner-border-sm align-middle ms-2' />
                   </span>
                 )}

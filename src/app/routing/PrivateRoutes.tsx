@@ -9,6 +9,8 @@ import {PermissionPage} from '../sections/identity/permission/pages/PermissionPa
 import {SuspenseView} from '../layout/SuspenseView'
 import React, {lazy} from 'react'
 import {Restricted} from '../modules/auth/core/AuthPermission'
+import {AdminCommunityCreate} from '../sections/community-admin/AdminCommunityCreate'
+import {VerifyEmail} from '../modules/auth/components/VerifyEmail'
 
 const PrivateRoutes = () => {
   const CommunityPage = lazy(() => import('../sections/community/pages/CommunityPage'))
@@ -22,6 +24,7 @@ const PrivateRoutes = () => {
     <Routes>
       <Route element={<MasterLayout />}>
         <Route path='auth/*' element={<Navigate to='/dashboard' />} />
+        <Route path='email-verify' element={<VerifyEmail />} />
 
         {/* Pages */}
         <Route path='dashboard/*' element={<DashboardWrapper />} />
@@ -29,6 +32,14 @@ const PrivateRoutes = () => {
         {/* Pages */}
 
         {/* Sections */}
+        <Route
+          path='admin/communities/create'
+          element={
+            <SuspenseView>
+              <AdminCommunityCreate />
+            </SuspenseView>
+          }
+        />
         <Route
           path='communities/*'
           element={
@@ -44,29 +55,42 @@ const PrivateRoutes = () => {
         <Route
           path='users/*'
           element={
-            <SuspenseView>
-              <UserPage />
-            </SuspenseView>
+            <Restricted to='view-users'>
+              <SuspenseView>
+                <UserPage />
+              </SuspenseView>
+            </Restricted>
           }
         />
         <Route
           path='roles/*'
           element={
-            <SuspenseView>
-              <RolePage />
-            </SuspenseView>
+            <Restricted to='view-users'>
+              <SuspenseView>
+                <RolePage />
+              </SuspenseView>
+            </Restricted>
           }
         />
-        <Route path='permissions/*' element={<PermissionPage />} />
+        <Route
+          path='permissions/*'
+          element={
+            <Restricted to='view-users'>
+              <SuspenseView>
+                <PermissionPage />
+              </SuspenseView>
+            </Restricted>
+          }
+        />
 
         <Route
           path='activities/*'
           element={
-            <SuspenseView>
-              <Restricted to='view-activities'>
+            <Restricted to='view-activities'>
+              <SuspenseView>
                 <ActivityPage />
-              </Restricted>
-            </SuspenseView>
+              </SuspenseView>
+            </Restricted>
           }
         />
 

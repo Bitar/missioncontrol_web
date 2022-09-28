@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
 import React, {FC} from 'react'
-import {Plan} from '../../models/billing/Plan'
+import {getOption, Plan} from '../../models/billing/Plan'
 
 type Props = {
   plan: Plan
@@ -10,84 +9,88 @@ type Props = {
 }
 
 const PlanCard: FC<React.PropsWithChildren<Props>> = ({plan, selectPlan, paymentTerms}) => {
+  const annualPrice = plan.price_per_member * plan.max_members * 12
+  const monthlyPrice = plan.price_per_member * plan.max_members * 1.1
+
   return (
     <>
-      <div className={plan.type === 1 ? 'col-xl-4' : 'col-xl-12'}>
-        <div className='d-flex h-100 align-items-center'>
-          <div className='w-100 d-flex flex-column flex-center rounded-3 bg-light bg-opacity-75 py-15 px-10'>
+      <div className='col-xl-4'>
+        {/*{plan.contact_type === 1 ? 'col-xl-3' : 'col-xl-12'}*/}
+        <div className='d-flex h-100 align-items-center bg-mc-secondary rounded-3'>
+          <div className='h-100 w-100 d-flex flex-column flex-center rounded-3 bg-light bg-opacity-75 py-10 px-5'>
             <div className='mb-7 text-center'>
               <h1 className='text-dark mb-5 fw-boldest'>{plan.name}</h1>
 
               <div className='text-gray-400 fw-bold mb-5'>{plan.description}</div>
 
-              {plan.type === 1 && (
+              {plan.contact_type === 1 && (
                 <div className='text-center'>
                   <span className='mb-2 text-primary'>$</span>
                   {paymentTerms === 1 && (
                     <span>
-                      <span className='fs-3x fw-bolder text-primary'>{plan.price.toFixed(2)}</span>
+                      <span className='fs-3x fw-bolder text-primary'>
+                        {monthlyPrice.toFixed(0)}
+                      </span>
                       <span className='fs-7 fw-bold opacity-50'>
-                        /<span data-kt-element='period'>Mon</span>
+                        /<span data-kt-element='period'>month</span>
                       </span>
                     </span>
                   )}
                   {paymentTerms === 2 && (
                     <span>
-                      <span className='fs-3x fw-bolder text-primary'>
-                        {(plan.price * 12).toFixed(2)}
-                      </span>
+                      <span className='fs-3x fw-bolder text-primary'>{annualPrice.toFixed(0)}</span>
                       <span className='fs-7 fw-bold opacity-50'>
-                        /<span data-kt-element='period'>Yr</span>
+                        /<span data-kt-element='period'>year</span>
                       </span>
                     </span>
                   )}
                 </div>
               )}
             </div>
+
             <div className='w-100 mb-10'>
-              <div className='d-flex align-items-center mb-5'>
-                <span className='fw-bold fs-6 text-gray-800 flex-grow-1 pe-3'>
-                  Up to 30 Registrations
-                </span>
-                <KTSVG
-                  path={toAbsoluteUrl('/media/icons/duotune/gen043.svg')}
-                  className='svg-icon-1 svg-icon-success'
-                />
-              </div>
-
-              <div className='d-flex align-items-center mb-5'>
-                <span className='fw-bold fs-6 text-gray-800 flex-grow-1 pe-3'>
-                  Transaction Cost 30%
-                </span>
-
-                <KTSVG
-                  path={toAbsoluteUrl('/media/icons/duotune/gen043.svg')}
-                  className='svg-icon-1 svg-icon-success'
-                />
-              </div>
-
-              <div className='d-flex align-items-center mb-5'>
-                <span className='fw-bold fs-6 text-gray-800 flex-grow-1 pe-3'>
-                  Technical Support
-                </span>
-
-                <KTSVG
-                  path={toAbsoluteUrl('/media/icons/duotune/gen043.svg')}
-                  className='svg-icon-1 svg-icon-success'
-                />
-              </div>
-
-              <div className='d-flex align-items-center mb-5'>
-                <span className='fw-bold fs-6 text-gray-800 flex-grow-1 pe-3'>Launch</span>
-
-                <KTSVG
-                  path={toAbsoluteUrl('/media/icons/duotune/gen040.svg')}
-                  className='svg-icon-1'
-                />
+              <div className='table-responsive'>
+                <table className='table align-middle gs-0 gy-3'>
+                  <thead>
+                    <tr>
+                      <th className='p-0 min-w-130px'></th>
+                      <th className='p-0 w-50px'></th>
+                    </tr>
+                  </thead>
+                  <tbody className='fs-4'>
+                    <tr>
+                      <td className='fw-bold'>Members</td>
+                      <td className='text-end'>
+                        {plan.max_members.toLocaleString()}
+                        {plan.contact_type === 2 && '+'}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className='fw-bold'>Price per member</td>
+                      <td className='text-end'>
+                        ${plan.price_per_member.toFixed(2).toLocaleString()}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className='fw-bold'>Launch Fee</td>
+                      <td className='text-end'>
+                        ${Math.round(annualPrice * (plan.launch_percentage / 100)).toLocaleString()}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className='fw-bold'>Transaction Fee</td>
+                      <td className='text-end'>{plan.transaction_fee}%</td>
+                    </tr>
+                    <tr>
+                      <td className='fw-bold'>Technical Support</td>
+                      <td className='text-end'>{getOption(plan, 1)?.value}</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
 
-            {plan.type === 1 && (
+            {plan.contact_type === 1 && (
               <a
                 href='#'
                 className='btn btn-sm btn-primary'
@@ -99,15 +102,8 @@ const PlanCard: FC<React.PropsWithChildren<Props>> = ({plan, selectPlan, payment
                 Select
               </a>
             )}
-            {plan.type === 2 && (
-              <a
-                href='#'
-                className='btn btn-sm btn-primary'
-                onClick={(e) => {
-                  e.preventDefault()
-                  selectPlan(plan)
-                }}
-              >
+            {plan.contact_type === 2 && (
+              <a href='mailto:sales@missioncontrol.gg' className='btn btn-sm btn-primary'>
                 Contact Sales
               </a>
             )}
