@@ -14,7 +14,7 @@ const Footer = () => {
           {new Date().getFullYear().toString()} &copy;
         </span>
         <a
-          href='src/app/layout/components/footer/Footer'
+          href='https://www.missioncontrol.gg/'
           target='_blank'
           className='text-gray-800 text-hover-mc-primary'
         >
