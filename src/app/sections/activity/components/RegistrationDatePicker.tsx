@@ -93,4 +93,4 @@ const RegistrationDatePicker: FC<Props> = ({activityForm, setActivityForm}) => {
   )
 }
 
-export { RegistrationDatePicker };
+export {RegistrationDatePicker}

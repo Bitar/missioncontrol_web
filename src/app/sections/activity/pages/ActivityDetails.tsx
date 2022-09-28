@@ -105,7 +105,9 @@ const ActivityDetails = () => {
 
             <div className='col-lg-8 d-flex align-items-center'>
               <span className='fw-bolder fs-6 me-2'>
-                {dayjs(new Date()).day(activity?.settings?.day - 1).format('dddd')}
+                {dayjs(new Date())
+                  .day(activity?.settings?.day - 1)
+                  .format('dddd')}
               </span>
             </div>
           </div>
@@ -157,7 +159,9 @@ const ActivityDetails = () => {
 
           <div className='col-lg-8'>
             <span className='fw-bold fs-6'>
-              {activity?.location?.type === 1 ? 'Online' : 'In-Person: ' + activity?.location?.locate}
+              {activity?.location?.type === 1
+                ? 'Online'
+                : 'In-Person: ' + activity?.location?.locate}
             </span>
           </div>
         </div>

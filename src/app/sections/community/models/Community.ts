@@ -66,7 +66,6 @@ export type CommunityForm = {
   logo?: string
   banner_image?: string
   is_featured?: boolean
-
 }
 
 export function formOnChange(

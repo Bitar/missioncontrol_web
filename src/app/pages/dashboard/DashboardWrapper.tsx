@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React, {FC} from 'react'
 // import { useIntl } from "react-intl";
-import { useAuth } from "../../modules/auth";
-import { isUserCommunityAdmin, isUserSuperAdmin } from "../../sections/identity/user/models/User";
-import { CommunityView } from "../../sections/community/pages/CommunityView";
-import { CreateCommunityWidget } from "../../layout/widgets/CreateCommunityWidget";
+import {useAuth} from '../../modules/auth'
+import {isUserCommunityAdmin, isUserSuperAdmin} from '../../sections/identity/user/models/User'
+import {CommunityView} from '../../sections/community/pages/CommunityView'
+import {CreateCommunityWidget} from '../../layout/widgets/CreateCommunityWidget'
 // import Pusher from "pusher-js";
 
 // const DashboardPage: FC<React.PropsWithChildren<unknown>> = () => {
@@ -59,4 +59,4 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
   )
 }
 
-export { DashboardWrapper };
+export {DashboardWrapper}

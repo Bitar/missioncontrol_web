@@ -1,6 +1,6 @@
 import {ID, Response} from '../../../_metronic/helpers'
 import * as Yup from 'yup'
-import { PlanOption } from "./PlanOption";
+import {PlanOption} from './PlanOption'
 
 export const planSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -18,7 +18,7 @@ export const initialPlan: Plan = {
   max_members: 0,
   can_quarter: false,
   launch_percentage: 0,
-  options: []
+  options: [],
 }
 
 export type Plan = {
@@ -26,12 +26,12 @@ export type Plan = {
   name: string
   description?: string
   contact_type: number
-  price_per_member: number,
-  cm_service_percentage?: number,
-  transaction_fee: number,
-  max_members: number,
-  can_quarter: boolean,
-  launch_percentage: number,
+  price_per_member: number
+  cm_service_percentage?: number
+  transaction_fee: number
+  max_members: number
+  can_quarter: boolean
+  launch_percentage: number
   options: PlanOption[]
   // categories: $this->getCategories($this->options),
   // options: BillingPlanOptionResource::collection($this->options),

@@ -108,4 +108,4 @@ const PrivateRoutes = () => {
   )
 }
 
-export { PrivateRoutes };
+export {PrivateRoutes}

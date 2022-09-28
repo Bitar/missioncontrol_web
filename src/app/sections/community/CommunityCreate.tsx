@@ -82,4 +82,4 @@ const CommunityCreate = () => {
   )
 }
 
-export { CommunityCreate };
+export {CommunityCreate}

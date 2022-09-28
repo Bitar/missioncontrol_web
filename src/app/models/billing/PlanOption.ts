@@ -1,13 +1,13 @@
-import { ID, Response } from "../../helpers/crud-helper/models";
+import {ID, Response} from '../../helpers/crud-helper/models'
 
 export type PlanOption = {
-  id?: ID,
+  id?: ID
   category_id?: ID
-  name?: string,
-  label?: string,
-  value: string,
-  is_boolean?: boolean,
-  is_hidden?: boolean,
+  name?: string
+  label?: string
+  value: string
+  is_boolean?: boolean
+  is_hidden?: boolean
 }
 
 export type BillingPlanOptionQueryResponse = Response<Array<PlanOption>>

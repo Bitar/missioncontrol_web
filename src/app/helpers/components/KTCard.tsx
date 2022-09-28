@@ -1,6 +1,6 @@
 import {FC} from 'react'
 import clsx from 'clsx'
-import {WithChildren} from "../../../_metronic/helpers"
+import {WithChildren} from '../../../_metronic/helpers'
 
 // Wrapper on html card:
 // https://preview.keenthemes.com/metronic8/demo1/documentation/base/cards.html

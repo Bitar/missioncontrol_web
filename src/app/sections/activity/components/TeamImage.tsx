@@ -54,4 +54,4 @@ const TeamImage: FC<Props> = ({
   )
 }
 
-export { TeamImage };
+export {TeamImage}

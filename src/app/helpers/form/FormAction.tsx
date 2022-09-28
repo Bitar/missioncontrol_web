@@ -26,4 +26,4 @@ const FormAction: FC<Props> = ({text, isSubmitting}) => {
   )
 }
 
-export { FormAction };
+export {FormAction}

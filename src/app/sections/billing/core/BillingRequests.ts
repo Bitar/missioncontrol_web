@@ -3,7 +3,7 @@ import {Response} from '../../../../_metronic/helpers'
 import {PaymentRequestIntent} from '../../../models/billing/PaymentRequest'
 import {PaymentResponseWrapper} from '../../../models/billing/PaymentResponse'
 import {Plan} from '../../../models/billing/Plan'
-import { SubscriptionRequest } from "../../../models/billing/SubscriptionRequest";
+import {SubscriptionRequest} from '../../../models/billing/SubscriptionRequest'
 
 const API_URL = process.env.REACT_APP_API_URL
 const GET_PAYMENT_REQUEST_URL = `${API_URL}/payment/request`
@@ -17,7 +17,10 @@ const paymentRequest = (plan: Plan): Promise<PaymentRequestIntent | undefined> =
     .then((response: Response<PaymentRequestIntent>) => response.data)
 }
 
-export const subscriptionRequest = (plan: Plan, paymentTerms: number = 1): Promise<SubscriptionRequest | undefined> => {
+export const subscriptionRequest = (
+  plan: Plan,
+  paymentTerms: number = 1
+): Promise<SubscriptionRequest | undefined> => {
   return axios
     .post(`${GET_SUBSCRIPTION_BILLING_URL}/${plan.id}/subscribe`, {payment_term: paymentTerms})
     .then((response: AxiosResponse<Response<SubscriptionRequest>>) => response.data)

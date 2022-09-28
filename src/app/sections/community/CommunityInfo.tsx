@@ -138,4 +138,4 @@ const CommunityInfo: FC<Props> = ({links}) => {
   )
 }
 
-export { CommunityInfo };
+export {CommunityInfo}

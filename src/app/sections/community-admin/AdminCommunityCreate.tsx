@@ -13,7 +13,7 @@ import {jsonToFormData} from '../../helpers/form/FormHelper'
 import {LogoImage} from '../community/partials/LogoImage'
 import {BannerImage} from '../community/partials/BannerImage'
 import {CommunityForm} from '../community/CommunityForm'
-import { useAuth } from "../../modules/auth";
+import {useAuth} from '../../modules/auth'
 
 const AdminCommunityCreate = () => {
   const [community, setCommunity] = useState<Community>(initialCommunity)
@@ -23,8 +23,8 @@ const AdminCommunityCreate = () => {
   const handleSubmit = async () => {
     let data = jsonToFormData(community)
     await createAdminCommunity(data).then(() => {
-      updateAuth();
-      navigate('/dashboard');
+      updateAuth()
+      navigate('/dashboard')
     })
   }
 
@@ -78,7 +78,7 @@ const AdminCommunityCreate = () => {
                 >
                   <span className='indicator-label'>Add Community</span>
                   {isSubmitting && (
-                    <span className='indicator-progress' style={{display: "inline-block"}}>
+                    <span className='indicator-progress' style={{display: 'inline-block'}}>
                       <span className='spinner-border spinner-border-sm align-middle ms-2' />
                     </span>
                   )}
@@ -92,4 +92,4 @@ const AdminCommunityCreate = () => {
   )
 }
 
-export { AdminCommunityCreate };
+export {AdminCommunityCreate}

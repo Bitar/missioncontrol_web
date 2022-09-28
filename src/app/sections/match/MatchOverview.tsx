@@ -46,8 +46,8 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
     if (scoringKey?.key.type === 1) {
       returnValue =
         scoringSheet.value *
-        (scoringKey?.values?.find((e: any) => e.id === scoringSheet?.scoring_value_id)?.value ||
-          0) +
+          (scoringKey?.values?.find((e: any) => e.id === scoringSheet?.scoring_value_id)?.value ||
+            0) +
         ''
     } else {
       returnValue =
@@ -188,4 +188,4 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
   )
 }
 
-export { MatchOverview };
+export {MatchOverview}

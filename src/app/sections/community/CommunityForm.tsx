@@ -3,7 +3,6 @@ import {ErrorMessage, Field} from 'formik'
 import {Community} from './models/Community'
 import {getStates} from '../misc/core/_requests'
 
-
 type Props = {
   method: string
   community: Community | undefined
@@ -209,12 +208,11 @@ const CommunityForm: FC<React.PropsWithChildren<Props>> = ({method, community}) 
         <label className='col-lg-4 col-form-label required fw-bold fs-6'>State</label>
         <div className='col-lg-8 fv-row'>
           {(statesLoaded || method === 'create') && (
-            <Field
-              as='select'
-              className='form-select'
-              name='address.state'>
+            <Field as='select' className='form-select' name='address.state'>
               {statesOptions.map((stateProvince) => (
-                <option key={`state-options-${stateProvince?.value}`} value={stateProvince?.value}>{stateProvince?.label}</option>
+                <option key={`state-options-${stateProvince?.value}`} value={stateProvince?.value}>
+                  {stateProvince?.label}
+                </option>
               ))}
             </Field>
           )}
@@ -353,4 +351,4 @@ const CommunityForm: FC<React.PropsWithChildren<Props>> = ({method, community}) 
   )
 }
 
-export { CommunityForm };
+export {CommunityForm}

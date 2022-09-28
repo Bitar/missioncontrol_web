@@ -1,12 +1,12 @@
 import {ActivityForm} from '../models/Activity'
-import React, { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
+import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
 import {StaticTimePicker} from '@mui/x-date-pickers/StaticTimePicker'
 import TextField from '@mui/material/TextField'
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider'
 import dayjs, {Dayjs} from 'dayjs'
 import {updateData} from '../../../helpers/form/FormHelper'
-import { useActivity } from "../ActivityContext";
+import {useActivity} from '../ActivityContext'
 
 type Props = {
   activityForm: ActivityForm
@@ -19,7 +19,7 @@ const TimeOfDayPicker: FC<Props> = ({activityForm, setActivityForm}) => {
 
   useEffect(() => {
     if (activity?.settings.time) {
-      console.log(activity?.settings?.time);
+      console.log(activity?.settings?.time)
       let time = dayjs(activity?.settings.time * 1000)
       setValue(time)
       // let endDate = dayjs(activity?.matchplay_dates?.end_date * 1000)

@@ -447,7 +447,10 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                       <span className='required fw-bold fs-6'>Registration Dates</span>
                     </div>
                     <div className='col-lg-8 fv-row'>
-                      <RegistrationDatePicker activityForm={activity} setActivityForm={setActivity} />
+                      <RegistrationDatePicker
+                        activityForm={activity}
+                        setActivityForm={setActivity}
+                      />
                     </div>
                   </div>
 
@@ -709,4 +712,4 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
   )
 }
 
-export { ActivityCreate };
+export {ActivityCreate}

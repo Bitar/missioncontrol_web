@@ -1,9 +1,9 @@
-import React, { FC } from "react";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { PrivateRoutes } from "./PrivateRoutes";
-import { ErrorsPage } from "../modules/errors/ErrorsPage";
-import { AuthPage, Logout, useAuth } from "../modules/auth";
-import { App } from "../App";
+import React, {FC} from 'react'
+import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
+import {PrivateRoutes} from './PrivateRoutes'
+import {ErrorsPage} from '../modules/errors/ErrorsPage'
+import {AuthPage, Logout, useAuth} from '../modules/auth'
+import {App} from '../App'
 
 const {PUBLIC_URL} = process.env
 

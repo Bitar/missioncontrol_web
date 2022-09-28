@@ -131,7 +131,7 @@ const PlansCreate = () => {
               {/*  /!* begin::Label *!/*/}
               {/*  <label className='required fw-bold fs-6 mb-2'>Price</label>*/}
               {/*  /!* end::Label *!/*/}
-              
+
               {/*  /!* begin::Input *!/*/}
               {/*  <input*/}
               {/*    placeholder='Price'*/}
@@ -163,7 +163,7 @@ const PlansCreate = () => {
               {/*  /!* begin::Label *!/*/}
               {/*  <label className='required fw-bold fs-6 mb-2'>Launch</label>*/}
               {/*  /!* end::Label *!/*/}
-              
+
               {/*  /!* begin::Input *!/*/}
               {/*  <input*/}
               {/*    placeholder='Launch'*/}

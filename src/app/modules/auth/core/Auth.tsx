@@ -71,7 +71,7 @@ const AuthProvider: FC<WithChildren> = ({children}) => {
   }
 
   const updateAuth = async () => {
-    if(auth) {
+    if (auth) {
       const {data} = await getUserByToken(auth.token)
       if (data) {
         setSubscription(data.subscription)

@@ -1,5 +1,5 @@
 import {Activity} from './models/Activity'
-import  { createContext, Dispatch, SetStateAction, useContext } from "react";
+import {createContext, Dispatch, SetStateAction, useContext} from 'react'
 import {Match} from './models/matches/Match'
 import {User} from '../identity/user/models/User'
 

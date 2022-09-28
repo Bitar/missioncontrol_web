@@ -143,7 +143,10 @@ const ActivityInfo: FC = () => {
                       <div className='d-flex justify-content-between w-100 mt-auto mb-2'>
                         <span className='fw-bold fs-6 text-gray-400'>Activity Completion</span>
                         <span className='fw-bolder fs-6'>
-                          {Math.round((activity?.teams?.length / activity?.team_setting?.max) * 100)}%
+                          {Math.round(
+                            (activity?.teams?.length / activity?.team_setting?.max) * 100
+                          )}
+                          %
                         </span>
                       </div>
                       <div className='h-5px mx-3 w-100 bg-light mb-3'>
@@ -151,9 +154,9 @@ const ActivityInfo: FC = () => {
                           className='bg-success rounded h-5px'
                           role='progressbar'
                           style={{
-                            width: `${
-                              Math.round((activity?.teams?.length / activity?.team_setting?.max) * 100)
-                            }%`,
+                            width: `${Math.round(
+                              (activity?.teams?.length / activity?.team_setting?.max) * 100
+                            )}%`,
                           }}
                         ></div>
                       </div>
@@ -195,4 +198,4 @@ const ActivityInfo: FC = () => {
   )
 }
 
-export { ActivityInfo };
+export {ActivityInfo}
