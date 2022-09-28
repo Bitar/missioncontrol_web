@@ -12,18 +12,6 @@ export type Team = {
   share_link?: string
 }
 
-// export const teamInitial = (team?: Team) => {
-//   return {
-//     name: team?.name || '',
-//     image: team?.image || '',
-//     captain_id: team?.captain_id || 0,
-//     users: team?.users || [],
-//     status: team?.status || 0,
-//     is_home: team?.is_home || false,
-//     share_link: team?.share_link || '',
-//   }
-// }
-
 export type TeamQueryResponse = Response<Array<Team>>
 
 export const getTeamStatus = (statusId: number) => {
