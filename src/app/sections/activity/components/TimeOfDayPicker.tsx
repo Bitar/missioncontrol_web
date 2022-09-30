@@ -63,4 +63,4 @@ const TimeOfDayPicker: FC<Props> = ({activityForm, setActivityForm}) => {
   )
 }
 
-export { TimeOfDayPicker };
+export {TimeOfDayPicker}

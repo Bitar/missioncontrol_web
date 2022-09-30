@@ -50,4 +50,4 @@ const ActivityTeamsColumns: ReadonlyArray<Column<Team>> = [
   },
 ]
 
-export { ActivityTeamsColumns };
+export {ActivityTeamsColumns}

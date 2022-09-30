@@ -1,13 +1,13 @@
-import React, { FC } from "react";
-import { ActivityStandings } from "../partials/ActivityStandings";
-import { ActivityAnnouncement } from "../partials/ActivityAnnouncement";
-import { ActivityDetails } from "./ActivityDetails";
-import { QUERIES } from "../../../helpers/crud-helper/consts";
-import { getActivityStandings } from "../core/ActivityRequests";
-import { QueryRequestProvider } from "../../../modules/table/QueryRequestProvider";
-import { useActivity } from "../ActivityContext";
-import { ListViewProvider } from "../../../modules/table/ListViewProvider";
-import { QueryResponseProvider } from "../../../modules/table/QueryResponseProvider";
+import React, {FC} from 'react'
+import {ActivityStandings} from '../partials/ActivityStandings'
+import {ActivityAnnouncement} from '../partials/ActivityAnnouncement'
+import {ActivityDetails} from './ActivityDetails'
+import {QUERIES} from '../../../helpers/crud-helper/consts'
+import {getActivityStandings} from '../core/ActivityRequests'
+import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
+import {useActivity} from '../ActivityContext'
+import {ListViewProvider} from '../../../modules/table/ListViewProvider'
+import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvider'
 // import {ActivityAnnouncement} from '../partials/ActivityAnnouncement'
 
 const ActivityOverview: FC = () => {
@@ -45,4 +45,4 @@ const ActivityOverview: FC = () => {
   )
 }
 
-export { ActivityOverview };
+export {ActivityOverview}

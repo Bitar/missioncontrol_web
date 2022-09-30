@@ -1,4 +1,4 @@
-import { ID, Response } from "../../../helpers/crud-helper/models";
+import {ID, Response} from '../../../helpers/crud-helper/models'
 import {User} from '../../identity/user/models/User'
 import {Team} from '../../../models/squad/Team'
 

@@ -30,6 +30,10 @@ const CommunityView: FC<Props> = ({communityId}) => {
       text: 'Members',
       link: link.current + '/members',
     },
+    {
+      text: 'Settings',
+      link: link.current + '/settings',
+    },
   ]
 
   const communityViewBreadCrumbs: Array<PageLink> = [
@@ -108,15 +112,6 @@ const CommunityView: FC<Props> = ({communityId}) => {
               )
             }
           />
-          {/*<Route*/}
-          {/*  path='activities'*/}
-          {/*  element={*/}
-          {/*    <>*/}
-          {/*      <PageTitle breadcrumbs={communityViewBreadCrumbs}>Activities</PageTitle>*/}
-          {/*      <CommunityActivities community={community} />*/}
-          {/*    </>*/}
-          {/*  }*/}
-          {/*/>*/}
           <Route
             path='members'
             element={
@@ -131,7 +126,7 @@ const CommunityView: FC<Props> = ({communityId}) => {
             element={
               <>
                 <PageTitle breadcrumbs={communityViewBreadCrumbs}>Settings</PageTitle>
-                <CommunityEdit />
+                <CommunityEdit communityId={community?.id} />
               </>
             }
           />

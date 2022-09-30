@@ -22,7 +22,7 @@ const CommunityPicker: FC<React.PropsWithChildren<unknown>> = () => {
     } else {
       setCommunityAdmins(communityObj)
     }
-  }, [])
+  }, [communityAdmin])
 
   const setCommunity = (community: Community) => {
     setAdminCommunities(community.id).then(() => {

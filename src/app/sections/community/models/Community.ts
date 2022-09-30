@@ -60,13 +60,38 @@ export type Community = {
 
 export type CommunityQueryResponse = Response<Array<Community>>
 
-export type CommunityForm = {
+export type CommunityFormType = {
   id?: ID
   name: string
   description?: string
   logo?: string
   banner_image?: string
   is_featured?: boolean
+  contact?: CommunityContact
+  address?: {
+    address_one: string
+    address_two: string
+    city: string
+    state: string
+    postal_code: string
+  }
+  access?: CommunityAccess
+}
+
+export const initialCommunityFormTypeByCommunity = (community?: Community) => {
+  return {
+    name: community?.name || '',
+    description: community?.description || '',
+    contact: initialCommunityContact(community?.contact),
+    address: {
+      address_one: community?.address?.address_one || '',
+      address_two: community?.address?.address_two || '',
+      city: community?.address?.city || '',
+      state: community?.address?.state?.id + '' || '',
+      postal_code: community?.address?.postal_code || '',
+    },
+    access: initialCommunityAccess(community?.access),
+  }
 }
 
 export function formOnChange(

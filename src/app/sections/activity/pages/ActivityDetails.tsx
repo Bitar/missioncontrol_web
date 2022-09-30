@@ -93,7 +93,10 @@ const ActivityDetails = () => {
                 {dayjs(new Date(activity?.settings?.time * 1000))
                   .utc(false)
                   .format('h:mm a')}{' '}
-                - {activity?.settings?.timezone?.name} <span className='text-muted' style={{fontSize: '12px'}}>({activity?.settings?.timezone?.value})</span>
+                - {activity?.settings?.timezone?.name}{' '}
+                <span className='text-muted' style={{fontSize: '12px'}}>
+                  ({activity?.settings?.timezone?.value})
+                </span>
               </span>
             </div>
           </div>
@@ -105,7 +108,9 @@ const ActivityDetails = () => {
 
             <div className='col-lg-8 d-flex align-items-center'>
               <span className='fw-bolder fs-6 me-2'>
-                {dayjs(new Date()).day(activity?.settings?.day - 1).format('dddd')}
+                {dayjs(new Date())
+                  .day(activity?.settings?.day - 1)
+                  .format('dddd')}
               </span>
             </div>
           </div>
@@ -157,7 +162,9 @@ const ActivityDetails = () => {
 
           <div className='col-lg-8'>
             <span className='fw-bold fs-6'>
-              {activity?.location?.type === 1 ? 'Online' : 'In-Person ' + (activity?.location?.locate ?? '')}
+              {activity?.location?.type === 1
+                ? 'Online'
+                : 'In-Person ' + (activity?.location?.locate ?? '')}
             </span>
           </div>
         </div>
