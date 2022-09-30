@@ -103,7 +103,7 @@ const PlanCard: FC<React.PropsWithChildren<Props>> = ({plan, selectPlan, payment
               </a>
             )}
             {plan.contact_type === 2 && (
-              <a href='mailto:sales@missioncontrol.gg' className='btn btn-sm btn-primary'>
+              <a href='mailto:revenue@missioncontrol.gg' className='btn btn-sm btn-primary'>
                 Contact Sales
               </a>
             )}

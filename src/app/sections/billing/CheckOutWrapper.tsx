@@ -19,4 +19,4 @@ const CheckOutWrapper: FC<React.PropsWithChildren<Props>> = ({plan, paymentTerms
   return <></>
 }
 
-export { CheckOutWrapper };
+export {CheckOutWrapper}

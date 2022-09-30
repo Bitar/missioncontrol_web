@@ -85,7 +85,7 @@ const CommunityInfo: FC<Props> = ({links}) => {
                   {community?.address && (
                     <div className='d-flex align-items-center text-gray-400 mb-2'>
                       <KTSVG path='/media/icons/duotune/gen018.svg' className='svg-icon-4 me-1' />
-                      {community?.address?.city}
+                      {community?.address?.city}, {community?.address?.state?.code}
                     </div>
                   )}
                 </div>

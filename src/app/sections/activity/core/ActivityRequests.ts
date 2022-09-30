@@ -1,11 +1,11 @@
-import axios, { AxiosResponse } from "axios";
-import { Response } from "../../../../_metronic/helpers";
-import { Activity, ActivityQueryResponse } from "../models/Activity";
-import { Match, MatchQueryResponse } from "../models/matches/Match";
-import { Announcement } from "../../../models/announcement/Announcements";
-import { ChatMessage, ChatMessageQueryResponse } from "../../../models/chat/ChatMessage";
-import { TeamQueryResponse } from "../../../models/squad/Team";
-import { ActivityRegistrationsQueryResponse } from "../models/ActivityRegistration";
+import axios, {AxiosResponse} from 'axios'
+import {Response} from '../../../../_metronic/helpers'
+import {Activity, ActivityQueryResponse} from '../models/Activity'
+import {Match, MatchQueryResponse} from '../models/matches/Match'
+import {Announcement} from '../../../models/announcement/Announcements'
+import {ChatMessage, ChatMessageQueryResponse} from '../../../models/chat/ChatMessage'
+import {TeamQueryResponse} from '../../../models/squad/Team'
+import {ActivityRegistrationsQueryResponse} from '../models/ActivityRegistration'
 // import process from "process";
 
 const API_URL = process.env.REACT_APP_API_URL

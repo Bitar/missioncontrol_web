@@ -44,27 +44,27 @@ const ActivityStandings: FC<Props> = ({scroll = false}) => {
               {...getTableProps()}
             >
               <thead>
-              <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
-                {headers.map((column: ColumnInstance<Team>) => (
-                  <CustomHeaderColumn key={column.id} column={column} />
-                ))}
-              </tr>
+                <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
+                  {headers.map((column: ColumnInstance<Team>) => (
+                    <CustomHeaderColumn key={column.id} column={column} />
+                  ))}
+                </tr>
               </thead>
               <tbody className='text-gray-600 fw-bold' {...getTableBodyProps()}>
-              {rows.length > 0 ? (
-                rows.map((row: Row<Team>, i) => {
-                  prepareRow(row)
-                  return <CustomRow row={row} key={`row-${i}-${row.id}`} />
-                })
-              ) : (
-                <tr>
-                  <td colSpan={3}>
-                    <div className='d-flex text-center w-100 align-content-center justify-content-center'>
-                      No records found
-                    </div>
-                  </td>
-                </tr>
-              )}
+                {rows.length > 0 ? (
+                  rows.map((row: Row<Team>, i) => {
+                    prepareRow(row)
+                    return <CustomRow row={row} key={`row-${i}-${row.id}`} />
+                  })
+                ) : (
+                  <tr>
+                    <td colSpan={3}>
+                      <div className='d-flex text-center w-100 align-content-center justify-content-center'>
+                        No records found
+                      </div>
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -76,4 +76,4 @@ const ActivityStandings: FC<Props> = ({scroll = false}) => {
   )
 }
 
-export { ActivityStandings };
+export {ActivityStandings}
