@@ -50,7 +50,7 @@ const RecentMatches: FC = () => {
                 </div>
               ))
             ) : (
-              <div className='d-flex text-center w-100 align-content-center justify-content-center'>
+              <div className='p-6 d-flex text-center w-100 align-content-center justify-content-center'>
                 <span className='text-gray-600 fw-bold'>Matches are not scheduled yet</span>
               </div>
             )}

@@ -2,9 +2,6 @@ import React, { FC, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { KTCard, KTCardBody } from "../../../../_metronic/helpers";
 import { Match } from "../models/matches/Match";
-import { calculateTeamScore, getDateFromTimestamp, getTimeFromTimestamp } from "../../../helpers/MCHelper";
-import { formatMatchStatus } from "../../../helpers/ActivityHelper";
-import { TeamImage } from "../components/TeamImage";
 import {useActivity} from '../ActivityContext'
 import { MatchRow } from "../components/MatchRow";
 
@@ -64,12 +61,12 @@ const UpcomingMatches: FC = () => {
                     handleMatchClick(match, '/activities/' + params.id + '/matches/' + match?.id)
                   }
                 >
-                  <MatchRow match={match}/>
+                  <MatchRow match={match} upcoming={true}/>
                   <div className='separator'></div>
                 </div>
               ))
             ) : (
-              <div className='d-flex text-center w-100 align-content-center justify-content-center'>
+              <div className='p-6 d-flex text-center w-100 align-content-center justify-content-center'>
                 <span className='text-gray-600 fw-bold'>Matches are not scheduled yet</span>
               </div>
             )}

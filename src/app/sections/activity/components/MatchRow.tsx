@@ -12,17 +12,19 @@ import clsx from "clsx";
 
 type Props = {
   match: Match
+  upcoming?: boolean
 }
 
-const MatchRow: FC<Props> = ({match}) => {
+const MatchRow: FC<Props> = ({match, upcoming= false}) => {
   return (
     <>
       <div className='d-flex flex-stack text-center'>
         {match?.teams && match?.teams[0] ? (
           <div
             className={clsx('flex-grow-1 mw-300px', {
-              'bg-light-success': isWinner(match, match?.teams[0]?.id),
-              'bg-light-danger': !isWinner(match, match?.teams[0]?.id)
+              'bg-light-success': !upcoming && isWinner(match, match?.teams[0]?.id),
+              'bg-light-danger': !upcoming && !isWinner(match, match?.teams[0]?.id),
+              'bg-light-secondary': upcoming
             })}
           >
             <div className='d-flex flex-stack text-start pt-8 pb-3'>
@@ -59,8 +61,10 @@ const MatchRow: FC<Props> = ({match}) => {
         {match?.teams && match?.teams[1] ? (
           <div
             className={clsx('flex-grow-1 mw-300px', {
-              'bg-light-success': isWinner(match, match?.teams[1]?.id),
-              'bg-light-danger': !isWinner(match, match?.teams[1]?.id)
+              'bg-light-success': !upcoming && isWinner(match, match?.teams[1]?.id),
+              'bg-light-danger': !upcoming && !isWinner(match, match?.teams[1]?.id),
+              'bg-light-secondary': upcoming
+
             })}
           >
             <div className='d-flex flex-stack text-end pt-8 pb-3'>
