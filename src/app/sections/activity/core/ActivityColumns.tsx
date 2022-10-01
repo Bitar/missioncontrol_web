@@ -62,18 +62,20 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
     ),
     id: 'Registration',
     Cell: ({...props}) => {
-      const {startDate, endDate} = formatDates(
-        props.data[props.row.index].registration_dates,
-        props.data[props.row.index].settings?.timezone.value
-      )
       return (
         <div className='d-flex align-items-center'>
           <div className='d-flex flex-column text-center'>
-            <span className='text-gray-800 pe-none'>{startDate}</span>
-            <span className='my-1'>
-              <i className='fa fa-arrow-circle-down text-mc-secondary'></i>
+            <span className='text-gray-800 pe-none'>
+              {dayjs(new Date(props.data[props.row.index]?.registration_dates?.start_date * 1000))
+                .utc(false)
+                .format('DD MMM YY')}
+              <span className='my-1 d-block'>
+                <i className='fa fa-arrow-circle-down text-mc-secondary'></i>
+              </span>
+              {dayjs(new Date(props.data[props.row.index]?.registration_dates?.end_date * 1000))
+                .utc(false)
+                .format('DD MMM YY')}
             </span>
-            <span className='text-gray-800 pe-none'>{endDate}</span>
           </div>
         </div>
       )
