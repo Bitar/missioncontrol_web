@@ -49,7 +49,6 @@ const MatchInfo: FC<Props> = ({match}) => {
                     team={match?.teams[0]}
                     size='100px'
                     className='mb-3'
-                    isWinner={match?.result?.winner?.team_id === match?.teams[0].id}
                     iconTop={'-21px'}
                   />
                 </div>
@@ -90,7 +89,6 @@ const MatchInfo: FC<Props> = ({match}) => {
                     team={match?.teams[1]}
                     size='100px'
                     className='mb-3'
-                    isWinner={match?.result?.winner?.team_id === match?.teams[1].id}
                     iconTop={'-21px'}
                   />
                 </div>

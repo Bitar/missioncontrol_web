@@ -66,7 +66,6 @@ const ActivityView: FC = () => {
     getActivityById(params.id).then((response) => {
       setActivity(response)
 
-      // setTeams(response?.teams)
       getActivityMatches(params.id).then((response) => {
         setMatches(response.data)
       })
@@ -84,8 +83,6 @@ const ActivityView: FC = () => {
         setActivity,
         matches,
         setMatches,
-        // members,
-        // setMembers,
         match,
         setMatch,
         registrations,
@@ -116,29 +113,29 @@ const ActivityView: FC = () => {
               </>
             }
           />
-          <Route
-            path='/registrations'
-            element={
-              <>
-                <SuspenseView>
-                  <PageTitle breadcrumbs={activityViewBreadcrumbs}>Registrations</PageTitle>
-                  {activity && (
-                    <QueryRequestProvider>
-                      <QueryResponseProvider
-                        id={QUERIES.ACTIVITIES_LIST}
-                        requestFunction={getActivityRegistrations}
-                        requestId={activity?.id}
-                      >
-                        <ListViewProvider>
-                          <ActivityRegistrations />
-                        </ListViewProvider>
-                      </QueryResponseProvider>
-                    </QueryRequestProvider>
-                  )}
-                </SuspenseView>
-              </>
-            }
-          />
+          {/*<Route*/}
+          {/*  path='/registrations'*/}
+          {/*  element={*/}
+          {/*    <>*/}
+          {/*      <SuspenseView>*/}
+          {/*        <PageTitle breadcrumbs={activityViewBreadcrumbs}>Registrations</PageTitle>*/}
+          {/*        {activity && (*/}
+          {/*          <QueryRequestProvider>*/}
+          {/*            <QueryResponseProvider*/}
+          {/*              id={QUERIES.ACTIVITIES_LIST}*/}
+          {/*              requestFunction={getActivityRegistrations}*/}
+          {/*              requestId={activity?.id}*/}
+          {/*            >*/}
+          {/*              <ListViewProvider>*/}
+          {/*                <ActivityRegistrations />*/}
+          {/*              </ListViewProvider>*/}
+          {/*            </QueryResponseProvider>*/}
+          {/*          </QueryRequestProvider>*/}
+          {/*        )}*/}
+          {/*      </SuspenseView>*/}
+          {/*    </>*/}
+          {/*  }*/}
+          {/*/>*/}
           <Route
             path='/matches'
             element={

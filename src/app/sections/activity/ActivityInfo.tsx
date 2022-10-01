@@ -28,11 +28,11 @@ const ActivityInfo: FC = () => {
       text: `Matches`,
       link: '/activities/' + activity?.id + '/matches',
     },
-    {
-      icon: 'fa-solid fa-person',
-      text: `Registrations (${activity?.additional_data?.players_count || 0})`,
-      link: '/activities/' + activity?.id + '/registrations',
-    },
+    // {
+    //   icon: 'fa-solid fa-person',
+    //   text: `Registrations (${activity?.additional_data?.players_count || 0})`,
+    //   link: '/activities/' + activity?.id + '/registrations',
+    // },
     {
       icon: 'fa-solid fa-rocket',
       text: `Teams (${activity?.additional_data?.teams_count || 0})`,

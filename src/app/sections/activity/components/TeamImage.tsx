@@ -17,41 +17,41 @@ const TeamImage: FC<Props> = ({
   className,
   isWinner = false,
   textPosition = 'down',
-  iconTop = '0',
 }) => {
   return (
     <>
-      {team ? (
-        <>
-          {textPosition === 'up' && <div className='fs-6 fw-bold'>{team.name}</div>}
-          <div className={clsx(`symbol symbol-${size} symbol-circle`, className && className)}>
-            {isWinner && (
-              <span className={`position-absolute w-100 text-center`} style={{top: iconTop}}>
-                <i className='fas fa-trophy text-warning fs-1'></i>
-              </span>
+      <div className={clsx('team-block mw-150px text-center', className && className)}>
+        {team ? (
+          <>
+            {textPosition === 'up' && <div className='fs-6 fw-bold'>{team.name}</div>}
+            <div className={clsx(`symbol symbol-${size} symbol-circle`, className && className)}>
+              {isWinner && (
+                <span className={`position-absolute w-100 text-center`} style={{top: '-18px'}}>
+                  <i className='fas fa-trophy text-warning' style={{fontSize: '20px'}}></i>
+                </span>
+              )}
+              <img
+                alt={team.name + ' team image'}
+                src={team.image}
+                className='border border-1 border-mc-secondary'
+              />
+            </div>
+            {textPosition === 'down' && (
+              <div className='mt-1 fw-bolder mw-150px mx-auto' style={{fontSize: '12px'}}>
+                {team.name}
+              </div>
             )}
-            <img
-              alt={team.name + ' team image'}
-              src={team.image}
-              className='border border-1 border-mc-secondary'
-            />
+          </>
+        ) : (
+          <div className='symbol symbol-${size} symbol-circle overflow-hidden'>
+            <div className={`bg-mc-secondary w-${size} h-${size} team-bye`}>
+              <div className='fs-6 fw-bold text-center text-white'>TBD</div>
+            </div>
           </div>
-          {textPosition === 'down' && <div className='fs-6 fw-bold'>{team.name}</div>}
-        </>
-      ) : (
-        <div
-          className={clsx(
-            `symbol symbol-${size} symbol-circle overflow-hidden`,
-            className && className
-          )}
-        >
-          <div className={`bg-mc-secondary w-${size} h-${size} team-bye`}>
-            <div className='fs-6 fw-bold text-center text-white'>BYE</div>
-          </div>
-        </div>
-      )}
+        )}
+      </div>
     </>
   )
 }
 
-export {TeamImage}
+export { TeamImage };

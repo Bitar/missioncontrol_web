@@ -5,6 +5,7 @@ import {calculateTeamScore} from '../../../helpers/MCHelper'
 import {useNavigate, useParams} from 'react-router-dom'
 import {TeamImage} from '../components/TeamImage'
 import {useActivity} from '../ActivityContext'
+import { MatchRow } from "../components/MatchRow";
 
 const RecentMatches: FC = () => {
   const {matches, setMatch} = useActivity()
@@ -33,54 +34,19 @@ const RecentMatches: FC = () => {
             <h3 className='card-label text-white'>Recent Matches</h3>
           </div>
         </div>
-        <KTCardBody className='py-5 scroll-y mh-300px' id='activity_recent_matches_body'>
+        <KTCardBody className='p-0 scroll-y mh-600px' id='activity_recent_matches_body'>
           <div className='d-flex flex-column'>
             {closedMatches && closedMatches?.length > 0 ? (
               matches?.filter(filterClosedMatches).map((match) => (
                 <div
                   key={match.id}
-                  className='nav-link text-active-primary me-6 cursor-pointer'
+                  className='nav-link text-active-primary cursor-pointer'
                   onClick={() =>
                     handleMatchClick(match, '/activities/' + params.id + '/matches/' + match?.id)
                   }
                 >
-                  <div className='d-flex flex-stack '>
-                    {match?.teams && match?.teams[0] ? (
-                      <div className='flex-grow-1 mw-200px'>
-                        <div className='d-flex justify-content-start flex-stack'>
-                          <TeamImage team={match?.teams[0]} className='me-3' />
-                        </div>
-                      </div>
-                    ) : (
-                      <div className='flex-grow-1 mw-200px'>
-                        <div className='d-inline-block'>
-                          <TeamImage className='mb-3' />
-                        </div>
-                      </div>
-                    )}
-                    {match?.teams && match?.teams[0] && match?.teams[1] && (
-                      <div className='flex-grow-1'>
-                        <div className='fs-6 fw-semibold text-gray-600 text-center'>
-                          {calculateTeamScore(match, match?.teams[0])} -{' '}
-                          {calculateTeamScore(match, match?.teams[1])}
-                        </div>
-                      </div>
-                    )}
-                    {match?.teams && match?.teams[1] ? (
-                      <div className='flex-grow-1 mw-200px'>
-                        <div className='d-flex flex-stack justify-content-end'>
-                          <TeamImage team={match?.teams[1]} className='ms-3' textPosition='up' />
-                        </div>
-                      </div>
-                    ) : (
-                      <div className='flex-grow-1 mw-200px'>
-                        <div className='text-end'>
-                          <TeamImage textPosition='up' />
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                  <div className='separator my-3'></div>
+                  <MatchRow match={match}/>
+                  <div className='separator'></div>
                 </div>
               ))
             ) : (

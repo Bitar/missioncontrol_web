@@ -22,12 +22,14 @@ export type Match = {
   actions?: []
   result?: {
     id: ID
-    winner: {
-      team_id: number
+    home_team: {
+      id: number
+      status: number
       score: number
     }
-    loser: {
-      team_id: number
+    away_team: {
+      id: number
+      status: number
       score: number
     }
   }

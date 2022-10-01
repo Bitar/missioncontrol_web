@@ -1,11 +1,12 @@
-import React, {FC, useEffect, useState} from 'react'
-import {useNavigate, useParams} from 'react-router-dom'
-import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
-import {Match} from '../models/matches/Match'
-import {getDateFromTimestamp, getTimeFromTimestamp} from '../../../helpers/MCHelper'
-import {formatMatchStatus} from '../../../helpers/ActivityHelper'
-import {TeamImage} from '../components/TeamImage'
+import React, { FC, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { KTCard, KTCardBody } from "../../../../_metronic/helpers";
+import { Match } from "../models/matches/Match";
+import { calculateTeamScore, getDateFromTimestamp, getTimeFromTimestamp } from "../../../helpers/MCHelper";
+import { formatMatchStatus } from "../../../helpers/ActivityHelper";
+import { TeamImage } from "../components/TeamImage";
 import {useActivity} from '../ActivityContext'
+import { MatchRow } from "../components/MatchRow";
 
 // let matchesLoaded = false
 
@@ -52,59 +53,19 @@ const UpcomingMatches: FC = () => {
             <h3 className='card-label text-white'>Upcoming Matches</h3>
           </div>
         </div>
-        <KTCardBody className='py-5 scroll-y mh-600px' id='activity_matches_body'>
+        <KTCardBody className='p-0 scroll-y mh-600px' id='activity_matches_body'>
           <div className='d-flex flex-column'>
             {openMatches && openMatches?.length > 0 ? (
               openMatches?.map((match) => (
                 <div
                   key={match.id}
-                  className='nav-link text-active-primary me-6 cursor-pointer'
+                  className='nav-link text-active-primary cursor-pointer'
                   onClick={() =>
                     handleMatchClick(match, '/activities/' + params.id + '/matches/' + match?.id)
                   }
                 >
-                  <div className='d-flex flex-stack text-center'>
-                    {match?.teams && match?.teams[0] ? (
-                      <div className='flex-grow-1 mw-200px'>
-                        <div className='d-inline-block'>
-                          <TeamImage team={match?.teams[0]} className='mb-3' size='60px' />
-                        </div>
-                      </div>
-                    ) : (
-                      <div className='flex-grow-1 mw-200px'>
-                        <div className='d-inline-block'>
-                          <TeamImage className='mb-3' size='60px' />
-                        </div>
-                      </div>
-                    )}
-                    <div className='flex-shrink-1'>
-                      <div className='fs-6 fw-semibold text-gray-600 px-5'>
-                        <p className='m-0'>{getTimeFromTimestamp(match?.start_date)}</p>
-                        <p className='m-0'>{getDateFromTimestamp(match?.start_date)}</p>
-                        <p className='m-0 text-center'>
-                          <span
-                            className={'badge badge-' + formatMatchStatus(match?.status)['color']}
-                          >
-                            {formatMatchStatus(match?.status)['status']}
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-                    {match?.teams && match?.teams[1] ? (
-                      <div className='flex-grow-1 mw-200px'>
-                        <div className='d-inline-block'>
-                          <TeamImage team={match?.teams[1]} className='mb-3' size='60px' />
-                        </div>
-                      </div>
-                    ) : (
-                      <div className='flex-grow-1 mw-200px'>
-                        <div className='d-inline-block'>
-                          <TeamImage className='mb-3' size='60px' />
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                  <div className='separator my-3'></div>
+                  <MatchRow match={match}/>
+                  <div className='separator'></div>
                 </div>
               ))
             ) : (
@@ -119,4 +80,4 @@ const UpcomingMatches: FC = () => {
   )
 }
 
-export {UpcomingMatches}
+export { UpcomingMatches };
