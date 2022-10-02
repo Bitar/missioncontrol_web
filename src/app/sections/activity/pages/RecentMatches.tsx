@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react'
 import {Match} from '../models/matches/Match'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
-import {calculateTeamScore} from '../../../helpers/MCHelper'
+import { calculateTeamScore, getDateFromTimestamp } from "../../../helpers/MCHelper";
 import {useNavigate, useParams} from 'react-router-dom'
 import {TeamImage} from '../components/TeamImage'
 import {useActivity} from '../ActivityContext'
@@ -22,6 +22,10 @@ const RecentMatches: FC = () => {
     return element.status === 3
   }
 
+  function sortClosedMatches(elementA: Match, elementB: Match) {
+    return elementB.start_date - elementA.start_date;
+  }
+
   useEffect(() => {
     setClosedMatches(matches?.filter(filterClosedMatches))
   }, [matches])
@@ -37,7 +41,7 @@ const RecentMatches: FC = () => {
         <KTCardBody className='p-0 scroll-y mh-600px' id='activity_recent_matches_body'>
           <div className='d-flex flex-column'>
             {closedMatches && closedMatches?.length > 0 ? (
-              matches?.filter(filterClosedMatches).map((match) => (
+              matches?.filter(filterClosedMatches).sort(sortClosedMatches).map((match) => (
                 <div
                   key={match.id}
                   className='nav-link text-active-primary cursor-pointer'
