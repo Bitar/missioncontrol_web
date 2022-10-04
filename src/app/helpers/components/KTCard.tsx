@@ -19,10 +19,12 @@ type Props = {
   utilityP?: number
   utilityPY?: number
   utilityPX?: number
+  ref?: any
 }
 
 const KTCard: FC<Props & WithChildren> = (props) => {
   const {
+    ref,
     id,
     className,
     shadow,
@@ -39,6 +41,7 @@ const KTCard: FC<Props & WithChildren> = (props) => {
   } = props
   return (
     <div
+      ref={ref}
       id={id}
       className={clsx(
         'card',

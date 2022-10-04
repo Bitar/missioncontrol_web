@@ -15,7 +15,7 @@ export type SortState = {
 }
 
 export type FilterState = {
-  filter?: unknown
+  filter?: any
 }
 
 export type SearchState = {

@@ -1,14 +1,22 @@
 import {Link} from 'react-router-dom'
 import React, {FC} from 'react'
 import clsx from 'clsx'
+import {KTSVG} from '../../helpers/components/KTSVG'
+import { useQueryResponse } from "./QueryResponseProvider";
 
 type Props = {
   name: string
   url: string
   showAdd?: boolean
+  showFilter?: boolean
+  ref?: any
 }
 
-const TableListToolbar: FC<React.PropsWithChildren<Props>> = ({name, url, showAdd}) => {
+const TableListToolbar: FC<React.PropsWithChildren<Props>> = ({name, url, showAdd, showFilter, ref}) => {
+  const {isLoading} = useQueryResponse()
+
+  console.log(ref);
+
   return (
     <div className='d-flex justify-content-end' data-kt-user-table-toolbar='base'>
       {/* begin::Export */}
@@ -17,6 +25,13 @@ const TableListToolbar: FC<React.PropsWithChildren<Props>> = ({name, url, showAd
       {/*    Export*/}
       {/*</button>*/}
       {/* end::Export */}
+
+      {showFilter &&
+        <button type='button' className='btn btn-light-info me-3' disabled={isLoading}>
+          <KTSVG path='/media/icons/duotune/gen031.svg' className='svg-icon-2' />
+          Filter
+        </button>
+      }
 
       {showAdd && (
         <Link to={url + '/create'} className='btn-icon btn btn-primary'>
