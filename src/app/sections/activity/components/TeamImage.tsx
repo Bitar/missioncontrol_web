@@ -43,7 +43,7 @@ const TeamImage: FC<Props> = ({
             )}
           </>
         ) : (
-          <div className='symbol symbol-${size} symbol-circle overflow-hidden'>
+          <div className={`symbol symbol-${size} symbol-circle overflow-hidden`}>
             <div className={`bg-mc-secondary w-${size} h-${size} team-bye`}>
               <div className='fs-6 fw-bold text-center text-white'>TBD</div>
             </div>
