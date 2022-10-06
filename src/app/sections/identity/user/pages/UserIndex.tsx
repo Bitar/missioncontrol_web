@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, {useRef} from 'react'
 import {KTCard, KTCardBody, QUERIES} from '../../../../../_metronic/helpers'
 import {TableHeader} from '../../../../modules/table/TableHeader'
 import {QueryRequestProvider} from '../../../../modules/table/QueryRequestProvider'
@@ -9,13 +9,11 @@ import {UserTable} from '../UserTable'
 import {UserFilter} from '../UserFilter'
 
 const UsersList = () => {
-  const filterContainerRef = useRef(null)
-
   return (
     <KTCard>
-      <TableHeader name='User' url='/users' showFilter={true} ref={filterContainerRef} />
+      <TableHeader name='User' url='/users' showFilter={true} />
       <KTCardBody>
-        <UserFilter ref={filterContainerRef} />
+        <UserFilter />
         <UserTable />
       </KTCardBody>
     </KTCard>

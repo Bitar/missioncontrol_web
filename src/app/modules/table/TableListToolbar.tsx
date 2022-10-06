@@ -9,13 +9,10 @@ type Props = {
   url: string
   showAdd?: boolean
   showFilter?: boolean
-  ref?: any
 }
 
-const TableListToolbar: FC<React.PropsWithChildren<Props>> = ({name, url, showAdd, showFilter, ref}) => {
+const TableListToolbar: FC<React.PropsWithChildren<Props>> = ({name, url, showAdd, showFilter}) => {
   const {isLoading} = useQueryResponse()
-
-  console.log(ref);
 
   return (
     <div className='d-flex justify-content-end' data-kt-user-table-toolbar='base'>

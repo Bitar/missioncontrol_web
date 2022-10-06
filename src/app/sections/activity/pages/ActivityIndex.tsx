@@ -1,18 +1,22 @@
 import React from 'react'
-import {KTCard, QUERIES} from '../../../../_metronic/helpers'
+import {KTCard, KTCardBody, QUERIES} from '../../../../_metronic/helpers'
 import {TableHeader} from '../../../modules/table/TableHeader'
 import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
 import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvider'
 import {getActivities} from '../core/ActivityRequests'
 import {ListViewProvider} from '../../../modules/table/ListViewProvider'
 import {ActivityTable} from '../ActivityTable'
+import {ActivityFilter} from '../ActivityFilter'
 
 const ActivitiesList = () => {
   return (
     <>
       <KTCard>
-        <TableHeader name='Activity' url='/activities' />
-        <ActivityTable />
+        <TableHeader name='Activity' url='/activities' showFilter={true} />
+        <KTCardBody>
+          <ActivityFilter />
+          <ActivityTable />
+        </KTCardBody>
       </KTCard>
     </>
   )
@@ -28,4 +32,4 @@ const ActivityIndex = () => (
   </QueryRequestProvider>
 )
 
-export {ActivityIndex}
+export { ActivityIndex };
