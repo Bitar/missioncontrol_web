@@ -109,7 +109,7 @@ const ActivityDetails = () => {
             <div className='col-lg-8 d-flex align-items-center'>
               <span className='fw-bolder fs-6 me-2'>
                 {dayjs(new Date())
-                  .day(activity?.settings?.day - 1)
+                  .day(activity?.settings?.day)
                   .format('dddd')}
               </span>
             </div>
