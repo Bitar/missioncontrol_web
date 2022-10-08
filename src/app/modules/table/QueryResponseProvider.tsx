@@ -13,7 +13,7 @@ import {
 type Props = {
   id: string
   requestFunction: any
-  requestId?: ID
+  requestId?: ID | string
 }
 
 const QueryResponseContext = createResponseContext<any>(initialQueryResponse)

@@ -20,7 +20,7 @@ const TeamImage: FC<Props> = ({
 }) => {
   return (
     <>
-      <div className={clsx('team-block mw-150px text-center', className && className)}>
+      <div className={clsx('team-block mw-150px mx-auto text-center', className && className)}>
         {team ? (
           <>
             {textPosition === 'up' && <div className='fs-6 fw-bold'>{team.name}</div>}
@@ -37,7 +37,7 @@ const TeamImage: FC<Props> = ({
               />
             </div>
             {textPosition === 'down' && (
-              <div className='mt-1 fw-bolder mw-150px mx-auto' style={{fontSize: '12px'}}>
+              <div className='mt-1 fw-bolder mw-100px mx-auto text-black' style={{fontSize: '12px'}}>
                 {team.name}
               </div>
             )}

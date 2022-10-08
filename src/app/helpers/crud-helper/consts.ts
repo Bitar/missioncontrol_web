@@ -11,6 +11,8 @@ const QUERIES = {
   SUBSCRIPTIONS_LIST: 'subscriptions-list',
   GAMES_LIST: 'games-list',
   PLANS_LIST: 'plans-list',
+  UPCOMING_MATCH_LIST: 'upcoming-match-list',
+  RECENT_MATCH_LIST: 'recent-match-list',
 }
 
 export {QUERIES}

@@ -45,7 +45,7 @@ export function ScrollTop() {
 
     updateHeaderSticky()
     setTimeout(() => {
-      scrollTop()
+      // scrollTop()
     }, 0)
   }, [pathname])
 

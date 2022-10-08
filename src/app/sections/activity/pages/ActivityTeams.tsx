@@ -27,7 +27,7 @@ const ActivityTeams: FC = () => {
     <KTCard>
       <div className='card-header bg-info'>
         <div className='card-title'>
-          <h3 className='card-label text-white'>Registrations</h3>
+          <h3 className='card-label text-white'>Teams</h3>
         </div>
       </div>
       <KTCardBody className='pt-1'>

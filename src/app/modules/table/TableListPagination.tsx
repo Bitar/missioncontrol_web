@@ -28,13 +28,13 @@ const TableListPagination = ({ numbers = true }) => {
             ?.map((link: any) => {
               return { ...link, label: mappedLabel(link.label) };
             })
-            .map((link: any) => (
+            .map((link: any, index: number) => (
               !numbers ? (
                 (link.label === "Previous" || link.label === "Next") && (
-                  <PaginationItem link={link} />
+                  <PaginationItem key={`pagination-link-${index}`} link={link} />
                 )
               ) : (
-                <PaginationItem link={link} />
+                <PaginationItem key={`pagination-link-${index}`} link={link} />
               )
             ))}
         </ul>

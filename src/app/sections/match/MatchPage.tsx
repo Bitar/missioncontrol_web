@@ -3,7 +3,7 @@ import {PageLink, PageTitle} from '../../layout/core'
 import React, {FC, useEffect} from 'react'
 import {MatchInfo} from './MatchInfo'
 import {MatchOverview} from './MatchOverview'
-import {getActivityMatch} from '../activity/core/ActivityRequests'
+import {getActivityMatch} from '../activity/core/ActivityMatchRequests'
 import {useActivity} from '../activity/ActivityContext'
 import { MatchChat } from "./pages/MatchChat";
 

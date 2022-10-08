@@ -4,8 +4,6 @@ import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../layout/core'
 import {
   getActivityById,
-  getActivityMatches,
-  getActivityRegistrations,
   getActivityTeams,
 } from '../core/ActivityRequests'
 import {ActivityInfo} from '../ActivityInfo'
@@ -13,7 +11,6 @@ import {ActivityTeams} from './ActivityTeams'
 import {ActivityOverview} from './ActivityOverview'
 import {ActivityChat} from './ActivityChat'
 import {Match} from '../models/matches/Match'
-import {ActivityRegistrations} from './ActivityRegistrations'
 import {MatchPage} from '../../match/MatchPage'
 import {ActivityContext} from '../ActivityContext'
 import {SuspenseView} from '../../../layout/SuspenseView'
@@ -29,6 +26,8 @@ import {ActivityRegistration} from '../models/ActivityRegistration'
 const ActivityView: FC = () => {
   const [activity, setActivity] = useState<Activity | undefined>()
   const [matches, setMatches] = useState<Match[] | undefined>([])
+  const [upcomingMatches, setUpcomingMatches] = useState<Match[] | undefined>([])
+  const [recentMatches, setRecentMatches] = useState<Match[] | undefined>([])
   const [match, setMatch] = useState<Match | undefined>()
   const [registrations, setRegistrations] = useState<ActivityRegistration[] | undefined>()
   const [teams, setTeams] = useState<Team[] | undefined>()
@@ -66,9 +65,9 @@ const ActivityView: FC = () => {
     getActivityById(params.id).then((response) => {
       setActivity(response)
 
-      getActivityMatches(params.id).then((response) => {
-        setMatches(response.data)
-      })
+      // getActivityMatches(params.id).then((response) => {
+      //   setMatches(response.data)
+      // })
 
       getActivityTeams(params.id).then((response) => {
         setTeams(response.data)
