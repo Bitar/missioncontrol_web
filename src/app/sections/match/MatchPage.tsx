@@ -52,11 +52,11 @@ const MatchPage: FC = () => {
   ]
 
   useEffect(() => {
-    if (match === undefined) {
+    // if (match === undefined) {
       getActivityMatch(params.id, params.matchId).then((response) => {
         setMatch(response)
       })
-    }
+    // }
   }, [params.id, params.matchId, match, setMatch])
 
   return (

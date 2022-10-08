@@ -5,6 +5,7 @@ import {Match} from '../activity/models/matches/Match'
 import {Activity} from '../activity/models/Activity'
 import {ScoreSheet} from '../activity/models/matches/ScoreSheet'
 import {TeamImage} from '../activity/components/TeamImage'
+import {Round} from '../activity/models/matches/Round'
 
 type Props = {
   activity: Activity | undefined
@@ -93,6 +94,30 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
     )
   }
 
+  const getImages = (round: Round) => {
+    let imagesIds: any = []
+    let imagesShown: any = []
+
+    let teamAScoreImages = round?.scores[0].images
+    let teamBScoreImages = round?.scores[1].images
+
+    teamAScoreImages?.forEach((image) => {
+      if (imagesIds.indexOf(image.id) === -1) {
+        imagesIds.push(image.id)
+        imagesShown.push(image)
+      }
+    })
+
+    teamBScoreImages?.forEach((image) => {
+      if (imagesIds.indexOf(image.id) === -1) {
+        imagesIds.push(image.id)
+        imagesShown.push(image)
+      }
+    })
+
+    return imagesShown
+  }
+
   return (
     <>
       <div className='row g-5 g-xxl-8'>
@@ -106,7 +131,7 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
                     <div className='py-1' key={round.round}>
                       <div className='fs-6 ps-10'>
                         <div className='d-flex flex-stack text-center mb-3'>
-                          <div className="flex-shrink-1">
+                          <div className='flex-shrink-1'>
                             <span className='fs-1 text-black'>Round: {round.round}</span>
                           </div>
                           {getTeam(round.scores[0]?.team_id) && (
@@ -157,6 +182,16 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
                               </div>
                             </div>
                           )}
+                        </div>
+                        <div className='images-container'>
+                          {getImages(round).map((image: any, index: any) => (
+                            <div
+                              key={`image-match-${match?.id}-round-${round.round}-image-${image.id}`}
+                              className='image-container d-inline-block'
+                            >
+                              <img src={image.image} className='mw-400px' alt='' />
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>
