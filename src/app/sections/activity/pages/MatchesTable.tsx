@@ -61,7 +61,7 @@ const MatchesTable: FC<Props> = ({title}) => {
           ) : (
             <tr>
               <td colSpan={5}>
-                <div className='d-flex text-center w-100 align-content-center justify-content-center'>
+                <div className='d-flex text-center w-100 align-content-center justify-content-center py-5'>
                   Matches are not scheduled yet
                 </div>
               </td>

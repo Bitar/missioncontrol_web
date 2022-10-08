@@ -1,4 +1,4 @@
-import {KTCard, KTCardBody, KTSVG} from '../../../_metronic/helpers'
+import {KTCard, KTCardBody} from '../../../_metronic/helpers'
 import React, {FC} from 'react'
 import {KTCardHeader} from '../../helpers/components/KTCardHeader'
 import {Match} from '../activity/models/matches/Match'
@@ -25,6 +25,8 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
           return 'fa-ranking-star'
         case 'Round':
           return 'fa-futbol'
+        case 'Goal':
+          return 'fa-futbol'
         default:
           return key
       }
@@ -46,8 +48,8 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
     if (scoringKey?.key.type === 1) {
       returnValue =
         scoringSheet.value *
-          (scoringKey?.values?.find((e: any) => e.id === scoringSheet?.scoring_value_id)?.value ||
-            0) +
+        (scoringKey?.values?.find((e: any) => e.id === scoringSheet?.scoring_value_id)?.value ||
+          0) +
         ''
     } else {
       returnValue =
@@ -102,31 +104,11 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
                 (round) =>
                   round?.scores.length > 0 && (
                     <div className='py-1' key={round.round}>
-                      <div className='py-3 d-flex flex-stack flex-wrap'>
-                        <div
-                          className='d-flex align-items-center collapsible toggle'
-                          data-bs-toggle='collapse'
-                          data-bs-target={`#mc_match_${match?.id}_scores_round_${round.round}`}
-                        >
-                          <div className='btn btn-sm btn-icon btn-active-color-primary ms-n3 me-2'>
-                            <KTSVG
-                              path='/media/icons/duotune/gen036.svg'
-                              className='svg-icon-2 svg-icon-primary toggle-off'
-                            />
-                            <KTSVG
-                              path='/media/icons/duotune/gen035.svg'
-                              className='svg-icon-2 toggle-on'
-                            />
-                          </div>
-                          <div className='fs-4 text-dark fw-bold me-3'>Round {round.round}:</div>
-                          <TeamImage team={getTeam(round?.scores[0]?.team_id)} className='me-3' />
-                        </div>
-                      </div>
-                      <div
-                        id={`mc_match_${match?.id}_scores_round_${round.round}`}
-                        className='collapse fs-6 ps-10'
-                      >
+                      <div className='fs-6 ps-10'>
                         <div className='d-flex flex-stack text-center mb-3'>
+                          <div className="flex-shrink-1">
+                            <span className='fs-1 text-black'>Round: {round.round}</span>
+                          </div>
                           {getTeam(round.scores[0]?.team_id) && (
                             <div className='flex-grow-1'>
                               <div className='d-inline-block'>
@@ -188,4 +170,4 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
   )
 }
 
-export {MatchOverview}
+export { MatchOverview };

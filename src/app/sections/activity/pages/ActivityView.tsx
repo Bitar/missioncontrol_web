@@ -2,10 +2,7 @@ import React, {FC, useEffect, useState} from 'react'
 import {Activity} from '../models/Activity'
 import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../layout/core'
-import {
-  getActivityById,
-  getActivityTeams,
-} from '../core/ActivityRequests'
+import {getActivityById, getActivityTeams} from '../core/ActivityRequests'
 import {ActivityInfo} from '../ActivityInfo'
 import {ActivityTeams} from './ActivityTeams'
 import {ActivityOverview} from './ActivityOverview'
@@ -22,6 +19,9 @@ import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvide
 import {ListViewProvider} from '../../../modules/table/ListViewProvider'
 import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
 import {ActivityRegistration} from '../models/ActivityRegistration'
+import {ActivityTeamsFilter} from '../ActivityTeamsFilter'
+import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
+import {TableHeader} from '../../../modules/table/TableHeader'
 
 const ActivityView: FC = () => {
   const [activity, setActivity] = useState<Activity | undefined>()
@@ -160,7 +160,13 @@ const ActivityView: FC = () => {
                         requestId={activity?.id}
                       >
                         <ListViewProvider>
-                          <ActivityTeams />
+                          <KTCard>
+                            <TableHeader name='Activity' url='/activities' showFilter={true} />
+                            <KTCardBody>
+                              <ActivityTeamsFilter />
+                              <ActivityTeams />
+                            </KTCardBody>
+                          </KTCard>
                         </ListViewProvider>
                       </QueryResponseProvider>
                     </QueryRequestProvider>
@@ -209,4 +215,4 @@ const ActivityView: FC = () => {
   )
 }
 
-export {ActivityView}
+export { ActivityView };

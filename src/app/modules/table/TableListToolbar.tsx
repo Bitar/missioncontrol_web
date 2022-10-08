@@ -23,12 +23,12 @@ const TableListToolbar: FC<React.PropsWithChildren<Props>> = ({name, url, showAd
       {/*</button>*/}
       {/* end::Export */}
 
-      {showFilter &&
-        <button type='button' className='btn btn-light-info me-3' disabled={isLoading}>
-          <KTSVG path='/media/icons/duotune/gen031.svg' className='svg-icon-2' />
-          Filter
-        </button>
-      }
+      {/*{showFilter &&*/}
+      {/*  <button type='button' className='btn btn-light-info me-3' disabled={isLoading}>*/}
+      {/*    <KTSVG path='/media/icons/duotune/gen031.svg' className='svg-icon-2' />*/}
+      {/*    Filter*/}
+      {/*  </button>*/}
+      {/*}*/}
 
       {showAdd && (
         <Link to={url + '/create'} className='btn-icon btn btn-primary'>

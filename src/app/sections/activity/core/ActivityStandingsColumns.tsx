@@ -2,18 +2,15 @@ import {Column} from 'react-table'
 import {TextCell} from '../../../modules/table/columns/TextCell'
 import {CustomHeader} from '../../../modules/table/columns/CustomHeader'
 import {ActivityStanding} from '../models/ActivityStanding'
-import {toAbsoluteUrl} from '../../../../_metronic/helpers'
-import { TeamImage } from "../components/TeamImage";
-import React from "react";
+import {TeamImage} from '../components/TeamImage'
+import React from 'react'
 
 const ActivityStandingsColumns: ReadonlyArray<Column<ActivityStanding>> = [
   {
-    Header: (props) => <CustomHeader tableProps={props} title='Team' />,
+    Header: (props) => <CustomHeader tableProps={props} title='Team' className='mw-200px' />,
     id: 'image',
     Cell: ({...props}) => (
-      <div className='d-flex align-items-center'>
-        <TeamImage team={props.data[props.row.index]} className='me-3' />
-      </div>
+      <TeamImage team={props.data[props.row.index]} size='50px' />
     ),
   },
   {
@@ -38,4 +35,4 @@ const ActivityStandingsColumns: ReadonlyArray<Column<ActivityStanding>> = [
   },
 ]
 
-export {ActivityStandingsColumns}
+export { ActivityStandingsColumns };

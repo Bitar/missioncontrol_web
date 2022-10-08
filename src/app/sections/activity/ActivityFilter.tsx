@@ -12,22 +12,50 @@ import Select from 'react-select'
 
 const initActivity = {
   title: '',
-  community_id: 0,
+  community_id: '',
+  status: '',
 }
 
 type ActivityFilterObj = {
   title: string
-  community_id: number
+  community_id: number | string
+  status: number | string
 }
 
 const ActivityFilter = () => {
   const {updateState} = useQueryRequest()
   const [activityFilters, setActivityFilters] = useState<ActivityFilterObj>(initActivity)
   const [communities, setCommunities] = useState<Community[]>()
-  const statuses = [{
-    'value': 0,
-    'label': 'registrations'
-  }]
+  const statuses = [
+    {
+      value: 1,
+      label: 'Registrations',
+    },
+    {
+      value: 2,
+      label: 'Active',
+    },
+    {
+      value: 3,
+      label: 'Pending',
+    },
+    {
+      value: 4,
+      label: 'Closed',
+    },
+    {
+      value: 5,
+      label: 'Match Generation In Queue',
+    },
+    {
+      value: 6,
+      label: 'Invalid Registrations',
+    },
+    {
+      value: 7,
+      label: 'Generating Matches In Progress',
+    },
+  ]
 
   useEffect(() => {
     getAllCommunities().then((response) => {
@@ -42,8 +70,11 @@ const ActivityFilter = () => {
     })
   }
 
-  const handleOnChange = (e: any) =>
-    updateData({[e.target.name]: e.target.value}, setActivityFilters, activityFilters)
+  const handleOnChange = (e: any) => {
+    if (e.target.name) {
+      updateData({[e.target.name]: e.target.value}, setActivityFilters, activityFilters)
+    }
+  }
 
   return (
     <KTCard id='filter-container' className='bg-transparent mb-10' shadow={false} border={true}>
@@ -78,8 +109,7 @@ const ActivityFilter = () => {
                   placeholder={'Choose a Status'}
                   options={statuses}
                   onChange={(e) => {
-                    console.log(e);
-                    // updateData({status: e?.id || ''}, setActivityFilters, activityFilters)
+                    updateData({status: e?.value || ''}, setActivityFilters, activityFilters)
                   }}
                   isClearable={true}
                 />

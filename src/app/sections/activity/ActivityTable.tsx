@@ -44,7 +44,7 @@ const ActivityTable = () => {
               })
             ) : (
               <tr>
-                <td colSpan={7}>
+                <td colSpan={10}>
                   <div className='d-flex text-center w-100 align-content-center justify-content-center'>
                     No matching records found
                   </div>

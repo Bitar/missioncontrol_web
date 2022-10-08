@@ -41,18 +41,7 @@ const ActivityChatInner: FC<Props> = ({chat, setChat, isDrawer = false}) => {
 
   return (
     <div className='card-body' id={'kt_chat_messenger_body'}>
-      <div
-        className={'scroll-y me-n5 pe-5 h-300px h-lg-auto'}
-        data-kt-element='messages'
-        data-kt-scroll='true'
-        data-kt-scroll-activate='{default: false, lg: true}'
-        data-kt-scroll-max-height='600px'
-        data-kt-scroll-dependencies={
-          '#kt_header, #kt_toolbar, #kt_footer, #kt_chat_messenger_header, #kt_chat_messenger_footer'
-        }
-        data-kt-scroll-wrappers={'#kt_content, #kt_chat_messenger_body'}
-        data-kt-scroll-offset={0}
-      >
+      <div className='scroll-y mh-600px' >
         {chat?.map((message, index) => {
           const userInfo = message?.user
           const state = message?.user?.id !== currentUser?.id ? 'info' : 'primary'
@@ -162,6 +151,8 @@ const ActivityChatInner: FC<Props> = ({chat, setChat, isDrawer = false}) => {
           </Form>
         )}
       </Formik>
+
+
     </div>
   )
 }
