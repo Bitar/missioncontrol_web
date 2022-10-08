@@ -7,6 +7,7 @@ import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvide
 import {QUERIES} from '../../../helpers/crud-helper/consts'
 import {ListViewProvider} from '../../../modules/table/ListViewProvider'
 import {useActivity} from '../ActivityContext'
+import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 
 const ActivityMatches = () => {
   const params = useParams()
@@ -16,37 +17,55 @@ const ActivityMatches = () => {
     <div className='row g-5 g-xxl-8'>
       <div className='col-lg-6 col-md-12'>
         <div className='mb-5'>
-          {activity && (
-            <QueryRequestProvider>
-              <QueryResponseProvider
-                id={QUERIES.UPCOMING_MATCH_LIST}
-                requestFunction={getUpcomingActivityMatches}
-                requestId={params?.id}
-              >
-                <ListViewProvider>
-                  <MatchesTable title={'Upcoming Matches'}/>
-                </ListViewProvider>
-              </QueryResponseProvider>
-            </QueryRequestProvider>
-          )}
+          <KTCard>
+            <div className='card-header bg-info'>
+              <div className='card-title'>
+                <h3 className='card-label text-white'>Upcoming Matches</h3>
+              </div>
+            </div>
+            <KTCardBody className='scroll-y mh-800px'>
+              {activity && (
+                <QueryRequestProvider>
+                  <QueryResponseProvider
+                    id={QUERIES.UPCOMING_MATCH_LIST}
+                    requestFunction={getUpcomingActivityMatches}
+                    requestId={params?.id}
+                  >
+                    <ListViewProvider>
+                      <MatchesTable title={'Upcoming Matches'} />
+                    </ListViewProvider>
+                  </QueryResponseProvider>
+                </QueryRequestProvider>
+              )}
+            </KTCardBody>
+          </KTCard>
         </div>
       </div>
 
       <div className='col-lg-6 col-md-12'>
         <div className='mb-5'>
-          {activity && (
-            <QueryRequestProvider>
-              <QueryResponseProvider
-                id={QUERIES.RECENT_MATCH_LIST}
-                requestFunction={getRecentActivityMatches}
-                requestId={params?.id}
-              >
-                <ListViewProvider>
-                  <MatchesTable title={'Recent Matches'}/>
-                </ListViewProvider>
-              </QueryResponseProvider>
-            </QueryRequestProvider>
-          )}
+          <KTCard>
+            <div className='card-header bg-mc-secondary'>
+              <div className='card-title'>
+                <h3 className='card-label text-white'>Recent Matches</h3>
+              </div>
+            </div>
+            <KTCardBody className='scroll-y mh-800px'>
+              {activity && (
+                <QueryRequestProvider>
+                  <QueryResponseProvider
+                    id={QUERIES.RECENT_MATCH_LIST}
+                    requestFunction={getRecentActivityMatches}
+                    requestId={params?.id}
+                  >
+                    <ListViewProvider>
+                      <MatchesTable title={'Recent Matches'} />
+                    </ListViewProvider>
+                  </QueryResponseProvider>
+                </QueryRequestProvider>
+              )}
+            </KTCardBody>
+          </KTCard>
         </div>
       </div>
     </div>
