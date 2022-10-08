@@ -31,10 +31,10 @@ const TableListPagination = ({ numbers = true }) => {
             .map((link: any, index: number) => (
               !numbers ? (
                 (link.label === "Previous" || link.label === "Next") && (
-                  <PaginationItem key={`pagination-link-${index}`} link={link} />
+                  <PaginationItem key={`pagination-key-${index}`} link={link} />
                 )
               ) : (
-                <PaginationItem key={`pagination-link-${index}`} link={link} />
+                <PaginationItem key={`pagination-key-${index}`} link={link} />
               )
             ))}
         </ul>

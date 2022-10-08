@@ -34,6 +34,8 @@ const QueryResponseProvider: FC<React.PropsWithChildren<Props>> = ({
     }
   }, [query, updatedQuery])
 
+  // console.log(query)
+  // console.log(updatedQuery)
   // console.log(requestFunction)
   // console.log(requestId)
   const {

@@ -23,7 +23,7 @@ const UserTable = () => {
   })
 
   return (
-    <KTCardBody className='py-4'>
+    <>
       <div className='table-responsive'>
         <table
           className='table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer'
@@ -56,7 +56,7 @@ const UserTable = () => {
       </div>
       <TableListPagination />
       {isLoading && <TableListLoading />}
-    </KTCardBody>
+    </>
   )
 }
 
