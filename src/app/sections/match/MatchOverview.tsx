@@ -98,8 +98,8 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
     let imagesIds: any = []
     let imagesShown: any = []
 
-    let teamAScoreImages = round?.scores[0].images
-    let teamBScoreImages = round?.scores[1].images
+    let teamAScoreImages = round?.scores[0]?.images
+    let teamBScoreImages = round?.scores[1]?.images
 
     teamAScoreImages?.forEach((image) => {
       if (imagesIds.indexOf(image.id) === -1) {
@@ -184,14 +184,14 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
                           )}
                         </div>
                         <div className='images-container'>
-                          {getImages(round).map((image: any, index: any) => (
-                            <div
-                              key={`image-match-${match?.id}-round-${round.round}-image-${image.id}`}
-                              className='image-container d-inline-block'
-                            >
-                              <img src={image.image} className='mw-400px' alt='' />
-                            </div>
-                          ))}
+                          {/*{getImages(round).map((image: any, index: any) => (*/}
+                          {/*  <div*/}
+                          {/*    key={`image-match-${match?.id}-round-${round.round}-image-${image.id}`}*/}
+                          {/*    className='image-container d-inline-block'*/}
+                          {/*  >*/}
+                          {/*    <img src={image.image} className='mw-400px' alt='' />*/}
+                          {/*  </div>*/}
+                          {/*))}*/}
                         </div>
                       </div>
                     </div>
