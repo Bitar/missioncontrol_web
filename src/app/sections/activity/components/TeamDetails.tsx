@@ -12,8 +12,8 @@ type Props = {
 
 const TeamDetails: FC<Props> = ({activity, setActivity, gameMode}) => {
   const [players, setPlayers] = useState<number>(gameMode?.min_players || 0)
-  const [minTeam, setMinTeam] = useState<number>(2)
-  const [maxTeam, setMaxTeam] = useState<number>(2)
+  const [minTeam, setMinTeam] = useState<number>(activity?.team?.min || 2)
+  const [maxTeam, setMaxTeam] = useState<number>(activity?.team?.max || 2)
 
   const updateObject = (updateObj: object) => {
     updateData(
@@ -30,9 +30,7 @@ const TeamDetails: FC<Props> = ({activity, setActivity, gameMode}) => {
 
   useEffect(() => {
     let updateObj: {players?: number; min?: number; max?: number} = {
-      players: gameMode?.min_players,
-      min: 2,
-      max: 2,
+      players: gameMode?.min_players
     }
 
     // console.log(gameMode?.min_players)
@@ -147,7 +145,10 @@ const TeamDetails: FC<Props> = ({activity, setActivity, gameMode}) => {
       </div>
 
       <div className='row mb-6'>
-        <label className='col-lg-4 col-form-label required fw-bold fs-6'>Players per team</label>
+        <label className='col-lg-4 col-form-label'>
+          <span className='fw-bold fs-6'>Players per team</span>
+          <p className='text-muted m-0'>The number of players per team for the chosen game mode.</p>
+        </label>
         <div className='col-lg-8 fv-row'>
           <ButtonGroup size='small' aria-label='small outlined button group'>
             <button
@@ -172,7 +173,10 @@ const TeamDetails: FC<Props> = ({activity, setActivity, gameMode}) => {
       </div>
 
       <div className='row mb-6'>
-        <label className='col-lg-4 col-form-label required fw-bold fs-6'>Minimum Team</label>
+        <label className='col-lg-4 col-form-label'>
+          <span className='fw-bold fs-6'>Minimum Teams</span>
+          <p className='text-muted m-0'>Minimum of 2 teams is required</p>
+        </label>
         <div className='col-lg-8 fv-row'>
           <ButtonGroup size='small' aria-label='small outlined button group'>
             <button

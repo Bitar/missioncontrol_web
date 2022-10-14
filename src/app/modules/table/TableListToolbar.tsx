@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom'
 import React, {FC} from 'react'
 import clsx from 'clsx'
 import {KTSVG} from '../../helpers/components/KTSVG'
-import { useQueryResponse } from "./QueryResponseProvider";
+import {useQueryResponse} from './QueryResponseProvider'
 
 type Props = {
   name: string

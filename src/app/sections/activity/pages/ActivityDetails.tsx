@@ -1,4 +1,4 @@
-import {useActivity} from '../ActivityContext'
+import {useActivity} from '../core/ActivityContext'
 import {PlatformObject} from '../components/PlatformObject'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
@@ -108,9 +108,7 @@ const ActivityDetails = () => {
 
             <div className='col-lg-8 d-flex align-items-center'>
               <span className='fw-bolder fs-6 me-2'>
-                {dayjs(new Date())
-                  .day(activity?.settings?.day)
-                  .format('dddd')}
+                {dayjs(new Date()).day(activity?.settings?.day).format('dddd')}
               </span>
             </div>
           </div>

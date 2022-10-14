@@ -37,7 +37,10 @@ const TeamImage: FC<Props> = ({
               />
             </div>
             {textPosition === 'down' && (
-              <div className='mt-1 fw-bolder mw-100px mx-auto text-black' style={{fontSize: '12px'}}>
+              <div
+                className='mt-1 fw-bolder mw-100px mx-auto text-black'
+                style={{fontSize: '12px'}}
+              >
                 {team.name}
               </div>
             )}
@@ -54,4 +57,4 @@ const TeamImage: FC<Props> = ({
   )
 }
 
-export { TeamImage };
+export {TeamImage}

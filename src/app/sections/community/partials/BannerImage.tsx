@@ -42,7 +42,7 @@ const BannerImage: FC<Props> = ({community, setCommunity}) => {
 
     updateData(
       {
-        logo: '',
+        banner_image: '',
       },
       setCommunity,
       community

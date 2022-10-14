@@ -1,29 +1,29 @@
+import {FC, useEffect, useState} from 'react'
+import {ActivityChatInner} from './ActivityChatInner'
 import {useParams} from 'react-router-dom'
-import {useEffect, useState} from 'react'
 import {ChatMessage} from '../../../models/chat/ChatMessage'
-import {getMatchChat} from '../core/MatchRequests'
-import {MatchChatInner} from './MatchChatInner'
+import {getActivityChat} from '../core/ActivityRequests'
 
-const MatchChat = () => {
+const ActivityChat: FC = () => {
   const params = useParams()
 
   const [chat, setChat] = useState<ChatMessage[] | undefined>([])
 
   useEffect(() => {
-    getMatchChat(params.matchId).then((response) => {
+    getActivityChat(params.id).then((response) => {
       setChat(response?.data?.reverse())
     })
-  }, [params.matchId])
+  }, [params.id])
 
   return (
     <div className='d-flex flex-column flex-lg-row'>
       <div className='flex-lg-row-fluid'>
         <div className='card' id='kt_chat_messenger'>
-          <MatchChatInner chat={chat} setChat={setChat} />
+          <ActivityChatInner chat={chat} setChat={setChat} />
         </div>
       </div>
     </div>
   )
 }
 
-export {MatchChat}
+export {ActivityChat}

@@ -1,13 +1,13 @@
-import {KTCard} from '../../helpers/components/KTCard'
-import {KTCardHeader} from '../../helpers/components/KTCardHeader'
+import {KTCard} from '../../../helpers/components/KTCard'
+import {KTCardHeader} from '../../../helpers/components/KTCardHeader'
 import {Field, Form, Formik} from 'formik'
-import {KTCardBody} from '../../helpers/components/KTCardBody'
+import {KTCardBody} from '../../../helpers/components/KTCardBody'
 import React, {useEffect, useState} from 'react'
-import {useQueryRequest} from '../../modules/table/QueryRequestProvider'
-import {initialQueryState} from '../../helpers/crud-helper/models'
-import {updateData} from '../../helpers/form/FormHelper'
-import {Community} from '../community/models/Community'
-import {getAllCommunities} from '../community/core/CommunityRequests'
+import {useQueryRequest} from '../../../modules/table/QueryRequestProvider'
+import {initialQueryState} from '../../../helpers/crud-helper/models'
+import {updateData} from '../../../helpers/form/FormHelper'
+import {Community} from '../../community/models/Community'
+import {getAllCommunities} from '../../community/core/CommunityRequests'
 import Select from 'react-select'
 
 const initActivity = {
@@ -127,4 +127,4 @@ const ActivityFilter = () => {
   )
 }
 
-export { ActivityFilter };
+export {ActivityFilter}

@@ -2,7 +2,7 @@ import React, {FC} from 'react'
 import {PageLink, PageTitle} from '../../../layout/core'
 import {Navigate, Route, Routes} from 'react-router-dom'
 import {ActivityIndex} from './ActivityIndex'
-import {ActivityCreate} from '../ActivityCreate'
+import {ActivityCreate} from './ActivityCreate'
 import {ActivityView} from './ActivityView'
 import {SuspenseView} from '../../../layout/SuspenseView'
 

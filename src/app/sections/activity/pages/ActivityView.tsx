@@ -3,13 +3,13 @@ import {Activity} from '../models/Activity'
 import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../layout/core'
 import {getActivityById, getActivityTeams} from '../core/ActivityRequests'
-import {ActivityInfo} from '../ActivityInfo'
+import {ActivityInfo} from '../partials/ActivityInfo'
 import {ActivityTeams} from './ActivityTeams'
 import {ActivityOverview} from './ActivityOverview'
-import {ActivityChat} from './ActivityChat'
+import {ActivityChat} from '../partials/ActivityChat'
 import {Match} from '../models/matches/Match'
 import {MatchPage} from '../../match/MatchPage'
-import {ActivityContext} from '../ActivityContext'
+import {ActivityContext} from '../core/ActivityContext'
 import {SuspenseView} from '../../../layout/SuspenseView'
 import {ActivitySettings} from './ActivitySettings'
 import {ActivityMatches} from './ActivityMatches'
@@ -19,7 +19,7 @@ import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvide
 import {ListViewProvider} from '../../../modules/table/ListViewProvider'
 import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
 import {ActivityRegistration} from '../models/ActivityRegistration'
-import {ActivityTeamsFilter} from '../ActivityTeamsFilter'
+import {ActivityTeamsFilter} from '../partials/ActivityTeamsFilter'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {TableHeader} from '../../../modules/table/TableHeader'
 
@@ -215,4 +215,4 @@ const ActivityView: FC = () => {
   )
 }
 
-export { ActivityView };
+export {ActivityView}

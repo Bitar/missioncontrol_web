@@ -8,7 +8,7 @@ export type Score = {
   user_id?: number
   team_id: number
   is_approved: number
-  images: {id: number, image: string}[]
+  images: {id: number; image: string}[]
   score_sheet: ScoreSheet[]
 }
 

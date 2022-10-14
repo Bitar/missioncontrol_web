@@ -83,4 +83,4 @@ const UserFilter: FC = () => {
   )
 }
 
-export { UserFilter };
+export {UserFilter}

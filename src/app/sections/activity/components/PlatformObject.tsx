@@ -31,4 +31,4 @@ const PlatformObject: FC<Props> = ({platform}) => {
   )
 }
 
-export { PlatformObject };
+export {PlatformObject}

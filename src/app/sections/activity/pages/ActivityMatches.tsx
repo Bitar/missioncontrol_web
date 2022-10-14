@@ -1,4 +1,4 @@
-import {MatchesTable} from './MatchesTable'
+import {MatchesTable} from '../partials/MatchesTable'
 import React from 'react'
 import {getRecentActivityMatches, getUpcomingActivityMatches} from '../core/ActivityMatchRequests'
 import {useParams} from 'react-router-dom'
@@ -6,7 +6,7 @@ import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
 import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvider'
 import {QUERIES} from '../../../helpers/crud-helper/consts'
 import {ListViewProvider} from '../../../modules/table/ListViewProvider'
-import {useActivity} from '../ActivityContext'
+import {useActivity} from '../core/ActivityContext'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 
 const ActivityMatches = () => {
@@ -72,4 +72,4 @@ const ActivityMatches = () => {
   )
 }
 
-export { ActivityMatches };
+export {ActivityMatches}

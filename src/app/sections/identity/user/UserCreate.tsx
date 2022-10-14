@@ -52,4 +52,4 @@ const UserCreate = () => {
   )
 }
 
-export { UserCreate };
+export {UserCreate}

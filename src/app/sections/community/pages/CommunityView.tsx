@@ -104,12 +104,10 @@ const CommunityView: FC<Props> = ({communityId}) => {
           <Route
             path='overview'
             element={
-              !!params.communityId && (
-                <>
-                  <PageTitle breadcrumbs={communityViewBreadCrumbs}>Overview</PageTitle>
-                  {/*<Overview />*/}
-                </>
-              )
+              <>
+                <PageTitle breadcrumbs={communityViewBreadCrumbs}>Overview</PageTitle>
+                {/*<Overview />*/}
+              </>
             }
           />
           <Route

@@ -83,6 +83,8 @@ export const initialCommunityFormTypeByCommunity = (community?: Community) => {
     name: community?.name || '',
     description: community?.description || '',
     contact: initialCommunityContact(community?.contact),
+    logo: community?.logo || '',
+    banner_image: community?.banner_image || '',
     address: {
       address_one: community?.address?.address_one || '',
       address_two: community?.address?.address_two || '',

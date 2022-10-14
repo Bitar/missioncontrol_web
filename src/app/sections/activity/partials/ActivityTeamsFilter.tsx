@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
-import {useQueryRequest} from '../../modules/table/QueryRequestProvider'
-import {initialQueryState} from '../../helpers/crud-helper/models'
-import {updateData} from '../../helpers/form/FormHelper'
-import {KTCardHeader} from '../../helpers/components/KTCardHeader'
+import {useQueryRequest} from '../../../modules/table/QueryRequestProvider'
+import {initialQueryState} from '../../../helpers/crud-helper/models'
+import {updateData} from '../../../helpers/form/FormHelper'
+import {KTCardHeader} from '../../../helpers/components/KTCardHeader'
 import {Field, Form, Formik} from 'formik'
-import {KTCardBody} from '../../helpers/components/KTCardBody'
-import {KTCard} from '../../helpers/components/KTCard'
+import {KTCardBody} from '../../../helpers/components/KTCardBody'
+import {KTCard} from '../../../helpers/components/KTCard'
 
 const initActivityTeamsFilter = {
   name: '',
@@ -68,7 +68,7 @@ const ActivityTeamsFilter = () => {
                 />
               </div>
             </div>
-            <div className="row">
+            <div className='row'>
               <div className='col-lg-4'>
                 <Field
                   type='text'
@@ -91,4 +91,4 @@ const ActivityTeamsFilter = () => {
   )
 }
 
-export { ActivityTeamsFilter };
+export {ActivityTeamsFilter}

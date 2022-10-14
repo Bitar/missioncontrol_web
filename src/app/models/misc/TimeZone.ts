@@ -4,7 +4,7 @@ export type TimeZone = {
   id?: ID
   name: string
   value: string
-  offset: string
+  offset?: string
 }
 
 export type TimeZoneCollection = Response<Array<TimeZone>>

@@ -30,4 +30,4 @@ const UserIndex = () => (
   </QueryRequestProvider>
 )
 
-export { UserIndex };
+export {UserIndex}

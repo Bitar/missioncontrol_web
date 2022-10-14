@@ -5,8 +5,8 @@ import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
 import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvider'
 import {getActivities} from '../core/ActivityRequests'
 import {ListViewProvider} from '../../../modules/table/ListViewProvider'
-import {ActivityTable} from '../ActivityTable'
-import {ActivityFilter} from '../ActivityFilter'
+import {ActivityTable} from '../partials/ActivityTable'
+import {ActivityFilter} from '../partials/ActivityFilter'
 
 const ActivitiesList = () => {
   return (
@@ -32,4 +32,4 @@ const ActivityIndex = () => (
   </QueryRequestProvider>
 )
 
-export { ActivityIndex };
+export {ActivityIndex}

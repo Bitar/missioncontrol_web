@@ -94,6 +94,16 @@ const CommunityEdit: FC<Props> = ({communityId}) => {
         setCommunityForm,
         communityForm
       )
+    } else if (targetName.includes('contact.')) {
+      let contactField = targetName.split('contact.')[1]
+
+      updateData(
+        {
+          contact: {...communityForm?.contact, ...{[contactField]: targetValue}},
+        },
+        setCommunityForm,
+        communityForm
+      )
     } else if (targetName.includes('access.')) {
       let accessField = targetName.split('access.')[1]
       if (accessField === 'type' || accessField === 'key') {
@@ -189,6 +199,7 @@ const CommunityEdit: FC<Props> = ({communityId}) => {
                         name='description'
                         className='form-control mb-3 mb-lg-0'
                         placeholder='Community Description'
+                        autoComplete='off'
                         rows={3}
                       />
                       <div className='text-danger mt-2'>
@@ -209,6 +220,7 @@ const CommunityEdit: FC<Props> = ({communityId}) => {
                     <label className='col-lg-4 col-form-label required fw-bold fs-6'>Name</label>
                     <div className='col-lg-8 fv-row'>
                       <Field
+                        autoComplete='off'
                         type='text'
                         name='contact.name'
                         placeholder='Contact Name'
@@ -224,6 +236,7 @@ const CommunityEdit: FC<Props> = ({communityId}) => {
                     <label className='col-lg-4 col-form-label required fw-bold fs-6'>Email</label>
                     <div className='col-lg-8 fv-row'>
                       <Field
+                        autoComplete='off'
                         type='text'
                         name='contact.email'
                         placeholder='Contact Email'
@@ -241,6 +254,7 @@ const CommunityEdit: FC<Props> = ({communityId}) => {
                     </label>
                     <div className='col-lg-8 fv-row'>
                       <Field
+                        autoComplete='off'
                         type='text'
                         name='contact.phone_number'
                         placeholder='Phone Number...'
@@ -266,6 +280,7 @@ const CommunityEdit: FC<Props> = ({communityId}) => {
                     </label>
                     <div className='col-lg-8 fv-row'>
                       <Field
+                        autoComplete='off'
                         type='text'
                         name='address.address_one'
                         placeholder='ex: 420 Broadway'
@@ -281,6 +296,7 @@ const CommunityEdit: FC<Props> = ({communityId}) => {
                     <label className='col-lg-4 col-form-label fw-bold fs-6'>Address Two</label>
                     <div className='col-lg-8 fv-row'>
                       <Field
+                        autoComplete='off'
                         type='text'
                         name='address.address_two'
                         className='form-control mb-3 mb-lg-0'
@@ -296,6 +312,7 @@ const CommunityEdit: FC<Props> = ({communityId}) => {
                     <label className='col-lg-4 col-form-label required fw-bold fs-6'>City</label>
                     <div className='col-lg-8 fv-row'>
                       <Field
+                        autoComplete='off'
                         type='text'
                         name='address.city'
                         className='form-control mb-3 mb-lg-0'
@@ -486,4 +503,4 @@ const CommunityEdit: FC<Props> = ({communityId}) => {
   )
 }
 
-export { CommunityEdit };
+export {CommunityEdit}

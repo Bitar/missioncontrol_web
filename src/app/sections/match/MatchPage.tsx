@@ -4,11 +4,12 @@ import React, {FC, useEffect} from 'react'
 import {MatchInfo} from './MatchInfo'
 import {MatchOverview} from './MatchOverview'
 import {getActivityMatch} from '../activity/core/ActivityMatchRequests'
-import {useActivity} from '../activity/ActivityContext'
-import { MatchChat } from "./pages/MatchChat";
+import {useActivity} from '../activity/core/ActivityContext'
+import {MatchChat} from './pages/MatchChat'
 
 const MatchPage: FC = () => {
   const {activity, match, setMatch} = useActivity()
+
   const params = useParams()
   // const [match, setMatch] = useState<Match | undefined>(initialMatch)
 
@@ -52,7 +53,7 @@ const MatchPage: FC = () => {
   ]
 
   useEffect(() => {
-    if (match === undefined) {
+    if (match === undefined || match?.id?.toString() !== params.matchId) {
       getActivityMatch(params.id, params.matchId).then((response) => {
         setMatch(response)
       })
@@ -83,8 +84,7 @@ const MatchPage: FC = () => {
           element={
             <>
               <PageTitle breadcrumbs={matchBreadCrumbs}>{'Chat'}</PageTitle>
-              <MatchChat/>
-              {/*<ActivityIndex />*/}
+              <MatchChat />
             </>
           }
         />
@@ -93,7 +93,6 @@ const MatchPage: FC = () => {
           element={
             <>
               <PageTitle breadcrumbs={matchBreadCrumbs}>{'Settings'}</PageTitle>
-              {/*<ActivityIndex />*/}
             </>
           }
         />

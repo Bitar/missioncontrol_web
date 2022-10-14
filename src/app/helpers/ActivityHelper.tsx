@@ -67,4 +67,10 @@ const formatDates = (dates: any, tz: string) => {
   return {startDate, endDate}
 }
 
+export const getDateConvertedToLocal = (timestamp: number, tz: string) => {
+  return dayjs(new Date(timestamp * 1000))
+    .utc(false)
+    .tz(tz, true)
+}
+
 export {formatActivityStatus, formatDates, formatMatchStatus}

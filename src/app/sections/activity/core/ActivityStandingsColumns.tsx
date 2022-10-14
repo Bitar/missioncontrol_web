@@ -9,9 +9,7 @@ const ActivityStandingsColumns: ReadonlyArray<Column<ActivityStanding>> = [
   {
     Header: (props) => <CustomHeader tableProps={props} title='Team' className='mw-200px' />,
     id: 'image',
-    Cell: ({...props}) => (
-      <TeamImage team={props.data[props.row.index]} size='50px' />
-    ),
+    Cell: ({...props}) => <TeamImage team={props.data[props.row.index]} size='50px' />,
   },
   {
     Header: (props) => <CustomHeader tableProps={props} title='M' />,
@@ -35,4 +33,4 @@ const ActivityStandingsColumns: ReadonlyArray<Column<ActivityStanding>> = [
   },
 ]
 
-export { ActivityStandingsColumns };
+export {ActivityStandingsColumns}

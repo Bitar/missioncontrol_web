@@ -1,6 +1,6 @@
-import axios, { AxiosResponse } from "axios";
-import { ChatMessage, ChatMessageQueryResponse } from "../../../models/chat/ChatMessage";
-import { Response } from "../../../helpers/crud-helper/models";
+import axios, {AxiosResponse} from 'axios'
+import {ChatMessage, ChatMessageQueryResponse} from '../../../models/chat/ChatMessage'
+import {Response} from '../../../helpers/crud-helper/models'
 // import process from "process";
 
 const API_URL = process.env.REACT_APP_API_URL

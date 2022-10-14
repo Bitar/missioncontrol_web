@@ -1,10 +1,10 @@
 import React, {FC, useEffect, useState} from 'react'
-import {ActivityForm, activitySchema, initialActivityForm} from './models/Activity'
-import {jsonToFormData, updateData} from '../../helpers/form/FormHelper'
-import {createActivity} from './core/ActivityRequests'
-import {KTCard, KTCardBody} from '../../../_metronic/helpers'
+import {ActivityForm, activitySchema, initialActivityForm} from '../models/Activity'
+import {jsonToFormData, updateData} from '../../../helpers/form/FormHelper'
+import {createActivity} from '../core/ActivityRequests'
+import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import {Form, Formik} from 'formik'
-import {FormAction} from '../../helpers/form/FormAction'
+import {FormAction} from '../../../helpers/form/FormAction'
 import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl'
 import {
@@ -17,13 +17,13 @@ import {
   Select,
   Switch,
 } from '@mui/material'
-import {Community} from '../community/models/Community'
-import {getAllCommunities} from '../community/core/CommunityRequests'
-import {TextFieldWrapper} from '../../helpers/form/TextFieldWrapper'
-import {Game} from '../../models/game/Game'
-import {getAllGameModes, getAllGamePlatforms, getAllGames} from '../games/core/GameRequests'
-import {GameMode} from '../../models/game/GameMode'
-import {Platform} from '../../models/game/Platform'
+import {Community} from '../../community/models/Community'
+import {getAllCommunities} from '../../community/core/CommunityRequests'
+import {TextFieldWrapper} from '../../../helpers/form/TextFieldWrapper'
+import {Game} from '../../../models/game/Game'
+import {getAllGameModes, getAllGamePlatforms, getAllGames} from '../../games/core/GameRequests'
+import {GameMode} from '../../../models/game/GameMode'
+import {Platform} from '../../../models/game/Platform'
 import {
   EntryFee,
   Location,
@@ -31,17 +31,17 @@ import {
   RegistrationDatePicker,
   Scoring,
   TeamDetails,
-} from './components'
-import {TimeOfDayPicker} from './components/TimeOfDayPicker'
-import {getTimeZones} from '../misc/core/_requests'
-import {TimeZone} from '../../models/misc/TimeZone'
+} from '../components'
+import {TimeOfDayPicker} from '../components/TimeOfDayPicker'
+import {getTimeZones} from '../../misc/core/_requests'
+import {TimeZone} from '../../../models/misc/TimeZone'
 import TextField from '@mui/material/TextField'
-import {PrizeWrapper} from './components/prize/PrizeWrapper'
+import {PrizeWrapper} from '../components/prize/PrizeWrapper'
 import {useNavigate} from 'react-router-dom'
 import toast from 'react-hot-toast'
-import {useAuth} from '../../modules/auth'
-import {isUserCommunityAdmin} from '../identity/user/models/User'
-import {FormErrorAlert} from '../../modules/errors/partials/FormErrorAlert'
+import {useAuth} from '../../../modules/auth'
+import {isUserCommunityAdmin} from '../../identity/user/models/User'
+import {FormErrorAlert} from '../../../modules/errors/partials/FormErrorAlert'
 
 const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
   const [communities, setCommunities] = useState<Community[]>()

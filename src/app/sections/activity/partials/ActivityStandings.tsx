@@ -68,7 +68,7 @@ const ActivityStandings: FC<Props> = ({scroll = false}) => {
               </tbody>
             </table>
           </div>
-          <TableListPagination numbers={false}/>
+          <TableListPagination numbers={false} />
           {isLoading && <TableListLoading />}
         </KTCardBody>
       </KTCard>

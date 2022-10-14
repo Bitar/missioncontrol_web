@@ -38,9 +38,12 @@ export const activityScheduleSchema = Yup.object().shape({
   }),
 })
 
-export const activitySchema = Yup.object().shape({
+export const activityDetailsSchema = Yup.object().shape({
   title: Yup.string().required('Activity title is required'),
   description: Yup.string().required('Activity Description is required'),
+})
+
+export const activitySchema = Yup.object().shape({
   community_id: Yup.string().required('Community is required'),
   game_id: Yup.string().required('Game is required'),
   game_mode_id: Yup.string().required('Game Mode is required'),
@@ -175,6 +178,14 @@ export type ActivityFormSchedule = {
     time: string | number
     timezone: string | number
     day: string | number
+  }
+}
+
+export const initialActivityDetails = (activity?: Activity) => {
+  return {
+    title: activity?.title || '',
+    description: activity?.description || '',
+    community_id: activity?.community?.id || '',
   }
 }
 

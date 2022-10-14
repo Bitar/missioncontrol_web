@@ -1,4 +1,3 @@
-import {Box, List, ListItem, ListItemText} from '@mui/material'
 import React, {FC} from 'react'
 import {ScoringSettings} from '../../../models/game/scoring/ScoringSettings'
 
@@ -18,41 +17,30 @@ const ScoringSetting: FC<Props> = ({settings}) => {
   return (
     <>
       {settings?.key?.type === 1 ? (
-        <>
-          <Box>
-            <div>
-              <h6>
-                {settings?.key?.key} Point worth {settings?.values[0].value}
-              </h6>
-            </div>
-          </Box>
-        </>
+        <h6>
+          {settings?.key?.key} Point worth {settings?.values[0].value}
+        </h6>
       ) : (
         <>
-          <Box>
-            <div>
-              <h6>{settings?.key?.key} Points</h6>
-            </div>
-            <List
-              className={'border border-1'}
-              dense={true}
-              sx={{
-                width: '100%',
-                maxWidth: 360,
-                position: 'relative',
-                overflow: 'auto',
-                maxHeight: 300,
-              }}
-            >
+          <div
+            className={'border border-1 p-2 w-100'}
+            style={{
+              maxWidth: 360,
+              position: 'relative',
+              overflow: 'auto',
+              maxHeight: 300,
+              fontSize: '12px',
+            }}
+          >
+            <h6>{settings?.key?.key} Points</h6>
+            <div className=''>
               {settings?.values?.map((value) => (
-                <ListItem key={value.id}>
-                  <ListItemText
-                    primary={ordinal(value.key) + ' ' + settings?.key?.key + ': ' + value.value}
-                  />
-                </ListItem>
+                <p className='m-0' key={value.id}>
+                  {ordinal(value.key) + ' ' + settings?.key?.key + ': ' + value.value}
+                </p>
               ))}
-            </List>
-          </Box>
+            </div>
+          </div>
         </>
       )}
       <br />

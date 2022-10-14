@@ -1,4 +1,4 @@
-import React, {Dispatch, FC, SetStateAction, useEffect, useRef, useState} from 'react'
+import React, {Dispatch, FC, SetStateAction, useState, useRef, useEffect} from 'react'
 import clsx from 'clsx'
 import {ChatMessage, chatSchema, initialChat} from '../../../models/chat/ChatMessage'
 import dayjs from 'dayjs'
@@ -8,10 +8,9 @@ import {IconButton} from '@mui/material'
 import SendIcon from '@mui/icons-material/Send'
 import {Form, Formik} from 'formik'
 import {jsonToFormData} from '../../../helpers/form/FormHelper'
-// import {sendActivityChat} from '../core/ActivityRequests'
+import {sendActivityChat} from '../core/ActivityRequests'
 import {useParams} from 'react-router-dom'
 import {useAuth} from '../../../modules/auth'
-import {sendMatchChat} from '../core/MatchRequests'
 
 type Props = {
   chat: ChatMessage[] | undefined
@@ -19,7 +18,7 @@ type Props = {
   isDrawer?: boolean
 }
 
-const MatchChatInner: FC<Props> = ({chat, setChat, isDrawer = false}) => {
+const ActivityChatInner: FC<Props> = ({chat, setChat, isDrawer = false}) => {
   dayjs.extend(relativeTime)
   const bottomRef = useRef<null | HTMLDivElement>(null)
   const params = useParams()
@@ -28,7 +27,7 @@ const MatchChatInner: FC<Props> = ({chat, setChat, isDrawer = false}) => {
 
   const handleSubmit = async () => {
     let data = jsonToFormData(message)
-    await sendMatchChat(params.id, data).then((response) => {
+    await sendActivityChat(params.id, data).then((response) => {
       if (response && chat) {
         setChat([...chat, response])
       }
@@ -156,4 +155,4 @@ const MatchChatInner: FC<Props> = ({chat, setChat, isDrawer = false}) => {
   )
 }
 
-export {MatchChatInner}
+export {ActivityChatInner}

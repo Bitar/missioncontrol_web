@@ -134,4 +134,4 @@ const MatchesColumns: ReadonlyArray<Column<Match>> = [
   },
 ]
 
-export { MatchesColumns };
+export {MatchesColumns}

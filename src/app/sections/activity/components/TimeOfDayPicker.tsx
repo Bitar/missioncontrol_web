@@ -6,12 +6,17 @@ import TextField from '@mui/material/TextField'
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider'
 import dayjs, {Dayjs} from 'dayjs'
 import {updateData} from '../../../helpers/form/FormHelper'
-import {useActivity} from '../ActivityContext'
+import {useActivity} from '../core/ActivityContext'
+import utc from 'dayjs/plugin/utc'
+import Timezone from 'dayjs/plugin/timezone'
 
 type Props = {
   activityForm: ActivityForm
   setActivityForm: Dispatch<SetStateAction<ActivityForm>>
 }
+
+dayjs.extend(utc)
+dayjs.extend(Timezone)
 
 const TimeOfDayPicker: FC<Props> = ({activityForm, setActivityForm}) => {
   const {activity} = useActivity()
@@ -20,6 +25,8 @@ const TimeOfDayPicker: FC<Props> = ({activityForm, setActivityForm}) => {
   useEffect(() => {
     if (activity?.settings.time) {
       let time = dayjs(activity?.settings.time * 1000)
+        .utc(false)
+        .tz(activity?.settings?.timezone?.value, true)
       setValue(time)
     } else {
       let time = dayjs()

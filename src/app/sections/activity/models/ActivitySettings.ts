@@ -1,4 +1,5 @@
 import {ID} from '../../../../_metronic/helpers'
+import {TimeZone} from '../../../models/misc/TimeZone'
 
 export type ActivitySettings = {
   rounds: number
@@ -7,11 +8,7 @@ export type ActivitySettings = {
   day: number
   time: number
   timezone_id: ID
-  timezone: {
-    id: ID
-    name: string
-    value: string
-  }
+  timezone: TimeZone
 }
 
 export const initialActivitySettings = (activitySettings?: ActivitySettings) => {

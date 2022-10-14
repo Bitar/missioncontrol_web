@@ -25,4 +25,4 @@ const TableHeader: FC<React.PropsWithChildren<Props>> = ({
   )
 }
 
-export { TableHeader };
+export {TableHeader}

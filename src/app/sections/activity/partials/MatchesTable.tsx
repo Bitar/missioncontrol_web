@@ -33,40 +33,40 @@ const MatchesTable: FC<Props> = ({title}) => {
           {...getTableProps()}
         >
           <thead>
-          <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
-            {headers.map((column: ColumnInstance<Match>) => (
-              <CustomHeaderColumn key={column.id} column={column} />
-            ))}
-          </tr>
+            <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
+              {headers.map((column: ColumnInstance<Match>) => (
+                <CustomHeaderColumn key={column.id} column={column} />
+              ))}
+            </tr>
           </thead>
           <tbody className='text-gray-600 fw-bold' {...getTableBodyProps()}>
-          {rows.length > 0 ? (
-            rows.map((row: Row<Match>, i) => {
-              prepareRow(row)
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <td
-                        {...cell.getCellProps()}
-                        className={clsx({'text-end': cell.column.id === 'actions'})}
-                      >
-                        {cell.render('Cell')}
-                      </td>
-                    )
-                  })}
-                </tr>
-              )
-            })
-          ) : (
-            <tr>
-              <td colSpan={5}>
-                <div className='d-flex text-center w-100 align-content-center justify-content-center py-5'>
-                  Matches are not scheduled yet
-                </div>
-              </td>
-            </tr>
-          )}
+            {rows.length > 0 ? (
+              rows.map((row: Row<Match>, i) => {
+                prepareRow(row)
+                return (
+                  <tr {...row.getRowProps()}>
+                    {row.cells.map((cell) => {
+                      return (
+                        <td
+                          {...cell.getCellProps()}
+                          className={clsx({'text-end': cell.column.id === 'actions'})}
+                        >
+                          {cell.render('Cell')}
+                        </td>
+                      )
+                    })}
+                  </tr>
+                )
+              })
+            ) : (
+              <tr>
+                <td colSpan={5}>
+                  <div className='d-flex text-center w-100 align-content-center justify-content-center py-5'>
+                    Matches are not scheduled yet
+                  </div>
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
@@ -76,4 +76,4 @@ const MatchesTable: FC<Props> = ({title}) => {
   )
 }
 
-export { MatchesTable };
+export {MatchesTable}
