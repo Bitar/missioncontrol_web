@@ -19,7 +19,7 @@ export const communitySchema = Yup.object().shape({
   address: Yup.object().shape({
     address_one: Yup.string().required('Contact address is required'),
     city: Yup.string().required('City is required'),
-    state: Yup.string().required('State is required'),
+    state_id: Yup.string().required('State is required'),
     postal_code: Yup.string().required('Postal Code is required'),
   }),
 })
@@ -72,7 +72,7 @@ export type CommunityFormType = {
     address_one: string
     address_two: string
     city: string
-    state: string
+    state_id: string | number
     postal_code: string
   }
   access?: CommunityAccess
@@ -89,7 +89,7 @@ export const initialCommunityFormTypeByCommunity = (community?: Community) => {
       address_one: community?.address?.address_one || '',
       address_two: community?.address?.address_two || '',
       city: community?.address?.city || '',
-      state: community?.address?.state?.id + '' || '',
+      state_id: community?.address?.state?.id + '' || '',
       postal_code: community?.address?.postal_code || '',
     },
     access: initialCommunityAccess(community?.access),
