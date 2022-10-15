@@ -17,7 +17,7 @@ const MatchOverview: FC<Props> = ({ match, activity }) => {
   // const [teamBScore, setTeamBScore] = useState(0)
   // const [teams, setTeams] = useState()
 
-  console.log(getScoringKeyForm(activity))
+  // console.log(getScoringKeyForm(activity))
 
   const getScoringKeyIcon = (key?: string) => {
     if (key) {
@@ -202,7 +202,7 @@ const MatchOverview: FC<Props> = ({ match, activity }) => {
                               </div>
                             )}
                           </div>
-                          <div className="images-container">
+                          {/*<div className="images-container">*/}
                             {/*{getImages(round).map((image: any, index: any) => (*/}
                             {/*  <div*/}
                             {/*    key={`image-match-${match?.id}-round-${round.round}-image-${image.id}`}*/}
@@ -211,27 +211,7 @@ const MatchOverview: FC<Props> = ({ match, activity }) => {
                             {/*    <img src={image.image} className='mw-400px' alt='' />*/}
                             {/*  </div>*/}
                             {/*))}*/}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="d-flex flex-column pt-5">
-                        <div className="row mb-6">
-                          <div className="col-lg-3">
-                            <label className="col-form-label required fw-bold fs-6">Elimination</label>
-                            <div className="col-lg-8 fv-row">
-                              <input type="text" className="form-control form-control-sm mb-3 mb-lg-0" />
-                              {/*<Field*/}
-                              {/*  type='text'*/}
-                              {/*  name='name'*/}
-                              {/*  placeholder='Community Name'*/}
-                              {/*  className='form-control mb-3 mb-lg-0'*/}
-                              {/*  autoComplete='off'*/}
-                              {/*/>*/}
-                              <div className="text-danger mt-2">
-                                {/*<ErrorMessage name='name' />*/}
-                              </div>
-                            </div>
-                          </div>
+                          {/*</div>*/}
                         </div>
                       </div>
                     </React.Fragment>

@@ -6,7 +6,7 @@ type Props = {
 }
 
 const BadgeCell: FC<React.PropsWithChildren<Props>> = ({status, color}) => (
-  <div className='d-flex align-items-center'>
+  <div className='d-flex align-items-center justify-content-around'>
     <div className='d-flex flex-column'>
       <span className={'badge badge-' + color}>{status}</span>
     </div>
