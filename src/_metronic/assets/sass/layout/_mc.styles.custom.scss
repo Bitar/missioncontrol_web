@@ -63,6 +63,32 @@
   }
 }
 
+.stepper.stepper-pills {
+  .stepper-item {
+    &.current {
+      background-color: #F3F6F9;
+
+      .stepper-label {
+        .stepper-title {
+          color: var(--kt-stepper-label-title-color)
+        }
+      }
+
+      &:after {
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        border: 1rem solid transparent;
+        border-left-color: #F3F6F9;
+      }
+    }
+  }
+}
+
 @import 'rsuite/dist/rsuite.min.css';
 
 .rs-picker-has-value .rs-btn .rs-picker-toggle-value,

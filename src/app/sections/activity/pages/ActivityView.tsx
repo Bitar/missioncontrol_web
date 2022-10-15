@@ -161,7 +161,7 @@ const ActivityView: FC = () => {
                       >
                         <ListViewProvider>
                           <KTCard>
-                            <TableHeader name='Activity' url='/activities' showFilter={true} />
+                            <TableHeader name='Activity' url='/activities' showFilter={true} showAdd={false}/>
                             <KTCardBody>
                               <ActivityTeamsFilter />
                               <ActivityTeams />
