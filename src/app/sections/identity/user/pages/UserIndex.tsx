@@ -1,4 +1,4 @@
-import React, {useRef} from 'react'
+import React from 'react'
 import {KTCard, KTCardBody, QUERIES} from '../../../../../_metronic/helpers'
 import {TableHeader} from '../../../../modules/table/TableHeader'
 import {QueryRequestProvider} from '../../../../modules/table/QueryRequestProvider'

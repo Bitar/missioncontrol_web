@@ -5,7 +5,6 @@ import {Match} from '../activity/models/matches/Match'
 import {Activity} from '../activity/models/Activity'
 import {ScoreSheet} from '../activity/models/matches/ScoreSheet'
 import {TeamImage} from '../activity/components/TeamImage'
-import {Round} from '../activity/models/matches/Round'
 
 type Props = {
   activity: Activity | undefined
@@ -94,29 +93,29 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
     )
   }
 
-  const getImages = (round: Round) => {
-    let imagesIds: any = []
-    let imagesShown: any = []
-
-    let teamAScoreImages = round?.scores[0]?.images
-    let teamBScoreImages = round?.scores[1]?.images
-
-    teamAScoreImages?.forEach((image) => {
-      if (imagesIds.indexOf(image.id) === -1) {
-        imagesIds.push(image.id)
-        imagesShown.push(image)
-      }
-    })
-
-    teamBScoreImages?.forEach((image) => {
-      if (imagesIds.indexOf(image.id) === -1) {
-        imagesIds.push(image.id)
-        imagesShown.push(image)
-      }
-    })
-
-    return imagesShown
-  }
+  // const getImages = (round: Round) => {
+  //   let imagesIds: any = []
+  //   let imagesShown: any = []
+  //
+  //   let teamAScoreImages = round?.scores[0]?.images
+  //   let teamBScoreImages = round?.scores[1]?.images
+  //
+  //   teamAScoreImages?.forEach((image) => {
+  //     if (imagesIds.indexOf(image.id) === -1) {
+  //       imagesIds.push(image.id)
+  //       imagesShown.push(image)
+  //     }
+  //   })
+  //
+  //   teamBScoreImages?.forEach((image) => {
+  //     if (imagesIds.indexOf(image.id) === -1) {
+  //       imagesIds.push(image.id)
+  //       imagesShown.push(image)
+  //     }
+  //   })
+  //
+  //   return imagesShown
+  // }
 
   return (
     <>

@@ -26,8 +26,6 @@ import {TableHeader} from '../../../modules/table/TableHeader'
 const ActivityView: FC = () => {
   const [activity, setActivity] = useState<Activity | undefined>()
   const [matches, setMatches] = useState<Match[] | undefined>([])
-  const [upcomingMatches, setUpcomingMatches] = useState<Match[] | undefined>([])
-  const [recentMatches, setRecentMatches] = useState<Match[] | undefined>([])
   const [match, setMatch] = useState<Match | undefined>()
   const [registrations, setRegistrations] = useState<ActivityRegistration[] | undefined>()
   const [teams, setTeams] = useState<Team[] | undefined>()

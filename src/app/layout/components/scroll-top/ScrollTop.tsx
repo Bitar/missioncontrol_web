@@ -1,7 +1,7 @@
 import {useEffect, useRef} from 'react'
 import {useLocation} from 'react-router-dom'
 import {
-  ScrollTopComponent,
+  // ScrollTopComponent,
   DrawerComponent,
   ToggleComponent,
   StickyComponent,
@@ -22,9 +22,9 @@ export function ScrollTop() {
     }, 140)
   }
 
-  const scrollTop = () => {
-    ScrollTopComponent.goTop()
-  }
+  // const scrollTop = () => {
+  //   ScrollTopComponent.goTop()
+  // }
 
   const updateHeaderSticky = () => {
     const stickyHeader = document.body.querySelectorAll(`[data-kt-sticky-name="header"]`)

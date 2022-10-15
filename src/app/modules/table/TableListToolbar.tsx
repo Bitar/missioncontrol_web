@@ -1,8 +1,6 @@
 import {Link} from 'react-router-dom'
 import React, {FC} from 'react'
 import clsx from 'clsx'
-import {KTSVG} from '../../helpers/components/KTSVG'
-import { useQueryResponse } from "./QueryResponseProvider";
 
 type Props = {
   name: string
@@ -12,7 +10,6 @@ type Props = {
 }
 
 const TableListToolbar: FC<React.PropsWithChildren<Props>> = ({name, url, showAdd, showFilter}) => {
-  const {isLoading} = useQueryResponse()
 
   return (
     <div className='d-flex justify-content-end' data-kt-user-table-toolbar='base'>
