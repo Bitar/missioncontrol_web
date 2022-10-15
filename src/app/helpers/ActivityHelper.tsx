@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import Timezone from 'dayjs/plugin/timezone'
+import { Activity } from "../sections/activity/models/Activity";
 
 dayjs.extend(utc)
 dayjs.extend(Timezone)
@@ -65,6 +66,27 @@ const formatDates = (dates: any, tz: string) => {
     .format('DD MMM YY')
 
   return {startDate, endDate}
+}
+
+export const getScoringKeyForm = (activity: Activity | undefined) => {
+  // console.log(activity?.game_mode?.scoring_type)
+  // console.log(activity?.game_mode?.scoring_settings)
+
+  let scoringStuff: any[] = [];
+
+
+  activity?.game_mode?.scoring_settings.forEach((value, index, array) => {
+    let scoreStuff = {
+      score_id: value?.id,
+      key_id: value?.key?.id,
+      key_type: value?.key?.type,
+      score_values: value?.values
+    }
+
+    scoringStuff.push(scoreStuff)
+  })
+
+  return scoringStuff;
 }
 
 export {formatActivityStatus, formatDates, formatMatchStatus}
