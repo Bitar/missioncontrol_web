@@ -8,7 +8,6 @@ import { TeamImage } from "../activity/components/TeamImage";
 import { Round } from "../activity/models/matches/Round";
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
-import { useActivity } from "../activity/ActivityContext";
 import { User } from "../identity/user/models/User";
 
 type Props = {
@@ -17,13 +16,6 @@ type Props = {
 }
 
 const MatchOverview: FC<Props> = ({ match, activity }) => {
-  // const [teamAScore, setTeamAScore] = useState(0)
-  // const [teamBScore, setTeamBScore] = useState(0)
-  // const [teams, setTeams] = useState()
-  const { teams } = useActivity();
-
-  // console.log(getScoringKeyForm(activity))
-
   const getScoringKeyIcon = (key?: string) => {
     if (key) {
       switch (key) {
@@ -235,7 +227,7 @@ const MatchOverview: FC<Props> = ({ match, activity }) => {
                                       }}
                                     />
                                   </Zoom>
-                                  <div className="score-image-detail text-white fw-bold" >
+                                  <div className="score-image-detail text-white fw-bold">
                                     {getTeam(round?.scores[1]?.team_id) &&
                                       <>
                                         <span className="d-block">User: {getUser(image?.user_id)?.name}</span>
