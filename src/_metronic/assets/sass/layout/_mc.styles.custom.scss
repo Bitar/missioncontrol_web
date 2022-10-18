@@ -12,6 +12,7 @@
   --o-transform: translate(-50%, -50%);
 }
 
+<<<<<<< HEAD
 .react-switch-checkbox {
   height: 0;
   width: 0;
@@ -95,3 +96,35 @@
 .rs-picker-has-value .rs-picker-toggle .rs-picker-toggle-value {
   color: hsl(0, 0%, 20%);
 }
+=======
+.score-images-container {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li.score-image-item {
+      border: 3px solid $mc-secondary;
+      margin: 0 1rem 1rem 0;
+      width: calc(33% - 1rem);
+      position: relative;
+
+      .score-image-detail {
+
+      }
+    }
+
+    .score-image-item {
+      .score-image-detail {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 0.250rem 1rem;
+        background-color: rgba($mc-primary, 0.6);
+      }
+    }
+  }
+}
+>>>>>>> main

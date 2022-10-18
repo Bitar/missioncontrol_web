@@ -53,7 +53,17 @@ const MatchPage: FC = () => {
   ]
 
   useEffect(() => {
+<<<<<<< HEAD
     if (match === undefined || match?.id?.toString() !== params.matchId) {
+=======
+    getActivityMatch(params.id, params.matchId).then((response) => {
+      setMatch(response)
+    })
+  }, [params.id, params.matchId, setMatch])
+
+  useEffect(() => {
+    if (match === undefined) {
+>>>>>>> main
       getActivityMatch(params.id, params.matchId).then((response) => {
         setMatch(response)
       })
@@ -65,7 +75,7 @@ const MatchPage: FC = () => {
       <Route
         element={
           <>
-            <MatchInfo match={match} />
+            <MatchInfo match={match} setMatch={setMatch}/>
             <Outlet />
           </>
         }

@@ -1,6 +1,6 @@
 {
   "name": "mission-control",
-  "version": "3.0.14",
+  "version": "3.0.15",
   "private": true,
   "homepage": "/",
   "dependencies": {
@@ -46,6 +46,7 @@
     "react-inlinesvg": "3.0.0",
     "react-input-mask": "^3.0.0-alpha.2",
     "react-intl": "5.25.0",
+    "react-medium-image-zoom": "^5.1.1",
     "react-query": "3.38.0",
     "react-router-dom": "6.3.0",
     "react-scripts": "latest",
