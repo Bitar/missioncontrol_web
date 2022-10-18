@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 import axios, {AxiosResponse} from 'axios'
 import {ChatMessage, ChatMessageQueryResponse} from '../../../models/chat/ChatMessage'
 import {Response} from '../../../helpers/crud-helper/models'
-=======
-import axios, { AxiosResponse } from "axios";
-import { ChatMessage, ChatMessageQueryResponse } from "../../../models/chat/ChatMessage";
-import { Response } from "../../../helpers/crud-helper/models";
-import { ApiResponse } from "../../../models/api/ApiResponse";
 import { Match } from "../../activity/models/matches/Match";
->>>>>>> main
 // import process from "process";
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -29,8 +22,6 @@ export const sendMatchChat = (id: any, formData: FormData): Promise<ChatMessage 
     .then((response: AxiosResponse<Response<ChatMessage>>) => response.data)
     .then((response: Response<ChatMessage>) => response.data)
 }
-<<<<<<< HEAD
-=======
 
 export const updateMatchResult = (id: any, formData: FormData): Promise<Match | undefined> => {
   let url = `${MATCHES_URL}/${id}/results`
@@ -41,4 +32,3 @@ export const updateMatchResult = (id: any, formData: FormData): Promise<Match | 
     .then((response: Response<Match>) => response.data)
 
 }
->>>>>>> main

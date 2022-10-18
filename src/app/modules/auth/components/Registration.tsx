@@ -22,11 +22,11 @@ const registrationSchema = Yup.object().shape({
     .required('First name is required'),
   email: Yup.string().email('Wrong email format').required('Email is required'),
   last_name: Yup.string()
-    .min(8, 'Minimum 3 letters')
+    .min(3, 'Minimum 3 letters')
     .max(50, 'Maximum 50 letters')
     .required('Last name is required'),
   password: Yup.string()
-    .min(8, 'Minimum length: 3')
+    .min(8, 'Minimum length: 8')
     .max(50, 'Maximum length: 50')
     .required('Password is required'),
   password_confirmation: Yup.string()

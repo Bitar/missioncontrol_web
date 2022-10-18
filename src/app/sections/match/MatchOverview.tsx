@@ -15,11 +15,7 @@ type Props = {
   match: Match | undefined
 }
 
-<<<<<<< HEAD
-const MatchOverview: FC<Props> = ({match, activity}) => {
-=======
 const MatchOverview: FC<Props> = ({ match, activity }) => {
->>>>>>> main
   const getScoringKeyIcon = (key?: string) => {
     if (key) {
       switch (key) {
@@ -65,15 +61,9 @@ const MatchOverview: FC<Props> = ({ match, activity }) => {
     if (scoringKey?.key.type === 1) {
       returnValue =
         scoringSheet.value *
-<<<<<<< HEAD
-          (scoringKey?.values?.find((e: any) => e.id === scoringSheet?.scoring_value_id)?.value ||
-            0) +
-        ''
-=======
         (scoringKey?.values?.find((e: any) => e.id === scoringSheet?.scoring_value_id)?.value ||
           0) +
         "";
->>>>>>> main
     } else {
       returnValue =
         scoringKey?.values.find((e: any) => e.id === scoringSheet.scoring_value_id)?.key + "";

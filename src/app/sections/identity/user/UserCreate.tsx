@@ -6,19 +6,20 @@ import {createUser} from './core/UserRequests'
 import {jsonToFormData} from '../../../helpers/form/FormHelper'
 import {formOnChange, initialUser, User, userSchema} from './models/User'
 import {AvatarImage} from './partials/AvatarImage'
-import {UserForm} from './UserForm'
+import {UserFormPage} from './UserFormPage'
 import {FormAction} from '../../../helpers/form/FormAction'
+import { initUserForm, UserForm } from "./models/UserForm";
 
 const UserCreate = () => {
-  const [user, setUser] = useState<User>(initialUser)
+  const [userForm, setUserForm] = useState<UserForm>(initUserForm())
   const navigate = useNavigate()
 
   const handleSubmit = async () => {
-    let data = jsonToFormData(user)
+    let data = jsonToFormData(userForm)
     await createUser(data).then((response) => navigate('/users/' + response?.id))
   }
 
-  const handleOnChange = (e: any) => formOnChange(e, user, setUser)
+  const handleOnChange = (e: any) => formOnChange(e, userForm, setUserForm)
 
   return (
     <>
@@ -31,15 +32,15 @@ const UserCreate = () => {
             <h3 className='card-label'>Add User</h3>
           </div>
         </div>
-        <Formik initialValues={user} onSubmit={handleSubmit} validationSchema={userSchema(true)}>
+        <Formik initialValues={userForm} onSubmit={handleSubmit} validationSchema={userSchema(true)}>
           {({isSubmitting, isValid, touched}) => {
             return (
               <Form onChange={handleOnChange} className='form' encType='multipart/form-data'>
                 <KTCardBody className='py-4'>
                   <div className='d-flex flex-column pt-5'>
-                    <AvatarImage user={user} setUser={setUser} />
+                    <AvatarImage user={userForm} setUser={setUserForm} />
 
-                    <UserForm method={'create'} user={user} setUser={setUser} />
+                    <UserFormPage method={'create'} user={userForm} setUser={setUserForm} />
                   </div>
                 </KTCardBody>
                 <FormAction text={'Add User'} isSubmitting={isSubmitting} />

@@ -14,7 +14,7 @@ export const initialUserMeta = (userMeta?: UserMeta) => {
   return {
     image: userMeta?.image || '',
     username: userMeta?.username || '',
-    city: userMeta?.city ? userMeta?.city : '',
+    city: userMeta?.city || '',
     date_of_birth: userMeta?.date_of_birth || 0,
   }
 }

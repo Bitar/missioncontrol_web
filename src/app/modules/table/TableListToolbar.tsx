@@ -1,11 +1,6 @@
 import {Link} from 'react-router-dom'
 import React, {FC} from 'react'
 import clsx from 'clsx'
-<<<<<<< HEAD
-import {KTSVG} from '../../helpers/components/KTSVG'
-import {useQueryResponse} from './QueryResponseProvider'
-=======
->>>>>>> main
 
 type Props = {
   name: string

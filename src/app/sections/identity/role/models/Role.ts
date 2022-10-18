@@ -8,7 +8,7 @@ export const roleSchema = Yup.object().shape({
 
 export type Role = {
   id?: ID
-  name?: string
+  name: string
   permissions: Permission[]
   ready_to_submit: boolean
 }

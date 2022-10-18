@@ -4,6 +4,8 @@ import {Role} from '../../role/models/Role'
 import {initialUserMeta, UserMeta} from './UserMeta'
 import {Dispatch, SetStateAction} from 'react'
 import {updateData} from '../../../../helpers/form/FormHelper'
+import { Community } from "../../../community/models/Community";
+import { UserForm } from './UserForm'
 
 let schema = {
   first_name: Yup.string().required('First name is required'),
@@ -49,6 +51,7 @@ export type User = {
   created_at: number
   roles: Role[]
   meta?: UserMeta
+  community_admin?: Community[]
 }
 
 export const initialUser = (user?: User) => {
@@ -69,8 +72,8 @@ export type UserQueryResponse = Response<Array<User>>
 
 export function formOnChange(
   event: any,
-  user: User | undefined,
-  setUser: Dispatch<SetStateAction<User>>
+  user: UserForm | undefined,
+  setUser: Dispatch<SetStateAction<UserForm>>
 ) {
   let target_name = event.target.name
 

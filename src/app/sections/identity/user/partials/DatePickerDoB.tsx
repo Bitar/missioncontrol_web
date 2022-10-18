@@ -1,15 +1,15 @@
-import React, {FC} from 'react'
+import React, {Dispatch, FC, SetStateAction} from 'react'
 import {updateData} from '../../../../helpers/form/FormHelper'
-import {User} from '../models/User'
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider'
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
 import {Dayjs} from 'dayjs'
 import {DatePicker} from '@mui/x-date-pickers/DatePicker'
 import TextField from '@mui/material/TextField'
+import { UserForm } from '../models/UserForm'
 
 type Props = {
-  user: User | undefined
-  setUser: any
+  user: UserForm | undefined
+  setUser: Dispatch<SetStateAction<UserForm>>
 }
 
 const DatePickerDoB: FC<Props> = ({user, setUser}) => {

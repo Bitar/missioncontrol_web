@@ -63,10 +63,6 @@ const ActivityView: FC = () => {
     getActivityById(params.id).then((response) => {
       setActivity(response)
 
-      // getActivityMatches(params.id).then((response) => {
-      //   setMatches(response.data)
-      // })
-
       getActivityTeams(params.id).then((response) => {
         setTeams(response.data)
       })
