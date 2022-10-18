@@ -5,7 +5,11 @@ import { Match } from "../activity/models/matches/Match";
 import { Activity } from "../activity/models/Activity";
 import { ScoreSheet } from "../activity/models/matches/ScoreSheet";
 import { TeamImage } from "../activity/components/TeamImage";
-import { getScoringKeyForm } from "../../helpers/ActivityHelper";
+import { Round } from "../activity/models/matches/Round";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
+import { useActivity } from "../activity/ActivityContext";
+import { User } from "../identity/user/models/User";
 
 type Props = {
   activity: Activity | undefined
@@ -16,6 +20,7 @@ const MatchOverview: FC<Props> = ({ match, activity }) => {
   // const [teamAScore, setTeamAScore] = useState(0)
   // const [teamBScore, setTeamBScore] = useState(0)
   // const [teams, setTeams] = useState()
+  const { teams } = useActivity();
 
   // console.log(getScoringKeyForm(activity))
 
@@ -42,23 +47,20 @@ const MatchOverview: FC<Props> = ({ match, activity }) => {
     });
   };
 
-  // const parseScoreSheet = (scoringSheet: ScoreSheet) => {
-  //   const scoringKey = activity?.game_mode?.scoring_settings?.find((element: any) => element.id === scoringSheet.score_settings_id);
-  //
-  //   let returnValue: string;
-  //   if (scoringKey?.key.type === 1) {
-  //     returnValue =
-  //       scoringSheet.value *
-  //       (scoringKey?.values?.find((e: any) => e.id === scoringSheet?.scoring_value_id)?.value ||
-  //         0) +
-  //       "";
-  //   } else {
-  //     returnValue =
-  //       scoringKey?.values.find((e: any) => e.id === scoringSheet.scoring_value_id)?.key + "";
-  //   }
-  //
-  //   let scoringKeyIcon = getScoringKeyIcon(scoringKey?.key.key);
-  // };
+  const getUser = (userId: number) => {
+    let userExist: User | undefined;
+
+    match?.teams?.forEach(function(element: any) {
+      return element.users.forEach((e: any) => {
+        if (e.id === userId) {
+          userExist = e;
+        }
+      });
+    });
+
+    return userExist;
+  };
+
 
   const getScoringKeyVisual = (scoringSheet: ScoreSheet, flip?: boolean) => {
     const scoringKey = activity?.game_mode?.scoring_settings?.find((element: any) => element.id === scoringSheet.score_settings_id);
@@ -112,29 +114,40 @@ const MatchOverview: FC<Props> = ({ match, activity }) => {
     );
   };
 
-  // const getImages = (round: Round) => {
-  //   let imagesIds: any = []
-  //   let imagesShown: any = []
-  //
-  //   let teamAScoreImages = round?.scores[0]?.images
-  //   let teamBScoreImages = round?.scores[1]?.images
-  //
-  //   teamAScoreImages?.forEach((image) => {
-  //     if (imagesIds.indexOf(image.id) === -1) {
-  //       imagesIds.push(image.id)
-  //       imagesShown.push(image)
-  //     }
-  //   })
-  //
-  //   teamBScoreImages?.forEach((image) => {
-  //     if (imagesIds.indexOf(image.id) === -1) {
-  //       imagesIds.push(image.id)
-  //       imagesShown.push(image)
-  //     }
-  //   })
-  //
-  //   return imagesShown
-  // }
+  const getImages = (round: Round) => {
+    let imagesIds: any = [];
+    let imagesShown: any = [];
+    let imageObject: any = [];
+
+    let teamAScoreImages = round?.scores[0]?.images;
+    let teamBScoreImages = round?.scores[1]?.images;
+
+    teamAScoreImages?.forEach((image) => {
+      if (imagesIds.indexOf(image.id) === -1) {
+        imagesIds.push(image.id);
+        imagesShown.push(image);
+        imageObject.push({
+          image: image,
+          team_id: round?.scores[0]?.team_id,
+          user_id: round?.scores[0]?.user_id
+        });
+      }
+    });
+
+    teamBScoreImages?.forEach((image) => {
+      if (imagesIds.indexOf(image.id) === -1) {
+        imagesIds.push(image.id);
+        imagesShown.push(image);
+        imageObject.push({
+          image: image,
+          team_id: round?.scores[1]?.team_id,
+          user_id: round?.scores[1]?.user_id
+        });
+      }
+    });
+
+    return imageObject;
+  };
 
   return (
     <>
@@ -202,16 +215,38 @@ const MatchOverview: FC<Props> = ({ match, activity }) => {
                               </div>
                             )}
                           </div>
-                          {/*<div className="images-container">*/}
-                            {/*{getImages(round).map((image: any, index: any) => (*/}
-                            {/*  <div*/}
-                            {/*    key={`image-match-${match?.id}-round-${round.round}-image-${image.id}`}*/}
-                            {/*    className='image-container d-inline-block'*/}
-                            {/*  >*/}
-                            {/*    <img src={image.image} className='mw-400px' alt='' />*/}
-                            {/*  </div>*/}
-                            {/*))}*/}
-                          {/*</div>*/}
+                          <div className="score-images-container">
+                            <ul>
+                              {getImages(round).map((image: any, index: any) => (
+                                <li key={`score-image-list-item-${index}`} className="rounded score-image-item">
+                                  <Zoom>
+                                    <div
+                                      aria-label="Score Screenshot"
+                                      role="img"
+                                      style={{
+                                        backgroundColor: "#fff",
+                                        backgroundImage: `url("${image.image.image}")`,
+                                        backgroundPosition: "50%",
+                                        backgroundRepeat: "no-repeat",
+                                        backgroundSize: "cover",
+                                        height: "0",
+                                        paddingBottom: "56%",
+                                        width: "100%"
+                                      }}
+                                    />
+                                  </Zoom>
+                                  <div className="score-image-detail text-white fw-bold" >
+                                    {getTeam(round?.scores[1]?.team_id) &&
+                                      <>
+                                        <span className="d-block">User: {getUser(image?.user_id)?.name}</span>
+                                        <span>Team: {getTeam(round?.scores[1]?.team_id)?.name}</span>
+                                      </>
+                                    }
+                                  </div>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         </div>
                       </div>
                     </React.Fragment>
