@@ -1,12 +1,10 @@
 import {
   getElementIndex,
   getUniqueIdWithPrefix,
-  ElementAnimateUtil,
   EventHandlerUtil,
   DataUtil,
   DOMEventHandlerUtil,
-  ElementStyleUtil,
-} from '../_utils/index'
+} from "../_utils"
 
 export interface IStepperOptions {
   startIndex: number

@@ -32,7 +32,7 @@ const TimeOfDayPicker: FC<Props> = ({activityForm, setActivityForm}) => {
       let time = dayjs()
       setValue(time)
     }
-  }, [activity?.settings.time])
+  }, [activity?.settings.time, activity?.settings?.timezone?.value])
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>

@@ -4,35 +4,31 @@ import { Activity, ActivityQueryResponse } from "../models/Activity";
 import { Announcement } from "../../../models/announcement/Announcements";
 import { ChatMessage, ChatMessageQueryResponse } from "../../../models/chat/ChatMessage";
 import { TeamQueryResponse } from "../../../models/squad/Team";
-import { ActivityRegistrationsQueryResponse } from "../models/ActivityRegistration";
-import { Community } from "../../community/models/Community";
-// import process from "process";
 
 const API_URL = process.env.REACT_APP_API_URL;
-// const API_URL = 'https://v3.staging.missioncontrol.gg/api-fe'
 const ACTIVITIES_URL = `${API_URL}/activities`;
 
-const getActivities = (query: string): Promise<ActivityQueryResponse> => {
+export const getActivities = (query: string): Promise<ActivityQueryResponse> => {
   return axios
     .get(`${ACTIVITIES_URL}?${query}`)
     .then((d: AxiosResponse<ActivityQueryResponse>) => d.data);
 };
 
-const createActivity = (formData: FormData): Promise<Activity | undefined> => {
+export const createActivity = (formData: FormData): Promise<Activity | undefined> => {
   return axios
     .post(`${ACTIVITIES_URL}`, formData)
     .then((response: AxiosResponse<Response<Activity>>) => response.data)
     .then((response: Response<Activity>) => response.data);
 };
 
-const updateActivity = (id: any, formData: FormData): Promise<Activity | undefined> => {
+export const updateActivity = (id: any, formData: FormData): Promise<Activity | undefined> => {
   return axios
     .post(`${ACTIVITIES_URL}/${id}`, formData)
     .then((response: AxiosResponse<Response<Activity>>) => response.data)
     .then((response: Response<Activity>) => response.data)
 }
 
-const getActivityById = (id: any, query?: String): Promise<Activity | undefined> => {
+export const getActivityById = (id: any, query?: String): Promise<Activity | undefined> => {
   let url = `${ACTIVITIES_URL}/${id}`;
 
   if (query) {
@@ -45,7 +41,7 @@ const getActivityById = (id: any, query?: String): Promise<Activity | undefined>
     .then((response: Response<Activity>) => response.data);
 };
 
-const getActivityTeams = (id: any, query?: string): Promise<TeamQueryResponse> => {
+export const getActivityTeams = (id: any, query?: string): Promise<TeamQueryResponse> => {
   let url = `${ACTIVITIES_URL}/${id}/teams`;
 
   if (query) {
@@ -55,7 +51,7 @@ const getActivityTeams = (id: any, query?: string): Promise<TeamQueryResponse> =
   return axios.get(url).then((response: AxiosResponse<TeamQueryResponse>) => response.data);
 };
 
-const getActivityStandings = (id: any, query?: string): Promise<TeamQueryResponse> => {
+export const getActivityStandings = (id: any, query?: string): Promise<TeamQueryResponse> => {
   let url = `${ACTIVITIES_URL}/${id}/standings`;
 
   if (query) {
@@ -65,22 +61,7 @@ const getActivityStandings = (id: any, query?: string): Promise<TeamQueryRespons
   return axios.get(url).then((response: AxiosResponse<TeamQueryResponse>) => response.data);
 };
 
-const getActivityRegistrations = (
-  id: any,
-  query?: string
-): Promise<ActivityRegistrationsQueryResponse> => {
-  let url = `${ACTIVITIES_URL}/${id}/registrations`;
-
-  if (query) {
-    url += `?${query}`;
-  }
-
-  return axios
-    .get(url)
-    .then((response: AxiosResponse<ActivityRegistrationsQueryResponse>) => response.data);
-};
-
-const createActivityAnnouncement = (
+export const createActivityAnnouncement = (
   id: any,
   formData: FormData
 ): Promise<Announcement | undefined> => {
@@ -92,13 +73,13 @@ const createActivityAnnouncement = (
     .then((response: Response<Announcement>) => response.data);
 };
 
-const getActivityChat = (id: any): Promise<ChatMessageQueryResponse> => {
+export const getActivityChat = (id: any): Promise<ChatMessageQueryResponse> => {
   let url = `${ACTIVITIES_URL}/${id}/chat`;
 
   return axios.get(url).then((response: AxiosResponse<ChatMessageQueryResponse>) => response.data);
 };
 
-const sendActivityChat = (id: any, formData: FormData): Promise<ChatMessage | undefined> => {
+export const sendActivityChat = (id: any, formData: FormData): Promise<ChatMessage | undefined> => {
   let url = `${ACTIVITIES_URL}/${id}/chat`;
 
   return axios
@@ -107,15 +88,14 @@ const sendActivityChat = (id: any, formData: FormData): Promise<ChatMessage | un
     .then((response: Response<ChatMessage>) => response.data);
 };
 
-export {
-  getActivities,
-  createActivity,
-  updateActivity,
-  getActivityChat,
-  getActivityById,
-  sendActivityChat,
-  getActivityTeams,
-  getActivityStandings,
-  getActivityRegistrations,
-  createActivityAnnouncement
-};
+// export {
+//   getActivities,
+//   createActivity,
+//   updateActivity,
+//   getActivityChat,
+//   getActivityById,
+//   sendActivityChat,
+//   getActivityTeams,
+//   getActivityStandings,
+//   createActivityAnnouncement
+// };

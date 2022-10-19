@@ -25,15 +25,28 @@ const UserFormPage: FC<Props> = ({ user, setUser }) => {
   const [dateOfBirthValue, setDateOfBirthValue] = useState<Date | null>(new Date());
   const hasCommunityAdminRole = user.roles.find((role) => role?.id === 3);
 
-  useEffect(() => {
-    if (hasCommunityAdminRole) {
-      fetchCommunities();
-    }
-  }, [hasCommunityAdminRole]);
+  // const fetchCommunities = useCallback(() => {
+  //   if (!communities) {
+  //     getAllCommunities().then((response) => {
+  //       setCommunities(response.data);
+  //     });
+  //   }
+  // }, [communities]);
+  //
+  // useEffect(() => {
+  //   if (hasCommunityAdminRole) {
+  //     console.log('i am here no');
+  //     fetchCommunities();
+  //   }
+  // }, [hasCommunityAdminRole, fetchCommunities]);
 
   useEffect(() => {
     getRoles().then((response) => {
       setRoles(response.data);
+    });
+
+    getAllCommunities().then((response) => {
+      setCommunities(response.data);
     });
   }, []);
 
@@ -46,15 +59,6 @@ const UserFormPage: FC<Props> = ({ user, setUser }) => {
     }
 
   }, [user?.meta?.date_of_birth]);
-
-
-  const fetchCommunities = () => {
-    if (!communities) {
-      getAllCommunities().then((response) => {
-        setCommunities(response.data);
-      });
-    }
-  };
 
   return (
     <>
@@ -115,7 +119,6 @@ const UserFormPage: FC<Props> = ({ user, setUser }) => {
 
               if (communityAdmin) {
                 updateData({ roles: e || [] }, setUser, user);
-                fetchCommunities();
               } else {
                 updateData({ roles: e || [], community_admin: [] }, setUser, user);
               }
