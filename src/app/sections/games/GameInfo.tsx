@@ -1,12 +1,9 @@
 import {FC} from 'react'
-import {Game} from '../../models/game/Game'
 import {Link, useLocation} from 'react-router-dom'
+import { useGame } from './core/GameContext'
 
-type Props = {
-  game: Game | undefined
-}
-
-const GameInfo: FC<Props> = ({game}) => {
+const GameInfo: FC = () => {
+  const {game} = useGame()
   const location = useLocation()
 
   return (

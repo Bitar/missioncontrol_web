@@ -95,21 +95,20 @@ const ActivityFilter = () => {
                   autoComplete="off"
                 />
               </div>
-              {currentUser && !isUserCommunityAdmin(currentUser) && (
-                communityAdmin && (
-                  <div className="col-lg-4">
-                    <Select
-                      placeholder={"Choose a Community"}
-                      options={communities}
-                      getOptionLabel={(community) => community?.name}
-                      getOptionValue={(community) => community?.id?.toString() || ""}
-                      onChange={(e) => {
-                        updateData({ community_id: e?.id || "" }, setActivityFilters, activityFilters);
-                      }}
-                      isClearable={true}
-                    />
-                  </div>
-                ))}
+              {currentUser && !isUserCommunityAdmin(currentUser) &&
+                <div className="col-lg-4">
+                  <Select
+                    placeholder={"Choose a Community"}
+                    options={communities}
+                    getOptionLabel={(community) => community?.name}
+                    getOptionValue={(community) => community?.id?.toString() || ""}
+                    onChange={(e) => {
+                      updateData({ community_id: e?.id || "" }, setActivityFilters, activityFilters);
+                    }}
+                    isClearable={true}
+                  />
+                </div>
+              }
               <div className="col-lg-4">
                 <Select
                   placeholder={"Choose a Status"}

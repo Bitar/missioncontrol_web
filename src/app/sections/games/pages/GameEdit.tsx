@@ -1,17 +1,14 @@
-import React, { Dispatch, FC, SetStateAction } from "react";
+import React, { FC } from "react";
 import { Form, Formik } from "formik";
-import { formOnChange, Game, gameSchema, initialGame } from "../../../models/game/Game";
+import { formOnChange, gameSchema, initialGame } from "../../../models/game/Game";
 import { KTCard, KTCardBody } from "../../../../_metronic/helpers";
 import { updateGame } from "../core/GameRequests";
 import { useParams } from "react-router-dom";
 import TextField from "@mui/material/TextField";
+import { useGame } from "../core/GameContext";
 
-type Props = {
-  game: Game | undefined
-  setGame: Dispatch<SetStateAction<Game | undefined>>
-}
-
-const GameEdit: FC<Props> = ({ game, setGame }) => {
+const GameEdit: FC = () => {
+  const { game, setGame } = useGame();
   const params = useParams();
 
   const handleSubmit = async () => {
