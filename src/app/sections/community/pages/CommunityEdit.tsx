@@ -94,6 +94,16 @@ const CommunityEdit: FC<Props> = ({communityId}) => {
         setCommunityForm,
         communityForm
       )
+    } else if (targetName.includes('contact.')) {
+      let contact_field = targetName.split('contact.')[1]
+
+      updateData(
+        {
+          contact: {...communityForm?.contact, ...{[contact_field]: targetValue}},
+        },
+        setCommunityForm,
+        communityForm
+      )
     } else if (targetName.includes('access.')) {
       let accessField = targetName.split('access.')[1]
       if (accessField === 'type' || accessField === 'key') {
