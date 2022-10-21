@@ -3,7 +3,7 @@ import React, {FC} from 'react'
 
 type Props = {
   name: string
-  url: string
+  url?: string
   showAdd?: boolean
   showFilter?: boolean
 }

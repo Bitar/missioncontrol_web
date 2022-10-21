@@ -4,7 +4,7 @@ import clsx from 'clsx'
 
 type Props = {
   name: string
-  url: string
+  url?: string
   showAdd?: boolean
   showFilter?: boolean
 }

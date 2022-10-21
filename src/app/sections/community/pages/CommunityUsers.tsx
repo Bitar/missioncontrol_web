@@ -1,4 +1,4 @@
-import {FC, useMemo} from 'react'
+import React, {FC, useMemo} from 'react'
 import {KTCard, KTCardBody, QUERIES} from '../../../../_metronic/helpers'
 import {User} from '../../identity/user/models/User'
 import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
@@ -16,6 +16,8 @@ import {TableListPagination} from '../../../modules/table/TableListPagination'
 import {TableListLoading} from '../../../modules/table/TableListLoading'
 import {CommunityUsersColumns} from '../core/CommunityUsersColumns'
 import {useCommunity} from '../CommunityContext'
+import { CommunityUserFilters } from '../partials/CommunityUserFilters'
+import { TableHeader } from "../../../modules/table/TableHeader";
 
 const CommunityUsersTable = () => {
   const communityUsers = useQueryResponseData()
@@ -28,7 +30,6 @@ const CommunityUsersTable = () => {
   })
 
   return (
-    <KTCard>
       <KTCardBody className='py-4'>
         <div className='table-responsive'>
           <table
@@ -63,7 +64,6 @@ const CommunityUsersTable = () => {
         <TableListPagination />
         {isLoading && <TableListLoading />}
       </KTCardBody>
-    </KTCard>
   )
 }
 
@@ -79,7 +79,13 @@ const CommunityUsers: FC = () => {
             requestId={community.id}
           >
             <ListViewProvider>
-              <CommunityUsersTable />
+              <KTCard>
+                <TableHeader name='Community Users' showFilter={true} showAdd={false}/>
+                <KTCardBody>
+                  <CommunityUserFilters />
+                  <CommunityUsersTable />
+                </KTCardBody>
+              </KTCard>
             </ListViewProvider>
           </QueryResponseProvider>
         </QueryRequestProvider>
