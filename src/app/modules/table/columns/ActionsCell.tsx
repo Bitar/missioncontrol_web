@@ -7,6 +7,7 @@ import {useMutation, useQueryClient} from 'react-query'
 import {deleteObject} from '../../../requests'
 import {useQueryRequest} from '../QueryRequestProvider'
 import clsx from 'clsx'
+import { useQueryResponse } from "../QueryResponseProvider";
 
 type Props = {
   id: ID
@@ -28,12 +29,13 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
   const queryClient = useQueryClient()
   const {state} = useQueryRequest()
   const [query] = useState<string>(stringifyRequestQuery(state))
+  const {setEnabled} = useQueryResponse()
 
   useEffect(() => {
     MenuComponent.reinitialization()
   }, [])
 
-  const deleteItem = useMutation(() => deleteObject(path + '/' + id), {
+  const deleteItem = useMutation(() => deleteObject(path + '/' + id).finally(() => setEnabled(true)), {
     onSuccess: () => {
       queryClient.invalidateQueries(`${queryKey}-${query}`)
     },

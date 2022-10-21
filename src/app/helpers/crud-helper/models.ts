@@ -56,9 +56,10 @@ export type QueryResponseContextProps<T> = {
   refetch: () => void
   isLoading: boolean
   query: string
+  setEnabled: Dispatch<SetStateAction<boolean>>
 }
 
-export const initialQueryResponse = {refetch: () => {}, isLoading: false, query: ''}
+export const initialQueryResponse = {refetch: () => {}, isLoading: false, query: '', setEnabled: () => {}}
 
 export type ListViewContextProps = {
   selected: Array<ID>

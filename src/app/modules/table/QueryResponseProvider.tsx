@@ -25,6 +25,7 @@ const QueryResponseProvider: FC<React.PropsWithChildren<Props>> = ({
 }) => {
   const {state} = useQueryRequest()
 
+  const [enabled, setEnabled] = useState<boolean>(true)
   const [query, setQuery] = useState<string>(stringifyRequestQuery(state))
   const updatedQuery = useMemo(() => stringifyRequestQuery(state), [state])
 
@@ -34,10 +35,6 @@ const QueryResponseProvider: FC<React.PropsWithChildren<Props>> = ({
     }
   }, [query, updatedQuery])
 
-  // console.log(query)
-  // console.log(updatedQuery)
-  // console.log(requestFunction)
-  // console.log(requestId)
   const {
     isFetching,
     refetch,
@@ -46,16 +43,16 @@ const QueryResponseProvider: FC<React.PropsWithChildren<Props>> = ({
     `${id}-${query}`,
     () => {
       if (requestId) {
-        return requestFunction(requestId, query)
+        return requestFunction(requestId, query).finally(() => setEnabled(false))
       } else {
-        return requestFunction(query)
+        return requestFunction(query).finally(() => setEnabled(false))
       }
     },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
+    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false, enabled: enabled}
   )
 
   return (
-    <QueryResponseContext.Provider value={{isLoading: isFetching, refetch, response, query}}>
+    <QueryResponseContext.Provider value={{isLoading: isFetching, refetch, response, query, setEnabled}}>
       {children}
     </QueryResponseContext.Provider>
   )

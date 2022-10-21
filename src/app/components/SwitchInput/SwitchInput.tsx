@@ -4,12 +4,14 @@ type Props = {
   isOn: boolean | undefined
   handleToggle: any
   onColor?: string
+  name?: string
 }
 
-const SwitchInput: FC<Props> = ({isOn, handleToggle, onColor = 'mc-secondary'}) => {
+const SwitchInput: FC<Props> = ({isOn, handleToggle, name, onColor = 'mc-secondary'}) => {
   return (
     <>
       <input
+        name={name}
         checked={isOn}
         onChange={handleToggle}
         className='react-switch-checkbox'

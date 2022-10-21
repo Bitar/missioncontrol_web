@@ -72,7 +72,6 @@ const ActivitySettings = () => {
       setHasErrors(false)
     }).catch(function(e) {
       if (e.response) {
-        console.log(e.response.data);
         // let obj = error.response.data.error.validation;
         // console.log((error.response.data.error.validation))
         // console.log(obj.stringify())
