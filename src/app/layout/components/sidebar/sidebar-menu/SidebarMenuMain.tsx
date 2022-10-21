@@ -33,9 +33,6 @@ const SidebarMenuMain = () => {
           <SidebarMenuItem to='/activities' title='Activities' fontIcon='fa-gamepad' />
         </Restricted>
       )}
-      {/*{communityAdmin && (*/}
-
-      {/*)}*/}
 
       <Restricted to='view-games'>
         <SidebarMenuItem to='/games' title='Games' fontIcon='fa-chess-pawn' />

@@ -1,30 +1,48 @@
-import {FC} from 'react'
-import {Link, useLocation} from 'react-router-dom'
-import { useGame } from './core/GameContext'
+import React, { FC } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { KTCard } from "../../helpers/components/KTCard";
+import { KTCardBody } from "../../helpers/components/KTCardBody";
+import { useGame } from "./core/GameContext";
+import clsx from "clsx";
 
 const GameInfo: FC = () => {
-  const {game} = useGame()
-  const location = useLocation()
+  const { game } = useGame();
+  const location = useLocation();
+
+  const links = [
+    {
+      text: "Overview",
+      link: "/games/" + game?.id + "/overview"
+    },
+    {
+      text: "Game Modes",
+      link: "/games/" + game?.id + "/modes"
+    },
+    {
+      text: "Settings",
+      link: "/games/" + game?.id + "/settings"
+    }
+  ];
 
   return (
     <>
-      <div className='card mb-5 mb-xl-10'>
-        <div className='card-body pt-9 pb-0'>
-          <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
-            <div className='me-7 mb-4'>
-              <div className='symbol symbol-100px symbol-lg-160px symbol-fixed position-relative'>
+      <KTCard className="mb-5 mb-xl-10 overflow-hidden">
+        <KTCardBody>
+          <div className="d-flex flex-wrap flex-sm-nowrap mb-3">
+            <div className="me-7 mb-4">
+              <div className="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
                 <img src={game?.image} alt={game?.title} />
               </div>
             </div>
 
-            <div className='flex-grow-1'>
-              <div className='d-flex justify-content-between align-items-start flex-wrap mb-2'>
-                <div className='d-flex flex-column'>
-                  <div className='d-flex align-items-center mb-2'>
-                    <div className='text-gray-800 fs-2 fw-bolder me-1'>{game?.title}</div>
+            <div className="flex-grow-1">
+              <div className="d-flex justify-content-between align-items-start flex-wrap mb-2">
+                <div className="d-flex flex-column">
+                  <div className="d-flex align-items-center mb-2">
+                    <div className="text-gray-800 fs-2 fw-bolder me-1">{game?.title}</div>
                   </div>
 
-                  <div className='d-flex flex-wrap fw-bold fs-6 mb-4 pe-2'>
+                  <div className="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
                     {/*{community?.contact && (*/}
                     {/*  <>*/}
                     {/*    <div className='d-flex align-items-center text-gray-400 me-5 mb-2'>*/}
@@ -64,68 +82,39 @@ const GameInfo: FC = () => {
                 {/*</div>*/}
               </div>
 
-              <div className='d-flex flex-wrap flex-stack'>
-                <div className='d-flex flex-column flex-grow-1 pe-8'>
-                  <div className='d-flex flex-wrap'>
-                    <div className='d-flex text-gray-600  mb-1'>{game?.description}</div>
+              <div className="d-flex flex-wrap flex-stack">
+                <div className="d-flex flex-column flex-grow-1 pe-8">
+                  <div className="d-flex flex-wrap">
+                    <div className="d-flex text-gray-600  mb-1">{game?.description}</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <div className='d-flex overflow-auto h-55px'>
-            <ul className='nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap'>
-              <li className='nav-item'>
+        </KTCardBody>
+        <KTCardBody className="p-0 rounded-3 rounded-bottom">
+          <ul
+            className="nav nav-fill nav-line-tabs nav-line-tabs-2x fs-5 fw-bolder flex-nowrap text-center border-transparent">
+            {links.map((link, index) => (
+              <li className="nav-item" key={index}>
                 <Link
-                  className={
-                    `nav-link text-active-primary me-6 ` +
-                    (location.pathname === '/games/' + game?.id + '/overview' && 'active')
-                  }
-                  to={'/games/' + game?.id + '/overview'}
+                  className={clsx(
+                    `m-0 nav-link bg-active-mc-secondary text-active-white border-active-mc-secondary border-hover-mc-secondary py-5 `,
+                    {
+                      active: location.pathname === link.link
+                    }
+                  )}
+                  to={link.link}
                 >
-                  Overview
+                  {link.text}
                 </Link>
               </li>
-              <li className='nav-item'>
-                <Link
-                  className={
-                    `nav-link text-active-primary me-6 ` +
-                    (location.pathname === '/games/' + game?.id + '/modes' && 'active')
-                  }
-                  to={'/games/' + game?.id + '/modes'}
-                >
-                  Game Modes
-                </Link>
-              </li>
-              {/*<li className='nav-item'>*/}
-              {/*  <Link*/}
-              {/*    className={*/}
-              {/*      `nav-link text-active-primary me-6 ` +*/}
-              {/*      (location.pathname === '/games/' + game?.id + '/scoring' && 'active')*/}
-              {/*    }*/}
-              {/*    to={'/games/' + game?.id + '/scoring'}*/}
-              {/*  >*/}
-              {/*    Scoring*/}
-              {/*  </Link>*/}
-              {/*</li>*/}
-              <li className='nav-item'>
-                <Link
-                  className={
-                    `nav-link text-active-primary me-6 ` +
-                    (location.pathname === '/games/' + game?.id + '/settings' && 'active')
-                  }
-                  to={'/games/' + game?.id + '/settings'}
-                >
-                  Settings
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+            ))}
+          </ul>
+        </KTCardBody>
+      </KTCard>
     </>
-  )
-}
+  );
+};
 
-export {GameInfo}
+export { GameInfo };

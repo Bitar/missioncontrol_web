@@ -25,7 +25,7 @@ type ActivityFilterObj = {
 }
 
 const ActivityFilter = () => {
-  const { currentUser, communityAdmin } = useAuth();
+  const { currentUser } = useAuth();
   const { updateState } = useQueryRequest();
   const [activityFilters, setActivityFilters] = useState<ActivityFilterObj>(initActivity);
   const [communities, setCommunities] = useState<Community[]>();

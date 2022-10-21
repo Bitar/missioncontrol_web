@@ -52,13 +52,16 @@ const PrivateRoutes = () => {
         />
 
 
-        <Route path="games/*" element={
-          <Restricted to="view-games">
-            <SuspenseView>
-              <GamePage />
-            </SuspenseView>
-          </Restricted>
-        } />
+        <Route
+          path="games/*"
+          element={
+            <Restricted to="view-games">
+              <SuspenseView>
+                <GamePage />
+              </SuspenseView>
+            </Restricted>
+          }
+        />
 
         <Route
           path="users/*"

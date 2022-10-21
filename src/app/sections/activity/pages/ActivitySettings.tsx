@@ -61,7 +61,6 @@ const ActivitySettings = () => {
     let data = jsonToFormData(activityForm)
     data.append('_method', 'PUT')
 
-    console.log(activityForm?.schedule?.settings?.time)
     let time = dayjs(new Date(activityForm?.schedule?.settings?.time)).format('HH:mm:ss')
 
     data.append('schedule[settings][time]', time)

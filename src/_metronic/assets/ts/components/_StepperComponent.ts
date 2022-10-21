@@ -154,8 +154,6 @@ class StepperComponent {
 
     this.element.classList.add(state)
 
-    console.log(this.element)
-
     // Step Items
     const elements = this.element.querySelectorAll(
       '[data-kt-stepper-element="nav"], [data-kt-stepper-element="content"], [data-kt-stepper-element="info"]'
@@ -174,11 +172,7 @@ class StepperComponent {
       element.classList.remove('pending')
 
       if (index === this.currentStepIndex) {
-        console.log(element)
         element.classList.add('current')
-        console.log('current', index, this.currentStepIndex)
-
-
         // if (
         //   this.options.animation !== false &&
         //   element.getAttribute('data-kt-stepper-element') === 'content'
@@ -193,10 +187,8 @@ class StepperComponent {
         // }
       } else {
         if (index < this.currentStepIndex) {
-          console.log('completed', index, this.currentStepIndex)
           // element.classList.add('completed')
         } else {
-          console.log('pending', index, this.currentStepIndex)
           // element.classList.add('pending')
         }
       }

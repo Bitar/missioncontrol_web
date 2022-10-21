@@ -3,7 +3,7 @@ import { Game } from "../../../models/game/Game";
 import { Navigate, Outlet, Route, Routes, useParams } from "react-router-dom";
 import { PageLink, PageTitle } from "../../../layout/core";
 import { getGameById } from "../core/GameRequests";
-import { GameEdit } from "./GameEdit";
+import { GameSettings } from "./GameSettings";
 import { GameInfo } from "../GameInfo";
 import { GameModes } from "./GameModes";
 import { GameContext } from "../core/GameContext";
@@ -40,7 +40,6 @@ const GameView: React.FC = () => {
   ];
 
   useEffect(() => {
-    // getGames
     getGameById(params.id).then((response) => {
       setGame(response);
     });
@@ -83,7 +82,7 @@ const GameView: React.FC = () => {
             element={
               <>
                 <PageTitle breadcrumbs={gameViewBreadCrumbs}>Settings</PageTitle>
-                <GameEdit />
+                <GameSettings />
               </>
             }
           />
