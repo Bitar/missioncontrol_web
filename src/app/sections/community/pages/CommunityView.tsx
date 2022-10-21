@@ -9,6 +9,7 @@ import { CommunitySettings } from "./CommunitySettings";
 import { ID } from "../../../../_metronic/helpers";
 import { CommunityContext } from "../CommunityContext";
 import { User } from "../../identity/user/models/User";
+import { CommunityAdminSettings } from "./CommunityAdminSettings";
 
 type Props = {
   communityId?: ID
@@ -124,7 +125,11 @@ const CommunityView: FC<Props> = ({ communityId }) => {
             element={
               <>
                 <PageTitle breadcrumbs={communityViewBreadCrumbs}>Settings</PageTitle>
-                <CommunitySettings communityId={community?.id} />
+                {params.communityId ? (
+                  <CommunitySettings communityId={community?.id} />
+                ) : (
+                  <CommunityAdminSettings />
+                )}
               </>
             }
           />
