@@ -27,9 +27,17 @@ const PermissionColumns: ReadonlyArray<Column<CommunityPermission>> = [
     id: 'is_owner',
     Cell: ({...props}) => {
       if(props.data[props.row.index]?.is_owner) {
-        return <BadgeCell status='Owner' color='mc-secondary' />
+        return <div className='d-flex align-items-center'>
+          <div className='d-flex flex-column'>
+            <span className='badge badge-mc-secondary'>Owner</span>
+          </div>
+        </div>
       } else {
-        return <BadgeCell status='Admin' color='secondary' />
+        return <div className='d-flex align-items-center'>
+          <div className='d-flex flex-column'>
+            <span className='badge badge-secondary'>Admin</span>
+          </div>
+        </div>
       }
     },
   },

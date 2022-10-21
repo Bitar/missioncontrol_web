@@ -32,6 +32,7 @@ const QueryResponseProvider: FC<React.PropsWithChildren<Props>> = ({
   useEffect(() => {
     if (query !== updatedQuery) {
       setQuery(updatedQuery)
+      setEnabled(true)
     }
   }, [query, updatedQuery])
 

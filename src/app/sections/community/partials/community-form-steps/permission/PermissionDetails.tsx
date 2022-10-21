@@ -58,6 +58,12 @@ const PermissionDetails = () => {
       toast.success("Community admin added Successfully!");
 
       setEnabled(true)
+      setPermissionUserForm({
+        email: "",
+        is_owner: false
+      })
+      setAlertMessage("");
+      setHasErrors(false);
     }).catch(function(e) {
       if (e.response) {
         let status = e.response.status;
