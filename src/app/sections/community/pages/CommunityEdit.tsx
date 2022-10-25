@@ -48,9 +48,9 @@ const CommunityEdit: FC<Props> = ({communityId}) => {
   }, [])
 
   useEffect(() => {
-    if (communityForm?.address?.state_id) {
+    if (communityForm?.address?.state) {
       let selectedOption = statesOptions.find(
-        (element) => element.value.toString() === communityForm?.address?.state_id
+        (element) => element.value.toString() === communityForm?.address?.state
       )
 
       if (selectedOption) {

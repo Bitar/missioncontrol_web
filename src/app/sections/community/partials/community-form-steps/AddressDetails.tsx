@@ -132,7 +132,7 @@ const AddressDetails: FC<Props> = ({ communityForm, setCommunityForm }) => {
                       getOptionValue={(state) => state?.id?.toString() || ""}
                       onChange={(e) => {
                         updateData({
-                          address: {...communityForm?.address, ...{state_id: e?.id}},
+                          address: {...communityForm?.address, ...{state: e?.id}},
                         }, setCommunityForm, communityForm);
                       }}
                     />
