@@ -34,7 +34,7 @@ const GameSettings: FC = () => {
               <div className="col-lg-4 col-xl-3">
                 <Nav variant="pills" className="flex-column settings-nav">
                   {settingsNav.map((settings, index) => (
-                    <Nav.Item className="mb-5">
+                    <Nav.Item className="mb-5" key={`nav-item-settings-game-${index}`}>
                       <Nav.Link className="settings-nav-item" eventKey={`settingsNav-${index}`}>
                         <div className="settings-nav-icon w-45px h-45px bg-transparent">
                           <i className={`${settings.icon} fs-2x text-mc-secondary`}></i>

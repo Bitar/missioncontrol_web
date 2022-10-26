@@ -27,7 +27,7 @@ const GameView: React.FC = () => {
     },
     {
       title: game?.title || "",
-      path: "/games/" + params.id + "/overvie",
+      path: "/games/" + params.id + "/overview",
       isSeparator: false,
       isActive: false
     },
