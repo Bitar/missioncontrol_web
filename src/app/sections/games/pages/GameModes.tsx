@@ -5,6 +5,7 @@ import { KTCard, KTCardBody } from "../../../../_metronic/helpers";
 import { updateData } from "../../../helpers/form/FormHelper";
 import { useGame } from "../core/GameContext";
 import { GameMode } from "../../../models/game/GameMode";
+import { GameModeWrapper } from "./GameModeWrapper";
 
 const GameModes: FC = () => {
   const { game, setGame } = useGame();
@@ -39,7 +40,6 @@ const GameModes: FC = () => {
                onClick={() => setGameMode(gameMode)}>
             <KTCard className="h-100">
               <KTCardBody className="d-flex justify-content-center flex-column p-8">
-                {/*<Link to={"/games/" + params.id + "/modes/" + gameMode?.id}>*/}
                 <span className="text-gray-800 d-flex flex-column">
                   <div className="fs-5 fw-bolder mb-2">{gameMode?.name}</div>
                 </span>
@@ -52,7 +52,6 @@ const GameModes: FC = () => {
                     ? gameMode?.min_players
                     : gameMode?.min_players + "-" + gameMode?.max_players}
                 </div>
-                {/*</Link>*/}
               </KTCardBody>
             </KTCard>
           </div>
@@ -60,12 +59,10 @@ const GameModes: FC = () => {
       </div>
 
       {gameMode &&
-        <div className="row g-6 g-xl-9 mb-6 mb-xl-9">
-          <KTCard>
-            <KTCardBody>
-
-            </KTCardBody>
-          </KTCard>
+        <div className="row">
+          <div className="col-12">
+            <GameModeWrapper gameMode={gameMode} />
+          </div>
         </div>
       }
 
