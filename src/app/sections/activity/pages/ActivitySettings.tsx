@@ -27,7 +27,7 @@ import { TimeZone } from "../../../models/misc/TimeZone";
 import { getTimeZones } from "../../misc/core/_requests";
 import { useParams } from "react-router-dom";
 import { updateActivity } from "../core/ActivityRequests";
-import toast from 'react-hot-toast'
+import toast from "react-hot-toast";
 import { FormErrorAlert } from "../../../modules/errors/partials/FormErrorAlert";
 import dayjs from "dayjs";
 
@@ -35,7 +35,7 @@ const { before } = DateRangePicker;
 
 const ActivitySettings = () => {
   const { currentUser } = useAuth();
-  const params = useParams()
+  const params = useParams();
   const { activity, setActivity } = useActivity();
   const [activityForm, setActivityForm] = useState<ActivityForm>(
     initialActivityFormByActivity(activity)
@@ -54,31 +54,31 @@ const ActivitySettings = () => {
   const [matchPlayDisabledDate, setMatchPlayDisabledDate] = useState<Date>(new Date());
   const selectGameModeRef = useRef<any>();
   const selectPlatformsRef = useRef<any>();
-  const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined)
-  const [alertMessage, setAlertMessage] = useState<string | undefined>(undefined)
+  const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined);
+  const [alertMessage, setAlertMessage] = useState<string | undefined>(undefined);
 
   const handleSubmit = async () => {
-    let data = jsonToFormData(activityForm)
-    data.append('_method', 'PUT')
+    let data = jsonToFormData(activityForm);
+    data.append("_method", "PUT");
 
-    let time = dayjs(new Date(activityForm?.schedule?.settings?.time)).format('HH:mm:ss')
+    let time = dayjs(new Date(activityForm?.schedule?.settings?.time)).format("HH:mm:ss");
 
-    data.append('schedule[settings][time]', time)
+    data.append("schedule[settings][time]", time);
 
     await updateActivity(params.id, data).then((response) => {
-      toast.success('Activity updated Successfully!');
-      setActivity(response)
-      setAlertMessage(undefined)
-      setHasErrors(false)
+      toast.success("Activity updated Successfully!");
+      setActivity(response);
+      setAlertMessage(undefined);
+      setHasErrors(false);
     }).catch(function(e) {
       if (e.response) {
         // let obj = error.response.data.error.validation;
         // console.log((error.response.data.error.validation))
         // console.log(obj.stringify())
-        setAlertMessage(e.response.data.message)
-        setHasErrors(true)
+        setAlertMessage(e.response.data.message);
+        setHasErrors(true);
       }
-    })
+    });
   };
 
   const handleOnChange = (e: any) => {
@@ -223,7 +223,7 @@ const ActivitySettings = () => {
           {({ isSubmitting }) => (
             <Form onChange={handleOnChange} className="form" encType="multipart/form-data">
               <KTCardBody className="py-10">
-              <FormErrorAlert hasErrors={hasErrors} message={alertMessage} />
+                <FormErrorAlert hasErrors={hasErrors} message={alertMessage} />
                 <div className="row mb-6">
                   <label className="col-lg-4 col-form-label required fw-bold fs-6">Title</label>
                   <div className="col-lg-8 fv-row">
@@ -468,11 +468,13 @@ const ActivitySettings = () => {
                       placeholder="Select Time"
                       showMeridian={true}
                       onChange={(value, event) => {
-                        updateData({ schedule: { ...activityForm?.schedule, ...{ settings: { ...activityForm?.schedule.settings, ...{ time: value?.valueOf() } } } } },
+                        updateData({
+                            schedule: { ...activityForm?.schedule, ...{ settings: { ...activityForm?.schedule.settings, ...{ time: value?.valueOf() } } } }
+                          },
                           setActivityForm,
                           activityForm
                         );
-                        setTimeValue(value)
+                        setTimeValue(value);
                       }}
                     />
                   </div>
@@ -509,7 +511,7 @@ const ActivitySettings = () => {
                         value={
                           ACTIVITY_DAY_OF_WEEK.filter(
                             (dayOfWeek) =>
-                              dayOfWeek.value === (Number.isInteger(activityForm?.schedule?.settings?.day) ? activityForm?.schedule?.settings?.day : parseInt(activityForm?.schedule?.settings?.day + ''))
+                              dayOfWeek.value === (Number.isInteger(activityForm?.schedule?.settings?.day) ? activityForm?.schedule?.settings?.day : parseInt(activityForm?.schedule?.settings?.day + ""))
                           )[0]
                         }
                         options={ACTIVITY_DAY_OF_WEEK}

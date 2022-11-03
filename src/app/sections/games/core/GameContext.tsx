@@ -4,11 +4,13 @@ import { Game } from "../../../models/game/Game";
 type GameContextProps = {
   game: Game | undefined,
   setGame: Dispatch<SetStateAction<Game | undefined>>
+  updateGame: any
 }
 
 const initGameContextPropsState = {
   game: undefined,
-  setGame: () => {}
+  setGame: () => {},
+  updateGame: () => {}
 }
 
 export const GameContext = createContext<GameContextProps>(initGameContextPropsState)

@@ -1,16 +1,13 @@
 import {ID, Response} from '../../../_metronic/helpers'
 import {GameSettings} from './GameSettings'
 import {ScoringSettings} from './scoring/ScoringSettings'
+import { ScoringType } from "./scoring/ScoringType";
 
 export type GameMode = {
   id?: ID
   name: string
   description: string
-  scoring_type: {
-    id?: ID
-    name: string
-    description: string
-  }
+  scoring_type: ScoringType
   instructions: string
   min_players: number
   max_players: number

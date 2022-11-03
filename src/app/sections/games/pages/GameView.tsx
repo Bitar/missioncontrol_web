@@ -45,10 +45,17 @@ const GameView: React.FC = () => {
     });
   }, [params.id]);
 
+  const updateGame = () => {
+    getGameById(params.id).then((response) => {
+      setGame(response);
+    });
+  }
+
   return (
     <GameContext.Provider value={{
       game,
-      setGame
+      setGame,
+      updateGame
     }}>
       <Routes>
         <Route

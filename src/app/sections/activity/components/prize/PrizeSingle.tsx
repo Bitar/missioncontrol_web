@@ -64,15 +64,6 @@ const PrizeSingle: FC<Props> = ({
                 onChange={(e) => updateData({name: e.target.value}, setPrizeItem, prizeItem)}
               />
             </div>
-
-            {/*updateData({*/}
-            {/*   settings: {*/}
-            {/*     ...activity?.settings,*/}
-            {/*     ...{*/}
-            {/*       frequency: e.target.value*/}
-            {/*     },*/}
-            {/*   },*/}
-            {/* }, setActivity, activity)*/}
             <div className='col-lg-3'>
               <TextField
                 type={'number'}

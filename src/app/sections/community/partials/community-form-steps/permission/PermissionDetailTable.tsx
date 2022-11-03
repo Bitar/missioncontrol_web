@@ -1,7 +1,4 @@
-import {
-  useQueryResponseData,
-  useQueryResponseLoading
-} from "../../../../../modules/table/QueryResponseProvider";
+import { useQueryResponseData, useQueryResponseLoading } from "../../../../../modules/table/QueryResponseProvider";
 import { KTCard } from "../../../../../helpers/components/KTCard";
 import { KTCardBody } from "../../../../../helpers/components/KTCardBody";
 import React, { useMemo } from "react";
@@ -25,8 +22,8 @@ const PermissionDetailTableWrapper = () => {
   });
 
   return (
-    <KTCard className={""}>
-      <KTCardHeader text={"Permission Users"} bg="mc-primary" text_color="white" />
+    <KTCard className="mb-10" border={true}>
+      <KTCardHeader text={"Users"} bg="mc-primary" text_color="white" />
       <KTCardBody>
         <div className="table-responsive">
           <table
@@ -65,4 +62,4 @@ const PermissionDetailTableWrapper = () => {
   );
 };
 
-export { PermissionDetailTableWrapper  };
+export { PermissionDetailTableWrapper };

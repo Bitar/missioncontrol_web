@@ -1,12 +1,11 @@
 import { KTCardBody } from "../../../helpers/components/KTCardBody";
 import { KTCard } from "../../../helpers/components/KTCard";
-import React, { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
-import { GameMode } from "../../../models/game/GameMode";
+import React, { FC, useEffect, useState } from "react";
 import { KTCardHeader } from "../../../helpers/components/KTCardHeader";
 import { GameModeFormType, initGameModeFormType } from "../models/GameModeFormType";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { FormErrorAlert } from "../../../modules/errors/partials/FormErrorAlert";
-import { getScoringKeys, getScoringTypes } from "../../misc/core/_requests";
+import { getScoringTypes } from "../../misc/core/_requests";
 import { ScoringType } from "../../../models/game/scoring/ScoringType";
 import Select from "react-select";
 import { jsonToFormData, updateData } from "../../../helpers/form/FormHelper";
@@ -14,42 +13,33 @@ import * as Yup from "yup";
 import { GameModeSettings } from "./GameModeSettings";
 import { initGameSettings } from "../../../models/game/GameSettings";
 import { FormAction } from "../../../helpers/form/FormAction";
-import { updateGameMode } from "../core/GameModeRequests";
 import { useGame } from "../core/GameContext";
+import { createGameMode } from "../core/GameModeRequests";
 import toast from "react-hot-toast";
-import { ScoringKey } from "../../../models/game/scoring/ScoringKey";
-
-type Props = {
-  gameMode: GameMode
-  setGameMode: Dispatch<SetStateAction<GameMode | undefined>>
-}
 
 export const gameModeSchema = Yup.object().shape({
-  name: Yup.string().required("Game mode name is required"),
-  description: Yup.string().required("Description is required"),
+  name: Yup.string().required("Name is required"),
   scoring_type_id: Yup.string().required("Scoring Type is required"),
-  instructions: Yup.string().required("Instructions is required")
+  min_players: Yup.string().required("Min Players is required"),
+  max_players: Yup.string().required("Max Players is required"),
+  game_time: Yup.string().required("Game Time is required")
 });
 
-const GameModeWrapper: FC<Props> = ({ gameMode, setGameMode }) => {
+type Props = {
+  setNewGameMode: any,
+  setGameMode: any
+}
+
+const NewGameModeWrapper: FC<Props> = ({ setNewGameMode, setGameMode }) => {
   const { game, updateGame } = useGame();
-  const [gameModeForm, setGameModeForm] = useState<GameModeFormType>(initGameModeFormType(gameMode));
+  const [gameModeForm, setGameModeForm] = useState<GameModeFormType>(initGameModeFormType());
   const [scoringTypes, setScoringTypes] = useState<ScoringType[]>();
-  const [scoringKeys, setScoringKeys] = useState<ScoringKey[]>();
   const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined);
   const [alertMessage, setAlertMessage] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    setGameModeForm(initGameModeFormType(gameMode));
-  }, [gameMode]);
-
-  useEffect(() => {
     getScoringTypes().then((response) => {
       setScoringTypes(response.data);
-    });
-
-    getScoringKeys().then((response) => {
-      setScoringKeys(response.data);
     });
   }, []);
 
@@ -65,10 +55,11 @@ const GameModeWrapper: FC<Props> = ({ gameMode, setGameMode }) => {
 
   const handleSubmit = async () => {
     let data = jsonToFormData(gameModeForm);
-    data.append("_method", "PUT");
 
-    await updateGameMode(game?.id, gameMode?.id, data).then((response) => {
-      toast.success("Game Mode updated Successfully!");
+    await createGameMode(game?.id, data).then((response) => {
+      toast.success("Game Mode created Successfully!");
+
+      setNewGameMode(false);
       setGameMode(response);
       updateGame();
       setAlertMessage(undefined);
@@ -80,18 +71,6 @@ const GameModeWrapper: FC<Props> = ({ gameMode, setGameMode }) => {
       }
     });
   };
-
-  const handleScoreSettingsChange = (el: any) => {
-    let scoringSettings = gameModeForm?.scoring_settings
-
-    console.log(scoringSettings)
-
-    // let targetName = e.target.name;
-    // let targetValue = e.target.value;
-
-    // console.log(targetName)
-    // console.log(targetValue)
-  }
 
   const handleOnChange = (e: any) => {
     let targetName = e.target.name;
@@ -115,7 +94,7 @@ const GameModeWrapper: FC<Props> = ({ gameMode, setGameMode }) => {
 
   return (
     <KTCard>
-      <KTCardHeader text={gameMode?.name} bg="mc-primary" text_color="white" />
+      <KTCardHeader text={"Create Game Mode"} bg="mc-primary" text_color="white" />
       <Formik
         initialValues={gameModeForm}
         onSubmit={handleSubmit}
@@ -166,7 +145,6 @@ const GameModeWrapper: FC<Props> = ({ gameMode, setGameMode }) => {
                     name="scoring_type_id"
                     placeholder={"Choose a Scoring Type"}
                     options={scoringTypes}
-                    defaultValue={gameMode?.scoring_type}
                     getOptionLabel={(scoringType) => scoringType?.name}
                     getOptionValue={(scoringType) => scoringType?.id?.toString() || ""}
                     onChange={(e) => {
@@ -281,42 +259,15 @@ const GameModeWrapper: FC<Props> = ({ gameMode, setGameMode }) => {
               <div className="row mb-6">
                 <label className="col-lg-4 col-form-label fw-bold fs-6">Scoring Settings</label>
                 <div className="col-lg-8 fv-row">
-                  {gameMode?.scoring_settings?.filter((setting) => setting?.key?.type === 1)?.map((setting, index) => (
-                      <div key={`stuff-stuff-key-${setting?.id}-${index}`} className="mb-10">
-                        <div className="row">
-                          <div className="col-6">
-                            <Select
-                              name={`game.mode.scoring_settings.key.${index}`}
-                              menuPlacement="top"
-                              placeholder={"Choose a Scoring Key"}
-                              options={scoringKeys}
-                              defaultValue={setting?.key}
-                              getOptionLabel={(scoringKey) => scoringKey?.key}
-                              getOptionValue={(scoringKey) => scoringKey?.id?.toString() || ""}
-                              onChange={handleScoreSettingsChange}
-                            />
-                          </div>
-                          <div className="col-6">
-                            <Field
-                              type="text"
-                              name={`game.mode.scoring_settings.values.${index}`}
-                              defaultValue={setting?.values[0]?.value}
-                              placeholder="Value"
-                              style={{
-                                padding: '0.55rem 1rem'
-                              }}
-                              className="form-control mb-3 mb-lg-0"
-                              autoComplete="off"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    )
-                  )}
+                  {/*<ul>*/}
+                  {/*  {gameMode?.scoring_settings?.map((setting) =>*/}
+                  {/*    <li key={`stuff-stuff-key-${setting?.id}`}>{setting?.key?.key}</li>*/}
+                  {/*  )}*/}
+                  {/*</ul>*/}
                 </div>
               </div>
             </KTCardBody>
-            <FormAction text={"Update"} isSubmitting={isSubmitting} />
+            <FormAction text={"Create"} isSubmitting={isSubmitting} />
           </Form>
         )}
       </Formik>
@@ -324,4 +275,4 @@ const GameModeWrapper: FC<Props> = ({ gameMode, setGameMode }) => {
   );
 };
 
-export { GameModeWrapper };
+export { NewGameModeWrapper };

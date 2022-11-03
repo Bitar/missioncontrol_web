@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from 'axios'
+import {Response} from '../../../../_metronic/helpers'
 import {Game, GameQueryResponse} from '../../../models/game/Game'
 import {IgdbQueryResponse} from '../../../models/game/Igdb'
-import {Response} from '../../../../_metronic/helpers'
 import {GameModeQueryResponse} from '../../../models/game/GameMode'
 import {PlatformQueryResponse} from '../../../models/game/Platform'
 
@@ -42,8 +42,11 @@ const getGameById = (id: any, query?: string): Promise<Game | undefined> => {
 }
 
 const createGame = (igdb_id: number): Promise<Game | undefined> => {
+  let formData = new FormData();
+  formData.append('igdb_id', igdb_id + '');
+
   return axios
-    .post(`${GET_GAMES_URL}`, {}, {params: {igdb_id}})
+    .post(`${GET_GAMES_URL}`, formData)
     .then((response: AxiosResponse<Response<Game>>) => response.data)
     .then((response: Response<Game>) => response.data)
 }

@@ -12,9 +12,7 @@ import { SwitchInput } from "../../../../../components/SwitchInput/SwitchInput";
 import { jsonToFormData, updateData } from "../../../../../helpers/form/FormHelper";
 import { FormErrorAlert } from "../../../../../modules/errors/partials/FormErrorAlert";
 import toast from "react-hot-toast";
-import {
-  useQueryResponse,
-} from "../../../../../modules/table/QueryResponseProvider";
+import { useQueryResponse } from "../../../../../modules/table/QueryResponseProvider";
 
 export const communityPermissionSchema = Yup.object().shape({
   email: Yup.string().email().required("Email is required")
@@ -35,7 +33,7 @@ const PermissionDetails = () => {
     is_owner: false
   });
 
-  const {setEnabled} = useQueryResponse()
+  const { setEnabled } = useQueryResponse();
 
   const handleOnChange = (e: any) => {
     let targetName = e.target.name;
@@ -57,11 +55,11 @@ const PermissionDetails = () => {
     await addCommunityPermissions(community?.id, data).then(() => {
       toast.success("Community admin added Successfully!");
 
-      setEnabled(true)
+      setEnabled(true);
       setPermissionUserForm({
         email: "",
         is_owner: false
-      })
+      });
       setAlertMessage("");
       setHasErrors(false);
     }).catch(function(e) {
@@ -84,7 +82,7 @@ const PermissionDetails = () => {
     <>
       <PermissionDetailTableWrapper />
       <KTCard border={true}>
-        <KTCardHeader text={"Permissions"} />
+        <KTCardHeader text={"Add Users"} bg="mc-primary" text_color="white" />
 
         <Formik
           validationSchema={communityPermissionSchema}
