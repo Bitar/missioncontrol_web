@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
 import { CommunityFormType, communitySchema, initialCommunityFormTypeByCommunity } from "../models/Community";
-import { ID, KTCard, KTCardBody } from "../../../../_metronic/helpers";
+import { KTCard, KTCardBody } from "../../../../_metronic/helpers";
 import { useCommunity } from "../CommunityContext";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { BannerImage } from "../partials/BannerImage";

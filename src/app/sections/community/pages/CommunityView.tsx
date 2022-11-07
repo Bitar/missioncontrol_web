@@ -125,11 +125,12 @@ const CommunityView: FC<Props> = ({ communityId }) => {
             element={
               <>
                 <PageTitle breadcrumbs={communityViewBreadCrumbs}>Settings</PageTitle>
-                {params.communityId ? (
-                  <CommunitySettings communityId={community?.id} />
-                ) : (
-                  <CommunityAdminSettings />
-                )}
+                  <CommunitySettings />
+                {/*{params.communityId ? (*/}
+                {/*) : (*/}
+                {/*  <CommunitySettings />*/}
+                {/*  // <CommunityAdminSettings />*/}
+                {/*)}*/}
               </>
             }
           />

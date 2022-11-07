@@ -18,11 +18,7 @@ import { QueryResponseProvider } from "../../../modules/table/QueryResponseProvi
 import { getCommunityPermissions } from "../core/CommunityPermissionRequests";
 import { ListViewProvider } from "../../../modules/table/ListViewProvider";
 
-type Props = {
-  communityId?: ID
-}
-
-const CommunitySettings: FC<Props> = () => {
+const CommunitySettings: FC = () => {
   const { community } = useCommunity();
   const [communityForm, setCommunityForm] = useState<CommunityFormType>(
     initialCommunityFormTypeByCommunity(community)

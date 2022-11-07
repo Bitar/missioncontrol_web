@@ -7,7 +7,7 @@ import { KTCardBody } from "../../../../helpers/components/KTCardBody";
 import { KTCard } from "../../../../helpers/components/KTCard";
 import { useParams } from "react-router-dom";
 import { jsonToFormData, updateData } from "../../../../helpers/form/FormHelper";
-import { updateCommunity } from "../../core/CommunityRequests";
+import { updateAdminCommunity, updateCommunity } from "../../core/CommunityRequests";
 import toast from "react-hot-toast";
 import { FormAction } from "../../../../helpers/form/FormAction";
 import { getStates } from "../../../misc/core/_requests";
@@ -34,10 +34,17 @@ const AddressDetails: FC<Props> = ({ communityForm, setCommunityForm }) => {
     let data = jsonToFormData(communityForm)
     data.append('_method', 'PUT')
 
-    await updateCommunity(params.communityId, data).then((response) => {
-      toast.success('Community Address Updated Successfully')
-      setCommunity(response)
-    })
+    if (params?.communityId) {
+      await updateCommunity(params.communityId, data).then((response) => {
+        toast.success('Community Address Updated Successfully')
+        setCommunity(response);
+      });
+    } else {
+      await updateAdminCommunity(data).then((response) => {
+        toast.success('Community Address Updated Successfully')
+        setCommunity(response);
+      });
+    }
   };
 
   const handleOnChange = (e: any) => {

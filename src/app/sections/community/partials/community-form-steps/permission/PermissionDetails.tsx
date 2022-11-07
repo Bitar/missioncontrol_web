@@ -13,6 +13,7 @@ import { jsonToFormData, updateData } from "../../../../../helpers/form/FormHelp
 import { FormErrorAlert } from "../../../../../modules/errors/partials/FormErrorAlert";
 import toast from "react-hot-toast";
 import { useQueryResponse } from "../../../../../modules/table/QueryResponseProvider";
+import { useAuth } from "../../../../../modules/auth";
 
 export const communityPermissionSchema = Yup.object().shape({
   email: Yup.string().email().required("Email is required")

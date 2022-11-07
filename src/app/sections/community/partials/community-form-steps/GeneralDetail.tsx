@@ -9,7 +9,7 @@ import { LogoImage } from "../LogoImage";
 import { BannerImage } from "../BannerImage";
 import { FormAction } from "../../../../helpers/form/FormAction";
 import { jsonToFormData, updateData } from "../../../../helpers/form/FormHelper";
-import { updateCommunity } from "../../core/CommunityRequests";
+import { updateAdminCommunity, updateCommunity } from "../../core/CommunityRequests";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 
@@ -20,34 +20,42 @@ type Props = {
 
 const GeneralDetail: FC<Props> = ({ communityForm, setCommunityForm }) => {
   const { setCommunity } = useCommunity();
-  const params = useParams()
+  const params = useParams();
 
   const handleSubmit = async () => {
-    let data = jsonToFormData(communityForm)
-    data.append('_method', 'PUT')
+      let data = jsonToFormData(communityForm);
+      data.append("_method", "PUT");
 
-    await updateCommunity(params.communityId, data).then((response) => {
-      toast.success('Community Updated Successfully')
-      setCommunity(response)
-    })
-  };
+      if (params?.communityId) {
+        await updateCommunity(params.communityId, data).then((response) => {
+          toast.success("Community Updated Successfully");
+          setCommunity(response);
+        });
+      } else {
+        await updateAdminCommunity(data).then((response) => {
+          toast.success("Community Updated Successfully");
+          setCommunity(response);
+        });
+      }
+    }
+  ;
 
   const handleOnChange = (e: any) => {
-    let targetName = e.target.name
-    let targetValue = e.target.value
+    let targetName = e.target.name;
+    let targetValue = e.target.value;
 
-    if (targetName === 'logo' || targetName === 'banner_image') {
-      targetValue = e.target.files[0]
+    if (targetName === "logo" || targetName === "banner_image") {
+      targetValue = e.target.files[0];
     } else {
-      targetValue = e.target.value
+      targetValue = e.target.value;
     }
 
-    updateData({[targetName]: targetValue}, setCommunityForm, communityForm);
-  }
+    updateData({ [targetName]: targetValue }, setCommunityForm, communityForm);
+  };
 
   return (
     <KTCard border={true}>
-      <KTCardHeader text={"General Details"} bg="mc-primary" text_color="white"  />
+      <KTCardHeader text={"General Details"} bg="mc-primary" text_color="white" />
       <Formik
         validationSchema={communitySchema}
         initialValues={communityForm}
