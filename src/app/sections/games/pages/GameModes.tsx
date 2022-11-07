@@ -62,9 +62,13 @@ const GameModes: FC = () => {
                 <span className="text-gray-800 d-flex flex-column">
                   <div className="fs-5 fw-bolder mb-2">{gameMode?.name}</div>
                 </span>
-                <div className="fs-7 fw-bold text-gray-400 mt-auto mb-2">
-                  {gameMode?.description.length > 150 ? gameMode?.description.substring(0, 150) + "..." : gameMode?.description}
-                </div>
+
+                {gameMode?.description &&
+                  <div className="fs-7 fw-bold text-gray-400 mt-auto mb-2">
+                    {gameMode?.description.length > 150 ? gameMode?.description.substring(0, 150) + "..." : gameMode?.description}
+                  </div>
+                }
+
                 <div className="fs-7 fw-bold text-gray-400 mt-auto">
                   Players:{" "}
                   {gameMode?.min_players === gameMode?.max_players
