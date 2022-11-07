@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Field } from "formik";
-import { GameSettings } from "../../../models/game/GameSettings";
+import { GameSettings } from "../../../../models/game/GameSettings";
 
 type Props = {
   gameModeSettings: GameSettings

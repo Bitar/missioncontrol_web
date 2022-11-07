@@ -1,21 +1,17 @@
 import { KTCardBody } from "../../../helpers/components/KTCardBody";
 import { KTCard } from "../../../helpers/components/KTCard";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import { KTCardHeader } from "../../../helpers/components/KTCardHeader";
 import { GameModeFormType, initGameModeFormType } from "../models/GameModeFormType";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import { FormErrorAlert } from "../../../modules/errors/partials/FormErrorAlert";
-import { getScoringTypes } from "../../misc/core/_requests";
-import { ScoringType } from "../../../models/game/scoring/ScoringType";
-import Select from "react-select";
 import { jsonToFormData, updateData } from "../../../helpers/form/FormHelper";
 import * as Yup from "yup";
-import { GameModeSettings } from "./GameModeSettings";
-import { initGameSettings } from "../../../models/game/GameSettings";
 import { FormAction } from "../../../helpers/form/FormAction";
 import { useGame } from "../core/GameContext";
 import { createGameMode } from "../core/GameModeRequests";
 import toast from "react-hot-toast";
+import { GameModeFormWrapper } from "../partials/game-modes/GameModeFormWrapper";
 
 export const gameModeSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
@@ -33,25 +29,8 @@ type Props = {
 const NewGameModeWrapper: FC<Props> = ({ setNewGameMode, setGameMode }) => {
   const { game, updateGame } = useGame();
   const [gameModeForm, setGameModeForm] = useState<GameModeFormType>(initGameModeFormType());
-  const [scoringTypes, setScoringTypes] = useState<ScoringType[]>();
   const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined);
   const [alertMessage, setAlertMessage] = useState<string | undefined>(undefined);
-
-  useEffect(() => {
-    getScoringTypes().then((response) => {
-      setScoringTypes(response.data);
-    });
-  }, []);
-
-  const removeSettings = (index: number) => {
-    let newFormValues = [...gameModeForm.settings];
-
-    newFormValues.splice(index, 1);
-
-    updateData({
-      settings: newFormValues
-    }, setGameModeForm, gameModeForm);
-  };
 
   const handleSubmit = async () => {
     let data = jsonToFormData(gameModeForm);
@@ -86,7 +65,7 @@ const NewGameModeWrapper: FC<Props> = ({ setNewGameMode, setGameMode }) => {
         items[gameModeSettingsIndex] = item;
 
         updateData({ settings: items }, setGameModeForm, gameModeForm);
-      } else if (targetName !== "min_players" && targetName !== "max_players" && targetName !== "game_time") {
+      } else if (targetName !== "min_players" && targetName !== "max_players" && targetName !== "game_time" && !targetName.includes("game.mode.scoring-settings")) {
         updateData({ [targetName]: targetValue }, setGameModeForm, gameModeForm);
       }
     }
@@ -106,166 +85,8 @@ const NewGameModeWrapper: FC<Props> = ({ setNewGameMode, setGameMode }) => {
             <KTCardBody>
               <FormErrorAlert hasErrors={hasErrors} message={alertMessage} />
 
-              <div className="row mb-6">
-                <label className="col-lg-4 col-form-label required fw-bold fs-6">Title</label>
-                <div className="col-lg-8 fv-row">
-                  <Field
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    className="form-control mb-3 mb-lg-0"
-                    autoComplete="off"
-                  />
-                  <div className="text-danger mt-2">
-                    <ErrorMessage name="name" />
-                  </div>
-                </div>
-              </div>
+              <GameModeFormWrapper gameModeForm={gameModeForm} setGameModeForm={setGameModeForm} />
 
-              <div className="row mb-6">
-                <label className="col-lg-4 col-form-label fw-bold fs-6">Description</label>
-                <div className="col-lg-8 fv-row">
-                  <Field
-                    as="textarea"
-                    name="description"
-                    className="form-control mb-3 mb-lg-0"
-                    placeholder="Game Mode Description"
-                    rows={3}
-                  />
-                  <div className="text-danger mt-2">
-                    <ErrorMessage name="description" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="row mb-6">
-                <label className="col-lg-4 col-form-label required fw-bold fs-6">Scoring Type</label>
-                <div className="col-lg-8 fv-row">
-                  <Select
-                    name="scoring_type_id"
-                    placeholder={"Choose a Scoring Type"}
-                    options={scoringTypes}
-                    getOptionLabel={(scoringType) => scoringType?.name}
-                    getOptionValue={(scoringType) => scoringType?.id?.toString() || ""}
-                    onChange={(e) => {
-                      updateData({
-                        scoring_type_id: e?.id
-                      }, setGameModeForm, gameModeForm);
-                    }}
-                  />
-                  <div className="text-danger mt-2">
-                    <ErrorMessage name="scoring_type_id" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="row mb-6">
-                <label className="col-lg-4 col-form-label fw-bold fs-6">Instructions</label>
-                <div className="col-lg-8 fv-row">
-                  <Field
-                    as="textarea"
-                    name="instructions"
-                    className="form-control mb-3 mb-lg-0"
-                    placeholder="Game Mode Instructions"
-                    rows={1}
-                  />
-                  <div className="text-danger mt-2">
-                    <ErrorMessage name="instructions" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="row mb-6">
-                <label className="col-lg-4 col-form-label required fw-bold fs-6">Min Players</label>
-                <div className="col-lg-8 fv-row">
-                  <Field
-                    type="text"
-                    name="min_players"
-                    placeholder="Minimum Players per team"
-                    className="form-control mb-3 mb-lg-0"
-                    autoComplete="off"
-                    onChange={(e: any) => {
-                      const result = e.target.value.replace(/\D/g, "");
-                      updateData({ [e.target.name]: result }, setGameModeForm, gameModeForm);
-                    }}
-                  />
-                  <div className="text-danger mt-2">
-                    <ErrorMessage name="min_players" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="row mb-6">
-                <label className="col-lg-4 col-form-label required fw-bold fs-6">Max Players</label>
-                <div className="col-lg-8 fv-row">
-                  <Field
-                    type="text"
-                    name="max_players"
-                    placeholder="Maximum Players per team"
-                    className="form-control mb-3 mb-lg-0"
-                    autoComplete="off"
-                    onChange={(e: any) => {
-                      const result = e.target.value.replace(/\D/g, "");
-                      updateData({ [e.target.name]: result }, setGameModeForm, gameModeForm);
-                    }}
-                  />
-                  <div className="text-danger mt-2">
-                    <ErrorMessage name="max_players" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="row mb-6">
-                <label className="col-lg-4 col-form-label required fw-bold fs-6">Game Time</label>
-                <div className="col-lg-8 fv-row">
-                  <Field
-                    type="text"
-                    name="game_time"
-                    placeholder="Average game time"
-                    className="form-control mb-3 mb-lg-0"
-                    autoComplete="off"
-                    onChange={(e: any) => {
-                      const result = e.target.value.replace(/\D/g, "");
-                      updateData({ [e.target.name]: result }, setGameModeForm, gameModeForm);
-                    }}
-                  />
-                  <div className="text-danger mt-2">
-                    <ErrorMessage name="game_time" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="row mb-6">
-                <label className="col-lg-4 col-form-label fw-bold fs-6">Settings</label>
-                <div className="col-lg-8 fv-row">
-                  {gameModeForm?.settings?.map((settings, index) => <GameModeSettings
-                    key={`game-mode-settings-${index}`} gameModeSettings={settings} index={index}
-                    removeSetting={removeSettings} />)}
-
-                  <button
-                    type="button"
-                    className="btn btn-icon btn-sm btn-light-success w-100 py-8 fw-bold"
-                    style={{ fontSize: "18px" }}
-                    onClick={() => {
-                      updateData({
-                        settings: [...gameModeForm.settings, initGameSettings()]
-                      }, setGameModeForm, gameModeForm);
-                    }}
-                  >
-                    <i className="fa fa-plus-circle me-3"></i> Add New
-                  </button>
-                </div>
-              </div>
-              <div className="row mb-6">
-                <label className="col-lg-4 col-form-label fw-bold fs-6">Scoring Settings</label>
-                <div className="col-lg-8 fv-row">
-                  {/*<ul>*/}
-                  {/*  {gameMode?.scoring_settings?.map((setting) =>*/}
-                  {/*    <li key={`stuff-stuff-key-${setting?.id}`}>{setting?.key?.key}</li>*/}
-                  {/*  )}*/}
-                  {/*</ul>*/}
-                </div>
-              </div>
             </KTCardBody>
             <FormAction text={"Create"} isSubmitting={isSubmitting} />
           </Form>
