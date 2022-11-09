@@ -31,8 +31,8 @@ const CommunitySettings: FC = () => {
       icon: "fas fa-file"
     },
     {
-      title: "Contact",
-      description: "Who shall we speak to",
+      title: "External Contact",
+      description: "Who should your players contact?",
       icon: "fas fa-phone"
     },
     {

@@ -34,14 +34,6 @@ export const GameModeScoringSettings: FC<Props> = ({
     }
   }, [scoringSettingForm]);
 
-  // const getScoringKeyObject = () => {
-  //   // console.log(scoringKeys?.filter((scoringKey) => scoringKey?.key === scoringSettingForm.scoring_key_id))
-  // }
-
-  function getScoringKeyObject() {
-    return scoringKeys?.filter((scoringKey) => scoringKey?.id === scoringSettingForm.scoring_key_id)[0]
-  }
-
   return (
     <div className="row mb-8">
       <div className="col-11">

@@ -2,8 +2,6 @@ import { KTCardHeader } from "../../../../helpers/components/KTCardHeader";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { CommunityFormType, communitySchema } from "../../models/Community";
 import { KTCardBody } from "../../../../helpers/components/KTCardBody";
-import { LogoImage } from "../LogoImage";
-import { BannerImage } from "../BannerImage";
 import { KTCard } from "../../../../helpers/components/KTCard";
 import React, { Dispatch, FC, SetStateAction } from "react";
 import { useCommunity } from "../../CommunityContext";
@@ -20,20 +18,20 @@ type Props = {
 
 const ContactDetails: FC<Props> = ({ communityForm, setCommunityForm }) => {
   const { setCommunity } = useCommunity();
-  const params = useParams()
+  const params = useParams();
 
   const handleSubmit = async () => {
-    let data = jsonToFormData(communityForm)
-    data.append('_method', 'PUT')
+    let data = jsonToFormData(communityForm);
+    data.append("_method", "PUT");
 
     if (params?.communityId) {
       await updateCommunity(params.communityId, data).then((response) => {
-        toast.success('Community Contact Updated Successfully')
+        toast.success("Community Contact Updated Successfully");
         setCommunity(response);
       });
     } else {
       await updateAdminCommunity(data).then((response) => {
-        toast.success('Community Contact Updated Successfully')
+        toast.success("Community Contact Updated Successfully");
         setCommunity(response);
       });
     }
@@ -41,78 +39,87 @@ const ContactDetails: FC<Props> = ({ communityForm, setCommunityForm }) => {
   };
 
   const handleOnChange = (e: any) => {
-    let targetName = e.target.name
-    let targetValue = e.target.value
+    let targetName = e.target.name;
+    let targetValue = e.target.value;
 
-    let contact_field = targetName.split('contact.')[1]
+    let contact_field = targetName.split("contact.")[1];
 
     updateData(
       {
-        contact: {...communityForm?.contact, ...{[contact_field]: targetValue}},
+        contact: { ...communityForm?.contact, ...{ [contact_field]: targetValue } }
       },
       setCommunityForm,
       communityForm
-    )
+    );
   };
   return (
     <KTCard border={true}>
-      <KTCardHeader text={"Contact Info"} bg="mc-primary" text_color="white"  />
+      <KTCardHeader text={"External Contact"} bg="mc-primary" text_color="white" />
       <Formik
         validationSchema={communitySchema}
         initialValues={communityForm}
         onSubmit={handleSubmit}
         enableReinitialize
       >
-        {({isSubmitting}) => (
+        {({ isSubmitting }) => (
           <Form
             onChange={handleOnChange}
             className="form"
             autoComplete="off">
             <KTCardBody className="py-4">
               <div className="d-flex flex-column pt-5">
-                <div className='row mb-6'>
-                  <label className='col-lg-4 col-form-label required fw-bold fs-6'>Name</label>
-                  <div className='col-lg-8 fv-row'>
+                <div className="row mb-6">
+                  <div className="alert alert-warning d-flex align-items-center p-5 mb-10">
+                    <span className="svg-icon svg-icon-2hx svg-icon-warning me-3"><i className='text-warning fas fa-warning'></i></span>
+
+                    <div className="d-flex flex-column">
+                      <span>This information is what will be displayed to your community members in case they need to contact you.</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="row mb-6">
+                  <label className="col-lg-4 col-form-label required fw-bold fs-6">Name</label>
+                  <div className="col-lg-8 fv-row">
                     <Field
-                      type='text'
-                      name='contact.name'
-                      placeholder='Contact Name'
-                      className='form-control mb-3 mb-lg-0'
+                      type="text"
+                      name="contact.name"
+                      placeholder="Contact Name"
+                      className="form-control mb-3 mb-lg-0"
                     />
-                    <div className='text-danger mt-2'>
-                      <ErrorMessage name='contact.name' />
+                    <div className="text-danger mt-2">
+                      <ErrorMessage name="contact.name" />
                     </div>
                   </div>
                 </div>
 
-                <div className='row mb-6'>
-                  <label className='col-lg-4 col-form-label required fw-bold fs-6'>Email</label>
-                  <div className='col-lg-8 fv-row'>
+                <div className="row mb-6">
+                  <label className="col-lg-4 col-form-label required fw-bold fs-6">Email</label>
+                  <div className="col-lg-8 fv-row">
                     <Field
-                      type='text'
-                      name='contact.email'
-                      placeholder='Contact Email'
-                      className='form-control mb-3 mb-lg-0'
+                      type="text"
+                      name="contact.email"
+                      placeholder="Contact Email"
+                      className="form-control mb-3 mb-lg-0"
                     />
-                    <div className='text-danger mt-2'>
-                      <ErrorMessage name='contact.email' />
+                    <div className="text-danger mt-2">
+                      <ErrorMessage name="contact.email" />
                     </div>
                   </div>
                 </div>
 
-                <div className='row mb-6'>
-                  <label className='col-lg-4 col-form-label required fw-bold fs-6'>
+                <div className="row mb-6">
+                  <label className="col-lg-4 col-form-label required fw-bold fs-6">
                     Phone Number
                   </label>
-                  <div className='col-lg-8 fv-row'>
+                  <div className="col-lg-8 fv-row">
                     <Field
-                      type='text'
-                      name='contact.phone_number'
-                      placeholder='Phone Number...'
-                      className='form-control mb-3 mb-lg-0'
+                      type="text"
+                      name="contact.phone_number"
+                      placeholder="Phone Number..."
+                      className="form-control mb-3 mb-lg-0"
                     />
-                    <div className='text-danger mt-2'>
-                      <ErrorMessage name='contact.phone_number' />
+                    <div className="text-danger mt-2">
+                      <ErrorMessage name="contact.phone_number" />
                     </div>
                   </div>
                 </div>
@@ -123,7 +130,7 @@ const ContactDetails: FC<Props> = ({ communityForm, setCommunityForm }) => {
         )}
       </Formik>
     </KTCard>
-  )
-}
+  );
+};
 
-export {ContactDetails}
+export { ContactDetails };
