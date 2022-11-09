@@ -135,9 +135,13 @@ const Scoring: FC<Props> = ({ gameMode }) => {
 
               <div className="d-flex align-items-center">
                 <div className="text-gray-800 pe-1">
-                  {gameMode?.settings.map((value) => {
-                    return value.setting;
-                  })}
+                  {gameMode?.settings.map((value) => (
+                    <ul>
+                      <li>
+                        {value.setting}
+                      </li>
+                    </ul>
+                  ))}
                 </div>
               </div>
             </div>
