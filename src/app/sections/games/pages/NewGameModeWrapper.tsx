@@ -45,7 +45,14 @@ const NewGameModeWrapper: FC<Props> = ({ setNewGameMode, setGameMode }) => {
       setHasErrors(false);
     }).catch(function(e) {
       if (e.response) {
-        setAlertMessage(e.response.data.message);
+        let status = e.response.status;
+
+        if (status === 422) {
+          setAlertMessage("Please make sure you fill all the fields.");
+        } else {
+          setAlertMessage(e.response.data.message);
+        }
+        
         setHasErrors(true);
       }
     });

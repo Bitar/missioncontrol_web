@@ -5,6 +5,7 @@ import { TimeZoneCollection } from "../../../models/misc/TimeZone";
 import { BillingPlanOptionQueryResponse } from "../../../models/billing/PlanOption";
 import { ScoringTypeQueryResponse } from "../../../models/game/scoring/ScoringType";
 import { ScoringKeyQueryResponse } from "../../../models/game/scoring/ScoringKey";
+import { PlatformQueryResponse } from "../../../models/game/Platform";
 
 const API_URL = process.env.REACT_APP_API_URL;
 const GET_MISC_URL = `${API_URL}/misc`;
@@ -40,4 +41,10 @@ export const getScoringKeys = (): Promise<ScoringKeyQueryResponse> => {
   return axios
     .get(`${GET_MISC_URL}/scoring-keys`)
     .then((d: AxiosResponse<ScoringKeyQueryResponse>) => d.data);
+};
+
+export const getPlatforms = (): Promise<PlatformQueryResponse> => {
+  return axios
+    .get(`${GET_MISC_URL}/platforms`)
+    .then((d: AxiosResponse<PlatformQueryResponse>) => d.data);
 };

@@ -7,6 +7,15 @@ import Nav from "react-bootstrap/Nav";
 import Tab from "react-bootstrap/Tab";
 import { GeneralDetail } from "../partials/game-settings/GeneralDetail";
 import { KTCardHeader } from "../../../helpers/components/KTCardHeader";
+import { QueryRequestProvider } from "../../../modules/table/QueryRequestProvider";
+import { QueryResponseProvider } from "../../../modules/table/QueryResponseProvider";
+import { QUERIES } from "../../../helpers/crud-helper/consts";
+import { getCommunityPermissions } from "../../community/core/CommunityPermissionRequests";
+import { ListViewProvider } from "../../../modules/table/ListViewProvider";
+import { PermissionDetails } from "../../community/partials/community-form-steps/permission/PermissionDetails";
+import { SuspenseView } from "../../../layout/SuspenseView";
+import { getGamePlatforms } from "../core/GamePlatformRequests";
+import { PlatformDetail } from "../partials/game-settings/PlatformDetail";
 
 const GameSettings: FC = () => {
   const { game } = useGame();
@@ -21,6 +30,11 @@ const GameSettings: FC = () => {
       title: "Details",
       description: "Basic Details",
       icon: "fas fa-file"
+    },
+    {
+      title: "Platforms",
+      description: "Manage game platforms",
+      icon: "fas fa-gamepad"
     }
   ];
 
@@ -52,6 +66,23 @@ const GameSettings: FC = () => {
                 <Tab.Content>
                   <Tab.Pane eventKey="settingsNav-0">
                     <GeneralDetail gameForm={gameForm} setGameForm={setGameForm} />
+                  </Tab.Pane>
+                  <Tab.Pane eventKey="settingsNav-1">
+                    <SuspenseView>
+                      {game && (
+                        <QueryRequestProvider>
+                          <QueryResponseProvider
+                            id={QUERIES.GAMES_PLATFORMS_LIST}
+                            requestFunction={getGamePlatforms}
+                            requestId={game?.id}
+                          >
+                            <ListViewProvider>
+                              <PlatformDetail/>
+                            </ListViewProvider>
+                          </QueryResponseProvider>
+                        </QueryRequestProvider>
+                      )}
+                    </SuspenseView>
                   </Tab.Pane>
                 </Tab.Content>
               </div>

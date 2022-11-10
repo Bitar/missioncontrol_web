@@ -20,10 +20,11 @@ type Props = {
 }
 
 export const gameModeSchema = Yup.object().shape({
-  name: Yup.string().required("Game mode name is required"),
-  description: Yup.string().required("Description is required"),
+  name: Yup.string().required("Name is required"),
   scoring_type_id: Yup.string().required("Scoring Type is required"),
-  instructions: Yup.string().required("Instructions is required")
+  min_players: Yup.string().required("Min Players is required"),
+  max_players: Yup.string().required("Max Players is required"),
+  game_time: Yup.string().required("Game Time is required")
 });
 
 const GameModeWrapper: FC<Props> = ({ gameMode, setGameMode }) => {
@@ -48,7 +49,14 @@ const GameModeWrapper: FC<Props> = ({ gameMode, setGameMode }) => {
       setHasErrors(false);
     }).catch(function(e) {
       if (e.response) {
-        setAlertMessage(e.response.data.message);
+        let status = e.response.status;
+
+        if (status === 422) {
+          setAlertMessage("Please make sure you fill all the fields.");
+        } else {
+          setAlertMessage(e.response.data.message);
+        }
+
         setHasErrors(true);
       }
     });
