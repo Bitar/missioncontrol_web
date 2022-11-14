@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from 'axios'
 import {ChatMessage, ChatMessageQueryResponse} from '../../../models/chat/ChatMessage'
 import {Response} from '../../../helpers/crud-helper/models'
-import { Match } from "../../activity/models/matches/Match";
+import {Match} from '../../activity/models/matches/Match'
 // import process from "process";
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -30,5 +30,4 @@ export const updateMatchResult = (id: any, formData: FormData): Promise<Match | 
     .post(url, formData)
     .then((response: AxiosResponse<Response<Match>>) => response.data)
     .then((response: Response<Match>) => response.data)
-
 }

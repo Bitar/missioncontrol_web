@@ -30,7 +30,7 @@ const TeamDetails: FC<Props> = ({activity, setActivity, gameMode}) => {
 
   useEffect(() => {
     let updateObj: {players?: number; min?: number; max?: number} = {
-      players: gameMode?.min_players
+      players: gameMode?.min_players,
     }
 
     // console.log(gameMode?.min_players)

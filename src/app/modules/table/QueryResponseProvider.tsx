@@ -53,7 +53,9 @@ const QueryResponseProvider: FC<React.PropsWithChildren<Props>> = ({
   )
 
   return (
-    <QueryResponseContext.Provider value={{isLoading: isFetching, refetch, response, query, setEnabled}}>
+    <QueryResponseContext.Provider
+      value={{isLoading: isFetching, refetch, response, query, setEnabled}}
+    >
       {children}
     </QueryResponseContext.Provider>
   )

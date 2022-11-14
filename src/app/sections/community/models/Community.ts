@@ -8,6 +8,27 @@ import {updateData} from '../../../helpers/form/FormHelper'
 import {Dispatch, SetStateAction} from 'react'
 import {User} from '../../identity/user/models/User'
 
+export const communityCreateWizardSchema = [
+  Yup.object().shape({
+    name: Yup.string().required('Community name is required'),
+  }),
+  Yup.object().shape({
+    contact: Yup.object().shape({
+      name: Yup.string().required('Contact name is required'),
+      email: Yup.string().email('Please enter a valid email').required('Contact email is required'),
+      phone_number: Yup.string().required('Contact phone number is required'),
+    }),
+  }),
+  Yup.object().shape({
+    address: Yup.object().shape({
+      address_one: Yup.string().required('Contact address is required'),
+      city: Yup.string().required('City is required'),
+      state: Yup.string().required('State is required'),
+      postal_code: Yup.string().required('Postal Code is required'),
+    }),
+  }),
+]
+
 export const communitySchema = Yup.object().shape({
   name: Yup.string().required('Community name is required'),
   description: Yup.string().required('Community description is required'),
@@ -98,8 +119,8 @@ export const initialCommunityFormTypeByCommunity = (community?: Community) => {
 
 export function formOnChange(
   event: any,
-  community: Community | undefined,
-  setCommunity: Dispatch<SetStateAction<Community>>
+  community: Community | CommunityFormType | undefined,
+  setCommunity: Dispatch<SetStateAction<Community>> | Dispatch<SetStateAction<CommunityFormType>>
 ) {
   let targetName = event.target.name
   let targetValue = event.target.value

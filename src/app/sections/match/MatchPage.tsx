@@ -65,7 +65,7 @@ const MatchPage: FC = () => {
       <Route
         element={
           <>
-            <MatchInfo match={match} setMatch={setMatch}/>
+            <MatchInfo match={match} setMatch={setMatch} />
             <Outlet />
           </>
         }

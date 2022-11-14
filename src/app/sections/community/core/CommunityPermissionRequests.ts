@@ -1,16 +1,19 @@
-import axios, { AxiosResponse } from "axios";
-import { User } from "../../identity/user/models/User";
-import { Response } from "../../../helpers/crud-helper/models";
-import { CommunityPermissionQueryResponse } from "../models/CommunityPermission";
+import axios, {AxiosResponse} from 'axios'
+import {User} from '../../identity/user/models/User'
+import {Response} from '../../../helpers/crud-helper/models'
+import {CommunityPermissionQueryResponse} from '../models/CommunityPermission'
 
 const API_URL = process.env.REACT_APP_API_URL
 const COMMUNITIES_URL = `${API_URL}/communities`
 
-export const getCommunityPermissions = (id: any, query?: String): Promise<CommunityPermissionQueryResponse> => {
-  let url = `${COMMUNITIES_URL}/${id}/permission`;
+export const getCommunityPermissions = (
+  id: any,
+  query?: String
+): Promise<CommunityPermissionQueryResponse> => {
+  let url = `${COMMUNITIES_URL}/${id}/permission`
 
   if (query) {
-    url += `?${query}`;
+    url += `?${query}`
   }
 
   return axios
@@ -19,7 +22,7 @@ export const getCommunityPermissions = (id: any, query?: String): Promise<Commun
 }
 
 export const addCommunityPermissions = (id: any, formData: FormData): Promise<User | undefined> => {
-  let url = `${COMMUNITIES_URL}/${id}/permission`;
+  let url = `${COMMUNITIES_URL}/${id}/permission`
 
   return axios
     .post(`${url}`, formData)

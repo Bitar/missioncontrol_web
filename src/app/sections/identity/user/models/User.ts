@@ -4,8 +4,8 @@ import {Role} from '../../role/models/Role'
 import {initialUserMeta, UserMeta} from './UserMeta'
 import {Dispatch, SetStateAction} from 'react'
 import {updateData} from '../../../../helpers/form/FormHelper'
-import { Community } from "../../../community/models/Community";
-import { UserForm } from './UserForm'
+import {Community} from '../../../community/models/Community'
+import {UserForm} from './UserForm'
 
 let schema = {
   first_name: Yup.string().required('First name is required'),

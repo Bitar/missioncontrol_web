@@ -1,22 +1,22 @@
-import React, { FC } from "react";
-import { useAuth } from "../../modules/auth";
-import { isCommunityAdmin, isSuperAdmin } from "../../sections/identity/user/models/User";
-import { CommunityView } from "../../sections/community/pages/CommunityView";
-import { CreateCommunityWidget } from "../../layout/widgets/CreateCommunityWidget";
+import React, {FC} from 'react'
+import {useAuth} from '../../modules/auth'
+import {isCommunityAdmin, isSuperAdmin} from '../../sections/identity/user/models/User'
+import {CommunityView} from '../../sections/community/pages/CommunityView'
+import {CreateCommunityWidget} from '../../layout/widgets/CreateCommunityWidget'
 
 const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
-  const { currentUser, communityAdmin } = useAuth();
+  const {currentUser, communityAdmin} = useAuth()
 
   const communityLinks = [
     {
-      text: "Overview",
-      link: "/dashboard/overview"
+      text: 'Overview',
+      link: '/dashboard/overview',
     },
     {
-      text: "Members",
-      link: "/dashboard/members"
-    }
-  ];
+      text: 'Members',
+      link: '/dashboard/members',
+    },
+  ]
 
   return (
     <>
@@ -24,10 +24,10 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
         (currentUser && isCommunityAdmin(currentUser) && communityAdmin ? (
           <CommunityView communityId={communityAdmin?.id} links={communityLinks}></CommunityView>
         ) : (
-          <div className="row gy-5 g-xl-8">
-            <div className="col-xl-12">
+          <div className='row gy-5 g-xl-8'>
+            <div className='col-xl-12'>
               {!communityAdmin && !isSuperAdmin(currentUser) ? (
-                <CreateCommunityWidget bgHex={"#FFFFFF"} type="create-community" />
+                <CreateCommunityWidget bgHex={'#FFFFFF'} type='create-community' />
               ) : (
                 <div></div>
               )}
@@ -35,7 +35,7 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
           </div>
         ))}
     </>
-  );
-};
+  )
+}
 
-export { DashboardWrapper };
+export {DashboardWrapper}

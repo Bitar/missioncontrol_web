@@ -16,8 +16,8 @@ import {TableListPagination} from '../../../modules/table/TableListPagination'
 import {TableListLoading} from '../../../modules/table/TableListLoading'
 import {CommunityUsersColumns} from '../core/CommunityUsersColumns'
 import {useCommunity} from '../CommunityContext'
-import { CommunityUserFilters } from '../partials/CommunityUserFilters'
-import { TableHeader } from "../../../modules/table/TableHeader";
+import {CommunityUserFilters} from '../partials/CommunityUserFilters'
+import {TableHeader} from '../../../modules/table/TableHeader'
 
 const CommunityUsersTable = () => {
   const communityUsers = useQueryResponseData()
@@ -30,40 +30,40 @@ const CommunityUsersTable = () => {
   })
 
   return (
-      <KTCardBody className='py-4'>
-        <div className='table-responsive'>
-          <table
-            className='table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer'
-            {...getTableProps()}
-          >
-            <thead>
-              <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
-                {headers.map((column: ColumnInstance<User>) => (
-                  <CustomHeaderColumn key={column.id} column={column} />
-                ))}
+    <KTCardBody className='py-4'>
+      <div className='table-responsive'>
+        <table
+          className='table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer'
+          {...getTableProps()}
+        >
+          <thead>
+            <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
+              {headers.map((column: ColumnInstance<User>) => (
+                <CustomHeaderColumn key={column.id} column={column} />
+              ))}
+            </tr>
+          </thead>
+          <tbody className='text-gray-600 fw-bold' {...getTableBodyProps()}>
+            {rows.length > 0 ? (
+              rows.map((row: Row<User>, i) => {
+                prepareRow(row)
+                return <CustomRow row={row} key={`row-${i}-${row.id}`} />
+              })
+            ) : (
+              <tr>
+                <td colSpan={2}>
+                  <div className='d-flex text-center w-100 align-content-center justify-content-center'>
+                    No matching records found
+                  </div>
+                </td>
               </tr>
-            </thead>
-            <tbody className='text-gray-600 fw-bold' {...getTableBodyProps()}>
-              {rows.length > 0 ? (
-                rows.map((row: Row<User>, i) => {
-                  prepareRow(row)
-                  return <CustomRow row={row} key={`row-${i}-${row.id}`} />
-                })
-              ) : (
-                <tr>
-                  <td colSpan={2}>
-                    <div className='d-flex text-center w-100 align-content-center justify-content-center'>
-                      No matching records found
-                    </div>
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-        <TableListPagination />
-        {isLoading && <TableListLoading />}
-      </KTCardBody>
+            )}
+          </tbody>
+        </table>
+      </div>
+      <TableListPagination />
+      {isLoading && <TableListLoading />}
+    </KTCardBody>
   )
 }
 
@@ -80,7 +80,7 @@ const CommunityUsers: FC = () => {
           >
             <ListViewProvider>
               <KTCard>
-                <TableHeader name='Community Users' showFilter={true} showAdd={false}/>
+                <TableHeader name='Community Users' showFilter={true} showAdd={false} />
                 <KTCardBody>
                   <CommunityUserFilters />
                   <CommunityUsersTable />

@@ -42,8 +42,8 @@ const getGameById = (id: any, query?: string): Promise<Game | undefined> => {
 }
 
 const createGame = (igdb_id: number): Promise<Game | undefined> => {
-  let formData = new FormData();
-  formData.append('igdb_id', igdb_id + '');
+  let formData = new FormData()
+  formData.append('igdb_id', igdb_id + '')
 
   return axios
     .post(`${GET_GAMES_URL}`, formData)

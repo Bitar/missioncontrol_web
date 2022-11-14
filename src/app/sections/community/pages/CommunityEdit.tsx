@@ -496,4 +496,4 @@ const CommunityEdit: FC<Props> = ({communityId}) => {
   )
 }
 
-export { CommunityEdit };
+export {CommunityEdit}

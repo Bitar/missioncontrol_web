@@ -1,4 +1,4 @@
-import { ID, Response } from "../../../helpers/crud-helper/models";
+import {ID, Response} from '../../../helpers/crud-helper/models'
 
 export type ScoringType = {
   id?: ID

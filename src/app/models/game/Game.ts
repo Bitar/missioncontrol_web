@@ -1,11 +1,11 @@
-import { ID, Response } from "../../../_metronic/helpers";
-import { Platform } from "./Platform";
-import { GameMode } from "./GameMode";
-import * as Yup from "yup";
+import {ID, Response} from '../../../_metronic/helpers'
+import {Platform} from './Platform'
+import {GameMode} from './GameMode'
+import * as Yup from 'yup'
 
 export const gameSchema = Yup.object().shape({
-  title: Yup.string().required("Name is required")
-});
+  title: Yup.string().required('Name is required'),
+})
 
 export type Game = {
   id?: ID

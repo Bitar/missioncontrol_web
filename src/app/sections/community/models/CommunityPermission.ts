@@ -1,8 +1,8 @@
 import {Response} from '../../../../_metronic/helpers'
-import { User } from "../../identity/user/models/User";
+import {User} from '../../identity/user/models/User'
 
 export type CommunityPermission = {
-  user: User,
+  user: User
   is_owner: boolean
 }
 

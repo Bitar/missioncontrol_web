@@ -1,62 +1,64 @@
-import React, { useEffect, useState } from "react";
-import { Game } from "../../../models/game/Game";
-import { Navigate, Outlet, Route, Routes, useParams } from "react-router-dom";
-import { PageLink, PageTitle } from "../../../layout/core";
-import { getGameById } from "../core/GameRequests";
-import { GameSettings } from "./GameSettings";
-import { GameInfo } from "../GameInfo";
-import { GameModes } from "./GameModes";
-import { GameContext } from "../core/GameContext";
+import React, {useEffect, useState} from 'react'
+import {Game} from '../../../models/game/Game'
+import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
+import {PageLink, PageTitle} from '../../../layout/core'
+import {getGameById} from '../core/GameRequests'
+import {GameSettings} from './GameSettings'
+import {GameInfo} from '../GameInfo'
+import {GameModes} from './GameModes'
+import {GameContext} from '../core/GameContext'
 
 const GameView: React.FC = () => {
-  const [game, setGame] = useState<Game | undefined>();
-  const params = useParams();
+  const [game, setGame] = useState<Game | undefined>()
+  const params = useParams()
 
   const gameViewBreadCrumbs: Array<PageLink> = [
     {
-      title: "Games",
-      path: "/games/overview",
+      title: 'Games',
+      path: '/games/overview',
       isSeparator: false,
-      isActive: false
+      isActive: false,
     },
     {
-      title: "",
-      path: "",
+      title: '',
+      path: '',
       isSeparator: true,
-      isActive: false
+      isActive: false,
     },
     {
-      title: game?.title || "",
-      path: "/games/" + params.id + "/overview",
+      title: game?.title || '',
+      path: '/games/' + params.id + '/overview',
       isSeparator: false,
-      isActive: false
+      isActive: false,
     },
     {
-      title: "",
-      path: "",
+      title: '',
+      path: '',
       isSeparator: true,
-      isActive: false
-    }
-  ];
+      isActive: false,
+    },
+  ]
 
   useEffect(() => {
     getGameById(params.id).then((response) => {
-      setGame(response);
-    });
-  }, [params.id]);
+      setGame(response)
+    })
+  }, [params.id])
 
   const updateGame = () => {
     getGameById(params.id).then((response) => {
-      setGame(response);
-    });
+      setGame(response)
+    })
   }
 
   return (
-    <GameContext.Provider value={{
-      game,
-      setGame,
-      updateGame
-    }}>
+    <GameContext.Provider
+      value={{
+        game,
+        setGame,
+        updateGame,
+      }}
+    >
       <Routes>
         <Route
           element={
@@ -67,7 +69,7 @@ const GameView: React.FC = () => {
           }
         >
           <Route
-            path="overview"
+            path='overview'
             element={
               <>
                 <PageTitle breadcrumbs={gameViewBreadCrumbs}>Overview</PageTitle>
@@ -76,7 +78,7 @@ const GameView: React.FC = () => {
             }
           />
           <Route
-            path="modes"
+            path='modes'
             element={
               <>
                 <PageTitle breadcrumbs={gameViewBreadCrumbs}>Game Modes</PageTitle>
@@ -85,7 +87,7 @@ const GameView: React.FC = () => {
             }
           />
           <Route
-            path="settings"
+            path='settings'
             element={
               <>
                 <PageTitle breadcrumbs={gameViewBreadCrumbs}>Settings</PageTitle>
@@ -93,11 +95,11 @@ const GameView: React.FC = () => {
               </>
             }
           />
-          <Route index element={<Navigate to={"/games/" + params.id + "/overview"} />} />
+          <Route index element={<Navigate to={'/games/' + params.id + '/overview'} />} />
         </Route>
       </Routes>
     </GameContext.Provider>
-  );
-};
+  )
+}
 
-export { GameView };
+export {GameView}

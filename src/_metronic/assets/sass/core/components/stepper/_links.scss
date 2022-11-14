@@ -12,37 +12,45 @@
     flex-wrap: wrap;
 
     .stepper-item {
+      display: flex;
+      align-items: center;
+      text-align: center;
       position: relative;
       flex-shrink: 0;
-      margin: 1rem 1.5rem;
+      margin: 1rem 0;
 
-      &:after {
-        content: ' ';
-        position: absolute;
-        top: 2.3rem;
-        left: 0;
-        height: 2px;
-        width: 100%;
-        background-color: transparent;
-        transition: $transition-link;
+      .stepper-label {
+        margin-left: 3.5rem;
+        margin-right: 3.5rem;
+      }
+
+      .stepper-icon {
+        margin-bottom: 1.25rem;
+      }
+
+      .stepper-title,
+      .stepper-icon i,
+      .stepper-icon .svg-icon,
+      .stepper-arrow svg {
+        color: var(--kt-gray-400);
       }
 
       .stepper-title {
-        color: var(--kt-dark);
-        font-weight: 600;
-        font-size: 1.25rem;
+        //color: var(--kt-dark);
+        font-weight: 500;
+        font-size: 1.2rem;
+        margin-bottom: 0;
       }
 
       // Current
       &.current {
         transition: $transition-link;
 
-        .stepper-title {
-          color: var(--kt-primary);
-        }
-
-        &:after {
-          background-color: var(--kt-primary);
+        .stepper-title,
+        .stepper-icon i,
+        .stepper-icon .svg-icon,
+        .stepper-arrow svg {
+          color: $mc-secondary;
         }
       }
 

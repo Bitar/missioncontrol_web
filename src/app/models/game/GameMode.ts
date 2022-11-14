@@ -1,7 +1,7 @@
 import {ID, Response} from '../../../_metronic/helpers'
 import {GameSettings} from './GameSettings'
 import {ScoringSettings} from './scoring/ScoringSettings'
-import { ScoringType } from "./scoring/ScoringType";
+import {ScoringType} from './scoring/ScoringType'
 
 export type GameMode = {
   id?: ID

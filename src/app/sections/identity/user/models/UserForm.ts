@@ -1,7 +1,7 @@
-import { Role } from "../../role/models/Role";
-import { initialUserMeta, UserMeta } from "./UserMeta";
-import { Community } from "../../../community/models/Community";
-import { User } from "./User";
+import {Role} from '../../role/models/Role'
+import {initialUserMeta, UserMeta} from './UserMeta'
+import {Community} from '../../../community/models/Community'
+import {User} from './User'
 
 export type UserForm = {
   first_name: string
@@ -16,13 +16,13 @@ export type UserForm = {
 
 export const initUserForm = (user?: User) => {
   return {
-    first_name: user?.first_name || "",
-    last_name: user?.last_name || "",
+    first_name: user?.first_name || '',
+    last_name: user?.last_name || '',
     password: '',
     password_confirmation: '',
-    email: user?.email || "",
+    email: user?.email || '',
     roles: user?.roles || [],
     meta: user?.meta || initialUserMeta(user?.meta),
-    community_admin: user?.community_admin || []
+    community_admin: user?.community_admin || [],
   }
 }

@@ -7,6 +7,6 @@ export type GameSettings = {
 
 export const initGameSettings = () => {
   return {
-    setting: ""
+    setting: '',
   }
 }

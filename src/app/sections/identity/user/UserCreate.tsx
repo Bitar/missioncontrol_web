@@ -8,7 +8,7 @@ import {formOnChange, userSchema} from './models/User'
 import {AvatarImage} from './partials/AvatarImage'
 import {UserFormPage} from './UserFormPage'
 import {FormAction} from '../../../helpers/form/FormAction'
-import { initUserForm, UserForm } from "./models/UserForm";
+import {initUserForm, UserForm} from './models/UserForm'
 
 const UserCreate = () => {
   const [userForm, setUserForm] = useState<UserForm>(initUserForm())
@@ -32,7 +32,11 @@ const UserCreate = () => {
             <h3 className='card-label'>Add User</h3>
           </div>
         </div>
-        <Formik initialValues={userForm} onSubmit={handleSubmit} validationSchema={userSchema(true)}>
+        <Formik
+          initialValues={userForm}
+          onSubmit={handleSubmit}
+          validationSchema={userSchema(true)}
+        >
           {({isSubmitting, isValid, touched}) => {
             return (
               <Form onChange={handleOnChange} className='form' encType='multipart/form-data'>

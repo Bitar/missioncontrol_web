@@ -4,7 +4,7 @@ import {
   EventHandlerUtil,
   DataUtil,
   DOMEventHandlerUtil,
-} from "../_utils"
+} from '../_utils'
 
 export interface IStepperOptions {
   startIndex: number

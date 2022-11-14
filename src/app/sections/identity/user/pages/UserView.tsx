@@ -1,59 +1,60 @@
-import React, { useEffect, useState } from "react";
-import { getUserById } from "../core/UserRequests";
-import { Navigate, Outlet, Route, Routes, useParams } from "react-router-dom";
-import { User } from "../models/User";
-import { UserInfo } from "../UserInfo";
-import { PageLink, PageTitle } from "../../../../layout/core";
-import { UserEdit } from "../UserEdit";
-import { UserActivities } from "./UserActivities";
-import { UserTeams } from "./UserTeams";
-import { SuspenseView } from "../../../../layout/SuspenseView";
-import { UserContext } from "../core/UserContext";
+import React, {useEffect, useState} from 'react'
+import {getUserById} from '../core/UserRequests'
+import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
+import {User} from '../models/User'
+import {UserInfo} from '../UserInfo'
+import {PageLink, PageTitle} from '../../../../layout/core'
+import {UserEdit} from '../UserEdit'
+import {UserActivities} from './UserActivities'
+import {UserTeams} from './UserTeams'
+import {SuspenseView} from '../../../../layout/SuspenseView'
+import {UserContext} from '../core/UserContext'
 
 const UserView: React.FC = () => {
-  const [user, setUser] = useState<User | undefined>();
-  const params = useParams();
+  const [user, setUser] = useState<User | undefined>()
+  const params = useParams()
 
   const userViewBreadCrumbs: Array<PageLink> = [
     {
-      title: "Users",
-      path: "/users/overview",
+      title: 'Users',
+      path: '/users/overview',
       isSeparator: false,
-      isActive: false
+      isActive: false,
     },
     {
-      title: "",
-      path: "",
+      title: '',
+      path: '',
       isSeparator: true,
-      isActive: false
+      isActive: false,
     },
     {
-      title: user?.name || "",
-      path: "/users/" + params.id + "/overview",
+      title: user?.name || '',
+      path: '/users/' + params.id + '/overview',
       isSeparator: false,
-      isActive: false
+      isActive: false,
     },
     {
-      title: "",
-      path: "",
+      title: '',
+      path: '',
       isSeparator: true,
-      isActive: false
-    }
-  ];
+      isActive: false,
+    },
+  ]
 
   useEffect(() => {
-    const query = "include=roles,admin";
+    const query = 'include=roles,admin'
     getUserById(params.id, query).then((response) => {
-      setUser(response);
-    });
-  }, [params.id]);
+      setUser(response)
+    })
+  }, [params.id])
 
   return (
     <UserContext.Provider
       value={{
         user,
-        setUser
-      }}>
+        setUser,
+      }}
+    >
       <Routes>
         <Route
           element={
@@ -64,7 +65,7 @@ const UserView: React.FC = () => {
           }
         >
           <Route
-            path="/overview"
+            path='/overview'
             element={
               <>
                 <SuspenseView>
@@ -74,7 +75,7 @@ const UserView: React.FC = () => {
             }
           />
           <Route
-            path="/activities"
+            path='/activities'
             element={
               <>
                 <SuspenseView>
@@ -85,7 +86,7 @@ const UserView: React.FC = () => {
             }
           />
           <Route
-            path="/teams"
+            path='/teams'
             element={
               <>
                 <SuspenseView>
@@ -96,7 +97,7 @@ const UserView: React.FC = () => {
             }
           />
           <Route
-            path="/settings"
+            path='/settings'
             element={
               <>
                 <SuspenseView>
@@ -106,11 +107,11 @@ const UserView: React.FC = () => {
               </>
             }
           />
-          <Route index element={<Navigate to={"/users/" + params.id + "/overview"} />} />
+          <Route index element={<Navigate to={'/users/' + params.id + '/overview'} />} />
         </Route>
       </Routes>
     </UserContext.Provider>
-  );
-};
+  )
+}
 
-export { UserView };
+export {UserView}
