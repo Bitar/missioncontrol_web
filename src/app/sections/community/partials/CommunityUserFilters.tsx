@@ -1,7 +1,7 @@
 import { KTCardHeader } from "../../../helpers/components/KTCardHeader";
 import { Field, Form, Formik } from "formik";
 import { KTCardBody } from "../../../helpers/components/KTCardBody";
-import { isUserCommunityAdmin } from "../../identity/user/models/User";
+import { isCommunityAdmin } from "../../identity/user/models/User";
 import Select from "react-select";
 import { updateData } from "../../../helpers/form/FormHelper";
 import { KTCard } from "../../../helpers/components/KTCard";

@@ -9,7 +9,7 @@ import { jsonToFormData, updateData } from "../../../helpers/form/FormHelper";
 import Select from "react-select";
 import { Community } from "../../community/models/Community";
 import { getAllCommunities } from "../../community/core/CommunityRequests";
-import { isUserCommunityAdmin } from "../../identity/user/models/User";
+import { isCommunityAdmin } from "../../identity/user/models/User";
 import { useAuth } from "../../../modules/auth";
 import { Game } from "../../../models/game/Game";
 import { getAllGameModes, getAllGamePlatforms, getAllGames } from "../../games/core/GameRequests";
@@ -256,7 +256,7 @@ const ActivitySettings = () => {
                   </div>
                 </div>
 
-                {currentUser && !isUserCommunityAdmin(currentUser) && (
+                {currentUser && !isCommunityAdmin(currentUser) && (
                   <div className="row mb-6">
                     <label className="col-lg-4 col-form-label fw-bold fs-6">Community</label>
                     <div className="col-lg-8 fv-row">

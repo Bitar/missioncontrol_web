@@ -5,7 +5,7 @@ import {SidebarMenuItem} from './SidebarMenuItem'
 import {useAuth} from '../../../../modules/auth'
 import {Restricted} from '../../../../modules/auth/core/AuthPermission'
 import {SidebarMenuItemWithSub} from './SidebarMenuItemWithSub'
-import {isUserCommunityAdmin} from '../../../../sections/identity/user/models/User'
+import {isCommunityAdmin} from '../../../../sections/identity/user/models/User'
 
 const SidebarMenuMain = () => {
   const intl = useIntl()
@@ -22,7 +22,7 @@ const SidebarMenuMain = () => {
       <Restricted to='view-communities'>
         <SidebarMenuItem to='/communities' title='Communities' fontIcon='fa-people-group' />
       </Restricted>
-      {currentUser && isUserCommunityAdmin(currentUser) ? (
+      {currentUser && isCommunityAdmin(currentUser) ? (
         communityAdmin && (
           <Restricted to='view-activities'>
             <SidebarMenuItem to='/activities' title='Activities' fontIcon='fa-gamepad' />

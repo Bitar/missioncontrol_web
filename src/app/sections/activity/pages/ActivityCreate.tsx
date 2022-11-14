@@ -40,7 +40,7 @@ import {PrizeWrapper} from '../components/prize/PrizeWrapper'
 import {useNavigate} from 'react-router-dom'
 import toast from 'react-hot-toast'
 import {useAuth} from '../../../modules/auth'
-import {isUserCommunityAdmin} from '../../identity/user/models/User'
+import {isCommunityAdmin} from '../../identity/user/models/User'
 import {FormErrorAlert} from '../../../modules/errors/partials/FormErrorAlert'
 
 const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
@@ -85,7 +85,7 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
   const {currentUser, communityAdmin} = useAuth()
 
   useEffect(() => {
-    if (currentUser && isUserCommunityAdmin(currentUser) && communityAdmin) {
+    if (currentUser && isCommunityAdmin(currentUser) && communityAdmin) {
       updateData(
         {
           community_id: communityAdmin?.id,
@@ -182,7 +182,7 @@ const ActivityCreate: FC<React.PropsWithChildren<unknown>> = () => {
                     </div>
                   </div>
 
-                  {currentUser && !isUserCommunityAdmin(currentUser) && (
+                  {currentUser && !isCommunityAdmin(currentUser) && (
                     <div className='row mb-6'>
                       <div className='col-lg-12 fv-row'>
                         <Box sx={{minWidth: 120}}>

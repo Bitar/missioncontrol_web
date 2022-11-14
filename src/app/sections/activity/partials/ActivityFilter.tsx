@@ -9,7 +9,7 @@ import { updateData } from "../../../helpers/form/FormHelper";
 import { Community } from "../../community/models/Community";
 import { getAllCommunities } from "../../community/core/CommunityRequests";
 import Select from "react-select";
-import { isUserCommunityAdmin } from "../../identity/user/models/User";
+import { isCommunityAdmin } from "../../identity/user/models/User";
 import { useAuth } from "../../../modules/auth";
 
 const initActivity = {
@@ -95,7 +95,7 @@ const ActivityFilter = () => {
                   autoComplete="off"
                 />
               </div>
-              {currentUser && !isUserCommunityAdmin(currentUser) &&
+              {currentUser && !isCommunityAdmin(currentUser) &&
                 <div className="col-lg-4">
                   <Select
                     placeholder={"Choose a Community"}
