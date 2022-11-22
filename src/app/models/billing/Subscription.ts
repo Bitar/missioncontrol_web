@@ -1,11 +1,12 @@
-import {ID, Response} from '../../../_metronic/helpers'
-import {User} from '../../sections/identity/user/models/User'
-import {Plan} from './Plan'
+import { ID, Response } from "../../../_metronic/helpers";
+import { Plan } from "./Plan";
 
 export type Subscription = {
   id?: ID
-  user: User
+  // user: User
   plan: Plan
+  status: number
+  ends_at: number
 }
 
 export type SubscriptionQueryResponse = Response<Array<Subscription>>

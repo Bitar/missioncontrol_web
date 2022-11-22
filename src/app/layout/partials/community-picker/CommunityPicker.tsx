@@ -46,7 +46,7 @@ const CommunityPicker: FC<React.PropsWithChildren<unknown>> = () => {
           </div>
 
           <div
-            className='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-muted menu-active-bg menu-state-primary fw-bold py-4 fs-6 w-400px'
+            className='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-muted menu-active-bg menu-state-primary fw-bold py-4 fs-6 w-400px scroll-y mh-325px'
             data-kt-menu='true'
           >
             {communityAdmins?.map((community, i) => (

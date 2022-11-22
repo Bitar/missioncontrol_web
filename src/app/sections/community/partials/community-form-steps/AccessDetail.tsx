@@ -10,13 +10,10 @@ import {KTCardHeader} from '../../../../helpers/components/KTCardHeader'
 import {ErrorMessage, Field, Form, Formik} from 'formik'
 import {KTCardBody} from '../../../../helpers/components/KTCardBody'
 import {FormAction} from '../../../../helpers/form/FormAction'
+import { useCommunityForm } from "../../core/CommunityFormContext";
 
-type Props = {
-  communityForm: CommunityFormType
-  setCommunityForm: Dispatch<SetStateAction<CommunityFormType>>
-}
-
-const AccessDetail: FC<Props> = ({communityForm, setCommunityForm}) => {
+const AccessDetail: FC = () => {
+  const { communityForm, setCommunityForm } = useCommunityForm();
   const {setCommunity} = useCommunity()
   const params = useParams()
 
@@ -78,7 +75,7 @@ const AccessDetail: FC<Props> = ({communityForm, setCommunityForm}) => {
       <KTCardHeader text={'Access Details'} bg='mc-primary' text_color='white' />
       <Formik
         validationSchema={communitySchema}
-        initialValues={communityForm}
+        initialValues={communityForm!}
         onSubmit={handleSubmit}
         enableReinitialize
       >

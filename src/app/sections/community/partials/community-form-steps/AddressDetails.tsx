@@ -13,13 +13,10 @@ import {FormAction} from '../../../../helpers/form/FormAction'
 import {getStates} from '../../../misc/core/_requests'
 import {State} from '../../../../models/misc/State'
 import Select from 'react-select'
+import { useCommunityForm } from "../../core/CommunityFormContext";
 
-type Props = {
-  communityForm: CommunityFormType
-  setCommunityForm: Dispatch<SetStateAction<CommunityFormType>>
-}
-
-const AddressDetails: FC<Props> = ({communityForm, setCommunityForm}) => {
+const AddressDetails: FC = () => {
+  const { communityForm, setCommunityForm } = useCommunityForm();
   const {community, setCommunity} = useCommunity()
   const params = useParams()
   const [states, setStates] = useState<State[]>()
@@ -69,7 +66,7 @@ const AddressDetails: FC<Props> = ({communityForm, setCommunityForm}) => {
       <KTCardHeader text={'Address Info'} bg='mc-primary' text_color='white' />
       <Formik
         validationSchema={communitySchema}
-        initialValues={communityForm}
+        initialValues={communityForm!}
         onSubmit={handleSubmit}
         enableReinitialize
       >

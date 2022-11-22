@@ -3,19 +3,34 @@ import React, { useEffect, useRef, useState } from "react";
 import { StepperComponent } from "../../../_metronic/assets/ts/components";
 import {
   communityCreateWizardSchema,
-  CommunityFormType, formOnChange,
+  CommunityFormType,
+  formOnChange,
   initialCommunityFormTypeByCommunity
 } from "../community/models/Community";
 import { KTSVG } from "../../helpers/components/KTSVG";
 import { GeneralDetails } from "../community/partials/community-create-steps/GeneralDetails";
-import { KTCardBody } from "../../../_metronic/helpers";
+import { KTCard, KTCardBody } from "../../../_metronic/helpers";
 import { KTCardHeader } from "../../helpers/components/KTCardHeader";
 import { ContactDetails } from "../community/partials/community-create-steps/ContactDetails";
 import { AddressDetails } from "../community/partials/community-create-steps/AddressDetails";
 import { AccessDetail } from "../community/partials/community-create-steps/AccessDetail";
 import { BillingPlanWrapper } from "../billing/BillingPlanWrapper";
+import { ReviewDetails } from "../community/partials/community-create-steps/ReviewDetails";
+import { CommunityFormContext } from "../community/core/CommunityFormContext";
+import { State } from "../../models/misc/State";
+import { getStates } from "../misc/core/_requests";
+import { getPlans } from "../billing/plan/core/_requests";
+import { Plan } from "../../models/billing/Plan";
+import { createSubscription } from "../billing/core/BillingRequests";
+import { jsonToFormData } from "../../helpers/form/FormHelper";
+import { FormErrorAlert } from "../../modules/errors/partials/FormErrorAlert";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useAuth } from "../../modules/auth";
+import { FormAction } from "../../helpers/form/FormAction";
 
 const AdminCommunityCreate = () => {
+  const { updateAuth } = useAuth();
   const stepperRef = useRef<HTMLDivElement | null>(null);
   const stepper = useRef<StepperComponent | null>(null);
   const [currentSchema, setCurrentSchema] = useState(communityCreateWizardSchema[0]);
@@ -23,6 +38,24 @@ const AdminCommunityCreate = () => {
     initialCommunityFormTypeByCommunity
   );
   const [isSubmitButton, setSubmitButton] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  const [states, setStates] = useState<State[]>();
+  const [plans, setPlans] = useState<Plan[] | undefined>();
+  const [paymentTerm, setPaymentTerm] = useState(1);
+  const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined);
+  const [alertMessage, setAlertMessage] = useState<string | undefined>(undefined);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getStates().then((response) => {
+      setStates(response.data);
+    });
+
+    getPlans().then((response) => {
+      setPlans(response?.data);
+    });
+  }, []);
 
   const loadStepper = () => {
     stepper.current = StepperComponent.createInsance(stepperRef.current as HTMLDivElement);
@@ -52,8 +85,9 @@ const AdminCommunityCreate = () => {
     if (stepper.current.currentStepIndex !== stepper.current.totalStepsNumber) {
       stepper.current.goNext();
     } else {
-      stepper.current.goto(1);
-      actions.resetForm();
+      handleSubmit();
+      // stepper.current.goto(1);
+      // actions.resetForm();
     }
   };
 
@@ -67,9 +101,42 @@ const AdminCommunityCreate = () => {
 
   const handleOnChange = (e: any) => formOnChange(e, communityForm, setCommunityForm);
 
+  const handleSubmit = () => {
+    let data = jsonToFormData(communityForm);
+    setIsSubmitting(true);
+
+    createSubscription(data).then((response) => {
+      if (response?.url) {
+        window.location.href = response?.url;
+      } else {
+        toast.success("Community created Successfully");
+        updateAuth();
+
+        navigate("/");
+        setIsSubmitting(false);
+      }
+    }).catch(function(e) {
+      setIsSubmitting(false);
+      if (e.response) {
+        setAlertMessage(e.response.data.message);
+        setHasErrors(true);
+      }
+    });
+    // subscriptionRequest(plan, paymentTerms).then((response) => {
+    //   if (plan.id === 1) {
+    //     toast.success("Commissioner subscription added successfully");
+    //     updateAuth();
+    //     navigate("/admin/communities/create");
+    //   } else {
+    //     if (response?.url) {
+    //       window.location.href = response?.url;
+    //     }
+    //   }
+    // });
+  };
+
   return (
-    <div className="card">
-      {/*<div className="card-body">*/}
+    <KTCard>
       <KTCardHeader text={"Create Community"} bg="mc-secondary" text_color="white" />
       <div ref={stepperRef} className="stepper stepper-links d-flex flex-column">
         <KTCardBody className="border-bottom">
@@ -90,7 +157,6 @@ const AdminCommunityCreate = () => {
               <div className="stepper-label">
                 <div className="stepper-icon">
                   <i className="fa-duotone fa-phone-arrow-down-left fs-3x"></i>
-                  {/*<i className="fas fa-phone fs-3x"></i>*/}
                 </div>
                 <h3 className="stepper-title">External Contact</h3>
               </div>
@@ -103,7 +169,6 @@ const AdminCommunityCreate = () => {
               <div className="stepper-label">
                 <div className="stepper-icon">
                   <i className="fa-duotone fa-location-dot fs-3x"></i>
-                  {/*<i className="fas fa-map-marker fs-3x"></i>*/}
                 </div>
                 <h3 className="stepper-title">Address</h3>
               </div>
@@ -147,75 +212,72 @@ const AdminCommunityCreate = () => {
           </div>
         </KTCardBody>
 
-        <KTCardBody>
+        <CommunityFormContext.Provider
+          value={{
+            communityForm: communityForm,
+            setCommunityForm: setCommunityForm,
+            plans: plans,
+            states: states,
+            paymentTerm: paymentTerm,
+            setPaymentTerm: setPaymentTerm
+          }}
+        >
           <Formik
             validationSchema={currentSchema}
             initialValues={communityForm}
             onSubmit={submitStep}
           >
             {() => (
-              <Form className="mx-auto mw-100"
-                    onChange={handleOnChange}
+              <Form
+                onChange={handleOnChange}
               >
-                <div className="current" data-kt-stepper-element="content">
-                  <GeneralDetails
-                    communityForm={communityForm}
-                    setCommunityForm={setCommunityForm}
-                  />
-                </div>
-
-                <div data-kt-stepper-element="content">
-                  <ContactDetails
-                    communityForm={communityForm}
-                    setCommunityForm={setCommunityForm}
-                  />
-                </div>
-
-                <div data-kt-stepper-element="content">
-                  <AddressDetails
-                    communityForm={communityForm}
-                    setCommunityForm={setCommunityForm}
-                  />
-                </div>
-
-                <div data-kt-stepper-element="content">
-                  <AccessDetail communityForm={communityForm} setCommunityForm={setCommunityForm} />
-                </div>
-
-                <div data-kt-stepper-element="content">
-                  <BillingPlanWrapper />
-                </div>
-
-                <div data-kt-stepper-element="content">Step 5</div>
-
-                <div className="d-flex flex-stack pt-15">
-                  <div className="mr-2">
-                    <button
-                      onClick={prevStep}
-                      type="button"
-                      className="btn btn-lg btn-light-mc-secondary me-3"
-                      data-kt-stepper-action="previous"
-                    >
-                      Back
-                    </button>
+                <KTCardBody>
+                  <FormErrorAlert hasErrors={hasErrors} message={alertMessage} />
+                  <div className="current" data-kt-stepper-element="content">
+                    <GeneralDetails />
                   </div>
 
-                  <div>
-                    <button type="submit" className="btn btn-lg btn-mc-secondary me-3">
-                      <span className="indicator-label">
-                        {!isSubmitButton && "Continue"}
-                        {isSubmitButton && "Submit"}
-                      </span>
-                    </button>
+                  <div data-kt-stepper-element="content">
+                    <ContactDetails />
                   </div>
-                </div>
+
+                  <div data-kt-stepper-element="content">
+                    <AddressDetails />
+                  </div>
+
+                  <div data-kt-stepper-element="content">
+                    <AccessDetail />
+                  </div>
+
+                  <div data-kt-stepper-element="content">
+                    <BillingPlanWrapper />
+                  </div>
+
+                  <div data-kt-stepper-element="content">
+                    <ReviewDetails />
+                  </div>
+
+                  <div className="d-flex flex-stack pt-15">
+                    <div className="mr-2">
+                      <button
+                        onClick={prevStep}
+                        type="button"
+                        className="btn btn-lg btn-light-mc-secondary me-3"
+                        data-kt-stepper-action="previous"
+                      >
+                        Back
+                      </button>
+                    </div>
+                  </div>
+                </KTCardBody>
+                <FormAction text={isSubmitting ? "Submitting" : (isSubmitButton ? "Submit" : "Continue")}
+                            isSubmitting={isSubmitting} />
               </Form>
             )}
           </Formik>
-        </KTCardBody>
+        </CommunityFormContext.Provider>
       </div>
-      {/*</div>*/}
-    </div>
+    </KTCard>
   );
 };
 
