@@ -1,11 +1,20 @@
-import { createContext, Dispatch, FC, SetStateAction, useContext, useEffect, useRef, useState } from "react";
-import { LayoutSplashScreen } from "../../../layout/core";
-import { AuthModel } from "./_models";
-import * as authHelper from "./AuthHelpers";
-import { getUserByToken } from "./_requests";
-import { WithChildren } from "../../../../_metronic/helpers";
-import { Community } from "../../../sections/community/models/Community";
-import { User } from "../../../sections/identity/user/models/User";
+import {
+  createContext,
+  Dispatch,
+  FC,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
+import {LayoutSplashScreen} from '../../../layout/core'
+import {AuthModel} from './_models'
+import * as authHelper from './AuthHelpers'
+import {getUserByToken} from './_requests'
+import {WithChildren} from '../../../../_metronic/helpers'
+import {Community} from '../../../sections/community/models/Community'
+import {User} from '../../../sections/identity/user/models/User'
 
 type AuthContextProps = {
   auth: AuthModel | undefined
@@ -20,53 +29,48 @@ type AuthContextProps = {
 
 const initAuthContextPropsState = {
   auth: authHelper.getAuth(),
-  saveAuth: () => {
-  },
-  updateAuth: () => {
-  },
+  saveAuth: () => {},
+  updateAuth: () => {},
   currentUser: undefined,
-  setCurrentUser: () => {
-  },
+  setCurrentUser: () => {},
   communityAdmin: undefined,
-  setCommunityAdmin: () => {
-  },
-  logout: () => {
-  }
-};
+  setCommunityAdmin: () => {},
+  logout: () => {},
+}
 
-const AuthContext = createContext<AuthContextProps>(initAuthContextPropsState);
+const AuthContext = createContext<AuthContextProps>(initAuthContextPropsState)
 
 const useAuth = () => {
-  return useContext(AuthContext);
-};
+  return useContext(AuthContext)
+}
 
-const AuthProvider: FC<WithChildren> = ({ children }) => {
-  const [auth, setAuth] = useState<AuthModel | undefined>(authHelper.getAuth());
-  const [currentUser, setCurrentUser] = useState<User | undefined>();
-  const [communityAdmin, setCommunityAdmin] = useState<Community | undefined>();
+const AuthProvider: FC<WithChildren> = ({children}) => {
+  const [auth, setAuth] = useState<AuthModel | undefined>(authHelper.getAuth())
+  const [currentUser, setCurrentUser] = useState<User | undefined>()
+  const [communityAdmin, setCommunityAdmin] = useState<Community | undefined>()
   const saveAuth = (auth: AuthModel | undefined) => {
-    setAuth(auth);
+    setAuth(auth)
     if (auth) {
-      authHelper.setAuth(auth);
+      authHelper.setAuth(auth)
     } else {
-      authHelper.removeAuth();
+      authHelper.removeAuth()
     }
-  };
+  }
 
   const logout = () => {
-    saveAuth(undefined);
-    setCurrentUser(undefined);
-    setCommunityAdmin(undefined);
-  };
+    saveAuth(undefined)
+    setCurrentUser(undefined)
+    setCommunityAdmin(undefined)
+  }
 
   const updateAuth = async () => {
     if (auth) {
       getUserByToken(auth.token).then((response) => {
-        setCurrentUser(response.data?.user);
-        setCommunityAdmin(response.data?.admin);
-      });
+        setCurrentUser(response.data?.user)
+        setCommunityAdmin(response.data?.admin)
+      })
     }
-  };
+  }
 
   return (
     <AuthContext.Provider
@@ -78,50 +82,50 @@ const AuthProvider: FC<WithChildren> = ({ children }) => {
         setCurrentUser,
         communityAdmin,
         setCommunityAdmin,
-        logout
+        logout,
       }}
     >
       {children}
     </AuthContext.Provider>
-  );
-};
+  )
+}
 
-const AuthInit: FC<WithChildren> = ({ children }) => {
-  const { auth, logout, setCurrentUser, setCommunityAdmin } = useAuth();
-  const didRequest = useRef(false);
-  const [showSplashScreen, setShowSplashScreen] = useState(true);
+const AuthInit: FC<WithChildren> = ({children}) => {
+  const {auth, logout, setCurrentUser, setCommunityAdmin} = useAuth()
+  const didRequest = useRef(false)
+  const [showSplashScreen, setShowSplashScreen] = useState(true)
 
   useEffect(() => {
     const requestUser = async (apiToken: string) => {
       try {
         if (!didRequest.current && apiToken) {
-          const { data } = await getUserByToken(apiToken);
+          const {data} = await getUserByToken(apiToken)
           if (data) {
-            setCurrentUser(data.user);
-            setCommunityAdmin(data.admin);
+            setCurrentUser(data.user)
+            setCommunityAdmin(data.admin)
           }
         }
       } catch (error) {
         if (!didRequest.current) {
-          logout();
+          logout()
         }
       } finally {
-        setShowSplashScreen(false);
+        setShowSplashScreen(false)
       }
 
-      didRequest.current = true;
-    };
+      didRequest.current = true
+    }
 
     if (auth && auth.token) {
-      requestUser(auth.token);
+      requestUser(auth.token)
     } else {
-      logout();
-      setShowSplashScreen(false);
+      logout()
+      setShowSplashScreen(false)
     }
     // eslint-disable-next-line
-  }, []);
+  }, [])
 
-  return showSplashScreen ? <LayoutSplashScreen /> : <>{children}</>;
-};
+  return showSplashScreen ? <LayoutSplashScreen /> : <>{children}</>
+}
 
-export { AuthProvider, AuthInit, useAuth };
+export {AuthProvider, AuthInit, useAuth}

@@ -13,10 +13,10 @@ import {FormAction} from '../../../../helpers/form/FormAction'
 import {getStates} from '../../../misc/core/_requests'
 import {State} from '../../../../models/misc/State'
 import Select from 'react-select'
-import { useCommunityForm } from "../../core/CommunityFormContext";
+import {useCommunityForm} from '../../core/CommunityFormContext'
 
 const AddressDetails: FC = () => {
-  const { communityForm, setCommunityForm } = useCommunityForm();
+  const {communityForm, setCommunityForm} = useCommunityForm()
   const {community, setCommunity} = useCommunity()
   const params = useParams()
   const [states, setStates] = useState<State[]>()

@@ -10,10 +10,10 @@ import {KTCardHeader} from '../../../../helpers/components/KTCardHeader'
 import {ErrorMessage, Field, Form, Formik} from 'formik'
 import {KTCardBody} from '../../../../helpers/components/KTCardBody'
 import {FormAction} from '../../../../helpers/form/FormAction'
-import { useCommunityForm } from "../../core/CommunityFormContext";
+import {useCommunityForm} from '../../core/CommunityFormContext'
 
 const AccessDetail: FC = () => {
-  const { communityForm, setCommunityForm } = useCommunityForm();
+  const {communityForm, setCommunityForm} = useCommunityForm()
   const {setCommunity} = useCommunity()
   const params = useParams()
 

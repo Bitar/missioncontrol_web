@@ -1,5 +1,5 @@
-import { ID, Response } from "../../../_metronic/helpers";
-import { Plan } from "./Plan";
+import {ID, Response} from '../../../_metronic/helpers'
+import {Plan} from './Plan'
 
 export type Subscription = {
   id?: ID
