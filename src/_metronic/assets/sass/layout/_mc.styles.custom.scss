@@ -150,3 +150,7 @@
     border: 2px solid $mc-secondary;
   }
 }
+
+.rs-picker-default .rs-picker-toggle {
+  z-index: auto;
+}

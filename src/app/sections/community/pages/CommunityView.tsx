@@ -65,6 +65,10 @@ const CommunityView: FC<Props> = ({communityId}) => {
   ]
 
   useEffect(() => {
+    updateCommunity()
+  }, [communityId, params.communityId])
+
+  const updateCommunity = () => {
     if (params.communityId) {
       getCommunityById(params.communityId).then((response) => {
         setCommunity(response)
@@ -80,13 +84,14 @@ const CommunityView: FC<Props> = ({communityId}) => {
       link.current = '/dashboard'
       indexLink.current = '/dashboard/overview'
     }
-  }, [communityId, params.communityId])
+  }
 
   return (
     <CommunityContext.Provider
       value={{
         community,
         setCommunity,
+        updateCommunity,
         members,
         setMembers,
       }}

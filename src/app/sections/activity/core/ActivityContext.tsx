@@ -9,8 +9,6 @@ type ActivityContextProps = {
   setActivity: Dispatch<SetStateAction<Activity | undefined>>
   matches: Match[] | undefined
   setMatches: Dispatch<SetStateAction<Match[] | undefined>>
-  // members: User[] | undefined
-  // setMembers: Dispatch<SetStateAction<User[] | undefined>>
   match: Match | undefined
   setMatch: Dispatch<SetStateAction<Match | undefined>>
   registrations: ActivityRegistration[] | undefined
@@ -24,8 +22,6 @@ const initActivityContextPropsState = {
   setActivity: () => {},
   matches: undefined,
   setMatches: () => {},
-  // members: undefined,
-  // setMembers: () => {},
   match: undefined,
   setMatch: () => {},
   registrations: undefined,
