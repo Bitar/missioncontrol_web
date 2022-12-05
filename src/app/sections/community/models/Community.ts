@@ -11,7 +11,9 @@ import { Subscription } from "../../../models/billing/Subscription";
 
 export const communityCreateWizardSchema = [
   Yup.object().shape({
-    name: Yup.string().required("Community name is required")
+    logo: Yup.mixed().required("Logo is required"),
+    banner_image: Yup.mixed().required("Banner Image is required"),
+    name: Yup.string().required("Name is required")
   }),
   Yup.object().shape({
     contact: Yup.object().shape({
@@ -22,7 +24,7 @@ export const communityCreateWizardSchema = [
   }),
   Yup.object().shape({
     address: Yup.object().shape({
-      address_one: Yup.string().required("Contact address is required"),
+      address_one: Yup.string().required("Address is required"),
       city: Yup.string().required("City is required"),
       state: Yup.string().required("State is required"),
       postal_code: Yup.string().required("Postal Code is required")
@@ -119,13 +121,13 @@ export const initialCommunityFormTypeByCommunity = (community?: Community) => {
       address_one: community?.address?.address_one || "",
       address_two: community?.address?.address_two || "",
       city: community?.address?.city || "",
-      state: community?.address?.state?.id + "" || "",
+      state: (community?.address?.state?.id && community?.address?.state?.id + "") || "",
       postal_code: community?.address?.postal_code || ""
     },
     access: initialCommunityAccess(community?.access),
     payment_term: 1,
     subscription_id: community?.subscription?.id || "",
-    plan_id: community?.subscription?.plan?.id || ""
+    plan_id: (community?.subscription?.plan?.id && community?.subscription?.plan?.id + "") || ""
 
   };
 };

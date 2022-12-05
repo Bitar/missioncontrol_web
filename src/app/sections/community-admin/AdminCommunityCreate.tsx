@@ -1,6 +1,6 @@
 import { Form, Formik, FormikValues } from "formik";
 import React, { useEffect, useRef, useState } from "react";
-import { StepperComponent } from "../../../_metronic/assets/ts/components";
+import { ScrollTopComponent, StepperComponent } from "../../../_metronic/assets/ts/components";
 import {
   communityCreateWizardSchema,
   CommunityFormType,
@@ -79,6 +79,32 @@ const AdminCommunityCreate = () => {
       return;
     }
 
+    if (stepper.current?.currentStepIndex === 5) {
+      if (communityForm?.plan_id) {
+        setAlertMessage("");
+        setHasErrors(false);
+        nextStep(stepper);
+      } else {
+        setAlertMessage("Please choose a Plan");
+        setHasErrors(true);
+        ScrollTopComponent.goTop();
+      }
+    } else if(stepper.current?.currentStepIndex === 6) {
+      if(communityForm?.payment_method) {
+        setAlertMessage("");
+        setHasErrors(false);
+        nextStep(stepper);
+      } else {
+        setAlertMessage("Please choose a Payment Method");
+        setHasErrors(true);
+        ScrollTopComponent.goTop();
+      }
+    } else {
+      nextStep(stepper);
+    }
+  };
+
+  const nextStep = (stepper: any) => {
     setSubmitButton(stepper.current.currentStepIndex === stepper.current.totalStepsNumber! - 1);
 
     setCurrentSchema(communityCreateWizardSchema[stepper.current.currentStepIndex]);
@@ -103,7 +129,6 @@ const AdminCommunityCreate = () => {
   const handleSubmit = () => {
     let data = jsonToFormData(communityForm);
     setIsSubmitting(true);
-    console.log(communityForm?.payment_method);
 
     if (communityForm?.payment_method === "1") {
       createSubscription(data)
@@ -127,11 +152,13 @@ const AdminCommunityCreate = () => {
         });
     } else if (communityForm?.payment_method === "2") {
       createAdminCommunity(data).then((response) => {
+        setIsSubmitting(false);
+
         toast.success("Community created Successfully");
+
         updateAuth();
 
         navigate("/");
-        setIsSubmitting(false);
       }).catch(function(e) {
         setIsSubmitting(false);
         if (e.response) {

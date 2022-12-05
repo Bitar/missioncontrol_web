@@ -20,8 +20,9 @@ import toast from "react-hot-toast";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import Timezone from "dayjs/plugin/timezone";
-dayjs.extend(utc)
-dayjs.extend(Timezone)
+
+dayjs.extend(utc);
+dayjs.extend(Timezone);
 
 type SubscriptionObject = {
   plan_id: string | number | undefined,
@@ -56,7 +57,7 @@ export const SubscriptionDetail = () => {
           .toDate()
       );
     }
-  }, [community?.subscription?.ends_at])
+  }, [community?.subscription?.ends_at]);
 
   useEffect(() => {
     getPlans().then((response) => {
@@ -71,7 +72,7 @@ export const SubscriptionDetail = () => {
     if (params?.communityId) {
       await updateCommunitySubscription(params.communityId, data).then((response) => {
         toast.success("Community Subscription Updated Successfully");
-        updateCommunity()
+        updateCommunity();
       });
     }
   };

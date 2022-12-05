@@ -1,11 +1,13 @@
 import React, {FC} from 'react'
-import {ErrorMessage, Field} from 'formik'
+import { ErrorMessage, Field, useFormikContext } from "formik";
 import {updateData} from '../../../../helpers/form/FormHelper'
 import Select from 'react-select'
 import {useCommunityForm} from '../../core/CommunityFormContext'
+import InputMask from "react-input-mask";
 
 const AddressDetails: FC = () => {
   const {communityForm, setCommunityForm, states} = useCommunityForm()
+  const { setFieldValue } = useFormikContext();
 
   return (
     <div className='d-flex flex-column pt-5 w-100'>
@@ -61,10 +63,10 @@ const AddressDetails: FC = () => {
             name='address.state'
             placeholder={'Choose a State'}
             options={states}
-            // defaultValue={community?.address?.state}
             getOptionLabel={(state) => state?.name}
             getOptionValue={(state) => state?.id?.toString() || ''}
             onChange={(e) => {
+              setFieldValue('address.state', e?.id?.toString())
               updateData(
                 {
                   address: {...communityForm?.address, ...{state: e?.id}},
@@ -83,12 +85,18 @@ const AddressDetails: FC = () => {
       <div className='row mb-6'>
         <label className='col-lg-4 col-form-label required fw-bold fs-6'>Postal Code</label>
         <div className='col-lg-8 fv-row'>
-          <Field
-            type='text'
-            name='address.postal_code'
-            className='form-control mb-3 mb-lg-0'
-            placeholder='ex: 95125'
-          />
+          <InputMask mask="99999" className="form-control mb-3 mb-lg-0" placeholder="Zip Code" maskPlaceholder={null}
+                     name="address.postal_code"   onChange={(e) => {
+            setFieldValue("address.postal_code", e.target.value);
+          }}/>
+
+
+        {/*  <Field*/}
+        {/*    type='text'*/}
+        {/*    name='address.postal_code'*/}
+        {/*    className='form-control mb-3 mb-lg-0'*/}
+        {/*    placeholder='ex: 95125'*/}
+        {/*  />*/}
           <div className='text-danger mt-2'>
             <ErrorMessage name='address.postal_code' />
           </div>

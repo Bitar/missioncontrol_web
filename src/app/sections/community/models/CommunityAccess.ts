@@ -11,7 +11,7 @@ export type CommunityAccess = {
 
 export const initialCommunityAccess = (communityAccess?: CommunityAccess) => {
   return {
-    type: communityAccess?.type || 0,
+    type: communityAccess?.type || 1,
     key: communityAccess?.key || 0,
     value: communityAccess?.value || '',
   }
