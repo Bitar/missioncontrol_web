@@ -100,7 +100,7 @@ const LogoImage: FC<Props> = ({ community, setCommunity }) => {
           )}
         </div>
         <div className="label-container">
-          <label className="col-lg-4 col-form-label fw-bold fs-6">Logo</label>
+          <label className="col-lg-4 col-form-label fw-bold fs-6 required">Logo</label>
           <div className="text-danger mt-2">
             <ErrorMessage name="logo" />
           </div>

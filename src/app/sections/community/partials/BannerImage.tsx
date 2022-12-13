@@ -99,7 +99,7 @@ const BannerImage: FC<Props> = ({ community, setCommunity }) => {
           )}
         </div>
         <div className="label-container">
-          <label className="col-lg-4 col-form-label fw-bold fs-6">Banner Image</label>
+          <label className="col-lg-4 col-form-label fw-bold fs-6 required">Banner Image</label>
           <div className="text-danger mt-2">
             <ErrorMessage name="banner_image" />
           </div>

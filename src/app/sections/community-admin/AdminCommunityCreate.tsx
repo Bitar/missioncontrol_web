@@ -79,6 +79,8 @@ const AdminCommunityCreate = () => {
       return;
     }
 
+    // nextStep(stepper);
+
     if (stepper.current?.currentStepIndex === 5) {
       if (communityForm?.plan_id) {
         setAlertMessage("");
@@ -89,8 +91,8 @@ const AdminCommunityCreate = () => {
         setHasErrors(true);
         ScrollTopComponent.goTop();
       }
-    } else if(stepper.current?.currentStepIndex === 6) {
-      if(communityForm?.payment_method) {
+    } else if (stepper.current?.currentStepIndex === 6) {
+      if (communityForm?.payment_method) {
         setAlertMessage("");
         setHasErrors(false);
         nextStep(stepper);
