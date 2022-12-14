@@ -25,8 +25,8 @@ dayjs.extend(utc);
 dayjs.extend(Timezone);
 
 type SubscriptionObject = {
-  plan_id: string | number | undefined,
-  status: string | number | undefined,
+  plan_id: string | number | undefined
+  status: string | number | undefined
   end_date?: string | undefined
 }
 
@@ -93,12 +93,19 @@ export const SubscriptionDetail = () => {
                 <div className="row mb-6">
                   <div className="col-12">
                     <p>Current Plan: {community?.subscription?.plan?.name}</p>
-                    <p>Payment Status: {community?.subscription?.status === 2 ? (
-                      <span className={"badge badge-success"}>Paid</span>
-                    ) : (
-                      <span className={"badge badge-danger"}>Unpaid</span>
-                    )}</p>
-                    <p>End Date: {endDate.toDateString()}</p>
+                    {community?.subscription?.plan?.id !== 1 &&
+                      <>
+                        <p>
+                          Payment Status:{" "}
+                          {community?.subscription?.status === 2 ? (
+                            <span className={"badge badge-success"}>Paid</span>
+                          ) : (
+                            <span className={"badge badge-danger"}>Unpaid</span>
+                          )}
+                        </p>
+                        <p>End Date: {endDate.toDateString()}</p>
+                      </>
+                    }
                   </div>
                 </div>
 
@@ -136,7 +143,10 @@ export const SubscriptionDetail = () => {
                         <Select
                           name="status"
                           placeholder={"Choose a State"}
-                          options={[{ value: "2", label: "Paid" }, { value: "7", label: "Unpaid" }]}
+                          options={[
+                            { value: "2", label: "Paid" },
+                            { value: "7", label: "Unpaid" }
+                          ]}
                           onChange={(e) => {
                             updateData(
                               {
@@ -178,7 +188,6 @@ export const SubscriptionDetail = () => {
                         </div>
                       </div>
                     </div>
-
                   </>
                 )}
               </div>

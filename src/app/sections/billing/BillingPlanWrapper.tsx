@@ -3,7 +3,6 @@ import clsx from 'clsx'
 import {getPlans} from './plan/core/_requests'
 import {getOption, Plan} from '../../models/billing/Plan'
 import {PlanCard} from './PlanCard'
-import {useNavigate} from 'react-router-dom'
 import {KTCardBody} from '../../helpers/components/KTCardBody'
 import {PlanOption} from '../../models/billing/PlanOption'
 import {getBillingPlanOptions} from '../misc/core/_requests'
@@ -34,7 +33,7 @@ const BillingPlan: FC<Props> = ({plans, setPlan}) => {
           <div className='mb-13 text-center'>
             <h1 className='fs-2hx fw-bolder mb-5'>Choose Your Plan</h1>
             <div className='text-gray-400 fw-bold fs-5'>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis, voluptatum.
+              Pick the plan that best fits your community
             </div>
           </div>
 
@@ -97,7 +96,6 @@ const BillingPlan: FC<Props> = ({plans, setPlan}) => {
 
 const BillingPlanWrapper: FC = () => {
   const {communityForm, setCommunityForm} = useCommunityForm()
-  const navigate = useNavigate()
   const [plan, setPlan] = useState<Plan | undefined>()
   const [plans, setPlans] = useState<Plan[] | undefined>()
   const [planOptions, setPlanOptions] = useState<PlanOption[] | undefined>()
@@ -126,13 +124,6 @@ const BillingPlanWrapper: FC = () => {
         <KTCardBody>
           <div className='text-center mw-650px mx-auto'>
             <h1 className='display-6'>Features</h1>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam animi
-              aperiam aut, dolorem doloremque ducimus earum ex incidunt ipsum labore, nisi officiis
-              perspiciatis quibusdam, quidem quos ratione repellat sit? Architecto assumenda aut,
-              dolorem doloremque enim excepturi harum ipsa, quae quisquam quo quos ratione
-              reprehenderit, voluptates. Consequatur qui quos tempora.
-            </p>
           </div>
           <div className='table-responsive mt-20'>
             <table className='table table-rounded table-striped align-middle gy-7'>

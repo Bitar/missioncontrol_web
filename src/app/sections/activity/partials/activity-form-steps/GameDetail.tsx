@@ -1,83 +1,81 @@
-import { useActivityForm } from "../../core/ActivityFormContext";
-import { useAuth } from "../../../../modules/auth";
-import { useActivity } from "../../core/ActivityContext";
-import { useParams } from "react-router-dom";
-import { KTCardHeader } from "../../../../helpers/components/KTCardHeader";
-import React, { useEffect, useRef, useState } from "react";
-import { KTCard } from "../../../../helpers/components/KTCard";
-import { activityDetailsSchema } from "../../models/Activity";
-import { ErrorMessage, Form, Formik } from "formik";
-import { KTCardBody } from "../../../../helpers/components/KTCardBody";
-import { FormAction } from "../../../../helpers/form/FormAction";
-import Select from "react-select";
-import { jsonToFormData, updateData } from "../../../../helpers/form/FormHelper";
-import { SwitchInput } from "../../../../components/SwitchInput/SwitchInput";
-import { Scoring } from "../../components";
-import { getAllGameModes, getAllGamePlatforms, getAllGames } from "../../../games/core/GameRequests";
-import { Game } from "../../../../models/game/Game";
-import { GameMode } from "../../../../models/game/GameMode";
-import { ID } from "../../../../helpers/crud-helper/models";
-import { Platform } from "../../../../models/game/Platform";
-import { updateActivity } from "../../core/ActivityRequests";
-import toast from "react-hot-toast";
+import {useActivityForm} from '../../core/ActivityFormContext'
+import {useAuth} from '../../../../modules/auth'
+import {useActivity} from '../../core/ActivityContext'
+import {useParams} from 'react-router-dom'
+import {KTCardHeader} from '../../../../helpers/components/KTCardHeader'
+import React, {useEffect, useRef, useState} from 'react'
+import {KTCard} from '../../../../helpers/components/KTCard'
+import {activityDetailsSchema} from '../../models/Activity'
+import {ErrorMessage, Form, Formik} from 'formik'
+import {KTCardBody} from '../../../../helpers/components/KTCardBody'
+import {FormAction} from '../../../../helpers/form/FormAction'
+import Select from 'react-select'
+import {jsonToFormData, updateData} from '../../../../helpers/form/FormHelper'
+import {SwitchInput} from '../../../../components/SwitchInput/SwitchInput'
+import {Scoring} from '../../components'
+import {getAllGameModes, getAllGamePlatforms, getAllGames} from '../../../games/core/GameRequests'
+import {Game} from '../../../../models/game/Game'
+import {GameMode} from '../../../../models/game/GameMode'
+import {ID} from '../../../../helpers/crud-helper/models'
+import {Platform} from '../../../../models/game/Platform'
+import {updateActivity} from '../../core/ActivityRequests'
+import toast from 'react-hot-toast'
 
 export const GameDetail = () => {
-  const params = useParams();
-  const { currentUser } = useAuth();
-  const { activity, setActivity } = useActivity();
-  const { activityForm, setActivityForm } = useActivityForm();
+  const params = useParams()
+  const {currentUser} = useAuth()
+  const {activity, setActivity} = useActivity()
+  const {activityForm, setActivityForm} = useActivityForm()
 
-  const [games, setGames] = useState<Game[]>();
-  const [modes, setModes] = useState<GameMode[]>();
-  const [platforms, setPlatforms] = useState<Platform[]>();
+  const [games, setGames] = useState<Game[]>()
+  const [modes, setModes] = useState<GameMode[]>()
+  const [platforms, setPlatforms] = useState<Platform[]>()
 
-  const selectGameModeRef = useRef<any>();
-  const selectPlatformsRef = useRef<any>();
+  const selectGameModeRef = useRef<any>()
+  const selectPlatformsRef = useRef<any>()
 
   useEffect(() => {
     getAllGames().then((response) => {
-      setGames(response.data);
-    });
-  }, []);
+      setGames(response.data)
+    })
+  }, [])
 
   useEffect(() => {
     if (activityForm?.game_id) {
-      updateModes(activityForm?.game_id);
+      updateModes(activityForm?.game_id)
     }
-  }, [activityForm?.game_id]);
+  }, [activityForm?.game_id])
 
   const updateModes = (gameId?: any) => {
     getAllGameModes(gameId).then((response) => {
-      setModes(response.data);
-    });
+      setModes(response.data)
+    })
 
     getAllGamePlatforms(gameId).then((response) => {
-      setPlatforms(response.data);
-    });
-  };
+      setPlatforms(response.data)
+    })
+  }
 
   const handleSubmit = async () => {
-    let data = jsonToFormData(activityForm);
-    data.append("_method", "PUT");
+    let data = jsonToFormData(activityForm)
+    data.append('_method', 'PUT')
 
     await updateActivity(params.id, data)
       .then((response) => {
-        toast.success("Activity updated Successfully!");
-        setActivity(response);
+        toast.success('Activity updated Successfully!')
+        setActivity(response)
       })
-      .catch(function(e) {
+      .catch(function (e) {
         if (e.response) {
         }
-      });
-  };
+      })
+  }
 
-  const handleOnChange = async () => {
-
-  };
+  const handleOnChange = async () => {}
 
   return (
     <KTCard border={true}>
-      <KTCardHeader text={"General Details"} bg="mc-primary" text_color="white" />
+      <KTCardHeader text={'General Details'} bg='mc-primary' text_color='white' />
 
       <Formik
         validationSchema={activityDetailsSchema}
@@ -85,125 +83,124 @@ export const GameDetail = () => {
         onSubmit={handleSubmit}
         enableReinitialize
       >
-        {({ isSubmitting }) => (
-          <Form onChange={handleOnChange} className="form" autoComplete="off">
-            <KTCardBody className="py-4">
-              <div className="d-flex flex-column pt-5">
-
-                <div className="row mb-6">
-                  <label className="col-lg-4 col-form-label fw-bold fs-6">Games</label>
-                  <div className="col-lg-8 fv-row">
+        {({isSubmitting}) => (
+          <Form onChange={handleOnChange} className='form' autoComplete='off'>
+            <KTCardBody className='py-4'>
+              <div className='d-flex flex-column pt-5'>
+                <div className='row mb-6'>
+                  <label className='col-lg-4 col-form-label fw-bold fs-6'>Games</label>
+                  <div className='col-lg-8 fv-row'>
                     {activity?.game && (
                       <Select
-                        name="game_id"
-                        placeholder={"Choose a Game"}
+                        name='game_id'
+                        placeholder={'Choose a Game'}
                         defaultValue={activity?.game}
                         options={games}
                         getOptionLabel={(game) => game?.title}
-                        getOptionValue={(game) => game?.id?.toString() || ""}
+                        getOptionValue={(game) => game?.id?.toString() || ''}
                         onChange={(e) => {
-                          updateData({ game_id: e?.id || "" }, setActivityForm, activityForm);
-                          e?.id && updateModes(e.id);
-                          selectGameModeRef.current.clearValue();
+                          updateData({game_id: e?.id || ''}, setActivityForm, activityForm)
+                          e?.id && updateModes(e.id)
+                          selectGameModeRef.current.clearValue()
                         }}
                       />
                     )}
-                    <div className="text-danger mt-2">
-                      <ErrorMessage name="game_id" />
+                    <div className='text-danger mt-2'>
+                      <ErrorMessage name='game_id' />
                     </div>
                   </div>
                 </div>
 
                 {activityForm?.game_id && (
                   <>
-                    <div className="row mb-6">
-                      <label className="col-lg-4 col-form-label fw-bold fs-6">Game Mode</label>
-                      <div className="col-lg-8 fv-row">
+                    <div className='row mb-6'>
+                      <label className='col-lg-4 col-form-label fw-bold fs-6'>Game Mode</label>
+                      <div className='col-lg-8 fv-row'>
                         {activity?.game_mode && (
                           <Select
-                            name="game_mode_id"
+                            name='game_mode_id'
                             ref={selectGameModeRef}
-                            placeholder={"Choose a Game Mode"}
+                            placeholder={'Choose a Game Mode'}
                             defaultValue={activity?.game_mode}
                             options={modes}
                             getOptionLabel={(mode) => mode?.name}
-                            getOptionValue={(mode) => mode?.id?.toString() || ""}
+                            getOptionValue={(mode) => mode?.id?.toString() || ''}
                             onChange={(e) => {
-                              updateData({ game_mode_id: e?.id || "" }, setActivityForm, activityForm);
+                              updateData({game_mode_id: e?.id || ''}, setActivityForm, activityForm)
                             }}
                           />
                         )}
-                        <div className="text-danger mt-2">
-                          <ErrorMessage name="game_mode_id" />
+                        <div className='text-danger mt-2'>
+                          <ErrorMessage name='game_mode_id' />
                         </div>
                       </div>
                     </div>
 
-                    <div className="row mb-6">
-                      <label className="col-lg-4 col-form-label fw-bold fs-6">Rounds</label>
-                      <div className="col-lg-8 fv-row">
+                    <div className='row mb-6'>
+                      <label className='col-lg-4 col-form-label fw-bold fs-6'>Rounds</label>
+                      <div className='col-lg-8 fv-row'>
                         {activity?.game_mode && (
                           <Select
-                            name="rounds"
-                            placeholder={"How many rounds?"}
+                            name='rounds'
+                            placeholder={'How many rounds?'}
                             defaultValue={{
                               value: activityForm?.rounds,
-                              label: activityForm?.rounds
+                              label: activityForm?.rounds,
                             }}
                             options={[
-                              { value: 1, label: "1" },
-                              { value: 3, label: "3" },
-                              { value: 5, label: "5" },
-                              { value: 7, label: "7" }
+                              {value: 1, label: '1'},
+                              {value: 3, label: '3'},
+                              {value: 5, label: '5'},
+                              {value: 7, label: '7'},
                             ]}
                             onChange={(e) => {
-                              updateData({ rounds: e?.value || "" }, setActivityForm, activityForm);
+                              updateData({rounds: e?.value || ''}, setActivityForm, activityForm)
                             }}
                           />
                         )}
-                        <div className="text-danger mt-2">
-                          <ErrorMessage name="game_mode_id" />
+                        <div className='text-danger mt-2'>
+                          <ErrorMessage name='game_mode_id' />
                         </div>
                       </div>
                     </div>
 
-                    <div className="row mb-6">
-                      <label className="col-lg-4 col-form-label fw-bold fs-6">Crossplay</label>
-                      <div className="col-lg-8 fv-row">
+                    <div className='row mb-6'>
+                      <label className='col-lg-4 col-form-label fw-bold fs-6'>Crossplay</label>
+                      <div className='col-lg-8 fv-row'>
                         <SwitchInput
                           isOn={activityForm?.is_cross_play}
                           handleToggle={() => {
-                            selectPlatformsRef.current.clearValue();
+                            selectPlatformsRef.current.clearValue()
                             updateData(
-                              { is_cross_play: !activityForm?.is_cross_play },
+                              {is_cross_play: !activityForm?.is_cross_play},
                               setActivityForm,
                               activityForm
-                            );
+                            )
                           }}
                         />
                       </div>
                     </div>
 
-                    <div className="row mb-6">
-                      <label className="col-lg-4 col-form-label fw-bold fs-6">Platforms</label>
-                      <div className="col-lg-8 fv-row">
+                    <div className='row mb-6'>
+                      <label className='col-lg-4 col-form-label fw-bold fs-6'>Platforms</label>
+                      <div className='col-lg-8 fv-row'>
                         {activity?.platforms && (
                           <Select
-                            name="community_id"
-                            placeholder={"Which Platform(s)"}
+                            name='community_id'
+                            placeholder={'Which Platform(s)'}
                             ref={selectPlatformsRef}
                             defaultValue={activity?.platforms}
                             isMulti={activityForm?.is_cross_play}
                             options={platforms}
                             getOptionLabel={(platform) => platform?.name}
-                            getOptionValue={(platform) => platform?.id?.toString() || ""}
+                            getOptionValue={(platform) => platform?.id?.toString() || ''}
                             onChange={(e) => {
-                              updateData({ platforms: e || [] }, setActivityForm, activityForm);
+                              updateData({platforms: e || []}, setActivityForm, activityForm)
                             }}
                           />
                         )}
-                        <div className="text-danger mt-2">
-                          <ErrorMessage name="community_id" />
+                        <div className='text-danger mt-2'>
+                          <ErrorMessage name='community_id' />
                         </div>
                       </div>
                     </div>
@@ -217,16 +214,12 @@ export const GameDetail = () => {
                     )}
                   </>
                 )}
-
-
               </div>
             </KTCardBody>
-            <FormAction text={"Update Activity"} isSubmitting={isSubmitting} />
+            <FormAction text={'Update Activity'} isSubmitting={isSubmitting} />
           </Form>
         )}
       </Formik>
-
-
     </KTCard>
-  );
-};
+  )
+}

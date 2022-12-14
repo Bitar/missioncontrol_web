@@ -1,19 +1,18 @@
-import { ActivityForm } from "../models/Activity";
-import { createContext, Dispatch, SetStateAction, useContext } from "react";
+import {ActivityForm} from '../models/Activity'
+import {createContext, Dispatch, SetStateAction, useContext} from 'react'
 
 type ActivityFormContextProps = {
-  activityForm: ActivityForm | undefined,
+  activityForm: ActivityForm | undefined
   setActivityForm: Dispatch<SetStateAction<ActivityForm>>
 }
 
 const initActivityFormContext = {
   activityForm: undefined,
-  setActivityForm: () => {
-  }
-};
+  setActivityForm: () => {},
+}
 
-export const ActivityFormContext = createContext<ActivityFormContextProps>(initActivityFormContext);
+export const ActivityFormContext = createContext<ActivityFormContextProps>(initActivityFormContext)
 
 export const useActivityForm = () => {
-  return useContext(ActivityFormContext);
-};
+  return useContext(ActivityFormContext)
+}

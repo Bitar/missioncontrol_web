@@ -1,6 +1,6 @@
-import { createContext, Dispatch, SetStateAction, useContext } from "react";
-import { User } from "../identity/user/models/User";
-import { Community } from "./models/Community";
+import {createContext, Dispatch, SetStateAction, useContext} from 'react'
+import {User} from '../identity/user/models/User'
+import {Community} from './models/Community'
 
 type CommunityContextProps = {
   community: Community | undefined
@@ -12,17 +12,14 @@ type CommunityContextProps = {
 
 const initCommunityContextPropsState = {
   community: undefined,
-  setCommunity: () => {
-  },
-  updateCommunity: () => {
-  },
+  setCommunity: () => {},
+  updateCommunity: () => {},
   members: undefined,
-  setMembers: () => {
-  }
-};
+  setMembers: () => {},
+}
 
-export const CommunityContext = createContext<CommunityContextProps>(initCommunityContextPropsState);
+export const CommunityContext = createContext<CommunityContextProps>(initCommunityContextPropsState)
 
 export const useCommunity = () => {
-  return useContext(CommunityContext);
-};
+  return useContext(CommunityContext)
+}

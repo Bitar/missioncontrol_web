@@ -239,50 +239,58 @@ export const ReviewDetails: FC = () => {
               </KTCardBody>
             </KTCard>
           )}
-          <KTCard shadow={false}>
-            <KTCardHeader text={"Payment Method"} bg={"mc-primary"} text_color={"white"} />
-            <KTCardBody>
-              <div className="card card-dashed h-xl-100 flex-row flex-stack flex-wrap mb-2">
-                <label className="cursor-pointer d-flex w-100 p-6 flex-stack">
-                  <div className="d-flex flex-column py-2">
-                    <div className="d-flex align-items-center fs-4 fw-bold">Pay with
-                      <i className="ms-2 fab fa-stripe" style={{
-                        color: "#635bff",
-                        fontSize: "2.5rem"
-                      }}></i>
+          {communityForm?.plan_id && communityForm?.plan_id !== 1 &&
+            <KTCard shadow={false}>
+              <KTCardHeader text={"Payment Method"} bg={"mc-primary"} text_color={"white"} />
+              <KTCardBody>
+                {communityForm?.plan_id < 4 &&
+                  <div className="card card-dashed h-xl-100 flex-row flex-stack flex-wrap mb-2">
+                    <label className="cursor-pointer d-flex w-100 p-6 flex-stack">
+                      <div className="d-flex flex-column py-2">
+                        <div className="d-flex align-items-center fs-4 fw-bold">
+                          Pay with
+                          <i
+                            className="ms-2 fab fa-stripe"
+                            style={{
+                              color: "#635bff",
+                              fontSize: "2.5rem"
+                            }}
+                          ></i>
+                        </div>
+                      </div>
+
+                      <div className="d-flex align-items-center py-2">
+                        <Field
+                          className="form-check-input"
+                          type="radio"
+                          name="payment_method"
+                          value={1}
+                          checked={communityForm?.payment_method === "1"}
+                        />
+                      </div>
+                    </label>
+                  </div>
+                }
+                <div className="card card-dashed h-xl-100 flex-row flex-stack flex-wrap">
+                  <label className="cursor-pointer d-flex w-100 p-6 flex-stack">
+                    <div className="d-flex flex-column py-2">
+                      <div className="d-flex align-items-center fs-4 fw-bold">Contact Sales</div>
                     </div>
-                  </div>
 
-                  <div className="d-flex align-items-center py-2">
-                    <Field
-                      className="form-check-input"
-                      type="radio"
-                      name="payment_method"
-                      value={1}
-                      checked={communityForm?.payment_method === "1"}
-                    />
-                  </div>
-                </label>
-              </div>
-              <div className="card card-dashed h-xl-100 flex-row flex-stack flex-wrap">
-                <label className="cursor-pointer d-flex w-100 p-6 flex-stack">
-                  <div className="d-flex flex-column py-2">
-                    <div className="d-flex align-items-center fs-4 fw-bold">Contact Sales</div>
-                  </div>
-
-                  <div className="d-flex align-items-center py-2">
-                    <Field
-                      className="form-check-input"
-                      type="radio"
-                      name="payment_method"
-                      value={2}
-                      checked={communityForm?.payment_method === "2"}
-                    />
-                  </div>
-                </label>
-              </div>
-            </KTCardBody>
-          </KTCard>
+                    <div className="d-flex align-items-center py-2">
+                      <Field
+                        className="form-check-input"
+                        type="radio"
+                        name="payment_method"
+                        value={2}
+                        checked={communityForm?.payment_method === "2"}
+                      />
+                    </div>
+                  </label>
+                </div>
+              </KTCardBody>
+            </KTCard>
+          }
         </div>
       </div>
     </div>

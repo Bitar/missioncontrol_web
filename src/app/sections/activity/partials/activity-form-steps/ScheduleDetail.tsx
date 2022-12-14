@@ -1,7 +1,3 @@
 export const ScheduleDetail = () => {
-  return (
-    <>
-
-    </>
-  );
-};
+  return <></>
+}

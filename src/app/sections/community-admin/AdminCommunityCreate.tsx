@@ -92,14 +92,16 @@ const AdminCommunityCreate = () => {
         ScrollTopComponent.goTop();
       }
     } else if (stepper.current?.currentStepIndex === 6) {
-      if (communityForm?.payment_method) {
+      if (communityForm?.plan_id !== 1) {
+        if (!communityForm?.payment_method) {
+          setAlertMessage("Please choose a Payment Method");
+          setHasErrors(true);
+          ScrollTopComponent.goTop();
+        }
+      } else {
         setAlertMessage("");
         setHasErrors(false);
         nextStep(stepper);
-      } else {
-        setAlertMessage("Please choose a Payment Method");
-        setHasErrors(true);
-        ScrollTopComponent.goTop();
       }
     } else {
       nextStep(stepper);
@@ -132,28 +134,42 @@ const AdminCommunityCreate = () => {
     let data = jsonToFormData(communityForm);
     setIsSubmitting(true);
 
-    if (communityForm?.payment_method === "1") {
-      createSubscription(data)
-        .then((response) => {
-          if (response?.url) {
-            window.location.href = response?.url;
-          } else {
-            toast.success("Community created Successfully");
-            updateAuth();
+    if (communityForm?.plan_id !== 1) {
+      if (communityForm?.payment_method === "1") {
+        createSubscriptionApi(data);
+      } else if (communityForm?.payment_method === "2") {
+        createAdminCommunityApi(data);
+      }
+    } else {
+      createAdminCommunityApi(data);
+    }
+  };
 
-            navigate("/");
-            setIsSubmitting(false);
-          }
-        })
-        .catch(function(e) {
+  function createSubscriptionApi(data: any) {
+    createSubscription(data)
+      .then((response) => {
+        if (response?.url) {
+          window.location.href = response?.url;
+        } else {
+          toast.success("Community created Successfully");
+          updateAuth();
+
+          navigate("/");
           setIsSubmitting(false);
-          if (e.response) {
-            setAlertMessage(e.response.data.message);
-            setHasErrors(true);
-          }
-        });
-    } else if (communityForm?.payment_method === "2") {
-      createAdminCommunity(data).then((response) => {
+        }
+      })
+      .catch(function(e) {
+        setIsSubmitting(false);
+        if (e.response) {
+          setAlertMessage(e.response.data.message);
+          setHasErrors(true);
+        }
+      });
+  }
+
+  function createAdminCommunityApi(data: any) {
+    createAdminCommunity(data)
+      .then((response) => {
         setIsSubmitting(false);
 
         toast.success("Community created Successfully");
@@ -161,18 +177,15 @@ const AdminCommunityCreate = () => {
         updateAuth();
 
         navigate("/");
-      }).catch(function(e) {
+      })
+      .catch(function(e) {
         setIsSubmitting(false);
         if (e.response) {
           setAlertMessage(e.response.data.message);
           setHasErrors(true);
         }
       });
-    } else {
-      // Invalid Payment Method
-      console.log("Invalid Payment Method");
-    }
-  };
+  }
 
   return (
     <KTCard>
