@@ -7,10 +7,8 @@ import {
   formOnChange,
   initialCommunityFormTypeByCommunity
 } from "../community/models/Community";
-import { KTSVG } from "../../helpers/components/KTSVG";
 import { GeneralDetails } from "../community/partials/community-create-steps/GeneralDetails";
-import { KTCard, KTCardBody } from "../../../_metronic/helpers";
-import { KTCardHeader } from "../../helpers/components/KTCardHeader";
+import { KTCard, KTCardBody, KTCardHeader, KTSVG } from "../../helpers/components";
 import { ContactDetails } from "../community/partials/community-create-steps/ContactDetails";
 import { AddressDetails } from "../community/partials/community-create-steps/AddressDetails";
 import { AccessDetail } from "../community/partials/community-create-steps/AccessDetail";

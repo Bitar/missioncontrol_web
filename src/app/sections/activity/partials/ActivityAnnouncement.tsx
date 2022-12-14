@@ -4,10 +4,10 @@ import TextField from '@mui/material/TextField'
 import dayjs from 'dayjs'
 import {Announcement, initialAnnouncement} from '../../../models/announcement/Announcements'
 import {useParams} from 'react-router-dom'
-import {createActivityAnnouncement} from '../core/ActivityRequests'
+import {createActivityAnnouncement} from '../core/requests/ActivityRequests'
 import {Form, Formik} from 'formik'
 import {jsonToFormData, updateData} from '../../../helpers/form/FormHelper'
-import {useActivity} from '../core/ActivityContext'
+import {useActivity} from '../core/contexts/ActivityContext'
 
 const ActivityAnnouncement: FC = () => {
   const {activity, setActivity} = useActivity()

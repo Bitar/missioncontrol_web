@@ -6,7 +6,7 @@ import {
   useQueryResponseLoading,
 } from '../../../modules/table/QueryResponseProvider'
 import {ColumnInstance, Row, useTable} from 'react-table'
-import {ActivityStandingsColumns} from '../core/ActivityStandingsColumns'
+import {ActivityStandingsColumns} from '../core/columns/ActivityStandingsColumns'
 import {Team} from '../../../models/squad/Team'
 import {CustomHeaderColumn} from '../../../modules/table/columns/CustomHeaderColumn'
 import {CustomRow} from '../../../modules/table/columns/CustomRow'

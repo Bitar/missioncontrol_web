@@ -1,6 +1,6 @@
-import {useActivityForm} from '../../core/ActivityFormContext'
+import {useActivityForm} from '../../core/contexts/ActivityFormContext'
 import {useAuth} from '../../../../modules/auth'
-import {useActivity} from '../../core/ActivityContext'
+import {useActivity} from '../../core/contexts/ActivityContext'
 import {useParams} from 'react-router-dom'
 import {KTCardHeader} from '../../../../helpers/components/KTCardHeader'
 import React, {useEffect, useRef, useState} from 'react'
@@ -18,7 +18,7 @@ import {Game} from '../../../../models/game/Game'
 import {GameMode} from '../../../../models/game/GameMode'
 import {ID} from '../../../../helpers/crud-helper/models'
 import {Platform} from '../../../../models/game/Platform'
-import {updateActivity} from '../../core/ActivityRequests'
+import {updateActivity} from '../../core/requests/ActivityRequests'
 import toast from 'react-hot-toast'
 
 export const GameDetail = () => {

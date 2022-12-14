@@ -1,4 +1,4 @@
-import {useActivity} from '../../core/ActivityContext'
+import {useActivity} from '../../core/contexts/ActivityContext'
 import React, {useEffect, useState} from 'react'
 import {
   ActivityForm,

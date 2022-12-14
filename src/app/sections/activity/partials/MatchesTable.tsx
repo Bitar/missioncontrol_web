@@ -7,7 +7,7 @@ import {
   useQueryResponseData,
   useQueryResponseLoading,
 } from '../../../modules/table/QueryResponseProvider'
-import {MatchesColumns} from '../core/MatchesColumns'
+import {MatchesColumns} from '../core/columns/MatchesColumns'
 import {Match} from '../models/matches/Match'
 import clsx from 'clsx'
 

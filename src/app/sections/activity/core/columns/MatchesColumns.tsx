@@ -1,15 +1,15 @@
 import {Column} from 'react-table'
-import {CustomHeader} from '../../../modules/table/columns/CustomHeader'
+import {CustomHeader} from '../../../../modules/table/columns/CustomHeader'
 import React from 'react'
-import {Match} from '../models/matches/Match'
-import {isWinner} from '../../../helpers/MatchHelper'
-import {TeamImage} from '../components/TeamImage'
+import {Match} from '../../models/matches/Match'
+import {isWinner} from '../../../../helpers/MatchHelper'
+import {TeamImage} from '../../components/TeamImage'
 import {
   calculateTeamScore,
   getDateFromTimestamp,
   getTimeFromTimestamp,
-} from '../../../helpers/MCHelper'
-import {formatMatchStatus} from '../../../helpers/ActivityHelper'
+} from '../../../../helpers/MCHelper'
+import {formatMatchStatus} from '../../../../helpers/ActivityHelper'
 import clsx from 'clsx'
 import {Link} from 'react-router-dom'
 

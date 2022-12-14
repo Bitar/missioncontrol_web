@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import {FC} from 'react'
-import {WithChildren} from '../../../_metronic/helpers/react18MigrationHelpers'
+import {WithChildren} from "../../../_metronic/helpers"
 
 type Props = {
   className?: string

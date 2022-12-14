@@ -9,6 +9,7 @@ import React, {lazy} from 'react'
 import {Restricted} from '../modules/auth/core/AuthPermission'
 import {AdminCommunityCreate} from '../sections/community-admin/AdminCommunityCreate'
 import {VerifyEmail} from '../modules/auth/components/VerifyEmail'
+import { ActivityCreate } from "../sections/activity/pages/ActivityCreate";
 
 const PrivateRoutes = () => {
   const CommunityPage = lazy(() => import('../sections/community/pages/CommunityPage'))
@@ -86,6 +87,17 @@ const PrivateRoutes = () => {
             <Restricted to='view-users'>
               <SuspenseView>
                 <PermissionPage />
+              </SuspenseView>
+            </Restricted>
+          }
+        />
+
+        <Route
+          path='activity/create'
+          element={
+            <Restricted to='manage-activities'>
+              <SuspenseView>
+                <ActivityCreate />
               </SuspenseView>
             </Restricted>
           }

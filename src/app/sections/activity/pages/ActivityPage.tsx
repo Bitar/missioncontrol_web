@@ -2,7 +2,7 @@ import React, {FC} from 'react'
 import {PageLink, PageTitle} from '../../../layout/core'
 import {Navigate, Route, Routes} from 'react-router-dom'
 import {ActivityIndex} from './ActivityIndex'
-import {ActivityCreate} from './ActivityCreate'
+import {ActivityCreateOld} from './ActivityCreateOld'
 import {ActivityView} from './ActivityView'
 import {SuspenseView} from '../../../layout/SuspenseView'
 
@@ -41,7 +41,7 @@ const ActivityPage: FC = () => {
           <>
             <SuspenseView>
               <PageTitle breadcrumbs={activityBreadCrumbs}>{'Add Activity'}</PageTitle>
-              <ActivityCreate />
+              <ActivityCreateOld />
             </SuspenseView>
           </>
         }

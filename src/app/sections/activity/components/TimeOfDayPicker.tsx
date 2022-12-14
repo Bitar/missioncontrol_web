@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField'
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider'
 import dayjs, {Dayjs} from 'dayjs'
 import {updateData} from '../../../helpers/form/FormHelper'
-import {useActivity} from '../core/ActivityContext'
+import {useActivity} from '../core/contexts/ActivityContext'
 import utc from 'dayjs/plugin/utc'
 import Timezone from 'dayjs/plugin/timezone'
 

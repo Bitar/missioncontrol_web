@@ -1,8 +1,8 @@
-import {Activity} from '../models/Activity'
+import {Activity} from '../../models/Activity'
 import {createContext, Dispatch, SetStateAction, useContext} from 'react'
-import {Match} from '../models/matches/Match'
-import {Team} from '../../../models/squad/Team'
-import {ActivityRegistration} from '../models/ActivityRegistration'
+import {Match} from '../../models/matches/Match'
+import {Team} from '../../../../models/squad/Team'
+import {ActivityRegistration} from '../../models/ActivityRegistration'
 
 type ActivityContextProps = {
   activity: Activity | undefined

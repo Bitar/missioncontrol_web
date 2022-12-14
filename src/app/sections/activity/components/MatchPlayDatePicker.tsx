@@ -7,7 +7,7 @@ import {LocalizationProvider} from '@mui/x-date-pickers-pro'
 import {AdapterDayjs} from '@mui/x-date-pickers-pro/AdapterDayjs'
 import TextField from '@mui/material/TextField'
 import {Box} from '@mui/material'
-import {useActivity} from '../core/ActivityContext'
+import {useActivity} from '../core/contexts/ActivityContext'
 
 type Props = {
   activityForm: ActivityForm

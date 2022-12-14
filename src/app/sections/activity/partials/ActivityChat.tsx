@@ -2,7 +2,7 @@ import {FC, useEffect, useState} from 'react'
 import {ActivityChatInner} from './ActivityChatInner'
 import {useParams} from 'react-router-dom'
 import {ChatMessage} from '../../../models/chat/ChatMessage'
-import {getActivityChat} from '../core/ActivityRequests'
+import {getActivityChat} from '../core/requests/ActivityRequests'
 
 const ActivityChat: FC = () => {
   const params = useParams()

@@ -3,7 +3,7 @@ import {
   useQueryResponseData,
   useQueryResponseLoading,
 } from '../../../modules/table/QueryResponseProvider'
-import {ActivityTeamsColumns} from '../core/ActivityTeamsColumns'
+import {ActivityTeamsColumns} from '../core/columns/ActivityTeamsColumns'
 import {ColumnInstance, Row, useTable} from 'react-table'
 import {KTCardBody} from '../../../helpers/components/KTCardBody'
 import {KTCard} from '../../../helpers/components/KTCard'

@@ -1,4 +1,4 @@
-import {ActivityForm} from '../models/Activity'
+import {ActivityForm} from '../../models/Activity'
 import {createContext, Dispatch, SetStateAction, useContext} from 'react'
 
 type ActivityFormContextProps = {

@@ -8,7 +8,7 @@ import {IconButton} from '@mui/material'
 import SendIcon from '@mui/icons-material/Send'
 import {Form, Formik} from 'formik'
 import {jsonToFormData} from '../../../helpers/form/FormHelper'
-import {sendActivityChat} from '../core/ActivityRequests'
+import {sendActivityChat} from '../core/requests/ActivityRequests'
 import {useParams} from 'react-router-dom'
 import {useAuth} from '../../../modules/auth'
 

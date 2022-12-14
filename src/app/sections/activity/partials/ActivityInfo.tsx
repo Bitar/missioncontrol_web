@@ -6,7 +6,7 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
 import clsx from 'clsx'
-import {useActivity} from '../core/ActivityContext'
+import {useActivity} from '../core/contexts/ActivityContext'
 
 const ActivityInfo: FC = () => {
   dayjs.extend(utc)

@@ -1,4 +1,4 @@
-import {useActivity} from '../core/ActivityContext'
+import {useActivity} from '../core/contexts/ActivityContext'
 import {PlatformObject} from '../components/PlatformObject'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'

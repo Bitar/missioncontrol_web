@@ -3,8 +3,8 @@ import {PageLink, PageTitle} from '../../layout/core'
 import React, {FC, useEffect} from 'react'
 import {MatchInfo} from './MatchInfo'
 import {MatchOverview} from './MatchOverview'
-import {getActivityMatch} from '../activity/core/ActivityMatchRequests'
-import {useActivity} from '../activity/core/ActivityContext'
+import {getActivityMatch} from '../activity/core/requests/ActivityMatchRequests'
+import {useActivity} from '../activity/core/contexts/ActivityContext'
 import {MatchChat} from './pages/MatchChat'
 
 const MatchPage: FC = () => {
