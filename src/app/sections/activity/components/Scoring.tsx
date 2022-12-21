@@ -7,7 +7,6 @@ type Props = {
 }
 
 const Scoring: FC<Props> = ({gameMode}) => {
-  console.log(gameMode)
   const players = () => {
     let minPlayers = gameMode?.min_players
     let maxPlayers = gameMode?.max_players
@@ -21,7 +20,7 @@ const Scoring: FC<Props> = ({gameMode}) => {
 
   return (
     <div className='row mb-6 justify-content-center'>
-      <div className='col-lg-8'>
+      <div className='col-12'>
         <div className={`card card-xl-stretch mb-xl-8`}>
           {/* begin::Body */}
           <div className='card-body p-0'>

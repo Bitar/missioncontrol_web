@@ -3,6 +3,7 @@ import {PlatformObject} from '../components/PlatformObject'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import CountUp from 'react-countup'
+import {getDateConvertedToLocal} from '../../../helpers/ActivityHelper'
 
 const ActivityDetails = () => {
   const {activity} = useActivity()
@@ -90,13 +91,15 @@ const ActivityDetails = () => {
 
             <div className='col-lg-8 d-flex align-items-center'>
               <span className='fw-bolder fs-6 me-2'>
-                {dayjs(new Date(activity?.settings?.time * 1000))
-                  .utc(false)
-                  .format('h:mm a')}{' '}
-                - {activity?.settings?.timezone?.name}{' '}
-                <span className='text-muted' style={{fontSize: '12px'}}>
-                  ({activity?.settings?.timezone?.value})
-                </span>
+                {getDateConvertedToLocal(
+                  activity?.settings?.time,
+                  activity?.settings?.timezone?.value
+                ).format('h:mm a')}
+                {/*{" "}*/}
+                {/*- {activity?.settings?.timezone?.name}{" "}*/}
+                {/*<span className="text-muted" style={{ fontSize: "12px" }}>*/}
+                {/*  ({activity?.settings?.timezone?.value})*/}
+                {/*</span>*/}
               </span>
             </div>
           </div>

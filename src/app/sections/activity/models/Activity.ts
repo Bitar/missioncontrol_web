@@ -175,7 +175,7 @@ export type ActivityFormSchedule = {
   }
   settings: {
     frequency: string | number
-    time: string | number
+    time: number
     timezone: string | number
     day: string | number
   }
@@ -212,7 +212,7 @@ export const initialActivityForm = (activityForm?: ActivityForm) => {
       },
       settings: {
         frequency: activityForm?.schedule.settings.frequency || '',
-        time: activityForm?.schedule.settings.time || dayjs(new Date()).format('HH:mm:ss'),
+        time: activityForm?.schedule.settings.time || 0,
         timezone: activityForm?.schedule.settings.timezone || '',
         day: activityForm?.schedule.settings.day || '',
       },
@@ -256,7 +256,7 @@ export const initialActivityFormByActivity = (activity?: Activity) => {
       },
       settings: {
         frequency: activity?.settings.frequency || '',
-        time: activity?.settings.time || dayjs(new Date()).format('HH:mm:ss'),
+        time: activity?.settings.time || 0,
         timezone: activity?.settings.timezone_id || '',
         day: activity?.settings.day || '',
       },

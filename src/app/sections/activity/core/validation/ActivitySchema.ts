@@ -1,4 +1,16 @@
-import * as Yup from "yup";
+import * as Yup from 'yup'
+
+export const activityDetailsSchema = Yup.object().shape({
+  title: Yup.string().required('Activity title is required'),
+})
+
+export const activityGameSchema = Yup.object().shape({
+  game_id: Yup.string().required('Game is required'),
+  game_mode_id: Yup.string().required('Game Mode is required'),
+  rounds: Yup.string().required('Rounds is required'),
+  is_cross_play: Yup.string().required('Is Cross play enabled?'),
+  platform_ids: Yup.array().min(1, 'Platforms is required').required('Platforms is required'),
+})
 
 export const activityScheduleSchema = Yup.object().shape({
   schedule: Yup.object().shape({
@@ -20,10 +32,6 @@ export const activityScheduleSchema = Yup.object().shape({
       timezone: Yup.string().required('Timezone is required'),
     }),
   }),
-})
-
-export const activityDetailsSchema = Yup.object().shape({
-  title: Yup.string().required('Activity title is required')
 })
 
 export const activitySchema = Yup.object().shape({
@@ -56,8 +64,8 @@ export const activitySchema = Yup.object().shape({
     settings: Yup.object().shape({
       frequency: Yup.string().required('Match Frequency is required'),
       time: Yup.string().required('Time of Day is required'),
-      day: Yup.string().when('schedule.settings.frequency', {
-        is: 2 || '2',
+      day: Yup.mixed().when('schedule.settings.frequency', {
+        is: 2,
         then: Yup.string().required('Day required'),
       }),
       timezone: Yup.string().required('Timezone is required'),
@@ -91,4 +99,6 @@ export const activitySchema = Yup.object().shape({
 
 export const activityCreateWizardSchema = [
   activityDetailsSchema,
+  activityGameSchema,
+  activityScheduleSchema,
 ]

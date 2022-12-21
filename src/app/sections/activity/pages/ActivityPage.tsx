@@ -5,6 +5,7 @@ import {ActivityIndex} from './ActivityIndex'
 import {ActivityCreateOld} from './ActivityCreateOld'
 import {ActivityView} from './ActivityView'
 import {SuspenseView} from '../../../layout/SuspenseView'
+import {ActivityCreate} from './ActivityCreate'
 
 const activityBreadCrumbs: Array<PageLink> = [
   {
@@ -41,7 +42,7 @@ const ActivityPage: FC = () => {
           <>
             <SuspenseView>
               <PageTitle breadcrumbs={activityBreadCrumbs}>{'Add Activity'}</PageTitle>
-              <ActivityCreateOld />
+              <ActivityCreate />
             </SuspenseView>
           </>
         }

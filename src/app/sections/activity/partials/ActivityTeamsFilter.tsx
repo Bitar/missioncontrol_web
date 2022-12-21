@@ -2,10 +2,8 @@ import React, {useState} from 'react'
 import {useQueryRequest} from '../../../modules/table/QueryRequestProvider'
 import {initialQueryState} from '../../../helpers/crud-helper/models'
 import {updateData} from '../../../helpers/form/FormHelper'
-import {KTCardHeader} from '../../../helpers/components/KTCardHeader'
 import {Field, Form, Formik} from 'formik'
-import {KTCardBody} from '../../../helpers/components/KTCardBody'
-import {KTCard} from '../../../helpers/components/KTCard'
+import {KTCard, KTCardBody, KTCardHeader} from '../../../helpers/components'
 
 const initActivityTeamsFilter = {
   name: '',

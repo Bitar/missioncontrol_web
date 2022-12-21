@@ -20,7 +20,7 @@ import {ListViewProvider} from '../../../modules/table/ListViewProvider'
 import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
 import {ActivityRegistration} from '../models/ActivityRegistration'
 import {ActivityTeamsFilter} from '../partials/ActivityTeamsFilter'
-import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
+import {KTCard, KTCardBody} from '../../../helpers/components'
 import {TableHeader} from '../../../modules/table/TableHeader'
 
 const ActivityView: FC = () => {

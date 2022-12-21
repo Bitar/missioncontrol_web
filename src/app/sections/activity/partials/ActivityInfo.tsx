@@ -42,10 +42,10 @@ const ActivityInfo: FC = () => {
       text: 'Chat',
       link: '/activities/' + activity?.id + '/chat',
     },
-    // {
-    //   text: 'Settings',
-    //   link: '/activities/' + activity?.id + '/settings',
-    // },
+    {
+      text: 'Settings',
+      link: '/activities/' + activity?.id + '/settings',
+    },
   ]
 
   return (

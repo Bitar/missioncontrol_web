@@ -67,10 +67,24 @@ const formatDates = (dates: any, tz: string) => {
   return {startDate, endDate}
 }
 
-export const getDateConvertedToLocal = (timestamp: number, tz: string) => {
-  return dayjs(new Date(timestamp * 1000))
-    .utc(false)
-    .tz(tz, true)
+export const getDateConvertedToLocal = (timestamp: number, tz?: string) => {
+  let date = dayjs(new Date(timestamp * 1000)).utc(true)
+
+  if (tz) {
+    date.tz(tz, true)
+  }
+
+  return date
+}
+
+export const getDateConvertedToUTC = (timestamp: number, tz?: string) => {
+  let date = dayjs(new Date(timestamp * 1000)).utc(false)
+
+  if (tz) {
+    date.tz(tz, true)
+  }
+
+  return date
 }
 
 export {formatActivityStatus, formatDates, formatMatchStatus}

@@ -9,7 +9,7 @@ import React, {lazy} from 'react'
 import {Restricted} from '../modules/auth/core/AuthPermission'
 import {AdminCommunityCreate} from '../sections/community-admin/AdminCommunityCreate'
 import {VerifyEmail} from '../modules/auth/components/VerifyEmail'
-import { ActivityCreate } from "../sections/activity/pages/ActivityCreate";
+import {ActivityCreate} from '../sections/activity/pages/ActivityCreate'
 
 const PrivateRoutes = () => {
   const CommunityPage = lazy(() => import('../sections/community/pages/CommunityPage'))

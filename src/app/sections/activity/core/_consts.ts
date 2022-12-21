@@ -118,3 +118,36 @@ export {
   ACTIVITY_ITEM_VALUETYPE,
   selectCustomStyles,
 }
+
+export const ACTIVITY_CREATE_STEPPER_NAV = [
+  {
+    title: 'Basic Details',
+    icon: 'fa-duotone fa-file',
+    has_next: true,
+  },
+  {
+    title: 'Game',
+    icon: 'fa-duotone fa-gamepad',
+    has_next: true,
+  },
+  {
+    title: 'Schedule',
+    icon: 'fa-duotone fa-calendar-range',
+    has_next: true,
+  },
+  {
+    title: 'Team',
+    icon: 'fa-duotone fa-people-group',
+    has_next: true,
+  },
+  {
+    title: 'Entry',
+    icon: 'fa-duotone fa-ticket',
+    has_next: true,
+  },
+  {
+    title: 'Location',
+    icon: 'fa-duotone fa-location-dot',
+    has_next: false,
+  },
+]

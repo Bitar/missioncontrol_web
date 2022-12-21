@@ -1,6 +1,9 @@
 import {MatchesTable} from '../partials/MatchesTable'
 import React from 'react'
-import {getRecentActivityMatches, getUpcomingActivityMatches} from '../core/requests/ActivityMatchRequests'
+import {
+  getRecentActivityMatches,
+  getUpcomingActivityMatches,
+} from '../core/requests/ActivityMatchRequests'
 import {useParams} from 'react-router-dom'
 import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
 import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvider'

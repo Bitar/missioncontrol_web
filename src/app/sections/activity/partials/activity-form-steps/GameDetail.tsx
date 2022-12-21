@@ -1,13 +1,10 @@
 import {useActivityForm} from '../../core/contexts/ActivityFormContext'
-import {useAuth} from '../../../../modules/auth'
 import {useActivity} from '../../core/contexts/ActivityContext'
 import {useParams} from 'react-router-dom'
-import {KTCardHeader} from '../../../../helpers/components/KTCardHeader'
 import React, {useEffect, useRef, useState} from 'react'
-import {KTCard} from '../../../../helpers/components/KTCard'
+import {KTCard, KTCardBody, KTCardHeader} from '../../../../helpers/components'
 import {activityDetailsSchema} from '../../models/Activity'
 import {ErrorMessage, Form, Formik} from 'formik'
-import {KTCardBody} from '../../../../helpers/components/KTCardBody'
 import {FormAction} from '../../../../helpers/form/FormAction'
 import Select from 'react-select'
 import {jsonToFormData, updateData} from '../../../../helpers/form/FormHelper'
@@ -16,14 +13,13 @@ import {Scoring} from '../../components'
 import {getAllGameModes, getAllGamePlatforms, getAllGames} from '../../../games/core/GameRequests'
 import {Game} from '../../../../models/game/Game'
 import {GameMode} from '../../../../models/game/GameMode'
-import {ID} from '../../../../helpers/crud-helper/models'
 import {Platform} from '../../../../models/game/Platform'
 import {updateActivity} from '../../core/requests/ActivityRequests'
 import toast from 'react-hot-toast'
 
 export const GameDetail = () => {
   const params = useParams()
-  const {currentUser} = useAuth()
+  // const { currentUser } = useAuth();
   const {activity, setActivity} = useActivity()
   const {activityForm, setActivityForm} = useActivityForm()
 
@@ -72,6 +68,20 @@ export const GameDetail = () => {
   }
 
   const handleOnChange = async () => {}
+
+  const handlePlatformChange = (e: any) => {
+    let platform_ids = []
+
+    if (Array.isArray(e)) {
+      platform_ids = e.map((e) => e.id)
+    } else {
+      if (e) {
+        platform_ids = [e.id]
+      }
+    }
+
+    updateData({platform_ids: platform_ids}, setActivityForm, activityForm)
+  }
 
   return (
     <KTCard border={true}>
@@ -159,7 +169,7 @@ export const GameDetail = () => {
                           />
                         )}
                         <div className='text-danger mt-2'>
-                          <ErrorMessage name='game_mode_id' />
+                          <ErrorMessage name='rounds' />
                         </div>
                       </div>
                     </div>
@@ -184,23 +194,19 @@ export const GameDetail = () => {
                     <div className='row mb-6'>
                       <label className='col-lg-4 col-form-label fw-bold fs-6'>Platforms</label>
                       <div className='col-lg-8 fv-row'>
-                        {activity?.platforms && (
-                          <Select
-                            name='community_id'
-                            placeholder={'Which Platform(s)'}
-                            ref={selectPlatformsRef}
-                            defaultValue={activity?.platforms}
-                            isMulti={activityForm?.is_cross_play}
-                            options={platforms}
-                            getOptionLabel={(platform) => platform?.name}
-                            getOptionValue={(platform) => platform?.id?.toString() || ''}
-                            onChange={(e) => {
-                              updateData({platforms: e || []}, setActivityForm, activityForm)
-                            }}
-                          />
-                        )}
+                        <Select
+                          name='platform_ids'
+                          placeholder={'Which Platform(s)'}
+                          ref={selectPlatformsRef}
+                          defaultValue={activity?.platforms}
+                          isMulti={activityForm?.is_cross_play}
+                          options={platforms}
+                          getOptionLabel={(platform) => platform?.name}
+                          getOptionValue={(platform) => platform?.id?.toString() || ''}
+                          onChange={(e) => handlePlatformChange(e)}
+                        />
                         <div className='text-danger mt-2'>
-                          <ErrorMessage name='community_id' />
+                          <ErrorMessage name='platform_ids' />
                         </div>
                       </div>
                     </div>
