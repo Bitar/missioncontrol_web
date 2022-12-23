@@ -106,29 +106,6 @@ const ActivityView: FC = () => {
               </>
             }
           />
-          {/*<Route*/}
-          {/*  path='/registrations'*/}
-          {/*  element={*/}
-          {/*    <>*/}
-          {/*      <SuspenseView>*/}
-          {/*        <PageTitle breadcrumbs={activityViewBreadcrumbs}>Registrations</PageTitle>*/}
-          {/*        {activity && (*/}
-          {/*          <QueryRequestProvider>*/}
-          {/*            <QueryResponseProvider*/}
-          {/*              id={QUERIES.ACTIVITIES_LIST}*/}
-          {/*              requestFunction={getActivityRegistrations}*/}
-          {/*              requestId={activity?.id}*/}
-          {/*            >*/}
-          {/*              <ListViewProvider>*/}
-          {/*                <ActivityRegistrations />*/}
-          {/*              </ListViewProvider>*/}
-          {/*            </QueryResponseProvider>*/}
-          {/*          </QueryRequestProvider>*/}
-          {/*        )}*/}
-          {/*      </SuspenseView>*/}
-          {/*    </>*/}
-          {/*  }*/}
-          {/*/>*/}
           <Route
             path='/matches'
             element={
@@ -186,7 +163,9 @@ const ActivityView: FC = () => {
               <>
                 <SuspenseView>
                   <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>
-                  <ActivitySettings />
+                  {activity &&
+                    <ActivitySettings />
+                  }
                 </SuspenseView>
               </>
             }

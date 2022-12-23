@@ -95,16 +95,11 @@ const BillingPlan: FC<Props> = ({plans, setPlan}) => {
 }
 
 const BillingPlanWrapper: FC = () => {
-  const {communityForm, setCommunityForm} = useCommunityForm()
+  const {communityForm, setCommunityForm, plans} = useCommunityForm()
   const [plan, setPlan] = useState<Plan | undefined>()
-  const [plans, setPlans] = useState<Plan[] | undefined>()
   const [planOptions, setPlanOptions] = useState<PlanOption[] | undefined>()
 
   useEffect(() => {
-    getPlans().then((response) => {
-      setPlans(response?.data)
-    })
-
     getBillingPlanOptions().then((response) => {
       setPlanOptions(response?.data)
     })

@@ -95,11 +95,11 @@ const ActivityDetails = () => {
                   activity?.settings?.time,
                   activity?.settings?.timezone?.value
                 ).format('h:mm a')}
-                {/*{" "}*/}
-                {/*- {activity?.settings?.timezone?.name}{" "}*/}
-                {/*<span className="text-muted" style={{ fontSize: "12px" }}>*/}
-                {/*  ({activity?.settings?.timezone?.value})*/}
-                {/*</span>*/}
+                {" "}
+                - {activity?.settings?.timezone?.name}{" "}
+                <span className="text-muted" style={{ fontSize: "12px" }}>
+                  ({activity?.settings?.timezone?.value})
+                </span>
               </span>
             </div>
           </div>

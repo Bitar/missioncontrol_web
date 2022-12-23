@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from 'react'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {updateData} from '../../../helpers/form/FormHelper'
 import clsx from 'clsx'
-import {useFormikContext} from 'formik'
+import { ErrorMessage, useFormikContext } from "formik";
 
 type Props = {
   community: any
@@ -97,6 +97,9 @@ const BannerImage: FC<Props> = ({community, setCommunity}) => {
               <i className='bi bi-x fs-2'></i>
             </span>
           )}
+        </div>
+        <div className='text-danger mt-2'>
+          <ErrorMessage name='banner_image' />
         </div>
       </div>
     </>

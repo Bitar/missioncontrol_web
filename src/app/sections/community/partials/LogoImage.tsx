@@ -99,6 +99,9 @@ const LogoImage: FC<Props> = ({community, setCommunity}) => {
             </span>
           )}
         </div>
+        <div className='text-danger mt-2'>
+          <ErrorMessage name='logo' />
+        </div>
       </div>
     </>
   )

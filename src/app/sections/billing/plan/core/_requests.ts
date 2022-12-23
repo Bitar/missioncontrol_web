@@ -5,8 +5,14 @@ import {Response} from '../../../../../_metronic/helpers'
 const API_URL = process.env.REACT_APP_API_URL
 const GET_PLANS_URL = `${API_URL}/plans`
 
-const getPlans = (): Promise<PlanQueryResponse> => {
-  return axios.get(`${GET_PLANS_URL}`).then((d: AxiosResponse<PlanQueryResponse>) => d.data)
+const getPlans = (query?: String): Promise<PlanQueryResponse> => {
+  let url = `${GET_PLANS_URL}`
+
+  if (query) {
+    url += `?${query}`
+  }
+
+  return axios.get(url).then((d: AxiosResponse<PlanQueryResponse>) => d.data)
 }
 
 const getPlanById = (id: any): Promise<Plan | undefined> => {

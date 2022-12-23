@@ -12,7 +12,7 @@ import {
 import {
   formatMatchStatus,
   getDateConvertedToLocal,
-  getDateConvertedToUTC,
+  getDateConvertedToTimezone,
 } from '../../../../helpers/ActivityHelper'
 import clsx from 'clsx'
 import {Link} from 'react-router-dom'

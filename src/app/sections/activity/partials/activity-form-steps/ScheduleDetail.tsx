@@ -15,7 +15,7 @@ import { DateRange } from "rsuite/esm/DateRangePicker/types";
 import { defaultTime } from "../../models/ActivityForm";
 import { TimeZone } from "../../../../models/misc/TimeZone";
 import { getTimeZones } from "../../../misc/core/_requests";
-import { getDateConvertedToUTC } from "../../../../helpers/ActivityHelper";
+import { getDateConvertedToLocal, getDateConvertedToTimezone } from "../../../../helpers/ActivityHelper";
 
 const { before } = DateRangePicker;
 
@@ -37,29 +37,29 @@ export const ScheduleDetail = () => {
 
   useEffect(() => {
     if (activityForm?.schedule && activity?.settings) {
-      let regStartDate = getDateConvertedToUTC(
+      let regStartDate = getDateConvertedToTimezone(
         activityForm?.schedule?.registration_dates?.start_date,
         activity.settings.timezone.value
       ).toDate();
 
-      let regEndDate = getDateConvertedToUTC(
+      let regEndDate = getDateConvertedToTimezone(
         activityForm?.schedule?.registration_dates?.end_date,
         activity?.settings?.timezone?.value
       ).toDate();
 
-      let matchStartDate = getDateConvertedToUTC(
+      let matchStartDate = getDateConvertedToTimezone(
         activityForm?.schedule?.matchplay_dates?.start_date,
         activity.settings.timezone.value
       ).toDate();
 
-      let matchEndDate = getDateConvertedToUTC(
+      let matchEndDate = getDateConvertedToTimezone(
         activityForm?.schedule?.matchplay_dates?.end_date,
         activity.settings.timezone.value
       ).toDate();
 
       setRegistrationValue([regStartDate, regEndDate]);
       setMatchPlayValue([matchStartDate, matchEndDate]);
-      setTimeValue(new Date(activityForm?.schedule?.settings?.time * 1000));
+      setTimeValue(getDateConvertedToTimezone(activityForm?.schedule?.settings?.time, activity?.settings?.timezone?.value).toDate());
     }
   }, [activity?.registration_dates, activity?.matchplay_dates, activity?.settings]);
 

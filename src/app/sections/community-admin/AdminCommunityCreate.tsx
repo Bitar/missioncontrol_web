@@ -51,7 +51,7 @@ const AdminCommunityCreate = () => {
       setStates(response.data)
     })
 
-    getPlans().then((response) => {
+    getPlans('include=options').then((response) => {
       setPlans(response?.data)
     })
   }, [])
