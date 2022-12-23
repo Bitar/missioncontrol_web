@@ -5,10 +5,10 @@ import {useActivityForm} from '../../core/contexts/ActivityFormContext'
 import {Form, Formik} from 'formik'
 import {TeamDetailForm} from '../activity-create-steps/TeamDetailForm'
 import {FormAction} from '../../../../helpers/form/FormAction'
-import { jsonToFormData } from "../../../../helpers/form/FormHelper";
-import { updateActivity } from "../../core/requests/ActivityRequests";
-import toast from "react-hot-toast";
-import { useActivity } from '../../core/contexts/ActivityContext'
+import {jsonToFormData} from '../../../../helpers/form/FormHelper'
+import {updateActivity} from '../../core/requests/ActivityRequests'
+import toast from 'react-hot-toast'
+import {useActivity} from '../../core/contexts/ActivityContext'
 
 export const TeamDetail = () => {
   const {activity, setActivity} = useActivity()
@@ -17,19 +17,19 @@ export const TeamDetail = () => {
   const handleOnChange = async () => {}
 
   const handleSubmit = async () => {
-    let data = jsonToFormData(activityForm);
-    data.append("_method", "PUT");
+    let data = jsonToFormData(activityForm)
+    data.append('_method', 'PUT')
 
     await updateActivity(activity?.id, data)
       .then((response) => {
-        toast.success("Activity updated Successfully!");
-        setActivity(response);
+        toast.success('Activity updated Successfully!')
+        setActivity(response)
       })
-      .catch(function(e) {
+      .catch(function (e) {
         if (e.response) {
         }
-      });
-  };
+      })
+  }
 
   return (
     <KTCard border={true}>

@@ -163,9 +163,7 @@ const ActivityView: FC = () => {
               <>
                 <SuspenseView>
                   <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>
-                  {activity &&
-                    <ActivitySettings />
-                  }
+                  {activity && <ActivitySettings />}
                 </SuspenseView>
               </>
             }

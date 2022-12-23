@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from 'react'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {updateData} from '../../../helpers/form/FormHelper'
 import clsx from 'clsx'
-import { ErrorMessage, useFormikContext } from "formik";
+import {ErrorMessage, useFormikContext} from 'formik'
 
 type Props = {
   community: any

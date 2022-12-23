@@ -94,10 +94,9 @@ const ActivityDetails = () => {
                 {getDateConvertedToLocal(
                   activity?.settings?.time,
                   activity?.settings?.timezone?.value
-                ).format('h:mm a')}
-                {" "}
-                - {activity?.settings?.timezone?.name}{" "}
-                <span className="text-muted" style={{ fontSize: "12px" }}>
+                ).format('h:mm a')}{' '}
+                - {activity?.settings?.timezone?.name}{' '}
+                <span className='text-muted' style={{fontSize: '12px'}}>
                   ({activity?.settings?.timezone?.value})
                 </span>
               </span>

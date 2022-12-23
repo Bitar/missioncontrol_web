@@ -1,90 +1,97 @@
-import { KTCard, KTCardBody, KTCardHeader } from "../../../../helpers/components";
-import { activityDetailsSchema } from "../../models/Activity";
-import React, { useEffect, useState } from "react";
-import { useActivity } from "../../core/contexts/ActivityContext";
-import { useActivityForm } from "../../core/contexts/ActivityFormContext";
-import { jsonToFormData, updateData } from "../../../../helpers/form/FormHelper";
-import { updateActivity } from "../../core/requests/ActivityRequests";
-import toast from "react-hot-toast";
-import { ErrorMessage, Form, Formik } from "formik";
-import { DatePicker, DateRangePicker } from "rsuite";
-import Select from "react-select";
-import { ACTIVITY_DAY_OF_WEEK, ACTIVITY_MATCH_FREQUENCY } from "../../core/_consts";
-import { FormAction } from "../../../../helpers/form/FormAction";
-import { DateRange } from "rsuite/esm/DateRangePicker/types";
-import { defaultTime } from "../../models/ActivityForm";
-import { TimeZone } from "../../../../models/misc/TimeZone";
-import { getTimeZones } from "../../../misc/core/_requests";
-import { getDateConvertedToLocal, getDateConvertedToTimezone } from "../../../../helpers/ActivityHelper";
+import {KTCard, KTCardBody, KTCardHeader} from '../../../../helpers/components'
+import {activityDetailsSchema} from '../../models/Activity'
+import React, {useEffect, useState} from 'react'
+import {useActivity} from '../../core/contexts/ActivityContext'
+import {useActivityForm} from '../../core/contexts/ActivityFormContext'
+import {jsonToFormData, updateData} from '../../../../helpers/form/FormHelper'
+import {updateActivity} from '../../core/requests/ActivityRequests'
+import toast from 'react-hot-toast'
+import {ErrorMessage, Form, Formik} from 'formik'
+import {DatePicker, DateRangePicker} from 'rsuite'
+import Select from 'react-select'
+import {ACTIVITY_DAY_OF_WEEK, ACTIVITY_MATCH_FREQUENCY} from '../../core/_consts'
+import {FormAction} from '../../../../helpers/form/FormAction'
+import {DateRange} from 'rsuite/esm/DateRangePicker/types'
+import {defaultTime} from '../../models/ActivityForm'
+import {TimeZone} from '../../../../models/misc/TimeZone'
+import {getTimeZones} from '../../../misc/core/_requests'
+import {
+  getDateConvertedToLocal,
+  getDateConvertedToTimezone,
+} from '../../../../helpers/ActivityHelper'
 
-const { before } = DateRangePicker;
+const {before} = DateRangePicker
 
 export const ScheduleDetail = () => {
-  const { activity, setActivity } = useActivity();
-  const { activityForm, setActivityForm } = useActivityForm();
+  const {activity, setActivity} = useActivity()
+  const {activityForm, setActivityForm} = useActivityForm()
 
-  const [registrationValue, setRegistrationValue] = useState<DateRange | null>();
-  const [matchPlayValue, setMatchPlayValue] = useState<DateRange | null>();
-  const [matchPlayDisabledDate, setMatchPlayDisabledDate] = useState<Date>(new Date());
-  const [timeValue, setTimeValue] = useState<Date | null>(defaultTime(new Date()));
-  const [timeZones, setTimeZones] = useState<TimeZone[]>();
+  const [registrationValue, setRegistrationValue] = useState<DateRange | null>()
+  const [matchPlayValue, setMatchPlayValue] = useState<DateRange | null>()
+  const [matchPlayDisabledDate, setMatchPlayDisabledDate] = useState<Date>(new Date())
+  const [timeValue, setTimeValue] = useState<Date | null>(defaultTime(new Date()))
+  const [timeZones, setTimeZones] = useState<TimeZone[]>()
 
   useEffect(() => {
     getTimeZones().then((response) => {
-      setTimeZones(response.data);
-    });
-  }, []);
+      setTimeZones(response.data)
+    })
+  }, [])
 
   useEffect(() => {
     if (activityForm?.schedule && activity?.settings) {
       let regStartDate = getDateConvertedToTimezone(
         activityForm?.schedule?.registration_dates?.start_date,
         activity.settings.timezone.value
-      ).toDate();
+      ).toDate()
 
       let regEndDate = getDateConvertedToTimezone(
         activityForm?.schedule?.registration_dates?.end_date,
         activity?.settings?.timezone?.value
-      ).toDate();
+      ).toDate()
 
       let matchStartDate = getDateConvertedToTimezone(
         activityForm?.schedule?.matchplay_dates?.start_date,
         activity.settings.timezone.value
-      ).toDate();
+      ).toDate()
 
       let matchEndDate = getDateConvertedToTimezone(
         activityForm?.schedule?.matchplay_dates?.end_date,
         activity.settings.timezone.value
-      ).toDate();
+      ).toDate()
 
-      setRegistrationValue([regStartDate, regEndDate]);
-      setMatchPlayValue([matchStartDate, matchEndDate]);
-      setTimeValue(getDateConvertedToTimezone(activityForm?.schedule?.settings?.time, activity?.settings?.timezone?.value).toDate());
+      setRegistrationValue([regStartDate, regEndDate])
+      setMatchPlayValue([matchStartDate, matchEndDate])
+      setTimeValue(
+        getDateConvertedToTimezone(
+          activityForm?.schedule?.settings?.time,
+          activity?.settings?.timezone?.value
+        ).toDate()
+      )
     }
-  }, [activity?.registration_dates, activity?.matchplay_dates, activity?.settings]);
+  }, [activity?.registration_dates, activity?.matchplay_dates, activity?.settings])
 
   const handleSubmit = async () => {
-    let data = jsonToFormData(activityForm);
-    data.append("_method", "PUT");
+    let data = jsonToFormData(activityForm)
+    data.append('_method', 'PUT')
 
     await updateActivity(activity?.id, data)
       .then((response) => {
-        toast.success("Activity updated Successfully!");
-        setActivity(response);
+        toast.success('Activity updated Successfully!')
+        setActivity(response)
       })
-      .catch(function(e) {
+      .catch(function (e) {
         if (e.response) {
         }
-      });
-  };
+      })
+  }
 
-  const handleOnChange = async () => {
-  };
+  const handleOnChange = async () => {}
 
   const handleRegistrationChange = (e: any) => {
     if (e) {
-      let startDate = Math.trunc(new Date(e[0]).getTime() / 1000);
-      let endDate = Math.trunc(new Date(e[1]).getTime() / 1000);
+      let startDate = Math.trunc(new Date(e[0]).getTime() / 1000)
+      let endDate = Math.trunc(new Date(e[1]).getTime() / 1000)
 
       updateData(
         {
@@ -93,33 +100,33 @@ export const ScheduleDetail = () => {
             ...{
               registration_dates: {
                 ...activityForm?.schedule.registration_dates,
-                ...{ start_date: startDate, end_date: endDate }
+                ...{start_date: startDate, end_date: endDate},
               },
               matchplay_dates: {
                 start_date: 0,
-                end_date: 0
-              }
-            }
-          }
+                end_date: 0,
+              },
+            },
+          },
         },
         setActivityForm,
         activityForm
-      );
+      )
 
-      let endDateDate = new Date(e[1]);
-      let disabledEndDate = new Date(endDateDate);
-      disabledEndDate.setDate(endDateDate.getDate() + 1);
+      let endDateDate = new Date(e[1])
+      let disabledEndDate = new Date(endDateDate)
+      disabledEndDate.setDate(endDateDate.getDate() + 1)
 
-      setRegistrationValue(e);
-      setMatchPlayValue(null);
-      setMatchPlayDisabledDate(disabledEndDate);
+      setRegistrationValue(e)
+      setMatchPlayValue(null)
+      setMatchPlayDisabledDate(disabledEndDate)
     }
-  };
+  }
 
   const handleMatchPlayChange = (e: any) => {
     if (e) {
-      let startDate = Math.trunc(new Date(e[0]).getTime() / 1000);
-      let endDate = Math.trunc(new Date(e[1]).getTime() / 1000);
+      let startDate = Math.trunc(new Date(e[0]).getTime() / 1000)
+      let endDate = Math.trunc(new Date(e[1]).getTime() / 1000)
 
       updateData(
         {
@@ -128,22 +135,22 @@ export const ScheduleDetail = () => {
             ...{
               matchplay_dates: {
                 ...activityForm?.schedule.matchplay_dates,
-                ...{ start_date: startDate, end_date: endDate }
-              }
-            }
-          }
+                ...{start_date: startDate, end_date: endDate},
+              },
+            },
+          },
         },
         setActivityForm,
         activityForm
-      );
+      )
 
-      setMatchPlayValue(e);
+      setMatchPlayValue(e)
     }
-  };
+  }
 
   return (
     <KTCard border={true}>
-      <KTCardHeader text={"Schedule"} bg="mc-primary" text_color="white" />
+      <KTCardHeader text={'Schedule'} bg='mc-primary' text_color='white' />
 
       <Formik
         validationSchema={activityDetailsSchema}
@@ -151,61 +158,61 @@ export const ScheduleDetail = () => {
         onSubmit={handleSubmit}
         enableReinitialize
       >
-        {({ isSubmitting }) => (
-          <Form onChange={handleOnChange} className="form" autoComplete="off">
-            <KTCardBody className="py-4">
-              <div className="d-flex flex-column pt-5 w-100">
-                <div className="row mb-6">
-                  <label className="col-lg-4 col-form-label fw-bold fs-6">Registration Dates</label>
-                  <div className="col-lg-8 fv-row">
+        {({isSubmitting}) => (
+          <Form onChange={handleOnChange} className='form' autoComplete='off'>
+            <KTCardBody className='py-4'>
+              <div className='d-flex flex-column pt-5 w-100'>
+                <div className='row mb-6'>
+                  <label className='col-lg-4 col-form-label fw-bold fs-6'>Registration Dates</label>
+                  <div className='col-lg-8 fv-row'>
                     <DateRangePicker
                       cleanable={false}
                       value={registrationValue}
-                      id="registration_dates"
-                      appearance="default"
-                      placeholder="Registration Dates"
-                      className="w-100"
-                      character={" - "}
+                      id='registration_dates'
+                      appearance='default'
+                      placeholder='Registration Dates'
+                      className='w-100'
+                      character={' - '}
                       ranges={[]}
                       onChange={handleRegistrationChange}
                     />
-                    <div className="text-danger mt-2">
-                      <ErrorMessage name="schedule.registration_dates" />
+                    <div className='text-danger mt-2'>
+                      <ErrorMessage name='schedule.registration_dates' />
                     </div>
                   </div>
                 </div>
 
-                <div className="row mb-6">
-                  <label className="col-lg-4 col-form-label fw-bold fs-6">MatchPlay Dates</label>
-                  <div className="col-lg-8 fv-row">
+                <div className='row mb-6'>
+                  <label className='col-lg-4 col-form-label fw-bold fs-6'>MatchPlay Dates</label>
+                  <div className='col-lg-8 fv-row'>
                     <DateRangePicker
                       cleanable={false}
                       value={matchPlayValue}
-                      id="match_play_dates"
-                      appearance="default"
-                      placeholder="MatchPlay Dates"
-                      className="w-100"
-                      character={" - "}
+                      id='match_play_dates'
+                      appearance='default'
+                      placeholder='MatchPlay Dates'
+                      className='w-100'
+                      character={' - '}
                       ranges={[]}
                       onChange={handleMatchPlayChange}
                       disabledDate={before && before(matchPlayDisabledDate)}
                     />
-                    <div className="text-danger mt-2">
-                      <ErrorMessage name="schedule.matchplay_dates" />
+                    <div className='text-danger mt-2'>
+                      <ErrorMessage name='schedule.matchplay_dates' />
                     </div>
                   </div>
                 </div>
 
-                <div className="row mb-6">
-                  <label className="col-lg-4 col-form-label fw-bold fs-6">Time</label>
-                  <div className="col-lg-8 fv-row">
+                <div className='row mb-6'>
+                  <label className='col-lg-4 col-form-label fw-bold fs-6'>Time</label>
+                  <div className='col-lg-8 fv-row'>
                     <DatePicker
                       cleanable={false}
                       value={timeValue}
-                      format="hh:mm aa"
+                      format='hh:mm aa'
                       ranges={[]}
-                      className="w-100"
-                      placeholder="Select Time"
+                      className='w-100'
+                      placeholder='Select Time'
                       showMeridian={true}
                       onChange={(value) => {
                         if (value?.getTime()) {
@@ -216,29 +223,29 @@ export const ScheduleDetail = () => {
                                 ...{
                                   settings: {
                                     ...activityForm?.schedule.settings,
-                                    ...{ time: Math.trunc(value?.getTime() / 1000) }
-                                  }
-                                }
-                              }
+                                    ...{time: Math.trunc(value?.getTime() / 1000)},
+                                  },
+                                },
+                              },
                             },
                             setActivityForm,
                             activityForm
-                          );
-                          setTimeValue(value);
+                          )
+                          setTimeValue(value)
                         }
                       }}
                     />
-                    <div className="text-danger mt-2">
-                      <ErrorMessage name="schedule.settings.time" />
+                    <div className='text-danger mt-2'>
+                      <ErrorMessage name='schedule.settings.time' />
                     </div>
                   </div>
                 </div>
 
-                <div className="row mb-6">
-                  <label className="col-lg-4 col-form-label fw-bold fs-6">Match Frequency</label>
-                  <div className="col-lg-8 fv-row">
+                <div className='row mb-6'>
+                  <label className='col-lg-4 col-form-label fw-bold fs-6'>Match Frequency</label>
+                  <div className='col-lg-8 fv-row'>
                     <Select
-                      placeholder={"Choose a Match frequency"}
+                      placeholder={'Choose a Match frequency'}
                       value={
                         ACTIVITY_MATCH_FREQUENCY.filter(
                           (frequency) =>
@@ -254,35 +261,35 @@ export const ScheduleDetail = () => {
                               ...{
                                 settings: {
                                   ...activityForm?.schedule.settings,
-                                  ...{ frequency: e?.value }
-                                }
-                              }
-                            }
+                                  ...{frequency: e?.value},
+                                },
+                              },
+                            },
                           },
                           setActivityForm,
                           activityForm
-                        );
+                        )
                       }}
                     />
-                    <div className="text-danger mt-2">
-                      <ErrorMessage name="schedule.settings.frequency" />
+                    <div className='text-danger mt-2'>
+                      <ErrorMessage name='schedule.settings.frequency' />
                     </div>
                   </div>
                 </div>
 
                 {activityForm?.schedule?.settings?.frequency === 2 && (
-                  <div className="row mb-6">
-                    <label className="col-lg-4 col-form-label fw-bold fs-6">Day Of Week</label>
-                    <div className="col-lg-8 fv-row">
+                  <div className='row mb-6'>
+                    <label className='col-lg-4 col-form-label fw-bold fs-6'>Day Of Week</label>
+                    <div className='col-lg-8 fv-row'>
                       <Select
-                        placeholder={"Choose Day of Week"}
+                        placeholder={'Choose Day of Week'}
                         value={
                           ACTIVITY_DAY_OF_WEEK.filter(
                             (dayOfWeek) =>
                               dayOfWeek.value ===
                               (Number.isInteger(activityForm?.schedule?.settings?.day)
                                 ? activityForm?.schedule?.settings?.day
-                                : parseInt(activityForm?.schedule?.settings?.day + ""))
+                                : parseInt(activityForm?.schedule?.settings?.day + ''))
                           )[0]
                         }
                         options={ACTIVITY_DAY_OF_WEEK}
@@ -294,30 +301,30 @@ export const ScheduleDetail = () => {
                                 ...{
                                   settings: {
                                     ...activityForm?.schedule.settings,
-                                    ...{ day: e?.value }
-                                  }
-                                }
-                              }
+                                    ...{day: e?.value},
+                                  },
+                                },
+                              },
                             },
                             setActivityForm,
                             activityForm
-                          );
+                          )
                         }}
                       />
-                      <div className="text-danger mt-2">
-                        <ErrorMessage name="schedule.settings.day" />
+                      <div className='text-danger mt-2'>
+                        <ErrorMessage name='schedule.settings.day' />
                       </div>
                     </div>
                   </div>
                 )}
 
-                <div className="row mb-6">
-                  <label className="col-lg-4 col-form-label fw-bold fs-6">Timezones</label>
-                  <div className="col-lg-8 fv-row">
+                <div className='row mb-6'>
+                  <label className='col-lg-4 col-form-label fw-bold fs-6'>Timezones</label>
+                  <div className='col-lg-8 fv-row'>
                     {/*{activity?.game && (*/}
                     <Select
-                      name="timezone_id"
-                      placeholder={"Choose a Timezone"}
+                      name='timezone_id'
+                      placeholder={'Choose a Timezone'}
                       value={
                         timeZones?.filter(
                           (timezone) => timezone.id === activityForm?.schedule?.settings?.timezone
@@ -325,7 +332,7 @@ export const ScheduleDetail = () => {
                       }
                       options={timeZones}
                       getOptionLabel={(timeZone) => timeZone?.name}
-                      getOptionValue={(timeZone) => timeZone?.id?.toString() || ""}
+                      getOptionValue={(timeZone) => timeZone?.id?.toString() || ''}
                       onChange={(e) => {
                         updateData(
                           {
@@ -334,27 +341,27 @@ export const ScheduleDetail = () => {
                               ...{
                                 settings: {
                                   ...activityForm?.schedule.settings,
-                                  ...{ timezone: e?.id }
-                                }
-                              }
-                            }
+                                  ...{timezone: e?.id},
+                                },
+                              },
+                            },
                           },
                           setActivityForm,
                           activityForm
-                        );
+                        )
                       }}
                     />
-                    <div className="text-danger mt-2">
-                      <ErrorMessage name="schedule.settings.timezone" />
+                    <div className='text-danger mt-2'>
+                      <ErrorMessage name='schedule.settings.timezone' />
                     </div>
                   </div>
                 </div>
               </div>
             </KTCardBody>
-            <FormAction text={"Update Activity"} isSubmitting={isSubmitting} />
+            <FormAction text={'Update Activity'} isSubmitting={isSubmitting} />
           </Form>
         )}
       </Formik>
     </KTCard>
-  );
-};
+  )
+}
