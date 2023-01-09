@@ -1,73 +1,82 @@
-import React, {FC, useEffect, useState} from 'react'
-import {Activity} from '../models/Activity'
-import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
-import {PageLink, PageTitle} from '../../../layout/core'
-import {getActivityById, getActivityTeams} from '../core/requests/ActivityRequests'
-import {ActivityInfo} from '../partials/ActivityInfo'
-import {ActivityTeams} from './ActivityTeams'
-import {ActivityOverview} from './ActivityOverview'
-import {ActivityChat} from '../partials/ActivityChat'
-import {Match} from '../models/matches/Match'
-import {MatchPage} from '../../match/MatchPage'
-import {ActivityContext} from '../core/contexts/ActivityContext'
-import {SuspenseView} from '../../../layout/SuspenseView'
-import {ActivitySettings} from './ActivitySettings'
-import {ActivityMatches} from './ActivityMatches'
-import {Team} from '../../../models/squad/Team'
-import {QUERIES} from '../../../helpers/crud-helper/consts'
-import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvider'
-import {ListViewProvider} from '../../../modules/table/ListViewProvider'
-import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
-import {ActivityRegistration} from '../models/ActivityRegistration'
-import {ActivityTeamsFilter} from '../partials/ActivityTeamsFilter'
-import {KTCard, KTCardBody} from '../../../helpers/components'
-import {TableHeader} from '../../../modules/table/TableHeader'
+import React, { FC, useEffect, useState } from "react";
+import { Activity } from "../models/Activity";
+import { Navigate, Outlet, Route, Routes, useNavigate, useParams } from "react-router-dom";
+import { PageLink, PageTitle } from "../../../layout/core";
+import { getActivityById, getActivityTeams } from "../core/requests/ActivityRequests";
+import { ActivityInfo } from "../partials/ActivityInfo";
+import { ActivityTeams } from "./ActivityTeams";
+import { ActivityOverview } from "./ActivityOverview";
+import { ActivityChat } from "../partials/ActivityChat";
+import { Match } from "../models/matches/Match";
+import { MatchPage } from "../../match/MatchPage";
+import { ActivityContext } from "../core/contexts/ActivityContext";
+import { SuspenseView } from "../../../layout/SuspenseView";
+import { ActivitySettings } from "./ActivitySettings";
+import { ActivityMatches } from "./ActivityMatches";
+import { Team } from "../../../models/squad/Team";
+import { QUERIES } from "../../../helpers/crud-helper/consts";
+import { QueryResponseProvider } from "../../../modules/table/QueryResponseProvider";
+import { ListViewProvider } from "../../../modules/table/ListViewProvider";
+import { QueryRequestProvider } from "../../../modules/table/QueryRequestProvider";
+import { ActivityRegistration } from "../models/ActivityRegistration";
+import { ActivityTeamsFilter } from "../partials/ActivityTeamsFilter";
+import { KTCard, KTCardBody } from "../../../helpers/components";
+import { TableHeader } from "../../../modules/table/TableHeader";
+import toast from "react-hot-toast";
 
 const ActivityView: FC = () => {
-  const [activity, setActivity] = useState<Activity | undefined>()
-  const [matches, setMatches] = useState<Match[] | undefined>([])
-  const [match, setMatch] = useState<Match | undefined>()
-  const [registrations, setRegistrations] = useState<ActivityRegistration[] | undefined>()
-  const [teams, setTeams] = useState<Team[] | undefined>()
+  const [activity, setActivity] = useState<Activity | undefined>();
+  const [matches, setMatches] = useState<Match[] | undefined>([]);
+  const [match, setMatch] = useState<Match | undefined>();
+  const [registrations, setRegistrations] = useState<ActivityRegistration[] | undefined>();
+  const [teams, setTeams] = useState<Team[] | undefined>();
+  const navigate = useNavigate();
 
-  const params = useParams()
+  const params = useParams();
 
   const activityViewBreadcrumbs: Array<PageLink> = [
     {
-      title: 'Activities',
-      path: '/activities/overview',
+      title: "Activities",
+      path: "/activities/overview",
       isSeparator: false,
-      isActive: false,
+      isActive: false
     },
     {
-      title: '',
-      path: '',
+      title: "",
+      path: "",
       isSeparator: true,
-      isActive: false,
+      isActive: false
     },
     {
-      title: activity?.title || '',
-      path: '/activities/' + params.id + '/overview',
+      title: activity?.title || "",
+      path: "/activities/" + params.id + "/overview",
       isSeparator: false,
-      isActive: false,
+      isActive: false
     },
     {
-      title: '',
-      path: '',
+      title: "",
+      path: "",
       isSeparator: true,
-      isActive: false,
-    },
-  ]
+      isActive: false
+    }
+  ];
 
   useEffect(() => {
     getActivityById(params.id).then((response) => {
-      setActivity(response)
+      setActivity(response);
 
       getActivityTeams(params.id).then((response) => {
-        setTeams(response.data)
-      })
-    })
-  }, [params.id])
+        setTeams(response.data);
+      });
+    }).catch((error) => {
+      if (error.response) {
+        if (error.response.status === 404) {
+          toast.error("Activity not found!");
+          navigate("/activities");
+        }
+      }
+    });
+  }, [params.id]);
 
   return (
     <ActivityContext.Provider
@@ -81,7 +90,7 @@ const ActivityView: FC = () => {
         registrations,
         setRegistrations,
         teams,
-        setTeams,
+        setTeams
       }}
     >
       <Routes>
@@ -96,7 +105,7 @@ const ActivityView: FC = () => {
           }
         >
           <Route
-            path='/overview'
+            path="/overview"
             element={
               <>
                 <SuspenseView>
@@ -107,7 +116,7 @@ const ActivityView: FC = () => {
             }
           />
           <Route
-            path='/matches'
+            path="/matches"
             element={
               <>
                 <SuspenseView>
@@ -118,7 +127,7 @@ const ActivityView: FC = () => {
             }
           />
           <Route
-            path='/teams'
+            path="/teams"
             element={
               <>
                 <SuspenseView>
@@ -132,7 +141,7 @@ const ActivityView: FC = () => {
                       >
                         <ListViewProvider>
                           <KTCard>
-                            <TableHeader name='Activity' showFilter={true} showAdd={false} />
+                            <TableHeader name="Activity" showFilter={true} showAdd={false} />
                             <KTCardBody>
                               <ActivityTeamsFilter />
                               <ActivityTeams />
@@ -147,7 +156,7 @@ const ActivityView: FC = () => {
             }
           />
           <Route
-            path='/chat'
+            path="/chat"
             element={
               <>
                 <SuspenseView>
@@ -158,7 +167,7 @@ const ActivityView: FC = () => {
             }
           />
           <Route
-            path='/settings'
+            path="/settings"
             element={
               <>
                 <SuspenseView>
@@ -169,7 +178,7 @@ const ActivityView: FC = () => {
             }
           />
           <Route
-            path='/matches/:matchId/*'
+            path="/matches/:matchId/*"
             element={
               <>
                 <SuspenseView>
@@ -179,11 +188,11 @@ const ActivityView: FC = () => {
               </>
             }
           />
-          <Route index element={<Navigate to={'/activities/' + params.id + '/overview'} />} />
+          <Route index element={<Navigate to={"/activities/" + params.id + "/overview"} />} />
         </Route>
       </Routes>
     </ActivityContext.Provider>
-  )
-}
+  );
+};
 
-export {ActivityView}
+export { ActivityView };

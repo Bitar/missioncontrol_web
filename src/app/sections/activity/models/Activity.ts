@@ -135,7 +135,6 @@ export type Activity = {
   team_setting?: ActivityTeamSetting
   rules?: []
   standings?: ActivityStanding[]
-
   additional_data?: {
     teams_count: number
     players_count: number
@@ -181,14 +180,6 @@ export type ActivityFormSchedule = {
   }
 }
 
-export const initialActivityDetails = (activity?: Activity) => {
-  return {
-    title: activity?.title || '',
-    description: activity?.description || '',
-    community_id: activity?.community?.id || '',
-  }
-}
-
 export const initialActivityForm = (activityForm?: ActivityForm) => {
   return {
     type_id: activityForm?.type_id || 1,
@@ -229,50 +220,6 @@ export const initialActivityForm = (activityForm?: ActivityForm) => {
     location: {
       type: activityForm?.location?.type || 1,
       locate: activityForm?.location?.locate || '',
-    },
-  }
-}
-
-export const initialActivityFormByActivity = (activity?: Activity) => {
-  return {
-    type_id: activity?.type?.id || 1,
-    title: activity?.title || '',
-    description: activity?.description || '',
-    community_id: activity?.community?.id || '',
-    game_id: activity?.game?.id || '',
-    game_mode_id: activity?.game_mode?.id || '',
-    rounds: activity?.settings?.rounds || '',
-    is_cross_play: activity?.settings?.is_cross_play || false,
-    // platform_id: activity?.platform_id || '',
-    // platform_ids: activity?.platform_ids || [],
-    schedule: {
-      registration_dates: {
-        start_date: activity?.registration_dates.start_date || 0,
-        end_date: activity?.registration_dates.end_date || 0,
-      },
-      matchplay_dates: {
-        start_date: activity?.matchplay_dates.start_date || 0,
-        end_date: activity?.matchplay_dates.end_date || 0,
-      },
-      settings: {
-        frequency: activity?.settings.frequency || '',
-        time: activity?.settings.time || 0,
-        timezone: activity?.settings.timezone_id || '',
-        day: activity?.settings.day || '',
-      },
-    },
-    team: {
-      min: activity?.team_setting?.min || 0,
-      max: activity?.team_setting?.max || 0,
-      players: activity?.team_setting?.players || 0,
-    },
-    entry_fee: {
-      type: activity?.entry_fee?.type || 1,
-      amount: activity?.entry_fee?.amount || 0,
-    },
-    location: {
-      type: activity?.location?.type || 1,
-      locate: activity?.location?.locate || '',
     },
   }
 }

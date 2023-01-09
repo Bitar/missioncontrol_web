@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
-import {ActivityForm, initialActivityFormByActivity} from '../models/Activity'
+import {ActivityForm} from '../models/Activity'
+import {initialActivityFormByActivity} from '../models/ActivityForm'
 import {KTCard, KTCardBody, KTCardHeader} from '../../../helpers/components'
 import {useActivity} from '../core/contexts/ActivityContext'
 import {getAllGameModes} from '../../games/core/GameRequests'

@@ -1,13 +1,17 @@
 import clsx from 'clsx'
-import {updateData} from '../../../../helpers/form/FormHelper'
-import {Form, Formik} from 'formik'
+import { jsonToFormData, updateData } from "../../../../helpers/form/FormHelper";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from 'react'
 import {useActivityForm} from '../../core/contexts/ActivityFormContext'
 import {KTCard, KTCardBody, KTCardHeader} from '../../../../helpers/components'
 import {activityDetailsSchema} from '../../models/Activity'
 import {FormAction} from '../../../../helpers/form/FormAction'
+import { updateActivity } from "../../core/requests/ActivityRequests";
+import toast from "react-hot-toast";
+import { useActivity } from "../../core/contexts/ActivityContext";
 
 export const LocationDetail = () => {
+  const {activity, setActivity} = useActivity()
   const {activityForm, setActivityForm} = useActivityForm()
 
   const handleLocationChange = (object: any, type: number) => {
@@ -17,7 +21,6 @@ export const LocationDetail = () => {
           ...activityForm?.location,
           ...{
             type: type,
-            locate: '',
           },
         },
       },
@@ -28,7 +31,20 @@ export const LocationDetail = () => {
 
   const handleOnChange = async () => {}
 
-  const handleSubmit = async () => {}
+  const handleSubmit = async () => {
+    let data = jsonToFormData(activityForm)
+    data.append('_method', 'PUT')
+
+    await updateActivity(activity?.id, data)
+      .then((response) => {
+        toast.success('Activity updated Successfully!')
+        setActivity(response)
+      })
+      .catch(function (e) {
+        if (e.response) {
+        }
+      })
+  }
 
   return (
     <KTCard border={true}>
@@ -88,6 +104,39 @@ export const LocationDetail = () => {
                     </div>
                   </div>
                 </div>
+
+                {activityForm?.location?.type === 2 && (
+                  <div className='row mb-6'>
+                    <label className='col-lg-4 col-form-label fw-bold fs-6'>Where?</label>
+                    <div className='col-lg-8 fv-row'>
+                      <Field
+                        type='text'
+                        id='location_input'
+                        value={activityForm?.location?.locate}
+                        placeholder='Where?'
+                        className='form-control mb-3 mb-lg-0'
+                        autoComplete='off'
+                        onChange={(e: any) => {
+                          updateData(
+                            {
+                              location: {
+                                ...activityForm?.location,
+                                ...{
+                                  locate: e.target.value,
+                                },
+                              },
+                            },
+                            setActivityForm,
+                            activityForm
+                          )
+                        }}
+                      />
+                      <div className='text-danger mt-2'>
+                        <ErrorMessage name='location.locate' />
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </KTCardBody>
             <FormAction text={'Update Activity'} isSubmitting={isSubmitting} />

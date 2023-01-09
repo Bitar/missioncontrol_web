@@ -141,7 +141,7 @@ export const initialActivityFormByActivity = (activity?: Activity) => {
     },
     entry_fee: {
       type: activity?.entry_fee?.type || 1,
-      amount: activity?.entry_fee?.amount || 0,
+      amount: (activity?.entry_fee?.amount || 0) / 100 || 0,
     },
     location: {
       type: activity?.location?.type || 1,

@@ -18,7 +18,6 @@ import {updateActivity} from '../../core/requests/ActivityRequests'
 import toast from 'react-hot-toast'
 
 export const GameDetail = () => {
-  const params = useParams()
   // const { currentUser } = useAuth();
   const {activity, setActivity} = useActivity()
   const {activityForm, setActivityForm} = useActivityForm()
@@ -56,7 +55,7 @@ export const GameDetail = () => {
     let data = jsonToFormData(activityForm)
     data.append('_method', 'PUT')
 
-    await updateActivity(params.id, data)
+    await updateActivity(activity?.id, data)
       .then((response) => {
         toast.success('Activity updated Successfully!')
         setActivity(response)

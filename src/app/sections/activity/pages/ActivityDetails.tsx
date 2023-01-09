@@ -153,7 +153,7 @@ const ActivityDetails = () => {
 
           <div className='col-lg-8'>
             <span className='fw-bold fs-6'>
-              {activity?.entry_fee?.type === 1 ? 'Free' : (activity?.entry_fee?.amount || 0) / 100}
+              {activity?.entry_fee?.type === 1 ? 'Free' : '$ ' + (activity?.entry_fee?.amount || 0) / 100}
             </span>
           </div>
         </div>
@@ -164,7 +164,7 @@ const ActivityDetails = () => {
             <span className='fw-bold fs-6'>
               {activity?.location?.type === 1
                 ? 'Online'
-                : 'In-Person ' + (activity?.location?.locate ?? '')}
+                : 'In-Person @ ' + (activity?.location?.locate ?? '')}
             </span>
           </div>
         </div>
