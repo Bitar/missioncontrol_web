@@ -1,9 +1,9 @@
 import {useActivity} from '../../core/contexts/ActivityContext'
 import React, {useEffect, useState} from 'react'
 import {
-  ActivityForm,
   activityScheduleSchema,
 } from '../../models/Activity'
+import { ActivityForm } from '../../models/ActivityForm'
 import {initialActivityFormByActivity} from '../../models/ActivityForm'
 import {TimeZone} from '../../../../models/misc/TimeZone'
 import {getTimeZones} from '../../../misc/core/_requests'

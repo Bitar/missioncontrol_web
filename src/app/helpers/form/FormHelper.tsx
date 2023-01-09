@@ -1,24 +1,22 @@
-import axios from 'axios'
-import toast from 'react-hot-toast'
-import Moment from 'moment'
-import moment from 'moment'
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const updateData = (fieldsToUpdate: Partial<any>, setFunction: any, model: any) => {
-  const updatedData = {...model, ...fieldsToUpdate}
-  setFunction(updatedData)
-}
+  const updatedData = { ...model, ...fieldsToUpdate };
+  setFunction(updatedData);
+};
 
 const submitForm = async (fun: any, model: any, to: any, id?: any) => {
   try {
     if (id) {
-      await fun(id, model)
+      await fun(id, model);
     } else {
-      await fun(model)
+      await fun(model);
     }
 
-    toast.success('Successful')
+    toast.success("Successful");
 
-    to()
+    to();
   } catch (exception) {
     // TODO: Return Error and handle Error Ness.
     if (axios.isAxiosError(exception)) {
@@ -26,49 +24,52 @@ const submitForm = async (fun: any, model: any, to: any, id?: any) => {
         // let validation_errors = exception.response?.data.error.validation
         // console.log(exception.response?.data.error.validation)
 
-        toast.error('Validation Error')
+        toast.error("Validation Error");
       }
     } else {
-      console.log(exception)
+      console.log(exception);
     }
   }
-}
+};
 
 function buildFormData(formData: FormData, data: any, parentKey?: any) {
   if (
     data &&
-    typeof data === 'object' &&
+    typeof data === "object" &&
     !(data instanceof Date) &&
-    !(data instanceof File) &&
-    !(data instanceof Moment)
+    !(data instanceof File)
   ) {
     Object.keys(data).forEach((key) => {
-      buildFormData(formData, data[key], parentKey ? `${parentKey}[${key}]` : key)
-    })
+      buildFormData(formData, data[key], parentKey ? `${parentKey}[${key}]` : key);
+    });
   } else {
     if (
       data !== null &&
-      data !== '' &&
-      parentKey !== 'id' &&
-      parentKey !== 'created_at' &&
-      parentKey !== 'ready_to_submit' &&
-      parentKey !== ''
+      data !== "" &&
+      parentKey !== "id" &&
+      parentKey !== "created_at" &&
+      parentKey !== "ready_to_submit" &&
+      parentKey !== ""
     ) {
-      if (data instanceof Moment) {
-        formData.append(parentKey, moment(data).format('X'))
+      if (typeof data === "boolean") {
+        if (!data) {
+          formData.append(parentKey, "0");
+        } else {
+          formData.append(parentKey, "1");
+        }
       } else {
-        formData.append(parentKey, data)
+        formData.append(parentKey, data);
       }
     }
   }
 }
 
 function jsonToFormData(data: any) {
-  const formData = new FormData()
+  const formData = new FormData();
 
-  buildFormData(formData, data)
+  buildFormData(formData, data);
 
-  return formData
+  return formData;
 }
 
-export {updateData, submitForm, jsonToFormData}
+export { updateData, submitForm, jsonToFormData };

@@ -24,6 +24,9 @@ const formatActivityStatus = (statusId: number) => {
   } else if (statusId === 6) {
     status = 'Invalid Registrations'
     color = 'danger'
+  } else if (statusId === 8) {
+    status = 'Upcoming'
+    color = 'secondary'
   } else {
     status = 'Closed'
     color = 'danger'

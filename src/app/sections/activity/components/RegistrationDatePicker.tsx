@@ -1,5 +1,5 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
-import {ActivityForm} from '../models/Activity'
+import { ActivityForm } from '../models/ActivityForm'
 import dayjs, {Dayjs} from 'dayjs'
 import {LocalizationProvider} from '@mui/x-date-pickers-pro'
 import {AdapterDayjs} from '@mui/x-date-pickers-pro/AdapterDayjs'

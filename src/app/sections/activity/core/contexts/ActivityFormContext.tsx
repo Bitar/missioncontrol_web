@@ -1,4 +1,4 @@
-import {ActivityForm} from '../../models/Activity'
+import { ActivityForm } from '../../models/ActivityForm'
 import {createContext, Dispatch, SetStateAction, useContext} from 'react'
 import {GameMode} from '../../../../models/game/GameMode'
 

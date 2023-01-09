@@ -14,6 +14,7 @@ import {activityDetailsSchema} from '../../models/Activity'
 import {updateActivity} from '../../core/requests/ActivityRequests'
 import toast from 'react-hot-toast'
 import {useParams} from 'react-router-dom'
+import { updateDetails } from "../../core/requests/ActivitySettingsRequests";
 
 const GeneralDetail: FC = () => {
   const {activityForm, setActivityForm} = useActivityForm()
@@ -32,9 +33,8 @@ const GeneralDetail: FC = () => {
 
   const handleSubmit = async () => {
     let data = jsonToFormData(activityForm)
-    data.append('_method', 'PUT')
 
-    await updateActivity(params.id, data)
+    await updateDetails(params.id, data)
       .then((response) => {
         toast.success('Activity updated Successfully!')
         setActivity(response)

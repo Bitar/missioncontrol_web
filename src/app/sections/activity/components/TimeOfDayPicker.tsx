@@ -1,4 +1,4 @@
-import {ActivityForm} from '../models/Activity'
+import { ActivityForm } from '../models/ActivityForm'
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
 import {StaticTimePicker} from '@mui/x-date-pickers/StaticTimePicker'

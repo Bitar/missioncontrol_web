@@ -110,7 +110,7 @@ const ActivityInfo: FC = () => {
                             </span>
                             {getDateConvertedToLocal(
                               activity?.registration_dates?.end_date,
-                              activity?.settings?.timezone?.value
+                              activity?.settings?.timezone?.value,
                             ).format('DD MMM YY')}
                           </span>
                         </div>

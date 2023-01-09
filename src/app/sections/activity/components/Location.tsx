@@ -1,5 +1,5 @@
 import React, {Dispatch, FC, SetStateAction} from 'react'
-import {ActivityForm} from '../models/Activity'
+import { ActivityForm } from '../models/ActivityForm'
 import clsx from 'clsx'
 import {updateData} from '../../../helpers/form/FormHelper'
 
