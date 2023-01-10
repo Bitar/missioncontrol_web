@@ -106,11 +106,11 @@ export const GameDetail = () => {
                         options={games}
                         getOptionLabel={(game) => game?.title}
                         getOptionValue={(game) => game?.id?.toString() || ""}
-                        onChange={(e) => {
-                          console.log(e?.id)
-                          updateData({ game_id: e?.id }, setActivityForm, activityForm);
-                          // e?.id && updateModes(e.id);
-                          // selectGameModeRef.current.clearValue();
+                        onChange={(e:any) => {
+                          if (e?.id) {
+                            selectGameModeRef.current.clearValue();
+                            updateData({ game_id: e.id }, setActivityForm, activityForm);
+                          }
                         }}
                       />
                     )}
