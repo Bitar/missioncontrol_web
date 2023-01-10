@@ -22,3 +22,39 @@ export const updateGame = (id: any, formData: FormData): Promise<Activity | unde
     .then((response: AxiosResponse<Response<Activity>>) => response.data)
     .then((response: Response<Activity>) => response.data);
 };
+
+export const updateSchedule = (id: any, formData: FormData): Promise<Activity | undefined> => {
+  let url = `${ACTIVITIES_SETTINGS_URL}/${id}/settings/schedule`;
+
+  return axios
+    .post(url, formData)
+    .then((response: AxiosResponse<Response<Activity>>) => response.data)
+    .then((response: Response<Activity>) => response.data);
+};
+
+export const updateTeam = (id: any, formData: FormData): Promise<Activity | undefined> => {
+  let url = `${ACTIVITIES_SETTINGS_URL}/${id}/settings/team`;
+
+  return axios
+    .post(url, formData)
+    .then((response: AxiosResponse<Response<Activity>>) => response.data)
+    .then((response: Response<Activity>) => response.data);
+};
+
+export const updateEntry = (id: any, formData: FormData): Promise<Activity | undefined> => {
+  let url = `${ACTIVITIES_SETTINGS_URL}/${id}/settings/entry`;
+
+  return axios
+    .post(url, formData)
+    .then((response: AxiosResponse<Response<Activity>>) => response.data)
+    .then((response: Response<Activity>) => response.data);
+};
+
+export const updateLocation = (id: any, formData: FormData): Promise<Activity | undefined> => {
+  let url = `${ACTIVITIES_SETTINGS_URL}/${id}/settings/location`;
+
+  return axios
+    .post(url, formData)
+    .then((response: AxiosResponse<Response<Activity>>) => response.data)
+    .then((response: Response<Activity>) => response.data);
+};

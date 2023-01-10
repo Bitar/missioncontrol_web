@@ -9,6 +9,7 @@ import {jsonToFormData} from '../../../../helpers/form/FormHelper'
 import {updateActivity} from '../../core/requests/ActivityRequests'
 import toast from 'react-hot-toast'
 import {useActivity} from '../../core/contexts/ActivityContext'
+import { updateTeam } from "../../core/requests/ActivitySettingsRequests";
 
 export const TeamDetail = () => {
   const {activity, setActivity} = useActivity()
@@ -18,9 +19,8 @@ export const TeamDetail = () => {
 
   const handleSubmit = async () => {
     let data = jsonToFormData(activityForm)
-    data.append('_method', 'PUT')
 
-    await updateActivity(activity?.id, data)
+    await updateTeam(activity?.id, data)
       .then((response) => {
         toast.success('Activity updated Successfully!')
         setActivity(response)

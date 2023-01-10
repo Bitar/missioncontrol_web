@@ -19,6 +19,7 @@ import {
   getDateConvertedToLocal,
   getDateConvertedToTimezone,
 } from '../../../../helpers/ActivityHelper'
+import { updateSchedule } from "../../core/requests/ActivitySettingsRequests";
 
 const {before} = DateRangePicker
 
@@ -73,9 +74,8 @@ export const ScheduleDetail = () => {
 
   const handleSubmit = async () => {
     let data = jsonToFormData(activityForm)
-    data.append('_method', 'PUT')
 
-    await updateActivity(activity?.id, data)
+    await updateSchedule(activity?.id, data)
       .then((response) => {
         toast.success('Activity updated Successfully!')
         setActivity(response)

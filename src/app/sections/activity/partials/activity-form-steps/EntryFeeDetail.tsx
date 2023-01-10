@@ -7,9 +7,9 @@ import { useActivityForm } from "../../core/contexts/ActivityFormContext";
 import { KTCard, KTCardBody, KTCardHeader } from "../../../../helpers/components";
 import { activityDetailsSchema } from "../../models/Activity";
 import { FormAction } from "../../../../helpers/form/FormAction";
-import { updateActivity } from "../../core/requests/ActivityRequests";
 import toast from "react-hot-toast";
 import { useActivity } from "../../core/contexts/ActivityContext";
+import { updateEntry } from "../../core/requests/ActivitySettingsRequests";
 
 export const EntryFeeDetail = () => {
   const { activity, setActivity } = useActivity();
@@ -35,9 +35,8 @@ export const EntryFeeDetail = () => {
 
   const handleSubmit = async () => {
     let data = jsonToFormData(activityForm);
-    data.append("_method", "PUT");
 
-    await updateActivity(activity?.id, data)
+    await updateEntry(activity?.id, data)
       .then((response) => {
         toast.success("Activity updated Successfully!");
         setActivity(response);
