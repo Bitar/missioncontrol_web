@@ -203,6 +203,7 @@ export const GameDetail = () => {
                           getOptionLabel={(platform) => platform?.name}
                           getOptionValue={(platform) => platform?.id?.toString() || ""}
                           onChange={(e) => handlePlatformChange(e)}
+                          styles={{ menu: base => ({ ...base, zIndex: 2 }) }}
                         />
                         <div className="text-danger mt-2">
                           <ErrorMessage name="platform_ids" />
