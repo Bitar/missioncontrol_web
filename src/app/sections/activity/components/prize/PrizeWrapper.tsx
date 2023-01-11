@@ -1,5 +1,5 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
-import { ActivityForm } from '../../models/ActivityForm'
+import {ActivityForm} from '../../models/ActivityForm'
 import FormControl from '@mui/material/FormControl'
 import {InputLabel, MenuItem, Select} from '@mui/material'
 import Box from '@mui/material/Box'

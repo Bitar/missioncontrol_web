@@ -1,4 +1,4 @@
-import {KTCard, KTCardBody} from '../../../_metronic/helpers'
+import {KTCard, KTCardBody} from '../../helpers/components'
 import {Form, Formik} from 'formik'
 import {Community, communitySchema, formOnChange, initialCommunity} from './models/Community'
 import {createCommunity} from './core/CommunityRequests'

@@ -73,6 +73,7 @@ const AdminCommunityCreate = () => {
   }
 
   const submitStep = (values: CommunityFormType, actions: FormikValues) => {
+    console.log(stepper.current?.currentStepIndex)
     if (!stepper.current) {
       return
     }
@@ -95,6 +96,8 @@ const AdminCommunityCreate = () => {
           setAlertMessage('Please choose a Payment Method')
           setHasErrors(true)
           ScrollTopComponent.goTop()
+        } else {
+          nextStep(stepper)
         }
       } else {
         setAlertMessage('')

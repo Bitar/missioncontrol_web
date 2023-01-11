@@ -31,6 +31,8 @@ export const TeamDetailForm = () => {
   useEffect(() => {
     let updateObj: {players?: number; min?: number; max?: number} = {
       players: gameMode?.min_players,
+      min: activityForm?.team?.min || 2,
+      max: activityForm?.team?.max || 2,
     }
 
     setPlayers(gameMode?.min_players || 0)

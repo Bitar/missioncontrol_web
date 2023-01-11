@@ -30,6 +30,7 @@ const BannerImage: FC<Props> = ({community, setCommunity}) => {
       setImage(`none`)
       setFieldValue('banner_image', '')
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [community])
 
   const handleOnChange = (event: any) => {

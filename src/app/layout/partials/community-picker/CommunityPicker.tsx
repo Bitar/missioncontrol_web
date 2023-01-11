@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import clsx from 'clsx'
 import {getAdminCommunities, setAdminCommunities} from './_requests'
 import {Community} from '../../../sections/community/models/Community'
@@ -7,21 +7,17 @@ import {useAuth} from '../../../modules/auth'
 
 let communityObj: any[] | undefined = []
 
-const CommunityPicker: FC<React.PropsWithChildren<unknown>> = () => {
+const CommunityPicker = () => {
   const [communityAdmins, setCommunityAdmins] = useState<Community[] | undefined>()
   const {communityAdmin, setCommunityAdmin} = useAuth()
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (communityObj && communityObj?.length === 0) {
-      getAdminCommunities().then((response) => {
-        communityObj = response?.data
-        setCommunityAdmins(communityObj)
-      })
-    } else {
+    getAdminCommunities().then((response) => {
+      communityObj = response?.data
       setCommunityAdmins(communityObj)
-    }
+    })
   }, [communityAdmin])
 
   const setCommunity = (community: Community) => {

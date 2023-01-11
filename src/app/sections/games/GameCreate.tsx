@@ -18,6 +18,7 @@ const GameCreate = () => {
         setGames(response.data)
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearch])
 
   const sendRequest = (igdb_id: any) => {

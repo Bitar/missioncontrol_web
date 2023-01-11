@@ -1,13 +1,11 @@
 import {useActivity} from '../../core/contexts/ActivityContext'
 import React, {useEffect, useState} from 'react'
-import {
-  activityScheduleSchema,
-} from '../../models/Activity'
-import { ActivityForm } from '../../models/ActivityForm'
+import {activityScheduleSchema} from '../../models/Activity'
+import {ActivityForm} from '../../models/ActivityForm'
 import {initialActivityFormByActivity} from '../../models/ActivityForm'
 import {TimeZone} from '../../../../models/misc/TimeZone'
 import {getTimeZones} from '../../../misc/core/_requests'
-import {KTCard, KTCardBody} from "../../../../helpers/components"
+import {KTCard, KTCardBody} from '../../../../helpers/components'
 import {Form, Formik} from 'formik'
 import {MatchPlayDatePicker, RegistrationDatePicker} from '../../components'
 import Box from '@mui/material/Box'

@@ -1,7 +1,7 @@
 import React, {Dispatch, FC, SetStateAction} from 'react'
 import clsx from 'clsx'
 import {updateData} from '../../../helpers/form/FormHelper'
-import { ActivityForm } from '../models/ActivityForm'
+import {ActivityForm} from '../models/ActivityForm'
 
 type Props = {
   activity: ActivityForm

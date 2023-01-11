@@ -11,10 +11,9 @@ import {useActivity} from '../../core/contexts/ActivityContext'
 import {getAllCommunities} from '../../../community/core/CommunityRequests'
 import {FormAction} from '../../../../helpers/form/FormAction'
 import {activityDetailsSchema} from '../../models/Activity'
-import {updateActivity} from '../../core/requests/ActivityRequests'
 import toast from 'react-hot-toast'
 import {useParams} from 'react-router-dom'
-import { updateDetails } from "../../core/requests/ActivitySettingsRequests";
+import {updateDetails} from '../../core/requests/ActivitySettingsRequests'
 
 const GeneralDetail: FC = () => {
   const {activityForm, setActivityForm} = useActivityForm()

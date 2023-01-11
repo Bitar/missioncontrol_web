@@ -1,14 +1,14 @@
 import clsx from 'clsx'
-import { jsonToFormData, updateData } from "../../../../helpers/form/FormHelper";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import {jsonToFormData, updateData} from '../../../../helpers/form/FormHelper'
+import {ErrorMessage, Field, Form, Formik} from 'formik'
 import React from 'react'
 import {useActivityForm} from '../../core/contexts/ActivityFormContext'
 import {KTCard, KTCardBody, KTCardHeader} from '../../../../helpers/components'
 import {activityDetailsSchema} from '../../models/Activity'
 import {FormAction} from '../../../../helpers/form/FormAction'
-import { updateActivity } from "../../core/requests/ActivityRequests";
-import toast from "react-hot-toast";
-import { useActivity } from "../../core/contexts/ActivityContext";
+import {updateActivity} from '../../core/requests/ActivityRequests'
+import toast from 'react-hot-toast'
+import {useActivity} from '../../core/contexts/ActivityContext'
 
 export const LocationDetail = () => {
   const {activity, setActivity} = useActivity()

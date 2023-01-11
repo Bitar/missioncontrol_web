@@ -1,12 +1,10 @@
 import {Column} from 'react-table'
-import {User} from '../../../../identity/user/models/User'
 import {CustomHeader} from '../../../../../modules/table/columns/CustomHeader'
 import {TextImageCell} from '../../../../../modules/table/columns/TextImageCell'
 import {ActionsCell} from '../../../../../modules/table/columns/ActionsCell'
 import {QUERIES} from '../../../../../helpers/crud-helper/consts'
 import React from 'react'
 import {useCommunity} from '../../../CommunityContext'
-import {BadgeCell} from '../../../../../modules/table/columns/BadgeCell'
 import {CommunityPermission} from '../../../models/CommunityPermission'
 
 const PermissionColumns: ReadonlyArray<Column<CommunityPermission>> = [

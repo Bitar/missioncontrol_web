@@ -28,7 +28,7 @@ export const ReviewDetails: FC = () => {
               </div>
 
               <div className='row mb-5'>
-                <label className='col-lg-4 fw-bold text-muted'>Game</label>
+                <label className='col-lg-4 fw-bold text-muted'>Name</label>
 
                 <div className='col-lg-8'>
                   <span className='fw-bolder fs-6 text-dark'>{communityForm?.name}</span>

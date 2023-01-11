@@ -4,7 +4,6 @@ import React, {useEffect, useState} from 'react'
 import {useActivity} from '../../core/contexts/ActivityContext'
 import {useActivityForm} from '../../core/contexts/ActivityFormContext'
 import {jsonToFormData, updateData} from '../../../../helpers/form/FormHelper'
-import {updateActivity} from '../../core/requests/ActivityRequests'
 import toast from 'react-hot-toast'
 import {ErrorMessage, Form, Formik} from 'formik'
 import {DatePicker, DateRangePicker} from 'rsuite'
@@ -15,11 +14,8 @@ import {DateRange} from 'rsuite/esm/DateRangePicker/types'
 import {defaultTime} from '../../models/ActivityForm'
 import {TimeZone} from '../../../../models/misc/TimeZone'
 import {getTimeZones} from '../../../misc/core/_requests'
-import {
-  getDateConvertedToLocal,
-  getDateConvertedToTimezone,
-} from '../../../../helpers/ActivityHelper'
-import { updateSchedule } from "../../core/requests/ActivitySettingsRequests";
+import {getDateConvertedToTimezone} from '../../../../helpers/ActivityHelper'
+import {updateSchedule} from '../../core/requests/ActivitySettingsRequests'
 
 const {before} = DateRangePicker
 
@@ -70,6 +66,7 @@ export const ScheduleDetail = () => {
         ).toDate()
       )
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activity?.registration_dates, activity?.matchplay_dates, activity?.settings])
 
   const handleSubmit = async () => {

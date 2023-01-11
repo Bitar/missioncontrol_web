@@ -8,7 +8,8 @@ import React, {useEffect, useState} from 'react'
 import {DateRange} from 'rsuite/esm/DateRangePicker/types'
 import {TimeZone} from '../../../../models/misc/TimeZone'
 import {getTimeZones} from '../../../misc/core/_requests'
-import {addOneDay, defaultTime} from '../../models/ActivityForm'
+import {addDays, defaultTime} from '../../models/ActivityForm'
+import toast from 'react-hot-toast'
 
 const {before} = DateRangePicker
 
@@ -17,11 +18,11 @@ export const ScheduleDetailForm = () => {
 
   const [registrationValue, setRegistrationValue] = useState<DateRange | null>([
     new Date(),
-    new Date(),
+    addDays(new Date(), 1),
   ])
   const [matchPlayValue, setMatchPlayValue] = useState<DateRange | null>([
-    addOneDay(new Date()),
-    addOneDay(new Date()),
+    addDays(new Date(), 2),
+    addDays(new Date(), 2),
   ])
   const [matchPlayDisabledDate, setMatchPlayDisabledDate] = useState<Date>(new Date())
   const [timeValue, setTimeValue] = useState<Date | null>(defaultTime(new Date()))
@@ -38,36 +39,42 @@ export const ScheduleDetailForm = () => {
       let startDate = Math.trunc(new Date(e[0]).getTime() / 1000)
       let endDate = Math.trunc(new Date(e[1]).getTime() / 1000)
 
-      console.log(startDate)
-      console.log(endDate)
+      const today = new Date()
+      // const yesterday = new Date().setDate(today.getDate() - 1);
+      // console.log(today.setHours(0, 0, 0));
+      // console.log(new Date(yesterday).setHours(0, 0, 0));
 
-      updateData(
-        {
-          schedule: {
-            ...activityForm?.schedule,
-            ...{
-              registration_dates: {
-                ...activityForm?.schedule.registration_dates,
-                ...{start_date: startDate, end_date: endDate},
-              },
-              matchplay_dates: {
-                start_date: 0,
-                end_date: 0,
+      if (new Date(e[1]) < today) {
+        toast.error('Registration end date needs to be in the future.')
+      } else {
+        updateData(
+          {
+            schedule: {
+              ...activityForm?.schedule,
+              ...{
+                registration_dates: {
+                  ...activityForm?.schedule.registration_dates,
+                  ...{start_date: startDate, end_date: endDate},
+                },
+                matchplay_dates: {
+                  start_date: 0,
+                  end_date: 0,
+                },
               },
             },
           },
-        },
-        setActivityForm,
-        activityForm
-      )
+          setActivityForm,
+          activityForm
+        )
 
-      let endDateDate = new Date(e[1])
-      let disabledEndDate = new Date(endDateDate)
-      disabledEndDate.setDate(endDateDate.getDate() + 1)
+        let endDateDate = new Date(e[1])
+        let disabledEndDate = new Date(endDateDate)
+        disabledEndDate.setDate(endDateDate.getDate() + 1)
 
-      setRegistrationValue(e)
-      setMatchPlayValue(null)
-      setMatchPlayDisabledDate(disabledEndDate)
+        setRegistrationValue(e)
+        setMatchPlayValue(null)
+        setMatchPlayDisabledDate(disabledEndDate)
+      }
     }
   }
 

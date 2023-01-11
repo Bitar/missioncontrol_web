@@ -1,90 +1,90 @@
-import React, {FC, useEffect, useRef, useState} from 'react'
-import {PageLink, PageTitle} from '../../../layout/core'
-import {getCommunityById} from '../core/CommunityRequests'
-import {Community} from '../models/Community'
-import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
-import {CommunityUsers} from './CommunityUsers'
-import {CommunityInfo} from '../CommunityInfo'
-import {CommunitySettings} from './CommunitySettings'
-import {ID} from '../../../../_metronic/helpers'
-import {CommunityContext} from '../CommunityContext'
-import {User} from '../../identity/user/models/User'
-import {CommunityAdminSettings} from './CommunityAdminSettings'
+import React, { FC, useEffect, useRef, useState } from "react";
+import { PageLink, PageTitle } from "../../../layout/core";
+import { getCommunityById } from "../core/CommunityRequests";
+import { Community } from "../models/Community";
+import { Navigate, Outlet, Route, Routes, useParams } from "react-router-dom";
+import { CommunityUsers } from "./CommunityUsers";
+import { CommunityInfo } from "../CommunityInfo";
+import { CommunitySettings } from "./CommunitySettings";
+import { ID } from "../../../../_metronic/helpers";
+import { CommunityContext } from "../CommunityContext";
+import { User } from "../../identity/user/models/User";
 
 type Props = {
   communityId?: ID
-  links?: {text: string; link: string}[]
+  links?: { text: string; link: string }[]
 }
 
-const CommunityView: FC<Props> = ({communityId}) => {
-  const [community, setCommunity] = useState<Community | undefined>()
-  const [members, setMembers] = useState<User[] | undefined>([])
-  const params = useParams()
-  const indexLink = useRef('')
-  const link = useRef('')
+const CommunityView: FC<Props> = ({ communityId }) => {
+  const [community, setCommunity] = useState<Community | undefined>();
+  const [members, setMembers] = useState<User[] | undefined>([]);
+  const params = useParams();
+  const indexLink = useRef("");
+  const link = useRef("");
   const links = [
     {
-      text: 'Overview',
-      link: link.current + '/overview',
+      text: "Overview",
+      link: link.current + "/overview"
     },
     {
-      text: 'Members',
-      link: link.current + '/members',
+      text: "Members",
+      link: link.current + "/members"
     },
     {
-      text: 'Settings',
-      link: link.current + '/settings',
-    },
-  ]
+      text: "Settings",
+      link: link.current + "/settings"
+    }
+  ];
 
   const communityViewBreadCrumbs: Array<PageLink> = [
     {
-      title: 'Communities',
-      path: '/communities/overview',
+      title: "Communities",
+      path: "/communities/overview",
       isSeparator: false,
-      isActive: false,
+      isActive: false
     },
     {
-      title: '',
-      path: '',
+      title: "",
+      path: "",
       isSeparator: true,
-      isActive: false,
+      isActive: false
     },
     {
-      title: community?.name || '',
-      path: '/communities/' + params.communityId + '/overview',
+      title: community?.name || "",
+      path: "/communities/" + params.communityId + "/overview",
       isSeparator: false,
-      isActive: false,
+      isActive: false
     },
     {
-      title: '',
-      path: '',
+      title: "",
+      path: "",
       isSeparator: true,
-      isActive: false,
-    },
-  ]
+      isActive: false
+    }
+  ];
 
   useEffect(() => {
-    updateCommunity()
-  }, [communityId, params.communityId])
+    updateCommunity();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [communityId, params.communityId]);
 
   const updateCommunity = () => {
     if (params.communityId) {
       getCommunityById(params.communityId).then((response) => {
-        setCommunity(response)
-      })
+        setCommunity(response);
+      });
 
-      link.current = '/communities/' + params.communityId
-      indexLink.current = '/communities/' + params.communityId + '/overview'
+      link.current = "/communities/" + params.communityId;
+      indexLink.current = "/communities/" + params.communityId + "/overview";
     } else {
       getCommunityById(communityId).then((response) => {
-        setCommunity(response)
-      })
+        setCommunity(response);
+      });
 
-      link.current = '/dashboard'
-      indexLink.current = '/dashboard/overview'
+      link.current = "/dashboard";
+      indexLink.current = "/dashboard/overview";
     }
-  }
+  };
 
   return (
     <CommunityContext.Provider
@@ -93,7 +93,7 @@ const CommunityView: FC<Props> = ({communityId}) => {
         setCommunity,
         updateCommunity,
         members,
-        setMembers,
+        setMembers
       }}
     >
       <Routes>
@@ -108,7 +108,7 @@ const CommunityView: FC<Props> = ({communityId}) => {
           }
         >
           <Route
-            path='overview'
+            path="overview"
             element={
               <>
                 <PageTitle breadcrumbs={communityViewBreadCrumbs}>Overview</PageTitle>
@@ -117,7 +117,7 @@ const CommunityView: FC<Props> = ({communityId}) => {
             }
           />
           <Route
-            path='members'
+            path="members"
             element={
               <>
                 <PageTitle breadcrumbs={communityViewBreadCrumbs}>Members</PageTitle>
@@ -126,7 +126,7 @@ const CommunityView: FC<Props> = ({communityId}) => {
             }
           />
           <Route
-            path='settings'
+            path="settings"
             element={
               <>
                 <PageTitle breadcrumbs={communityViewBreadCrumbs}>Settings</PageTitle>
@@ -143,7 +143,7 @@ const CommunityView: FC<Props> = ({communityId}) => {
         </Route>
       </Routes>
     </CommunityContext.Provider>
-  )
-}
+  );
+};
 
-export {CommunityView}
+export { CommunityView };

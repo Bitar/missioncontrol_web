@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { ActivityForm } from '../models/ActivityForm'
+import {ActivityForm} from '../models/ActivityForm'
 import {initialActivityFormByActivity} from '../models/ActivityForm'
 import {KTCard, KTCardBody, KTCardHeader} from '../../../helpers/components'
 import {useActivity} from '../core/contexts/ActivityContext'

@@ -1,6 +1,6 @@
 import {GameMode} from '../../../models/game/GameMode'
 import {GameSettings} from '../../../models/game/GameSettings'
-import {initScoringSetting, ScoringSettings} from '../../../models/game/scoring/ScoringSettings'
+import {initScoringSetting} from '../../../models/game/scoring/ScoringSettings'
 
 export type GameModeFormType = {
   name: string

@@ -5,7 +5,7 @@ import { ActionsCell } from "../../../../modules/table/columns/ActionsCell";
 import { QUERIES, toAbsoluteUrl } from "../../../../../_metronic/helpers";
 import { Activity } from "../../models/Activity";
 import { BadgeCell } from "../../../../modules/table/columns/BadgeCell";
-import { formatActivityStatus, formatDates, getDateConvertedToLocal } from "../../../../helpers/ActivityHelper";
+import { formatActivityStatus, getDateConvertedToLocal } from "../../../../helpers/ActivityHelper";
 import dayjs from "dayjs";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -75,7 +75,7 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
               </span>
               {getDateConvertedToLocal(
                 props.data[props.row.index]?.registration_dates?.end_date,
-                props.data[props.row.index]?.settings?.timezone?.value,
+                props.data[props.row.index]?.settings?.timezone?.value
               ).format("DD MMM YY")}
             </span>
           </div>
@@ -96,7 +96,7 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
               {getDateConvertedToLocal(
                 props.data[props.row.index]?.matchplay_dates?.start_date,
                 props.data[props.row.index]?.settings?.timezone?.value
-              ).format('DD MMM YY')}
+              ).format("DD MMM YY")}
             </span>
             <span className="my-1">
               <i className="fa fa-arrow-circle-down text-mc-secondary"></i>
@@ -105,7 +105,7 @@ const ActivityColumns: ReadonlyArray<Column<Activity>> = [
               {getDateConvertedToLocal(
                 props.data[props.row.index]?.matchplay_dates?.end_date,
                 props.data[props.row.index]?.settings?.timezone?.value
-              ).format('DD MMM YY')}
+              ).format("DD MMM YY")}
             </span>
           </div>
         </div>
