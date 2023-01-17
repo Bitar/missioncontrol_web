@@ -1,3 +1,4 @@
+import React from "react";
 import { Column } from "react-table";
 import { TextCell } from "../../../../modules/table/columns/TextCell";
 import { CustomHeader } from "../../../../modules/table/columns/CustomHeader";
@@ -6,9 +7,11 @@ import { QUERIES, toAbsoluteUrl } from "../../../../../_metronic/helpers";
 import { Activity } from "../../models/Activity";
 import { BadgeCell } from "../../../../modules/table/columns/BadgeCell";
 import { formatActivityStatus, getDateConvertedToLocal } from "../../../../helpers/ActivityHelper";
-import dayjs from "dayjs";
-import React from "react";
 import { Link } from "react-router-dom";
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+
+dayjs.extend(localizedFormat);
 
 const ActivityColumns: ReadonlyArray<Column<Activity>> = [
   {

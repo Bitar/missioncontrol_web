@@ -23,7 +23,6 @@ export function VerifyEmail() {
           navigate('/')
         })
         .catch(() => {
-          console.log('errors');
           setHasErrors(true)
         })
     }
