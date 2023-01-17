@@ -57,29 +57,6 @@ const Marketing = () => {
         ))}
       </div>
 
-      <div className='row g-6 g-xl-9 mb-6 mb-xl-9'>
-        {support.map((supportData, index) => (
-          <div className='col-12 col-sm-12 col-xl' key={index}>
-            <div className='card h-100'>
-              <div className='card-body d-flex justify-content-center text-center flex-column p-8'>
-                <a
-                  href={supportData.link}
-                  className='text-gray-800 text-hover-primary d-flex flex-column'
-                  rel='noreferrer'
-                  target='_blank'
-                >
-                  <div className='symbol symbol-75px mb-6'>
-                    <img src={toAbsoluteUrl(supportData.icon)} alt='' />
-                  </div>
-                  <div className='fs-5 fw-bolder mb-2'>{supportData.title}</div>
-                </a>
-                <div className='fs-7 fw-bold text-gray-400 h-100'>{supportData.description}</div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-
       <div className='d-flex flex-wrap flex-stack mb-6'>
         <h3 className='fw-bolder my-2'>Contact Support</h3>
       </div>

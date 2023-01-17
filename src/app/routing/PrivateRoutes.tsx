@@ -23,7 +23,6 @@ const PrivateRoutes = () => {
     <Routes>
       <Route element={<MasterLayout />}>
         <Route path='auth/*' element={<Navigate to='/dashboard' />} />
-        <Route path='email-verify' element={<VerifyEmail />} />
 
         {/* Pages */}
         <Route path='dashboard/*' element={<DashboardWrapper />} />

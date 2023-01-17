@@ -4,6 +4,7 @@ import {PrivateRoutes} from './PrivateRoutes'
 import {ErrorsPage} from '../modules/errors/ErrorsPage'
 import {AuthPage, Logout, useAuth} from '../modules/auth'
 import {App} from '../App'
+import { VerifyEmail } from "../modules/auth/components/VerifyEmail";
 
 const {PUBLIC_URL} = process.env
 
@@ -22,6 +23,7 @@ const AppRoutes: FC<React.PropsWithChildren<unknown>> = () => {
             </>
           ) : (
             <>
+              <Route path='email-verify' element={<VerifyEmail />} />
               <Route path='auth/*' element={<AuthPage />} />
               <Route path='*' element={<Navigate to='/auth' />} />
             </>

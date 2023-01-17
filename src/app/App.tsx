@@ -7,6 +7,7 @@ import {AuthInit, useAuth} from './modules/auth'
 // import * as PusherPushNotifications from '@pusher/push-notifications-web'
 import {LicenseInfo} from '@mui/x-license-pro'
 import {PermissionProvider} from './modules/auth/core/AuthPermission'
+import { MCToaster } from "./helpers/ToastHelper";
 
 LicenseInfo.setLicenseKey(
   'e5379e980da589db25ae8ddfcb672c0aTz00OTgyMCxFPTE2OTMxNzYzMDAwNzMsUz1wcm8sTE09c3Vic2NyaXB0aW9uLEtWPTI='
@@ -30,6 +31,7 @@ const App = () => {
         <LayoutProvider>
           <AuthInit>
             <PermissionProvider roles={currentUser?.roles}>
+              <MCToaster />
               <Outlet />
               <MasterInit />
             </PermissionProvider>

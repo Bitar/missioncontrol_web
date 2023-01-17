@@ -22,7 +22,7 @@ const MasterLayout = () => {
       <ThemeModeProvider>
         <div className='d-flex flex-column flex-root app-root' id='kt_app_root'>
           <div className='app-page flex-column flex-column-fluid' id='kt_app_page'>
-            <MCToaster />
+            {/*<MCToaster />*/}
             <HeaderWrapper />
             <div className='app-wrapper flex-column flex-row-fluid' id='kt_app_wrapper'>
               <Sidebar />
