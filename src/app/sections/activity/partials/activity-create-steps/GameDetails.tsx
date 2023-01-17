@@ -16,6 +16,7 @@ export const GameDetail = () => {
 
   const selectGameModeRef = useRef<any>();
   const selectPlatformsRef = useRef<any>();
+  const selectRoundsRef = useRef<any>();
 
   useEffect(() => {
     getAllGames().then((response) => {
@@ -66,11 +67,25 @@ export const GameDetail = () => {
             getOptionLabel={(game) => game?.title}
             getOptionValue={(game) => game?.id?.toString() || ""}
             onChange={(e) => {
-              updateData({ game_id: e?.id || "" }, setActivityForm, activityForm);
-              e?.id && updateModes(e.id);
               if (selectGameModeRef && selectGameModeRef.current) {
                 selectGameModeRef.current.clearValue();
               }
+
+              if (selectPlatformsRef && selectPlatformsRef.current) {
+                selectPlatformsRef.current.clearValue();
+              }
+
+              if (selectRoundsRef && selectRoundsRef.current) {
+                selectRoundsRef.current.clearValue();
+              }
+
+              updateData({
+                game_id: e?.id || "",
+                game_mode_id: "",
+                rounds: "",
+                is_cross_play: false,
+                platform_ids: []
+              }, setActivityForm, activityForm);
             }}
           />
           <div className="text-danger mt-2">
@@ -107,6 +122,7 @@ export const GameDetail = () => {
               <Select
                 name="rounds"
                 placeholder={"How many rounds?"}
+                ref={selectRoundsRef}
                 defaultValue={{
                   value: activityForm?.rounds,
                   label: activityForm?.rounds
@@ -155,6 +171,7 @@ export const GameDetail = () => {
                 getOptionLabel={(platform) => platform?.name}
                 getOptionValue={(platform) => platform?.id?.toString() || ""}
                 onChange={(e) => handlePlatformChange(e)}
+                styles={{ menu: (base) => ({ ...base, zIndex: 2 }) }}
               />
               <div className="text-danger mt-2">
                 <ErrorMessage name="platform_ids" />

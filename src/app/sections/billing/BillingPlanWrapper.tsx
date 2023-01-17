@@ -17,7 +17,6 @@ const BillingPlan: FC<Props> = ({ plans, setPlan }) => {
   const { communityForm, setCommunityForm } = useCommunityForm();
 
   const selectPlan = (plan: Plan) => {
-    console.log(plan);
     setPlan(plan);
     if (plan.contact_type === 1) {
       // setShowCheckout(true)
@@ -135,7 +134,23 @@ const BillingPlanWrapper: FC = () => {
               </tr>
               </thead>
               <tbody>
-              {planOptions?.map((planOption) => (
+              <tr>
+                <td className="ps-5 fs-4 mw-150px">Members</td>
+                {plans?.map((plan) => (
+                  <td key={`plan-table-body-${plan?.id}`} className="text-center">
+                    {plan.max_members.toLocaleString()}
+                  </td>
+                ))}
+              </tr>
+              <tr>
+                <td className="ps-5 fs-4 mw-150px">Transaction Fee</td>
+                {plans?.map((plan) => (
+                  <td key={`plan-table-body-${plan?.id}`} className="text-center">
+                    {plan.transaction_fee}%
+                  </td>
+                ))}
+              </tr>
+              {planOptions?.filter((planOption) => planOption.category_id !== 8).map((planOption) => (
                 <tr key={`plan-option-${planOption?.id}`}>
                   <td className="ps-5 fs-4 mw-150px">{planOption.label ?? planOption.name}</td>
                   {plans?.map((plan) => (
@@ -149,6 +164,56 @@ const BillingPlanWrapper: FC = () => {
                       ) : (
                         <span className="fw-bold">
                             {getOption(plan, planOption?.id)?.value ?? "-"}
+                          </span>
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+              </tbody>
+            </table>
+          </div>
+        </KTCardBody>
+
+        <KTCardBody>
+          <div className="text-center mw-650px mx-auto">
+            <h1 className="display-6">Launch Features</h1>
+          </div>
+          <div className="table-responsive mt-20">
+            <table className="table table-rounded table-striped align-middle gy-7">
+              <thead>
+              <tr className="fw-semibold fs-6 text-gray-800 border-bottom border-gray-200">
+                <th className="p-0 min-w-130px"></th>
+                {plans?.map((plan) => (
+                  <th
+                    key={`plan-table-header-${plan?.id}`}
+                    className="fs-4 fw-bolder text-center"
+                  >
+                    {plan.name}
+                  </th>
+                ))}
+              </tr>
+              </thead>
+              <tbody>
+              {planOptions?.filter((planOption) => planOption.category_id === 8).map((planOption) => (
+                <tr key={`plan-option-${planOption?.id}`}>
+                  <td className="ps-5 fs-4 mw-150px">{planOption.label ?? planOption.name}</td>
+                  {plans?.map((plan) => (
+                    <td key={`plan-table-body-${plan?.id}`} className="text-center">
+                      {planOption?.is_boolean ? (
+                        getOption(plan, planOption?.id)?.value === "true" ? (
+                          <i className="fs-2 fa fa-check-circle text-success"></i>
+                        ) : (
+                          "-"
+                        )
+                      ) : (
+                        <span className="fw-bold">
+                          {planOption.id === 11 ?
+                            (getOption(plan, planOption?.id)?.value ? getOption(plan, planOption?.id)?.value + " days" : "-")
+                            : (
+                              getOption(plan, planOption?.id)?.value ?? "-"
+                            )}
+
                           </span>
                       )}
                     </td>

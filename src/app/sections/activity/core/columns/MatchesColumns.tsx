@@ -54,7 +54,6 @@ const MatchesColumns: ReadonlyArray<Column<Match>> = [
     Header: (props) => <CustomHeader tableProps={props} title="" className="mw-150px" />,
     id: "details",
     Cell: ({ ...props }) => {
-      console.log(props.data[props.row.index]?.start_date);
       return (
         <div className="text-center">
           <div className="fw-semibold text-gray-600 px-5" style={{ fontSize: "12px" }}>

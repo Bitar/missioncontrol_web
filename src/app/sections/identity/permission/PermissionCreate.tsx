@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Field, Form, Formik} from 'formik'
 import {Permission, permissionInitial, permissionSchema} from './models/Permission'
-import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
+import {KTCard, KTCardBody} from "../../../helpers/components"
 import clsx from 'clsx'
 import {createPermission} from './core/PermissionRequests'
 import {useNavigate} from 'react-router-dom'

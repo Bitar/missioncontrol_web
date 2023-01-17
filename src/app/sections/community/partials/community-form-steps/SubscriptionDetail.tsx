@@ -190,7 +190,9 @@ export const SubscriptionDetail = () => {
                 )}
               </div>
             </KTCardBody>
-            <FormAction text={"Update Subscription"} isSubmitting={isSubmitting} />
+            {currentUser && isSuperAdmin(currentUser) && (
+              <FormAction text={"Update Subscription"} isSubmitting={isSubmitting} />
+            )}
           </Form>
         )}
       </Formik>

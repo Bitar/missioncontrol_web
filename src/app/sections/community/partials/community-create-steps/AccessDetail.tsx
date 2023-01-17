@@ -85,7 +85,7 @@ const AccessDetail: FC = () => {
 
                     <span className='d-flex flex-column'>
                       <span className='fw-bolder fs-6'>Passcode</span>
-                      <span className='fs-7 text-muted'>Good ol' fashion password</span>
+                      <span className='fs-7 text-muted'>Share this passcode with people who you want to be a part of your community</span>
                     </span>
                   </span>
                 </label>

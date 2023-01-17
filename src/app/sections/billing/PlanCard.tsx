@@ -91,10 +91,6 @@ const PlanCard: FC<React.PropsWithChildren<Props>> = ({plan, selectPlan, communi
                       <td className='fw-bold'>Transaction Fee</td>
                       <td className='text-end'>{plan.transaction_fee}%</td>
                     </tr>
-                    <tr>
-                      <td className='fw-bold'>Technical Support</td>
-                      <td className='text-end'>{getOption(plan, 1)?.value}</td>
-                    </tr>
                   </tbody>
                 </table>
               </div>

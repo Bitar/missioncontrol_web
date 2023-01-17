@@ -73,7 +73,7 @@ export const EntryFeeDetail = () => {
 
       {activityForm?.entry_fee?.type === 2 && (
         <div className='row mb-6'>
-          <label className='col-lg-4 col-form-label fw-bold fs-6'>Amount</label>
+          <label className='col-lg-4 required col-form-label fw-bold fs-6'>Amount</label>
           <div className='col-lg-8 fv-row'>
             <CurrencyInput
               id='entry_fee_amount_input'

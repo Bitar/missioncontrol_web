@@ -58,12 +58,18 @@ export const ActivityCreate = () => {
   }
 
   const nextStep = (stepper: any) => {
-    setSubmitButton(stepper.current.currentStepIndex === stepper.current.totalStepsNumber! - 1)
+    // console.log('next step: ' + stepper.current.currentStepIndex);
+    if(stepper.current.currentStepIndex < stepper.current.totalStepsNumber) {
+      setSubmitButton(stepper.current.currentStepIndex === stepper.current.totalStepsNumber! - 1)
 
-    setCurrentSchema(activityCreateWizardSchema[stepper.current.currentStepIndex])
+      setCurrentSchema(activityCreateWizardSchema[stepper.current.currentStepIndex])
 
-    if (stepper.current.currentStepIndex !== stepper.current.totalStepsNumber) {
-      stepper.current.goNext()
+      if (stepper.current.currentStepIndex !== stepper.current.totalStepsNumber) {
+        // console.log('am i here');
+        stepper.current.goNext()
+      } else {
+        handleSubmit()
+      }
     } else {
       handleSubmit()
     }
@@ -81,7 +87,18 @@ export const ActivityCreate = () => {
     let targetName = event.target.name
     let targetValue = event.target.value
 
-    if (targetName === 'is_cross_play') {
+    if (targetName === 'location.locate') {
+      updateData(
+        {
+          location: {
+            ...activityForm?.location,
+            ...{ locate: targetValue}
+          }
+        },
+        setActivityForm,
+        activityForm
+      )
+    } else if (targetName === 'is_cross_play') {
       updateData(
         {is_cross_play: !activityForm?.is_cross_play, platform_ids: []},
         setActivityForm,
@@ -146,11 +163,15 @@ export const ActivityCreate = () => {
         </KTCardBody>
 
         <ActivityFormContext.Provider
-          value={{activityForm, setActivityForm, gameModes, setGameModes}}
+          value={{
+            activityForm,
+            setActivityForm,
+            gameModes,
+            setGameModes}}
         >
           <Formik
             validationSchema={currentSchema}
-            initialValues={activityForm!}
+            initialValues={activityForm}
             onSubmit={submitStep}
             enableReinitialize
           >

@@ -5,9 +5,10 @@ type Props = {
   handleToggle: any
   onColor?: string
   name?: string
+  id?: string
 }
 
-const SwitchInput: FC<Props> = ({isOn, handleToggle, name, onColor = 'mc-secondary'}) => {
+const SwitchInput: FC<Props> = ({isOn, handleToggle, name, onColor = 'mc-secondary', id = 'react-switch'}) => {
   return (
     <>
       <input
@@ -15,7 +16,7 @@ const SwitchInput: FC<Props> = ({isOn, handleToggle, name, onColor = 'mc-seconda
         checked={isOn}
         onChange={handleToggle}
         className='react-switch-checkbox'
-        id={`react-switch`}
+        id={id}
         type='checkbox'
       />
       <label className={`react-switch-label bg-${isOn && onColor}`} htmlFor={`react-switch`}>

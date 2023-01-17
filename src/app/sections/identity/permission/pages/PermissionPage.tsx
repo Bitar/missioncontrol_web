@@ -1,4 +1,4 @@
-import {Navigate, Route, Routes} from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../../layout/core'
 import React from 'react'
 import {PermissionIndex} from '../PermissionIndex'
@@ -24,7 +24,7 @@ const PermissionPage: React.FC = () => {
   return (
     <Routes>
       <Route
-        path='/overview'
+        path='/'
         element={
           <>
             <PageTitle breadcrumbs={permissionsBreadCrumbs}>{'Overview'}</PageTitle>
@@ -50,7 +50,6 @@ const PermissionPage: React.FC = () => {
           </>
         }
       />
-      <Route index element={<Navigate to='/permissions/overview' replace={true} />} />
     </Routes>
   )
 }

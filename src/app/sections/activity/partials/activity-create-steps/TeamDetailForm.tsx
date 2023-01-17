@@ -198,7 +198,7 @@ export const TeamDetailForm = () => {
       </div>
 
       <div className='row mb-6'>
-        <label className='col-lg-4 col-form-label required fw-bold fs-6'>Maximum Team</label>
+        <label className='col-lg-4 col-form-label fw-bold fs-6'>Maximum Team</label>
         <div className='col-lg-8 fv-row'>
           <ButtonGroup size='small' aria-label='small outlined button group'>
             <button

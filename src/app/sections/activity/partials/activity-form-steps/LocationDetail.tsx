@@ -107,7 +107,7 @@ export const LocationDetail = () => {
 
                 {activityForm?.location?.type === 2 && (
                   <div className='row mb-6'>
-                    <label className='col-lg-4 col-form-label fw-bold fs-6'>Where?</label>
+                    <label className='col-lg-4 required col-form-label fw-bold fs-6'>Where?</label>
                     <div className='col-lg-8 fv-row'>
                       <Field
                         type='text'

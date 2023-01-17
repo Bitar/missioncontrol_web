@@ -2,10 +2,11 @@ import {useActivityForm} from '../../core/contexts/ActivityFormContext'
 import {updateData} from '../../../../helpers/form/FormHelper'
 import clsx from 'clsx'
 import React from 'react'
-import {ErrorMessage, Field} from 'formik'
+import { ErrorMessage, Field, useFormikContext } from "formik";
 
 export const LocationDetail = () => {
   const {activityForm, setActivityForm} = useActivityForm()
+  const {setFieldValue} = useFormikContext()
 
   const handleLocationChange = (object: any, type: number) => {
     updateData(
@@ -75,9 +76,8 @@ export const LocationDetail = () => {
           <label className='col-lg-4 col-form-label fw-bold fs-6'>Where?</label>
           <div className='col-lg-8 fv-row'>
             <Field
+              name='location.locate'
               type='text'
-              id='location_input'
-              value={activityForm?.location?.locate}
               placeholder='Where?'
               className='form-control mb-3 mb-lg-0'
               autoComplete='off'
@@ -86,10 +86,8 @@ export const LocationDetail = () => {
                   {
                     location: {
                       ...activityForm?.location,
-                      ...{
-                        locate: e.target.value,
-                      },
-                    },
+                      ...{ locate: e.target.value}
+                    }
                   },
                   setActivityForm,
                   activityForm

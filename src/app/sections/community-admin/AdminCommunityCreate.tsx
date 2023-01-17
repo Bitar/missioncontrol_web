@@ -73,7 +73,6 @@ const AdminCommunityCreate = () => {
   }
 
   const submitStep = (values: CommunityFormType, actions: FormikValues) => {
-    console.log(stepper.current?.currentStepIndex)
     if (!stepper.current) {
       return
     }
@@ -112,6 +111,8 @@ const AdminCommunityCreate = () => {
   const nextStep = (stepper: any) => {
     setSubmitButton(stepper.current.currentStepIndex === stepper.current.totalStepsNumber! - 1)
 
+    console.log(communityCreateWizardSchema)
+    console.log(communityCreateWizardSchema[stepper.current.currentStepIndex])
     setCurrentSchema(communityCreateWizardSchema[stepper.current.currentStepIndex])
 
     if (stepper.current.currentStepIndex !== stepper.current.totalStepsNumber) {
