@@ -13,13 +13,14 @@ export const communityCreateWizardSchema = [
   Yup.object().shape({
     logo: Yup.mixed().required("Logo is required"),
     banner_image: Yup.mixed().required("Banner Image is required"),
-    name: Yup.string().required("Name is required")
+    name: Yup.string().required("Name is required"),
+    description: Yup.string().required("Description is required")
   }),
   Yup.object().shape({
     contact: Yup.object().shape({
       name: Yup.string().required("Contact name is required"),
       email: Yup.string().email("Please enter a valid email").required("Contact email is required"),
-      phone_number: Yup.string().test("is-phone-number", "Invalid phone number", (value) =>  value?.length === 12).required("Contact phone number is required")
+      phone_number: Yup.string().test("is-phone-number", "Invalid phone number", (value) => value?.length === 12).required("Contact phone number is required")
     })
   }),
   Yup.object().shape({
@@ -33,7 +34,8 @@ export const communityCreateWizardSchema = [
 ];
 
 export const communitySchema = Yup.object().shape({
-  name: Yup.string().required("Community name is required"),
+  name: Yup.string().required("Name is required"),
+  description: Yup.string().required("Description is required"),
   contact: Yup.object().shape({
     name: Yup.string().required("Contact name is required"),
     email: Yup.string().email("Please enter a valid email").required("Contact email is required"),

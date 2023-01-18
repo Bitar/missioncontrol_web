@@ -1,6 +1,6 @@
 import {useMemo} from 'react'
 import {ColumnInstance, Row, useTable} from 'react-table'
-import {KTCardBody} from '../../../../_metronic/helpers'
+import {KTCardBody} from "../../../helpers/components"
 import {ActivityColumns} from '../core/columns/ActivityColumns'
 import {Activity} from '../models/Activity'
 import {

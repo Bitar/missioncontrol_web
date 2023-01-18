@@ -33,7 +33,7 @@ const CustomHeader: FC<React.PropsWithChildren<Props>> = ({className, title, tab
     if (isSelectedForSorting && order !== undefined) {
       if (order === 'asc') {
         // enable sort desc
-        updateState({sort: id, order: 'desc', ...initialQueryState})
+        updateState({sort: '-' + id, order: 'desc', ...initialQueryState})
         return
       }
 
