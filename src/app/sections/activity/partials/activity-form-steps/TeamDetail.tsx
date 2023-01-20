@@ -25,10 +25,15 @@ export const TeamDetail = () => {
         toast.success("Activity updated Successfully!");
         setActivity(response);
       })
-      .catch(function(e) {
+      .catch(function (e) {
         if (e.response) {
+          let status = e.response.status
+
+          if (status === 403) {
+            toast.error('You are not allowed to do this update!')
+          }
         }
-      });
+      })
   };
 
   return (

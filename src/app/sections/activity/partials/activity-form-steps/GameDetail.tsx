@@ -2,7 +2,6 @@ import { useActivityForm } from "../../core/contexts/ActivityFormContext";
 import { useActivity } from "../../core/contexts/ActivityContext";
 import React, { useEffect, useRef, useState } from "react";
 import { KTCard, KTCardBody, KTCardHeader } from "../../../../helpers/components";
-import { activityDetailsSchema } from "../../models/Activity";
 import { ErrorMessage, Form, Formik } from "formik";
 import { FormAction } from "../../../../helpers/form/FormAction";
 import Select from "react-select";
@@ -62,6 +61,11 @@ export const GameDetail = () => {
       })
       .catch(function(e) {
         if (e.response) {
+          let status = e.response.status;
+
+          if (status === 403) {
+            toast.error("You are not allowed to do this update!");
+          }
         }
       });
   };
@@ -120,11 +124,13 @@ export const GameDetail = () => {
                               selectRoundsRef.current.clearValue();
                             }
 
-                            updateData({ game_id: e?.id || "",
+                            updateData({
+                              game_id: e?.id || "",
                               game_mode_id: "",
                               rounds: "",
                               is_cross_play: false,
-                              platform_ids: [] }, setActivityForm, activityForm);
+                              platform_ids: []
+                            }, setActivityForm, activityForm);
                           }
                         }}
                       />
