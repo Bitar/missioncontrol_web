@@ -83,6 +83,8 @@ export type Community = {
     open_registrations: number
     players_count: number
   }
+
+  dynamic_link?: string
 }
 
 export type CommunityQueryResponse = Response<Array<Community>>
@@ -132,7 +134,6 @@ export const initialCommunityFormTypeByCommunity = (community?: Community) => {
     plan_id: (community?.subscription?.plan?.id && community?.subscription?.plan?.id + "") || ""
   };
 };
-
 export function formOnChange(
   event: any,
   community: Community | CommunityFormType | undefined,
