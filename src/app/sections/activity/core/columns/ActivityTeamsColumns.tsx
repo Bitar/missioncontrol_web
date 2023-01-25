@@ -23,7 +23,7 @@ const ActivityTeamsColumns: ReadonlyArray<Column<Team>> = [
           </span>
         </div>
       </div>
-    ),
+    )
   },
   {
     Header: (props) => <CustomHeader tableProps={props} title='Players' />,

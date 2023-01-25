@@ -38,11 +38,11 @@ const communitiesColumns: ReadonlyArray<Column<Community>> = [
   },
   {
     Header: (props) => (
-      <CustomHeader tableProps={props} title='Access Type' className='min-w-125px' />
+      <CustomHeader tableProps={props} title='Status' className='min-w-125px' />
     ),
-    id: 'access_type',
+    id: 'status',
     Cell: ({...props}) => {
-      const {color, text} = communityAccessType(props.data[props.row.index]?.access?.type)
+      const {color, text} = communityAccessType(props.data[props.row.index]?.status)
 
       return (
         <div className='d-flex align-items-center'>

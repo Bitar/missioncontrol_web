@@ -1,4 +1,4 @@
-import React, {FC, useMemo} from 'react'
+import React, { FC, useEffect, useMemo } from "react";
 import {ColumnInstance, Row, useTable} from 'react-table'
 import {ActivityMembersColumns} from '../core/columns/ActivityMembersColumns'
 import {KTCard, KTCardBody} from '../../../helpers/components'
@@ -24,9 +24,9 @@ const ActivityMembers: FC = () => {
 
   return (
     <KTCard>
-      <div className='card-header bg-info'>
+      <div className='card-header bg-mc-primary'>
         <div className='card-title'>
-          <h3 className='card-label text-white'>Registrations</h3>
+          <h3 className='card-label text-white'>Members</h3>
         </div>
       </div>
       <KTCardBody className='pt-1'>
@@ -50,7 +50,7 @@ const ActivityMembers: FC = () => {
                 })
               ) : (
                 <tr>
-                  <td colSpan={3}>
+                  <td colSpan={5}>
                     <div className='d-flex text-center w-100 align-content-center justify-content-center'>
                       No records found
                     </div>
