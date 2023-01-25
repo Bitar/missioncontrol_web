@@ -8,7 +8,13 @@ type Props = {
   id?: string
 }
 
-const SwitchInput: FC<Props> = ({isOn, handleToggle, name, onColor = 'mc-secondary', id = 'react-switch'}) => {
+const SwitchInput: FC<Props> = ({
+  isOn,
+  handleToggle,
+  name,
+  onColor = 'mc-secondary',
+  id = 'react-switch',
+}) => {
   return (
     <>
       <input

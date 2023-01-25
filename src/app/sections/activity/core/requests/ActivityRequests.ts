@@ -4,6 +4,7 @@ import {Activity, ActivityQueryResponse} from '../../models/Activity'
 import {Announcement} from '../../../../models/announcement/Announcements'
 import {ChatMessage, ChatMessageQueryResponse} from '../../../../models/chat/ChatMessage'
 import {TeamQueryResponse} from '../../../../models/squad/Team'
+import { UserQueryResponse } from "../../../identity/user/models/User";
 
 const API_URL = process.env.REACT_APP_API_URL
 const ACTIVITIES_URL = `${API_URL}/activities`
@@ -49,6 +50,15 @@ export const getActivityTeams = (id: any, query?: string): Promise<TeamQueryResp
   }
 
   return axios.get(url).then((response: AxiosResponse<TeamQueryResponse>) => response.data)
+}
+export const getActivityMembers = (id: any, query?: string): Promise<UserQueryResponse> => {
+  let url = `${ACTIVITIES_URL}/${id}/members`
+
+  if (query) {
+    url += `?${query}`
+  }
+
+  return axios.get(url).then((response: AxiosResponse<UserQueryResponse>) => response.data)
 }
 
 export const getActivityStandings = (id: any, query?: string): Promise<TeamQueryResponse> => {

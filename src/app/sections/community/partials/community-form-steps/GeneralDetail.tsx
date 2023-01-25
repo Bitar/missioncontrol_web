@@ -24,6 +24,14 @@ const GeneralDetail: FC = () => {
   const {setCommunity} = useCommunity()
   const params = useParams()
 
+  const statuses = [
+    {value: 1, label: 'Pending'},
+    {value: 2, label: 'Active'},
+  ]
+
+  console.log(communityForm?.status)
+  console.log()
+
   const handleSubmit = async () => {
     let data = jsonToFormData(communityForm)
     data.append('_method', 'PUT')
@@ -121,10 +129,8 @@ const GeneralDetail: FC = () => {
                         <Select
                           name='status'
                           placeholder={'Choose a State'}
-                          options={[
-                            {value: '1', label: 'Pending'},
-                            {value: '2', label: 'Active'},
-                          ]}
+                          defaultValue={statuses.find((e) => e.value === communityForm?.status)}
+                          options={statuses}
                           onChange={(e) => {
                             updateData(
                               {

@@ -1,6 +1,6 @@
 import {useMemo} from 'react'
-import {ColumnInstance, Row, useTable} from 'react-table'
-import {KTCardBody} from "../../../helpers/components"
+import {ColumnInstance, Row, useSortBy, useTable} from 'react-table'
+import {KTCardBody} from '../../../helpers/components'
 import {ActivityColumns} from '../core/columns/ActivityColumns'
 import {Activity} from '../models/Activity'
 import {
@@ -17,10 +17,13 @@ const ActivityTable = () => {
   const isLoading = useQueryResponseLoading()
   const data = useMemo(() => activities, [activities])
   const columns = useMemo(() => ActivityColumns, [])
-  const {getTableProps, getTableBodyProps, headers, rows, prepareRow} = useTable({
-    columns,
-    data,
-  })
+  const {getTableProps, getTableBodyProps, headers, rows, prepareRow} = useTable<Activity>(
+    {
+      columns,
+      data,
+    },
+    useSortBy
+  )
 
   return (
     <KTCardBody className='py-4'>

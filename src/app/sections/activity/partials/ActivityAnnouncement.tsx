@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react'
-import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
+import {KTCard, KTCardBody} from "../../../helpers/components"
 import TextField from '@mui/material/TextField'
 import dayjs from 'dayjs'
 import {Announcement, initialAnnouncement} from '../../../models/announcement/Announcements'

@@ -2,11 +2,10 @@ import {useActivityForm} from '../../core/contexts/ActivityFormContext'
 import {updateData} from '../../../../helpers/form/FormHelper'
 import clsx from 'clsx'
 import React from 'react'
-import { ErrorMessage, Field, useFormikContext } from "formik";
+import {ErrorMessage, Field} from 'formik'
 
 export const LocationDetail = () => {
   const {activityForm, setActivityForm} = useActivityForm()
-  const {setFieldValue} = useFormikContext()
 
   const handleLocationChange = (object: any, type: number) => {
     updateData(
@@ -86,8 +85,8 @@ export const LocationDetail = () => {
                   {
                     location: {
                       ...activityForm?.location,
-                      ...{ locate: e.target.value}
-                    }
+                      ...{locate: e.target.value},
+                    },
                   },
                   setActivityForm,
                   activityForm

@@ -75,7 +75,9 @@
   color: #ffffff;
   font-weight: bold;
 
-  &:hover, &:active, &:focus {
+  &:hover,
+  &:active,
+  &:focus {
     background-color: $mc-secondary-light;
     color: $mc-secondary;
   }

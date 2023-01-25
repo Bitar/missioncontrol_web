@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from 'react'
 import {Activity} from '../models/Activity'
 import {Navigate, Outlet, Route, Routes, useNavigate, useParams} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../layout/core'
-import {getActivityById, getActivityTeams} from '../core/requests/ActivityRequests'
+import { getActivityById, getActivityMembers, getActivityTeams } from "../core/requests/ActivityRequests";
 import {ActivityInfo} from '../partials/ActivityInfo'
 import {ActivityTeams} from './ActivityTeams'
 import {ActivityOverview} from './ActivityOverview'
@@ -23,6 +23,8 @@ import {ActivityTeamsFilter} from '../partials/ActivityTeamsFilter'
 import {KTCard, KTCardBody} from '../../../helpers/components'
 import {TableHeader} from '../../../modules/table/TableHeader'
 import toast from 'react-hot-toast'
+import { ActivityMembers } from "./ActivityMembers";
+import { ActivityMembersFilter } from "../partials/ActivityMembersFilter";
 
 const ActivityView: FC = () => {
   const [activity, setActivity] = useState<Activity | undefined>()
@@ -130,32 +132,57 @@ const ActivityView: FC = () => {
             }
           />
           <Route
+            path='/members'
+            element={
+              <SuspenseView>
+                <PageTitle breadcrumbs={activityViewBreadcrumbs}>Teams</PageTitle>
+                {activity && (
+                  <QueryRequestProvider>
+                    <QueryResponseProvider
+                      id={QUERIES.ACTIVITIES_MEMBER_LIST}
+                      requestFunction={getActivityMembers}
+                      requestId={activity?.id}
+                    >
+                      <ListViewProvider>
+                        <KTCard>
+                          {/*<TableHeader name='Activity' showFilter={true} showAdd={false} />*/}
+                          <KTCardBody>
+                            <ActivityMembersFilter />
+                            <ActivityMembers />
+                          </KTCardBody>
+                        </KTCard>
+                      </ListViewProvider>
+                    </QueryResponseProvider>
+                  </QueryRequestProvider>
+                )}
+              </SuspenseView>
+            }
+          />
+          <Route
             path='/teams'
             element={
-              <>
-                <SuspenseView>
-                  <PageTitle breadcrumbs={activityViewBreadcrumbs}>Teams</PageTitle>
-                  {activity && (
-                    <QueryRequestProvider>
-                      <QueryResponseProvider
-                        id={QUERIES.TEAMS_LIST}
-                        requestFunction={getActivityTeams}
-                        requestId={activity?.id}
-                      >
-                        <ListViewProvider>
-                          <KTCard>
-                            <TableHeader name='Activity' showFilter={true} showAdd={false} />
-                            <KTCardBody>
-                              <ActivityTeamsFilter />
-                              <ActivityTeams />
-                            </KTCardBody>
-                          </KTCard>
-                        </ListViewProvider>
-                      </QueryResponseProvider>
-                    </QueryRequestProvider>
-                  )}
-                </SuspenseView>
-              </>
+              <SuspenseView>
+                <PageTitle breadcrumbs={activityViewBreadcrumbs}>Teams</PageTitle>
+                {activity && (
+                  <QueryRequestProvider>
+                    <QueryResponseProvider
+                      id={QUERIES.TEAMS_LIST}
+                      requestFunction={getActivityTeams}
+                      requestId={activity?.id}
+                    >
+                      <ListViewProvider>
+                        <KTCard>
+                          <TableHeader name='Activity' showFilter={true} showAdd={false} />
+                          <KTCardBody>
+                            <ActivityTeamsFilter />
+                            <ActivityTeams />
+                          </KTCardBody>
+                        </KTCard>
+                      </ListViewProvider>
+                    </QueryResponseProvider>
+                  </QueryRequestProvider>
+                )}
+              </SuspenseView>
             }
           />
           <Route

@@ -11,6 +11,8 @@ type Props = {
 }
 const CustomHeader: FC<React.PropsWithChildren<Props>> = ({className, title, tableProps}) => {
   const id = tableProps.column.id
+  const canSort = tableProps.column.defaultCanSort
+
   const {state, updateState} = useQueryRequest()
 
   const isSelectedForSorting = useMemo(() => {
@@ -20,7 +22,7 @@ const CustomHeader: FC<React.PropsWithChildren<Props>> = ({className, title, tab
 
   const sortColumn = () => {
     // avoid sorting for these columns
-    if (id === 'actions' || id === 'selection') {
+    if (!canSort || id === 'actions' || id === 'selection') {
       return
     }
 

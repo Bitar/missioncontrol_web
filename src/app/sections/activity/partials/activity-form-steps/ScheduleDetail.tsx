@@ -199,11 +199,11 @@ export const ScheduleDetail = () => {
                       onChange={handleMatchPlayChange}
                       disabledDate={before && before(matchPlayDisabledDate)}
                     />
-                    <div className="text-danger mt-2">
-                      <ErrorMessage name="schedule.matchplay_dates.start_date" />
+                    <div className='text-danger mt-2'>
+                      <ErrorMessage name='schedule.matchplay_dates.start_date' />
                     </div>
-                    <div className="text-danger mt-2">
-                      <ErrorMessage name="schedule.matchplay_dates.end_date" />
+                    <div className='text-danger mt-2'>
+                      <ErrorMessage name='schedule.matchplay_dates.end_date' />
                     </div>
                   </div>
                 </div>

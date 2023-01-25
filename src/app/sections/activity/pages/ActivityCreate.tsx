@@ -59,7 +59,7 @@ export const ActivityCreate = () => {
 
   const nextStep = (stepper: any) => {
     // console.log('next step: ' + stepper.current.currentStepIndex);
-    if(stepper.current.currentStepIndex < stepper.current.totalStepsNumber) {
+    if (stepper.current.currentStepIndex < stepper.current.totalStepsNumber) {
       setSubmitButton(stepper.current.currentStepIndex === stepper.current.totalStepsNumber! - 1)
 
       setCurrentSchema(activityCreateWizardSchema[stepper.current.currentStepIndex])
@@ -92,8 +92,8 @@ export const ActivityCreate = () => {
         {
           location: {
             ...activityForm?.location,
-            ...{ locate: targetValue}
-          }
+            ...{locate: targetValue},
+          },
         },
         setActivityForm,
         activityForm
@@ -167,7 +167,8 @@ export const ActivityCreate = () => {
             activityForm,
             setActivityForm,
             gameModes,
-            setGameModes}}
+            setGameModes,
+          }}
         >
           <Formik
             validationSchema={currentSchema}

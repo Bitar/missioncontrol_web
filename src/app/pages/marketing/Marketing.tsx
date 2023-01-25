@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react'
-import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
+import {KTSVG} from '../../helpers/components'
 import {PageTitle} from '../../layout/core'
 import {marketingData} from './data/MarketingData'
-import {support} from './data/SupportData'
 
 const Marketing = () => {
   useEffect(() => {

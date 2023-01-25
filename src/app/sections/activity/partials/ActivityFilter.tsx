@@ -1,20 +1,20 @@
-import { KTCard, KTCardBody, KTCardHeader } from "../../../helpers/components";
-import { Field, Form, Formik } from "formik";
-import React, { useEffect, useState } from "react";
-import { useQueryRequest } from "../../../modules/table/QueryRequestProvider";
-import { initialQueryState } from "../../../helpers/crud-helper/models";
-import { updateData } from "../../../helpers/form/FormHelper";
-import { Community } from "../../community/models/Community";
-import { getAllCommunities } from "../../community/core/CommunityRequests";
-import Select from "react-select";
-import { isCommunityAdmin } from "../../identity/user/models/User";
-import { useAuth } from "../../../modules/auth";
+import {KTCard, KTCardBody, KTCardHeader} from '../../../helpers/components'
+import {Field, Form, Formik} from 'formik'
+import React, {useEffect, useState} from 'react'
+import {useQueryRequest} from '../../../modules/table/QueryRequestProvider'
+import {initialQueryState} from '../../../helpers/crud-helper/models'
+import {updateData} from '../../../helpers/form/FormHelper'
+import {Community} from '../../community/models/Community'
+import {getAllCommunities} from '../../community/core/CommunityRequests'
+import Select from 'react-select'
+import {isCommunityAdmin} from '../../identity/user/models/User'
+import {useAuth} from '../../../modules/auth'
 
 const initActivity = {
-  title: "",
-  community_id: "",
-  status: "",
-};
+  title: '',
+  community_id: '',
+  status: '',
+}
 
 type ActivityFilterObj = {
   title: string
@@ -23,107 +23,96 @@ type ActivityFilterObj = {
 }
 
 const ActivityFilter = () => {
-  const { currentUser } = useAuth();
-  const { updateState } = useQueryRequest();
-  const [activityFilters, setActivityFilters] = useState<ActivityFilterObj>(initActivity);
-  const [communities, setCommunities] = useState<Community[]>();
+  const {currentUser} = useAuth()
+  const {updateState} = useQueryRequest()
+  const [activityFilters, setActivityFilters] = useState<ActivityFilterObj>(initActivity)
+  const [communities, setCommunities] = useState<Community[]>()
   const statuses = [
     {
       value: 1,
-      label: "Registrations"
+      label: 'Registrations',
     },
     {
       value: 2,
-      label: "Active"
+      label: 'Active',
     },
     {
       value: 3,
-      label: "Pending"
+      label: 'Pending',
     },
     {
       value: 4,
-      label: "Closed"
+      label: 'Closed',
     },
     {
       value: 5,
-      label: "Match Generation In Queue"
+      label: 'Match Generation In Queue',
     },
     {
       value: 6,
-      label: "Invalid Registrations"
+      label: 'Invalid Registrations',
     },
     {
       value: 7,
-      label: "Generating Matches In Progress"
-    }
-  ];
-
-  const createdUpdatedAt = [
-    {
-      value: 1,
-      label: "Creation Date"
+      label: 'Generating Matches In Progress',
     },
-    {
-      value: 2,
-      label: "Update Date"
-    }
-  ];
+  ]
 
   useEffect(() => {
     getAllCommunities().then((response) => {
-      setCommunities(response.data);
-    });
-  }, []);
+      setCommunities(response.data)
+    })
+  }, [])
 
   const filterData = () => {
     updateState({
       filter: activityFilters,
-      ...initialQueryState
-    });
-  };
+      ...initialQueryState,
+    })
+  }
 
   const handleOnChange = (e: any) => {
     if (e.target.name) {
-      updateData({ [e.target.name]: e.target.value }, setActivityFilters, activityFilters);
+      updateData({[e.target.name]: e.target.value}, setActivityFilters, activityFilters)
     }
-  };
+  }
 
   return (
-    <KTCard id="filter-container" className="bg-transparent mb-10" shadow={false} border={true}>
-      <KTCardHeader text={"Filters"} bg={"info"} text_color={"white"} />
+    <KTCard id='filter-container' className='bg-transparent mb-10' shadow={false} border={true}>
+      <KTCardHeader text={'Filters'} bg={'info'} text_color={'white'} />
       <Formik initialValues={activityFilters} onSubmit={filterData} enableReinitialize>
-        <Form onChange={handleOnChange} className="form">
+        <Form onChange={handleOnChange} className='form'>
           <KTCardBody>
-            <div className="row">
-              <div className="col-lg-4 mb-5">
+            <div className='row'>
+              <div className='col-lg-4 mb-5'>
                 <Field
-                  type="text"
-                  name="title"
-                  placeholder="Title"
-                  className={"form-control mb-3 mb-lg-0"}
-                  autoComplete="off"
+                  type='text'
+                  name='title'
+                  placeholder='Title'
+                  className={'form-control mb-3 mb-lg-0'}
+                  autoComplete='off'
                 />
               </div>
               {currentUser && !isCommunityAdmin(currentUser) && (
-                <div className="col-lg-4 mb-5">
+                <div className='col-lg-4 mb-5'>
                   <Select
-                    placeholder={"Community"}
+                    placeholder={'Community'}
                     options={communities}
                     getOptionLabel={(community) => community?.name}
-                    getOptionValue={(community) => community?.id?.toString() || ""}
+                    getOptionValue={(community) => community?.id?.toString() || ''}
                     onChange={(e) => {
-                      updateData({ community_id: e?.id || "" }, setActivityFilters, activityFilters);
+                      updateData({community_id: e?.id || ''}, setActivityFilters, activityFilters)
                     }}
                     isClearable={true}
                   />
                 </div>
               )}
-              <div className="col-lg-4 mb-5">
+              <div className='col-lg-4 mb-5'>
                 <Select
-                  placeholder={"Status"}
+                  placeholder={'Status'}
                   options={statuses}
                   onChange={(e) => {
-                    updateData({ status: e?.value || "" }, setActivityFilters, activityFilters);
+                    updateData({status: e?.value || ''}, setActivityFilters, activityFilters)
                   }}
                   isClearable={true}
                 />
@@ -140,15 +129,15 @@ const ActivityFilter = () => {
               {/*</div>*/}
             </div>
           </KTCardBody>
-          <div className="card-footer d-flex justify-content-end py-6 px-9">
-            <button type="submit" className="btn btn-mc-secondary btn-active-mc-secondary btn-sm">
-              <span className="indicator-label">Filter</span>
+          <div className='card-footer d-flex justify-content-end py-6 px-9'>
+            <button type='submit' className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'>
+              <span className='indicator-label'>Filter</span>
             </button>
           </div>
         </Form>
       </Formik>
     </KTCard>
-  );
-};
+  )
+}
 
-export { ActivityFilter };
+export {ActivityFilter}

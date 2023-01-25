@@ -3,7 +3,7 @@ import {useNavigate, useSearchParams} from 'react-router-dom'
 import {useAuth} from '../core/Auth'
 import axios from 'axios'
 import {FormErrorAlert} from '../../errors/partials/FormErrorAlert'
-import toast from "react-hot-toast";
+import toast from 'react-hot-toast'
 
 export function VerifyEmail() {
   const [hasErrors, setHasErrors] = useState<boolean>(false)
@@ -17,9 +17,9 @@ export function VerifyEmail() {
       axios
         .get(verifyLink)
         .then(() => {
-          toast.success("Email verified Successfully", {
-            position:"top-center"
-          });
+          toast.success('Email verified Successfully', {
+            position: 'top-center',
+          })
           navigate('/')
         })
         .catch(() => {

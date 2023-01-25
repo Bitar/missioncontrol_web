@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx'
 import React, {FC} from 'react'
-import {getOption, Plan} from '../../models/billing/Plan'
+import {Plan} from '../../models/billing/Plan'
 import {CommunityFormType} from '../community/models/Community'
 
 type Props = {
