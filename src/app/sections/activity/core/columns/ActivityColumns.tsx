@@ -144,7 +144,7 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
     Cell: ({ ...props }) => (
       <div className="text-center">
         <span className="text-gray-800 pe-none mb-1">
-          {dayjs(new Date(props.data[props.row.index].created_at * 1000)).format("L @ h:mm a")}
+          {dayjs(new Date(props.data[props.row.index].updated_at * 1000)).format("L @ h:mm a")}
         </span>
       </div>
     )
