@@ -6,7 +6,7 @@ import {QUERIES} from '../../../../_metronic/helpers'
 import {ActionsCell} from '../../../modules/table/columns/ActionsCell'
 import {TextImageCell} from '../../../modules/table/columns/TextImageCell'
 import React from 'react'
-import {communityAccessType} from '../../../helpers/CommunityHelper'
+import { communityStatus } from "../../../helpers/CommunityHelper";
 
 const communitiesColumns: ReadonlyArray<Column<Community>> = [
   {
@@ -18,15 +18,6 @@ const communitiesColumns: ReadonlyArray<Column<Community>> = [
         dText={props.data[props.row.index].name}
         link={`/communities/${props.data[props.row.index].id}`}
       />
-    ),
-  },
-  {
-    Header: (props) => (
-      <CustomHeader tableProps={props} title='Is Featured' className='min-w-125px' />
-    ),
-    id: 'is_featured',
-    Cell: ({...props}) => (
-      <TextCell dObject={props.data[props.row.index].is_featured ? 'Yes' : 'No'} />
     ),
   },
   {
@@ -42,7 +33,7 @@ const communitiesColumns: ReadonlyArray<Column<Community>> = [
     ),
     id: 'status',
     Cell: ({...props}) => {
-      const {color, text} = communityAccessType(props.data[props.row.index]?.status)
+      const {color, text} = communityStatus(props.data[props.row.index]?.status)
 
       return (
         <div className='d-flex align-items-center'>

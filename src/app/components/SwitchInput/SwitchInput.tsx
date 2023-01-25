@@ -25,7 +25,7 @@ const SwitchInput: FC<Props> = ({
         id={id}
         type='checkbox'
       />
-      <label className={`react-switch-label bg-${isOn && onColor}`} htmlFor={`react-switch`}>
+      <label className={`react-switch-label bg-${isOn && onColor}`} htmlFor={`${id}`}>
         <span className={`react-switch-button`} />
       </label>
     </>

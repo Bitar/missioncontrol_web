@@ -15,3 +15,18 @@ export const communityAccessType = (accessType: number) => {
 
   return {color, text}
 }
+
+export const communityStatus = (accessType: number) => {
+  let text = ''
+  let color = ''
+
+  if (accessType === 2) {
+    color = 'success'
+    text = 'Active'
+  } else {
+    color = 'secondary'
+    text = 'Pending'
+  }
+
+  return {color, text}
+}
