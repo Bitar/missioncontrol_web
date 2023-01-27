@@ -31,3 +31,21 @@ export const updateMatchResult = (id: any, formData: FormData): Promise<Match | 
     .then((response: AxiosResponse<Response<Match>>) => response.data)
     .then((response: Response<Match>) => response.data)
 }
+
+export const rejectMatchDispute = (id: any): Promise<Match | undefined> => {
+  let url = `${MATCHES_URL}/${id}/dispute/reject`
+
+  return axios
+    .post(url)
+    .then((response: AxiosResponse<Response<Match>>) => response.data)
+    .then((response: Response<Match>) => response.data)
+}
+
+export const approveMatchDispute = (id: any, formData: FormData): Promise<Match | undefined> => {
+  let url = `${MATCHES_URL}/${id}/dispute/approve`
+
+  return axios
+    .post(url, formData)
+    .then((response: AxiosResponse<Response<Match>>) => response.data)
+    .then((response: Response<Match>) => response.data)
+}

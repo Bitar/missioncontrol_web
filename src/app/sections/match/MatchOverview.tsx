@@ -1,6 +1,5 @@
-import {KTCard, KTCardBody} from '../../../_metronic/helpers'
+import {KTCard, KTCardBody, KTCardHeader} from '../../helpers/components'
 import React, {FC} from 'react'
-import {KTCardHeader} from '../../helpers/components/KTCardHeader'
 import {Match} from '../activity/models/matches/Match'
 import {Activity} from '../activity/models/Activity'
 import {ScoreSheet} from '../activity/models/matches/ScoreSheet'
@@ -20,11 +19,11 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
     if (key) {
       switch (key) {
         case 'Elimination':
+        case 'Kill':
           return 'fa-crosshairs'
         case 'Place':
           return 'fa-ranking-star'
         case 'Round':
-          return 'fa-futbol'
         case 'Goal':
           return 'fa-futbol'
         default:

@@ -9,6 +9,8 @@ export type ActivitySettings = {
   time: number
   timezone_id: ID
   timezone: TimeZone
+
+  total_game_time: number
 }
 
 export const initialActivitySettings = (activitySettings?: ActivitySettings) => {
@@ -19,5 +21,6 @@ export const initialActivitySettings = (activitySettings?: ActivitySettings) => 
     day: activitySettings?.day || 0,
     time: activitySettings?.time || '',
     timezone_id: activitySettings?.timezone_id || 0,
+    total_game_time: activitySettings?.total_game_time || 0
   }
 }

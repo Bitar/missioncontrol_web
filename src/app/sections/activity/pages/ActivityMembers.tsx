@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useMemo} from 'react'
+import React, {FC, useMemo} from 'react'
 import {ColumnInstance, Row, useTable} from 'react-table'
 import {ActivityMembersColumns} from '../core/columns/ActivityMembersColumns'
 import {KTCard, KTCardBody} from '../../../helpers/components'

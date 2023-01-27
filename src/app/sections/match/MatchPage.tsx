@@ -6,6 +6,8 @@ import {MatchOverview} from './MatchOverview'
 import {getActivityMatch} from '../activity/core/requests/ActivityMatchRequests'
 import {useActivity} from '../activity/core/contexts/ActivityContext'
 import {MatchChat} from './pages/MatchChat'
+import { ScoreSettings } from './partials/ScoreSettings'
+import { MatchSettings } from "./pages/MatchSettings";
 
 const MatchPage: FC = () => {
   const {activity, match, setMatch} = useActivity()
@@ -93,6 +95,7 @@ const MatchPage: FC = () => {
           element={
             <>
               <PageTitle breadcrumbs={matchBreadCrumbs}>{'Settings'}</PageTitle>
+              <MatchSettings match={match}/>
             </>
           }
         />

@@ -62,7 +62,6 @@ const ThemeModeProvider = ({children}: {children: React.ReactNode}) => {
   const [mode, setMode] = useState<ThemeModeType>(defaultThemeMode.mode)
   const [menuMode, setMenuMode] = useState<ThemeModeType>(defaultThemeMode.menuMode)
 
-  console.log(mode)
   const updateMode = (_mode: ThemeModeType, saveInLocalStorage: boolean = true) => {
     setMode(_mode)
     // themeModeSwitchHelper(updatedMode)

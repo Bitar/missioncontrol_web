@@ -45,7 +45,7 @@ const ActivityDetails = () => {
           </div>
         </div>
 
-        {activity?.settings?.rounds && activity?.game_mode?.game_time && (
+        {activity?.settings?.total_game_time && (
           <div className='row mb-5'>
             <label className='col-lg-4 fw-bold text-muted'>Match Duration</label>
 
@@ -53,7 +53,7 @@ const ActivityDetails = () => {
               <span className='fw-bolder fs-6 me-2'>
                 <CountUp
                   useEasing={false}
-                  end={activity?.settings?.rounds * activity?.game_mode?.game_time + 15}
+                  end={activity?.settings?.total_game_time}
                 />{' '}
                 min
               </span>
