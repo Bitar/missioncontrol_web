@@ -6,7 +6,7 @@ import {QUERIES} from '../../../../_metronic/helpers'
 import {ActionsCell} from '../../../modules/table/columns/ActionsCell'
 import {TextImageCell} from '../../../modules/table/columns/TextImageCell'
 import React from 'react'
-import { communityStatus } from "../../../helpers/CommunityHelper";
+import {communityStatus} from '../../../helpers/CommunityHelper'
 
 const communitiesColumns: ReadonlyArray<Column<Community>> = [
   {
@@ -28,9 +28,7 @@ const communitiesColumns: ReadonlyArray<Column<Community>> = [
     ),
   },
   {
-    Header: (props) => (
-      <CustomHeader tableProps={props} title='Status' className='min-w-125px' />
-    ),
+    Header: (props) => <CustomHeader tableProps={props} title='Status' className='min-w-125px' />,
     id: 'status',
     Cell: ({...props}) => {
       const {color, text} = communityStatus(props.data[props.row.index]?.status)

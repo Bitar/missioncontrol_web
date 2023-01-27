@@ -2,6 +2,7 @@ import {ID, Response} from '../../../../../_metronic/helpers'
 import {Round} from './Round'
 import {Team} from '../../../../models/squad/Team'
 import {Activity} from '../Activity'
+import { User } from "../../../identity/user/models/User";
 
 export type Match = {
   id?: ID
@@ -11,7 +12,6 @@ export type Match = {
   status: number
   teams?: Team[]
   rounds: Round[]
-
   additional_data?: {
     session: {
       current: number
@@ -32,6 +32,11 @@ export type Match = {
       status: number
       score: number
     }
+  }
+
+  dispute?: {
+    user: User,
+    message: string
   }
 }
 

@@ -46,8 +46,17 @@ const formatMatchStatus = (statusId: number) => {
     status = 'Playing'
     color = 'success'
   } else if (statusId === 4) {
+    status = 'Dispute'
+    color = 'info'
+  } else if (statusId === 5) {
     status = 'Score Validation'
     color = 'info'
+  } else if (statusId === 6) {
+    status = 'Dispute Approved'
+    color = 'success'
+  } else if (statusId === 7) {
+    status = 'Dispute Rejected'
+    color = 'danger'
   } else {
     status = 'Closed'
     color = 'danger'

@@ -1,74 +1,74 @@
-import React, { FC, useMemo } from "react";
-import { KTCard, KTCardBody, QUERIES } from "../../../../_metronic/helpers";
-import { User } from "../../identity/user/models/User";
-import { QueryRequestProvider } from "../../../modules/table/QueryRequestProvider";
+import React, {FC, useMemo} from 'react'
+import {KTCard, KTCardBody, QUERIES} from '../../../../_metronic/helpers'
+import {User} from '../../identity/user/models/User'
+import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
 import {
   QueryResponseProvider,
   useQueryResponseData,
-  useQueryResponseLoading
-} from "../../../modules/table/QueryResponseProvider";
-import { getCommunityUsers } from "../core/CommunityRequests";
-import { ListViewProvider } from "../../../modules/table/ListViewProvider";
-import { ColumnInstance, Row, useTable } from "react-table";
-import { CustomHeaderColumn } from "../../../modules/table/columns/CustomHeaderColumn";
-import { CustomRow } from "../../../modules/table/columns/CustomRow";
-import { TableListPagination } from "../../../modules/table/TableListPagination";
-import { TableListLoading } from "../../../modules/table/TableListLoading";
-import { CommunityUsersColumns } from "../core/CommunityUsersColumns";
-import { useCommunity } from "../CommunityContext";
-import { CommunityUserFilters } from "../partials/CommunityUserFilters";
-import { TableHeader } from "../../../modules/table/TableHeader";
+  useQueryResponseLoading,
+} from '../../../modules/table/QueryResponseProvider'
+import {getCommunityUsers} from '../core/CommunityRequests'
+import {ListViewProvider} from '../../../modules/table/ListViewProvider'
+import {ColumnInstance, Row, useTable} from 'react-table'
+import {CustomHeaderColumn} from '../../../modules/table/columns/CustomHeaderColumn'
+import {CustomRow} from '../../../modules/table/columns/CustomRow'
+import {TableListPagination} from '../../../modules/table/TableListPagination'
+import {TableListLoading} from '../../../modules/table/TableListLoading'
+import {CommunityUsersColumns} from '../core/CommunityUsersColumns'
+import {useCommunity} from '../CommunityContext'
+import {CommunityUserFilters} from '../partials/CommunityUserFilters'
+import {TableHeader} from '../../../modules/table/TableHeader'
 
 const CommunityUsersTable = () => {
-  const communityUsers = useQueryResponseData();
-  const isLoading = useQueryResponseLoading();
-  const data = useMemo(() => communityUsers, [communityUsers]);
-  const columns = useMemo(() => CommunityUsersColumns, []);
-  const { getTableProps, getTableBodyProps, headers, rows, prepareRow } = useTable({
+  const communityUsers = useQueryResponseData()
+  const isLoading = useQueryResponseLoading()
+  const data = useMemo(() => communityUsers, [communityUsers])
+  const columns = useMemo(() => CommunityUsersColumns, [])
+  const {getTableProps, getTableBodyProps, headers, rows, prepareRow} = useTable({
     columns,
-    data
-  });
+    data,
+  })
 
   return (
-    <KTCardBody className="py-4">
-      <div className="table-responsive">
+    <KTCardBody className='py-4'>
+      <div className='table-responsive'>
         <table
-          className="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
+          className='table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer'
           {...getTableProps()}
         >
           <thead>
-          <tr className="text-start text-muted fw-bolder fs-6 text-uppercase gs-0">
-            {headers.map((column: ColumnInstance<User>) => (
-              <CustomHeaderColumn key={column.id} column={column} />
-            ))}
-          </tr>
-          </thead>
-          <tbody className="text-gray-600 fw-bold" {...getTableBodyProps()}>
-          {rows.length > 0 ? (
-            rows.map((row: Row<User>, i) => {
-              prepareRow(row);
-              return <CustomRow row={row} key={`row-${i}-${row.id}`} />;
-            })
-          ) : (
-            <tr>
-              <td colSpan={2}>
-                <div className="d-flex text-center w-100 align-content-center justify-content-center">
-                  No matching records found
-                </div>
-              </td>
+            <tr className='text-start text-muted fw-bolder fs-6 text-uppercase gs-0'>
+              {headers.map((column: ColumnInstance<User>) => (
+                <CustomHeaderColumn key={column.id} column={column} />
+              ))}
             </tr>
-          )}
+          </thead>
+          <tbody className='text-gray-600 fw-bold' {...getTableBodyProps()}>
+            {rows.length > 0 ? (
+              rows.map((row: Row<User>, i) => {
+                prepareRow(row)
+                return <CustomRow row={row} key={`row-${i}-${row.id}`} />
+              })
+            ) : (
+              <tr>
+                <td colSpan={2}>
+                  <div className='d-flex text-center w-100 align-content-center justify-content-center'>
+                    No matching records found
+                  </div>
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
       <TableListPagination />
       {isLoading && <TableListLoading />}
     </KTCardBody>
-  );
-};
+  )
+}
 
 const CommunityUsers: FC = () => {
-  const { community } = useCommunity();
+  const {community} = useCommunity()
   return (
     <>
       {community && (
@@ -80,7 +80,7 @@ const CommunityUsers: FC = () => {
           >
             <ListViewProvider>
               <KTCard>
-                <TableHeader name="Community Users" showFilter={true} showAdd={false} />
+                <TableHeader name='Community Users' showFilter={true} showAdd={false} />
                 <KTCardBody>
                   <CommunityUserFilters />
                   <CommunityUsersTable />
@@ -142,7 +142,7 @@ const CommunityUsers: FC = () => {
       {/*  </div>*/}
       {/*</KTCard>*/}
     </>
-  );
-};
+  )
+}
 
-export { CommunityUsers };
+export {CommunityUsers}
