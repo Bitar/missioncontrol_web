@@ -50,7 +50,7 @@ const ActivityTeamsColumns: ReadonlyArray<Column<Team>> = [
     id: 'team_status',
     Cell: ({...props}) => {
       const {status, color} = getTeamStatus(props.data[props.row.index].status)
-      return <BadgeCell status={status} color={color} />
+      return <BadgeCell status={status} color={color} align={'left'} />
     },
   },
 ]

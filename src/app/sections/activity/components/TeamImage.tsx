@@ -23,7 +23,7 @@ const TeamImage: FC<Props> = ({
       <div className={clsx('team-block mw-150px mx-auto text-center', className && className)}>
         {team ? (
           <>
-            {textPosition === 'up' && <div className='fs-6 fw-bold'>{team.name}</div>}
+            {textPosition === 'up' && <div className='team-name fs-6 fw-bold'>{team.name}</div>}
             <div className={clsx(`symbol symbol-${size} symbol-circle`, className && className)}>
               {isWinner && (
                 <span className={`position-absolute w-100 text-center`} style={{top: '-18px'}}>
@@ -38,7 +38,7 @@ const TeamImage: FC<Props> = ({
             </div>
             {textPosition === 'down' && (
               <div
-                className='mt-1 fw-bolder mw-100px mx-auto text-black'
+                className='team-name mt-1 fw-bolder mw-100px mx-auto'
                 style={{fontSize: '12px'}}
               >
                 {team.name}

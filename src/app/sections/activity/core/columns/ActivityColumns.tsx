@@ -8,6 +8,7 @@ import {formatActivityStatus, getDateConvertedToLocal} from '../../../../helpers
 import {Link} from 'react-router-dom'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
+import {BadgeCell} from '../../../../modules/table/columns/BadgeCell'
 
 dayjs.extend(localizedFormat)
 
@@ -47,7 +48,7 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
           <div className='d-flex align-items-center'>
             <div className='d-flex flex-column'>
               <span className='text-gray-800 pe-none mb-1'>
-                <i className='fas fa fa-people-group'></i>{' '}
+                <i className='fas fa fa-people-group text-mc-secondary'></i>{' '}
                 {props.data[props.row.index]?.community?.name}
               </span>
             </div>
@@ -62,13 +63,7 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
     defaultCanSort: false,
     Cell: ({...props}) => {
       const {status, color} = formatActivityStatus(props.data[props.row.index].status)
-      return (
-        <div className='d-flex align-items-center justify-content-around'>
-          <div className='d-flex flex-column'>
-            <span className={'badge badge-' + color}>{status}</span>
-          </div>
-        </div>
-      )
+      return <BadgeCell status={status} color={color} align={'left'} />
     },
   },
   {

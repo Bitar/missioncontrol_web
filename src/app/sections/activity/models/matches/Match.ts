@@ -2,7 +2,7 @@ import {ID, Response} from '../../../../../_metronic/helpers'
 import {Round} from './Round'
 import {Team} from '../../../../models/squad/Team'
 import {Activity} from '../Activity'
-import { User } from "../../../identity/user/models/User";
+import {User} from '../../../identity/user/models/User'
 
 export type Match = {
   id?: ID
@@ -35,7 +35,7 @@ export type Match = {
   }
 
   dispute?: {
-    user: User,
+    user: User
     message: string
   }
 }
