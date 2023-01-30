@@ -13,7 +13,7 @@ export const EmptyRoundBlock: FC<{ roundIndex: number; match: Match }> = ({ roun
 
         <div className="mt-6 d-flex justify-content-around">
           {match?.teams?.map((team, teamScoreIndex) => {
-            return <EmptyScoresBlock roundIndex={roundIndex} team={team}
+            return <EmptyScoresBlock roundIndex={roundIndex} team={team} teamScoreIndex={teamScoreIndex}
                                      key={`round-empty-score-per-team-${teamScoreIndex}`} />;
           })}
         </div>

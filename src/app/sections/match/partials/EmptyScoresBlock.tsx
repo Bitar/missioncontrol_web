@@ -7,9 +7,10 @@ import { useActivity } from "../../activity/core/contexts/ActivityContext";
 type Props = {
   roundIndex: number,
   team: Team
+  teamScoreIndex: number
 }
 
-export const EmptyScoresBlock: FC<Props> = ({roundIndex, team}) => {
+export const EmptyScoresBlock: FC<Props> = ({roundIndex, team, teamScoreIndex}) => {
   const {activity} = useActivity();
 
   return (
@@ -26,13 +27,12 @@ export const EmptyScoresBlock: FC<Props> = ({roundIndex, team}) => {
                 <div className='col-lg-8 fv-row'>
                   <Field
                     type='text'
-                    name={team?.id + '__' + roundIndex + '__' + settings?.key?.key}
+                    name={`rounds.${roundIndex}.scores.${teamScoreIndex}.keys.${index}.value`}
                     className='form-control form-control-sm mb-3 mb-lg-0'
                     autoComplete='off'
-                    defaultValue={0}
                   />
                   <div className='text-danger mt-2'>
-                    <ErrorMessage name={team?.id + '__' + roundIndex + '__' + settings?.key?.key} />
+                    <ErrorMessage name={`rounds.${roundIndex}.scores.${teamScoreIndex}.keys.${index}.value`} />
                   </div>
 
                   {/*<Field*/}

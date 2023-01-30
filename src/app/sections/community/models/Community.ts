@@ -115,6 +115,7 @@ export type CommunityFormType = {
 }
 
 export const initialCommunityFormTypeByCommunity = (community?: Community) => {
+  console.log(community);
   return {
     name: community?.name || '',
     description: community?.description || '',

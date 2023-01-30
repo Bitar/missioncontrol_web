@@ -1,8 +1,8 @@
 import React, {FC, useState} from 'react'
 import {CommunityFormType, initialCommunityFormTypeByCommunity} from '../models/Community'
-import {KTCard, KTCardBody, QUERIES} from '../../../../_metronic/helpers'
+import {QUERIES} from '../../../../_metronic/helpers'
 import {useCommunity} from '../CommunityContext'
-import {KTCardHeader} from '../../../helpers/components/KTCardHeader'
+import {KTCard, KTCardBody, KTCardHeader} from "../../../helpers/components"
 import Tab from 'react-bootstrap/Tab'
 import Nav from 'react-bootstrap/Nav'
 import {GeneralDetail} from '../partials/community-form-steps/GeneralDetail'

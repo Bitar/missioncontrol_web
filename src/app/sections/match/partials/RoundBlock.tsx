@@ -68,13 +68,14 @@ export const RoundBlock: FC<{ roundIndex: number; round: Round; match: Match }> 
                           <div className="col-lg-8 fv-row">
                             <Field
                               type="text"
-                              name={team?.id + "__" + roundIndex + "__" + stuff?.key?.key}
+                              name={`rounds.${roundIndex}.scores.${teamScoreIndex}.keys.${i}.value`}
                               className="form-control form-control-sm mb-3 mb-lg-0"
                               autoComplete="off"
-                              defaultValue={stuff?.value}
                             />
+
                             <div className="text-danger mt-2">
-                              <ErrorMessage name={team?.id + "__" + roundIndex + "__" + stuff?.key?.key} />
+                              <ErrorMessage
+                                name={`rounds.[${roundIndex}].scores.[${teamScoreIndex}].keys.[${i}].value`} />
                             </div>
                           </div>
                         </div>
@@ -86,7 +87,7 @@ export const RoundBlock: FC<{ roundIndex: number; round: Round; match: Match }> 
             );
           })}
           {match?.teams?.filter((team) => !teamsAdded.includes(team?.id)).map((team, teamScoreIndex) => {
-            return <EmptyScoresBlock roundIndex={roundIndex} team={team}
+            return <EmptyScoresBlock roundIndex={roundIndex} team={team} teamScoreIndex={1}
                                      key={`round-empty-score-per-team-${teamScoreIndex}`} />;
           })}
         </div>
