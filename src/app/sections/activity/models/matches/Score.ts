@@ -3,6 +3,7 @@ import { ScoreSheet } from "./ScoreSheet";
 import { Activity } from "../Activity";
 import { Match } from "./Match";
 import { Round } from "./Round";
+import { Team } from "../../../../models/squad/Team";
 
 export type Score = {
   id?: ID
@@ -89,69 +90,77 @@ export const defaultScoreSettings = (match?: Match, activity?: Activity) => {
   return scoreSettings;
 };
 
-export const defaultRound = (round: number, matchRound?: Round) => {
+export const updateScores = (matchRound: Round, teams?: Team[]) => {
+  let scoresObjs: any[] = [];
+
+  matchRound?.scores.forEach((score) => {
+    let scoreObj: any = {
+      team_id: score?.team_id,
+      keys: []
+    };
+
+    score?.score_sheet.forEach((scoreSheet) => {
+      let scoreSheetObj = {
+        key: scoreSheet?.score_settings_id,
+        value: scoreSheet?.value
+      };
+      scoreObj?.keys.push(scoreSheetObj);
+    });
+
+    scoresObjs.push(scoreObj);
+  });
+
+  // Check if MatchRound has 2 scores
+  if (matchRound?.scores.length === 1) {
+    let scoreObj = defaultScoreTeam(teams?.find((team) => team?.id !== matchRound?.scores[0]?.team_id)?.id);
+    scoresObjs.push(scoreObj);
+  }
+
+  return scoresObjs;
+
+};
+
+const defaultScoreTeam = (team_id?: ID) => {
+  return {
+    team_id: team_id || 0,
+    keys: [
+      {
+        key: 0,
+        value: 0
+      },
+      {
+        key: 0,
+        value: 0
+      }
+    ]
+  };
+};
+
+export const defaultRound = (round: number, matchRound?: Round, teams?: Team[]) => {
   let roundObj: any;
   if (matchRound) {
     roundObj = {
       round: matchRound?.round,
-      scores: []
+      scores: updateScores(matchRound, teams)
     };
-
-    matchRound?.scores.forEach((score) => {
-      let scoreObj: any = {
-        team_id: score?.team_id,
-        keys: []
-      };
-
-      score?.score_sheet.forEach((scoreSheet) => {
-        let scoreSheetObj = {
-          key: scoreSheet?.score_settings_id,
-          value: scoreSheet?.value
-        };
-        scoreObj?.keys.push(scoreSheetObj);
-      });
-
-      roundObj?.scores.push(scoreObj);
-    });
-
-
-    console.log('if');
   } else {
-    console.log('else');
+    let scoresObj: any[] = [];
+
+    if (teams && teams.length > 0) {
+      teams?.forEach((team) => {
+        scoresObj.push(defaultScoreTeam(team?.id));
+      });
+    } else {
+      scoresObj.push(defaultScoreTeam());
+      scoresObj.push(defaultScoreTeam());
+    }
+
     roundObj = {
       round: round,
-      scores: [
-        {
-          team_id: 0,
-          keys: [
-            {
-              key: 0,
-              value: 0
-            },
-            {
-              key: 0,
-              value: 0
-            }
-          ]
-        },
-        {
-          team_id: 0,
-          keys: [
-            {
-              key: 0,
-              value: 0
-            },
-            {
-              key: 0,
-              value: 0
-            }
-          ]
-        }
-      ]
+      scores: scoresObj
     };
   }
 
-  console.log(roundObj);
   return roundObj;
 };
 

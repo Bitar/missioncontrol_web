@@ -31,6 +31,8 @@ export const EmptyScoresBlock: FC<Props> = ({roundIndex, team, teamScoreIndex}) 
                     className='form-control form-control-sm mb-3 mb-lg-0'
                     autoComplete='off'
                   />
+
+
                   <div className='text-danger mt-2'>
                     <ErrorMessage name={`rounds.${roundIndex}.scores.${teamScoreIndex}.keys.${index}.value`} />
                   </div>
