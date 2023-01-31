@@ -2,7 +2,7 @@ import React, {FC, useState} from 'react'
 import {CommunityFormType, initialCommunityFormTypeByCommunity} from '../models/Community'
 import {QUERIES} from '../../../../_metronic/helpers'
 import {useCommunity} from '../CommunityContext'
-import {KTCard, KTCardBody, KTCardHeader} from "../../../helpers/components"
+import {KTCard, KTCardBody, KTCardHeader} from '../../../helpers/components'
 import Tab from 'react-bootstrap/Tab'
 import Nav from 'react-bootstrap/Nav'
 import {GeneralDetail} from '../partials/community-form-steps/GeneralDetail'

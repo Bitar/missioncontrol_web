@@ -51,11 +51,7 @@ const ActivityDetails = () => {
 
             <div className='col-lg-8'>
               <span className='fw-bolder fs-6 me-2'>
-                <CountUp
-                  useEasing={false}
-                  end={activity?.settings?.total_game_time}
-                />{' '}
-                min
+                <CountUp useEasing={false} end={activity?.settings?.total_game_time} /> min
               </span>
             </div>
           </div>

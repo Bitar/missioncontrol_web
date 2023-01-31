@@ -2,11 +2,13 @@ import { KTCard, KTCardBody, KTCardHeader } from "../../../helpers/components";
 import React, { FC, useEffect, useState } from "react";
 import { RoundBlock } from "./RoundBlock";
 import { EmptyRoundBlock } from "./EmptyRoundBlock";
-import { Form, Formik, useFormikContext } from "formik";
+import { Form, Formik } from "formik";
 import { FormAction } from "../../../helpers/form/FormAction";
 import * as Yup from "yup";
 import { useActivity } from "../../activity/core/contexts/ActivityContext";
 import { defaultRound, roundScoreObject } from "../../activity/models/matches/Score";
+import { jsonToFormData } from "../../../helpers/form/FormHelper";
+import { updateScores } from "../core/ScoreRequests";
 
 export const ScoreSettings: FC = () => {
   const { match, activity } = useActivity();
@@ -24,33 +26,50 @@ export const ScoreSettings: FC = () => {
 
         if (roundExist.round) {
           if (matchRound?.scores && matchRound?.scores.length > 0) {
-            roundExist = defaultRound(i, matchRound, match?.teams);
-
-            tempRounds[i - 1] = roundExist;
+            roundExist = defaultRound(i, match?.teams, matchRound);
+          } else {
+            roundExist = defaultRound(i, match?.teams);
           }
         } else {
           if (matchRound?.scores && matchRound?.scores.length > 0) {
-            roundExist = defaultRound(i, matchRound);
+            roundExist = defaultRound(i, match?.teams, matchRound);
           } else {
-            roundExist = defaultRound(i);
+            roundExist = defaultRound(i, match?.teams);
           }
-
-          tempRounds[i - 1] = roundExist;
         }
+
+        tempRounds[i - 1] = roundExist;
       }
 
       setRounds(tempRounds);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activity?.settings?.rounds, match?.teams]);
 
-  }, [activity?.settings?.rounds, match]);
+  const handleSubmit = () => {
+    let dataObj = {
+      "rounds": rounds
+    };
+    let data = jsonToFormData(dataObj);
 
-  const handleSubmit = (e: any) => {
-    console.log("submit");
+    updateScores(match?.id, data).then((response) => {
+      console.log(response);
+    });
   };
 
   const handleOnChange = (e: any) => {
-    console.log(e.target.name);
-    console.log(e.target.value);
+    let targetName = e.target.name;
+    let targetValue = e.target.value;
+
+    let tempRounds = [...rounds];
+    let fieldName = targetName.split(".");
+
+    let existingValue = { ...tempRounds[fieldName[1]].scores[fieldName[3]].keys[fieldName[5]] };
+    existingValue.value = targetValue;
+
+    tempRounds[fieldName[1]].scores[fieldName[3]].keys[fieldName[5]] = existingValue;
+
+    setRounds(tempRounds);
   };
 
   const scoreUpdateValidation = Yup.object().shape({});
@@ -72,15 +91,29 @@ export const ScoreSettings: FC = () => {
         enableReinitialize
       >
         {() => (
-          <Form onChange={handleOnChange} className="form collapse show" autoComplete="off" id="update-scores-wrapper">
+          <Form
+            onChange={handleOnChange}
+            className="form collapse show"
+            autoComplete="off"
+            id="update-scores-wrapper"
+          >
             <KTCardBody className="pb-0 pt-5">
               {match?.rounds?.map((round, index) =>
                 round?.scores.length > 0 ? (
                   // <div key={`round-block-${index}`}></div>
-                  <RoundBlock match={match} round={round} roundIndex={index} key={`round-block-${index}`} />
+                  <RoundBlock
+                    match={match}
+                    round={round}
+                    roundIndex={index}
+                    key={`round-block-${index}`}
+                  />
                 ) : (
                   // <div key={`round-empty-block-${index}`}></div>
-                  <EmptyRoundBlock match={match} roundIndex={index} key={`round-empty-block-${index}`} />
+                  <EmptyRoundBlock
+                    match={match}
+                    roundIndex={index}
+                    key={`round-empty-block-${index}`}
+                  />
                 )
               )}
             </KTCardBody>

@@ -1,5 +1,5 @@
 import React, {Dispatch, FC, SetStateAction, useState} from 'react'
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import {Link, useLocation, useNavigate} from 'react-router-dom'
 import {formatMatchStatus} from '../../helpers/ActivityHelper'
 import {Match} from '../activity/models/matches/Match'
 import {
@@ -26,7 +26,7 @@ const MatchInfo: FC<Props> = ({match, setMatch}) => {
   const location = useLocation()
   const {activity} = useActivity()
   const [isDisputeApproved, setIsDisputeApproved] = useState<boolean>(false)
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const getStatus = (matchStatus: any) => {
     return formatMatchStatus(matchStatus)
@@ -154,7 +154,11 @@ const MatchInfo: FC<Props> = ({match, setMatch}) => {
               {match?.status !== 6 && match?.status !== 7 && (
                 <div className='d-flex justify-content-center mt-3'>
                   <button
-                    onClick={() => navigate('/activities/' + activity?.id + '/matches/' + match?.id + '/settings')}
+                    onClick={() =>
+                      navigate(
+                        '/activities/' + activity?.id + '/matches/' + match?.id + '/settings'
+                      )
+                    }
                     type='button'
                     className='btn btn-sm btn-success'
                   >

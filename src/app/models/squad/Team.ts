@@ -2,7 +2,7 @@ import {ID, Response} from '../../../_metronic/helpers'
 import {User} from '../../sections/identity/user/models/User'
 
 export type Team = {
-  id?: ID
+  id?: number
   name: string
   image: string
   captain_id: number

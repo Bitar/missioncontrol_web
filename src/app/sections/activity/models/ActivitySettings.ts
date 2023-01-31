@@ -21,6 +21,6 @@ export const initialActivitySettings = (activitySettings?: ActivitySettings) => 
     day: activitySettings?.day || 0,
     time: activitySettings?.time || '',
     timezone_id: activitySettings?.timezone_id || 0,
-    total_game_time: activitySettings?.total_game_time || 0
+    total_game_time: activitySettings?.total_game_time || 0,
   }
 }

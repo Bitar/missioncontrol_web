@@ -112,12 +112,13 @@ export const updateScores = (matchRound: Round, teams?: Team[]) => {
 
   // Check if MatchRound has 2 scores
   if (matchRound?.scores.length === 1) {
-    let scoreObj = defaultScoreTeam(teams?.find((team) => team?.id !== matchRound?.scores[0]?.team_id)?.id);
+    let scoreObj = defaultScoreTeam(
+      teams?.find((team) => team?.id !== matchRound?.scores[0]?.team_id)?.id
+    );
     scoresObjs.push(scoreObj);
   }
 
   return scoresObjs;
-
 };
 
 const defaultScoreTeam = (team_id?: ID) => {
@@ -136,7 +137,7 @@ const defaultScoreTeam = (team_id?: ID) => {
   };
 };
 
-export const defaultRound = (round: number, matchRound?: Round, teams?: Team[]) => {
+export const defaultRound = (round: number, teams?: Team[], matchRound?: Round) => {
   let roundObj: any;
   if (matchRound) {
     roundObj = {
@@ -188,18 +189,17 @@ export const getDefaultScoreSheetKeys = (activity?: Activity) => {
   return defaultScoreSheet;
 };
 
-
 type scoreObjectKey = {
-  key: number,
+  key: number
   value: number
 }
 
 type scoresScoreObject = {
-  team_id: number,
   keys: scoreObjectKey[]
+  team_id: number
 }
 
 export type roundScoreObject = {
-  round: number,
+  round: number
   scores: scoresScoreObject[]
 }
