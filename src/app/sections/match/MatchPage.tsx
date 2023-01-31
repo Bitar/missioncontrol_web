@@ -1,66 +1,66 @@
-import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
-import {PageLink, PageTitle} from '../../layout/core'
-import React, {FC, useEffect} from 'react'
-import {MatchInfo} from './MatchInfo'
-import {MatchOverview} from './MatchOverview'
-import {getActivityMatch} from '../activity/core/requests/ActivityMatchRequests'
-import {useActivity} from '../activity/core/contexts/ActivityContext'
-import {MatchChat} from './pages/MatchChat'
-import {ScoreSettings} from './partials/ScoreSettings'
-import {MatchSettings} from './pages/MatchSettings'
+import { Navigate, Outlet, Route, Routes, useParams } from "react-router-dom";
+import { PageLink, PageTitle } from "../../layout/core";
+import React, { FC, useEffect } from "react";
+import { MatchInfo } from "./MatchInfo";
+import { MatchOverview } from "./MatchOverview";
+import { getActivityMatch } from "../activity/core/requests/ActivityMatchRequests";
+import { useActivity } from "../activity/core/contexts/ActivityContext";
+import { MatchChat } from "./pages/MatchChat";
+import { ScoreSettings } from "./partials/ScoreSettings";
+import { MatchSettings } from "./pages/MatchSettings";
 
 const MatchPage: FC = () => {
-  const {activity, match, setMatch} = useActivity()
+  const { activity, match, setMatch } = useActivity();
 
-  const params = useParams()
+  const params = useParams();
   // const [match, setMatch] = useState<Match | undefined>(initialMatch)
 
   const matchBreadCrumbs: Array<PageLink> = [
     {
-      title: 'Activities',
-      path: '/activities/:id/overview',
+      title: "Activities",
+      path: "/activities/:id/overview",
       isSeparator: false,
-      isActive: false,
+      isActive: false
     },
     {
-      title: '',
-      path: '',
+      title: "",
+      path: "",
       isSeparator: true,
-      isActive: false,
+      isActive: false
     },
     {
-      title: match?.activity?.title || '',
-      path: '/activities/' + params.id + '/overview',
+      title: match?.activity?.title || "",
+      path: "/activities/" + params.id + "/overview",
       isSeparator: false,
-      isActive: false,
+      isActive: false
     },
     {
-      title: '',
-      path: '',
+      title: "",
+      path: "",
       isSeparator: true,
-      isActive: false,
+      isActive: false
     },
     {
-      title: 'Match',
-      path: '',
+      title: "Match",
+      path: "",
       isSeparator: false,
-      isActive: false,
+      isActive: false
     },
     {
-      title: '',
-      path: '',
+      title: "",
+      path: "",
       isSeparator: true,
-      isActive: false,
-    },
-  ]
+      isActive: false
+    }
+  ];
 
   useEffect(() => {
     if (match === undefined || match?.id?.toString() !== params.matchId) {
       getActivityMatch(params.id, params.matchId).then((response) => {
-        setMatch(response)
-      })
+        setMatch(response);
+      });
     }
-  }, [params.id, params.matchId, match, setMatch])
+  }, [params.id, params.matchId, match, setMatch]);
 
   return (
     <Routes>
@@ -73,29 +73,29 @@ const MatchPage: FC = () => {
         }
       >
         <Route
-          path='overview'
+          path="overview"
           element={
             <>
-              <PageTitle breadcrumbs={matchBreadCrumbs}>{'Overview'}</PageTitle>
+              <PageTitle breadcrumbs={matchBreadCrumbs}>{"Overview"}</PageTitle>
               <MatchOverview activity={activity} match={match} />
             </>
           }
         />
         <Route
-          path='chat'
+          path="chat"
           element={
             <>
-              <PageTitle breadcrumbs={matchBreadCrumbs}>{'Chat'}</PageTitle>
+              <PageTitle breadcrumbs={matchBreadCrumbs}>{"Chat"}</PageTitle>
               <MatchChat />
             </>
           }
         />
         <Route
-          path='settings'
+          path="settings"
           element={
             <>
-              <PageTitle breadcrumbs={matchBreadCrumbs}>{'Settings'}</PageTitle>
-              <MatchSettings match={match} />
+              <PageTitle breadcrumbs={matchBreadCrumbs}>{"Settings"}</PageTitle>
+              <MatchSettings />
             </>
           }
         />
@@ -110,7 +110,7 @@ const MatchPage: FC = () => {
         />
       </Route>
     </Routes>
-  )
-}
+  );
+};
 
-export {MatchPage}
+export { MatchPage };

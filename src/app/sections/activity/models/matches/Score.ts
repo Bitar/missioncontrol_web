@@ -100,6 +100,8 @@ export const updateScores = (activity: Activity, matchRound: Round, teams?: Team
     };
 
     score?.score_sheet.forEach((scoreSheet) => {
+      console.log('here');
+      console.log(scoreSheet);
       let scoreSheetObj = {
         key: scoreSheet?.score_settings_id,
         value: scoreSheet?.value

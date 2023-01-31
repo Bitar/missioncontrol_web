@@ -9,9 +9,10 @@ import { useActivity } from "../../activity/core/contexts/ActivityContext";
 import { defaultRound, roundScoreObject } from "../../activity/models/matches/Score";
 import { jsonToFormData } from "../../../helpers/form/FormHelper";
 import { updateScores } from "../core/ScoreRequests";
+import toast from "react-hot-toast";
 
 export const ScoreSettings: FC = () => {
-  const { match, activity } = useActivity();
+  const { match, activity, setMatch } = useActivity();
 
   const [rounds, setRounds] = useState<roundScoreObject[]>([]);
 
@@ -53,7 +54,8 @@ export const ScoreSettings: FC = () => {
     let data = jsonToFormData(dataObj);
 
     updateScores(match?.id, data).then((response) => {
-      console.log(response);
+      toast.success('Match Updated');
+      setMatch(response)
     });
   };
 

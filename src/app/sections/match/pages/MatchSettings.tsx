@@ -1,18 +1,11 @@
 import {KTCard, KTCardBody, KTCardHeader} from '../../../helpers/components'
 import {Tab} from 'react-bootstrap'
 import Nav from 'react-bootstrap/Nav'
-import React, {FC, useEffect, useRef} from 'react'
+import React, { FC } from "react";
 import {ScoreSettings} from '../partials/ScoreSettings'
-import {Match} from '../../activity/models/matches/Match'
-import {defaultScoreSettings, initScoreSettings} from '../../activity/models/matches/Score'
-import {useActivity} from '../../activity/core/contexts/ActivityContext'
 
-type Props = {
-  match: Match | undefined
-}
 
-export const MatchSettings: FC<Props> = ({match}) => {
-  const {activity} = useActivity()
+export const MatchSettings: FC = () => {
 
   const settingsNav = [
     {
