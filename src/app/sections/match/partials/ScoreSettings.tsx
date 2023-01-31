@@ -26,15 +26,15 @@ export const ScoreSettings: FC = () => {
 
         if (roundExist.round) {
           if (matchRound?.scores && matchRound?.scores.length > 0) {
-            roundExist = defaultRound(i, match?.teams, matchRound);
+            roundExist = defaultRound(i, activity, match?.teams, matchRound);
           } else {
-            roundExist = defaultRound(i, match?.teams);
+            roundExist = defaultRound(i, activity, match?.teams);
           }
         } else {
           if (matchRound?.scores && matchRound?.scores.length > 0) {
-            roundExist = defaultRound(i, match?.teams, matchRound);
+            roundExist = defaultRound(i, activity, match?.teams, matchRound);
           } else {
-            roundExist = defaultRound(i, match?.teams);
+            roundExist = defaultRound(i, activity, match?.teams);
           }
         }
 
@@ -44,7 +44,7 @@ export const ScoreSettings: FC = () => {
       setRounds(tempRounds);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activity?.settings?.rounds, match?.teams]);
+  }, [activity, match?.teams]);
 
   const handleSubmit = () => {
     let dataObj = {

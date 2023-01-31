@@ -90,7 +90,7 @@ export const defaultScoreSettings = (match?: Match, activity?: Activity) => {
   return scoreSettings;
 };
 
-export const updateScores = (matchRound: Round, teams?: Team[]) => {
+export const updateScores = (activity: Activity, matchRound: Round, teams?: Team[]) => {
   let scoresObjs: any[] = [];
 
   matchRound?.scores.forEach((score) => {
@@ -112,7 +112,7 @@ export const updateScores = (matchRound: Round, teams?: Team[]) => {
 
   // Check if MatchRound has 2 scores
   if (matchRound?.scores.length === 1) {
-    let scoreObj = defaultScoreTeam(
+    let scoreObj = defaultScoreTeam(activity,
       teams?.find((team) => team?.id !== matchRound?.scores[0]?.team_id)?.id
     );
     scoresObjs.push(scoreObj);
@@ -121,39 +121,54 @@ export const updateScores = (matchRound: Round, teams?: Team[]) => {
   return scoresObjs;
 };
 
-const defaultScoreTeam = (team_id?: ID) => {
+const defaultScoreTeam = (activity: Activity, team_id?: ID) => {
   return {
     team_id: team_id || 0,
-    keys: [
-      {
-        key: 0,
-        value: 0
-      },
-      {
-        key: 0,
-        value: 0
-      }
-    ]
+    keys: getKeysArray(activity)
   };
 };
 
-export const defaultRound = (round: number, teams?: Team[], matchRound?: Round) => {
+const getKeysArray = (activity?: Activity) => {
+  let keysArray: any[] = [];
+
+  if (activity) {
+    activity?.game_mode?.scoring_settings.forEach((scoreSetting) => {
+      keysArray.push({
+        key: scoreSetting.id,
+        value: 0
+      });
+    });
+  } else {
+    keysArray.push({
+      key: 0,
+      value: 0
+    });
+    keysArray.push({
+      key: 0,
+      value: 0
+    });
+  }
+
+  return keysArray;
+};
+
+export const defaultRound = (round: number, activity: Activity, teams?: Team[], matchRound?: Round) => {
   let roundObj: any;
   if (matchRound) {
     roundObj = {
       round: matchRound?.round,
-      scores: updateScores(matchRound, teams)
+      scores: updateScores(activity, matchRound, teams)
     };
   } else {
     let scoresObj: any[] = [];
 
     if (teams && teams.length > 0) {
       teams?.forEach((team) => {
-        scoresObj.push(defaultScoreTeam(team?.id));
+        scoresObj.push(defaultScoreTeam(activity, team?.id));
       });
     } else {
-      scoresObj.push(defaultScoreTeam());
-      scoresObj.push(defaultScoreTeam());
+      scoresObj.push(defaultScoreTeam(activity));
+      scoresObj.push(defaultScoreTeam(activity));
     }
 
     roundObj = {

@@ -70,7 +70,6 @@ export const RoundBlock: FC<{roundIndex: number; round: Round; match: Match}> = 
                           </label>
                           <div className='col-lg-8 fv-row'>
 
-
                             <InputMask
                               mask='99999'
                               className='form-control form-control-sm mb-3 mb-lg-0'
@@ -81,13 +80,6 @@ export const RoundBlock: FC<{roundIndex: number; round: Round; match: Match}> = 
                                 setFieldValue(`rounds.${roundIndex}.scores.${teamScoreIndex}.keys.${i}.value`, e.target.value)
                               }}
                             />
-
-                            {/*<Field*/}
-                            {/*  type='text'*/}
-                            {/*  name={`rounds.${roundIndex}.scores.${teamScoreIndex}.keys.${i}.value`}*/}
-                            {/*  className='form-control form-control-sm mb-3 mb-lg-0'*/}
-                            {/*  autoComplete='off'*/}
-                            {/*/>*/}
 
                             <div className='text-danger mt-2'>
                               <ErrorMessage
