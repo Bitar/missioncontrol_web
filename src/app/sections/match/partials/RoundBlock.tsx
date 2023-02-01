@@ -14,9 +14,7 @@ export const RoundBlock: FC<{roundIndex: number; round: Round; match: Match}> = 
   match,
 }) => {
   const {activity} = useActivity()
-  const {setFieldValue, values} = useFormikContext()
-
-  console.log(values);
+  const {setFieldValue} = useFormikContext()
 
   let teamsAdded: any[] = []
 
@@ -70,15 +68,10 @@ export const RoundBlock: FC<{roundIndex: number; round: Round; match: Match}> = 
                           </label>
                           <div className='col-lg-8 fv-row'>
 
-                            <InputMask
-                              mask='99999'
-                              className='form-control form-control-sm mb-3 mb-lg-0'
-                              maskPlaceholder={null}
+                            <Field
+                              type='text'
                               name={`rounds.${roundIndex}.scores.${teamScoreIndex}.keys.${i}.value`}
-
-                              onChange={(e) => {
-                                setFieldValue(`rounds.${roundIndex}.scores.${teamScoreIndex}.keys.${i}.value`, e.target.value)
-                              }}
+                              className='form-control form-control-sm mb-3 mb-lg-0'
                             />
 
                             <div className='text-danger mt-2'>

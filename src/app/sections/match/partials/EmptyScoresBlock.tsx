@@ -13,7 +13,7 @@ type Props = {
 
 export const EmptyScoresBlock: FC<Props> = ({ roundIndex, team, teamScoreIndex }) => {
   const { activity } = useActivity();
-  const {setFieldValue} = useFormikContext()
+  const { setFieldValue } = useFormikContext();
 
   return (
     <div>
@@ -28,14 +28,10 @@ export const EmptyScoresBlock: FC<Props> = ({ roundIndex, team, teamScoreIndex }
               </label>
               <div className="col-lg-8 fv-row">
 
-                <InputMask
-                  mask='99999'
-                  className='form-control form-control-sm mb-3 mb-lg-0'
-                  maskPlaceholder={null}
+                <Field
+                  type="text"
                   name={`rounds.${roundIndex}.scores.${teamScoreIndex}.keys.${index}.value`}
-                  onChange={(e) => {
-                    setFieldValue(`rounds.${roundIndex}.scores.${teamScoreIndex}.keys.${index}.value`, e.target.value)
-                  }}
+                  className="form-control form-control-sm mb-3 mb-lg-0"
                 />
 
                 <div className="text-danger mt-2">
@@ -43,15 +39,6 @@ export const EmptyScoresBlock: FC<Props> = ({ roundIndex, team, teamScoreIndex }
                     name={`rounds.${roundIndex}.scores.${teamScoreIndex}.keys.${index}.value`}
                   />
                 </div>
-
-                {/*<Field*/}
-                {/*  type='text'*/}
-                {/*  name='title'*/}
-                {/*  placeholder='Title'*/}
-                {/*  className='form-control mb-3 mb-lg-0'*/}
-                {/*  autoComplete='off'*/}
-                {/*  // value={}*/}
-                {/*/>*/}
               </div>
             </div>
           );

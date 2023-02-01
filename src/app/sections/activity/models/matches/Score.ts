@@ -99,12 +99,14 @@ export const updateScores = (activity: Activity, matchRound: Round, teams?: Team
       keys: []
     };
 
+
+    // console.log(activity?.game_mode?.scoring_settings);
     score?.score_sheet.forEach((scoreSheet) => {
-      console.log('here');
-      console.log(scoreSheet);
+      let scoreSheetValue = checkScoreKey(activity, scoreSheet);
+
       let scoreSheetObj = {
         key: scoreSheet?.score_settings_id,
-        value: scoreSheet?.value
+        value: scoreSheetValue
       };
       scoreObj?.keys.push(scoreSheetObj);
     });
@@ -121,6 +123,18 @@ export const updateScores = (activity: Activity, matchRound: Round, teams?: Team
   }
 
   return scoresObjs;
+};
+
+const checkScoreKey = (activity: Activity, scoreSheet: ScoreSheet) => {
+  let scoreSetting = activity?.game_mode?.scoring_settings?.find((scoreSetting) => scoreSetting?.id === scoreSheet?.score_settings_id);
+
+  if (scoreSetting?.key?.type === 1) {
+    return scoreSheet?.value;
+  } else {
+    let exist = scoreSetting?.values?.find((scoreSettingValue) => scoreSettingValue?.value === scoreSheet?.value);
+
+    return exist?.key || 0;
+  }
 };
 
 const defaultScoreTeam = (activity: Activity, team_id?: ID) => {
