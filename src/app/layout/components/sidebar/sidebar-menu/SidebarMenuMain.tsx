@@ -49,6 +49,11 @@ const SidebarMenuMain = () => {
           <SidebarMenuItem to='/permissions' title='Permissions' hasBullet={true} />
         </SidebarMenuItemWithSub>
       </Restricted>
+
+      <Restricted to='view-games'>
+        <SidebarMenuItem to='/resources' title='Resources' fontIcon='fa-file' />
+      </Restricted>
+
     </>
   )
 }

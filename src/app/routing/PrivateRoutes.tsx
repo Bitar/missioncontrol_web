@@ -1,7 +1,7 @@
 import {Navigate, Route, Routes} from 'react-router-dom'
 import {MasterLayout} from '../layout/MasterLayout'
 import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper'
-import {Marketing} from '../pages/marketing/Marketing'
+import {Resources} from '../pages/marketing/Resources'
 import {SubscriptionIndex} from '../sections/billing/subscriptions/SubscriptionIndex'
 import {PermissionPage} from '../sections/identity/permission/pages/PermissionPage'
 import {SuspenseView} from '../layout/SuspenseView'
@@ -25,7 +25,7 @@ const PrivateRoutes = () => {
 
         {/* Pages */}
         <Route path='dashboard/*' element={<DashboardWrapper />} />
-        <Route path='marketing-support' element={<Marketing />} />
+        <Route path='resources' element={<Resources />} />
         {/* Pages */}
 
         {/* Sections */}
