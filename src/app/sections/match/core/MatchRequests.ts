@@ -41,11 +41,11 @@ export const rejectMatchDispute = (id: any): Promise<Match | undefined> => {
     .then((response: Response<Match>) => response.data)
 }
 
-export const approveMatchDispute = (id: any, formData: FormData): Promise<Match | undefined> => {
+export const approveMatchDispute = (id: any): Promise<Match | undefined> => {
   let url = `${MATCHES_URL}/${id}/dispute/approve`
 
   return axios
-    .post(url, formData)
+    .post(url)
     .then((response: AxiosResponse<Response<Match>>) => response.data)
     .then((response: Response<Match>) => response.data)
 }

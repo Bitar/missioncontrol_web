@@ -12,7 +12,7 @@ import clsx from 'clsx'
 import {TeamImage} from '../activity/components/TeamImage'
 import {isWinner} from '../../helpers/MatchHelper'
 import {BadgeCell} from '../../modules/table/columns/BadgeCell'
-import {rejectMatchDispute, updateMatchResult} from './core/MatchRequests'
+import { approveMatchDispute, rejectMatchDispute, updateMatchResult } from "./core/MatchRequests";
 import toast from 'react-hot-toast'
 import {useActivity} from '../activity/core/contexts/ActivityContext'
 import {ScoreSettings} from './partials/ScoreSettings'
@@ -62,6 +62,14 @@ const MatchInfo: FC<Props> = ({match, setMatch}) => {
     rejectMatchDispute(match?.id).then((response) => {
       setMatch(response)
       toast.error('Match dispute rejected!')
+    })
+  }
+
+  const approveDispute = () => {
+    setIsDisputeApproved(true)
+    approveMatchDispute(match?.id).then((response) => {
+      setMatch(response)
+      toast.success('Match dispute approved!')
     })
   }
 
@@ -154,11 +162,7 @@ const MatchInfo: FC<Props> = ({match, setMatch}) => {
               {match?.status !== 6 && match?.status !== 7 && (
                 <div className='d-flex justify-content-center mt-3'>
                   <button
-                    onClick={() =>
-                      navigate(
-                        '/activities/' + activity?.id + '/matches/' + match?.id + '/settings'
-                      )
-                    }
+                    onClick={approveDispute}
                     type='button'
                     className='btn btn-sm btn-success'
                   >
