@@ -7,6 +7,7 @@ import { StatisticsWidget5 } from "./StatisticsWidget5";
 import { UsersByDay } from "./UsersByDay";
 import { Game } from "../../../models/game/Game";
 import { PopularGames } from "./PopularGames";
+import { CommunitiesByBillingPlan, CommunitiesSubscriptions } from "./CommunitiesByBillingPlan";
 
 export type PopularGames = {
   total: number,
@@ -21,6 +22,8 @@ export type DashboardStuff = {
   active_activities: number
   commissioner_communities: number
   popular_games: PopularGames[]
+
+  communities_billing_plan: CommunitiesSubscriptions[]
 }
 
 export const SuperAdmin = () => {
@@ -37,8 +40,11 @@ export const SuperAdmin = () => {
   const [usersByDayDates, setUsersByDayDates] = useState<string[]>([]);
   const [usersByDayValues, setUsersByDayValues] = useState<number[]>([]);
 
-  const [popularGames, setPopularGames] = useState<string[]>([]);
+  const [communitySubscriptions, setCommunitySubscriptions] = useState<string[]>([]);
   const [popularGamesActivities, setPopularGamesActivities] = useState<number[]>([]);
+
+  const [communitiesSubscriptions, setCommunitiesSubscriptions] = useState<string[]>([]);
+  const [communitiesSubscriptionsValue, setCommunitiesSubscriptionsValue] = useState<number[]>([]);
 
   const [matchesToday, setMatchesToday] = useState<number>(0);
   const [activeActivities, setActiveActivitiesToday] = useState<number>(0);
@@ -54,8 +60,22 @@ export const SuperAdmin = () => {
         setActiveActivitiesToday(response.active_activities);
         setCommissionerCommunities(response.commissioner_communities);
         handlePopularGamesData(response.popular_games);
+        handleCommunityBySubscription(response.communities_billing_plan)
       }
     });
+  };
+
+  const handleCommunityBySubscription = (communitySubscriptions: CommunitiesSubscriptions[]) => {
+    let data: string[] = [];
+    let values: number[] = [];
+
+    communitySubscriptions.forEach((communitysub) => {
+      data.push(communitysub?.billing_plan?.name);
+      values.push(communitysub?.total_communities);
+    });
+
+    setCommunitiesSubscriptions(data);
+    setCommunitiesSubscriptionsValue(values);
   };
 
   const handlePopularGamesData = (popularGames: PopularGames[]) => {
@@ -67,7 +87,7 @@ export const SuperAdmin = () => {
       values.push(popularGame?.total);
     });
 
-    setPopularGames(games);
+    setCommunitySubscriptions(games);
     setPopularGamesActivities(values);
   };
 
@@ -162,23 +182,29 @@ export const SuperAdmin = () => {
       </div>
       <div className="row">
         <div className="col-xl-6">
+          {communitiesSubscriptions.length > 0 && communitiesSubscriptionsValue.length > 0 &&
+            <CommunitiesByBillingPlan className="mb-xl-8"
+                                      values={communitiesSubscriptionsValue} dates={communitiesSubscriptions} />
+          }
+        </div>
+        <div className="col-xl-6">
           {activitiesByDayValues.length > 0 && activitiesByDayDates.length > 0 &&
             <ActivitiesByDay className="mb-xl-8" activitiesCreation={activitiesCreation}
                              values={activitiesByDayValues} dates={activitiesByDayDates} />
           }
         </div>
-        <div className="col-xl-6">
-          {popularGames.length > 0 && popularGamesActivities.length > 0 &&
-            <PopularGames className={"mb-xl-8"} dates={popularGames} values={popularGamesActivities} />
+        <div className="col-xl-4">
+          {communitySubscriptions.length > 0 && popularGamesActivities.length > 0 &&
+            <PopularGames className={"mb-xl-8"} dates={communitySubscriptions} values={popularGamesActivities} />
           }
         </div>
-        <div className="col-xl-6">
+        <div className="col-xl-4">
           {usersByDayDates.length > 0 && usersByDayValues.length > 0 &&
             <UsersByDay className="mb-xl-8"
                         values={usersByDayValues} dates={usersByDayDates} />
           }
         </div>
-        <div className="col-xl-6">
+        <div className="col-xl-4">
           {communityByDayValues.length > 0 && communityByDayDates.length > 0 &&
             <CommunitiesByDay className="mb-xl-8" communitiesCreation={communitiesCreation}
                               values={communityByDayValues} dates={communityByDayDates} />
