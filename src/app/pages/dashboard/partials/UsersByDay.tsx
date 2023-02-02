@@ -87,7 +87,7 @@ function getChartOptions(height: number, values?: number[], dates?: string[]): A
     ],
     chart: {
       fontFamily: "inherit",
-      type: "area",
+      type: "line",
       height: 350,
       toolbar: {
         show: false

@@ -10,11 +10,10 @@ export type ActivitiesCreation = {
 
 type Props = {
   className: string
-  activitiesCreation?: ActivitiesCreation[]
   values: number[]
   dates: string[]
 }
-const ActivitiesByDay: React.FC<Props> = ({ className, values, dates }) => {
+const PopularGames: React.FC<Props> = ({ className, values, dates }) => {
   const chartRef = useRef<HTMLDivElement | null>(null);
   const { mode } = useThemeMode();
 
@@ -53,7 +52,7 @@ const ActivitiesByDay: React.FC<Props> = ({ className, values, dates }) => {
       {/* begin::Header */}
       <div className="card-header border-0 pt-5">
         <h3 className="card-title align-items-start flex-column">
-          <span className="card-label fw-bold fs-3 mb-1">Recent Activities</span>
+          <span className="card-label fw-bold fs-3 mb-1">Most Popular Games</span>
 
           {/*<span className='text-muted fw-semibold fs-7'>More than 1000 new records</span>*/}
         </h3>
@@ -71,36 +70,34 @@ const ActivitiesByDay: React.FC<Props> = ({ className, values, dates }) => {
   );
 };
 
-export { ActivitiesByDay };
+export { PopularGames };
 
 function getChartOptions(height: number, values?: number[], dates?: string[]): ApexOptions {
   const labelColor = getCSSVariableValue("--kt-gray-500");
   const borderColor = getCSSVariableValue("--kt-gray-200");
-  const baseColor = getCSSVariableValue("--kt-info");
-  const lightColor = getCSSVariableValue("--kt-info-light");
+  const baseColor = getCSSVariableValue("--kt-mc-secondary");
+
+  const primary = getCSSVariableValue("--kt-primary");
+  const success = getCSSVariableValue("--kt-success");
+  const warning = getCSSVariableValue("--kt-warning");
+  const danger = getCSSVariableValue("--kt-danger");
+  const info = getCSSVariableValue("--kt-info");
+  const secondary = getCSSVariableValue("--kt-secondary");
 
   return {
-    series: [
-      {
-        name: "New Activity",
-        data: values || []
-      }
-    ],
+    series: values,
+    labels: dates,
     chart: {
+      height: 400,
       fontFamily: "inherit",
-      type: "area",
-      height: 350,
-      toolbar: {
-        show: false
-      }
+      type: "pie",
+    },
+    legend: {
+      show: true,
+      position: 'bottom',
+      horizontalAlign: 'center',
     },
     plotOptions: {},
-    legend: {
-      show: false
-    },
-    dataLabels: {
-      enabled: false
-    },
     fill: {
       type: "solid",
       opacity: 1
@@ -108,56 +105,11 @@ function getChartOptions(height: number, values?: number[], dates?: string[]): A
     stroke: {
       curve: "smooth",
       show: true,
-      width: 3,
-      colors: [baseColor]
-    },
-    xaxis: {
-      categories: dates || [],
-      axisBorder: {
-        show: false
-      },
-      axisTicks: {
-        show: false
-      },
-      labels: {
-        style: {
-          colors: labelColor,
-          fontSize: "12px"
-        }
-      },
-      crosshairs: {
-        position: "front",
-        stroke: {
-          color: baseColor,
-          width: 1,
-          dashArray: 3
-        }
-      },
-      tooltip: {
-        enabled: true,
-        formatter: undefined,
-        offsetY: 0,
-        style: {
-          fontSize: "12px"
-        }
-      }
-    },
-    yaxis: {
-      labels: {
-        style: {
-          colors: labelColor,
-          fontSize: "12px"
-        }
-      }
+      width: 2,
+      colors: ["#ffffff"]
     },
     states: {
       normal: {
-        filter: {
-          type: "none",
-          value: 0
-        }
-      },
-      hover: {
         filter: {
           type: "none",
           value: 0
@@ -175,22 +127,9 @@ function getChartOptions(height: number, values?: number[], dates?: string[]): A
       style: {
         fontSize: "12px"
       },
-      y: {
-        formatter: function(val) {
-          return val + "";
-        }
-      }
     },
-    colors: [lightColor],
-    grid: {
-      borderColor: borderColor,
-      strokeDashArray: 4,
-      yaxis: {
-        lines: {
-          show: true
-        }
-      }
-    },
+    // colors: [lightColor],
+    colors: [primary, success, warning, danger, info, secondary],
     markers: {
       strokeColors: baseColor,
       strokeWidth: 3
