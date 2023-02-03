@@ -1,9 +1,9 @@
-import Box from '@mui/material/Box'
 import {Accordion, AccordionDetails, AccordionSummary, Typography} from '@mui/material'
+import Box from '@mui/material/Box'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import {Prizes} from './Prizes'
 import React, {Dispatch, SetStateAction, FC} from 'react'
-import {ActivityPrize, initialActivityPrize} from '../../models/ActivityPrize'
+import {ActivityPrize, initialActivityPrize} from '../../../../models/activity/ActivityPrize'
 
 type Props = {
   activityPrizes: ActivityPrize[]

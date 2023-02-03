@@ -1,6 +1,6 @@
 import {KTCard, KTCardBody, KTCardHeader} from '../../../helpers/components'
 import React, {FC, useState} from 'react'
-import {GameModeFormType, initGameModeFormType} from '../models/GameModeFormType'
+import {GameModeFormType, initGameModeFormType} from '../../../models/game/GameModeFormType'
 import {Form, Formik} from 'formik'
 import {FormErrorAlert} from '../../../modules/errors/partials/FormErrorAlert'
 import {jsonToFormData, updateData} from '../../../helpers/form/FormHelper'

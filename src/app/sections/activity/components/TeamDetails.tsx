@@ -1,4 +1,4 @@
-import {ActivityForm} from '../models/ActivityForm'
+import {ActivityForm} from '../../../models/activity/ActivityForm'
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
 import {Button, ButtonGroup} from '@mui/material'
 import {GameMode} from '../../../models/game/GameMode'

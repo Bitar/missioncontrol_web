@@ -1,5 +1,5 @@
 import {ColumnInstance, Row, useTable} from 'react-table'
-import {User} from '../../identity/user/models/User'
+import {User} from '../../iam/user/models/User'
 import {CustomHeaderColumn} from '../../../modules/table/columns/CustomHeaderColumn'
 import {CustomRow} from '../../../modules/table/columns/CustomRow'
 import {TableListPagination} from '../../../modules/table/TableListPagination'
@@ -10,7 +10,7 @@ import {
   useQueryResponseLoading,
 } from '../../../modules/table/QueryResponseProvider'
 import {useMemo} from 'react'
-import {usersColumns} from '../../identity/user/core/UserColumns'
+import {usersColumns} from '../../iam/user/core/UserColumns'
 
 const TimeZoneTable = () => {
   const timeZones = useQueryResponseData()

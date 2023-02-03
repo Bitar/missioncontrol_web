@@ -1,6 +1,6 @@
 import {Prizes} from './Prizes'
 import React, {Dispatch, FC, SetStateAction} from 'react'
-import {ActivityPrize} from '../../models/ActivityPrize'
+import {ActivityPrize} from '../../../../models/activity/ActivityPrize'
 
 type Props = {
   activityPrizes: ActivityPrize[]

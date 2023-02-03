@@ -3,7 +3,7 @@ import {ScoringKey} from './ScoringKey'
 import {ScoringValues} from './ScoringValues'
 
 export type ScoringSettings = {
-  id?: ID
+  id?: number
   key: ScoringKey
   values: ScoringValues[]
 }

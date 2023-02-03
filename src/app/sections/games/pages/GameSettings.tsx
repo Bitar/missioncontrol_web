@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from 'react'
 import {useGame} from '../core/GameContext'
-import {GameFormType, initGameFormType} from '../models/GameFormType'
+import {GameFormType, initGameFormType} from '../../../models/game/GameFormType'
 import {KTCard, KTCardBody, KTCardHeader} from '../../../helpers/components'
 import Nav from 'react-bootstrap/Nav'
 import Tab from 'react-bootstrap/Tab'

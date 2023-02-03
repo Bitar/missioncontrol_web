@@ -1,7 +1,7 @@
 import {ID, Response} from '../../../_metronic/helpers'
 
 export type TimeZone = {
-  id?: ID
+  id?: number
   name: string
   value: string
   offset?: string

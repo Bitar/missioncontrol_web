@@ -4,10 +4,10 @@ import React, {useEffect, useState} from 'react'
 import {useQueryRequest} from '../../../modules/table/QueryRequestProvider'
 import {initialQueryState} from '../../../helpers/crud-helper/models'
 import {updateData} from '../../../helpers/form/FormHelper'
-import {Community} from '../../community/models/Community'
+import {Community} from '../../../models/community/Community'
 import {getAllCommunities} from '../../community/core/CommunityRequests'
 import Select from 'react-select'
-import {isCommunityAdmin} from '../../identity/user/models/User'
+import {isCommunityAdmin} from '../../../models/iam/User'
 import {useAuth} from '../../../modules/auth'
 
 const initActivity = {

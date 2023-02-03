@@ -1,4 +1,4 @@
-import {communitySchema} from '../../models/Community'
+import {communitySchema} from '../../../../models/community/Community'
 import React, {FC, useEffect, useState} from 'react'
 import {useCommunity} from '../../CommunityContext'
 import {ErrorMessage, Field, Form, Formik} from 'formik'

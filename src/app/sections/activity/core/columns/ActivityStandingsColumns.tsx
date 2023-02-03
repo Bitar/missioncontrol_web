@@ -1,7 +1,7 @@
 import {Column} from 'react-table'
 import {TextCell} from '../../../../modules/table/columns/TextCell'
 import {CustomHeader} from '../../../../modules/table/columns/CustomHeader'
-import {ActivityStanding} from '../../models/ActivityStanding'
+import {ActivityStanding} from '../../../../models/activity/ActivityStanding'
 import {TeamImage} from '../../components/TeamImage'
 import React from 'react'
 

@@ -4,7 +4,7 @@ import {getCommunityActivities} from '../core/CommunityRequests'
 import {useParams} from 'react-router-dom'
 import {Activity} from '../../activity/models/Activity'
 import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
-import {ActivityObject} from '../../identity/user/objects/activity/ActivityObject'
+import {ActivityObject} from '../../iam/user/objects/activity/ActivityObject'
 
 type Props = {
   community: Community | undefined

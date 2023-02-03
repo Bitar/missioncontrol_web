@@ -8,7 +8,7 @@ import {
   useQueryResponseLoading,
 } from '../../../modules/table/QueryResponseProvider'
 import {MatchesColumns} from '../core/columns/MatchesColumns'
-import {Match} from '../models/matches/Match'
+import {Match} from '../../../models/activity/matches/Match'
 import clsx from 'clsx'
 
 type Props = {

@@ -1,8 +1,8 @@
-import {ID, Response} from '../../helpers/crud-helper/models'
+import {Response} from '../../helpers/crud-helper/models'
 
 export type PlanOption = {
-  id?: ID
-  category_id?: ID
+  id?: number
+  category_id?: number
   name?: string
   label?: string
   value: string

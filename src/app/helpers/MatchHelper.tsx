@@ -1,4 +1,4 @@
-import {Match} from '../sections/activity/models/matches/Match'
+import {Match} from '../models/activity/matches/Match'
 import {ID} from './crud-helper/models'
 
 export function isWinner(match: Match, teamId: ID) {

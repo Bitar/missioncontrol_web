@@ -1,4 +1,4 @@
-import {Match, MatchQueryResponse} from '../../models/matches/Match'
+import {Match, MatchQueryResponse} from '../../../../models/activity/matches/Match'
 import axios, {AxiosResponse} from 'axios'
 import {Response} from '../../../../helpers/crud-helper/models'
 

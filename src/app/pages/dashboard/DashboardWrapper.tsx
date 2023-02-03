@@ -1,6 +1,6 @@
 import React, {FC} from 'react'
 import {useAuth} from '../../modules/auth'
-import {isCommunityAdmin, isSuperAdmin} from '../../sections/identity/user/models/User'
+import {isCommunityAdmin, isSuperAdmin} from '../../models/iam/User'
 import {CommunityView} from '../../sections/community/pages/CommunityView'
 import {CreateCommunityWidget} from '../../layout/widgets/CreateCommunityWidget'
 import { SuperAdmin } from "./partials/SuperAdmin";

@@ -2,7 +2,7 @@
 import clsx from 'clsx'
 import React, {FC} from 'react'
 import {Plan} from '../../models/billing/Plan'
-import {CommunityFormType} from '../community/models/Community'
+import {CommunityFormType} from '../../models/community/Community'
 
 type Props = {
   plan: Plan

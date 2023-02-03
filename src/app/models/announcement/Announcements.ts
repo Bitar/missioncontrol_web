@@ -1,6 +1,5 @@
-import {ID} from '../../../_metronic/helpers'
 import * as Yup from 'yup'
-import {User} from '../../sections/identity/user/models/User'
+import {User} from '../iam/User'
 
 export const announcementSchema = Yup.object().shape({
   title: Yup.string().required('Title is required'),
@@ -8,7 +7,7 @@ export const announcementSchema = Yup.object().shape({
 })
 
 export type Announcement = {
-  id?: ID
+  id?: number
   title: string
   body: string
   created_at?: number

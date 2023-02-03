@@ -1,6 +1,6 @@
 import {KTCard, KTCardBody} from '../../helpers/components'
 import {Form, Formik} from 'formik'
-import {Community, communitySchema, formOnChange, initialCommunity} from './models/Community'
+import {Community, communitySchema, formOnChange, initialCommunity} from '../../models/community/Community'
 import {createCommunity} from './core/CommunityRequests'
 import {useNavigate} from 'react-router-dom'
 import React, {useState} from 'react'

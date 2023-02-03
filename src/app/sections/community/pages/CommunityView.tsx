@@ -1,17 +1,16 @@
 import React, {FC, useEffect, useRef, useState} from 'react'
 import {PageLink, PageTitle} from '../../../layout/core'
 import {getCommunityById} from '../core/CommunityRequests'
-import {Community} from '../models/Community'
+import {Community} from '../../../models/community/Community'
 import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
 import {CommunityUsers} from './CommunityUsers'
 import {CommunityInfo} from '../CommunityInfo'
 import {CommunitySettings} from './CommunitySettings'
-import {ID} from '../../../../_metronic/helpers'
 import {CommunityContext} from '../CommunityContext'
-import {User} from '../../identity/user/models/User'
+import {User} from '../../../models/iam/User'
 
 type Props = {
-  communityId?: ID
+  communityId?: number
   links?: {text: string; link: string}[]
 }
 

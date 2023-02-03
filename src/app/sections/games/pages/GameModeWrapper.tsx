@@ -1,9 +1,7 @@
-import {KTCardBody} from '../../../helpers/components/KTCardBody'
-import {KTCard} from '../../../helpers/components/KTCard'
+import {KTCard,KTCardHeader, KTCardBody} from "../../../helpers/components"
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
 import {GameMode} from '../../../models/game/GameMode'
-import {KTCardHeader} from '../../../helpers/components/KTCardHeader'
-import {GameModeFormType, initGameModeFormType} from '../models/GameModeFormType'
+import {GameModeFormType, initGameModeFormType} from '../../../models/game/GameModeFormType'
 import {Form, Formik} from 'formik'
 import {FormErrorAlert} from '../../../modules/errors/partials/FormErrorAlert'
 import {jsonToFormData, updateData} from '../../../helpers/form/FormHelper'

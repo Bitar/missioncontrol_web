@@ -1,4 +1,4 @@
-import {ID, Response} from '../../../_metronic/helpers'
+import {Response} from '../../../_metronic/helpers'
 import * as Yup from 'yup'
 import {PlanOption} from './PlanOption'
 
@@ -22,7 +22,7 @@ export const initialPlan: Plan = {
 }
 
 export type Plan = {
-  id?: ID
+  id?: number
   name: string
   description?: string
   contact_type: number
@@ -39,7 +39,7 @@ export type Plan = {
 
 export type PlanQueryResponse = Response<Array<Plan>>
 
-export const getOption = (plan: Plan, optionId: ID) => {
+export const getOption = (plan: Plan, optionId?: number) => {
   return plan?.options?.find(function (element: any) {
     return element.id === optionId
   })

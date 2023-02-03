@@ -1,9 +1,9 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
-import {ActivityForm} from '../../models/ActivityForm'
+import {ActivityForm} from '../../../../models/activity/ActivityForm'
 import FormControl from '@mui/material/FormControl'
 import {InputLabel, MenuItem, Select} from '@mui/material'
 import Box from '@mui/material/Box'
-import {ActivityPrize} from '../../models/ActivityPrize'
+import {ActivityPrize} from '../../../../models/activity/ActivityPrize'
 import {PrizeSingleWrapper} from './PrizeSingleWrapper'
 import {updateData} from '../../../../helpers/form/FormHelper'
 

@@ -1,5 +1,5 @@
-import {User} from '../../../sections/identity/user/models/User'
-import {Community} from '../../../sections/community/models/Community'
+import {User} from '../../../models/iam/User'
+import {Community} from '../../../models/community/Community'
 
 export interface AuthModel {
   token: string

@@ -10,7 +10,7 @@ import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvide
 import {QUERIES} from '../../../helpers/crud-helper/consts'
 import {ListViewProvider} from '../../../modules/table/ListViewProvider'
 import {useActivity} from '../core/contexts/ActivityContext'
-import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
+import {KTCard, KTCardBody} from "../../../helpers/components"
 
 const ActivityMatches = () => {
   const params = useParams()

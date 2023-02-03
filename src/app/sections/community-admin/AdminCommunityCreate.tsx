@@ -6,7 +6,7 @@ import {
   CommunityFormType,
   formOnChange,
   initialCommunityFormTypeByCommunity,
-} from '../community/models/Community'
+} from '../../models/community/Community'
 import {GeneralDetails} from '../community/partials/community-create-steps/GeneralDetails'
 import {KTCard, KTCardBody, KTCardHeader, KTSVG} from '../../helpers/components'
 import {ContactDetails} from '../community/partials/community-create-steps/ContactDetails'

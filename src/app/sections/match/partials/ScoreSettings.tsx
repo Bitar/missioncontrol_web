@@ -6,7 +6,7 @@ import { Form, Formik } from "formik";
 import { FormAction } from "../../../helpers/form/FormAction";
 import * as Yup from "yup";
 import { useActivity } from "../../activity/core/contexts/ActivityContext";
-import { defaultRound, roundScoreObject } from "../../activity/models/matches/Score";
+import { defaultRound, roundScoreObject } from "../../../models/activity/matches/Score";
 import { jsonToFormData } from "../../../helpers/form/FormHelper";
 import { updateScores } from "../core/ScoreRequests";
 import toast from "react-hot-toast";

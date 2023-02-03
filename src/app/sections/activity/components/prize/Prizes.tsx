@@ -1,9 +1,9 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
 import {Grid} from '@mui/material'
 import {PrizeSingle} from './PrizeSingle'
-import {initialPrizeItem, PrizeItem as PrizeItemModel} from '../../models/PrizeItem'
+import {initialPrizeItem, PrizeItem as PrizeItemModel} from '../../../../models/activity/PrizeItem'
 import TextField from '@mui/material/TextField'
-import {ActivityPrize, initialActivityPrize} from '../../models/ActivityPrize'
+import {ActivityPrize, initialActivityPrize} from '../../../../models/activity/ActivityPrize'
 import {updateData} from '../../../../helpers/form/FormHelper'
 
 type Props = {

@@ -1,7 +1,7 @@
-import {ID, Response} from '../../../_metronic/helpers'
+import {Response} from '../../../_metronic/helpers'
 
 export type Igdb = {
-  id?: ID
+  id?: number
   title: string
   image: string
 }

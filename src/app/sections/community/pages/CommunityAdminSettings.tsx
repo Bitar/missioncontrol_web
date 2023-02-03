@@ -3,8 +3,8 @@ import {
   CommunityFormType,
   communitySchema,
   initialCommunityFormTypeByCommunity,
-} from '../models/Community'
-import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
+} from '../../../models/community/Community'
+import {KTCard, KTCardBody} from "../../../helpers/components"
 import {useCommunity} from '../CommunityContext'
 import {ErrorMessage, Field, Form, Formik} from 'formik'
 import {BannerImage} from '../partials/BannerImage'

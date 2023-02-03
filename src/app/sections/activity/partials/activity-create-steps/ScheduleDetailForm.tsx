@@ -8,7 +8,7 @@ import React, {useEffect, useState} from 'react'
 import {DateRange} from 'rsuite/esm/DateRangePicker/types'
 import {TimeZone} from '../../../../models/misc/TimeZone'
 import {getTimeZones} from '../../../misc/core/_requests'
-import {addDays, defaultTime} from '../../models/ActivityForm'
+import {addDays, defaultTime} from '../../../../models/activity/ActivityForm'
 import toast from 'react-hot-toast'
 
 const {before} = DateRangePicker

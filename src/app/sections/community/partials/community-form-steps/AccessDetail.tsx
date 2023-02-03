@@ -1,4 +1,4 @@
-import {communitySchema} from '../../models/Community'
+import {communitySchema} from '../../../../models/community/Community'
 import React, {FC} from 'react'
 import {useCommunity} from '../../CommunityContext'
 import {useParams} from 'react-router-dom'

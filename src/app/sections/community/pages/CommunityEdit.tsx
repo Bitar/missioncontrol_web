@@ -16,7 +16,7 @@ import {getStates} from '../../misc/core/_requests'
 import toast from 'react-hot-toast'
 
 type Props = {
-  communityId?: ID
+  communityid?: number
 }
 
 let statesOptions: any[] = []

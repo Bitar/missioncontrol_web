@@ -75,7 +75,7 @@ function groupingOnSelect(
 function groupingOnSelectAll<T>(
   isAllSelected: boolean,
   setSelected: Dispatch<SetStateAction<Array<ID>>>,
-  data?: Array<T & {id?: ID}>
+  data?: Array<T & {id?: number}>
 ) {
   if (isAllSelected) {
     setSelected([])

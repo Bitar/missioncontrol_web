@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import {ActivityForm} from '../models/ActivityForm'
-import {initialActivityFormByActivity} from '../models/ActivityForm'
+import {ActivityForm} from '../../../models/activity/ActivityForm'
+import {initialActivityFormByActivity} from '../../../models/activity/ActivityForm'
 import {KTCard, KTCardBody, KTCardHeader} from '../../../helpers/components'
 import {useActivity} from '../core/contexts/ActivityContext'
 import {getAllGameModes} from '../../games/core/GameRequests'
 import {GameMode} from '../../../models/game/GameMode'
-import {ID} from '../../../helpers/crud-helper/models'
 import Nav from 'react-bootstrap/Nav'
 import {Tab} from 'react-bootstrap'
 import {ActivityFormContext} from '../core/contexts/ActivityFormContext'
@@ -34,7 +33,7 @@ const ActivitySettings = () => {
     }
   }, [activity])
 
-  const updateModes = (gameId?: ID) => {
+  const updateModes = (gameId?: number) => {
     getAllGameModes(gameId).then((response) => {
       setGameModes(response.data)
     })

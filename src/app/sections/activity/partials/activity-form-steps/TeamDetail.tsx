@@ -1,5 +1,5 @@
 import {KTCard, KTCardBody, KTCardHeader} from '../../../../helpers/components'
-import {activityDetailsSchema} from '../../models/Activity'
+import {activityDetailsSchema} from '../../../../models/activity/Activity'
 import React from 'react'
 import {useActivityForm} from '../../core/contexts/ActivityFormContext'
 import {Form, Formik} from 'formik'

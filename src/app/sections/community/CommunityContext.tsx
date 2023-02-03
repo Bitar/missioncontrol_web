@@ -1,5 +1,5 @@
 import {createContext, Dispatch, SetStateAction, useContext} from 'react'
-import {User} from '../identity/user/models/User'
+import {User} from '../iam/user/models/User'
 import {Community} from './models/Community'
 
 type CommunityContextProps = {

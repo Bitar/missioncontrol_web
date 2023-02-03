@@ -1,6 +1,6 @@
 import {QueryResponseProvider} from '../../../../modules/table/QueryResponseProvider'
 import {KTCard, QUERIES} from '../../../../../_metronic/helpers'
-import {getUsers} from '../../../identity/user/core/UserRequests'
+import {getUsers} from '../../../iam/user/core/UserRequests'
 import {ListViewProvider} from '../../../../modules/table/ListViewProvider'
 import {QueryRequestProvider} from '../../../../modules/table/QueryRequestProvider'
 import React from 'react'

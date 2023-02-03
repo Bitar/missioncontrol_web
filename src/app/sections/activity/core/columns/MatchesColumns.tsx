@@ -1,7 +1,7 @@
 import {Column} from 'react-table'
 import {CustomHeader} from '../../../../modules/table/columns/CustomHeader'
 import React from 'react'
-import {Match} from '../../models/matches/Match'
+import {Match} from '../../../../models/activity/matches/Match'
 import {isWinner} from '../../../../helpers/MatchHelper'
 import {TeamImage} from '../../components/TeamImage'
 import {calculateTeamScore, getDateFromTimestamp} from '../../../../helpers/MCHelper'

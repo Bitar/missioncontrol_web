@@ -2,7 +2,7 @@ import React, {Dispatch, FC, SetStateAction, useState} from 'react'
 import Box from '@mui/material/Box'
 import FormControl from '@mui/material/FormControl'
 import {InputLabel, MenuItem, Select} from '@mui/material'
-import {PrizeItem} from '../../models/PrizeItem'
+import {PrizeItem} from '../../../../models/activity/PrizeItem'
 import {updateData} from '../../../../helpers/form/FormHelper'
 
 type Props = {

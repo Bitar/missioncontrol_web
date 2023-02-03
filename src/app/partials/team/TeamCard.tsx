@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
 import {Team} from '../../models/squad/Team'
 import {KTCard, KTCardBody, toAbsoluteUrl} from '../../../_metronic/helpers'
-import {ActivityStanding} from '../../sections/activity/models/ActivityStanding'
+import {ActivityStanding} from '../../models/activity/ActivityStanding'
 
 type Props = {
   standing?: ActivityStanding

@@ -4,7 +4,7 @@ import {ActivityMembersColumns} from '../core/columns/ActivityMembersColumns'
 import {KTCard, KTCardBody} from '../../../helpers/components'
 import {CustomHeaderColumn} from '../../../modules/table/columns/CustomHeaderColumn'
 import {CustomRow} from '../../../modules/table/columns/CustomRow'
-import {ActivityRegistration} from '../models/ActivityRegistration'
+import {ActivityRegistration} from '../../../models/activity/ActivityRegistration'
 import {
   useQueryResponseData,
   useQueryResponseLoading,

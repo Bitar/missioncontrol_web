@@ -1,10 +1,10 @@
 import axios, {AxiosResponse} from 'axios'
 import {Response} from '../../../../../_metronic/helpers'
-import {Activity, ActivityQueryResponse} from '../../models/Activity'
+import {Activity, ActivityQueryResponse} from '../../../../models/activity/Activity'
 import {Announcement} from '../../../../models/announcement/Announcements'
 import {ChatMessage, ChatMessageQueryResponse} from '../../../../models/chat/ChatMessage'
 import {TeamQueryResponse} from '../../../../models/squad/Team'
-import {UserQueryResponse} from '../../../identity/user/models/User'
+import {UserQueryResponse} from '../../../../models/iam/User'
 
 const API_URL = process.env.REACT_APP_API_URL
 const ACTIVITIES_URL = `${API_URL}/activities`

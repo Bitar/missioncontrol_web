@@ -1,7 +1,5 @@
-import {ID} from '../../../_metronic/helpers'
-
 export type GameSettings = {
-  id?: ID
+  id?: number
   setting: string
 }
 

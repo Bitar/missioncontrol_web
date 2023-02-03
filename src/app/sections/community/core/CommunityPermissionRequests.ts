@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from 'axios'
-import {User} from '../../identity/user/models/User'
+import {User} from '../../iam/user/models/User'
 import {Response} from '../../../helpers/crud-helper/models'
 import {CommunityPermissionQueryResponse} from '../models/CommunityPermission'
 

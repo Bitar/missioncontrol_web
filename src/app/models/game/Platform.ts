@@ -1,7 +1,7 @@
-import {ID, Response} from '../../../_metronic/helpers'
+import {Response} from '../../../_metronic/helpers'
 
 export type Platform = {
-  id?: ID
+  id?: number
   name: string
   abbreviation: string
   description: string

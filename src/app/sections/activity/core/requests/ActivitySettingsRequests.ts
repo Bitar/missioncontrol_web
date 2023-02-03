@@ -1,4 +1,4 @@
-import {Activity} from '../../models/Activity'
+import {Activity} from '../../../../models/activity/Activity'
 import axios, {AxiosResponse} from 'axios'
 import {Response} from '../../../../helpers/crud-helper/models'
 

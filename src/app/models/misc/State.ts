@@ -1,7 +1,7 @@
 import {ID, Response} from '../../../_metronic/helpers'
 
 export type State = {
-  id?: ID
+  id?: number
   name: string
   code: string
 }

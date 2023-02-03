@@ -1,7 +1,7 @@
 import {ID, Response} from '../../../helpers/crud-helper/models'
 
 export type ScoringType = {
-  id?: ID
+  id?: number
   name: string
   description: string
 }

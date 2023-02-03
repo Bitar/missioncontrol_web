@@ -6,7 +6,7 @@ import {
 } from '../../../helpers/MCHelper'
 import {formatMatchStatus} from '../../../helpers/ActivityHelper'
 import React, {FC} from 'react'
-import {Match} from '../models/matches/Match'
+import {Match} from '../../../models/activity/matches/Match'
 import {isWinner} from '../../../helpers/MatchHelper'
 import clsx from 'clsx'
 

@@ -5,7 +5,7 @@ import {SidebarMenuItem} from './SidebarMenuItem'
 import {useAuth} from '../../../../modules/auth'
 import {Restricted} from '../../../../modules/auth/core/AuthPermission'
 import {SidebarMenuItemWithSub} from './SidebarMenuItemWithSub'
-import {isCommunityAdmin} from '../../../../sections/identity/user/models/User'
+import {isCommunityAdmin} from '../../../../models/iam/User'
 
 const SidebarMenuMain = () => {
   const intl = useIntl()

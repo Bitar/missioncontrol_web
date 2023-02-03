@@ -1,7 +1,7 @@
 import {ID} from '../../../../_metronic/helpers'
 
 export type ScoringValues = {
-  id?: ID
+  id?: number
   key: number
   value: number
 }

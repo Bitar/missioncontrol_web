@@ -1,6 +1,6 @@
 import React, {createContext, FC, useContext} from 'react'
-import {Permission} from '../../../sections/identity/permission/models/Permission'
-import {Role} from '../../../sections/identity/role/models/Role'
+import {Permission} from '../../../models/iam/Permission'
+import {Role} from '../../../models/iam/Role'
 
 type PermissionContextProps = {
   isAllowedTo: (permission: string) => boolean
