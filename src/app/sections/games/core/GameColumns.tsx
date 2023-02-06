@@ -30,15 +30,6 @@ const gamesColumns: ReadonlyArray<Column<Game>> = [
       </div>
     ),
   },
-  // {
-  //   Header: (props) => (
-  //     <CustomHeader tableProps={props} title='Crossplay' className='min-w-125px' />
-  //   ),
-  //   id: 'is_crossplay',
-  //   Cell: ({...props}) => (
-  //     <TextCell dObject={props.data[props.row.index].is_crossplay === 0 ? 'True' : 'False'} />
-  //   ),
-  // },
   {
     Header: (props) => (
       <CustomHeader tableProps={props} title='Platforms' className='min-w-125px' />
@@ -65,6 +56,8 @@ const gamesColumns: ReadonlyArray<Column<Game>> = [
         path={'games'}
         queryKey={QUERIES.GAMES_LIST}
         showView={true}
+        showDelete={true}
+        canAdminDelete={false}
       />
     ),
   },
