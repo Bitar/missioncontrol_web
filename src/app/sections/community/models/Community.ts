@@ -71,6 +71,8 @@ export type Community = {
   status?: number
   banner_image?: string
   is_featured?: boolean
+
+  is_owner?: boolean
   address?: CommunityAddress
   contact?: CommunityContact
   access?: CommunityAccess

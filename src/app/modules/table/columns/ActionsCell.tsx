@@ -57,6 +57,16 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
     }
   );
 
+  const ifing = () => {
+    if(showDelete) {
+      if(currentUser) {
+        if((canAdminDelete && isCommunityAdmin(currentUser)) || (isSuperAdmin(currentUser))) {
+          // Show
+        }
+      }
+    }
+  }
+
   return (
     <>
       {showView && (
@@ -74,18 +84,15 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
         </Link>
       )}
 
-      {showDelete && (
-        (
-          canAdminDelete && (currentUser && isCommunityAdmin(currentUser))
-        ) || (currentUser && isSuperAdmin(currentUser)) || (
-          <a
-            className="btn btn-icon btn-sm btn-active-light-danger"
-            onClick={async () => await deleteItem.mutateAsync()}
-          >
-            <i className={clsx("fa fs-2 text-danger", "fa-trash")}></i>
-          </a>
-        )
-      )}
+      {showDelete && currentUser &&
+        ((canAdminDelete && isCommunityAdmin(currentUser)) || isSuperAdmin(currentUser)) &&
+        <a
+          className="btn btn-icon btn-sm btn-active-light-danger"
+          onClick={async () => await deleteItem.mutateAsync()}
+        >
+          <i className={clsx("fa fs-2 text-danger", "fa-trash")}></i>
+        </a>
+      }
     </>
   );
 };
