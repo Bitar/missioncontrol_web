@@ -1,5 +1,5 @@
 import React, { Dispatch, FC, SetStateAction, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { formatMatchStatus } from "../../helpers/ActivityHelper";
 import { Match } from "../activity/models/matches/Match";
 import { calculateTeamScore, getDateFromTimestamp, getTimeFromTimestamp } from "../../helpers/MCHelper";
@@ -9,7 +9,7 @@ import { TeamImage } from "../activity/components/TeamImage";
 import { isWinner } from "../../helpers/MatchHelper";
 import { approveMatchDispute, rejectMatchDispute } from "./core/MatchRequests";
 import toast from "react-hot-toast";
-import { useActivity } from "../activity/core/contexts/ActivityContext";
+import Swal from "sweetalert2";
 
 type Props = {
   match: Match | undefined
@@ -18,7 +18,6 @@ type Props = {
 
 const MatchInfo: FC<Props> = ({ match, setMatch }) => {
   const location = useLocation();
-  const [makeDecision, setMakeDecision] = useState<boolean>(false);
 
   const getStatus = (matchStatus: any) => {
     return formatMatchStatus(matchStatus);
@@ -40,18 +39,37 @@ const MatchInfo: FC<Props> = ({ match, setMatch }) => {
   ];
 
 
-  const rejectDispute = () => {
-    rejectMatchDispute(match?.id).then((response) => {
-      setMatch(response);
-      toast.error("Match dispute rejected!");
+  const rejectDispute = async () => {
+    const { isConfirmed } = await Swal.fire({
+      title: "Are you sure to want to Reject dispute?",
+      icon: "error",
+      showConfirmButton: true,
+      showCancelButton: true
     });
+
+    if (isConfirmed) {
+      rejectMatchDispute(match?.id).then((response) => {
+        setMatch(response);
+        toast.error("Match dispute rejected!");
+      });
+    }
+
   };
 
-  const approveDispute = () => {
-    approveMatchDispute(match?.id).then((response) => {
-      setMatch(response);
-      toast.success("Match dispute approved!");
+  const approveDispute = async () => {
+    const { isConfirmed } = await Swal.fire({
+      title: "Are you sure to want to Approve dispute?",
+      icon: "success",
+      showConfirmButton: true,
+      showCancelButton: true
     });
+
+    if (isConfirmed) {
+      approveMatchDispute(match?.id).then((response) => {
+        setMatch(response);
+        toast.success("Match dispute approved!");
+      });
+    }
   };
 
   return (
@@ -142,37 +160,22 @@ const MatchInfo: FC<Props> = ({ match, setMatch }) => {
               </div>
               {match?.status !== 6 && match?.status !== 7 && (
                 <div className="d-flex justify-content-center mt-3">
-                  {makeDecision ? (
-                    <div>
-                      <button
-                        onClick={approveDispute}
-                        type="button"
-                        className="btn btn-sm btn-success"
-                      >
-                        Approve
-                      </button>
-                      <button
-                        onClick={rejectDispute}
-                        type="button"
-                        className="btn btn-sm btn-danger ms-3"
-                      >
-                        Reject
-                      </button>
-                    </div>
-                  ) : (
-                    // <div>
-                      <button
-                        onClick={() => {
-                          setMakeDecision(true);
-                        }}
-                        type="button"
-                        className="btn btn-sm btn-warning text-dark"
-                      >
-                        Make Decision
-                      </button>
-                    // </div>
-                  )
-                  }
+                  <div>
+                    <button
+                      onClick={approveDispute}
+                      type="button"
+                      className="btn btn-sm btn-success"
+                    >
+                      Approve
+                    </button>
+                    <button
+                      onClick={rejectDispute}
+                      type="button"
+                      className="btn btn-sm btn-danger ms-3"
+                    >
+                      Reject
+                    </button>
+                  </div>
                 </div>
               )}
             </div>

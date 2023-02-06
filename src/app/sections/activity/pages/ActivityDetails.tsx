@@ -3,7 +3,7 @@ import {PlatformObject} from '../components/PlatformObject'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import CountUp from 'react-countup'
-import {getDateConvertedToTimezoneFromUtc} from '../../../helpers/ActivityHelper'
+import { getDateConvertedToTimezone, getDateConvertedToTimezoneFromUtc } from "../../../helpers/ActivityHelper";
 
 const ActivityDetails = () => {
   const {activity} = useActivity()
@@ -87,7 +87,7 @@ const ActivityDetails = () => {
 
             <div className='col-lg-8 d-flex align-items-center'>
               <span className='fw-bolder fs-6 me-2'>
-                {getDateConvertedToTimezoneFromUtc(
+                {getDateConvertedToTimezone(
                   activity?.settings?.time,
                   activity?.settings?.timezone?.value
                 ).format('h:mm a')}{' '}

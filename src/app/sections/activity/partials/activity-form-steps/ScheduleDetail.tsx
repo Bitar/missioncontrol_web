@@ -216,6 +216,7 @@ export const ScheduleDetail = () => {
                       value={timeValue}
                       format='hh:mm aa'
                       ranges={[]}
+                      hideMinutes={(minute) => minute % 5 !== 0}
                       className='w-100'
                       placeholder='Select Time'
                       showMeridian={true}
