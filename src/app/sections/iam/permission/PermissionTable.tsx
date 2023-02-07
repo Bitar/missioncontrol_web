@@ -1,10 +1,10 @@
 import {useMemo} from 'react'
 import {useTable, ColumnInstance, Row} from 'react-table'
-import {KTCardBody} from '../../../../_metronic/helpers'
+import {KTCardBody} from '../../../helpers/components'
 import {CustomHeaderColumn} from '../../../modules/table/columns/CustomHeaderColumn'
 import {CustomRow} from '../../../modules/table/columns/CustomRow'
 import {permissionColumns} from './core/PermissionColumns'
-import {Permission} from './models/Permission'
+import {Permission} from '../../../models/iam/Permission'
 import {
   useQueryResponseData,
   useQueryResponseLoading,

@@ -1,5 +1,8 @@
 import React, {FC, useState} from 'react'
-import {CommunityFormType, initialCommunityFormTypeByCommunity} from '../../../models/community/Community'
+import {
+  CommunityFormType,
+  initialCommunityFormTypeByCommunity,
+} from '../../../models/community/Community'
 import {QUERIES} from '../../../../_metronic/helpers'
 import {useCommunity} from '../CommunityContext'
 import {KTCard, KTCardBody, KTCardHeader} from '../../../helpers/components'

@@ -5,7 +5,7 @@ import {ActionsCell} from '../../../../../modules/table/columns/ActionsCell'
 import {QUERIES} from '../../../../../helpers/crud-helper/consts'
 import React from 'react'
 import {useCommunity} from '../../../CommunityContext'
-import {CommunityPermission} from '../../../models/CommunityPermission'
+import {CommunityPermission} from '../../../../../models/community/CommunityPermission'
 
 const PermissionColumns: ReadonlyArray<Column<CommunityPermission>> = [
   {

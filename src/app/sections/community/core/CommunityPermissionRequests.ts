@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from 'axios'
-import {User} from '../../iam/user/models/User'
+import {User} from '../../../models/iam/User'
 import {Response} from '../../../helpers/crud-helper/models'
-import {CommunityPermissionQueryResponse} from '../models/CommunityPermission'
+import {CommunityPermissionQueryResponse} from '../../../models/community/CommunityPermission'
 
 const API_URL = process.env.REACT_APP_API_URL
 const COMMUNITIES_URL = `${API_URL}/communities`

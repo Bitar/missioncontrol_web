@@ -11,6 +11,8 @@ import {FormErrorAlert} from '../../../../../modules/errors/partials/FormErrorAl
 import {useQueryResponse} from '../../../../../modules/table/QueryResponseProvider'
 import toast from 'react-hot-toast'
 import {addCommunityPermissions} from '../../../core/CommunityPermissionRequests'
+import {useAuth} from '../../../../../modules/auth'
+import {isCommunityAdmin, isSuperAdmin} from '../../../../../models/iam/User'
 
 export const communityPermissionSchema = Yup.object().shape({
   email: Yup.string().email().required('Email is required'),
@@ -22,6 +24,7 @@ type PermissionUserForm = {
 }
 
 const PermissionDetails = () => {
+  const {currentUser, communityAdmin} = useAuth()
   const {community} = useCommunity()
 
   const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined)
@@ -49,8 +52,6 @@ const PermissionDetails = () => {
   }
 
   const handleSubmit = async () => {
-    console.log(permissionUserForm)
-
     let data = jsonToFormData(permissionUserForm)
     data.delete('is_owner')
     data.append('is_owner', (permissionUserForm.is_owner ? 1 : 0) + '')
@@ -75,7 +76,7 @@ const PermissionDetails = () => {
             setAlertMessage(e.response.data.error)
             setHasErrors(true)
           } else if (status === 422) {
-            let firstMessage = e.response.data.error.validation.email[0]
+            let firstMessage = e.response.data.error.validation?.email[0]
             setAlertMessage(firstMessage)
             setHasErrors(true)
           }
@@ -117,17 +118,23 @@ const PermissionDetails = () => {
                     </div>
                   </div>
 
-                  <div className='row mb-6'>
-                    <label className='col-lg-4 col-form-label fw-bold fs-6'>Is Owner</label>
-                    <div className='col-lg-8 fv-row'>
-                      <SwitchInput
-                        name='is_owner'
-                        id={'permission_is_owner'}
-                        isOn={permissionUserForm?.is_owner}
-                        handleToggle={() => {}}
-                      />
-                    </div>
-                  </div>
+                  {currentUser &&
+                    (isSuperAdmin(currentUser) ||
+                      (isCommunityAdmin(currentUser) &&
+                        community?.id === communityAdmin?.id &&
+                        communityAdmin?.is_owner)) && (
+                      <div className='row mb-6'>
+                        <label className='col-lg-4 col-form-label fw-bold fs-6'>Is Owner</label>
+                        <div className='col-lg-8 fv-row'>
+                          <SwitchInput
+                            name='is_owner'
+                            id={'permission_is_owner'}
+                            isOn={permissionUserForm?.is_owner}
+                            handleToggle={() => {}}
+                          />
+                        </div>
+                      </div>
+                    )}
                 </div>
               </KTCardBody>
               <FormAction text={'Add User'} isSubmitting={isSubmitting} />

@@ -1,15 +1,23 @@
 import React, {FC} from 'react'
 import {Link, useLocation} from 'react-router-dom'
-import {KTCard} from '../../helpers/components/KTCard'
-import {KTCardBody} from '../../helpers/components/KTCardBody'
+import {KTCard, KTCardBody} from '../../helpers/components'
 import {useGame} from './core/GameContext'
 import clsx from 'clsx'
+import {usePermissions} from '../../modules/auth/core/AuthPermission'
+
+type LinkType = {
+  text: string
+  link: string
+  isManage?: boolean
+}
 
 const GameInfo: FC = () => {
+  const managePermission = 'manage-games'
   const {game} = useGame()
   const location = useLocation()
+  const {isAllowedTo} = usePermissions()
 
-  const links = [
+  const links: LinkType[] = [
     {
       text: 'Overview',
       link: '/games/' + game?.id + '/overview',
@@ -21,6 +29,7 @@ const GameInfo: FC = () => {
     {
       text: 'Settings',
       link: '/games/' + game?.id + '/settings',
+      isManage: true,
     },
   ]
 
@@ -94,21 +103,24 @@ const GameInfo: FC = () => {
         </KTCardBody>
         <KTCardBody className='p-0 rounded-3 rounded-bottom'>
           <ul className='nav nav-fill nav-line-tabs nav-line-tabs-2x fs-5 fw-bolder flex-nowrap text-center border-transparent'>
-            {links.map((link, index) => (
-              <li className='nav-item' key={index}>
-                <Link
-                  className={clsx(
-                    `m-0 nav-link bg-active-mc-secondary text-active-white border-active-mc-secondary border-hover-mc-secondary py-5 `,
-                    {
-                      active: location.pathname === link.link,
-                    }
-                  )}
-                  to={link.link}
-                >
-                  {link.text}
-                </Link>
-              </li>
-            ))}
+            {links.map(
+              (link, index) =>
+                ((link?.isManage && isAllowedTo(managePermission)) || !link?.isManage) && (
+                  <li className='nav-item' key={index}>
+                    <Link
+                      className={clsx(
+                        `m-0 nav-link bg-active-mc-secondary text-active-white border-active-mc-secondary border-hover-mc-secondary py-5 `,
+                        {
+                          active: location.pathname === link.link,
+                        }
+                      )}
+                      to={link.link}
+                    >
+                      {link.text}
+                    </Link>
+                  </li>
+                )
+            )}
           </ul>
         </KTCardBody>
       </KTCard>

@@ -1,7 +1,7 @@
-import {KTCard, KTCardBody} from '../../../../../_metronic/helpers'
+import {KTCard, KTCardBody} from '../../../../helpers/components'
 import {getUserActivities} from '../core/UserRequests'
 import React, {useEffect, useState} from 'react'
-import {Activity} from '../../../activity/models/Activity'
+import {Activity} from '../../../../models/activity/Activity'
 import {useParams} from 'react-router-dom'
 import {ActivityObject} from '../objects/activity/ActivityObject'
 

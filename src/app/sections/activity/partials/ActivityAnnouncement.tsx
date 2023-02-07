@@ -8,7 +8,7 @@ import {createActivityAnnouncement} from '../core/requests/ActivityRequests'
 import {Form, Formik} from 'formik'
 import {jsonToFormData, updateData} from '../../../helpers/form/FormHelper'
 import {useActivity} from '../core/contexts/ActivityContext'
-import toast from "react-hot-toast";
+import toast from 'react-hot-toast'
 
 const ActivityAnnouncement: FC = () => {
   const {activity, setActivity} = useActivity()
@@ -19,8 +19,7 @@ const ActivityAnnouncement: FC = () => {
     let data = jsonToFormData(announcement)
     await createActivityAnnouncement(params.id, data).then((response) => {
       setAnnouncement(initialAnnouncement())
-      toast.success('Announcement Sent');
-
+      toast.success('Announcement Sent')
 
       if (response && activity?.announcements) {
         updateData(

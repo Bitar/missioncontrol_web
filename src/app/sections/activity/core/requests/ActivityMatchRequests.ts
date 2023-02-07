@@ -19,23 +19,24 @@ export const getUpcomingActivityMatches = (
   id: any,
   query?: string
 ): Promise<MatchQueryResponse> => {
-  let url = `${ACTIVITIES_URL}/${id}/matches/upcoming`
+  let q = 'filter[status]=1,2'
 
-  if (query) {
-    url += `?${query}`
-  }
-
-  return axios.get(url).then((response: AxiosResponse<MatchQueryResponse>) => response.data)
+  return getActivityMatches(id, q)
 }
 
 export const getRecentActivityMatches = (id: any, query?: string): Promise<MatchQueryResponse> => {
-  let url = `${ACTIVITIES_URL}/${id}/matches/recent`
+  let q = 'filter[status]=3,4,5,6,7'
 
-  if (query) {
-    url += `?${query}`
-  }
+  return getActivityMatches(id, q)
+}
 
-  return axios.get(url).then((response: AxiosResponse<MatchQueryResponse>) => response.data)
+export const getDisputedActivityMatches = (
+  id: any,
+  query?: string
+): Promise<MatchQueryResponse> => {
+  let q = 'filter[status]=4,6,7'
+
+  return getActivityMatches(id, q)
 }
 
 export const getActivityMatch = (id: any, matchId: any): Promise<Match | undefined> => {

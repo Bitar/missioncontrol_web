@@ -3,7 +3,7 @@ import {Role, roleInitial, roleSchema} from '../../../models/iam/Role'
 import {useNavigate, useParams} from 'react-router-dom'
 import {Field, Form, Formik} from 'formik'
 import {getRoleById, updateRole} from './core/RoleRequests'
-import {KTCard, KTCardBody} from "../../../helpers/components"
+import {KTCard, KTCardBody} from '../../../helpers/components'
 import clsx from 'clsx'
 import {jsonToFormData, updateData} from '../../../helpers/form/FormHelper'
 import {Switch} from '@mui/material'

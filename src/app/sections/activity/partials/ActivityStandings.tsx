@@ -1,5 +1,5 @@
 import React, {FC, useMemo} from 'react'
-import {KTCard, KTCardBody} from "../../../helpers/components"
+import {KTCard, KTCardBody} from '../../../helpers/components'
 import clsx from 'clsx'
 import {
   useQueryResponseData,

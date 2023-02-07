@@ -1,4 +1,4 @@
-import { Response } from "../../helpers/crud-helper/models";
+import {Response} from '../../helpers/crud-helper/models'
 import * as Yup from 'yup'
 import {Permission} from './Permission'
 

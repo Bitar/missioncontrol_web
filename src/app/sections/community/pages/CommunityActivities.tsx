@@ -1,9 +1,9 @@
-import {Community} from '../models/Community'
+import {Community} from '../../../models/community/Community'
 import React, {FC, useEffect, useState} from 'react'
 import {getCommunityActivities} from '../core/CommunityRequests'
 import {useParams} from 'react-router-dom'
-import {Activity} from '../../activity/models/Activity'
-import {KTCard, KTCardBody} from '../../../../_metronic/helpers'
+import {Activity} from '../../../models/activity/Activity'
+import {KTCard, KTCardBody} from '../../../helpers/components'
 import {ActivityObject} from '../../iam/user/objects/activity/ActivityObject'
 
 type Props = {

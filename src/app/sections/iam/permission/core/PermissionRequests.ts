@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from 'axios'
 
 import {Response} from '../../../../../_metronic/helpers'
-import {Permission, PermissionQueryResponse} from '../models/Permission'
+import {Permission, PermissionQueryResponse} from '../../../../models/iam/Permission'
 
 const API_URL = process.env.REACT_APP_API_URL
 const GET_PERMISSIONS_URL = `${API_URL}/permissions`

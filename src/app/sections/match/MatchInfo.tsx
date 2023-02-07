@@ -1,7 +1,6 @@
-import React, {Dispatch, FC, SetStateAction, useState} from 'react'
-import {Link, useLocation, useNavigate} from 'react-router-dom'
+import React from 'react'
+import {Link, useLocation} from 'react-router-dom'
 import {formatMatchStatus} from '../../helpers/ActivityHelper'
-import {Match} from '../activity/models/matches/Match'
 import {
   calculateTeamScore,
   getDateFromTimestamp,
@@ -11,22 +10,14 @@ import {KTCard, KTCardBody, KTSVG} from '../../helpers/components'
 import clsx from 'clsx'
 import {TeamImage} from '../activity/components/TeamImage'
 import {isWinner} from '../../helpers/MatchHelper'
-import {BadgeCell} from '../../modules/table/columns/BadgeCell'
-import { approveMatchDispute, rejectMatchDispute, updateMatchResult } from "./core/MatchRequests";
+import {approveMatchDispute, rejectMatchDispute} from './core/MatchRequests'
 import toast from 'react-hot-toast'
-import {useActivity} from '../activity/core/contexts/ActivityContext'
-import {ScoreSettings} from './partials/ScoreSettings'
+import Swal from 'sweetalert2'
+import {useMatch} from './core/MatchContext'
 
-type Props = {
-  match: Match | undefined
-  setMatch: Dispatch<SetStateAction<Match | undefined>>
-}
-
-const MatchInfo: FC<Props> = ({match, setMatch}) => {
+const MatchInfo = () => {
+  const {match, setMatch} = useMatch()
   const location = useLocation()
-  const {activity} = useActivity()
-  const [isDisputeApproved, setIsDisputeApproved] = useState<boolean>(false)
-  const navigate = useNavigate()
 
   const getStatus = (matchStatus: any) => {
     return formatMatchStatus(matchStatus)
@@ -47,30 +38,36 @@ const MatchInfo: FC<Props> = ({match, setMatch}) => {
     },
   ]
 
-  // const makeWinner = (match: Match, teamId: any) => {
-  //   const formData = new FormData()
-  //   formData.append('_method', 'PUT')
-  //   formData.append('team_winner', teamId)
-  //
-  //   updateMatchResult(match?.id, formData).then((response) => {
-  //     setMatch(response)
-  //   })
-  // }
-
-  const rejectDispute = () => {
-    setIsDisputeApproved(false)
-    rejectMatchDispute(match?.id).then((response) => {
-      setMatch(response)
-      toast.error('Match dispute rejected!')
+  const rejectDispute = async () => {
+    const {isConfirmed} = await Swal.fire({
+      title: 'Are you sure to want to Reject dispute?',
+      icon: 'error',
+      showConfirmButton: true,
+      showCancelButton: true,
     })
+
+    if (isConfirmed) {
+      rejectMatchDispute(match?.id).then((response) => {
+        setMatch(response)
+        toast.error('Match dispute rejected!')
+      })
+    }
   }
 
-  const approveDispute = () => {
-    setIsDisputeApproved(true)
-    approveMatchDispute(match?.id).then((response) => {
-      setMatch(response)
-      toast.success('Match dispute approved!')
+  const approveDispute = async () => {
+    const {isConfirmed} = await Swal.fire({
+      title: 'Are you sure to want to Approve dispute?',
+      icon: 'success',
+      showConfirmButton: true,
+      showCancelButton: true,
     })
+
+    if (isConfirmed) {
+      approveMatchDispute(match?.id).then((response) => {
+        setMatch(response)
+        toast.success('Match dispute approved!')
+      })
+    }
   }
 
   return (
@@ -161,20 +158,22 @@ const MatchInfo: FC<Props> = ({match, setMatch}) => {
               </div>
               {match?.status !== 6 && match?.status !== 7 && (
                 <div className='d-flex justify-content-center mt-3'>
-                  <button
-                    onClick={approveDispute}
-                    type='button'
-                    className='btn btn-sm btn-success'
-                  >
-                    Approve
-                  </button>
-                  <button
-                    onClick={rejectDispute}
-                    type='button'
-                    className='btn btn-sm btn-danger ms-3'
-                  >
-                    Reject
-                  </button>
+                  <div>
+                    <button
+                      onClick={approveDispute}
+                      type='button'
+                      className='btn btn-sm btn-success'
+                    >
+                      Approve
+                    </button>
+                    <button
+                      onClick={rejectDispute}
+                      type='button'
+                      className='btn btn-sm btn-danger ms-3'
+                    >
+                      Reject
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
@@ -201,8 +200,6 @@ const MatchInfo: FC<Props> = ({match, setMatch}) => {
           </ul>
         </KTCardBody>
       </KTCard>
-
-      {/*{isDisputeApproved && activity?.settings?.rounds && <MatchDispute match={match} />}*/}
     </>
   )
 }

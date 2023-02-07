@@ -8,13 +8,18 @@ import {GameMode} from '../../../models/game/GameMode'
 import {GameModeWrapper} from './GameModeWrapper'
 import {NewGameModeWrapper} from './NewGameModeWrapper'
 import {deleteObject} from '../../../requests'
+import {usePermissions} from '../../../modules/auth/core/AuthPermission'
+import {useAuth} from '../../../modules/auth'
+import {isCommunityAdmin, isSuperAdmin} from '../../../models/iam/User'
 
 const GameModes: FC = () => {
+  const [showManage, setShowManage] = useState<boolean>(false)
   const {game, setGame, updateGame} = useGame()
   const params = useParams()
   const [gameMode, setGameMode] = useState<GameMode>()
   const [newGameMode, setNewGameMode] = useState<boolean>(false)
-  // const GAMES_URL = `${API_URL}/games`;
+  const {isAllowedTo} = usePermissions()
+  const {currentUser} = useAuth()
 
   useEffect(() => {
     if (game?.game_modes?.length === 0) {
@@ -48,6 +53,18 @@ const GameModes: FC = () => {
     })
   }
 
+  useEffect(() => {
+    if (currentUser) {
+      if (
+        isSuperAdmin(currentUser) ||
+        (isCommunityAdmin(currentUser) && isAllowedTo('manage-games'))
+      ) {
+        setShowManage(true)
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser])
+
   return (
     <>
       <div className='row g-6 g-xl-9 mb-6 mb-xl-9'>
@@ -58,7 +75,9 @@ const GameModes: FC = () => {
                 className='card-body cursor-pointer d-flex justify-content-center flex-column p-8'
                 onClick={() => {
                   setNewGameMode(false)
-                  setGameMode(gameMode)
+                  if (showManage) {
+                    setGameMode(gameMode)
+                  }
                 }}
               >
                 <span className='text-gray-800 d-flex flex-column'>
@@ -80,30 +99,34 @@ const GameModes: FC = () => {
                     : gameMode?.min_players + '-' + gameMode?.max_players}
                 </div>
               </div>
-              <div className='text-center py-5'>
-                <i
-                  className='fas fa-trash text-danger cursor-pointer'
-                  onClick={() => deleteGameMode(gameMode?.id)}
-                ></i>
-              </div>
+              {showManage && (
+                <div className='text-center py-5'>
+                  <i
+                    className='fas fa-trash text-danger cursor-pointer'
+                    onClick={() => deleteGameMode(gameMode?.id)}
+                  ></i>
+                </div>
+              )}
             </div>
           </div>
         ))}
-        <div className='col-12 col-xl'>
-          <div
-            className='card h-100 cursor-pointer text-center bg-success'
-            onClick={() => addGameMode()}
-          >
-            <KTCardBody className='d-flex justify-content-center flex-column p-8'>
-              <span className='text-light-success d-flex flex-column'>
-                <div className='mb-5'>
-                  <i className='fa fa-plus-circle text-light-success fs-3x'></i>
-                </div>
-                <div className='fs-5 fw-bolder mb-2'> Add a new Game Mode</div>
-              </span>
-            </KTCardBody>
+        {showManage && (
+          <div className='col-12 col-xl'>
+            <div
+              className='card h-100 cursor-pointer text-center bg-success'
+              onClick={() => addGameMode()}
+            >
+              <KTCardBody className='d-flex justify-content-center flex-column p-8'>
+                <span className='text-light-success d-flex flex-column'>
+                  <div className='mb-5'>
+                    <i className='fa fa-plus-circle text-light-success fs-3x'></i>
+                  </div>
+                  <div className='fs-5 fw-bolder mb-2'> Add a new Game Mode</div>
+                </span>
+              </KTCardBody>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {gameMode && (

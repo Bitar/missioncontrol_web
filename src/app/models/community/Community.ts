@@ -1,13 +1,13 @@
-import { Response } from "../../helpers/crud-helper/models";
+import {Response} from '../../../_metronic/helpers'
 import {CommunityAddress, initialCommunityAddress} from './CommunityAddress'
 import {CommunityContact, initialCommunityContact} from './CommunityContact'
 import {CommunityAccess, initialCommunityAccess} from './CommunityAccess'
 import {Game} from '../game/Game'
 import * as Yup from 'yup'
-import {Dispatch, SetStateAction} from 'react'
 import {updateData} from '../../helpers/form/FormHelper'
+import {Dispatch, SetStateAction} from 'react'
 import {User} from '../iam/User'
-import {Subscription} from "../billing/Subscription"
+import {Subscription} from '../billing/Subscription'
 
 export const communityCreateWizardSchema = [
   Yup.object().shape({
@@ -71,6 +71,8 @@ export type Community = {
   status?: number
   banner_image?: string
   is_featured?: boolean
+
+  is_owner?: boolean
   address?: CommunityAddress
   contact?: CommunityContact
   access?: CommunityAccess

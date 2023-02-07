@@ -1,6 +1,6 @@
 import {ErrorMessage, Field, Form, Formik} from 'formik'
-import {KTCard} from '../../../../helpers/components/KTCard'
-import {GameFormType} from '../../models/GameFormType'
+import {KTCard, KTCardHeader, KTCardBody} from '../../../../helpers/components'
+import {GameFormType} from '../../../../models/game/GameFormType'
 import {Dispatch, FC, SetStateAction} from 'react'
 import {jsonToFormData, updateData} from '../../../../helpers/form/FormHelper'
 import {updateGame} from '../../core/GameRequests'
@@ -8,8 +8,6 @@ import {useGame} from '../../core/GameContext'
 import {useParams} from 'react-router-dom'
 import {gameSchema} from '../../../../models/game/Game'
 import {FormAction} from '../../../../helpers/form/FormAction'
-import {KTCardBody} from '../../../../helpers/components/KTCardBody'
-import {KTCardHeader} from '../../../../helpers/components/KTCardHeader'
 
 type Props = {
   gameForm: GameFormType

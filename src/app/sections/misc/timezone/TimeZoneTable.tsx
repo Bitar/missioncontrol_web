@@ -1,10 +1,10 @@
 import {ColumnInstance, Row, useTable} from 'react-table'
-import {User} from '../../iam/user/models/User'
+import {User} from '../../../models/iam/User'
 import {CustomHeaderColumn} from '../../../modules/table/columns/CustomHeaderColumn'
 import {CustomRow} from '../../../modules/table/columns/CustomRow'
 import {TableListPagination} from '../../../modules/table/TableListPagination'
 import {TableListLoading} from '../../../modules/table/TableListLoading'
-import {KTCardBody} from '../../../../_metronic/helpers'
+import {KTCardBody} from '../../../helpers/components'
 import {
   useQueryResponseData,
   useQueryResponseLoading,

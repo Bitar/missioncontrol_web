@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from 'axios'
 import {Response} from '../../../../../_metronic/helpers'
-import {Role, RolesQueryResponse} from '../models/Role'
+import {Role, RolesQueryResponse} from '../../../../models/iam/Role'
 
 const API_URL = process.env.REACT_APP_API_URL
 const GET_ROLES_URL = `${API_URL}/roles`

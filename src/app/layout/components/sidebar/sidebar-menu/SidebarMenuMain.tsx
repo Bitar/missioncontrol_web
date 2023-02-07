@@ -53,7 +53,6 @@ const SidebarMenuMain = () => {
       <Restricted to='view-games'>
         <SidebarMenuItem to='/resources' title='Resources' fontIcon='fa-file' />
       </Restricted>
-
     </>
   )
 }

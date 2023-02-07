@@ -8,6 +8,8 @@ import {deleteObject} from '../../../requests'
 import {useQueryRequest} from '../QueryRequestProvider'
 import clsx from 'clsx'
 import {useQueryResponse} from '../QueryResponseProvider'
+import {useAuth} from '../../auth'
+import {isCommunityAdmin, isSuperAdmin} from '../../../models/iam/User'
 
 type Props = {
   id: ID
@@ -15,6 +17,7 @@ type Props = {
   queryKey: string
   showEdit?: boolean
   showDelete?: boolean
+  canAdminDelete?: boolean
   showView?: boolean
   callBackFn?: any
 }
@@ -26,9 +29,11 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
   showEdit,
   showDelete = true,
   showView,
+  canAdminDelete,
   callBackFn,
 }) => {
   const queryClient = useQueryClient()
+  const {currentUser} = useAuth()
   const {state} = useQueryRequest()
   const [query] = useState<string>(stringifyRequestQuery(state))
   const {setEnabled} = useQueryResponse()
@@ -69,14 +74,16 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
         </Link>
       )}
 
-      {showDelete && (
-        <a
-          className='btn btn-icon btn-sm btn-active-light-danger'
-          onClick={async () => await deleteItem.mutateAsync()}
-        >
-          <i className={clsx('fa fs-2 text-danger', 'fa-trash')}></i>
-        </a>
-      )}
+      {showDelete &&
+        currentUser &&
+        ((canAdminDelete && isCommunityAdmin(currentUser)) || isSuperAdmin(currentUser)) && (
+          <a
+            className='btn btn-icon btn-sm btn-active-light-danger'
+            onClick={async () => await deleteItem.mutateAsync()}
+          >
+            <i className={clsx('fa fs-2 text-danger', 'fa-trash')}></i>
+          </a>
+        )}
     </>
   )
 }

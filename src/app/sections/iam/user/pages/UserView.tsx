@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {getUserById} from '../core/UserRequests'
 import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
-import {User} from '../models/User'
+import {User} from '../../../../models/iam/User'
 import {UserInfo} from '../UserInfo'
 import {PageLink, PageTitle} from '../../../../layout/core'
 import {UserEdit} from '../UserEdit'

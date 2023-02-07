@@ -4,7 +4,7 @@ import {
   communitySchema,
   initialCommunityFormTypeByCommunity,
 } from '../../../models/community/Community'
-import {KTCard, KTCardBody} from "../../../helpers/components"
+import {KTCard, KTCardBody} from '../../../helpers/components'
 import {useCommunity} from '../CommunityContext'
 import {ErrorMessage, Field, Form, Formik} from 'formik'
 import {BannerImage} from '../partials/BannerImage'

@@ -1,5 +1,5 @@
 import {createContext, Dispatch, SetStateAction, useContext} from 'react'
-import {CommunityFormType} from '../models/Community'
+import {CommunityFormType} from '../../../models/community/Community'
 import {Plan} from '../../../models/billing/Plan'
 import {State} from '../../../models/misc/State'
 

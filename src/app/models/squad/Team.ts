@@ -1,5 +1,5 @@
-import { Response } from "../../../_metronic/helpers";
-import { User } from "../iam/User";
+import {Response} from '../../../_metronic/helpers'
+import {User} from '../iam/User'
 
 export type Team = {
   id?: number
@@ -15,19 +15,19 @@ export type Team = {
 export type TeamQueryResponse = Response<Array<Team>>
 
 export const getTeamStatus = (statusId: number) => {
-  let color: string;
-  let status: string;
+  let color: string
+  let status: string
 
   if (statusId === 1) {
-    status = "Complete";
-    color = "success";
+    status = 'Complete'
+    color = 'success'
   } else if (statusId === 2) {
-    status = "Pending";
-    color = "danger";
+    status = 'Pending'
+    color = 'danger'
   } else {
-    status = "Unknown";
-    color = "secondary";
+    status = 'Unknown'
+    color = 'secondary'
   }
 
-  return { status, color };
-};
+  return {status, color}
+}

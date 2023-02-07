@@ -3,11 +3,19 @@ import {PlatformObject} from '../components/PlatformObject'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import CountUp from 'react-countup'
-import {getDateConvertedToTimezoneFromUtc} from '../../../helpers/ActivityHelper'
+import {getDateConvertedToTimezone} from '../../../helpers/ActivityHelper'
 
 const ActivityDetails = () => {
   const {activity} = useActivity()
   dayjs.extend(utc)
+
+  if (activity?.settings?.time) {
+    console.log(activity?.settings?.time)
+    console.log(getDateConvertedToTimezone(activity?.settings?.time))
+    console.log(
+      getDateConvertedToTimezone(activity?.settings?.time, activity?.settings?.timezone?.value)
+    )
+  }
 
   return (
     <div className='card mb-5 mb-xl-10' id='kt_profile_details_view'>
@@ -87,7 +95,7 @@ const ActivityDetails = () => {
 
             <div className='col-lg-8 d-flex align-items-center'>
               <span className='fw-bolder fs-6 me-2'>
-                {getDateConvertedToTimezoneFromUtc(
+                {getDateConvertedToTimezone(
                   activity?.settings?.time,
                   activity?.settings?.timezone?.value
                 ).format('h:mm a')}{' '}

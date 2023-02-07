@@ -5,7 +5,7 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
 import {Dayjs} from 'dayjs'
 import {DatePicker} from '@mui/x-date-pickers/DatePicker'
 import TextField from '@mui/material/TextField'
-import {UserForm} from '../models/UserForm'
+import {UserForm} from '../../../../models/iam/UserForm'
 
 type Props = {
   user: UserForm | undefined

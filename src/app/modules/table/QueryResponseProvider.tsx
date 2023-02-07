@@ -3,7 +3,6 @@ import {useQuery} from 'react-query'
 import {useQueryRequest} from './QueryRequestProvider'
 import {
   createResponseContext,
-  ID,
   initialQueryResponse,
   initialQueryState,
   PaginationState,

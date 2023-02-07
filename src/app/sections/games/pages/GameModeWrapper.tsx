@@ -1,4 +1,4 @@
-import {KTCard,KTCardHeader, KTCardBody} from "../../../helpers/components"
+import {KTCard, KTCardHeader, KTCardBody} from '../../../helpers/components'
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
 import {GameMode} from '../../../models/game/GameMode'
 import {GameModeFormType, initGameModeFormType} from '../../../models/game/GameModeFormType'

@@ -1,5 +1,5 @@
 import {Response} from '../../helpers/crud-helper/models'
-import {State} from "../misc/State"
+import {State} from '../misc/State'
 
 export type CommunityAddress = {
   id?: number

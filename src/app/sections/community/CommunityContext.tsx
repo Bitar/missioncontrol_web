@@ -1,6 +1,6 @@
 import {createContext, Dispatch, SetStateAction, useContext} from 'react'
-import {User} from '../iam/user/models/User'
-import {Community} from './models/Community'
+import {User} from '../../models/iam/User'
+import {Community} from '../../models/community/Community'
 
 type CommunityContextProps = {
   community: Community | undefined

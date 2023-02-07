@@ -1,4 +1,3 @@
-
 export type PrizeItem = {
   id?: number
   prize_type?: {

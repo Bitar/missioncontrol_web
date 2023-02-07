@@ -1,12 +1,10 @@
 import {KTCard, KTCardBody, KTCardHeader} from '../../../helpers/components'
 import {Tab} from 'react-bootstrap'
 import Nav from 'react-bootstrap/Nav'
-import React, { FC } from "react";
+import React, {FC} from 'react'
 import {ScoreSettings} from '../partials/ScoreSettings'
 
-
 export const MatchSettings: FC = () => {
-
   const settingsNav = [
     {
       title: 'Scores',

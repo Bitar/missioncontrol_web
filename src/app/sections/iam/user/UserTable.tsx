@@ -1,7 +1,7 @@
 import {useMemo} from 'react'
 import {useTable, ColumnInstance, Row} from 'react-table'
 import {usersColumns} from './core/UserColumns'
-import {User} from './models/User'
+import {User} from '../../../models/iam/User'
 import {
   useQueryResponseData,
   useQueryResponseLoading,

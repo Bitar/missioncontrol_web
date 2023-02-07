@@ -7,7 +7,7 @@ import {
   ScoringSettingForm,
 } from '../../../../models/game/scoring/ScoringSettings'
 import {updateData} from '../../../../helpers/form/FormHelper'
-import {GameModeFormType} from '../../models/GameModeFormType'
+import {GameModeFormType} from '../../../../models/game/GameModeFormType'
 
 type Props = {
   gameMode: GameModeFormType

@@ -10,6 +10,12 @@ import {TimeZone} from '../../../../models/misc/TimeZone'
 import {getTimeZones} from '../../../misc/core/_requests'
 import {addDays, defaultTime} from '../../../../models/activity/ActivityForm'
 import toast from 'react-hot-toast'
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 const {before} = DateRangePicker
 
@@ -163,6 +169,8 @@ export const ScheduleDetailForm = () => {
             showMeridian={true}
             onChange={(value) => {
               if (value?.getTime()) {
+                let time = dayjs(new Date(value.getTime())).utc(true).tz('utc').unix()
+
                 updateData(
                   {
                     schedule: {
@@ -170,7 +178,7 @@ export const ScheduleDetailForm = () => {
                       ...{
                         settings: {
                           ...activityForm?.schedule.settings,
-                          ...{time: Math.trunc(value?.getTime() / 1000)},
+                          ...{time: time},
                         },
                       },
                     },

@@ -1,6 +1,6 @@
 import React, {FC, useMemo} from 'react'
 import {KTCard, KTCardBody, QUERIES} from '../../../../_metronic/helpers'
-import {User} from '../../iam/user/models/User'
+import {User} from '../../../models/iam/User'
 import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
 import {
   QueryResponseProvider,

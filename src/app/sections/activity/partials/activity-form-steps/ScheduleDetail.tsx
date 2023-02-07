@@ -23,6 +23,14 @@ export const ScheduleDetail = () => {
   const {activity, setActivity} = useActivity()
   const {activityForm, setActivityForm} = useActivityForm()
 
+  if (activity?.settings?.time) {
+    console.log(activity?.settings?.time)
+    console.log(getDateConvertedToTimezone(activity?.settings?.time))
+    console.log(
+      getDateConvertedToTimezone(activity?.settings?.time, activity?.settings?.timezone?.value)
+    )
+  }
+
   const [registrationValue, setRegistrationValue] = useState<DateRange | null>()
   const [matchPlayValue, setMatchPlayValue] = useState<DateRange | null>()
   const [matchPlayDisabledDate, setMatchPlayDisabledDate] = useState<Date>(new Date())
@@ -59,9 +67,10 @@ export const ScheduleDetail = () => {
 
       setRegistrationValue([regStartDate, regEndDate])
       setMatchPlayValue([matchStartDate, matchEndDate])
+
       setTimeValue(
         getDateConvertedToTimezone(
-          activityForm?.schedule?.settings?.time,
+          activity?.settings?.time,
           activity?.settings?.timezone?.value
         ).toDate()
       )
@@ -216,6 +225,7 @@ export const ScheduleDetail = () => {
                       value={timeValue}
                       format='hh:mm aa'
                       ranges={[]}
+                      hideMinutes={(minute) => minute % 5 !== 0}
                       className='w-100'
                       placeholder='Select Time'
                       showMeridian={true}

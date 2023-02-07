@@ -1,6 +1,6 @@
 import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react'
 import {ErrorMessage, Field} from 'formik'
-import {Community} from './models/Community'
+import {Community} from '../../models/community/Community'
 import {getStates} from '../misc/core/_requests'
 import Select from 'react-select'
 import {updateData} from '../../helpers/form/FormHelper'

@@ -1,4 +1,3 @@
-import {ID} from '../../../../_metronic/helpers'
 import {ScoringKey} from './ScoringKey'
 import {ScoringValues} from './ScoringValues'
 

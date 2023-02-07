@@ -1,8 +1,8 @@
 import {useMemo} from 'react'
 import {useTable, ColumnInstance, Row} from 'react-table'
-import {KTCardBody} from '../../../../_metronic/helpers'
+import {KTCardBody} from '../../../helpers/components'
 import {rolesColumns} from './core/RoleColumns'
-import {Role} from './models/Role'
+import {Role} from '../../../models/iam/Role'
 import {
   useQueryResponseData,
   useQueryResponseLoading,

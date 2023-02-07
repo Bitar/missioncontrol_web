@@ -7,6 +7,7 @@ import {GameSettings} from './GameSettings'
 import {GameInfo} from '../GameInfo'
 import {GameModes} from './GameModes'
 import {GameContext} from '../core/GameContext'
+import {Restricted} from '../../../modules/auth/core/AuthPermission'
 
 const GameView: React.FC = () => {
   const [game, setGame] = useState<Game | undefined>()
@@ -89,10 +90,10 @@ const GameView: React.FC = () => {
           <Route
             path='settings'
             element={
-              <>
+              <Restricted to='manage-games'>
                 <PageTitle breadcrumbs={gameViewBreadCrumbs}>Settings</PageTitle>
                 <GameSettings />
-              </>
+              </Restricted>
             }
           />
           <Route index element={<Navigate to={'/games/' + params.id + '/overview'} />} />

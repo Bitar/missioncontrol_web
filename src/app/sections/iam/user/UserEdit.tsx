@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from 'react'
 import {Form, Formik} from 'formik'
-import {KTCard, KTCardBody} from "../../../helpers/components"
+import {KTCard, KTCardBody} from '../../../helpers/components'
 import {useParams} from 'react-router-dom'
 import {updateUser} from './core/UserRequests'
 import {jsonToFormData} from '../../../helpers/form/FormHelper'
