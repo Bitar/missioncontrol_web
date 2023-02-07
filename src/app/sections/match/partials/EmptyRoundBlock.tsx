@@ -4,8 +4,6 @@ import {useActivity} from '../../activity/core/contexts/ActivityContext'
 import {EmptyScoresBlock} from './EmptyScoresBlock'
 
 export const EmptyRoundBlock: FC<{roundIndex: number; match: Match}> = ({roundIndex, match}) => {
-  const {activity} = useActivity()
-
   return (
     <div key={`round-block-inner-${roundIndex}`}>
       <div className='round-scores empty-round-scores rounded border-warning border border-dashed p-6'>

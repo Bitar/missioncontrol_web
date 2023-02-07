@@ -8,8 +8,10 @@ const SidebarFooter = () => {
         data-bs-toggle='tooltip'
         data-bs-trigger='hover'
         data-bs-dismiss-='click'
-        rel="noreferrer"
-        href="https://forms.gle/B4jBuHaU3cyJHYdU8" target="_blank">
+        rel='noreferrer'
+        href='https://forms.gle/B4jBuHaU3cyJHYdU8'
+        target='_blank'
+      >
         <KTSVG path={toAbsoluteUrl('/media/icons/duotune/gen005.svg')} className='svg-icon-2' />
         <span className='btn-label'>Support</span>
       </a>

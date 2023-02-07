@@ -7,7 +7,7 @@ import {GameSettings} from './GameSettings'
 import {GameInfo} from '../GameInfo'
 import {GameModes} from './GameModes'
 import {GameContext} from '../core/GameContext'
-import { Restricted } from '../../../modules/auth/core/AuthPermission'
+import {Restricted} from '../../../modules/auth/core/AuthPermission'
 
 const GameView: React.FC = () => {
   const [game, setGame] = useState<Game | undefined>()

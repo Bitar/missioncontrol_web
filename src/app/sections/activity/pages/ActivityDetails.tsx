@@ -3,7 +3,10 @@ import {PlatformObject} from '../components/PlatformObject'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import CountUp from 'react-countup'
-import { getDateConvertedToTimezone, getDateConvertedToTimezoneFromUtc } from "../../../helpers/ActivityHelper";
+import {
+  getDateConvertedToTimezone,
+  getDateConvertedToTimezoneFromUtc,
+} from '../../../helpers/ActivityHelper'
 
 const ActivityDetails = () => {
   const {activity} = useActivity()

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
-import { KTSVG } from "../../../helpers/components";
+import React from 'react'
+import {KTSVG} from '../../../helpers/components'
 
 type Props = {
   className: string
@@ -16,19 +16,19 @@ type Props = {
 }
 
 const StatisticsWidget5: React.FC<Props> = ({
-                                              className,
-                                              color,
-                                              svgIcon,
-                                              iconColor,
-                                              title,
-                                              titleColor,
-                                              description,
-                                              descriptionColor,
-                                              faIcon
-                                            }) => {
+  className,
+  color,
+  svgIcon,
+  iconColor,
+  title,
+  titleColor,
+  description,
+  descriptionColor,
+  faIcon,
+}) => {
   return (
-    <a href="#" className={`card bg-${color} hoverable ${className}`}>
-      <div className="card-body">
+    <a href='#' className={`card bg-${color} hoverable ${className}`}>
+      <div className='card-body'>
         {faIcon ? (
           <i className={`${faIcon} fs-3x ms-n1 text-${iconColor}`}></i>
         ) : (
@@ -40,7 +40,7 @@ const StatisticsWidget5: React.FC<Props> = ({
         <div className={`fw-semibold text-${descriptionColor}`}>{description}</div>
       </div>
     </a>
-  );
-};
+  )
+}
 
-export { StatisticsWidget5 };
+export {StatisticsWidget5}

@@ -1,9 +1,10 @@
-import { ID } from "../../../../../_metronic/helpers";
-import { ScoreSheet } from "./ScoreSheet";
-import { Activity } from "../Activity";
-import { Match } from "./Match";
-import { Round } from "./Round";
-import { Team } from "../../../../models/squad/Team";
+import {ID} from '../../../../../_metronic/helpers'
+import {ScoreSheet} from './ScoreSheet'
+import {Activity} from '../Activity'
+import {Round} from './Round'
+import {Team} from '../../../../models/squad/Team'
+import {ScoringSettings} from '../../../../models/game/scoring/ScoringSettings'
+import {Match} from './Match'
 
 export type Score = {
   id?: ID
@@ -12,225 +13,175 @@ export type Score = {
   user_id?: number
   team_id: number
   is_approved: number
-  images: { id: number; image: string }[]
+  images: {id: number; image: string}[]
   score_sheet: ScoreSheet[]
 }
 export const initialScore = (score?: Score) => {
   return {
     round: score?.round || 0,
     score: score?.score || 0,
-    is_approved: score?.is_approved || 0
-  };
-};
-
-export const initScoreSettings = () => {
-  return {
-    rounds: [
-      {
-        round: 0,
-        scores: [
-          {
-            team_id: 0,
-            keys: [
-              {
-                key: 0,
-                value: 0
-              },
-              {
-                key: 0,
-                value: 0
-              }
-            ]
-          },
-          {
-            team_id: 0,
-            keys: [
-              {
-                key: 0,
-                value: 0
-              },
-              {
-                key: 0,
-                value: 0
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  };
-};
-
-export const defaultScoreSettings = (match?: Match, activity?: Activity) => {
-  let scoreSettings: any = {
-    rounds: []
-  };
-
-  if (activity?.settings?.rounds) {
-    let matchTeams = match?.teams;
-    for (let i = 0; i < activity?.settings?.rounds; i++) {
-      let roundObject: any = {
-        round: i + 1,
-        scores: []
-      };
-
-      matchTeams?.forEach((team) => {
-        let teamObject = {
-          team_id: team?.id,
-          keys: getDefaultScoreSheetKeys(activity)
-        };
-
-        roundObject.scores.push(teamObject);
-      });
-
-      scoreSettings.rounds.push(roundObject);
-    }
+    is_approved: score?.is_approved || 0,
   }
-
-  return scoreSettings;
-};
+}
 
 export const updateScores = (activity: Activity, matchRound: Round, teams?: Team[]) => {
-  let scoresObjs: any[] = [];
+  let scoresObjs: any[] = []
 
   matchRound?.scores.forEach((score) => {
     let scoreObj: any = {
       team_id: score?.team_id,
-      keys: []
-    };
+      keys: [],
+    }
 
+    let activitySettings = activity?.game_mode?.scoring_settings
 
-    // console.log(activity?.game_mode?.scoring_settings);
-    score?.score_sheet.forEach((scoreSheet) => {
-      let scoreSheetValue = checkScoreKey(activity, scoreSheet);
+    activitySettings?.forEach((scoreSetting) => {
+      let scoreSheetValue = checkScoreKey(scoreSetting, score?.score_sheet)
 
       let scoreSheetObj = {
-        key: scoreSheet?.score_settings_id,
-        value: scoreSheetValue
-      };
-      scoreObj?.keys.push(scoreSheetObj);
-    });
+        key: scoreSetting?.id,
+        value: scoreSheetValue,
+      }
 
-    scoresObjs.push(scoreObj);
-  });
+      scoreObj?.keys.push(scoreSheetObj)
+    })
+
+    scoresObjs.push(scoreObj)
+  })
 
   // Check if MatchRound has 2 scores
   if (matchRound?.scores.length === 1) {
-    let scoreObj = defaultScoreTeam(activity,
+    let scoreObj = defaultScoreTeam(
+      activity,
       teams?.find((team) => team?.id !== matchRound?.scores[0]?.team_id)?.id
-    );
-    scoresObjs.push(scoreObj);
+    )
+    scoresObjs.push(scoreObj)
   }
 
-  return scoresObjs;
-};
+  return scoresObjs
+}
 
-const checkScoreKey = (activity: Activity, scoreSheet: ScoreSheet) => {
-  let scoreSetting = activity?.game_mode?.scoring_settings?.find((scoreSetting) => scoreSetting?.id === scoreSheet?.score_settings_id);
+const checkScoreKey = (scoreSetting: ScoringSettings, scoreSheets: ScoreSheet[]) => {
+  let scoreSheetExist = scoreSheets?.find((scoreSheet) => {
+    return scoreSheet?.score_settings_id === scoreSetting?.id
+  })
 
-  if (scoreSetting?.key?.type === 1) {
-    return scoreSheet?.value;
-  } else {
-    let exist = scoreSetting?.values?.find((scoreSettingValue) => scoreSettingValue?.value === scoreSheet?.value);
+  if (scoreSheetExist) {
+    if (scoreSetting?.key?.type === 1) {
+      return scoreSheetExist?.value
+    } else {
+      let exist = scoreSetting?.values?.find(
+        (scoreSettingValue) => scoreSettingValue?.key === scoreSheetExist?.value
+      )
 
-    return exist?.key || 0;
+      return exist?.key || 0
+    }
   }
-};
+
+  return 0
+}
 
 const defaultScoreTeam = (activity: Activity, team_id?: ID) => {
   return {
     team_id: team_id || 0,
-    keys: getKeysArray(activity)
-  };
-};
+    keys: getKeysArray(activity),
+  }
+}
 
 const getKeysArray = (activity?: Activity) => {
-  let keysArray: any[] = [];
+  let keysArray: any[] = []
 
   if (activity) {
     activity?.game_mode?.scoring_settings.forEach((scoreSetting) => {
       keysArray.push({
         key: scoreSetting.id,
-        value: 0
-      });
-    });
+        value: 0,
+      })
+    })
   } else {
     keysArray.push({
       key: 0,
-      value: 0
-    });
+      value: 0,
+    })
     keysArray.push({
       key: 0,
-      value: 0
-    });
+      value: 0,
+    })
   }
 
-  return keysArray;
-};
+  return keysArray
+}
 
-export const defaultRound = (round: number, activity: Activity, teams?: Team[], matchRound?: Round) => {
-  let roundObj: any;
+export const defaultRound = (
+  round: number,
+  activity: Activity,
+  teams?: Team[],
+  matchRound?: Round
+) => {
+  let roundObj: any
   if (matchRound) {
     roundObj = {
       round: matchRound?.round,
-      scores: updateScores(activity, matchRound, teams)
-    };
+      scores: updateScores(activity, matchRound, teams),
+    }
   } else {
-    let scoresObj: any[] = [];
+    let scoresObj: any[] = []
 
     if (teams && teams.length > 0) {
       teams?.forEach((team) => {
-        scoresObj.push(defaultScoreTeam(activity, team?.id));
-      });
+        scoresObj.push(defaultScoreTeam(activity, team?.id))
+      })
     } else {
-      scoresObj.push(defaultScoreTeam(activity));
-      scoresObj.push(defaultScoreTeam(activity));
+      scoresObj.push(defaultScoreTeam(activity))
+      scoresObj.push(defaultScoreTeam(activity))
     }
 
     roundObj = {
       round: round,
-      scores: scoresObj
-    };
-  }
-
-  return roundObj;
-};
-
-export const getDefaultScoreSheetKeys = (activity?: Activity) => {
-  let defaultScoreSheet: any = [];
-
-  if (activity?.game_mode?.scoring_settings) {
-    for (let i = 0; i < activity?.game_mode?.scoring_settings?.length; i++) {
-      let scoreSheetObj = {
-        key: activity?.game_mode?.scoring_settings[i]?.id,
-        value: 0
-      };
-
-      defaultScoreSheet.push(scoreSheetObj);
+      scores: scoresObj,
     }
-  } else {
-    let scoreSheetObj = {
-      key: 0,
-      value: 0
-    };
-
-    defaultScoreSheet.push(scoreSheetObj);
   }
 
-  return defaultScoreSheet;
-};
+  return roundObj
+}
 
-type scoreObjectKey = {
+export type ScoreObjectKey = {
   key: number
   value: number
 }
 
-type scoresScoreObject = {
-  keys: scoreObjectKey[]
+export type ScoresScoreObject = {
+  keys: ScoreObjectKey[]
   team_id: number
 }
 
-export type roundScoreObject = {
+export type RoundScoreObject = {
   round: number
-  scores: scoresScoreObject[]
+  scores: ScoresScoreObject[]
+}
+
+export const setUpScoringFields = (activity: Activity, match: Match) => {
+  let rounds = activity?.settings?.rounds
+
+  let newRounds: RoundScoreObject[] = []
+
+  for (let i = 1; i <= rounds; i++) {
+    let matchRound = match?.rounds?.filter(
+      (round) => round?.round === i && round?.scores?.length > 0
+    )[0]
+    console.log(match?.rounds)
+
+    if (matchRound) {
+      // Match Found Scores
+      console.log('found')
+      newRounds.push(defaultRound(i, activity, match?.teams, matchRound))
+    } else {
+      console.log('not found')
+      newRounds.push(defaultRound(i, activity, match?.teams))
+      // Add Default Round
+      // Match Not Found Scores
+    }
+  }
+
+  return newRounds
 }

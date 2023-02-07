@@ -17,6 +17,7 @@ const QUERIES = {
   PLANS_LIST: 'plans-list',
   UPCOMING_MATCH_LIST: 'upcoming-match-list',
   RECENT_MATCH_LIST: 'recent-match-list',
+  DISPUTED_MATCH_LIST: 'disputed-match-list',
 }
 
 export {QUERIES}

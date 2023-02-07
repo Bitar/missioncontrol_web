@@ -3,7 +3,7 @@ import {useAuth} from '../../modules/auth'
 import {isCommunityAdmin, isSuperAdmin} from '../../sections/identity/user/models/User'
 import {CommunityView} from '../../sections/community/pages/CommunityView'
 import {CreateCommunityWidget} from '../../layout/widgets/CreateCommunityWidget'
-import { SuperAdmin } from "./partials/SuperAdmin";
+import {SuperAdmin} from './partials/SuperAdmin'
 
 const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
   const {currentUser, communityAdmin} = useAuth()
@@ -30,7 +30,7 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
               {!communityAdmin && !isSuperAdmin(currentUser) ? (
                 <CreateCommunityWidget bgHex={'#FFFFFF'} type='create-community' />
               ) : (
-                isSuperAdmin(currentUser) && <SuperAdmin/>
+                isSuperAdmin(currentUser) && <SuperAdmin />
               )}
             </div>
           </div>
