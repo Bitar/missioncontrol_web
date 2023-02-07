@@ -8,6 +8,8 @@ import {UsersByDay} from './UsersByDay'
 import {Game} from '../../../models/game/Game'
 import {PopularGames} from './PopularGames'
 import {CommunitiesByBillingPlan, CommunitiesSubscriptions} from './CommunitiesByBillingPlan'
+import {KTCard, KTCardBody} from '../../../helpers/components'
+import { toAbsoluteUrl } from "../../../../_metronic/helpers";
 
 export type PopularGamesType = {
   total: number
@@ -139,44 +141,6 @@ export const SuperAdmin = () => {
 
   return (
     <>
-      <div className='row'>
-        <div className='col-xl-4'>
-          <StatisticsWidget5
-            className='card-xl-stretch mb-5 mb-xl-8'
-            faIcon={'fa-duotone fa-gamepad'}
-            color='mc-primary'
-            iconColor='white'
-            titleColor='white'
-            descriptionColor='white'
-            title={activeActivities + ''}
-            description='Active Activities'
-          />
-        </div>
-        <div className='col-xl-4'>
-          <StatisticsWidget5
-            className='card-xl-stretch mb-5 mb-xl-8'
-            faIcon={'fa-duotone fa-joystick'}
-            color='mc-secondary'
-            iconColor='white'
-            titleColor='white'
-            descriptionColor='white'
-            title={matchesToday + ''}
-            description='Matches Today'
-          />
-        </div>
-        <div className='col-xl-4'>
-          <StatisticsWidget5
-            className='card-xl-stretch mb-5 mb-xl-8'
-            faIcon={'fa-duotone fa-people-group'}
-            color='success'
-            iconColor='white'
-            titleColor='white'
-            descriptionColor='white'
-            title={commissionerCommunities + ''}
-            description='Commissioners'
-          />
-        </div>
-      </div>
       <div className='row'>
         <div className='col-xl-6'>
           {communitiesSubscriptions.length > 0 && communitiesSubscriptionsValue.length > 0 && (

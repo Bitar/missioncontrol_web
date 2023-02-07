@@ -50,7 +50,7 @@ const SidebarMenuMain = () => {
         </SidebarMenuItemWithSub>
       </Restricted>
 
-      <Restricted to='view-games'>
+      <Restricted to='view-resources'>
         <SidebarMenuItem to='/resources' title='Resources' fontIcon='fa-file' />
       </Restricted>
     </>

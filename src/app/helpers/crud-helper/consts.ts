@@ -16,7 +16,7 @@ const QUERIES = {
   GAMES_PLATFORMS_LIST: 'games-platforms-list',
   PLANS_LIST: 'plans-list',
   UPCOMING_MATCH_LIST: 'upcoming-match-list',
-  RECENT_MATCH_LIST: 'recent-match-list',
+  PAST_MATCH_LIST: 'past-match-list',
   DISPUTED_MATCH_LIST: 'disputed-match-list',
 }
 

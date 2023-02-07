@@ -4,6 +4,10 @@ import {isCommunityAdmin, isSuperAdmin} from '../../models/iam/User'
 import {CommunityView} from '../../sections/community/pages/CommunityView'
 import {CreateCommunityWidget} from '../../layout/widgets/CreateCommunityWidget'
 import {SuperAdmin} from './partials/SuperAdmin'
+import {KTCard, KTCardBody} from '../../helpers/components'
+import {toAbsoluteUrl} from '../../../_metronic/helpers'
+import {StatisticsWidget5} from './partials/StatisticsWidget5'
+import { Link } from "react-router-dom";
 
 const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
   const {currentUser, communityAdmin} = useAuth()
@@ -28,7 +32,41 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
           <div className='row gy-5 g-xl-8'>
             <div className='col-xl-12'>
               {!communityAdmin && !isSuperAdmin(currentUser) ? (
-                <CreateCommunityWidget bgHex={'#FFFFFF'} type='create-community' />
+                <>
+                  <div className='row'>
+                    <div className='col-xl-6'>
+                      <CreateCommunityWidget bgHex={'#FFFFFF'} type='create-community' />
+                    </div>
+                    <div className='col-xl-6'>
+                      <div className={`card bg-mc-secondary text-white`} >
+                        <div className={`content d-flex flex-column flex-column-fluid" id="kt_content`}>
+                          <div className='post d-flex flex-column-fluid' id='kt_post'>
+                            <div id='kt_content_container' className='container-xxl'>
+                              <div className='card-body pt-0'>
+                                <div className='card-px text-center py-10'>
+                                  <h2 className='fs-2x fw-bolder mb-10 text-white'>Download the app</h2>
+                                  <p className='fs-4 fw-bold mb-10'>
+                                    We do gaming community stuff!
+                                  </p>
+                                  <div className='text-center px-4 mb-10'>
+                                    <img
+                                      className='mw-100 mh-300px'
+                                      alt=''
+                                      src={toAbsoluteUrl(`/media/marketing/mockview.png`)}
+                                    />
+                                  </div>
+                                  <a href='https://apps.apple.com/us/app/mission-control-gg/id1477441476' target='_blank' className='btn btn-mc-primary fw-semibold' rel='noreferrer'>
+                                    <i className='fab fa-apple'></i> Download on App Store
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
               ) : (
                 isSuperAdmin(currentUser) && <SuperAdmin />
               )}
@@ -39,4 +77,4 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
   )
 }
 
-export {DashboardWrapper}
+export { DashboardWrapper };

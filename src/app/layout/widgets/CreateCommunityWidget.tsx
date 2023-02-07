@@ -35,12 +35,6 @@ const CreateCommunityWidget: React.FC<Props> = ({className, bgHex = '', type}) =
                 <Link to={'/admin/communities/create'} className='btn btn-mc-secondary'>
                   Create Community
                 </Link>
-                {/*{type === 'create-community' ? (*/}
-                {/*) : (*/}
-                {/*  <Link to={'/billing/plan'} className='btn btn-mc-secondary'>*/}
-                {/*    Create Community*/}
-                {/*  </Link>*/}
-                {/*)}*/}
               </div>
             </div>
           </div>

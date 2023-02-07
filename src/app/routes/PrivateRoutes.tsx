@@ -25,7 +25,16 @@ const PrivateRoutes = () => {
 
         {/* Pages */}
         <Route path='dashboard/*' element={<DashboardWrapper />} />
-        <Route path='resources' element={<Resources />} />
+        <Route
+          path='resources'
+          element={
+            <Restricted to='view-resources'>
+              <SuspenseView>
+                <Resources />
+              </SuspenseView>
+            </Restricted>
+          }
+        />
         {/* Pages */}
 
         {/* Sections */}
@@ -126,4 +135,4 @@ const PrivateRoutes = () => {
   )
 }
 
-export {PrivateRoutes}
+export { PrivateRoutes };

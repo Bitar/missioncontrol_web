@@ -45,13 +45,13 @@ const ActivityMatches = () => {
           <KTCard>
             <div className='card-header bg-mc-secondary'>
               <div className='card-title'>
-                <h3 className='card-label text-white'>Recent Matches</h3>
+                <h3 className='card-label text-white'>Past Matches</h3>
               </div>
             </div>
             <KTCardBody className='scroll-y mh-800px pt-3'>
               <QueryRequestProvider>
                 <QueryResponseProvider
-                  id={QUERIES.RECENT_MATCH_LIST}
+                  id={QUERIES.PAST_MATCH_LIST}
                   requestFunction={getRecentActivityMatches}
                   requestId={params?.id}
                 >
