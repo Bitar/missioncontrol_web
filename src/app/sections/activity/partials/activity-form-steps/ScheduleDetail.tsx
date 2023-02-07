@@ -14,8 +14,9 @@ import {DateRange} from 'rsuite/esm/DateRangePicker/types'
 import {defaultTime} from '../../../../models/activity/ActivityForm'
 import {TimeZone} from '../../../../models/misc/TimeZone'
 import {getTimeZones} from '../../../misc/core/_requests'
-import {getDateConvertedToTimezone} from '../../../../helpers/ActivityHelper'
+import { getDateConvertedToTimezone, getDateInUTC } from "../../../../helpers/ActivityHelper";
 import {updateSchedule} from '../../core/requests/ActivitySettingsRequests'
+import dayjs from "dayjs";
 
 const {before} = DateRangePicker
 
@@ -23,13 +24,14 @@ export const ScheduleDetail = () => {
   const {activity, setActivity} = useActivity()
   const {activityForm, setActivityForm} = useActivityForm()
 
-  if (activity?.settings?.time) {
-    console.log(activity?.settings?.time)
-    console.log(getDateConvertedToTimezone(activity?.settings?.time))
-    console.log(
-      getDateConvertedToTimezone(activity?.settings?.time, activity?.settings?.timezone?.value)
-    )
-  }
+  // if (activity?.settings?.time) {
+  //   console.log(activity?.settings?.time)
+  //   console.log(activityForm?.schedule?.settings?.time)
+  //   console.log(getDateConvertedToTimezone(activity?.settings?.time))
+  //   console.log(
+  //     getDateConvertedToTimezone(activity?.settings?.time, activity?.settings?.timezone?.value)
+  //   )
+  // }
 
   const [registrationValue, setRegistrationValue] = useState<DateRange | null>()
   const [matchPlayValue, setMatchPlayValue] = useState<DateRange | null>()
@@ -68,12 +70,10 @@ export const ScheduleDetail = () => {
       setRegistrationValue([regStartDate, regEndDate])
       setMatchPlayValue([matchStartDate, matchEndDate])
 
-      setTimeValue(
-        getDateConvertedToTimezone(
-          activity?.settings?.time,
-          activity?.settings?.timezone?.value
-        ).toDate()
-      )
+      let time = getDateInUTC(activity?.settings?.time);
+      let newDate = dayjs(new Date().setHours(time.hour(), time.minute(), 0)).toDate();
+
+      setTimeValue(newDate)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activity?.registration_dates, activity?.matchplay_dates, activity?.settings])

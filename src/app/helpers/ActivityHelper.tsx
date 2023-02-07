@@ -108,4 +108,8 @@ export const getDateConvertedToTimezoneFromUtc = (timestamp: number, tz?: string
   return date
 }
 
+export const getDateInUTC = (timestamp: number, tz?: string) => {
+  return dayjs(new Date(timestamp * 1000)).utc(false).tz(tz, true);
+}
+
 export {formatActivityStatus, formatDates, formatMatchStatus}
