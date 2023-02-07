@@ -6,7 +6,7 @@ import {
   useQueryResponseLoading,
 } from '../../../modules/table/QueryResponseProvider'
 import {Match} from '../../../models/activity/matches/Match'
-import {getDateConvertedToLocal} from '../../../helpers/ActivityHelper'
+import { getDateConvertedToLocal, getDateConvertedToTimezone } from "../../../helpers/ActivityHelper";
 import {TextImageCell} from '../../../modules/table/columns/TextImageCell'
 import {calculateTeamScore} from '../../../helpers/MCHelper'
 import {useActivity} from '../core/contexts/ActivityContext'
@@ -37,7 +37,7 @@ const MatchesTable = () => {
       <div className='mb-5'>
         {Object.keys(data).map((key, index) => {
           let keyInt = parseInt(key)
-          let date = getDateConvertedToLocal(keyInt)
+          let date = getDateConvertedToTimezone(keyInt)
 
           return (
             <React.Fragment key={`yo-${index}`}>
