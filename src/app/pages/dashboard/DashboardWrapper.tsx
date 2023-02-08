@@ -44,9 +44,9 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
                             <div id='kt_content_container' className='container-xxl'>
                               <div className='card-body pt-0'>
                                 <div className='card-px text-center py-10'>
-                                  <h2 className='fs-2x fw-bolder mb-10 text-white'>Download the app</h2>
+                                  <h2 className='fs-2x fw-bolder mb-10 text-white'>Join A Community</h2>
                                   <p className='fs-4 fw-bold mb-10'>
-                                    We do gaming community stuff!
+                                    Players can join a community by downloading our mobile app
                                   </p>
                                   <div className='text-center px-4 mb-10'>
                                     <img
