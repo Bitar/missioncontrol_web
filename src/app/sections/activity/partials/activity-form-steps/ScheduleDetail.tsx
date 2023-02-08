@@ -14,9 +14,9 @@ import {DateRange} from 'rsuite/esm/DateRangePicker/types'
 import {defaultTime} from '../../../../models/activity/ActivityForm'
 import {TimeZone} from '../../../../models/misc/TimeZone'
 import {getTimeZones} from '../../../misc/core/_requests'
-import { convertDateToUTC, getDateConvertedToTimezone, getDateInUTC } from "../../../../helpers/ActivityHelper";
+import {getDateConvertedToTimezone, getDateInUTC} from '../../../../helpers/ActivityHelper'
 import {updateSchedule} from '../../core/requests/ActivitySettingsRequests'
-import dayjs from "dayjs";
+import dayjs from 'dayjs'
 
 const {before} = DateRangePicker
 
@@ -220,6 +220,8 @@ export const ScheduleDetail = () => {
                       showMeridian={true}
                       onChange={(value) => {
                         if (value?.getTime()) {
+                          let time = dayjs(new Date(value.getTime())).utc(true).tz('utc').unix()
+
                           updateData(
                             {
                               schedule: {
@@ -227,7 +229,7 @@ export const ScheduleDetail = () => {
                                 ...{
                                   settings: {
                                     ...activityForm?.schedule.settings,
-                                    ...{time: Math.trunc(value?.getTime() / 1000)},
+                                    ...{time: time},
                                   },
                                 },
                               },
