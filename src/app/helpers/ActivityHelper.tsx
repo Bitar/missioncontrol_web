@@ -65,6 +65,18 @@ const formatMatchStatus = (statusId: number) => {
   return {status, color}
 }
 
+export const convertDateToUTC = (timestamp: number) => {
+  let date = new Date(timestamp * 1000);
+  let now_utc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(),
+    date.getUTCDate(), date.getUTCHours(),
+    date.getUTCMinutes(), date.getUTCSeconds());
+
+  return new Date(now_utc);
+}
+export const convertDateToTimezone = (date: Date, tz: string) => {
+  return new Intl.DateTimeFormat('default', {timeZone: tz, dateStyle: 'full', timeStyle: 'long'}).format(date)
+}
+
 const formatDates = (dates: any, tz: string) => {
   const startDate = dayjs(new Date(dates?.start_date * 1000))
     .utc(false)
@@ -98,16 +110,6 @@ export const getDateConvertedToTimezone = (timestamp: number, tz?: string) => {
 
   return date
 }
-export const getDateConvertedToTimezoneFromUtc = (timestamp: number, tz?: string) => {
-  let date = dayjs(new Date(timestamp * 1000)).utc(true)
-
-  if (tz) {
-    date.tz(tz, true)
-  }
-
-  return date
-}
-
 export const getDateInUTC = (timestamp: number, tz?: string) => {
   return dayjs(new Date(timestamp * 1000)).utc(false).tz(tz, true);
 }

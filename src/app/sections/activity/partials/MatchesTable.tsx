@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react'
+import React, { useEffect, useMemo } from "react";
 import {TableListPagination} from '../../../modules/table/TableListPagination'
 import {TableListLoading} from '../../../modules/table/TableListLoading'
 import {
@@ -38,7 +38,8 @@ const MatchesTable = () => {
       <div className='mb-5'>
         {Object.keys(data).map((key, index) => {
           let keyInt = parseInt(key)
-          let date = dayjs(new Date(keyInt * 1000))
+          let time = dayjs(getDateInUTC(activity?.settings?.time!, activity?.settings?.timezone?.value))
+          let date = dayjs(new Date(keyInt * 1000).setHours(time.hour(), time.minute(), 0))
 
           return (
             <React.Fragment key={`yo-${index}`}>

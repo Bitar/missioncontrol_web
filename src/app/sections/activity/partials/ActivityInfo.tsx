@@ -1,12 +1,18 @@
 import React, {FC} from 'react'
 import {Link, useLocation} from 'react-router-dom'
 import {BadgeCell} from '../../../modules/table/columns/BadgeCell'
-import {formatActivityStatus, getDateConvertedToLocal} from '../../../helpers/ActivityHelper'
-import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
+import {formatActivityStatus} from '../../../helpers/ActivityHelper'
 import {KTCard, KTCardBody} from '../../../helpers/components'
 import clsx from 'clsx'
 import {useActivity} from '../core/contexts/ActivityContext'
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import tz from 'dayjs/plugin/timezone'
+import AdvancedFormat from 'dayjs/plugin/advancedFormat'
+
+dayjs.extend(utc)
+dayjs.extend(AdvancedFormat)
+dayjs.extend(tz)
 
 const ActivityInfo: FC = () => {
   dayjs.extend(utc)
@@ -100,17 +106,15 @@ const ActivityInfo: FC = () => {
                       </div>
                       <div className='fs-4 fw-bold'>
                         <span>
-                          {getDateConvertedToLocal(
-                            activity?.registration_dates?.start_date,
-                            activity?.settings?.timezone?.value
-                          ).format('DD MMM YY')}
+                          {dayjs(new Date(activity?.registration_dates?.start_date * 1000))
+                            .tz(activity?.settings?.timezone?.value)
+                            .format('DD MMM YY - hh:mm a z')}
                           <span className='mx-1'>
                             <i className='fa fa-arrow-circle-right text-mc-secondary'></i>
                           </span>
-                          {getDateConvertedToLocal(
-                            activity?.registration_dates?.end_date,
-                            activity?.settings?.timezone?.value
-                          ).format('DD MMM YY')}
+                          {dayjs(new Date(activity?.registration_dates?.end_date * 1000))
+                            .tz(activity?.settings?.timezone?.value)
+                            .format('DD MMM YY - hh:mm a z')}
                         </span>
                       </div>
                     </div>
@@ -122,17 +126,15 @@ const ActivityInfo: FC = () => {
                       </div>
                       <div className='fs-4 fw-bold'>
                         <span>
-                          {getDateConvertedToLocal(
-                            activity?.matchplay_dates?.start_date,
-                            activity?.settings?.timezone?.value
-                          ).format('DD MMM YY')}
+                          {dayjs(new Date(activity?.matchplay_dates?.start_date * 1000))
+                            .tz(activity?.settings?.timezone?.value)
+                            .format('DD MMM YY - hh:mm a z')}
                           <span className='mx-1'>
                             <i className='fa fa-arrow-circle-right text-mc-secondary'></i>
                           </span>
-                          {getDateConvertedToLocal(
-                            activity?.matchplay_dates?.end_date,
-                            activity?.settings?.timezone?.value
-                          ).format('DD MMM YY')}
+                          {dayjs(new Date(activity?.matchplay_dates?.end_date * 1000))
+                            .tz(activity?.settings?.timezone?.value)
+                            .format('DD MMM YY - hh:mm a z')}
                         </span>
                       </div>
                     </div>
@@ -197,4 +199,4 @@ const ActivityInfo: FC = () => {
   )
 }
 
-export {ActivityInfo}
+export { ActivityInfo };

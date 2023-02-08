@@ -1,13 +1,25 @@
 import {useActivity} from '../core/contexts/ActivityContext'
 import {PlatformObject} from '../components/PlatformObject'
-import dayjs from 'dayjs'
+import dayjs, { Dayjs } from "dayjs";
 import utc from 'dayjs/plugin/utc'
 import CountUp from 'react-countup'
-import { getDateConvertedToTimezone } from "../../../helpers/ActivityHelper";
+import {getDateInUTC
+} from "../../../helpers/ActivityHelper";
+import {useEffect, useState} from 'react'
 
 const ActivityDetails = () => {
   const {activity} = useActivity()
   dayjs.extend(utc)
+
+  const [timeValue, setTimeValue] = useState<Dayjs | null>(dayjs(new Date().setHours(18, 0)))
+
+  useEffect(() => {
+    if(activity?.settings) {
+      let time = dayjs(getDateInUTC(activity?.settings?.time, activity?.settings?.timezone?.value))
+      let newDate = dayjs(new Date().setHours(time.hour(), time.minute(), 0))
+      setTimeValue(newDate)
+    }
+  }, [activity?.settings])
 
   return (
     <div className='card mb-5 mb-xl-10' id='kt_profile_details_view'>
@@ -87,11 +99,7 @@ const ActivityDetails = () => {
 
             <div className='col-lg-8 d-flex align-items-center'>
               <span className='fw-bolder fs-6 me-2'>
-                {getDateConvertedToTimezone(
-                  activity?.settings?.time,
-                  activity?.settings?.timezone?.value
-                ).format('h:mm a')}{' '}
-                - {activity?.settings?.timezone?.name}{' '}
+                {timeValue?.format('hh:mm a')} - {activity?.settings?.timezone?.name}{' '}
                 <span className='text-muted' style={{fontSize: '12px'}}>
                   ({activity?.settings?.timezone?.value})
                 </span>
@@ -178,4 +186,4 @@ const ActivityDetails = () => {
   )
 }
 
-export {ActivityDetails}
+export { ActivityDetails };
