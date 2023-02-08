@@ -24,14 +24,12 @@ const QueryResponseProvider: FC<React.PropsWithChildren<Props>> = ({
 }) => {
   const {state} = useQueryRequest()
 
-  const [enabled, setEnabled] = useState<boolean>(true)
   const [query, setQuery] = useState<string>(stringifyRequestQuery(state))
   const updatedQuery = useMemo(() => stringifyRequestQuery(state), [state])
 
   useEffect(() => {
     if (query !== updatedQuery) {
       setQuery(updatedQuery)
-      setEnabled(true)
     }
   }, [query, updatedQuery])
 
@@ -43,17 +41,17 @@ const QueryResponseProvider: FC<React.PropsWithChildren<Props>> = ({
     `${id}-${query}`,
     () => {
       if (requestId) {
-        return requestFunction(requestId, query).finally(() => setEnabled(false))
+        return requestFunction(requestId, query)
       } else {
-        return requestFunction(query).finally(() => setEnabled(false))
+        return requestFunction(query)
       }
     },
-    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false, enabled: enabled}
+    {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false, enabled: true}
   )
 
   return (
     <QueryResponseContext.Provider
-      value={{isLoading: isFetching, refetch, response, query, setEnabled}}
+      value={{isLoading: isFetching, refetch, response, query}}
     >
       {children}
     </QueryResponseContext.Provider>

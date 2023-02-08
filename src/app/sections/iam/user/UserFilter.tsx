@@ -36,9 +36,9 @@ const UserFilter: FC = () => {
 
   return (
     <KTCard id='filter-container' className='bg-transparent mb-10' shadow={false} border={true}>
-      <KTCardHeader text={'Filters'} bg={'info'} text_color={'white'} />
+      <KTCardHeader text={'Filters'} bg={'info'} text_color={'white'}/>
       <Formik initialValues={userFilters} onSubmit={filterData} enableReinitialize>
-        <Form onChange={handleOnChange} className='form'>
+        <Form onChange={handleOnChange} className='form' id='filter-container-wrapper'>
           <KTCardBody>
             <div className='row'>
               <div className='col-lg-4'>

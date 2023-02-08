@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import {getUserById} from '../core/UserRequests'
-import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
+import {Outlet, Route, Routes, useParams} from 'react-router-dom'
 import {User} from '../../../../models/iam/User'
 import {UserInfo} from '../UserInfo'
 import {PageLink, PageTitle} from '../../../../layout/core'
-import {UserEdit} from '../UserEdit'
+import {UserSettings} from './UserSettings'
 import {UserActivities} from './UserActivities'
 import {UserTeams} from './UserTeams'
 import {SuspenseView} from '../../../../layout/SuspenseView'
@@ -17,7 +17,7 @@ const UserView: React.FC = () => {
   const userViewBreadCrumbs: Array<PageLink> = [
     {
       title: 'Users',
-      path: '/users/overview',
+      path: '/iam/users',
       isSeparator: false,
       isActive: false,
     },
@@ -29,7 +29,7 @@ const UserView: React.FC = () => {
     },
     {
       title: user?.name || '',
-      path: '/users/' + params.id + '/overview',
+      path: '/iam/users/' + params.id,
       isSeparator: false,
       isActive: false,
     },
@@ -65,7 +65,7 @@ const UserView: React.FC = () => {
           }
         >
           <Route
-            path='/overview'
+            index
             element={
               <>
                 <SuspenseView>
@@ -102,12 +102,11 @@ const UserView: React.FC = () => {
               <>
                 <SuspenseView>
                   <PageTitle breadcrumbs={userViewBreadCrumbs}>Settings</PageTitle>
-                  <UserEdit />
+                  <UserSettings />
                 </SuspenseView>
               </>
             }
           />
-          <Route index element={<Navigate to={'/users/' + params.id + '/overview'} />} />
         </Route>
       </Routes>
     </UserContext.Provider>

@@ -34,8 +34,6 @@ const PermissionDetails = () => {
     is_owner: false,
   })
 
-  const {setEnabled} = useQueryResponse()
-
   const handleOnChange = (e: any) => {
     let targetName = e.target.name
     let targetValue = e.target.value
@@ -60,7 +58,6 @@ const PermissionDetails = () => {
       .then(() => {
         toast.success('Community admin added Successfully!')
 
-        setEnabled(true)
         setPermissionUserForm({
           email: '',
           is_owner: false,

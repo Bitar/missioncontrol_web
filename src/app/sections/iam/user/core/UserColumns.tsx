@@ -18,7 +18,7 @@ const usersColumns: ReadonlyArray<Column<User>> = [
       <TextImageCell
         dImage={props.data[props.row.index]?.meta?.image}
         dText={props.data[props.row.index].name}
-        link={`/users/${props.data[props.row.index].id}`}
+        link={`iam/users/${props.data[props.row.index].id}`}
         dExtraText={props.data[props.row.index].email}
       />
     ),
@@ -53,10 +53,12 @@ const usersColumns: ReadonlyArray<Column<User>> = [
     Cell: ({...props}) => (
       <ActionsCell
         id={props.data[props.row.index].id}
-        path={'users'}
+        path={'iam/users'}
         queryKey={QUERIES.USERS_LIST}
         showView={true}
         showEdit={false}
+        title="Delete User"
+        text={`Are you sure you want to delete the user '${props.data[props.row.index].name}'?`}
       />
     ),
   },

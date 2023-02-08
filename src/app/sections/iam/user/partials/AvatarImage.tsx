@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import {toAbsoluteUrl} from '../../../../../_metronic/helpers'
 import React, {FC, useEffect, useState} from 'react'
 import {updateData} from '../../../../helpers/form/FormHelper'
+import { ErrorMessage } from "formik";
 
 type Props = {
   user: any
@@ -93,6 +94,9 @@ const AvatarImage: FC<Props> = ({user, setUser}) => {
                 <i className='bi bi-x fs-2'></i>
               </span>
             )}
+          </div>
+          <div className='text-danger mt-2'>
+            <ErrorMessage name='meta.image' />
           </div>
         </div>
       </div>

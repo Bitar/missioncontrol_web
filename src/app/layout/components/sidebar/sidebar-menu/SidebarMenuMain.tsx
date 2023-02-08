@@ -40,13 +40,13 @@ const SidebarMenuMain = () => {
 
       <Restricted to='view-users'>
         <SidebarMenuItemWithSub
-          to={['/users', '/roles', '/permissions']}
-          title='Identity'
+          to={['/iam/users', '/iam/roles', '/iam/permissions']}
+          title='IAM'
           fontIcon='fa-users'
         >
-          <SidebarMenuItem to='/users' title='Users' hasBullet={true} />
-          <SidebarMenuItem to='/roles' title='Roles' hasBullet={true} />
-          <SidebarMenuItem to='/permissions' title='Permissions' hasBullet={true} />
+          <SidebarMenuItem to='/iam/users' title='Users' hasBullet={true} />
+          <SidebarMenuItem to='/iam/roles' title='Roles' hasBullet={true} />
+          <SidebarMenuItem to='/iam/permissions' title='Permissions' hasBullet={true} />
         </SidebarMenuItemWithSub>
       </Restricted>
 
