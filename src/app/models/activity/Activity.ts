@@ -35,7 +35,6 @@ export const activityScheduleSchema = Yup.object().shape({
     }),
   }),
 })
-
 export const activityDetailsSchema = Yup.object().shape({
   title: Yup.string().required('Activity title is required'),
 })

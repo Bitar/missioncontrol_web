@@ -13,17 +13,17 @@ import utc from 'dayjs/plugin/utc'
 
 type Props = {
   method: string
-  user: UserForm
-  setUser: Dispatch<SetStateAction<UserForm>>
+  userForm: UserForm
+  setUserForm: Dispatch<SetStateAction<UserForm>>
 }
 
 dayjs.extend(utc)
 
-const UserFormPage: FC<Props> = ({user, setUser}) => {
+const UserFormPage: FC<Props> = ({userForm, setUserForm}) => {
   const [roles, setRoles] = useState<Role[]>()
   const [communities, setCommunities] = useState<Community[]>()
   const [dateOfBirthValue, setDateOfBirthValue] = useState<Date | null>(new Date())
-  const hasCommunityAdminRole = user.roles.find((role) => role?.id === 3)
+  const hasCommunityAdminRole = userForm.role_ids.find((role) => role?.id === 3)
 
   // const fetchCommunities = useCallback(() => {
   //   if (!communities) {
@@ -51,8 +51,8 @@ const UserFormPage: FC<Props> = ({user, setUser}) => {
   }, [])
 
   useEffect(() => {
-    if (user?.meta?.date_of_birth) {
-      const utcDate = new Date(user?.meta?.date_of_birth * 1000)
+    if (userForm?.meta?.date_of_birth) {
+      const utcDate = new Date(userForm?.meta?.date_of_birth * 1000)
       const actualDate = new Date(
         utcDate.getUTCFullYear(),
         utcDate.getUTCMonth(),
@@ -61,7 +61,7 @@ const UserFormPage: FC<Props> = ({user, setUser}) => {
 
       setDateOfBirthValue(actualDate)
     }
-  }, [user?.meta?.date_of_birth])
+  }, [userForm?.meta?.date_of_birth])
 
   return (
     <>
@@ -112,7 +112,7 @@ const UserFormPage: FC<Props> = ({user, setUser}) => {
           <Select
             name='role_id'
             placeholder={'Choose a Role'}
-            value={user?.roles}
+            value={userForm?.role_ids}
             options={roles}
             getOptionLabel={(role) => role?.name}
             isMulti
@@ -121,9 +121,9 @@ const UserFormPage: FC<Props> = ({user, setUser}) => {
               let communityAdmin = e.find((e: any) => e?.id === 3)
 
               if (communityAdmin) {
-                updateData({roles: e || []}, setUser, user)
+                updateData({roles: e || []}, setUserForm, userForm)
               } else {
-                updateData({roles: e || [], community_admin: []}, setUser, user)
+                updateData({roles: e || [], community_admin: []}, setUserForm, userForm)
               }
             }}
           />
@@ -137,13 +137,13 @@ const UserFormPage: FC<Props> = ({user, setUser}) => {
             <Select
               name='community_id'
               placeholder={'Choose a Community'}
-              value={user?.community_admin}
+              value={userForm?.community_admin}
               options={communities}
               getOptionLabel={(community) => community?.name}
               isMulti
               getOptionValue={(community) => community?.id?.toString() || ''}
               onChange={(e) => {
-                updateData({community_admin: e || []}, setUser, user)
+                updateData({community_admin: e || []}, setUserForm, userForm)
               }}
             />
           </div>
@@ -203,7 +203,7 @@ const UserFormPage: FC<Props> = ({user, setUser}) => {
               className={'form-control mb-3 mb-lg-0'}
               autoComplete='off'
             />
-            <span className='input-group-text'>#{user?.meta?.rng}</span>
+            <span className='input-group-text'>#{userForm?.meta?.rng}</span>
           </div>
         </div>
       </div>
@@ -225,14 +225,14 @@ const UserFormPage: FC<Props> = ({user, setUser}) => {
                 updateData(
                   {
                     meta: {
-                      ...user?.meta,
+                      ...userForm?.meta,
                       ...{
                         date_of_birth: dateOfBirth,
                       },
                     },
                   },
-                  setUser,
-                  user
+                  setUserForm,
+                  userForm
                 )
               }
             }}

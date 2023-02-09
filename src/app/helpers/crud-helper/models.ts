@@ -56,7 +56,6 @@ export type QueryResponseContextProps<T> = {
   refetch: () => void
   isLoading: boolean
   query: string
-  setEnabled: Dispatch<SetStateAction<boolean>>
 }
 
 export const initialQueryResponse = {

@@ -3,7 +3,7 @@ import {MasterLayout} from '../layout/MasterLayout'
 import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper'
 import {Resources} from '../pages/marketing/Resources'
 import {SubscriptionIndex} from '../sections/billing/subscriptions/SubscriptionIndex'
-import {PermissionPage} from '../sections/iam/permission/pages/PermissionPage'
+import {PermissionRoutes} from './iam/PermissionRoutes'
 import {SuspenseView} from '../layout/SuspenseView'
 import React, {lazy} from 'react'
 import {Restricted} from '../modules/auth/core/AuthPermission'
@@ -15,8 +15,8 @@ const PrivateRoutes = () => {
   const GamePage = lazy(() => import('../sections/games/pages/GamePage'))
   const PlansPage = lazy(() => import('../sections/billing/plan/pages/PlansPage'))
   const ActivityPage = lazy(() => import('../sections/activity/pages/ActivityPage'))
-  const RolePage = lazy(() => import('../sections/iam/role/pages/RolePage'))
-  const UserPage = lazy(() => import('../sections/iam/user/pages/UserPage'))
+  const RolePage = lazy(() => import('./iam/RoleRoutes'))
+  const UserPage = lazy(() => import('./iam/UserRoutes'))
 
   return (
     <Routes>
@@ -69,7 +69,7 @@ const PrivateRoutes = () => {
         />
 
         <Route
-          path='users/*'
+          path='iam/users/*'
           element={
             <Restricted to='view-users'>
               <SuspenseView>
@@ -79,7 +79,7 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='roles/*'
+          path='iam/roles/*'
           element={
             <Restricted to='view-users'>
               <SuspenseView>
@@ -89,11 +89,11 @@ const PrivateRoutes = () => {
           }
         />
         <Route
-          path='permissions/*'
+          path='iam/permissions/*'
           element={
             <Restricted to='view-users'>
               <SuspenseView>
-                <PermissionPage />
+                <PermissionRoutes />
               </SuspenseView>
             </Restricted>
           }

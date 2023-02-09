@@ -9,7 +9,7 @@ export type UserForm = {
   email: string
   password?: string
   password_confirmation?: string
-  roles: Role[]
+  role_ids: Role[]
   meta?: UserMeta
   community_admin?: Community[]
 }
@@ -21,7 +21,7 @@ export const initUserForm = (user?: User) => {
     password: '',
     password_confirmation: '',
     email: user?.email || '',
-    roles: user?.roles || [],
+    role_ids: user?.roles || [],
     meta: user?.meta || initialUserMeta(user?.meta),
     community_admin: user?.community_admin || [],
   }

@@ -1,14 +1,15 @@
 import {Route, Routes} from 'react-router-dom'
-import {PageLink, PageTitle} from '../../../../layout/core'
+import {PageLink, PageTitle} from '../../layout/core'
 import React from 'react'
-import {PermissionIndex} from '../PermissionIndex'
-import {PermissionCreate} from '../PermissionCreate'
-import {PermissionEdit} from '../PermissionEdit'
+import {PermissionIndex} from '../../sections/iam/permission/PermissionIndex'
+import {PermissionCreate} from '../../sections/iam/permission/PermissionCreate'
+import {PermissionEdit} from '../../sections/iam/permission/PermissionEdit'
+import {SuspenseView} from '../../layout/SuspenseView'
 
 const permissionsBreadCrumbs: Array<PageLink> = [
   {
     title: 'Permissions',
-    path: '/permissions/overview',
+    path: '/iam/permissions',
     isSeparator: false,
     isActive: false,
   },
@@ -20,38 +21,38 @@ const permissionsBreadCrumbs: Array<PageLink> = [
   },
 ]
 
-const PermissionPage: React.FC = () => {
+const PermissionRoutes: React.FC = () => {
   return (
     <Routes>
       <Route
-        path='/'
+        index
         element={
-          <>
+          <SuspenseView>
             <PageTitle breadcrumbs={permissionsBreadCrumbs}>{'Overview'}</PageTitle>
             <PermissionIndex />
-          </>
+          </SuspenseView>
         }
       />
       <Route
         path='/create'
         element={
-          <>
+          <SuspenseView>
             <PageTitle breadcrumbs={permissionsBreadCrumbs}>{'Add Permission'}</PageTitle>
             <PermissionCreate />
-          </>
+          </SuspenseView>
         }
       />
       <Route
         path='/:id/edit'
         element={
-          <>
+          <SuspenseView>
             <PageTitle breadcrumbs={permissionsBreadCrumbs}>{'Update Permission'}</PageTitle>
             <PermissionEdit />
-          </>
+          </SuspenseView>
         }
       />
     </Routes>
   )
 }
 
-export {PermissionPage}
+export { PermissionRoutes };

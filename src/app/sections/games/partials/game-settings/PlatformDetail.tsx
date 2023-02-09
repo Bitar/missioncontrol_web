@@ -2,15 +2,12 @@ import {useGame} from '../../core/GameContext'
 import React, {useEffect, useRef, useState} from 'react'
 import {Platform} from '../../../../models/game/Platform'
 import {getPlatforms} from '../../../misc/core/_requests'
-import {useQueryResponse} from '../../../../modules/table/QueryResponseProvider'
 import {jsonToFormData, updateData} from '../../../../helpers/form/FormHelper'
 import {PlatformDetailTable} from './platform/PlatformDetailTable'
-import {KTCardHeader} from '../../../../helpers/components/KTCardHeader'
 import {ErrorMessage, Form, Formik} from 'formik'
-import {KTCardBody} from '../../../../helpers/components/KTCardBody'
 import {FormErrorAlert} from '../../../../modules/errors/partials/FormErrorAlert'
 import {FormAction} from '../../../../helpers/form/FormAction'
-import {KTCard} from '../../../../helpers/components/KTCard'
+import {KTCard, KTCardHeader, KTCardBody} from '../../../../helpers/components'
 import * as Yup from 'yup'
 import Select from 'react-select'
 import {addGamePlatform} from '../../core/GamePlatformRequests'
@@ -26,7 +23,6 @@ type PlatformForm = {
 
 export const PlatformDetail = () => {
   const {game, updateGame} = useGame()
-  const {setEnabled} = useQueryResponse()
 
   const platformSelectRef = useRef<any>()
   const [platforms, setPlatforms] = useState<Platform[]>()
@@ -69,7 +65,6 @@ export const PlatformDetail = () => {
         platformSelectRef.current.clearValue()
 
         toast.success('Platform added Successfully!')
-        setEnabled(true)
 
         setPlatformForm({
           platform_id: '',

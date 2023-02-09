@@ -1,5 +1,7 @@
 import React, {FC} from 'react'
 import clsx from 'clsx'
+import { Actions } from "../variables";
+import CreateButton from "../../components/buttons/Create";
 
 type Props = {
   className?: string
@@ -9,17 +11,29 @@ type Props = {
   text_color?: string
   collapse?: boolean
   target_id?: string
+  actions?: CardAction[],
+  icon?: string,
+  icon_style?: string
+}
+
+type CardAction = {
+  type: Actions,
+  url: string
 }
 
 const KTCardHeader: FC<Props> = ({
-  className,
-  text,
-  id,
-  bg,
-  text_color,
-  collapse = false,
-  target_id,
-}) => {
+                                   className,
+                                   text,
+                                   id,
+                                   bg,
+                                   text_color,
+                                   collapse = false,
+                                   target_id,
+                                   actions,
+                                   icon,
+                                   icon_style
+
+                                 }) => {
   let opts: any = {}
   if (collapse) {
     opts['role'] = 'button'
@@ -32,12 +46,28 @@ const KTCardHeader: FC<Props> = ({
   return (
     <div
       id={id}
-      className={clsx(`card-header bg-${bg || 'white'}`, className && className)}
+      className={clsx(`card-header`, className && className, bg && `bg-${bg}`)}
       {...opts}
     >
-      <div className='card-title'>
-        <h3 className={`card-label text-${text_color || 'black'}`}>{text}</h3>
+      <div className='card-title d-flex align-items'>
+        {icon && icon_style && <span className="me-2"><i className={clsx(icon, icon_style)}></i></span>}
+        <h3 className={`card-label text-${text_color || 'dark'}`}>{text}</h3>
       </div>
+      {
+        (actions && actions.length > 0) ? <div className="card-toolbar">
+          {
+            actions.map((cardAction, index) => {
+              if (cardAction.type === Actions.CREATE) {
+                return (
+                  <CreateButton url={cardAction.url} key={index}/>
+                );
+              } else {
+                return <></>;
+              }
+            })
+          }
+        </div> : <></>
+      }
     </div>
   )
 }
