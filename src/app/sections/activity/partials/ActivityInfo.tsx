@@ -54,11 +54,6 @@ const ActivityInfo: FC = () => {
     },
   ]
 
-  if (activity?.registration_dates) {
-    let regStartDate = createDateFrom(activity?.registration_dates?.start_date)
-    let regEndDate = createDateFrom(activity?.registration_dates?.end_date)
-  }
-
   return (
     <KTCard className='mb-5 mb-xl-10 overflow-hidden'>
       <KTCardBody>
