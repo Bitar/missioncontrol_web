@@ -102,7 +102,7 @@ const UserView: React.FC = () => {
               <>
                 <SuspenseView>
                   <PageTitle breadcrumbs={userViewBreadCrumbs}>Settings</PageTitle>
-                  <UserSettings />
+                  {user && <UserSettings />}
                 </SuspenseView>
               </>
             }

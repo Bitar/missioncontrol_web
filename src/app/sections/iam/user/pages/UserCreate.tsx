@@ -20,37 +20,44 @@ import {extractErrors} from '../../../../requests/helpers'
 const UserCreate = () => {
   const [userForm, setUserForm] = useState<UserForm>(initUserForm())
   const [roles, setRoles] = useState<Role[]>()
+
   const [communities, setCommunities] = useState<Community[]>()
-  const [dateOfBirthValue, setDateOfBirthValue] = useState<Date | null>(new Date())
+  const [dateOfBirthValue, setDateOfBirthValue] = useState<Date | null>()
 
   const [formErrors, setFormErrors] = useState<string[]>([])
-  const hasCommunityAdminRole = userForm.role_ids.find((role) => role?.id === 3)
+  const [hasCommunityAdminRole, setHasCommunityAdminRole] = useState<boolean>(false)
 
   const navigate = useNavigate()
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: any, fns: any) => {
     let data = jsonToFormData(userForm)
     createUser(data)
-      .then((response) => navigate('/users/' + response?.id))
+      .then((response) => {
+        navigate('/iam/users/' + response?.id)
+        setFormErrors([])
+        fns.setSubmitting(false);
+      })
       .catch((error) => {
         setFormErrors(extractErrors(error))
+        fns.setSubmitting(false);
       })
   }
 
   const handleOnChange = (e: any) => formOnChange(e, userForm, setUserForm)
 
   const handleRoleChange = (e: any) => {
-    let role_ids = []
+    e.find((e: any) => e?.id === 3) ? setHasCommunityAdminRole(true) : setHasCommunityAdminRole(false)
 
-    role_ids = e.map((role: any) => role.id)
+    let roleIds = e.map((role: any) => role.id)
+    updateData({role_ids: roleIds, community_admin: []}, setUserForm, userForm)
+  }
 
-    let communityAdmin = e.find((e: any) => e?.id === 3)
+  const handleCommunityChange = (e:any) => {
+    let communityAdmins = []
 
-    if (communityAdmin) {
-      updateData({role_ids: role_ids, community_ids: []}, setUserForm, userForm)
-    } else {
-      updateData({role_ids: role_ids}, setUserForm, userForm)
-    }
+    communityAdmins = e.map((community: any) => community.id)
+
+    updateData({community_admin: communityAdmins}, setUserForm, userForm);
   }
 
   useEffect(() => {
@@ -182,14 +189,11 @@ const UserCreate = () => {
                         <Select
                           name='community_id'
                           placeholder={'Choose a Community'}
-                          value={userForm?.community_admin}
                           options={communities}
                           getOptionLabel={(community) => community?.name}
                           isMulti
                           getOptionValue={(community) => community?.id?.toString() || ''}
-                          onChange={(e) => {
-                            updateData({community_admin: e || []}, setUserForm, userForm)
-                          }}
+                          onChange={handleCommunityChange}
                         />
                       </div>
                     </div>
