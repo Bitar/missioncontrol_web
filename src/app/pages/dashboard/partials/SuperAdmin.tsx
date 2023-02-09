@@ -3,13 +3,10 @@ import React, {useEffect, useState} from 'react'
 import {getHome} from '../core/DashboardRequests'
 import {ActivitiesByDay, ActivitiesCreation} from './ActivitiesByDay'
 import {UserRegistrations} from './UsersRegistrations'
-import {StatisticsWidget5} from './StatisticsWidget5'
 import {UsersByDay} from './UsersByDay'
 import {Game} from '../../../models/game/Game'
 import {PopularGames} from './PopularGames'
 import {CommunitiesByBillingPlan, CommunitiesSubscriptions} from './CommunitiesByBillingPlan'
-import {KTCard, KTCardBody} from '../../../helpers/components'
-import { toAbsoluteUrl } from "../../../../_metronic/helpers";
 
 export type PopularGamesType = {
   total: number
@@ -46,9 +43,9 @@ export const SuperAdmin = () => {
   const [communitiesSubscriptions, setCommunitiesSubscriptions] = useState<string[]>([])
   const [communitiesSubscriptionsValue, setCommunitiesSubscriptionsValue] = useState<number[]>([])
 
-  const [matchesToday, setMatchesToday] = useState<number>(0)
-  const [activeActivities, setActiveActivitiesToday] = useState<number>(0)
-  const [commissionerCommunities, setCommissionerCommunities] = useState<number>(0)
+  // const [matchesToday, setMatchesToday] = useState<number>(0)
+  // const [activeActivities, setActiveActivitiesToday] = useState<number>(0)
+  // const [commissionerCommunities, setCommissionerCommunities] = useState<number>(0)
 
   const getDashboardData = () => {
     getHome().then((response) => {
@@ -56,9 +53,9 @@ export const SuperAdmin = () => {
         handleCommunitiesData(response.communities_creation)
         handleActivitiesData(response.activities_creation)
         handleUsersData(response.user_registrations)
-        setMatchesToday(response.matches_count)
-        setActiveActivitiesToday(response.active_activities)
-        setCommissionerCommunities(response.commissioner_communities)
+        // setMatchesToday(response.matches_count)
+        // setActiveActivitiesToday(response.active_activities)
+        // setCommissionerCommunities(response.commissioner_communities)
         handlePopularGamesData(response.popular_games)
         handleCommunityBySubscription(response.communities_billing_plan)
       }
@@ -69,9 +66,9 @@ export const SuperAdmin = () => {
     let data: string[] = []
     let values: number[] = []
 
-    communitySubscriptions.forEach((communitysub) => {
-      data.push(communitysub?.billing_plan?.name)
-      values.push(communitysub?.total_communities)
+    communitySubscriptions.forEach((communitySub) => {
+      data.push(communitySub?.billing_plan?.name)
+      values.push(communitySub?.total_communities)
     })
 
     setCommunitiesSubscriptions(data)

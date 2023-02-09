@@ -14,7 +14,12 @@ import {DateRange} from 'rsuite/esm/DateRangePicker/types'
 import {defaultTime} from '../../../../models/activity/ActivityForm'
 import {TimeZone} from '../../../../models/misc/TimeZone'
 import {getTimeZones} from '../../../misc/core/_requests'
-import {getDateConvertedToTimezone, getDateInUTC} from '../../../../helpers/ActivityHelper'
+import {
+  activityMatchPlayOnChange,
+  activityRegistrationOnChange,
+  createDateFrom,
+  getDateInUTC,
+} from '../../../../helpers/ActivityHelper'
 import {updateSchedule} from '../../core/requests/ActivitySettingsRequests'
 import dayjs from 'dayjs'
 
@@ -37,27 +42,16 @@ export const ScheduleDetail = () => {
 
   useEffect(() => {
     if (activityForm?.schedule && activity?.settings) {
-      let regStartDate = getDateConvertedToTimezone(
-        activityForm?.schedule?.registration_dates?.start_date,
-        activity.settings.timezone.value
+      let regStartDate = createDateFrom(
+        activityForm?.schedule?.registration_dates?.start_date
       ).toDate()
-
-      let regEndDate = getDateConvertedToTimezone(
-        activityForm?.schedule?.registration_dates?.end_date,
-        activity?.settings?.timezone?.value
-      ).toDate()
-
-      let matchStartDate = getDateConvertedToTimezone(
-        activityForm?.schedule?.matchplay_dates?.start_date,
-        activity.settings.timezone.value
-      ).toDate()
-
-      let matchEndDate = getDateConvertedToTimezone(
-        activityForm?.schedule?.matchplay_dates?.end_date,
-        activity.settings.timezone.value
-      ).toDate()
-
+      let regEndDate = createDateFrom(activityForm?.schedule?.registration_dates?.end_date).toDate()
       setRegistrationValue([regStartDate, regEndDate])
+
+      let matchStartDate = createDateFrom(
+        activityForm?.schedule?.matchplay_dates?.start_date
+      ).toDate()
+      let matchEndDate = createDateFrom(activityForm?.schedule?.matchplay_dates?.end_date).toDate()
       setMatchPlayValue([matchStartDate, matchEndDate])
 
       let time = dayjs(getDateInUTC(activity?.settings?.time, activity?.settings?.timezone?.value))
@@ -89,63 +83,18 @@ export const ScheduleDetail = () => {
   const handleOnChange = async () => {}
 
   const handleRegistrationChange = (e: any) => {
-    if (e) {
-      let startDate = Math.trunc(new Date(e[0]).getTime() / 1000)
-      let endDate = Math.trunc(new Date(e[1]).getTime() / 1000)
-
-      updateData(
-        {
-          schedule: {
-            ...activityForm?.schedule,
-            ...{
-              registration_dates: {
-                ...activityForm?.schedule.registration_dates,
-                ...{start_date: startDate, end_date: endDate},
-              },
-              matchplay_dates: {
-                start_date: 0,
-                end_date: 0,
-              },
-            },
-          },
-        },
-        setActivityForm,
-        activityForm
-      )
-
-      let endDateDate = new Date(e[1])
-      let disabledEndDate = new Date(endDateDate)
-      disabledEndDate.setDate(endDateDate.getDate() + 1)
-
-      setRegistrationValue(e)
-      setMatchPlayValue(null)
-      setMatchPlayDisabledDate(disabledEndDate)
-    }
+    activityRegistrationOnChange(
+      e,
+      activityForm,
+      setActivityForm,
+      setRegistrationValue,
+      setMatchPlayValue,
+      setMatchPlayDisabledDate
+    )
   }
 
   const handleMatchPlayChange = (e: any) => {
-    if (e) {
-      let startDate = Math.trunc(new Date(e[0]).getTime() / 1000)
-      let endDate = Math.trunc(new Date(e[1]).getTime() / 1000)
-
-      updateData(
-        {
-          schedule: {
-            ...activityForm?.schedule,
-            ...{
-              matchplay_dates: {
-                ...activityForm?.schedule.matchplay_dates,
-                ...{start_date: startDate, end_date: endDate},
-              },
-            },
-          },
-        },
-        setActivityForm,
-        activityForm
-      )
-
-      setMatchPlayValue(e)
-    }
+    activityMatchPlayOnChange(e, activityForm, setActivityForm, setMatchPlayValue)
   }
 
   return (

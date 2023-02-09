@@ -4,7 +4,10 @@ import {CustomHeader} from '../../../../modules/table/columns/CustomHeader'
 import {ActionsCell} from '../../../../modules/table/columns/ActionsCell'
 import {QUERIES, toAbsoluteUrl} from '../../../../../_metronic/helpers'
 import {Activity} from '../../../../models/activity/Activity'
-import {formatActivityStatus, getDateConvertedToLocal} from '../../../../helpers/ActivityHelper'
+import {
+  createDateFrom,
+  formatActivityStatus,
+} from '../../../../helpers/ActivityHelper'
 import {Link} from 'react-router-dom'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
@@ -77,15 +80,13 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
         <div className='d-flex align-items-center'>
           <div className='d-flex flex-column text-center'>
             <span className='text-gray-800 pe-none'>
-              {getDateConvertedToLocal(
-                props.data[props.row.index]?.registration_dates?.start_date,
-                props.data[props.row.index]?.settings?.timezone?.value
-              ).format('MMM DD, YY')}
+              {createDateFrom(props.data[props.row.index]?.registration_dates?.start_date).format(
+                'DD MMM YY - hh:mm a'
+              )}
               <i className='fa fa-arrow-circle-right text-mc-secondary ps-2 pe-2'></i>
-              {getDateConvertedToLocal(
-                props.data[props.row.index]?.registration_dates?.end_date,
-                props.data[props.row.index]?.settings?.timezone?.value
-              ).format('MMM DD, YY')}
+              {createDateFrom(props.data[props.row.index]?.registration_dates?.end_date).format(
+                'DD MMM YY - hh:mm a'
+              )}
             </span>
           </div>
         </div>
@@ -101,15 +102,13 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
         <div className='d-flex align-items-center'>
           <div className='d-flex flex-column text-center'>
             <span className='text-gray-800'>
-              {getDateConvertedToLocal(
-                props.data[props.row.index]?.matchplay_dates?.start_date,
-                props.data[props.row.index]?.settings?.timezone?.value
-              ).format('MMM DD, YY')}
+              {createDateFrom(props.data[props.row.index]?.matchplay_dates?.start_date).format(
+                'DD MMM YY - hh:mm a'
+              )}
               <i className='fa fa-arrow-circle-right text-mc-secondary ps-2 pe-2'></i>
-              {getDateConvertedToLocal(
-                props.data[props.row.index]?.matchplay_dates?.end_date,
-                props.data[props.row.index]?.settings?.timezone?.value
-              ).format('MMM DD, YY')}
+              {createDateFrom(props.data[props.row.index]?.matchplay_dates?.end_date).format(
+                'DD MMM YY - hh:mm a'
+              )}
             </span>
           </div>
         </div>
@@ -162,4 +161,4 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
   },
 ]
 
-export {ActivityColumns}
+export { ActivityColumns };

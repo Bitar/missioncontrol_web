@@ -8,11 +8,11 @@ import React, {useEffect, useState} from 'react'
 import {DateRange} from 'rsuite/esm/DateRangePicker/types'
 import {TimeZone} from '../../../../models/misc/TimeZone'
 import {getTimeZones} from '../../../misc/core/_requests'
-import {addDays, defaultTime} from '../../../../models/activity/ActivityForm'
-import toast from 'react-hot-toast'
+import {defaultTime} from '../../../../models/activity/ActivityForm'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
+import { activityMatchPlayOnChange, activityRegistrationOnChange } from "../../../../helpers/ActivityHelper";
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
@@ -22,14 +22,8 @@ const {before} = DateRangePicker
 export const ScheduleDetailForm = () => {
   const {activityForm, setActivityForm} = useActivityForm()
 
-  const [registrationValue, setRegistrationValue] = useState<DateRange | null>([
-    new Date(),
-    addDays(new Date(), 1),
-  ])
-  const [matchPlayValue, setMatchPlayValue] = useState<DateRange | null>([
-    addDays(new Date(), 2),
-    addDays(new Date(), 2),
-  ])
+  const [registrationValue, setRegistrationValue] = useState<DateRange | null>()
+  const [matchPlayValue, setMatchPlayValue] = useState<DateRange | null>()
   const [matchPlayDisabledDate, setMatchPlayDisabledDate] = useState<Date>(new Date())
   const [timeValue, setTimeValue] = useState<Date | null>(defaultTime(new Date()))
   const [timeZones, setTimeZones] = useState<TimeZone[]>()
@@ -41,69 +35,18 @@ export const ScheduleDetailForm = () => {
   }, [])
 
   const handleRegistrationChange = (e: any) => {
-    if (e) {
-      let startDate = Math.trunc(new Date(e[0]).getTime() / 1000)
-      let endDate = Math.trunc(new Date(e[1]).getTime() / 1000)
-
-      const today = new Date()
-
-      if (new Date(e[1]) < today) {
-        toast.error('Registration end date needs to be in the future.')
-      } else {
-        updateData(
-          {
-            schedule: {
-              ...activityForm?.schedule,
-              ...{
-                registration_dates: {
-                  ...activityForm?.schedule.registration_dates,
-                  ...{start_date: startDate, end_date: endDate},
-                },
-                matchplay_dates: {
-                  ...activityForm?.schedule.matchplay_dates,
-                  ...{start_date: 0, end_date: 0},
-                },
-              },
-            },
-          },
-          setActivityForm,
-          activityForm
-        )
-
-        let endDateDate = new Date(e[1])
-        let disabledEndDate = new Date(endDateDate)
-        disabledEndDate.setDate(endDateDate.getDate() + 1)
-
-        setRegistrationValue(e)
-        setMatchPlayValue(null)
-        setMatchPlayDisabledDate(disabledEndDate)
-      }
-    }
+    activityRegistrationOnChange(
+      e,
+      activityForm,
+      setActivityForm,
+      setRegistrationValue,
+      setMatchPlayValue,
+      setMatchPlayDisabledDate
+    )
   }
 
   const handleMatchPlayChange = (e: any) => {
-    if (e) {
-      let startDate = Math.trunc(new Date(e[0]).getTime() / 1000)
-      let endDate = Math.trunc(new Date(e[1]).getTime() / 1000)
-
-      updateData(
-        {
-          schedule: {
-            ...activityForm?.schedule,
-            ...{
-              matchplay_dates: {
-                ...activityForm?.schedule.matchplay_dates,
-                ...{start_date: startDate, end_date: endDate},
-              },
-            },
-          },
-        },
-        setActivityForm,
-        activityForm
-      )
-
-      setMatchPlayValue(e)
-    }
+    activityMatchPlayOnChange(e, activityForm, setActivityForm, setMatchPlayValue)
   }
 
   return (

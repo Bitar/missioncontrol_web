@@ -4,10 +4,7 @@ import {isCommunityAdmin, isSuperAdmin} from '../../models/iam/User'
 import {CommunityView} from '../../sections/community/pages/CommunityView'
 import {CreateCommunityWidget} from '../../layout/widgets/CreateCommunityWidget'
 import {SuperAdmin} from './partials/SuperAdmin'
-import {KTCard, KTCardBody} from '../../helpers/components'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
-import {StatisticsWidget5} from './partials/StatisticsWidget5'
-import { Link } from "react-router-dom";
 
 const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
   const {currentUser, communityAdmin} = useAuth()

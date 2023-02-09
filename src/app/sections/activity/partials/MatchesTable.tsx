@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import {TableListPagination} from '../../../modules/table/TableListPagination'
 import {TableListLoading} from '../../../modules/table/TableListLoading'
 import {
@@ -6,7 +6,7 @@ import {
   useQueryResponseLoading,
 } from '../../../modules/table/QueryResponseProvider'
 import {Match} from '../../../models/activity/matches/Match'
-import { getDateConvertedToLocal, getDateConvertedToTimezone, getDateInUTC } from "../../../helpers/ActivityHelper";
+import { getDateInUTC } from "../../../helpers/ActivityHelper";
 import {TextImageCell} from '../../../modules/table/columns/TextImageCell'
 import {calculateTeamScore} from '../../../helpers/MCHelper'
 import {useActivity} from '../core/contexts/ActivityContext'

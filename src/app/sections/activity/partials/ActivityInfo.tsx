@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
 import {Link, useLocation} from 'react-router-dom'
 import {BadgeCell} from '../../../modules/table/columns/BadgeCell'
-import {formatActivityStatus} from '../../../helpers/ActivityHelper'
+import {createDateFrom, formatActivityStatus} from '../../../helpers/ActivityHelper'
 import {KTCard, KTCardBody} from '../../../helpers/components'
 import clsx from 'clsx'
 import {useActivity} from '../core/contexts/ActivityContext'
@@ -53,6 +53,11 @@ const ActivityInfo: FC = () => {
       link: '/activities/' + activity?.id + '/settings',
     },
   ]
+
+  if (activity?.registration_dates) {
+    let regStartDate = createDateFrom(activity?.registration_dates?.start_date)
+    let regEndDate = createDateFrom(activity?.registration_dates?.end_date)
+  }
 
   return (
     <KTCard className='mb-5 mb-xl-10 overflow-hidden'>
@@ -106,15 +111,15 @@ const ActivityInfo: FC = () => {
                       </div>
                       <div className='fs-4 fw-bold'>
                         <span>
-                          {dayjs(new Date(activity?.registration_dates?.start_date * 1000))
-                            .tz(activity?.settings?.timezone?.value)
-                            .format('DD MMM YY - hh:mm a z')}
+                          {createDateFrom(activity?.registration_dates?.start_date).format(
+                            'DD MMM YY - hh:mm a'
+                          )}
                           <span className='mx-1'>
                             <i className='fa fa-arrow-circle-right text-mc-secondary'></i>
                           </span>
-                          {dayjs(new Date(activity?.registration_dates?.end_date * 1000))
-                            .tz(activity?.settings?.timezone?.value)
-                            .format('DD MMM YY - hh:mm a z')}
+                          {createDateFrom(activity?.registration_dates?.end_date).format(
+                            'DD MMM YY - hh:mm a'
+                          )}
                         </span>
                       </div>
                     </div>
@@ -126,15 +131,15 @@ const ActivityInfo: FC = () => {
                       </div>
                       <div className='fs-4 fw-bold'>
                         <span>
-                          {dayjs(new Date(activity?.matchplay_dates?.start_date * 1000))
-                            .tz(activity?.settings?.timezone?.value)
-                            .format('DD MMM YY - hh:mm a z')}
+                          {createDateFrom(activity?.matchplay_dates?.start_date).format(
+                            'DD MMM YY - hh:mm a'
+                          )}
                           <span className='mx-1'>
                             <i className='fa fa-arrow-circle-right text-mc-secondary'></i>
                           </span>
-                          {dayjs(new Date(activity?.matchplay_dates?.end_date * 1000))
-                            .tz(activity?.settings?.timezone?.value)
-                            .format('DD MMM YY - hh:mm a z')}
+                          {createDateFrom(activity?.matchplay_dates?.end_date).format(
+                            'DD MMM YY - hh:mm a'
+                          )}
                         </span>
                       </div>
                     </div>

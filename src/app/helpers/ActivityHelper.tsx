@@ -1,6 +1,12 @@
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import tz from 'dayjs/plugin/timezone'
+import moment from 'moment/moment'
+import toast from 'react-hot-toast'
+import {updateData} from './form/FormHelper'
+import {ActivityForm} from '../models/activity/ActivityForm'
+import {Dispatch, SetStateAction} from 'react'
+import {DateRange} from 'rsuite/esm/DateRangePicker/types'
 
 dayjs.extend(utc)
 dayjs.extend(tz)
@@ -64,19 +70,6 @@ const formatMatchStatus = (statusId: number) => {
 
   return {status, color}
 }
-
-export const convertDateToUTC = (timestamp: number) => {
-  let date = new Date(timestamp * 1000);
-  let now_utc = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(),
-    date.getUTCDate(), date.getUTCHours(),
-    date.getUTCMinutes(), date.getUTCSeconds());
-
-  return new Date(now_utc);
-}
-export const convertDateToTimezone = (date: Date, tz: string) => {
-  return new Intl.DateTimeFormat('default', {timeZone: tz, dateStyle: 'full', timeStyle: 'long'}).format(date)
-}
-
 const formatDates = (dates: any, tz: string) => {
   const startDate = dayjs(new Date(dates?.start_date * 1000))
     .utc(false)
@@ -91,27 +84,99 @@ const formatDates = (dates: any, tz: string) => {
   return {startDate, endDate}
 }
 
-export const getDateConvertedToLocal = (timestamp: number, tz?: string) => {
-  let date = dayjs(new Date(timestamp * 1000)).utc(true)
-
-  if (tz) {
-    date.tz(tz, false)
-  }
-
-  return date
+export const createDateFrom = (timestamp: number) => {
+  let UTCRegStartDate = moment(timestamp * 1000).utc(false)
+  return moment()
+    .year(UTCRegStartDate.year())
+    .month(UTCRegStartDate.month())
+    .date(UTCRegStartDate.date())
+    .hour(UTCRegStartDate.hour())
+    .minute(UTCRegStartDate.minute())
+    .second(UTCRegStartDate.second())
 }
 
-export const getDateConvertedToTimezone = (timestamp: number, tz?: string) => {
-  let date = dayjs(new Date(timestamp * 1000)).utc(false)
-
-  if (tz) {
-    date.tz(tz, true)
-  }
-
-  return date
-}
 export const getDateInUTC = (timestamp: number, tz?: string) => {
-  return dayjs(new Date(timestamp * 1000)).utc(false).tz(tz, true);
+  return dayjs(new Date(timestamp * 1000))
+    .utc(false)
+    .tz(tz, true)
 }
 
-export {formatActivityStatus, formatDates, formatMatchStatus}
+export const activityRegistrationOnChange = (
+  e: any,
+  activityForm: ActivityForm | undefined,
+  setActivityForm: Dispatch<SetStateAction<ActivityForm>>,
+  setRegistrationValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
+  setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
+  setMatchPlayDisabledDate: Dispatch<SetStateAction<Date>>
+) => {
+  if (e) {
+    const today = new Date()
+
+    if (new Date(e[1]) < today) {
+      toast.error('Registration end date needs to be in the future.')
+    } else {
+      let startDate = dayjs(new Date(e[0]).setHours(0, 0)).utc(true).tz('utc').unix()
+      let endDate = dayjs(new Date(e[1]).setHours(0, 0)).utc(true).tz('utc').unix()
+
+      updateData(
+        {
+          schedule: {
+            ...activityForm?.schedule,
+            ...{
+              registration_dates: {
+                ...activityForm?.schedule.registration_dates,
+                ...{start_date: startDate, end_date: endDate},
+              },
+              matchplay_dates: {
+                ...activityForm?.schedule.matchplay_dates,
+                ...{start_date: 0, end_date: 0},
+              },
+            },
+          },
+        },
+        setActivityForm,
+        activityForm
+      )
+
+      let endDateDate = new Date(e[1])
+      let disabledEndDate = new Date(endDateDate)
+      disabledEndDate.setDate(endDateDate.getDate() + 1)
+
+      setRegistrationValue(e)
+      setMatchPlayValue(null)
+      setMatchPlayDisabledDate(disabledEndDate)
+    }
+  }
+}
+
+export const activityMatchPlayOnChange = (
+  e: any,
+  activityForm: ActivityForm | undefined,
+  setActivityForm: Dispatch<SetStateAction<ActivityForm>>,
+  setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
+) => {
+  if (e) {
+    let startDate = dayjs(new Date(e[0]).setHours(0, 0)).utc(true).tz('utc').unix()
+    let endDate = dayjs(new Date(e[1]).setHours(23, 59)).utc(true).tz('utc').unix()
+
+    updateData(
+      {
+        schedule: {
+          ...activityForm?.schedule,
+          ...{
+            matchplay_dates: {
+              ...activityForm?.schedule.matchplay_dates,
+              ...{start_date: startDate, end_date: endDate},
+            },
+          },
+        },
+      },
+      setActivityForm,
+      activityForm
+    )
+
+    setMatchPlayValue(e)
+  }
+}
+
+export { formatActivityStatus, formatDates, formatMatchStatus };
