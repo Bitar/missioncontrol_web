@@ -88,7 +88,7 @@ const UserInfo: FC = () => {
                     `nav-link text-active-primary me-6 ` +
                     (location.pathname === '/users/' + user?.id + '/overview' && 'active')
                   }
-                  to={'/users/' + user?.id + '/overview'}
+                  to={'/iam/users/' + user?.id + '/overview'}
                 >
                   Overview
                 </Link>
@@ -99,7 +99,7 @@ const UserInfo: FC = () => {
                     `nav-link text-active-primary me-6 ` +
                     (location.pathname === '/users/' + user?.id + '/activity' && 'active')
                   }
-                  to={'/users/' + user?.id + '/activity'}
+                  to={'/iam/users/' + user?.id + '/activity'}
                 >
                   Activities
                 </Link>
@@ -110,7 +110,7 @@ const UserInfo: FC = () => {
                     `nav-link text-active-primary me-6 ` +
                     (location.pathname === '/users/' + user?.id + '/teams' && 'active')
                   }
-                  to={'/users/' + user?.id + '/teams'}
+                  to={'/iam/users/' + user?.id + '/teams'}
                 >
                   Teams
                 </Link>
@@ -121,7 +121,7 @@ const UserInfo: FC = () => {
                     `nav-link text-active-primary me-6 ` +
                     (location.pathname === '/users/' + user?.id + '/settings' && 'active')
                   }
-                  to={'/users/' + user?.id + '/settings'}
+                  to={'/iam/users/' + user?.id + '/settings'}
                 >
                   Settings
                 </Link>

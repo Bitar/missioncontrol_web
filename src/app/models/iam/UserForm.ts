@@ -9,20 +9,24 @@ export type UserForm = {
   email: string
   password?: string
   password_confirmation?: string
-  roles: Role[]
+  role_ids: number[]
   meta?: UserMeta
-  community_admin?: Community[]
+  community_admin?: number[]
 }
 
 export const initUserForm = (user?: User) => {
+
+  let roleIds = user?.roles?.map((role: any) => role.id)
+  let communityAdminIds = user?.community_admin?.map((community: any) => community.id)
+
   return {
     first_name: user?.first_name || '',
     last_name: user?.last_name || '',
     password: '',
     password_confirmation: '',
     email: user?.email || '',
-    roles: user?.roles || [],
+    role_ids: roleIds || [],
     meta: user?.meta || initialUserMeta(user?.meta),
-    community_admin: user?.community_admin || [],
+    community_admin: communityAdminIds || [],
   }
 }

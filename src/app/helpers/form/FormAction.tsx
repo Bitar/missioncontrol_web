@@ -1,12 +1,14 @@
 import React, {FC} from 'react'
 import {KTCardFooter} from '../components'
+import { useFormikContext } from "formik";
 
 type Props = {
   text: string
-  isSubmitting: boolean
+  isSubmitting?: boolean
 }
 
-const FormAction: FC<Props> = ({text, isSubmitting}) => {
+const FormAction: FC<Props> = ({text}) => {
+  const {isSubmitting} = useFormikContext()
   return (
     <KTCardFooter className='card-footer d-flex justify-content-end py-6 px-9'>
       <button

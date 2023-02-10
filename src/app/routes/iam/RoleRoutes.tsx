@@ -1,14 +1,15 @@
-import {Navigate, Route, Routes} from 'react-router-dom'
-import {PageLink, PageTitle} from '../../../../layout/core'
+import {Route, Routes} from 'react-router-dom'
+import {PageLink, PageTitle} from '../../layout/core'
 import React from 'react'
-import {RoleIndex} from '../RoleIndex'
-import {RoleCreate} from '../RoleCreate'
-import {RoleEdit} from '../RoleEdit'
+import {RoleIndex} from '../../sections/iam/role/RoleIndex'
+import {RoleCreate} from '../../sections/iam/role/RoleCreate'
+import {RoleEdit} from '../../sections/iam/role/RoleEdit'
+import {SuspenseView} from '../../layout/SuspenseView'
 
 const rolesBreadCrumbs: Array<PageLink> = [
   {
     title: 'Roles',
-    path: '/roles/overview',
+    path: '/iam/roles/',
     isSeparator: false,
     isActive: false,
   },
@@ -20,39 +21,38 @@ const rolesBreadCrumbs: Array<PageLink> = [
   },
 ]
 
-const RolePage: React.FC = () => {
+const RoleRoutes: React.FC = () => {
   return (
     <Routes>
       <Route
-        path='/overview'
+        index
         element={
-          <>
+          <SuspenseView>
             <PageTitle breadcrumbs={rolesBreadCrumbs}>{'Overview'}</PageTitle>
             <RoleIndex />
-          </>
+          </SuspenseView>
         }
       />
       <Route
         path='/create'
         element={
-          <>
+          <SuspenseView>
             <PageTitle breadcrumbs={rolesBreadCrumbs}>{'Add Role'}</PageTitle>
             <RoleCreate />
-          </>
+          </SuspenseView>
         }
       />
       <Route
         path='/:id/edit'
         element={
-          <>
+          <SuspenseView>
             <PageTitle breadcrumbs={rolesBreadCrumbs}>{'Update Role'}</PageTitle>
             <RoleEdit />
-          </>
+          </SuspenseView>
         }
       />
-      <Route index element={<Navigate to='/roles/overview' replace={true} />} />
     </Routes>
   )
 }
 
-export default RolePage
+export default RoleRoutes;

@@ -5,7 +5,7 @@ import {ActivityQueryResponse} from '../../../../models/activity/Activity'
 import {TeamQueryResponse} from '../../../../models/squad/Team'
 
 const API_URL = process.env.REACT_APP_API_URL
-const GET_USERS_URL = `${API_URL}/users`
+const GET_USERS_URL = `${API_URL}/iam/users`
 
 const getUsers = (query: string): Promise<UserQueryResponse> => {
   let url = `${GET_USERS_URL}`
