@@ -41,8 +41,11 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
   const { currentUser } = useAuth();
   const queryClient = useQueryClient();
   const { state } = useQueryRequest();
-  const [query] = useState<string>(stringifyRequestQuery(state));
+  const [query, setQuery] = useState<string>(stringifyRequestQuery(state));
 
+  useEffect(() => {
+    setQuery(stringifyRequestQuery(state));
+  }, [state]);
 
   useEffect(() => {
     MenuComponent.reinitialization();

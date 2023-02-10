@@ -4,9 +4,8 @@ import {KTCard, KTCardBody} from '../../../../helpers/components'
 import {useParams} from 'react-router-dom'
 import {updateUser} from '../core/UserRequests'
 import { jsonToFormData, updateData } from "../../../../helpers/form/FormHelper";
-import {formOnChange, userSchema} from '../../../../models/iam/User'
+import { formOnChange, UserEditSchema } from "../../../../models/iam/User";
 import {AvatarImage} from '../partials/AvatarImage'
-import {UserFormPage} from '../UserFormPage'
 import {initUserForm, UserForm} from '../../../../models/iam/UserForm'
 import {useUser} from '../core/UserContext'
 import toast from 'react-hot-toast'
@@ -18,15 +17,18 @@ import FormErrors from "../../../../components/form/FormErrors";
 import Select from "react-select";
 import { DatePicker } from "rsuite";
 import { FormAction } from "../../../../helpers/form/FormAction";
+import { extractErrors } from "../../../../requests/helpers";
 
 const UserSettings: FC = () => {
   const {user, setUser} = useUser()
   const [userForm, setUserForm] = useState<UserForm>(initUserForm(user))
+
   const [roles, setRoles] = useState<Role[]>()
   const [communities, setCommunities] = useState<Community[]>()
+
+  const [dateOfBirthValue, setDateOfBirthValue] = useState<Date | null>()
   const [formErrors, setFormErrors] = useState<string[]>([])
-  const [dateOfBirthValue, setDateOfBirthValue] = useState<Date | null>(new Date())
-  const hasCommunityAdminRole = userForm.role_ids.find((role) => role?.id === 3)
+  const [hasCommunityAdminRole, setHasCommunityAdminRole] = useState<boolean>(false)
 
   const params = useParams()
 
@@ -41,7 +43,7 @@ const UserSettings: FC = () => {
   }, [])
 
   useEffect(() => {
-    setUserForm(initUserForm(user))
+    user?.roles?.find((e: any) => e?.id === 3) ? setHasCommunityAdminRole(true) : setHasCommunityAdminRole(false)
   }, [user])
 
   useEffect(() => {
@@ -57,31 +59,50 @@ const UserSettings: FC = () => {
     }
   }, [userForm?.meta?.date_of_birth])
 
-  const handleSubmit = async () => {
+  const handleSubmit = (e: any, fns: any) => {
     let data = jsonToFormData(userForm)
     data.append('_method', 'PUT')
 
-    await updateUser(params.id, data).then((response) => {
+    updateUser(params.id, data).then((response) => {
+      setFormErrors([])
       setUser(response)
       toast.success('User updated Successfully!')
+      fns.setSubmitting(false);
+    }).catch((error) => {
+      setFormErrors(extractErrors(error))
+      fns.setSubmitting(false);
     })
   }
 
   const handleOnChange = (e: any) => formOnChange(e, userForm, setUserForm)
 
   const handleRoleChange = (e: any) => {
-    let role_ids = []
+    e.find((e: any) => e?.id === 3) ? setHasCommunityAdminRole(true) : setHasCommunityAdminRole(false)
 
-    role_ids = e.map((role: any) => role.id)
-
-    let communityAdmin = e.find((e: any) => e?.id === 3)
-
-    if (communityAdmin) {
-      updateData({role_ids: role_ids, community_ids: []}, setUserForm, userForm)
-    } else {
-      updateData({role_ids: role_ids}, setUserForm, userForm)
-    }
+    let roleIds = e.map((role: any) => role.id)
+    updateData({role_ids: roleIds, community_admin: []}, setUserForm, userForm)
   }
+
+  const handleCommunityChange = (e:any) => {
+    let communityAdmins = []
+
+    communityAdmins = e.map((community: any) => community.id)
+
+    updateData({community_admin: communityAdmins}, setUserForm, userForm);
+  }
+
+  useEffect(() => {
+    if (userForm?.meta?.date_of_birth) {
+      const utcDate = new Date(userForm?.meta?.date_of_birth * 1000)
+      const actualDate = new Date(
+        utcDate.getUTCFullYear(),
+        utcDate.getUTCMonth(),
+        utcDate.getUTCDate()
+      )
+
+      setDateOfBirthValue(actualDate)
+    }
+  }, [userForm?.meta?.date_of_birth])
 
   return (
     <KTCard>
@@ -93,10 +114,10 @@ const UserSettings: FC = () => {
       <Formik
         initialValues={userForm}
         onSubmit={handleSubmit}
-        validationSchema={userSchema}
+        validationSchema={UserEditSchema}
         enableReinitialize
       >
-        {({isSubmitting, isValid, touched}) => (
+        {({isSubmitting}) => (
           <Form
             onChange={handleOnChange}
             className='form'
@@ -164,8 +185,8 @@ const UserSettings: FC = () => {
                     <Select
                       name='role_ids'
                       placeholder={'Choose a Role'}
-                      defaultValue={user?.roles}
                       isMulti
+                      defaultValue={user?.roles}
                       options={roles}
                       getOptionLabel={(role) => role?.name}
                       getOptionValue={(role) => role?.id?.toString() || ''}
@@ -186,14 +207,12 @@ const UserSettings: FC = () => {
                       <Select
                         name='community_id'
                         placeholder={'Choose a Community'}
-                        value={userForm?.community_admin}
+                        defaultValue={user?.community_admin}
                         options={communities}
                         getOptionLabel={(community) => community?.name}
                         isMulti
                         getOptionValue={(community) => community?.id?.toString() || ''}
-                        onChange={(e) => {
-                          updateData({community_admin: e || []}, setUserForm, userForm)
-                        }}
+                        onChange={handleCommunityChange}
                       />
                     </div>
                   </div>

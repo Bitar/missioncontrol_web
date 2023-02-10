@@ -1,4 +1,4 @@
-import {Column, ColumnInstance, Row, useTable} from 'react-table'
+import { Column, ColumnInstance, Row, useSortBy, useTable } from "react-table";
 import {FC} from 'react'
 import {CustomHeaderColumn} from '../modules/table/columns/CustomHeaderColumn'
 import {CustomRow} from '../modules/table/columns/CustomRow'
@@ -17,7 +17,7 @@ export const McTable: FC<Props> = ({data, columns, model, isLoading}) => {
   const {getTableProps, getTableBodyProps, headers, rows, prepareRow} = useTable({
     columns,
     data,
-  })
+  }, useSortBy)
 
   return (
     <>

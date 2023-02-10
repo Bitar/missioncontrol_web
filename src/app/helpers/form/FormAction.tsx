@@ -14,7 +14,7 @@ const FormAction: FC<Props> = ({text}) => {
       <button
         type='submit'
         className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'
-        // disabled={isSubmitting}
+        disabled={isSubmitting}
       >
         <span className='indicator-label'>{text}</span>
         {isSubmitting && (

@@ -1,17 +1,22 @@
-import React from 'react';
-import clsx from 'clsx';
-import {Link} from 'react-router-dom';
+import React from 'react'
+import clsx from 'clsx'
+import {Link} from 'react-router-dom'
 
 type Props = {
-    url?: string
+  url?: string
+  className?: string
 }
 
-const CreateButton: React.FC<Props> = ({url}) => {
-    return (
-        <Link to={(url ? url : '') + '/create'} className='btn btn-light-success fs-6' title='Create'>
-            <i className={clsx('fa fs-2', 'fa-plus', 'pe-0')}></i>
-        </Link>
-    );
+const CreateButton: React.FC<Props> = ({url, className}) => {
+  return (
+    <Link
+      to={(url ?? '') + '/create'}
+      className={clsx('btn btn-light-success fs-6', className)}
+      title='Create'
+    >
+      <i className={clsx('fa fs-2', 'fa-plus', 'pe-0')}></i>
+    </Link>
+  )
 }
 
-export default CreateButton;
+export default CreateButton
