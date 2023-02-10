@@ -14,7 +14,7 @@ const PrivateRoutes = () => {
   const CommunityPage = lazy(() => import('../sections/community/pages/CommunityPage'))
   const GamePage = lazy(() => import('../sections/games/pages/GamePage'))
   const PlansPage = lazy(() => import('../sections/billing/plan/pages/PlansPage'))
-  const ActivityPage = lazy(() => import('../sections/activity/pages/ActivityPage'))
+  const ActivityRoutes = lazy(() => import('./activity/ActivityRoutes'))
   const RolePage = lazy(() => import('./iam/RoleRoutes'))
   const UserPage = lazy(() => import('./iam/UserRoutes'))
 
@@ -115,7 +115,7 @@ const PrivateRoutes = () => {
           element={
             <Restricted to='view-activities'>
               <SuspenseView>
-                <ActivityPage />
+                <ActivityRoutes />
               </SuspenseView>
             </Restricted>
           }

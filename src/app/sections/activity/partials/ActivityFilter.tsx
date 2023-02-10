@@ -9,6 +9,7 @@ import {getAllCommunities} from '../../community/core/CommunityRequests'
 import Select from 'react-select'
 import {isCommunityAdmin} from '../../../models/iam/User'
 import {useAuth} from '../../../modules/auth'
+import { Button } from 'react-bootstrap'
 
 const initActivity = {
   title: '',
@@ -78,66 +79,64 @@ const ActivityFilter = () => {
   }
 
   return (
-    <KTCard id='filter-container' className='bg-transparent mb-10' shadow={false} border={true}>
-      <KTCardHeader text={'Filters'} bg={'info'} text_color={'white'} />
+    <div id='filter-container' className='bg-primary bg-opacity-5 p-10 mb-15 card-rounded'>
       <Formik initialValues={activityFilters} onSubmit={filterData} enableReinitialize>
         <Form onChange={handleOnChange} className='form'>
-          <KTCardBody>
-            <div className='row'>
-              <div className='col-lg-4 mb-5'>
-                <Field
-                  type='text'
-                  name='title'
-                  placeholder='Title'
-                  className={'form-control mb-3 mb-lg-0'}
-                  autoComplete='off'
-                />
-              </div>
-              {currentUser && !isCommunityAdmin(currentUser) && (
-                <div className='col-lg-4 mb-5'>
-                  <Select
-                    placeholder={'Community'}
-                    options={communities}
-                    getOptionLabel={(community) => community?.name}
-                    getOptionValue={(community) => community?.id?.toString() || ''}
-                    onChange={(e) => {
-                      updateData({community_id: e?.id || ''}, setActivityFilters, activityFilters)
-                    }}
-                    isClearable={true}
-                  />
-                </div>
-              )}
+          <div className='row'>
+            <div className='col-lg-4 mb-5'>
+              <Field
+                type='text'
+                name='title'
+                placeholder='Title'
+                className={'form-control mb-3 mb-lg-0'}
+                autoComplete='off'
+              />
+            </div>
+            {currentUser && !isCommunityAdmin(currentUser) && (
               <div className='col-lg-4 mb-5'>
                 <Select
-                  placeholder={'Status'}
-                  options={statuses}
+                  placeholder={'Community'}
+                  options={communities}
+                  getOptionLabel={(community) => community?.name}
+                  getOptionValue={(community) => community?.id?.toString() || ''}
                   onChange={(e) => {
-                    updateData({status: e?.value || ''}, setActivityFilters, activityFilters)
+                    updateData({community_id: e?.id || ''}, setActivityFilters, activityFilters)
                   }}
                   isClearable={true}
                 />
               </div>
-              {/*<div className="col-lg-4 mb-5">*/}
-              {/*  <Select*/}
-              {/*    placeholder={"Created/Updated"}*/}
-              {/*    options={createdUpdatedAt}*/}
-              {/*    onChange={(e) => {*/}
-              {/*      updateData({ modified_at: e?.value || "" }, setActivityFilters, activityFilters);*/}
-              {/*    }}*/}
-              {/*    isClearable={true}*/}
-              {/*  />*/}
-              {/*</div>*/}
+            )}
+            <div className='col-lg-4 mb-5'>
+              <Select
+                placeholder={'Status'}
+                options={statuses}
+                onChange={(e) => {
+                  updateData({status: e?.value || ''}, setActivityFilters, activityFilters)
+                }}
+                isClearable={true}
+              />
             </div>
-          </KTCardBody>
-          <div className='card-footer d-flex justify-content-end py-6 px-9'>
-            <button type='submit' className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'>
-              <span className='indicator-label'>Filter</span>
-            </button>
+            {/*<div className="col-lg-4 mb-5">*/}
+            {/*  <Select*/}
+            {/*    placeholder={"Created/Updated"}*/}
+            {/*    options={createdUpdatedAt}*/}
+            {/*    onChange={(e) => {*/}
+            {/*      updateData({ modified_at: e?.value || "" }, setActivityFilters, activityFilters);*/}
+            {/*    }}*/}
+            {/*    isClearable={true}*/}
+            {/*  />*/}
+            {/*</div>*/}
           </div>
+          <Button variant="primary" type="submit">Filter</Button>
+          {/*<div className='card-footer d-flex justify-content-end py-6 px-9'>*/}
+          {/*  <button type='submit' className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'>*/}
+          {/*    <span className='indicator-label'>Filter</span>*/}
+          {/*  </button>*/}
+          {/*</div>*/}
         </Form>
       </Formik>
-    </KTCard>
+    </div>
   )
 }
 
-export {ActivityFilter}
+export { ActivityFilter };
