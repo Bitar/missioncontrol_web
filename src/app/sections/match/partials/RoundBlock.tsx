@@ -40,7 +40,6 @@ export const RoundBlock: FC<{roundIndex: number; round: RoundScoreObject}> = ({
                   <div>
                     {scoreObject?.keys?.map((scoreObjectKey, i) => {
                       const scoringKeyVisual = getScoringKeyVisual(scoreObjectKey)
-                      console.log(scoringKeyVisual)
                       return (
                         <div className='row mb-6' key={`scoresheet-${i}`}>
                           <label className='col-lg-4 col-form-label required fw-bold fs-6'>

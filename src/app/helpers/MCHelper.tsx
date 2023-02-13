@@ -5,17 +5,7 @@ import utc from 'dayjs/plugin/utc'
 dayjs.extend(utc)
 // dayjs.extend(timezone)
 
-const getTimeFromTimestamp = (timestamp: any) => {
-  return dayjs(new Date(timestamp * 1000))
-    .utc(true)
-    .format('LT')
-}
-
-const getDateFromTimestamp = ($timestamp: any) => {
-  return dayjs(new Date($timestamp * 1000)).format('ddd, ll')
-}
-
-const calculateTeamScore = (match: any, team: any) => {
+export const calculateTeamScore = (match: any, team: any) => {
   let totalScore = 0
 
   if (team) {
@@ -32,5 +22,3 @@ const calculateTeamScore = (match: any, team: any) => {
 
   return totalScore
 }
-
-export {getDateFromTimestamp, getTimeFromTimestamp, calculateTeamScore}
