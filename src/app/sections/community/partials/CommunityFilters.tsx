@@ -1,40 +1,35 @@
-import {useQueryRequest} from '../../../modules/table/QueryRequestProvider'
-import {KTCardHeader} from '../../../helpers/components/KTCardHeader'
-import {Field, Form, Formik} from 'formik'
-import {KTCardBody} from '../../../helpers/components/KTCardBody'
-import {updateData} from '../../../helpers/form/FormHelper'
-import {KTCard} from '../../../helpers/components/KTCard'
-import React, {useState} from 'react'
-import {initialQueryState} from '../../../helpers/crud-helper/models'
-import { isCommunityAdmin } from "../../../models/iam/User";
-import Select from "react-select";
+import { useQueryRequest } from "../../../modules/table/QueryRequestProvider";
+import { Field, Form, Formik } from "formik";
+import { updateData } from "../../../helpers/form/FormHelper";
+import React, { useState } from "react";
+import { initialQueryState } from "../../../helpers/crud-helper/models";
 import { Button } from "react-bootstrap";
 
 const initCommunityFilterObj = {
-  name: '',
-}
+  name: ""
+};
 
 type CommunityFilterObj = {
   name: string
 }
 
 const CommunityFilters = () => {
-  const {updateState} = useQueryRequest()
+  const { updateState } = useQueryRequest();
   const [communityFilters, setCommunityFilters] =
-    useState<CommunityFilterObj>(initCommunityFilterObj)
+    useState<CommunityFilterObj>(initCommunityFilterObj);
 
   const filterData = () => {
     updateState({
       filter: communityFilters,
-      ...initialQueryState,
-    })
-  }
+      ...initialQueryState
+    });
+  };
 
   const handleOnChange = (e: any) => {
     if (e.target.name) {
-      updateData({[e.target.name]: e.target.value}, setCommunityFilters, communityFilters)
+      updateData({ [e.target.name]: e.target.value }, setCommunityFilters, communityFilters);
     }
-  }
+  };
 
   return (
     <div className="bg-primary bg-opacity-5 p-10 mb-15 card-rounded">
@@ -55,7 +50,7 @@ const CommunityFilters = () => {
         </Form>
       </Formik>
     </div>
-  )
-}
+  );
+};
 
-export {CommunityFilters}
+export { CommunityFilters };

@@ -3,7 +3,6 @@ import { QueryRequestProvider } from "../../../modules/table/QueryRequestProvide
 import { QueryResponseProvider } from "../../../modules/table/QueryResponseProvider";
 import { ListViewProvider } from "../../../modules/table/ListViewProvider";
 import { getCommunities } from "../core/CommunityRequests";
-import { TableHeader } from "../../../modules/table/TableHeader";
 import { CommunityTable } from "../CommunityTable";
 import { CommunityFilters } from "../partials/CommunityFilters";
 import { Actions } from "../../../helpers/variables";

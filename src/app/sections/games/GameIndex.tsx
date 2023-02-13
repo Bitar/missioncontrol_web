@@ -9,7 +9,6 @@ import { GameFilters } from "./partials/GameFilters";
 import { KTCardHeader } from "../../helpers/components";
 import { Actions } from "../../helpers/variables";
 import { Col, Collapse, Row } from "react-bootstrap";
-import { ActivityFilter } from "../activity/partials/ActivityFilter";
 
 const GameIndex = () => {
   const [showFilter, setShowFilter] = useState<boolean>(false);
