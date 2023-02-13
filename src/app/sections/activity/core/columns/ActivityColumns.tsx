@@ -81,11 +81,11 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
           <div className='d-flex flex-column text-center'>
             <span className='text-gray-800 pe-none'>
               {createDateFrom(props.data[props.row.index]?.registration_dates?.start_date).format(
-                'DD MMM YY'
-              )} {props.data[props.row.index]?.settings?.timezone?.value}
+                'DD MMM YY hh:mm a'
+              )}
               <i className='fa fa-arrow-circle-right text-mc-secondary ps-2 pe-2'></i>
               {createDateFrom(props.data[props.row.index]?.registration_dates?.end_date).format(
-                'DD MMM YY'
+                'DD MMM YY hh:mm a'
               )}
             </span>
           </div>
@@ -103,11 +103,11 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
           <div className='d-flex flex-column text-center'>
             <span className='text-gray-800'>
               {createDateFrom(props.data[props.row.index]?.matchplay_dates?.start_date).format(
-                'DD MMM YY'
+                'DD MMM YY hh:mm a'
               )}
               <i className='fa fa-arrow-circle-right text-mc-secondary ps-2 pe-2'></i>
               {createDateFrom(props.data[props.row.index]?.matchplay_dates?.end_date).format(
-                'DD MMM YY'
+                'DD MMM YY hh:mm a'
               )}
             </span>
           </div>
