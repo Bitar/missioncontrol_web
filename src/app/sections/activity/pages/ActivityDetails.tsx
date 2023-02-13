@@ -3,9 +3,11 @@ import {PlatformObject} from '../components/PlatformObject'
 import dayjs, { Dayjs } from "dayjs";
 import utc from 'dayjs/plugin/utc'
 import CountUp from 'react-countup'
-import {getDateInUTC
+import {
+  createDateFrom, getDateInUTC
 } from "../../../helpers/ActivityHelper";
 import {useEffect, useState} from 'react'
+import moment from "moment/moment";
 
 const ActivityDetails = () => {
   const {activity} = useActivity()
@@ -13,13 +15,13 @@ const ActivityDetails = () => {
 
   const [timeValue, setTimeValue] = useState<Dayjs | null>(dayjs(new Date().setHours(18, 0)))
 
-  useEffect(() => {
-    if(activity?.settings) {
-      let time = dayjs(getDateInUTC(activity?.settings?.time, activity?.settings?.timezone?.value))
-      let newDate = dayjs(new Date().setHours(time.hour(), time.minute(), 0))
-      setTimeValue(newDate)
-    }
-  }, [activity?.settings])
+  // useEffect(() => {
+  //   if(activity?.settings) {
+  //     let time = dayjs(getDateInUTC(activity?.settings?.time, activity?.settings?.timezone?.value))
+  //     let newDate = dayjs(new Date().setHours(time.hour(), time.minute(), 0))
+  //     setTimeValue(newDate)
+  //   }
+  // }, [activity?.settings])
 
   return (
     <div className='card mb-5 mb-xl-10' id='kt_profile_details_view'>
@@ -99,7 +101,9 @@ const ActivityDetails = () => {
 
             <div className='col-lg-8 d-flex align-items-center'>
               <span className='fw-bolder fs-6 me-2'>
-                {timeValue?.format('hh:mm a')} - {activity?.settings?.timezone?.name}{' '}
+                {createDateFrom(activity?.settings?.time).format(
+                  'hh:mm a'
+                )}{' '}
                 <span className='text-muted' style={{fontSize: '12px'}}>
                   ({activity?.settings?.timezone?.value})
                 </span>

@@ -18,10 +18,10 @@ import {
   activityMatchPlayOnChange,
   activityRegistrationOnChange,
   createDateFrom,
-  getDateInUTC,
 } from '../../../../helpers/ActivityHelper'
 import {updateSchedule} from '../../core/requests/ActivitySettingsRequests'
 import dayjs from 'dayjs'
+import moment from "moment";
 
 const {before} = DateRangePicker
 
@@ -53,10 +53,12 @@ export const ScheduleDetail = () => {
       ).toDate()
       let matchEndDate = createDateFrom(activityForm?.schedule?.matchplay_dates?.end_date).toDate()
       setMatchPlayValue([matchStartDate, matchEndDate])
+      createDateFrom(activity?.settings?.time).format(
+        'hh:mm a'
+      )
+      let time = createDateFrom(activity?.settings?.time).toDate()
 
-      let time = dayjs(getDateInUTC(activity?.settings?.time, activity?.settings?.timezone?.value))
-      let newDate = dayjs(new Date().setHours(time.hour(), time.minute(), 0)).toDate()
-      setTimeValue(newDate)
+      setTimeValue(time)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activity?.registration_dates, activity?.matchplay_dates, activity?.settings])
@@ -169,7 +171,7 @@ export const ScheduleDetail = () => {
                       showMeridian={true}
                       onChange={(value) => {
                         if (value?.getTime()) {
-                          let time = dayjs(new Date(value.getTime())).utc(true).tz('utc').unix()
+                          let time = moment(value.getTime()).utc(true).unix()
 
                           updateData(
                             {
