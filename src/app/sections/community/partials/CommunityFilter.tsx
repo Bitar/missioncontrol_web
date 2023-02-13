@@ -13,7 +13,7 @@ type CommunityFilterObj = {
   name: string
 }
 
-const CommunityFilters = () => {
+const CommunityFilter = () => {
   const { updateState } = useQueryRequest();
   const [communityFilters, setCommunityFilters] =
     useState<CommunityFilterObj>(initCommunityFilterObj);
@@ -53,4 +53,4 @@ const CommunityFilters = () => {
   );
 };
 
-export { CommunityFilters };
+export { CommunityFilter };

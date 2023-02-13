@@ -4,7 +4,7 @@ import { QueryResponseProvider } from "../../../modules/table/QueryResponseProvi
 import { ListViewProvider } from "../../../modules/table/ListViewProvider";
 import { getCommunities } from "../core/CommunityRequests";
 import { CommunityTable } from "../CommunityTable";
-import { CommunityFilters } from "../partials/CommunityFilters";
+import { CommunityFilter } from "../partials/CommunityFilter";
 import { Actions } from "../../../helpers/variables";
 import { KTCardHeader } from "../../../helpers/components";
 import React, { useState } from "react";
@@ -38,7 +38,7 @@ const CommunityIndex = () => {
               <Collapse in={showFilter}>
                 <Row id="#communities-list-filter">
                   <Col>
-                    <CommunityFilters />
+                    <CommunityFilter />
                   </Col>
                 </Row>
               </Collapse>
