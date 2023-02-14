@@ -70,7 +70,6 @@ export const activityLocationSchema = Yup.object().shape({
   }),
 })
 
-
 export const activitySchema = Yup.object().shape({
   community_id: Yup.string().required('Community is required'),
   game_id: Yup.string().required('Game is required'),

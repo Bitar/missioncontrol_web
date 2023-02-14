@@ -1,7 +1,7 @@
 import {communitySchema} from '../../../../models/community/Community'
 import React, {FC, useEffect, useState} from 'react'
 import {useCommunity} from '../../CommunityContext'
-import { ErrorMessage, Field, Form, Formik, useFormikContext } from "formik";
+import {ErrorMessage, Field, Form, Formik} from 'formik'
 import {KTCard, KTCardBody, KTCardHeader} from '../../../../helpers/components'
 import {useParams} from 'react-router-dom'
 import {jsonToFormData, updateData} from '../../../../helpers/form/FormHelper'
@@ -12,7 +12,7 @@ import {getStates} from '../../../misc/core/_requests'
 import {State} from '../../../../models/misc/State'
 import Select from 'react-select'
 import {useCommunityForm} from '../../core/CommunityFormContext'
-import InputMask from "react-input-mask";
+import InputMask from 'react-input-mask'
 
 const AddressDetails: FC = () => {
   const {communityForm, setCommunityForm} = useCommunityForm()

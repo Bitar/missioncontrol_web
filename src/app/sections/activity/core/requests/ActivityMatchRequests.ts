@@ -27,7 +27,7 @@ export const getUpcomingActivityMatches = (
 export const getRecentActivityMatches = (id: any, query?: string): Promise<MatchQueryResponse> => {
   let q = query + '&filter[status]=3,4,5,6,7'
 
-  console.log(query);
+  console.log(query)
 
   return getActivityMatches(id, q)
 }
