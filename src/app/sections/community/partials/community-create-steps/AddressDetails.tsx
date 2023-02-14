@@ -95,13 +95,6 @@ const AddressDetails: FC = () => {
               setFieldValue('address.postal_code', e.target.value)
             }}
           />
-
-          {/*  <Field*/}
-          {/*    type='text'*/}
-          {/*    name='address.postal_code'*/}
-          {/*    className='form-control mb-3 mb-lg-0'*/}
-          {/*    placeholder='ex: 95125'*/}
-          {/*  />*/}
           <div className='text-danger mt-2'>
             <ErrorMessage name='address.postal_code' />
           </div>

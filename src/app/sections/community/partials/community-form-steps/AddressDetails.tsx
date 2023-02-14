@@ -1,7 +1,7 @@
 import {communitySchema} from '../../../../models/community/Community'
 import React, {FC, useEffect, useState} from 'react'
 import {useCommunity} from '../../CommunityContext'
-import {ErrorMessage, Field, Form, Formik} from 'formik'
+import { ErrorMessage, Field, Form, Formik, useFormikContext } from "formik";
 import {KTCard, KTCardBody, KTCardHeader} from '../../../../helpers/components'
 import {useParams} from 'react-router-dom'
 import {jsonToFormData, updateData} from '../../../../helpers/form/FormHelper'
@@ -12,6 +12,7 @@ import {getStates} from '../../../misc/core/_requests'
 import {State} from '../../../../models/misc/State'
 import Select from 'react-select'
 import {useCommunityForm} from '../../core/CommunityFormContext'
+import InputMask from "react-input-mask";
 
 const AddressDetails: FC = () => {
   const {communityForm, setCommunityForm} = useCommunityForm()
@@ -68,7 +69,7 @@ const AddressDetails: FC = () => {
         onSubmit={handleSubmit}
         enableReinitialize
       >
-        {({isSubmitting}) => (
+        {({isSubmitting, setFieldValue}) => (
           <Form onChange={handleOnChange} className='form' autoComplete='off'>
             <KTCardBody className='py-4'>
               <div className='d-flex flex-column pt-5'>
@@ -150,11 +151,16 @@ const AddressDetails: FC = () => {
                     Postal Code
                   </label>
                   <div className='col-lg-8 fv-row'>
-                    <Field
-                      type='text'
-                      name='address.postal_code'
+                    <InputMask
+                      mask='99999'
                       className='form-control mb-3 mb-lg-0'
-                      placeholder='ex: 95125'
+                      defaultValue={community?.address?.postal_code}
+                      placeholder='Zip Code'
+                      maskPlaceholder={null}
+                      name='address.postal_code'
+                      onChange={(e) => {
+                        setFieldValue('address.postal_code', e.target.value)
+                      }}
                     />
                     <div className='text-danger mt-2'>
                       <ErrorMessage name='address.postal_code' />

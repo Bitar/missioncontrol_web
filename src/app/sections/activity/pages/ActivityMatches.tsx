@@ -17,28 +17,28 @@ const ActivityMatches = () => {
 
   return (
     <div className='row g-5 g-xxl-8'>
-      {/*<div className='col-lg-4 col-md-6'>*/}
-      {/*  <div className='mb-5'>*/}
-      {/*    <KTCard>*/}
-      {/*      <div className='card-header bg-info'>*/}
-      {/*        <div className='card-title'>*/}
-      {/*          <h3 className='card-label text-white'>Upcoming Matches</h3>*/}
-      {/*        </div>*/}
-      {/*      </div>*/}
-      {/*      <KTCardBody className='scroll-y mh-800px pt-3'>*/}
-      {/*        <QueryRequestProvider>*/}
-      {/*          <QueryResponseProvider*/}
-      {/*            id={QUERIES.UPCOMING_MATCH_LIST}*/}
-      {/*            requestFunction={getUpcomingActivityMatches}*/}
-      {/*            requestId={params?.id}*/}
-      {/*          >*/}
-      {/*            <MatchesTable />*/}
-      {/*          </QueryResponseProvider>*/}
-      {/*        </QueryRequestProvider>*/}
-      {/*      </KTCardBody>*/}
-      {/*    </KTCard>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
+      <div className='col-lg-4 col-md-6'>
+        <div className='mb-5'>
+          <KTCard>
+            <div className='card-header bg-info'>
+              <div className='card-title'>
+                <h3 className='card-label text-white'>Upcoming Matches</h3>
+              </div>
+            </div>
+            <KTCardBody className='scroll-y mh-800px pt-3'>
+              <QueryRequestProvider>
+                <QueryResponseProvider
+                  id={QUERIES.UPCOMING_MATCH_LIST}
+                  requestFunction={getUpcomingActivityMatches}
+                  requestId={params?.id}
+                >
+                  <MatchesTable />
+                </QueryResponseProvider>
+              </QueryRequestProvider>
+            </KTCardBody>
+          </KTCard>
+        </div>
+      </div>
 
       <div className='col-lg-4 col-md-6'>
         <div className='mb-5'>
@@ -63,30 +63,30 @@ const ActivityMatches = () => {
         </div>
       </div>
 
-      {/*<div className='col-lg-4 col-md-6'>*/}
-      {/*  <div className='mb-5'>*/}
-      {/*    <KTCard>*/}
-      {/*      <div className='card-header bg-dark'>*/}
-      {/*        <div className='card-title'>*/}
-      {/*          <h3 className='card-label text-white'>Disputed Matches</h3>*/}
-      {/*        </div>*/}
-      {/*      </div>*/}
-      {/*      <KTCardBody className='scroll-y mh-800px pt-3'>*/}
-      {/*        <QueryRequestProvider>*/}
-      {/*          <QueryResponseProvider*/}
-      {/*            id={QUERIES.DISPUTED_MATCH_LIST}*/}
-      {/*            requestFunction={getDisputedActivityMatches}*/}
-      {/*            requestId={params?.id}*/}
-      {/*          >*/}
-      {/*            <ListViewProvider>*/}
-      {/*              <MatchesTable />*/}
-      {/*            </ListViewProvider>*/}
-      {/*          </QueryResponseProvider>*/}
-      {/*        </QueryRequestProvider>*/}
-      {/*      </KTCardBody>*/}
-      {/*    </KTCard>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
+      <div className='col-lg-4 col-md-6'>
+        <div className='mb-5'>
+          <KTCard>
+            <div className='card-header bg-dark'>
+              <div className='card-title'>
+                <h3 className='card-label text-white'>Disputed Matches</h3>
+              </div>
+            </div>
+            <KTCardBody className='scroll-y mh-800px pt-3'>
+              <QueryRequestProvider>
+                <QueryResponseProvider
+                  id={QUERIES.DISPUTED_MATCH_LIST}
+                  requestFunction={getDisputedActivityMatches}
+                  requestId={params?.id}
+                >
+                  <ListViewProvider>
+                    <MatchesTable />
+                  </ListViewProvider>
+                </QueryResponseProvider>
+              </QueryRequestProvider>
+            </KTCardBody>
+          </KTCard>
+        </div>
+      </div>
     </div>
   )
 }
