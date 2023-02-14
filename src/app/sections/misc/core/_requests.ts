@@ -6,6 +6,7 @@ import {BillingPlanOptionQueryResponse} from '../../../models/billing/PlanOption
 import {ScoringTypeQueryResponse} from '../../../models/game/scoring/ScoringType'
 import {ScoringKeyQueryResponse} from '../../../models/game/scoring/ScoringKey'
 import {PlatformQueryResponse} from '../../../models/game/Platform'
+import { ActivityType, ActivityTypeQueryResponse } from "../../../models/activity/ActivityType";
 
 const API_URL = process.env.REACT_APP_API_URL
 const GET_MISC_URL = `${API_URL}/misc`
@@ -48,3 +49,10 @@ export const getPlatforms = (): Promise<PlatformQueryResponse> => {
     .get(`${GET_MISC_URL}/platforms`)
     .then((d: AxiosResponse<PlatformQueryResponse>) => d.data)
 }
+
+export const getActivityTypes = (): Promise<ActivityTypeQueryResponse> => {
+  let url = `${GET_MISC_URL}/activity-types`;
+
+  return axios.get(url)
+    .then((response: AxiosResponse<ActivityTypeQueryResponse>) => response.data);
+};
