@@ -33,6 +33,9 @@ const formatActivityStatus = (statusId: number) => {
   } else if (statusId === 8) {
     status = 'Upcoming'
     color = 'secondary'
+  } else if (statusId === 9) {
+    status = 'Generating Playoffs'
+    color = 'info'
   } else {
     status = 'Closed'
     color = 'danger'
@@ -153,7 +156,7 @@ export const activityMatchPlayOnChange = (
   e: any,
   activityForm: ActivityForm | undefined,
   setActivityForm: Dispatch<SetStateAction<ActivityForm>>,
-  setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
+  setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>
 ) => {
   if (e) {
     let startDate = dayjs(new Date(e[0]).setHours(0, 0)).utc(true).tz('utc').unix()
@@ -179,4 +182,4 @@ export const activityMatchPlayOnChange = (
   }
 }
 
-export { formatActivityStatus, formatDates, formatMatchStatus };
+export {formatActivityStatus, formatDates, formatMatchStatus}

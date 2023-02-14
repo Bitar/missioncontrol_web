@@ -8,6 +8,7 @@ const QueryRequestProvider: FC<React.PropsWithChildren<unknown>> = ({children}) 
 
   const updateState = (updates: Partial<QueryState>) => {
     const updatedState = {...state, ...updates} as QueryState
+
     setState(updatedState)
   }
 

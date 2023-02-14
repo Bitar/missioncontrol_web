@@ -1,5 +1,5 @@
 import React from 'react'
-import { KTCard, KTCardBody, QUERIES } from "../../../../_metronic/helpers";
+import {KTCard, KTCardBody, QUERIES} from '../../../../_metronic/helpers'
 import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
 import {RoleTable} from './RoleTable'
 import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvider'
@@ -28,4 +28,4 @@ const RoleIndex = () => (
   </QueryRequestProvider>
 )
 
-export { RoleIndex };
+export {RoleIndex}

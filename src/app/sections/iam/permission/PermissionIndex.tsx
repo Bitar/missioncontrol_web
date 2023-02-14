@@ -28,4 +28,4 @@ const PermissionIndex = () => (
   </QueryRequestProvider>
 )
 
-export { PermissionIndex };
+export {PermissionIndex}

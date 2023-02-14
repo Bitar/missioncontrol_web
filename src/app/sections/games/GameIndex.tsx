@@ -1,27 +1,27 @@
-import React, { useState } from "react";
-import { KTCard, KTCardBody, QUERIES } from "../../../_metronic/helpers";
-import { QueryRequestProvider } from "../../modules/table/QueryRequestProvider";
-import { QueryResponseProvider } from "../../modules/table/QueryResponseProvider";
-import { getGames } from "./core/GameRequests";
-import { ListViewProvider } from "../../modules/table/ListViewProvider";
-import { GameTable } from "./GameTable";
-import { GameFilters } from "./partials/GameFilters";
-import { KTCardHeader } from "../../helpers/components";
-import { Actions } from "../../helpers/variables";
-import { Col, Collapse, Row } from "react-bootstrap";
+import React, {useState} from 'react'
+import {KTCard, KTCardBody, QUERIES} from '../../../_metronic/helpers'
+import {QueryRequestProvider} from '../../modules/table/QueryRequestProvider'
+import {QueryResponseProvider} from '../../modules/table/QueryResponseProvider'
+import {getGames} from './core/GameRequests'
+import {ListViewProvider} from '../../modules/table/ListViewProvider'
+import {GameTable} from './GameTable'
+import {GameFilters} from './partials/GameFilters'
+import {KTCardHeader} from '../../helpers/components'
+import {Actions} from '../../helpers/variables'
+import {Col, Collapse, Row} from 'react-bootstrap'
 
 const GameIndex = () => {
-  const [showFilter, setShowFilter] = useState<boolean>(false);
+  const [showFilter, setShowFilter] = useState<boolean>(false)
 
   const headerActions = [
     {
       type: Actions.FILTER,
-      target: "games-list-filter",
+      target: 'games-list-filter',
       showFilter: showFilter,
-      setShowFilter: setShowFilter
+      setShowFilter: setShowFilter,
     },
-    { type: Actions.CREATE, url: "/activities" }
-  ];
+    {type: Actions.CREATE, url: '/activities'},
+  ]
 
   return (
     <QueryRequestProvider>
@@ -29,14 +29,14 @@ const GameIndex = () => {
         <ListViewProvider>
           <KTCard>
             <KTCardHeader
-              text="All Games"
-              icon="fa-regular fa-list"
-              icon_style="fs-3 text-primary"
+              text='All Games'
+              icon='fa-regular fa-list'
+              icon_style='fs-3 text-primary'
               actions={headerActions}
             />
             <KTCardBody>
               <Collapse in={showFilter}>
-                <Row id="#games-list-filter">
+                <Row id='#games-list-filter'>
                   <Col>
                     <GameFilters />
                   </Col>
@@ -48,7 +48,7 @@ const GameIndex = () => {
         </ListViewProvider>
       </QueryResponseProvider>
     </QueryRequestProvider>
-  );
-};
+  )
+}
 
-export { GameIndex };
+export {GameIndex}

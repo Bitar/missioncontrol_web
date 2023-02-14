@@ -1,5 +1,5 @@
-import { initialUserMeta, UserMeta } from "./UserMeta";
-import { User } from "./User";
+import {initialUserMeta, UserMeta} from './UserMeta'
+import {User} from './User'
 
 export type UserForm = {
   first_name: string
@@ -13,18 +13,17 @@ export type UserForm = {
 }
 
 export const initUserForm = (user?: User) => {
-
-  let roleIds = user?.roles?.map((role: any) => role.id);
-  let communityAdminIds = user?.community_admin?.map((community: any) => community.id);
+  let roleIds = user?.roles?.map((role: any) => role.id)
+  let communityAdminIds = user?.community_admin?.map((community: any) => community.id)
 
   return {
-    first_name: user?.first_name || "",
-    last_name: user?.last_name || "",
-    password: "",
-    password_confirmation: "",
-    email: user?.email || "",
+    first_name: user?.first_name || '',
+    last_name: user?.last_name || '',
+    password: '',
+    password_confirmation: '',
+    email: user?.email || '',
     role_ids: roleIds || [],
     meta: user?.meta || initialUserMeta(user?.meta),
-    community_admin: communityAdminIds || []
-  };
-};
+    community_admin: communityAdminIds || [],
+  }
+}

@@ -55,4 +55,4 @@ const PermissionRoutes: React.FC = () => {
   )
 }
 
-export { PermissionRoutes };
+export {PermissionRoutes}

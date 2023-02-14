@@ -19,13 +19,15 @@ export const getUpcomingActivityMatches = (
   id: any,
   query?: string
 ): Promise<MatchQueryResponse> => {
-  let q = 'filter[status]=1,2'
+  let q = query + '&filter[status]=1,2'
 
   return getActivityMatches(id, q)
 }
 
 export const getRecentActivityMatches = (id: any, query?: string): Promise<MatchQueryResponse> => {
-  let q = 'filter[status]=3,4,5,6,7'
+  let q = query + '&filter[status]=3,4,5,6,7'
+
+  console.log(query);
 
   return getActivityMatches(id, q)
 }
@@ -34,7 +36,7 @@ export const getDisputedActivityMatches = (
   id: any,
   query?: string
 ): Promise<MatchQueryResponse> => {
-  let q = 'filter[status]=4,6,7'
+  let q = query + '&filter[status]=4,6,7'
 
   return getActivityMatches(id, q)
 }

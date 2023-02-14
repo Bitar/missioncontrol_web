@@ -55,4 +55,4 @@ const UserRoutes: React.FC = () => {
   )
 }
 
-export default UserRoutes;
+export default UserRoutes

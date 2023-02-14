@@ -1,6 +1,6 @@
 import React, {FC} from 'react'
 import {KTCardFooter} from '../components'
-import { useFormikContext } from "formik";
+import {useFormikContext} from 'formik'
 
 type Props = {
   text: string

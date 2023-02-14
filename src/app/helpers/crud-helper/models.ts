@@ -4,7 +4,7 @@ export type ID = undefined | null | number
 
 export type PaginationState = {
   page: number
-  per_page: 10 | 30 | 50 | 100
+  per_page: 15 | 30 | 50 | 100
   links?: Array<{label: string; active: boolean; url: string | null; page: number | null}>
   current_page?: number
 }
@@ -43,7 +43,7 @@ export type QueryRequestContextProps = {
 
 export const initialQueryState: QueryState = {
   page: 1,
-  per_page: 10,
+  per_page: 15,
 }
 
 export const initialQueryRequest: QueryRequestContextProps = {

@@ -1,26 +1,26 @@
-import React, { FC, useMemo, useState } from "react";
-import { KTCard, KTCardBody, QUERIES } from "../../../../_metronic/helpers";
-import { QueryRequestProvider } from "../../../modules/table/QueryRequestProvider";
+import React, {FC, useMemo, useState} from 'react'
+import {KTCard, KTCardBody, QUERIES} from '../../../../_metronic/helpers'
+import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
 import {
   QueryResponseProvider,
   useQueryResponseData,
-  useQueryResponseLoading
-} from "../../../modules/table/QueryResponseProvider";
-import { getCommunityUsers } from "../core/CommunityRequests";
-import { ListViewProvider } from "../../../modules/table/ListViewProvider";
-import { CommunityUsersColumns } from "../core/CommunityUsersColumns";
-import { useCommunity } from "../CommunityContext";
-import { CommunityUserFilters } from "../partials/CommunityUserFilters";
-import { KTCardHeader } from "../../../helpers/components";
-import { Col, Collapse, Row } from "react-bootstrap";
-import { Actions } from "../../../helpers/variables";
-import { McTable } from "../../../components/McTable";
+  useQueryResponseLoading,
+} from '../../../modules/table/QueryResponseProvider'
+import {getCommunityUsers} from '../core/CommunityRequests'
+import {ListViewProvider} from '../../../modules/table/ListViewProvider'
+import {CommunityUsersColumns} from '../core/CommunityUsersColumns'
+import {useCommunity} from '../CommunityContext'
+import {CommunityUserFilters} from '../partials/CommunityUserFilters'
+import {KTCardHeader} from '../../../helpers/components'
+import {Col, Collapse, Row} from 'react-bootstrap'
+import {Actions} from '../../../helpers/variables'
+import {McTable} from '../../../components/McTable'
 
 const CommunityUsersTable = () => {
-  const communityUsers = useQueryResponseData();
-  const isLoading = useQueryResponseLoading();
-  const data = useMemo(() => communityUsers, [communityUsers]);
-  const columns = useMemo(() => CommunityUsersColumns, []);
+  const communityUsers = useQueryResponseData()
+  const isLoading = useQueryResponseLoading()
+  const data = useMemo(() => communityUsers, [communityUsers])
+  const columns = useMemo(() => CommunityUsersColumns, [])
 
   return (
     <McTable
@@ -29,21 +29,21 @@ const CommunityUsersTable = () => {
       model={communityUsers.length > 0 ? communityUsers[0] : null}
       isLoading={isLoading}
     />
-  );
-};
+  )
+}
 
 const CommunityUsers: FC = () => {
-  const { community } = useCommunity();
-  const [showFilter, setShowFilter] = useState<boolean>(false);
+  const {community} = useCommunity()
+  const [showFilter, setShowFilter] = useState<boolean>(false)
 
   const headerActions = [
     {
       type: Actions.FILTER,
-      target: "community-members-list-filter",
+      target: 'community-members-list-filter',
       showFilter: showFilter,
-      setShowFilter: setShowFilter
-    }
-  ];
+      setShowFilter: setShowFilter,
+    },
+  ]
 
   return (
     <QueryRequestProvider>
@@ -55,14 +55,14 @@ const CommunityUsers: FC = () => {
         <ListViewProvider>
           <KTCard>
             <KTCardHeader
-              text="Community Members"
-              icon="fa-regular fa-list"
-              icon_style="fs-3 text-primary"
+              text='Community Members'
+              icon='fa-regular fa-list'
+              icon_style='fs-3 text-primary'
               actions={headerActions}
             />
             <KTCardBody>
               <Collapse in={showFilter}>
-                <Row id="#community-members-list-filter">
+                <Row id='#community-members-list-filter'>
                   <Col>
                     <CommunityUserFilters />
                   </Col>
@@ -74,7 +74,7 @@ const CommunityUsers: FC = () => {
         </ListViewProvider>
       </QueryResponseProvider>
     </QueryRequestProvider>
-  );
-};
+  )
+}
 
-export { CommunityUsers };
+export {CommunityUsers}

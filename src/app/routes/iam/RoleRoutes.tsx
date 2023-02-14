@@ -55,4 +55,4 @@ const RoleRoutes: React.FC = () => {
   )
 }
 
-export default RoleRoutes;
+export default RoleRoutes

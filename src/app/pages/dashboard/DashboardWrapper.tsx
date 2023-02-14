@@ -35,13 +35,17 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
                       <CreateCommunityWidget bgHex={'#FFFFFF'} type='create-community' />
                     </div>
                     <div className='col-xl-6'>
-                      <div className={`card bg-mc-secondary text-white`} >
-                        <div className={`content d-flex flex-column flex-column-fluid" id="kt_content`}>
+                      <div className={`card bg-mc-secondary text-white`}>
+                        <div
+                          className={`content d-flex flex-column flex-column-fluid" id="kt_content`}
+                        >
                           <div className='post d-flex flex-column-fluid' id='kt_post'>
                             <div id='kt_content_container' className='container-xxl'>
                               <div className='card-body pt-0'>
                                 <div className='card-px text-center py-10'>
-                                  <h2 className='fs-2x fw-bolder mb-10 text-white'>Join A Community</h2>
+                                  <h2 className='fs-2x fw-bolder mb-10 text-white'>
+                                    Join A Community
+                                  </h2>
                                   <p className='fs-4 fw-bold mb-10'>
                                     Players can join a community by downloading our mobile app
                                   </p>
@@ -52,7 +56,12 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
                                       src={toAbsoluteUrl(`/media/marketing/mockview.png`)}
                                     />
                                   </div>
-                                  <a href='https://apps.apple.com/us/app/mission-control-gg/id1477441476' target='_blank' className='btn btn-mc-primary fw-semibold' rel='noreferrer'>
+                                  <a
+                                    href='https://apps.apple.com/us/app/mission-control-gg/id1477441476'
+                                    target='_blank'
+                                    className='btn btn-mc-primary fw-semibold'
+                                    rel='noreferrer'
+                                  >
                                     <i className='fab fa-apple'></i> Download on App Store
                                   </a>
                                 </div>
@@ -74,4 +83,4 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
   )
 }
 
-export { DashboardWrapper };
+export {DashboardWrapper}

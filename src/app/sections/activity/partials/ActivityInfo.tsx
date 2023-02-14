@@ -199,4 +199,4 @@ const ActivityInfo: FC = () => {
   )
 }
 
-export { ActivityInfo };
+export {ActivityInfo}

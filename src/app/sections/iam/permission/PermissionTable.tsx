@@ -22,4 +22,4 @@ const PermissionTable = () => {
   )
 }
 
-export { PermissionTable };
+export {PermissionTable}

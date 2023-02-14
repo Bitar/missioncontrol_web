@@ -35,29 +35,31 @@ const UserCreate = () => {
       .then((response) => {
         navigate('/iam/users/' + response?.id)
         setFormErrors([])
-        fns.setSubmitting(false);
+        fns.setSubmitting(false)
       })
       .catch((error) => {
         setFormErrors(extractErrors(error))
-        fns.setSubmitting(false);
+        fns.setSubmitting(false)
       })
   }
 
   const handleOnChange = (e: any) => formOnChange(e, userForm, setUserForm)
 
   const handleRoleChange = (e: any) => {
-    e.find((e: any) => e?.id === 3) ? setHasCommunityAdminRole(true) : setHasCommunityAdminRole(false)
+    e.find((e: any) => e?.id === 3)
+      ? setHasCommunityAdminRole(true)
+      : setHasCommunityAdminRole(false)
 
     let roleIds = e.map((role: any) => role.id)
     updateData({role_ids: roleIds, community_admin: []}, setUserForm, userForm)
   }
 
-  const handleCommunityChange = (e:any) => {
+  const handleCommunityChange = (e: any) => {
     let communityAdmins = []
 
     communityAdmins = e.map((community: any) => community.id)
 
-    updateData({community_admin: communityAdmins}, setUserForm, userForm);
+    updateData({community_admin: communityAdmins}, setUserForm, userForm)
   }
 
   useEffect(() => {
@@ -320,4 +322,4 @@ const UserCreate = () => {
   )
 }
 
-export { UserCreate };
+export {UserCreate}

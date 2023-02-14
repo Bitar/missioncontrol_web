@@ -12,8 +12,11 @@ import {defaultTime} from '../../../../models/activity/ActivityForm'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
-import { activityMatchPlayOnChange, activityRegistrationOnChange } from "../../../../helpers/ActivityHelper";
-import moment from "moment/moment";
+import {
+  activityMatchPlayOnChange,
+  activityRegistrationOnChange,
+} from '../../../../helpers/ActivityHelper'
+import moment from 'moment/moment'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)

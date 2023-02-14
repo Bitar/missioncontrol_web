@@ -1,25 +1,25 @@
-import React, { FC } from "react";
-import { PageLink, PageTitle } from "../../layout/core";
-import { Route, Routes } from "react-router-dom";
-import { ActivityIndex } from "../../sections/activity/pages/ActivityIndex";
-import { ActivityView } from "../../sections/activity/pages/ActivityView";
-import { SuspenseView } from "../../layout/SuspenseView";
-import { ActivityCreate } from "../../sections/activity/pages/ActivityCreate";
+import React, {FC} from 'react'
+import {PageLink, PageTitle} from '../../layout/core'
+import {Route, Routes} from 'react-router-dom'
+import {ActivityIndex} from '../../sections/activity/pages/ActivityIndex'
+import {ActivityView} from '../../sections/activity/pages/ActivityView'
+import {SuspenseView} from '../../layout/SuspenseView'
+import {ActivityCreate} from '../../sections/activity/pages/ActivityCreate'
 
 const activityBreadCrumbs: Array<PageLink> = [
   {
-    title: "Activities",
-    path: "/activities/overview",
+    title: 'Activities',
+    path: '/activities/overview',
     isSeparator: false,
-    isActive: false
+    isActive: false,
   },
   {
-    title: "",
-    path: "",
+    title: '',
+    path: '',
     isSeparator: true,
-    isActive: false
-  }
-];
+    isActive: false,
+  },
+]
 
 const ActivityRoutes: FC = () => {
   return (
@@ -29,36 +29,36 @@ const ActivityRoutes: FC = () => {
         element={
           <>
             <SuspenseView>
-              <PageTitle breadcrumbs={activityBreadCrumbs}>{"Overview"}</PageTitle>
+              <PageTitle breadcrumbs={activityBreadCrumbs}>{'Overview'}</PageTitle>
               <ActivityIndex />
             </SuspenseView>
           </>
         }
       />
       <Route
-        path="/create"
+        path='/create'
         element={
           <>
             <SuspenseView>
-              <PageTitle breadcrumbs={activityBreadCrumbs}>{"Add Activity"}</PageTitle>
+              <PageTitle breadcrumbs={activityBreadCrumbs}>{'Add Activity'}</PageTitle>
               <ActivityCreate />
             </SuspenseView>
           </>
         }
       />
       <Route
-        path="/:id/*"
+        path='/:id/*'
         element={
           <>
             <SuspenseView>
-              <PageTitle breadcrumbs={activityBreadCrumbs}>{"View Community"}</PageTitle>
+              <PageTitle breadcrumbs={activityBreadCrumbs}>{'View Community'}</PageTitle>
               <ActivityView />
             </SuspenseView>
           </>
         }
       />
     </Routes>
-  );
-};
+  )
+}
 
-export default ActivityRoutes;
+export default ActivityRoutes

@@ -57,7 +57,7 @@ const usersColumns: ReadonlyArray<Column<User>> = [
         queryKey={QUERIES.USERS_LIST}
         showView={true}
         showEdit={false}
-        title="Delete User"
+        title='Delete User'
         text={`Are you sure you want to delete the user '${props.data[props.row.index].name}'?`}
       />
     ),

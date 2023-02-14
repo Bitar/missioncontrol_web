@@ -23,7 +23,6 @@ const QueryResponseProvider: FC<React.PropsWithChildren<Props>> = ({
   children,
 }) => {
   const {state} = useQueryRequest()
-
   const [query, setQuery] = useState<string>(stringifyRequestQuery(state))
   const updatedQuery = useMemo(() => stringifyRequestQuery(state), [state])
 
@@ -50,9 +49,7 @@ const QueryResponseProvider: FC<React.PropsWithChildren<Props>> = ({
   )
 
   return (
-    <QueryResponseContext.Provider
-      value={{isLoading: isFetching, refetch, response, query}}
-    >
+    <QueryResponseContext.Provider value={{isLoading: isFetching, refetch, response, query}}>
       {children}
     </QueryResponseContext.Provider>
   )

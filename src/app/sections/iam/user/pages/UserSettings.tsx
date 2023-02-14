@@ -1,23 +1,23 @@
 import React, {FC, useEffect, useState} from 'react'
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import {ErrorMessage, Field, Form, Formik} from 'formik'
 import {KTCard, KTCardBody} from '../../../../helpers/components'
 import {useParams} from 'react-router-dom'
 import {updateUser} from '../core/UserRequests'
-import { jsonToFormData, updateData } from "../../../../helpers/form/FormHelper";
-import { formOnChange, UserEditSchema } from "../../../../models/iam/User";
+import {jsonToFormData, updateData} from '../../../../helpers/form/FormHelper'
+import {formOnChange, UserEditSchema} from '../../../../models/iam/User'
 import {AvatarImage} from '../partials/AvatarImage'
 import {initUserForm, UserForm} from '../../../../models/iam/UserForm'
 import {useUser} from '../core/UserContext'
 import toast from 'react-hot-toast'
-import { Role } from "../../../../models/iam/Role";
-import { Community } from "../../../../models/community/Community";
-import { getRoles } from "../../role/core/RoleRequests";
-import { getAllCommunities } from "../../../community/core/CommunityRequests";
-import FormErrors from "../../../../components/form/FormErrors";
-import Select from "react-select";
-import { DatePicker } from "rsuite";
-import { FormAction } from "../../../../helpers/form/FormAction";
-import { extractErrors } from "../../../../requests/helpers";
+import {Role} from '../../../../models/iam/Role'
+import {Community} from '../../../../models/community/Community'
+import {getRoles} from '../../role/core/RoleRequests'
+import {getAllCommunities} from '../../../community/core/CommunityRequests'
+import FormErrors from '../../../../components/form/FormErrors'
+import Select from 'react-select'
+import {DatePicker} from 'rsuite'
+import {FormAction} from '../../../../helpers/form/FormAction'
+import {extractErrors} from '../../../../requests/helpers'
 
 const UserSettings: FC = () => {
   const {user, setUser} = useUser()
@@ -43,7 +43,9 @@ const UserSettings: FC = () => {
   }, [])
 
   useEffect(() => {
-    user?.roles?.find((e: any) => e?.id === 3) ? setHasCommunityAdminRole(true) : setHasCommunityAdminRole(false)
+    user?.roles?.find((e: any) => e?.id === 3)
+      ? setHasCommunityAdminRole(true)
+      : setHasCommunityAdminRole(false)
   }, [user])
 
   useEffect(() => {
@@ -63,32 +65,36 @@ const UserSettings: FC = () => {
     let data = jsonToFormData(userForm)
     data.append('_method', 'PUT')
 
-    updateUser(params.id, data).then((response) => {
-      setFormErrors([])
-      setUser(response)
-      toast.success('User updated Successfully!')
-      fns.setSubmitting(false);
-    }).catch((error) => {
-      setFormErrors(extractErrors(error))
-      fns.setSubmitting(false);
-    })
+    updateUser(params.id, data)
+      .then((response) => {
+        setFormErrors([])
+        setUser(response)
+        toast.success('User updated Successfully!')
+        fns.setSubmitting(false)
+      })
+      .catch((error) => {
+        setFormErrors(extractErrors(error))
+        fns.setSubmitting(false)
+      })
   }
 
   const handleOnChange = (e: any) => formOnChange(e, userForm, setUserForm)
 
   const handleRoleChange = (e: any) => {
-    e.find((e: any) => e?.id === 3) ? setHasCommunityAdminRole(true) : setHasCommunityAdminRole(false)
+    e.find((e: any) => e?.id === 3)
+      ? setHasCommunityAdminRole(true)
+      : setHasCommunityAdminRole(false)
 
     let roleIds = e.map((role: any) => role.id)
     updateData({role_ids: roleIds, community_admin: []}, setUserForm, userForm)
   }
 
-  const handleCommunityChange = (e:any) => {
+  const handleCommunityChange = (e: any) => {
     let communityAdmins = []
 
     communityAdmins = e.map((community: any) => community.id)
 
-    updateData({community_admin: communityAdmins}, setUserForm, userForm);
+    updateData({community_admin: communityAdmins}, setUserForm, userForm)
   }
 
   useEffect(() => {
@@ -131,9 +137,7 @@ const UserSettings: FC = () => {
                 <AvatarImage user={userForm} setUser={setUserForm} />
 
                 <div className='row mb-6'>
-                  <label className='col-lg-4 col-form-label required fw-bold fs-6'>
-                    Full Name
-                  </label>
+                  <label className='col-lg-4 col-form-label required fw-bold fs-6'>Full Name</label>
 
                   <div className='col-lg-8'>
                     <div className='row'>
@@ -338,4 +342,4 @@ const UserSettings: FC = () => {
   )
 }
 
-export { UserSettings };
+export {UserSettings}
