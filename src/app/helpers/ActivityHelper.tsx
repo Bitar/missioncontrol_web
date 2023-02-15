@@ -117,6 +117,7 @@ export const activityRegistrationOnChange = (
 
     if (new Date(e[1]) < today) {
       toast.error('Registration end date needs to be in the future.')
+      setRegistrationValue(null)
     } else {
       let startDate = dayjs(new Date(e[0]).setHours(0, 0)).utc(true).tz('utc').unix()
       let endDate = dayjs(new Date(e[1]).setHours(0, 0)).utc(true).tz('utc').unix()
