@@ -148,11 +148,6 @@ export const ACTIVITY_CREATE_STEPPER_NAV = [
   {
     title: 'Location',
     icon: 'fa-duotone fa-location-dot',
-    has_next: true,
-  },
-  {
-    title: 'Playoffs',
-    icon: 'fa-duotone fa-trophy',
     has_next: false,
   },
 ]
