@@ -20,7 +20,7 @@ const GameIndex = () => {
       showFilter: showFilter,
       setShowFilter: setShowFilter,
     },
-    {type: Actions.CREATE, url: '/activities'},
+    {type: Actions.CREATE, url: '/games'},
   ]
 
   return (
