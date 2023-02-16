@@ -35,8 +35,8 @@ export const PlayoffDetail = () => {
           playoffs: {
             ...activityForm?.playoffs,
             ...{
-              playoff_dates: {
-                ...activityForm?.playoffs?.playoff_dates,
+              playoffs_dates: {
+                ...activityForm?.playoffs?.playoffs_dates,
                 ...{start_date: startDate, end_date: endDate},
               },
               teams: 0,

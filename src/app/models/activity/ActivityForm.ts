@@ -26,7 +26,7 @@ export type ActivityForm = {
 }
 
 export type ActivityPlayoff = {
-  playoff_dates: {
+  playoffs_dates: {
     start_date: number
     end_date: number
   }

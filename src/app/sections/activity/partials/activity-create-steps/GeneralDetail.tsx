@@ -31,7 +31,7 @@ const GeneralDetail: FC = () => {
   return (
     <div className='d-flex flex-column pt-5 w-100'>
       <div className='row mb-6'>
-        <label className='col-lg-4 col-form-label fw-bold fs-6'>type</label>
+        <label className='col-lg-4 col-form-label fw-bold fs-6'>Type</label>
         <div className='col-lg-8 fv-row'>
           <Select
             name='type_id'
