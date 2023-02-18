@@ -30,15 +30,40 @@ export const activityScheduleSchema = Yup.object().shape({
         .moreThan(0, 'GameDay End Date is required')
         .required('Match Play End Date is required'),
     }),
-
     settings: Yup.object().shape({
       frequency: Yup.string().required('Match Frequency is required'),
-      time: Yup.string().required('Time of Day is required'),
+      time: Yup.number().moreThan(0, 'Time is required').required('Time is required'),
       day: Yup.string().when('frequency', {
         is: '2',
         then: Yup.string().required('Day required'),
       }),
       timezone: Yup.string().required('Timezone is required'),
+    }),
+  }),
+  playoffs: Yup.object().shape({
+    is_enabled: Yup.boolean().required(),
+    playoffs_dates: Yup.object().when('is_enabled', {
+      is: true,
+      then: Yup.object().shape({
+        start_date: Yup.number()
+          .moreThan(0, 'Playoff Start Date is required')
+          .required('Playoff Start Date is required'),
+        end_date: Yup.number()
+          .moreThan(0, 'Playoff End Date is required')
+          .required('Playoff End Date is required'),
+      }),
+    }),
+    teams: Yup.number().when('is_enabled', {
+      is: true,
+      then: Yup.number()
+        .moreThan(1, 'Teams needs to be greater than 1')
+        .required('Teams is required'),
+    }),
+    is_valid: Yup.boolean().when('is_enabled', {
+      is: true,
+      then: Yup.boolean()
+        .required('Playoff settings are Invalid')
+        .oneOf([true], 'Playoff settings are Invalid'),
     }),
   }),
 })
@@ -136,8 +161,8 @@ export const activitySchema = Yup.object().shape({
 export const activityCreateWizardSchema = [
   activityDetailsSchema,
   activityGameSchema,
-  activityScheduleSchema,
   activityTeamSchema,
+  activityScheduleSchema,
   activityEntryFeeSchema,
   activityLocationSchema,
   activityLocationSchema,

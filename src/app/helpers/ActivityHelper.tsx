@@ -160,11 +160,14 @@ export const activityMatchPlayOnChange = (
   setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>
 ) => {
   if (e) {
-    let startDate = dayjs(new Date(e[0]).setHours(0, 0)).utc(true).tz('utc').unix()
-    let endDate = dayjs(new Date(e[1]).setHours(23, 59)).utc(true).tz('utc').unix()
 
-    updateData(
-      {
+    let updateObject;
+
+    if (activityForm?.type_id === 1 && activityForm?.playoffs?.is_enabled) {
+      let startDate = dayjs(new Date(e[0]).setHours(0, 0)).utc(true).tz('utc').unix()
+      let endDate = dayjs(new Date(e[1]).setHours(23, 59)).utc(true).tz('utc').unix()
+
+      updateObject = {
         schedule: {
           ...activityForm?.schedule,
           ...{
@@ -174,12 +177,66 @@ export const activityMatchPlayOnChange = (
             },
           },
         },
-      },
-      setActivityForm,
-      activityForm
-    )
+        playoffs: {
+          ...activityForm?.playoffs,
+          ...{
+            playoffs_dates: {
+              ...activityForm?.playoffs?.playoffs_dates,
+              ...{start_date: 0, end_date: 0},
+            },
+            teams: 2,
+          },
+        },
+      }
 
-    setMatchPlayValue(e)
+      setMatchPlayValue(e)
+    } else {
+      let startDate = dayjs(new Date(e[0]).setHours(0, 0)).utc(true).tz('utc')
+      let endDate = dayjs(new Date(e[1]).setHours(23, 59)).utc(true).tz('utc')
+
+      console.log(endDate)
+      console.log(startDate)
+
+      console.log(endDate.unix())
+      console.log(startDate.unix())
+
+      console.log()
+
+      let daysOfRange = Math.ceil(endDate.diff(startDate, 'days', true));
+      let daysNeeded = Math.ceil(Math.log2(activityForm?.team?.max!))
+
+      if(daysNeeded <= daysOfRange) {
+        updateObject = {
+          schedule: {
+            ...activityForm?.schedule,
+            ...{
+              matchplay_dates: {
+                ...activityForm?.schedule.matchplay_dates,
+                ...{start_date: startDate.unix(), end_date: endDate.unix()},
+              },
+            },
+          },
+        }
+
+        setMatchPlayValue(e)
+      } else {
+        updateObject = {
+          schedule: {
+            ...activityForm?.schedule,
+            ...{
+              matchplay_dates: {
+                ...activityForm?.schedule.matchplay_dates,
+                ...{start_date: 0, end_date: 0},
+              },
+            },
+          },
+        }
+        setMatchPlayValue(null)
+      }
+    }
+
+    updateData(updateObject, setActivityForm, activityForm)
+
   }
 }
 

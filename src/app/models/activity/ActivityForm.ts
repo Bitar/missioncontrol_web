@@ -26,11 +26,13 @@ export type ActivityForm = {
 }
 
 export type ActivityPlayoff = {
+  is_enabled: boolean
   playoffs_dates: {
     start_date: number
     end_date: number
   }
   teams: number
+  is_valid?: boolean
 }
 
 export type ActivityFormSchedule = {
@@ -76,28 +78,27 @@ export const initialActivityForm = (activityForm?: ActivityForm) => {
     rounds: activityForm?.rounds || '',
     is_cross_play: activityForm?.is_cross_play || false,
     platform_ids: activityForm?.platform_ids || [],
+    playoffs: {
+      is_enabled: false,
+      teams: 2,
+      playoffs_dates: {
+        start_date: activityForm?.playoffs?.playoffs_dates?.start_date || 0,
+        end_date: activityForm?.playoffs?.playoffs_dates?.end_date || 0,
+      },
+      is_valid: false,
+    },
     schedule: {
       registration_dates: {
-        start_date:
-          activityForm?.schedule.registration_dates.start_date ||
-          Math.trunc(new Date().getTime() / 1000),
-        end_date:
-          activityForm?.schedule.registration_dates.end_date ||
-          Math.trunc(new Date().getTime() / 1000),
+        start_date: activityForm?.schedule.registration_dates.start_date || 0,
+        end_date: activityForm?.schedule.registration_dates.end_date || 0,
       },
       matchplay_dates: {
-        start_date:
-          activityForm?.schedule.matchplay_dates.start_date ||
-          Math.trunc(addOneDay(new Date()).getTime() / 1000),
-        end_date:
-          activityForm?.schedule.matchplay_dates.end_date ||
-          Math.trunc(addOneDay(new Date()).getTime() / 1000),
+        start_date: activityForm?.schedule.matchplay_dates.start_date || 0,
+        end_date: activityForm?.schedule.matchplay_dates.end_date || 0,
       },
       settings: {
         frequency: activityForm?.schedule.settings.frequency || '',
-        time:
-          activityForm?.schedule.settings.time ||
-          Math.trunc(defaultTime(new Date()).getTime() / 1000),
+        time: activityForm?.schedule.settings.time || 0,
         timezone: activityForm?.schedule.settings.timezone || '',
         day: activityForm?.schedule.settings.day || '',
       },

@@ -131,13 +131,13 @@ export const ACTIVITY_CREATE_STEPPER_NAV = [
     has_next: true,
   },
   {
-    title: 'Schedule',
-    icon: 'fa-duotone fa-calendar-range',
+    title: 'Team',
+    icon: 'fa-duotone fa-people-group',
     has_next: true,
   },
   {
-    title: 'Team',
-    icon: 'fa-duotone fa-people-group',
+    title: 'Schedule',
+    icon: 'fa-duotone fa-calendar-range',
     has_next: true,
   },
   {

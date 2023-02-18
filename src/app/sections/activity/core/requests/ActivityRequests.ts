@@ -95,14 +95,8 @@ export const sendActivityChat = (id: any, formData: FormData): Promise<ChatMessa
     .then((response: Response<ChatMessage>) => response.data)
 }
 
-// export {
-//   getActivities,
-//   createActivity,
-//   updateActivity,
-//   getActivityChat,
-//   getActivityById,
-//   sendActivityChat,
-//   getActivityTeams,
-//   getActivityStandings,
-//   createActivityAnnouncement
-// };
+export const validateCreatePlayoffs = (formData: FormData) => {
+  let url = `${ACTIVITIES_URL}/validate-playoffs`
+
+  return axios.post(url, formData)
+}
