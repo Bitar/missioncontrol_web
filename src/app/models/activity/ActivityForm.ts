@@ -79,8 +79,8 @@ export const initialActivityForm = (activityForm?: ActivityForm) => {
     is_cross_play: activityForm?.is_cross_play || false,
     platform_ids: activityForm?.platform_ids || [],
     playoffs: {
-      is_enabled: false,
-      teams: 2,
+      is_enabled: !!activityForm?.playoffs?.playoffs_dates?.start_date,
+      teams: activityForm?.playoffs?.teams || 2,
       playoffs_dates: {
         start_date: activityForm?.playoffs?.playoffs_dates?.start_date || 0,
         end_date: activityForm?.playoffs?.playoffs_dates?.end_date || 0,
@@ -163,6 +163,15 @@ export const initialActivityFormByActivity = (activity?: Activity) => {
     location: {
       type: activity?.location?.type || 1,
       locate: activity?.location?.locate || '',
+    },
+    playoffs: {
+      is_enabled: !!activity?.playoffs?.playoffs_dates?.start_date,
+      teams: activity?.playoffs?.teams || 2,
+      playoffs_dates: {
+        start_date: activity?.playoffs?.playoffs_dates?.start_date || 0,
+        end_date: activity?.playoffs?.playoffs_dates?.end_date || 0,
+      },
+      is_valid: !!activity?.playoffs?.playoffs_dates?.start_date,
     },
   }
 }
