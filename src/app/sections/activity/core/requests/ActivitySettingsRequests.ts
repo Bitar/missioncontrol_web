@@ -31,6 +31,14 @@ export const updateSchedule = (id: any, formData: FormData): Promise<Activity | 
     .then((response: AxiosResponse<Response<Activity>>) => response.data)
     .then((response: Response<Activity>) => response.data)
 }
+export const updatePlayoffs = (id: any, formData: FormData): Promise<Activity | undefined> => {
+  let url = `${ACTIVITIES_SETTINGS_URL}/${id}/settings/playoffs`
+
+  return axios
+    .post(url, formData)
+    .then((response: AxiosResponse<Response<Activity>>) => response.data)
+    .then((response: Response<Activity>) => response.data)
+}
 
 export const updateTeam = (id: any, formData: FormData): Promise<Activity | undefined> => {
   let url = `${ACTIVITIES_SETTINGS_URL}/${id}/settings/team`

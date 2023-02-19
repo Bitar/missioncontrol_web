@@ -21,7 +21,9 @@ import {
 } from "../../../../helpers/ActivityHelper";
 import { updateSchedule } from "../../core/requests/ActivitySettingsRequests";
 import moment from "moment";
-import { PlayoffDetail } from "../activity-create-steps/PlayoffDetail";
+import { PlayoffDetail } from "./PlayoffDetail";
+import { Badge } from "react-bootstrap";
+import dayjs from "dayjs";
 
 const { before } = DateRangePicker;
 
@@ -32,6 +34,7 @@ export const ScheduleDetail = () => {
   const [matchPlayValue, setMatchPlayValue] = useState<DateRange | null>();
   const [matchPlayDisabledDate, setMatchPlayDisabledDate] = useState<Date>(new Date());
   const [playoffDisabledDate, setPlayoffDisabledDate] = useState<Date>(new Date());
+  const [showErrors, setShowErrors] = useState<boolean>(false);
   const [timeValue, setTimeValue] = useState<Date | null>(defaultTime(new Date()));
   const [timeZones, setTimeZones] = useState<TimeZone[]>();
 
@@ -105,6 +108,15 @@ export const ScheduleDetail = () => {
   };
 
   const handleMatchPlayChange = (e: any) => {
+    if (activityForm?.type_id === 2 && activityForm?.team?.max) {
+      let startDate = dayjs(new Date(e[0]).setHours(0, 0)).utc(true).tz("utc");
+      let endDate = dayjs(new Date(e[1]).setHours(23, 59)).utc(true).tz("utc");
+
+      let daysOfRange = Math.ceil(endDate.diff(startDate, "days", true));
+      let daysNeeded = Math.ceil(Math.log2(activityForm?.team?.max));
+
+      daysNeeded <= daysOfRange ? setShowErrors(false) : setShowErrors(true);
+    }
     activityMatchPlayOnChange(e, activityForm, setActivityForm, setMatchPlayValue);
   };
 
@@ -158,6 +170,27 @@ export const ScheduleDetail = () => {
                         onChange={handleMatchPlayChange}
                         disabledDate={before && before(matchPlayDisabledDate)}
                       />
+                      <div className="text-danger mt-2">
+                        {showErrors && "Invalid Playoff dates"}
+                      </div>
+                      {activityForm?.type_id === 2 && (
+                        <div className="form-text">
+                          {activityForm?.team?.max ? (
+                            <>
+                              <Badge bg="warning" text="dark">
+                                {" "}
+                                You need at least {Math.ceil(Math.log2(activityForm?.team?.max))} days
+                                of playoffs{" "}
+                              </Badge>{" "}
+                              Number of teams needs to be between "Min" & "Max" teams set in the previous
+                              section.
+                            </>
+                          ) : (
+                            <></>
+                          )}
+
+                        </div>
+                      )}
                       <div className="text-danger mt-2">
                         <ErrorMessage name="schedule.matchplay_dates.start_date" />
                       </div>
@@ -325,33 +358,13 @@ export const ScheduleDetail = () => {
                   </div>
                 </div>
               </KTCardBody>
-              <FormAction text={"Update Activity"} isSubmitting={isSubmitting} />
+              <FormAction text={"Update"} isSubmitting={isSubmitting} />
             </Form>
           )}
         </Formik>
       </KTCard>
 
-      {activityForm?.type_id === 1 &&
-        <KTCard border={true} className={'mt-8'}>
-          <KTCardHeader text={"Playoffs"} bg="mc-primary" text_color="white" />
-
-          <Formik
-            validationSchema={activityDetailsSchema}
-            initialValues={activityForm!}
-            onSubmit={handleSubmit}
-            enableReinitialize
-          >
-            {({ isSubmitting }) => (
-              <Form onChange={handleOnChange} className="form" autoComplete="off">
-                <KTCardBody className="py-4">
-                  <PlayoffDetail playoffDisabledDate={playoffDisabledDate} />
-                </KTCardBody>
-                <FormAction text={"Update Activity"} isSubmitting={isSubmitting} />
-              </Form>
-            )}
-          </Formik>
-        </KTCard>
-      }
+      {activityForm?.type_id === 1 && <PlayoffDetail playoffDisabledDate={playoffDisabledDate} />}
     </>
   );
 };

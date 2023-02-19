@@ -19,6 +19,13 @@ const ActivityDetails = () => {
 
       <div className='card-body p-9'>
         <div className='row mb-5'>
+          <label className='col-lg-4 fw-bold text-muted'>Activity Type</label>
+
+          <div className='col-lg-8'>
+            <span className='fw-bolder fs-6 text-dark'>{activity?.type?.name} {activity?.playoffs?.is_enabled && ' & Playoffs'}</span>
+          </div>
+        </div>
+        <div className='row mb-5'>
           <label className='col-lg-4 fw-bolder text-dark fs-5'>Game Details</label>
         </div>
         <div className='row mb-5'>

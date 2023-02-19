@@ -23,11 +23,11 @@ const { before } = DateRangePicker;
 
 export const ScheduleDetailForm = () => {
   const { activityForm, setActivityForm } = useActivityForm();
-
   const [registrationValue, setRegistrationValue] = useState<DateRange | null>();
   const [matchPlayValue, setMatchPlayValue] = useState<DateRange | null>();
   const [matchPlayDisabledDate, setMatchPlayDisabledDate] = useState<Date>(new Date());
   const [playoffDisabledDate, setPlayoffDisabledDate] = useState<Date>(new Date());
+  const [showErrors, setShowErrors] = useState<boolean>(false);
   const [timeValue, setTimeValue] = useState<Date | null>();
   const [timeZones, setTimeZones] = useState<TimeZone[]>();
 
@@ -49,6 +49,16 @@ export const ScheduleDetailForm = () => {
   };
 
   const handleMatchPlayChange = (e: any) => {
+    if (activityForm?.type_id === 2 && activityForm?.team?.max) {
+      let startDate = dayjs(new Date(e[0]).setHours(0, 0)).utc(true).tz("utc");
+      let endDate = dayjs(new Date(e[1]).setHours(23, 59)).utc(true).tz("utc");
+
+      let daysOfRange = Math.ceil(endDate.diff(startDate, "days", true));
+      let daysNeeded = Math.ceil(Math.log2(activityForm?.team?.max));
+
+      daysNeeded <= daysOfRange ? setShowErrors(false) : setShowErrors(true);
+    }
+
     activityMatchPlayOnChange(e, activityForm, setActivityForm, setMatchPlayValue);
   };
 
@@ -102,6 +112,9 @@ export const ScheduleDetailForm = () => {
               onChange={handleMatchPlayChange}
               disabledDate={before && before(matchPlayDisabledDate)}
             />
+            <div className="text-danger mt-2">
+              {showErrors && "Invalid Playoff dates"}
+            </div>
             {activityForm?.type_id === 2 && (
               <div className="form-text">
                 {activityForm?.team?.max ? (
@@ -286,9 +299,11 @@ export const ScheduleDetailForm = () => {
           </div>
         </div>
 
-        <div className="separator mt-5 opacity-75"></div>
 
-        {activityForm?.type_id === 1 && <PlayoffDetail playoffDisabledDate={playoffDisabledDate} />}
+        {activityForm?.type_id === 1 && (<>
+          <div className="separator mt-5 opacity-75"></div>
+          <PlayoffDetail playoffDisabledDate={playoffDisabledDate} />
+        </>)}
       </div>
     </>
   );

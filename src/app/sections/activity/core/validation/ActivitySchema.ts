@@ -41,7 +41,7 @@ export const activityScheduleSchema = Yup.object().shape({
     }),
   }),
   playoffs: Yup.object().shape({
-    is_enabled: Yup.boolean().required(),
+    is_enabled: Yup.boolean(),
     playoffs_dates: Yup.object().when('is_enabled', {
       is: true,
       then: Yup.object().shape({
