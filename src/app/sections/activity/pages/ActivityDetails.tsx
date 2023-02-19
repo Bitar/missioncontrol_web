@@ -103,6 +103,24 @@ const ActivityDetails = () => {
           </div>
         )}
 
+        {activity?.playoffs?.is_enabled && (
+          <>
+            <div className='row mb-5'>
+              <label className='col-lg-4 fw-bolder text-dark fs-5'>Playoffs</label>
+            </div>
+
+            <div className='row mb-5'>
+              <label className='col-lg-4 fw-bold text-muted'>Teams</label>
+
+              <div className='col-lg-8 d-flex align-items-center'>
+              <span className='fw-bolder fs-6 me-2'>
+                {activity?.playoffs?.teams}
+              </span>
+              </div>
+            </div>
+          </>
+        )}
+
         {activity?.settings?.day && (
           <div className='row mb-5'>
             <label className='col-lg-4 fw-bold text-muted'>Day</label>
