@@ -1,7 +1,8 @@
 import * as Yup from 'yup'
 
 export const activityDetailsSchema = Yup.object().shape({
-  title: Yup.string().required('Activity title is required'),
+  type_id: Yup.string().required('Type is required'),
+  title: Yup.string().required('Title is required'),
 })
 
 export const activityGameSchema = Yup.object().shape({
@@ -10,6 +11,35 @@ export const activityGameSchema = Yup.object().shape({
   rounds: Yup.string().required('Rounds is required'),
   is_cross_play: Yup.string().required('Is Cross play enabled?'),
   platform_ids: Yup.array().min(1, 'Platforms is required').required('Platforms is required'),
+})
+
+export const activityPlayoffSchema = Yup.object().shape({
+  playoff: Yup.object().shape({
+    is_enabled: Yup.boolean(),
+    playoff_dates: Yup.object().when('is_enabled', {
+      is: true,
+      then: Yup.object().shape({
+        start_date: Yup.number()
+          .moreThan(0, 'Playoff Start Date is required')
+          .required('Playoff Start Date is required'),
+        end_date: Yup.number()
+          .moreThan(0, 'Playoff End Date is required')
+          .required('Playoff End Date is required'),
+      }),
+    }),
+    teams: Yup.number().when('is_enabled', {
+      is: true,
+      then: Yup.number()
+        .moreThan(1, 'Teams needs to be greater than 1')
+        .required('Teams is required'),
+    }),
+    is_valid: Yup.boolean().when('is_enabled', {
+      is: true,
+      then: Yup.boolean()
+        .required('Playoff settings are Invalid')
+        .oneOf([true], 'Playoff settings are Invalid'),
+    }),
+  }),
 })
 
 export const activityScheduleSchema = Yup.object().shape({
@@ -40,9 +70,9 @@ export const activityScheduleSchema = Yup.object().shape({
       timezone: Yup.string().required('Timezone is required'),
     }),
   }),
-  playoffs: Yup.object().shape({
+  playoff: Yup.object().shape({
     is_enabled: Yup.boolean(),
-    playoffs_dates: Yup.object().when('is_enabled', {
+    playoff_dates: Yup.object().when('is_enabled', {
       is: true,
       then: Yup.object().shape({
         start_date: Yup.number()

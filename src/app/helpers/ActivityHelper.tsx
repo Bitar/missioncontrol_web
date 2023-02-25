@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import utc from "dayjs/plugin/utc";
 import tz from "dayjs/plugin/timezone";
 import moment from "moment/moment";
@@ -11,7 +11,7 @@ import { DateRange } from "rsuite/esm/DateRangePicker/types";
 dayjs.extend(utc);
 dayjs.extend(tz);
 
-const formatActivityStatus = (statusId: number) => {
+export const formatActivityStatus = (statusId: number) => {
   let color: string;
   let status: string;
 
@@ -34,7 +34,7 @@ const formatActivityStatus = (statusId: number) => {
     status = "Upcoming";
     color = "secondary";
   } else if (statusId === 9) {
-    status = "Generating Playoffs";
+    status = "Generating Playoff";
     color = "info";
   } else {
     status = "Closed";
@@ -44,7 +44,7 @@ const formatActivityStatus = (statusId: number) => {
   return { status, color };
 };
 
-const formatMatchStatus = (statusId: number) => {
+export const formatMatchStatus = (statusId: number) => {
   let color: string;
   let status: string;
 
@@ -73,20 +73,6 @@ const formatMatchStatus = (statusId: number) => {
 
   return { status, color };
 };
-const formatDates = (dates: any, tz: string) => {
-  const startDate = dayjs(new Date(dates?.start_date * 1000))
-    .utc(false)
-    .tz(tz, true)
-    .format("DD MMM YY");
-  const endDate = dayjs(new Date(dates?.end_date * 1000))
-    .subtract(1, "second")
-    .utc(false)
-    .tz(tz, true)
-    .format("DD MMM YY");
-
-  return { startDate, endDate };
-};
-
 export const createDateFrom = (timestamp: number) => {
   let UTCRegStartDate = moment(timestamp * 1000).utc(false);
   return moment()
@@ -153,6 +139,23 @@ export const activityRegistrationOnChange = (
   }
 };
 
+export const updateActivityMatchPlayDates = (activityForm: ActivityForm | undefined, setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>) => {
+  if (
+    activityForm?.schedule?.matchplay_dates?.start_date &&
+    activityForm?.schedule?.matchplay_dates?.end_date &&
+    activityForm?.schedule?.matchplay_dates?.start_date > 0 &&
+    activityForm?.schedule?.matchplay_dates?.end_date > 0
+  ) {
+    let playoffStartDate = createDateFrom(
+      activityForm?.schedule?.matchplay_dates?.start_date
+    ).toDate();
+    let playEndDate = createDateFrom(activityForm?.schedule?.matchplay_dates?.end_date).toDate();
+    setMatchPlayValue([playoffStartDate, playEndDate]);
+  } else {
+    setMatchPlayValue(null);
+  }
+};
+
 export const activityMatchPlayOnChange = (
   e: any,
   activityForm: ActivityForm | undefined,
@@ -160,7 +163,6 @@ export const activityMatchPlayOnChange = (
   setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>
 ) => {
   if (e) {
-
     let updateObject;
 
     if (activityForm?.type_id === 1) {
@@ -179,7 +181,7 @@ export const activityMatchPlayOnChange = (
         }
       };
 
-      if (activityForm?.playoffs?.is_enabled) {
+      if (activityForm?.playoff?.is_enabled) {
         updateObject = {
           schedule: {
             ...activityForm?.schedule,
@@ -190,11 +192,11 @@ export const activityMatchPlayOnChange = (
               }
             }
           },
-          playoffs: {
-            ...activityForm?.playoffs,
+          playoff: {
+            ...activityForm?.playoff,
             ...{
-              playoffs_dates: {
-                ...activityForm?.playoffs?.playoffs_dates,
+              playoff_dates: {
+                ...activityForm?.playoff?.playoff_dates,
                 ...{ start_date: 0, end_date: 0 }
               },
               teams: 2
@@ -203,7 +205,7 @@ export const activityMatchPlayOnChange = (
         };
       }
 
-      setMatchPlayValue(e);
+      // setMatchPlayValue(e);
     } else {
       let startDate = dayjs(new Date(e[0]).setHours(0, 0)).utc(true).tz("utc");
       let endDate = dayjs(new Date(e[1]).setHours(23, 59)).utc(true).tz("utc");
@@ -224,7 +226,7 @@ export const activityMatchPlayOnChange = (
           }
         };
 
-        setMatchPlayValue(e);
+        // setMatchPlayValue(e);
       } else {
         updateObject = {
           schedule: {
@@ -237,13 +239,37 @@ export const activityMatchPlayOnChange = (
             }
           }
         };
-        setMatchPlayValue(null);
+        // setMatchPlayValue(null);
       }
     }
 
     updateData(updateObject, setActivityForm, activityForm);
-
   }
 };
 
-export { formatActivityStatus, formatDates, formatMatchStatus };
+export const isValidTournament = (e: any, activityForm: ActivityForm | undefined, setShowErrors: Dispatch<SetStateAction<boolean>>) => {
+  if (activityForm?.type_id === 2 && activityForm?.team?.max) {
+    let startDate = dayjs(new Date(e[0]).setHours(0, 0)).utc(true).tz("utc");
+    let endDate = dayjs(new Date(e[1]).setHours(23, 59)).utc(true).tz("utc");
+
+    let daysOfRange = Math.ceil(endDate.diff(startDate, "days", true));
+    let daysNeeded = Math.ceil(Math.log2(activityForm?.team?.max));
+
+    daysNeeded <= daysOfRange ? setShowErrors(false) : setShowErrors(true);
+  }
+};
+
+export const countDaysOfWeek = (startDate: Dayjs, endDate: Dayjs, dayOfWeek: any): number => {
+  let current = startDate;
+  let count = 0;
+
+  while (current.isBefore(endDate)) {
+    console.log(current.day())
+    if (current.day() === dayOfWeek) {
+      count++;
+    }
+    current = current.add(1, "day");
+  }
+
+  return count;
+}

@@ -8,7 +8,7 @@ import {
   initialCommunityFormTypeByCommunity,
 } from '../../models/community/Community'
 import {GeneralDetails} from '../community/partials/community-create-steps/GeneralDetails'
-import {KTCard, KTCardBody, KTCardHeader, KTSVG} from '../../helpers/components'
+import {KTCard, KTCardBody, KTCardFooter, KTCardHeader, KTSVG} from '../../helpers/components'
 import {ContactDetails} from '../community/partials/community-create-steps/ContactDetails'
 import {AddressDetails} from '../community/partials/community-create-steps/AddressDetails'
 import {AccessDetail} from '../community/partials/community-create-steps/AccessDetail'
@@ -311,24 +311,32 @@ const AdminCommunityCreate = () => {
                   <div data-kt-stepper-element='content'>
                     <ReviewDetails />
                   </div>
-
-                  <div className='d-flex flex-stack pt-15'>
-                    <div className='mr-2'>
-                      <button
-                        onClick={prevStep}
-                        type='button'
-                        className='btn btn-lg btn-light-mc-secondary me-3'
-                        data-kt-stepper-action='previous'
-                      >
-                        Back
-                      </button>
-                    </div>
-                  </div>
                 </KTCardBody>
-                <FormAction
-                  text={isSubmitting ? 'Submitting' : isSubmitButton ? 'Submit' : 'Continue'}
-                  isSubmitting={isSubmitting}
-                />
+                <KTCardFooter className='d-flex justify-content-end py-6 px-9'>
+                  <button
+                    onClick={prevStep}
+                    type='button'
+                    className='btn btn-sm btn-light-mc-secondary me-3'
+                    data-kt-stepper-action='previous'
+                  >
+                    Back
+                  </button>
+
+                  <button
+                    type='submit'
+                    className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'
+                    disabled={isSubmitting}
+                  >
+                    <span className='indicator-label'>
+                      {isSubmitting ? 'Submitting' : isSubmitButton ? 'Submit' : 'Continue'}
+                    </span>
+                    {isSubmitting && (
+                      <span className='indicator-progress' style={{display: 'inline-block'}}>
+                        <span className='spinner-border spinner-border-sm align-middle ms-2' />
+                      </span>
+                    )}
+                  </button>
+                </KTCardFooter>
               </Form>
             )}
           </Formik>

@@ -1,4 +1,4 @@
-import {ErrorMessage, Field} from 'formik'
+import {ErrorMessage, Field, useFormikContext} from 'formik'
 import React, {FC, useEffect, useState} from 'react'
 import {Community} from '../../../../models/community/Community'
 import {useActivityForm} from '../../core/contexts/ActivityFormContext'
@@ -15,6 +15,7 @@ const GeneralDetail: FC = () => {
   const {currentUser} = useAuth()
   const [communities, setCommunities] = useState<Community[]>()
   const [activityTypes, setActivityTypes] = useState<ActivityType[]>()
+  const {setFieldValue} = useFormikContext()
 
   useEffect(() => {
     if (currentUser && !isCommunityAdmin(currentUser)) {
@@ -31,20 +32,22 @@ const GeneralDetail: FC = () => {
   return (
     <div className='d-flex flex-column pt-5 w-100'>
       <div className='row mb-6'>
-        <label className='col-lg-4 col-form-label fw-bold fs-6'>Type</label>
+        <label className='col-lg-4 col-form-label fw-bold required fs-6'>Type</label>
         <div className='col-lg-8 fv-row'>
           <Select
             name='type_id'
             placeholder={'What type?'}
             getOptionLabel={(activityType) => activityType?.name}
             getOptionValue={(activityType) => activityType?.id?.toString() || ''}
+            defaultValue={activityTypes?.find((e) => e?.id === 1)}
             options={activityTypes}
             onChange={(e) => {
+              setFieldValue('type_id', e?.id?.toString())
               updateData({type_id: e?.id || ''}, setActivityForm, activityForm)
             }}
           />
           <div className='text-danger mt-2'>
-            <ErrorMessage name='rounds' />
+            <ErrorMessage name='type_id' />
           </div>
         </div>
       </div>
@@ -86,6 +89,7 @@ const GeneralDetail: FC = () => {
           <label className='col-lg-4 col-form-label required fw-bold fs-6'>Community</label>
           <div className='col-lg-8 fv-row'>
             <Select
+              required={true}
               name='community_id'
               placeholder={'Choose a Community'}
               options={communities}

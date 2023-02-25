@@ -17,13 +17,14 @@ import { getTimeZones } from "../../../misc/core/_requests";
 import {
   activityMatchPlayOnChange,
   activityRegistrationOnChange,
-  createDateFrom
+  createDateFrom,
+  isValidTournament
 } from "../../../../helpers/ActivityHelper";
 import { updateSchedule } from "../../core/requests/ActivitySettingsRequests";
 import moment from "moment";
 import { PlayoffDetail } from "./PlayoffDetail";
 import { Badge } from "react-bootstrap";
-import dayjs from "dayjs";
+import { handleDayChange, handleFrequencyChange } from "../../../../helpers/PlayoffHelper";
 
 const { before } = DateRangePicker;
 
@@ -93,7 +94,7 @@ export const ScheduleDetail = () => {
       });
   };
 
-  const handleOnChange = async () => {
+  const handleOnChange = (e: any) => {
   };
 
   const handleRegistrationChange = (e: any) => {
@@ -108,16 +109,22 @@ export const ScheduleDetail = () => {
   };
 
   const handleMatchPlayChange = (e: any) => {
-    if (activityForm?.type_id === 2 && activityForm?.team?.max) {
-      let startDate = dayjs(new Date(e[0]).setHours(0, 0)).utc(true).tz("utc");
-      let endDate = dayjs(new Date(e[1]).setHours(23, 59)).utc(true).tz("utc");
-
-      let daysOfRange = Math.ceil(endDate.diff(startDate, "days", true));
-      let daysNeeded = Math.ceil(Math.log2(activityForm?.team?.max));
-
-      daysNeeded <= daysOfRange ? setShowErrors(false) : setShowErrors(true);
-    }
+    isValidTournament(e, activityForm, setShowErrors);
     activityMatchPlayOnChange(e, activityForm, setActivityForm, setMatchPlayValue);
+  };
+
+  const onFrequencyChange = (e: any) => {
+    handleFrequencyChange(e, activityForm, setActivityForm);
+    if(activityForm?.type_id === 2) {
+      setMatchPlayValue(null)
+    }
+  };
+
+  const onDayChange = (e: any) => {
+    handleDayChange(e, activityForm, setActivityForm);
+    if(activityForm?.type_id === 2) {
+      setMatchPlayValue(null)
+    }
   };
 
   return (
@@ -136,7 +143,9 @@ export const ScheduleDetail = () => {
               <KTCardBody className="py-4">
                 <div className="d-flex flex-column pt-5 w-100">
                   <div className="row mb-6">
-                    <label className="col-lg-4 col-form-label fw-bold fs-6">Registration Dates</label>
+                    <label className="col-lg-4 col-form-label fw-bold fs-6">
+                      Registration Dates
+                    </label>
                     <div className="col-lg-8 fv-row">
                       <DateRangePicker
                         cleanable={false}
@@ -179,16 +188,17 @@ export const ScheduleDetail = () => {
                             <>
                               <Badge bg="warning" text="dark">
                                 {" "}
-                                You need at least {Math.ceil(Math.log2(activityForm?.team?.max))} days
-                                of playoffs{" "}
+                                You need at least {Math.ceil(
+                                Math.log2(activityForm?.team?.max)
+                              )}{" "}
+                                days of playoffs{" "}
                               </Badge>{" "}
-                              Number of teams needs to be between "Min" & "Max" teams set in the previous
-                              section.
+                              Number of teams needs to be between "Min" & "Max" teams set in the
+                              previous section.
                             </>
                           ) : (
                             <></>
                           )}
-
                         </div>
                       )}
                       <div className="text-danger mt-2">
@@ -253,23 +263,7 @@ export const ScheduleDetail = () => {
                           )[0]
                         }
                         options={ACTIVITY_MATCH_FREQUENCY}
-                        onChange={(e) => {
-                          updateData(
-                            {
-                              schedule: {
-                                ...activityForm?.schedule,
-                                ...{
-                                  settings: {
-                                    ...activityForm?.schedule.settings,
-                                    ...{ frequency: e?.value }
-                                  }
-                                }
-                              }
-                            },
-                            setActivityForm,
-                            activityForm
-                          );
-                        }}
+                        onChange={onFrequencyChange}
                       />
                       <div className="text-danger mt-2">
                         <ErrorMessage name="schedule.settings.frequency" />
@@ -293,23 +287,7 @@ export const ScheduleDetail = () => {
                             )[0]
                           }
                           options={ACTIVITY_DAY_OF_WEEK}
-                          onChange={(e) => {
-                            updateData(
-                              {
-                                schedule: {
-                                  ...activityForm?.schedule,
-                                  ...{
-                                    settings: {
-                                      ...activityForm?.schedule.settings,
-                                      ...{ day: e?.value }
-                                    }
-                                  }
-                                }
-                              },
-                              setActivityForm,
-                              activityForm
-                            );
-                          }}
+                          onChange={onDayChange}
                         />
                         <div className="text-danger mt-2">
                           <ErrorMessage name="schedule.settings.day" />

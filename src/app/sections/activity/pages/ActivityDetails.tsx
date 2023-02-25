@@ -22,7 +22,9 @@ const ActivityDetails = () => {
           <label className='col-lg-4 fw-bold text-muted'>Activity Type</label>
 
           <div className='col-lg-8'>
-            <span className='fw-bolder fs-6 text-dark'>{activity?.type?.name} {activity?.playoffs?.is_enabled && ' & Playoffs'}</span>
+            <span className='fw-bolder fs-6 text-dark'>
+              {activity?.type?.name} {activity?.playoff?.is_enabled && ' & Playoffs'}
+            </span>
           </div>
         </div>
         <div className='row mb-5'>
@@ -103,7 +105,7 @@ const ActivityDetails = () => {
           </div>
         )}
 
-        {activity?.playoffs?.is_enabled && (
+        {activity?.playoff?.is_enabled && (
           <>
             <div className='row mb-5'>
               <label className='col-lg-4 fw-bolder text-dark fs-5'>Playoffs</label>
@@ -113,9 +115,7 @@ const ActivityDetails = () => {
               <label className='col-lg-4 fw-bold text-muted'>Teams</label>
 
               <div className='col-lg-8 d-flex align-items-center'>
-              <span className='fw-bolder fs-6 me-2'>
-                {activity?.playoffs?.teams}
-              </span>
+                <span className='fw-bolder fs-6 me-2'>{activity?.playoff?.teams}</span>
               </div>
             </div>
           </>

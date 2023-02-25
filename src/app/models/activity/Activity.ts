@@ -13,7 +13,7 @@ import {GameMode} from '../game/GameMode'
 import {Platform} from '../game/Platform'
 import {Announcement} from '../announcement/Announcements'
 import {Response} from '../../helpers/crud-helper/models'
-import { ActivityPlayoff } from "./ActivityForm";
+import {ActivityPlayoff} from './ActivityForm'
 
 export const activityScheduleSchema = Yup.object().shape({
   schedule: Yup.object().shape({
@@ -75,7 +75,7 @@ export type Activity = {
     total_sessions: number
   }
 
-  playoffs?: ActivityPlayoff
+  playoff?: ActivityPlayoff
 }
 
 export type ActivityQueryResponse = Response<Array<Activity>>

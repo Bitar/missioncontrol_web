@@ -139,20 +139,20 @@ const ActivityInfo: FC = () => {
                       </div>
                     </div>
                   )}
-                  {activity?.playoffs?.is_enabled && activity?.playoffs?.playoffs_dates && (
+                  {activity?.playoff?.is_enabled && activity?.playoff?.playoff_dates && (
                     <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                       <div className='d-flex align-items-center'>
                         <div className='fw-semibold fs-6 text-gray-400'>Playoff Dates</div>
                       </div>
                       <div className='fs-4 fw-bold'>
                         <span>
-                          {createDateFrom(activity?.playoffs?.playoffs_dates.start_date).format(
+                          {createDateFrom(activity?.playoff?.playoff_dates.start_date).format(
                             'DD MMM YY - hh:mm a'
                           )}
                           <span className='mx-1'>
                             <i className='fa fa-arrow-circle-right text-mc-secondary'></i>
                           </span>
-                          {createDateFrom(activity?.playoffs?.playoffs_dates.end_date).format(
+                          {createDateFrom(activity?.playoff?.playoff_dates.end_date).format(
                             'DD MMM YY - hh:mm a'
                           )}
                         </span>

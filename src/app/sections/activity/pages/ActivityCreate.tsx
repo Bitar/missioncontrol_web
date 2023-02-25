@@ -104,11 +104,11 @@ export const ActivityCreate = () => {
         setActivityForm,
         activityForm
       )
-    } else if (targetName === 'playoffs.teams') {
+    } else if (targetName === 'playoff.teams') {
       updateData(
         {
-          playoffs: {
-            ...activityForm?.playoffs,
+          playoff: {
+            ...activityForm?.playoff,
             ...{
               teams: targetValue,
             },
@@ -117,24 +117,24 @@ export const ActivityCreate = () => {
         setActivityForm,
         activityForm
       )
-    } else if (targetName === 'playoffs.is_enabled') {
+    } else if (targetName === 'playoff.is_enabled') {
       let updateObject
-      if (!activityForm?.playoffs?.is_enabled) {
+      if (!activityForm?.playoff?.is_enabled) {
         updateObject = {
-          is_enabled: !activityForm?.playoffs?.is_enabled,
-          playoffs_dates: {
-            ...activityForm?.playoffs?.playoffs_dates,
+          is_enabled: !activityForm?.playoff?.is_enabled,
+          playoff_dates: {
+            ...activityForm?.playoff?.playoff_dates,
             ...{start_date: 0, end_date: 0},
           },
           teams: 2,
         }
       } else {
         updateObject = {
-          is_enabled: !activityForm?.playoffs?.is_enabled,
+          is_enabled: !activityForm?.playoff?.is_enabled,
         }
       }
 
-      updateData({playoffs: updateObject}, setActivityForm, activityForm)
+      updateData({playoff: updateObject}, setActivityForm, activityForm)
     } else {
       updateData({[targetName]: targetValue}, setActivityForm, activityForm)
     }
@@ -150,7 +150,7 @@ export const ActivityCreate = () => {
         toast.success('Activity Created Successfully')
 
         if (response) {
-          navigate(`/activities/${response.id}`)
+          // navigate(`/activities/${response.id}`)
         }
       })
       .catch((error) => {
