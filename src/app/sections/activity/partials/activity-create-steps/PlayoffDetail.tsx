@@ -20,6 +20,13 @@ export const PlayoffDetail = () => {
   const [playoffDisabledDate, setPlayoffDisabledDate] = useState<Date>(new Date());
   const [playoffsRange, setPlayoffsRange] = useState<DateRange | null>();
   const [showErrors, setShowErrors] = useState<boolean>(false);
+  const [teams, setTeams] = useState("");
+
+  useEffect(() => {
+    if (activityForm?.playoff?.teams) {
+      setTeams(activityForm?.playoff?.teams?.toString());
+    }
+  }, [activityForm?.playoff?.teams]);
 
   useEffect(() => {
     updatePlayoffDates(activityForm, setPlayoffsRange);
@@ -80,13 +87,13 @@ export const PlayoffDetail = () => {
             <div className="col-lg-8 fv-row">
               <Field
                 id={"playoff_teams"}
-                value={activityForm?.playoff?.teams}
+                value={teams}
                 type="text"
                 placeholder="Teams count"
                 className="form-control mb-3 mb-lg-0"
                 autoComplete="off"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  handleTeamChange(e, activityForm, setActivityForm);
+                  handleTeamChange(e, activityForm, setActivityForm, setTeams);
                 }}
               />
               <div className="text-danger mt-2">

@@ -44,7 +44,7 @@ export const TeamDetailForm = () => {
   }, [gameMode?.min_players])
 
   useEffect(() => {
-    if(activityForm?.team) {
+    if (activityForm?.team) {
       setMinTeam(activityForm?.team?.min)
       setMaxTeam(activityForm?.team?.max)
     }

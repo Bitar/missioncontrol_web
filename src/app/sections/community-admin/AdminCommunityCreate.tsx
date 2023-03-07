@@ -25,7 +25,6 @@ import {FormErrorAlert} from '../../modules/errors/partials/FormErrorAlert'
 import {useNavigate} from 'react-router-dom'
 import toast from 'react-hot-toast'
 import {useAuth} from '../../modules/auth'
-import {FormAction} from '../../helpers/form/FormAction'
 import {createAdminCommunity} from '../community/core/CommunityRequests'
 
 const AdminCommunityCreate = () => {
@@ -169,7 +168,7 @@ const AdminCommunityCreate = () => {
 
   function createAdminCommunityApi(data: any) {
     createAdminCommunity(data)
-      .then((response) => {
+      .then(() => {
         setIsSubmitting(false)
 
         toast.success('Community created Successfully')

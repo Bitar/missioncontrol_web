@@ -71,7 +71,7 @@ export const activityScheduleSchema = Yup.object().shape({
       }),
       timezone: Yup.string().required('Timezone is required'),
     }),
-  })
+  }),
 })
 
 export const activitySchedulePlayoffSchema = Yup.object().shape({
