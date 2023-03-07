@@ -3,6 +3,7 @@ import * as Yup from 'yup'
 export const activityDetailsSchema = Yup.object().shape({
   type_id: Yup.string().required('Type is required'),
   title: Yup.string().required('Title is required'),
+  description: Yup.string().required('Description is required'),
 })
 
 export const activityGameSchema = Yup.object().shape({
@@ -30,7 +31,8 @@ export const activityPlayoffSchema = Yup.object().shape({
     teams: Yup.number().when('is_enabled', {
       is: true,
       then: Yup.number()
-        .moreThan(1, 'Teams needs to be greater than 1')
+        .typeError('Teams is required')
+        .min(2, 'At least 2 teams are needed')
         .required('Teams is required'),
     }),
     is_valid: Yup.boolean().when('is_enabled', {
@@ -43,6 +45,36 @@ export const activityPlayoffSchema = Yup.object().shape({
 })
 
 export const activityScheduleSchema = Yup.object().shape({
+  schedule: Yup.object().shape({
+    registration_dates: Yup.object().shape({
+      start_date: Yup.number()
+        .moreThan(0, 'Registration Start Date is required')
+        .required('Registration Start Date is required'),
+      end_date: Yup.number()
+        .moreThan(0, 'Registration End Date is required')
+        .required('Registration End Date is required'),
+    }),
+    matchplay_dates: Yup.object().shape({
+      start_date: Yup.number()
+        .moreThan(0, 'GameDay Start Date is required')
+        .required('Match Play Start Date is required'),
+      end_date: Yup.number()
+        .moreThan(0, 'GameDay End Date is required')
+        .required('Match Play End Date is required'),
+    }),
+    settings: Yup.object().shape({
+      frequency: Yup.string().required('Match Frequency is required'),
+      time: Yup.number().moreThan(0, 'Time is required').required('Time is required'),
+      day: Yup.string().when('frequency', {
+        is: '2',
+        then: Yup.string().required('Day required'),
+      }),
+      timezone: Yup.string().required('Timezone is required'),
+    }),
+  })
+})
+
+export const activitySchedulePlayoffSchema = Yup.object().shape({
   schedule: Yup.object().shape({
     registration_dates: Yup.object().shape({
       start_date: Yup.number()
@@ -86,7 +118,8 @@ export const activityScheduleSchema = Yup.object().shape({
     teams: Yup.number().when('is_enabled', {
       is: true,
       then: Yup.number()
-        .moreThan(1, 'Teams needs to be greater than 1')
+        .typeError('Teams is required')
+        .min(2, 'At least 2 teams are needed')
         .required('Teams is required'),
     }),
     is_valid: Yup.boolean().when('is_enabled', {
@@ -192,7 +225,7 @@ export const activityCreateWizardSchema = [
   activityDetailsSchema,
   activityGameSchema,
   activityTeamSchema,
-  activityScheduleSchema,
+  activitySchedulePlayoffSchema,
   activityEntryFeeSchema,
   activityLocationSchema,
   activityLocationSchema,

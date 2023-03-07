@@ -174,3 +174,8 @@
 .rs-picker-default .rs-picker-toggle {
   z-index: auto;
 }
+
+.mc-textarea {
+  resize: none;
+  overflow: hidden;
+}

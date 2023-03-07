@@ -23,8 +23,9 @@ import {
 import { updateSchedule } from "../../core/requests/ActivitySettingsRequests";
 import moment from "moment";
 import { PlayoffDetail } from "./PlayoffDetail";
-import { Badge } from "react-bootstrap";
 import { handleDayChange, handleFrequencyChange } from "../../../../helpers/PlayoffHelper";
+import { TournamentTeamCountText } from "../TournamentTeamCountText";
+import { activityScheduleSchema } from "../../core/validation/ActivitySchema";
 
 const { before } = DateRangePicker;
 
@@ -94,7 +95,7 @@ export const ScheduleDetail = () => {
       });
   };
 
-  const handleOnChange = (e: any) => {
+  const handleOnChange = () => {
   };
 
   const handleRegistrationChange = (e: any) => {
@@ -110,20 +111,20 @@ export const ScheduleDetail = () => {
 
   const handleMatchPlayChange = (e: any) => {
     isValidTournament(e, activityForm, setShowErrors);
-    activityMatchPlayOnChange(e, activityForm, setActivityForm, setMatchPlayValue);
+    activityMatchPlayOnChange(e, activityForm, setActivityForm, setMatchPlayValue, setShowErrors);
   };
 
   const onFrequencyChange = (e: any) => {
     handleFrequencyChange(e, activityForm, setActivityForm);
-    if(activityForm?.type_id === 2) {
-      setMatchPlayValue(null)
+    if (activityForm?.type_id === 2) {
+      setMatchPlayValue(null);
     }
   };
 
   const onDayChange = (e: any) => {
     handleDayChange(e, activityForm, setActivityForm);
-    if(activityForm?.type_id === 2) {
-      setMatchPlayValue(null)
+    if (activityForm?.type_id === 2) {
+      setMatchPlayValue(null);
     }
   };
 
@@ -133,7 +134,7 @@ export const ScheduleDetail = () => {
         <KTCardHeader text={"Schedule"} bg="mc-primary" text_color="white" />
 
         <Formik
-          validationSchema={activityDetailsSchema}
+          validationSchema={activityScheduleSchema}
           initialValues={activityForm!}
           onSubmit={handleSubmit}
           enableReinitialize
@@ -184,21 +185,7 @@ export const ScheduleDetail = () => {
                       </div>
                       {activityForm?.type_id === 2 && (
                         <div className="form-text">
-                          {activityForm?.team?.max ? (
-                            <>
-                              <Badge bg="warning" text="dark">
-                                {" "}
-                                You need at least {Math.ceil(
-                                Math.log2(activityForm?.team?.max)
-                              )}{" "}
-                                days of playoffs{" "}
-                              </Badge>{" "}
-                              Number of teams needs to be between "Min" & "Max" teams set in the
-                              previous section.
-                            </>
-                          ) : (
-                            <></>
-                          )}
+                          <TournamentTeamCountText teamCount={activityForm?.team?.max!} />
                         </div>
                       )}
                       <div className="text-danger mt-2">

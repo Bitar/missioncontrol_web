@@ -13,13 +13,14 @@ import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import {
   activityMatchPlayOnChange,
-  activityRegistrationOnChange, createDateFrom,
-  isValidTournament, updateActivityMatchPlayDates
+  activityRegistrationOnChange,
+  isValidTournament,
+  updateActivityMatchPlayDates
 } from "../../../../helpers/ActivityHelper";
 import moment from "moment/moment";
 import { PlayoffDetail } from "./PlayoffDetail";
-import { Badge } from "react-bootstrap";
-import { handleDayChange, handleFrequencyChange, updatePlayoffDates } from "../../../../helpers/PlayoffHelper";
+import { handleDayChange, handleFrequencyChange } from "../../../../helpers/PlayoffHelper";
+import { TournamentTeamCountText } from "../TournamentTeamCountText";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -31,7 +32,6 @@ export const ScheduleDetailForm = () => {
   const [registrationValue, setRegistrationValue] = useState<DateRange | null>();
   const [matchPlayValue, setMatchPlayValue] = useState<DateRange | null>();
   const [matchPlayDisabledDate, setMatchPlayDisabledDate] = useState<Date>(new Date());
-  const [playoffDisabledDate, setPlayoffDisabledDate] = useState<Date>(new Date());
   const [showErrors, setShowErrors] = useState<boolean>(false);
   const [timeValue, setTimeValue] = useState<Date | null>();
   const [timeZones, setTimeZones] = useState<TimeZone[]>();
@@ -55,39 +55,115 @@ export const ScheduleDetailForm = () => {
 
   const handleMatchPlayChange = (e: any) => {
     isValidTournament(e, activityForm, setShowErrors);
-    activityMatchPlayOnChange(e, activityForm, setActivityForm, setMatchPlayValue);
+    activityMatchPlayOnChange(e, activityForm, setActivityForm, setMatchPlayValue, setShowErrors);
   };
 
   useEffect(() => {
-    if (activityForm?.schedule?.matchplay_dates?.end_date) {
-      let disabledEndDate = new Date(activityForm?.schedule?.matchplay_dates?.end_date * 1000);
-      disabledEndDate.setDate(disabledEndDate.getDate() + 1);
-
-      setPlayoffDisabledDate(disabledEndDate);
-    }
-  }, [activityForm?.schedule?.matchplay_dates?.end_date]);
+    updateData({
+      schedule: {
+        ...activityForm?.schedule,
+        ...{
+          matchplay_dates: {
+            ...activityForm?.schedule.matchplay_dates,
+            ...{ start_date: 0, end_date: 0 }
+          }
+        }
+      }
+    }, setActivityForm, activityForm);
+    setMatchPlayValue(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activityForm?.team?.max]);
 
   useEffect(() => {
-    updateActivityMatchPlayDates(activityForm, setMatchPlayValue)
+    updateData({
+      schedule: {
+        ...activityForm?.schedule, ...{
+          registration_dates: {
+            start_date: 0,
+            end_date: 0
+          },
+          matchplay_dates: {
+            start_date: 0,
+            end_date: 0
+          }
+        }
+      },
+      playoff: {
+        playoff_dates: {
+          start_date: 0,
+          end_date: 0
+        },
+        is_valid: false
+      }
+    }, setActivityForm, activityForm);
+    setRegistrationValue(null);
+    setMatchPlayValue(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activityForm?.type_id]);
+
+  useEffect(() => {
+    updateActivityMatchPlayDates(activityForm, setMatchPlayValue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activityForm?.schedule?.matchplay_dates]);
 
   const onFrequencyChange = (e: any) => {
     handleFrequencyChange(e, activityForm, setActivityForm);
-    if(activityForm?.type_id === 2) {
-      setMatchPlayValue(null)
+    if (activityForm?.type_id === 2) {
+      setMatchPlayValue(null);
     }
   };
 
   const onDayChange = (e: any) => {
     handleDayChange(e, activityForm, setActivityForm);
-    if(activityForm?.type_id === 2) {
-      setMatchPlayValue(null)
+    if (activityForm?.type_id === 2) {
+      setMatchPlayValue(null);
     }
   };
 
   return (
     <div className="d-flex flex-column pt-5 w-100">
+      <div className="row mb-6">
+        <label className="col-lg-4 col-form-label fw-bold fs-6">Match Frequency</label>
+        <div className="col-lg-8 fv-row">
+          <Select
+            placeholder={"Choose a Match frequency"}
+            value={ACTIVITY_MATCH_FREQUENCY.filter(
+              (frequency) => frequency.value === activityForm?.schedule?.settings?.frequency
+            )[0]}
+            options={ACTIVITY_MATCH_FREQUENCY}
+            onChange={onFrequencyChange}
+          />
+          <div className="text-danger mt-2">
+            <ErrorMessage name="schedule.settings.frequency" />
+          </div>
+        </div>
+      </div>
+
+      {activityForm?.schedule?.settings?.frequency === 2 && (
+        <div className="row mb-6">
+          <label className="col-lg-4 col-form-label fw-bold fs-6">Day Of Week</label>
+          <div className="col-lg-8 fv-row">
+            <Select
+              placeholder={"Choose Day of Week"}
+              value={
+                ACTIVITY_DAY_OF_WEEK.filter(
+                  (dayOfWeek) =>
+                    dayOfWeek.value ===
+                    (Number.isInteger(activityForm?.schedule?.settings?.day)
+                      ? activityForm?.schedule?.settings?.day
+                      : parseInt(activityForm?.schedule?.settings?.day + ""))
+                )[0]
+              }
+              options={ACTIVITY_DAY_OF_WEEK}
+              onChange={onDayChange}
+            />
+            <div className="text-danger mt-2">
+              <ErrorMessage name="schedule.settings.day" />
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="row mb-6">
         <label className="col-lg-4 col-form-label fw-bold fs-6">Registration Dates</label>
         <div className="col-lg-8 fv-row">
@@ -129,19 +205,7 @@ export const ScheduleDetailForm = () => {
           <div className="text-danger mt-2">{showErrors && "Invalid Playoff dates"}</div>
           {activityForm?.type_id === 2 && (
             <div className="form-text">
-              {activityForm?.team?.max ? (
-                <>
-                  <Badge bg="warning" text="dark">
-                    {" "}
-                    You need at least {Math.ceil(Math.log2(activityForm?.team?.max))} days of
-                    playoffs{" "}
-                  </Badge>{" "}
-                  Number of teams needs to be between "Min" & "Max" teams set in the previous
-                  section.
-                </>
-              ) : (
-                <></>
-              )}
+              <TournamentTeamCountText teamCount={activityForm?.team?.max!} />
             </div>
           )}
           <div className="text-danger mt-2">
@@ -165,6 +229,7 @@ export const ScheduleDetailForm = () => {
             className="w-100"
             placeholder="Select Time"
             showMeridian={true}
+            placement={"topStart"}
             onChange={(value) => {
               if (value?.getTime()) {
                 let time = moment(value.getTime()).utc(true).unix();
@@ -194,50 +259,6 @@ export const ScheduleDetailForm = () => {
           </div>
         </div>
       </div>
-
-      <div className="row mb-6">
-        <label className="col-lg-4 col-form-label fw-bold fs-6">Match Frequency</label>
-        <div className="col-lg-8 fv-row">
-          <Select
-            placeholder={"Choose a Match frequency"}
-            value={
-              ACTIVITY_MATCH_FREQUENCY.filter(
-                (frequency) => frequency.value === activityForm?.schedule?.settings?.frequency
-              )[0]
-            }
-            options={ACTIVITY_MATCH_FREQUENCY}
-            onChange={onFrequencyChange}
-          />
-          <div className="text-danger mt-2">
-            <ErrorMessage name="schedule.settings.frequency" />
-          </div>
-        </div>
-      </div>
-
-      {activityForm?.schedule?.settings?.frequency === 2 && (
-        <div className="row mb-6">
-          <label className="col-lg-4 col-form-label fw-bold fs-6">Day Of Week</label>
-          <div className="col-lg-8 fv-row">
-            <Select
-              placeholder={"Choose Day of Week"}
-              value={
-                ACTIVITY_DAY_OF_WEEK.filter(
-                  (dayOfWeek) =>
-                    dayOfWeek.value ===
-                    (Number.isInteger(activityForm?.schedule?.settings?.day)
-                      ? activityForm?.schedule?.settings?.day
-                      : parseInt(activityForm?.schedule?.settings?.day + ""))
-                )[0]
-              }
-              options={ACTIVITY_DAY_OF_WEEK}
-              onChange={onDayChange}
-            />
-            <div className="text-danger mt-2">
-              <ErrorMessage name="schedule.settings.day" />
-            </div>
-          </div>
-        </div>
-      )}
 
       <div className="row mb-6">
         <label className="col-lg-4 col-form-label fw-bold fs-6">Timezones</label>
@@ -278,10 +299,11 @@ export const ScheduleDetailForm = () => {
         </div>
       </div>
 
+
       {activityForm?.type_id === 1 && (
         <>
           <div className="separator mt-5 opacity-75"></div>
-          <PlayoffDetail playoffDisabledDate={playoffDisabledDate} />
+          <PlayoffDetail />
         </>
       )}
     </div>

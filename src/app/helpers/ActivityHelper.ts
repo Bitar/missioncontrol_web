@@ -1,4 +1,4 @@
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import tz from "dayjs/plugin/timezone";
 import moment from "moment/moment";
@@ -156,120 +156,200 @@ export const updateActivityMatchPlayDates = (activityForm: ActivityForm | undefi
   }
 };
 
+export const getLeagueUpdateObj = (
+  startDate: Date,
+  endDate: Date,
+  activityForm: ActivityForm | undefined
+) => {
+  let updateObject;
+
+  let startDateTimestamp = Math.floor(startDate.getTime() / 1000)
+  let endDateTimestamp = Math.floor(endDate.getTime() / 1000)
+
+  updateObject = {
+    schedule: {
+      ...activityForm?.schedule,
+      ...{
+        matchplay_dates: {
+          ...activityForm?.schedule.matchplay_dates,
+          ...{ start_date: startDateTimestamp, end_date: endDateTimestamp }
+        }
+      }
+    }
+  };
+
+  if (activityForm?.playoff?.is_enabled) {
+    updateObject = {
+      schedule: {
+        ...activityForm?.schedule,
+        ...{
+          matchplay_dates: {
+            ...activityForm?.schedule.matchplay_dates,
+            ...{ start_date: startDateTimestamp, end_date: endDateTimestamp }
+          }
+        }
+      },
+      playoff: {
+        ...activityForm?.playoff,
+        ...{
+          playoff_dates: {
+            ...activityForm?.playoff?.playoff_dates,
+            ...{ start_date: 0, end_date: 0 }
+          }
+        }
+      }
+    };
+  }
+
+  return updateObject;
+};
+
+export const getDaysNeedRanged = (
+  startDate: Date,
+  endDate: Date,
+  activityForm: ActivityForm | undefined,
+  teamCount: number
+) => {
+  let daysOfRange;
+  let daysNeeded;
+
+  if (activityForm?.schedule?.settings?.frequency === 2 && activityForm?.schedule?.settings?.day) {
+    daysOfRange = countDaysOfWeekJS(startDate, endDate, activityForm?.schedule?.settings?.day);
+    daysNeeded = Math.ceil(Math.log2(teamCount));
+  } else {
+    daysOfRange = Math.ceil(getDaysBetweenDates(startDate, endDate));
+    daysNeeded = Math.ceil(Math.log2(teamCount));
+  }
+
+  return { daysNeeded, daysOfRange };
+};
+
+export const getTournamentUpdateObj = (
+  startDate: Date,
+  endDate: Date,
+  activityForm: ActivityForm | undefined
+) => {
+  let updateObject;
+  let errors = false;
+
+  let { daysNeeded, daysOfRange } = getDaysNeedRanged(startDate, endDate, activityForm, activityForm?.team?.max!);
+
+  let startDateTimestamp = Math.floor(startDate.getTime() / 1000)
+  let endDateTimestamp = Math.floor(endDate.getTime() / 1000)
+
+  if (daysNeeded <= daysOfRange) {
+    updateObject = {
+      schedule: {
+        ...activityForm?.schedule,
+        ...{
+          matchplay_dates: {
+            ...activityForm?.schedule.matchplay_dates,
+            ...{ start_date: startDateTimestamp, end_date: endDateTimestamp }
+          }
+        }
+      }
+    };
+
+    // setShowErrors(false);
+    // setMatchPlayValue(e);
+  } else {
+    updateObject = {
+      schedule: {
+        ...activityForm?.schedule,
+        ...{
+          matchplay_dates: {
+            ...activityForm?.schedule.matchplay_dates,
+            ...{ start_date: 0, end_date: 0 }
+          }
+        }
+      }
+    };
+
+    errors = true;
+    // setMatchPlayValue(null);
+    // setShowErrors(true);
+  }
+
+  return { updateObject, errors };
+};
+
+export function getDaysBetweenDates(startDate: Date, endDate: Date): number {
+  console.log(startDate)
+  console.log(endDate)
+  if (startDate <= endDate) {
+    const oneDayInMilliseconds = 1000 * 60 * 60 * 24; // number of milliseconds in a day
+    const startTime = startDate.getTime();
+    const endTime = endDate.getTime();
+    const timeDiff = endTime - startTime;
+    // divide by number of milliseconds in a day and round down
+    return Math.floor(timeDiff / oneDayInMilliseconds) + 1;
+  }
+
+  return 0;
+}
+
 export const activityMatchPlayOnChange = (
   e: any,
   activityForm: ActivityForm | undefined,
   setActivityForm: Dispatch<SetStateAction<ActivityForm>>,
-  setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>
+  setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
+  setShowErrors: Dispatch<SetStateAction<boolean>>
 ) => {
   if (e) {
-    let updateObject;
+    let startDate = new Date(e[0]);
+    let endDate = new Date(e[1]);
 
     if (activityForm?.type_id === 1) {
-      let startDate = dayjs(new Date(e[0]).setHours(0, 0)).utc(true).tz("utc").unix();
-      let endDate = dayjs(new Date(e[1]).setHours(23, 59)).utc(true).tz("utc").unix();
-
-      updateObject = {
-        schedule: {
-          ...activityForm?.schedule,
-          ...{
-            matchplay_dates: {
-              ...activityForm?.schedule.matchplay_dates,
-              ...{ start_date: startDate, end_date: endDate }
-            }
-          }
-        }
-      };
-
-      if (activityForm?.playoff?.is_enabled) {
-        updateObject = {
-          schedule: {
-            ...activityForm?.schedule,
-            ...{
-              matchplay_dates: {
-                ...activityForm?.schedule.matchplay_dates,
-                ...{ start_date: startDate, end_date: endDate }
-              }
-            }
-          },
-          playoff: {
-            ...activityForm?.playoff,
-            ...{
-              playoff_dates: {
-                ...activityForm?.playoff?.playoff_dates,
-                ...{ start_date: 0, end_date: 0 }
-              },
-              teams: 2
-            }
-          }
-        };
-      }
-
-      // setMatchPlayValue(e);
+      let updateObject = getLeagueUpdateObj(startDate, endDate, activityForm);
+      updateData(updateObject, setActivityForm, activityForm);
     } else {
-      let startDate = dayjs(new Date(e[0]).setHours(0, 0)).utc(true).tz("utc");
-      let endDate = dayjs(new Date(e[1]).setHours(23, 59)).utc(true).tz("utc");
+      let { updateObject, errors } = getTournamentUpdateObj(startDate, endDate, activityForm);
 
-      let daysOfRange = Math.ceil(endDate.diff(startDate, "days", true));
-      let daysNeeded = Math.ceil(Math.log2(activityForm?.team?.max!));
-
-      if (daysNeeded <= daysOfRange) {
-        updateObject = {
-          schedule: {
-            ...activityForm?.schedule,
-            ...{
-              matchplay_dates: {
-                ...activityForm?.schedule.matchplay_dates,
-                ...{ start_date: startDate.unix(), end_date: endDate.unix() }
-              }
-            }
-          }
-        };
-
-        // setMatchPlayValue(e);
+      if (errors) {
+        setMatchPlayValue(e);
       } else {
-        updateObject = {
-          schedule: {
-            ...activityForm?.schedule,
-            ...{
-              matchplay_dates: {
-                ...activityForm?.schedule.matchplay_dates,
-                ...{ start_date: 0, end_date: 0 }
-              }
-            }
-          }
-        };
-        // setMatchPlayValue(null);
+        setMatchPlayValue(null);
       }
-    }
 
-    updateData(updateObject, setActivityForm, activityForm);
+      setShowErrors(errors);
+      updateData(updateObject, setActivityForm, activityForm);
+    }
   }
 };
 
 export const isValidTournament = (e: any, activityForm: ActivityForm | undefined, setShowErrors: Dispatch<SetStateAction<boolean>>) => {
   if (activityForm?.type_id === 2 && activityForm?.team?.max) {
-    let startDate = dayjs(new Date(e[0]).setHours(0, 0)).utc(true).tz("utc");
-    let endDate = dayjs(new Date(e[1]).setHours(23, 59)).utc(true).tz("utc");
+    let startDate = new Date(e[0]);
+    let endDate = new Date(e[1]);
 
-    let daysOfRange = Math.ceil(endDate.diff(startDate, "days", true));
+    let daysOfRange = Math.ceil(getDaysBetweenDates(startDate, endDate));
     let daysNeeded = Math.ceil(Math.log2(activityForm?.team?.max));
 
     daysNeeded <= daysOfRange ? setShowErrors(false) : setShowErrors(true);
   }
 };
 
-export const countDaysOfWeek = (startDate: Dayjs, endDate: Dayjs, dayOfWeek: any): number => {
-  let current = startDate;
+export const countDaysOfWeekJS = (startDate: Date, endDate: Date, dayOfWeek: any): number => {
+  let currentDate = startDate;
   let count = 0;
 
-  while (current.isBefore(endDate)) {
-    console.log(current.day())
-    if (current.day() === dayOfWeek) {
+  // console.log(startDate.getTime())
+  // console.log(endDate)
+  // console.log(currentDate.getTime())
+
+  while (currentDate <= endDate) {
+    // console.log(currentDate)
+    // console.log(currentDate.getTime())
+    // console.log(currentDate.getDay())
+    // console.log(dayOfWeek)
+    // console.log(endDate)
+    // console.log(endDate.getTime())
+    if (currentDate.getDay() === dayOfWeek) {
       count++;
     }
-    current = current.add(1, "day");
+
+    currentDate.setDate(currentDate.getDate() + 1);
   }
 
   return count;
-}
+};

@@ -1,21 +1,40 @@
-import dayjs from "dayjs";
 import { updateData } from "./form/FormHelper";
 import { ActivityForm } from "../models/activity/ActivityForm";
-import { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { DateRange } from "rsuite/esm/DateRangePicker/types";
-import { countDaysOfWeek, createDateFrom } from "./ActivityHelper";
+import { countDaysOfWeekJS, createDateFrom, getDaysBetweenDates } from "./ActivityHelper";
 
 export const onInputMaskChange = ({ nextState }: any, activityForm: ActivityForm | undefined) => {
-  let { value } = nextState;
+  // Get the input value without the formatting characters
+  // const {value} = nextState;
+  // const newValue = nextState.value.replace(/[^\d]/g, '');
 
-  if (activityForm?.team?.max && parseInt(value) > activityForm?.team?.max) {
-    value = activityForm?.team?.max;
+
+  if (activityForm?.team?.max) {
+    const inputValue = nextState.value.replace(/[^\d]/g, "");
+
+    if (/^\d+$/.test(inputValue)) { // Check if input is digits only
+      const numValue = parseInt(inputValue);
+
+      if (!isNaN(numValue) && numValue >= 2 && (activityForm?.team?.max && numValue > activityForm?.team?.max)) {
+        return {
+          ...nextState,
+          value: activityForm?.team?.max
+        };
+      } else {
+        return {
+          ...nextState,
+          value: `2${inputValue.slice(1)}`
+        };
+      }
+    }
+
+    return {
+      ...nextState,
+      inputValue
+    };
   }
 
-  return {
-    ...nextState,
-    value
-  };
 };
 
 export const resetPlayoffDates = (
@@ -54,19 +73,23 @@ export const handlePlayoffsChange = (
   setPlayoffsRange: Dispatch<SetStateAction<DateRange | null | undefined>>
 ) => {
   if (e) {
-    let startDate = dayjs(new Date(e[0]).setHours(0, 0)).utc(true).tz("utc");
-    let endDate = dayjs(new Date(e[1]).setHours(23, 59)).utc(true).tz("utc");
+    let startDate = new Date(e[0].setHours(0, 0, 0, 0));
+    let endDate = new Date(e[1].setHours(23, 59, 59, 59));
 
     if (activityForm?.playoff?.teams) {
       let daysOfRange;
       let daysNeeded;
+
       if (activityForm?.schedule?.settings?.frequency === 2 && activityForm?.schedule?.settings?.day) {
-        daysOfRange = countDaysOfWeek(startDate, endDate, activityForm?.schedule?.settings?.day);
+        daysOfRange = countDaysOfWeekJS(startDate, endDate, activityForm?.schedule?.settings?.day);
         daysNeeded = Math.ceil(Math.log2(activityForm?.playoff?.teams));
       } else {
-        daysOfRange = Math.ceil(endDate.diff(startDate, "days", true));
+        daysOfRange = Math.ceil(getDaysBetweenDates(startDate, endDate));
         daysNeeded = Math.ceil(Math.log2(activityForm?.playoff?.teams));
       }
+
+      let startDateTimestamp = Math.floor(startDate.getTime() / 1000);
+      let endDateTimestamp = Math.floor(endDate.getTime() / 1000);
 
       if (daysNeeded <= daysOfRange) {
         updateData(
@@ -76,7 +99,7 @@ export const handlePlayoffsChange = (
               ...{
                 playoff_dates: {
                   ...activityForm?.playoff?.playoff_dates,
-                  ...{ start_date: startDate.unix(), end_date: endDate.unix() }
+                  ...{ start_date: startDateTimestamp, end_date: endDateTimestamp }
                 }
               },
               is_valid: true
@@ -102,6 +125,7 @@ export const updatePlayoffDates = (activityForm: ActivityForm | undefined, setPl
     activityForm?.playoff?.playoff_dates?.start_date > 0 &&
     activityForm?.playoff?.playoff_dates?.end_date > 0
   ) {
+    console.log("updating playoff dates");
     let playoffStartDate = createDateFrom(
       activityForm?.playoff?.playoff_dates?.start_date
     ).toDate();
@@ -127,7 +151,7 @@ export const handleFrequencyChange = (e: any, activityForm: ActivityForm | undef
       playoff: defaultPlayoff(activityForm).playoff
     }, setActivityForm, activityForm);
   } else {
-    if(activityForm?.type_id === 2) {
+    if (activityForm?.type_id === 2) {
       updateData(
         {
           schedule: {
@@ -199,3 +223,37 @@ export const handleDayChange = (e: any, activityForm: ActivityForm | undefined, 
     );
   }
 };
+
+const updateActivityFormTeams = (teams: number, activityForm: ActivityForm | undefined, setActivityForm: Dispatch<SetStateAction<ActivityForm>>) => {
+  updateData(
+    {
+      playoff: {
+        ...activityForm?.playoff,
+        ...{
+          playoff_dates: {
+            ...activityForm?.playoff?.playoff_dates,
+            ...{ start_date: 0, end_date: 0 }
+          },
+          teams: teams
+        }
+      }
+    },
+    setActivityForm,
+    activityForm
+  );
+};
+
+export const handleTeamChange = (event: React.ChangeEvent<HTMLInputElement>, activityForm: ActivityForm | undefined, setActivityForm: Dispatch<SetStateAction<ActivityForm>>) => {
+  const { value } = event.target;
+  if (/^\d+$/.test(value)) {
+    if (activityForm?.team?.max && parseInt(value) > activityForm?.team?.max) {
+      updateActivityFormTeams(activityForm?.team?.max, activityForm, setActivityForm);
+    } else {
+      updateActivityFormTeams(parseInt(value), activityForm, setActivityForm);
+    }
+  } else {
+    if (value === "") {
+      updateActivityFormTeams(parseInt(value), activityForm, setActivityForm);
+    }
+  }
+}

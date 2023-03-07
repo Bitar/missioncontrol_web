@@ -43,6 +43,13 @@ export const TeamDetailForm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameMode?.min_players])
 
+  useEffect(() => {
+    if(activityForm?.team) {
+      setMinTeam(activityForm?.team?.min)
+      setMaxTeam(activityForm?.team?.max)
+    }
+  }, [activityForm?.team])
+
   const handleMinClick = (direction: string) => {
     let updateObj: {players?: number; min?: number; max?: number} = {
       players: players,

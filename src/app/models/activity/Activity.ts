@@ -15,27 +15,6 @@ import {Announcement} from '../announcement/Announcements'
 import {Response} from '../../helpers/crud-helper/models'
 import {ActivityPlayoff} from './ActivityForm'
 
-export const activityScheduleSchema = Yup.object().shape({
-  schedule: Yup.object().shape({
-    registration_dates: Yup.object().shape({
-      start_date: Yup.string().required('Registration Start Date is required'),
-      end_date: Yup.string().required('Registration End Date is required'),
-    }),
-    matchplay_dates: Yup.object().shape({
-      start_date: Yup.string().required('GameDay Start Date is required'),
-      end_date: Yup.string().required('GameDay End Date is required'),
-    }),
-    settings: Yup.object().shape({
-      frequency: Yup.string().required('Match Frequency is required'),
-      time: Yup.string().required('Time of Day is required'),
-      day: Yup.string().when('schedule.settings.frequency', {
-        is: 2 || '2',
-        then: Yup.string().required('Day required'),
-      }),
-      timezone: Yup.string().required('Timezone is required'),
-    }),
-  }),
-})
 export const activityDetailsSchema = Yup.object().shape({
   title: Yup.string().required('Activity title is required'),
 })
