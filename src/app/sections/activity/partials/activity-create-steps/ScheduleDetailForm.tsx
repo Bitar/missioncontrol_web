@@ -93,6 +93,11 @@ export const ScheduleDetailForm = () => {
   useEffect(() => {
     updateActivityMatchPlayDates(activityForm, setMatchPlayValue)
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activityForm?.schedule?.registration_dates])
+
+  useEffect(() => {
+    updateActivityMatchPlayDates(activityForm, setMatchPlayValue)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activityForm?.schedule?.matchplay_dates])
 
   const onFrequencyChange = (e: any) => {

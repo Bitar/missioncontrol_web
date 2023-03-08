@@ -17,6 +17,7 @@ const { before } = DateRangePicker;
 
 export const PlayoffDetail = () => {
   const { activityForm, setActivityForm } = useActivityForm();
+
   const [playoffDisabledDate, setPlayoffDisabledDate] = useState<Date>(new Date());
   const [playoffsRange, setPlayoffsRange] = useState<DateRange | null>();
   const [showErrors, setShowErrors] = useState<boolean>(false);

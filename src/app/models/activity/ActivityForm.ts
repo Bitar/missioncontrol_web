@@ -46,7 +46,7 @@ export type ActivityFormSchedule = {
   }
   settings: {
     frequency: string | number
-    time: number | string
+    time: number
     timezone: string | number
     day: string | number
   }
