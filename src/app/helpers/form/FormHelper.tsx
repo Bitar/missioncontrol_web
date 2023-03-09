@@ -22,8 +22,6 @@ const submitForm = async (fun: any, model: any, to: any, id?: any) => {
     if (axios.isAxiosError(exception)) {
       if (exception.response?.status === 422) {
         // let validation_errors = exception.response?.data.error.validation
-        // console.log(exception.response?.data.error.validation)
-
         toast.error('Validation Error')
       }
     } else {

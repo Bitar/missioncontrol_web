@@ -11,12 +11,7 @@ import { updatePlayoffs } from "../../core/requests/ActivitySettingsRequests";
 import toast from "react-hot-toast";
 import { useActivity } from "../../core/contexts/ActivityContext";
 import { activityPlayoffSchema } from "../../core/validation/ActivitySchema";
-import {
-  handlePlayoffsChange,
-  handleTeamChange,
-  resetPlayoffDates,
-  updatePlayoffDates
-} from "../../../../helpers/PlayoffHelper";
+import { handlePlayoffsChange, handleTeamChange, updatePlayoffDates } from "../../../../helpers/PlayoffHelper";
 import { TournamentTeamCountText } from "../TournamentTeamCountText";
 
 const { before } = DateRangePicker;
@@ -45,17 +40,16 @@ export const PlayoffDetail = () => {
     if (activityForm?.schedule?.matchplay_dates?.end_date) {
       let disabledEndDate = new Date(activityForm?.schedule?.matchplay_dates?.end_date * 1000);
 
-      disabledEndDate.setDate(disabledEndDate.getDate() + 1);
+      disabledEndDate.setDate(disabledEndDate.getDate());
       disabledEndDate.setHours(0, 0, 0, 0);
 
       setPlayoffDisabledDate(disabledEndDate);
     }
-
-    resetPlayoffDates(activityForm, setActivityForm, setPlayoffsRange);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activityForm?.schedule?.matchplay_dates]);
 
   const onPlayoffsChange = (e: any) => {
+    console.log("i get called?");
     handlePlayoffsChange(e, activityForm, setActivityForm, setShowErrors, setPlayoffsRange);
   };
 

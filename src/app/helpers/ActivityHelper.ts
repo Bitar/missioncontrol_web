@@ -141,7 +141,7 @@ export const activityRegistrationOnChange = (
 
 export const updateActivityMatchPlayDates = (
   activityForm: ActivityForm | undefined,
-  setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
+  setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>
 ) => {
   if (
     activityForm?.schedule?.matchplay_dates?.start_date &&
@@ -238,6 +238,9 @@ export const getDaysNeedRanged = (
   let daysOfRange;
   let daysNeeded;
 
+  startDate = new Date(startDate);
+  endDate = new Date(endDate);
+
   if (activityForm?.schedule?.settings?.frequency === 2 && activityForm?.schedule?.settings?.day) {
     daysOfRange = countDaysOfWeekJS(startDate, endDate, activityForm?.schedule?.settings?.day);
     daysNeeded = Math.ceil(Math.log2(teamCount));
@@ -331,9 +334,6 @@ export const activityMatchPlayOnChange = (
     } else {
       let { updateObject, errors } = getTournamentUpdateObj(startDate, endDate, activityForm);
 
-      console.log(updateObject);
-      console.log(errors);
-
       if (errors) {
         setMatchPlayValue(e);
       } else {
@@ -363,20 +363,12 @@ export const isValidTournament = (
 };
 
 export const countDaysOfWeekJS = (startDate: Date, endDate: Date, dayOfWeek: any): number => {
-  let currentDate = startDate;
+  let currentDate = new Date(startDate);
   let count = 0;
 
-  // console.log(startDate.getTime())
-  // console.log(endDate)
-  // console.log(currentDate.getTime())
-
   while (currentDate <= endDate) {
-    // console.log(currentDate)
-    // console.log(currentDate.getTime())
-    // console.log(currentDate.getDay())
-    // console.log(dayOfWeek)
-    // console.log(endDate)
-    // console.log(endDate.getTime())
+    console.log(currentDate.getDay())
+    console.log(dayOfWeek)
     if (currentDate.getDay() === dayOfWeek) {
       count++;
     }

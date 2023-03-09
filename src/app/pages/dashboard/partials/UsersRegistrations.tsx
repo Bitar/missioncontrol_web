@@ -92,7 +92,7 @@ const chartOptions = (
   const strokeColor = getCSSVariableValue('--kt-gray-300')
   const baseColor = getCSSVariableValue('--kt-' + chartColor)
   const lightColor = getCSSVariableValue('--kt-' + chartColor + '-light')
-  console.log(values)
+
   return {
     series: [
       {

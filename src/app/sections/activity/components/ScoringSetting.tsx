@@ -6,8 +6,6 @@ type Props = {
 }
 
 const ScoringSetting: FC<Props> = ({settings}) => {
-  // console.log(settings);
-
   function ordinal(n: number) {
     let s = ['th', 'st', 'nd', 'rd']
     let v = n % 100

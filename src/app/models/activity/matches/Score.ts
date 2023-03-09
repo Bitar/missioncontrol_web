@@ -37,8 +37,6 @@ export const updateScores = (activity: Activity, matchRound: Round, teams?: Team
     activitySettings?.forEach((scoreSetting) => {
       let scoreSheetValue = checkScoreKey(scoreSetting, score?.score_sheet)
 
-      console.log(scoreSheetValue)
-
       let scoreSheetObj = {
         key: scoreSetting?.id,
         value: scoreSheetValue,

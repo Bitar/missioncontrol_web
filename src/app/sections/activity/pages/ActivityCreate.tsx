@@ -58,14 +58,12 @@ export const ActivityCreate = () => {
   }
 
   const nextStep = (stepper: any) => {
-    // console.log('next step: ' + stepper.current.currentStepIndex);
     if (stepper.current.currentStepIndex < stepper.current.totalStepsNumber) {
       setSubmitButton(stepper.current.currentStepIndex === stepper.current.totalStepsNumber! - 1)
 
       setCurrentSchema(activityCreateWizardSchema[stepper.current.currentStepIndex])
 
       if (stepper.current.currentStepIndex !== stepper.current.totalStepsNumber) {
-        // console.log('am i here');
         stepper.current.goNext()
       } else {
         handleSubmit()
@@ -145,8 +143,6 @@ export const ActivityCreate = () => {
         setIsSubmitting(false)
         if (error.response) {
           // let obj = error.response.data.error.validation;
-          // console.log((error.response.data.error.validation))
-          // console.log(obj.stringify())
           setAlertMessage('Error occurred!')
           setHasErrors(true)
         }

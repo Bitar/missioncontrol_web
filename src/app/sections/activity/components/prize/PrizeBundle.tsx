@@ -27,13 +27,6 @@ const PrizeBundle: FC<Props> = ({
   const [valueSuffix, setValueSuffix] = useState('')
   const [prizeItem, setPrizeItem] = useState<PrizeItem[]>([initialPrizeItem()])
 
-  // useEffect(() => {
-  //   console.log(prizeItem);
-  //   updateData({
-  //     item: prizeItem
-  //   }, setActivityPrize, activityPrize)
-  // }, [prizeItem])
-
   return (
     <>
       <div className='row mb-6'>

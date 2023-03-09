@@ -159,10 +159,7 @@ export function formOnChange(
   } else if (targetName.includes('contact.')) {
     let contact_field = targetName.split('contact.')[1]
 
-    // console.log(contact_field);
     if (contact_field === 'phone_number') {
-      // console.log('here');
-      // console.log(targetValue.replace(/[ )(-]/g, ""));
       updateData(
         {
           contact: {...community?.contact, ...{phone_number: targetValue.replace(/[ )(-]/g, '')}},

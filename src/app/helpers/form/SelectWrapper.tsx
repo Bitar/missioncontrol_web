@@ -21,17 +21,11 @@ const SelectWrapper: FC<Props> = ({
   errors,
   setFieldValue,
 }) => {
-  // console.log(field)
-  // console.log(meta)
-
   const configSelect: Record<string, any> = {
     select: true,
     variant: 'outlined',
     size: 'small',
   }
-
-  // console.log(meta.touched && Boolean(meta.error))
-  // console.log(meta.error)
 
   return (
     <FormControl size={'small'} fullWidth={true} error={touched.name && Boolean(touched.name)}>

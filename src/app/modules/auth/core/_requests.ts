@@ -56,7 +56,7 @@ export function getUserByToken(token: string) {
 }
 
 export const resetPassword = (formData: FormData) => {
-  return axios.post(`${RESET_PASSWORD_URL}`, formData).then((response) => console.log(response))
+  return axios.post(`${RESET_PASSWORD_URL}`, formData).then((response) => {})
 }
 // const createActivity = (formData: FormData): Promise<Activity | undefined> => {
 //   return axios

@@ -33,7 +33,6 @@ const TeamDetails: FC<Props> = ({activity, setActivity, gameMode}) => {
       players: gameMode?.min_players,
     }
 
-    // console.log(gameMode?.min_players)
     setPlayers(gameMode?.min_players || 0)
 
     updateObject(updateObj)

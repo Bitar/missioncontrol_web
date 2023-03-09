@@ -42,9 +42,6 @@ export const ScoreSettings: FC = () => {
     let tempRounds = [...rounds]
     let fieldName = targetName.split('.')
 
-    console.log(fieldName)
-    console.log(tempRounds)
-
     let existingValue = {...tempRounds[fieldName[1]].scores[fieldName[3]].keys[fieldName[5]]}
     existingValue.value = targetValue
 

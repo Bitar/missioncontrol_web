@@ -140,6 +140,8 @@ export const updatePlayoffDates = (
   ) {
     let playoffStartDate = createDateFrom(activityForm?.playoff?.playoff_dates?.start_date).toDate();
     let playEndDate = createDateFrom(activityForm?.playoff?.playoff_dates?.end_date).toDate();
+    console.log(playoffStartDate)
+    console.log(playEndDate)
     setPlayoffsRange([playoffStartDate, playEndDate]);
   } else {
     setPlayoffsRange(null);
