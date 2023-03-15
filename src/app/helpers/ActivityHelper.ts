@@ -367,8 +367,6 @@ export const countDaysOfWeekJS = (startDate: Date, endDate: Date, dayOfWeek: any
   let count = 0;
 
   while (currentDate <= endDate) {
-    console.log(currentDate.getDay())
-    console.log(dayOfWeek)
     if (currentDate.getDay() === dayOfWeek) {
       count++;
     }
