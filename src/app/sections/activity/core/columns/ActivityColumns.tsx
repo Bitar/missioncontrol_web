@@ -32,6 +32,25 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
     ),
   },
   {
+    Header: (props) => <CustomHeader tableProps={props} title='Type' className='min-w-125px' />,
+    id: 'type',
+    defaultCanSort: true,
+    Cell: ({...props}) => (
+      <>
+        <div style={{fontSize: '12px'}}>
+          <div className='d-flex align-items-center'>
+            <div className='d-flex flex-column'>
+              <span className='text-gray-800 pe-none mb-1'>
+                {props.data[props.row.index]?.type?.name}
+                {props.data[props.row.index]?.type?.id === 1 && props.data[props.row.index]?.playoff?.is_enabled && ' w/ Playoffs'}
+              </span>
+            </div>
+          </div>
+        </div>
+      </>
+    ),
+  },
+  {
     Header: (props) => <CustomHeader tableProps={props} title='Title' className='min-w-125px' />,
     id: 'title',
     defaultCanSort: true,

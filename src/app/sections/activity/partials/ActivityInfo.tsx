@@ -28,7 +28,7 @@ const ActivityInfo: FC = () => {
   const links = [
     {
       text: 'Overview',
-      link: '/activities/' + activity?.id + '/overview',
+      link: '/activities/' + activity?.id,
     },
     {
       text: `Matches`,
