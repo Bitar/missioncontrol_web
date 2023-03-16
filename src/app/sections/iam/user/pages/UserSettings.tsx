@@ -18,6 +18,7 @@ import Select from 'react-select'
 import {DatePicker} from 'rsuite'
 import {FormAction} from '../../../../helpers/form/FormAction'
 import {extractErrors} from '../../../../requests/helpers'
+import { Restricted } from "../../../../modules/auth/core/AuthPermission";
 
 const UserSettings: FC = () => {
   const {user, setUser} = useUser()
@@ -65,7 +66,7 @@ const UserSettings: FC = () => {
     let data = jsonToFormData(userForm)
     data.append('_method', 'PUT')
 
-    updateUser(params.id, data)
+    updateUser(user?.id, data)
       .then((response) => {
         setFormErrors([])
         setUser(response)
@@ -183,44 +184,46 @@ const UserSettings: FC = () => {
                   </div>
                 </div>
 
-                <div className='row mb-6'>
-                  <label className='col-lg-4 col-form-label required fw-bold fs-6'>Roles</label>
-                  <div className='col-lg-8 fv-row'>
-                    <Select
-                      name='role_ids'
-                      placeholder={'Choose a Role'}
-                      isMulti
-                      defaultValue={user?.roles}
-                      options={roles}
-                      getOptionLabel={(role) => role?.name}
-                      getOptionValue={(role) => role?.id?.toString() || ''}
-                      onChange={handleRoleChange}
-                    />
-                    <div className='text-danger mt-2'>
-                      <ErrorMessage name='role_ids' />
-                    </div>
-                  </div>
-                </div>
-
-                {hasCommunityAdminRole && (
+                <Restricted to={'manage-roles'}>
                   <div className='row mb-6'>
-                    <label className='col-lg-4 col-form-label required fw-bold fs-6'>
-                      Community
-                    </label>
+                    <label className='col-lg-4 col-form-label required fw-bold fs-6'>Roles</label>
                     <div className='col-lg-8 fv-row'>
                       <Select
-                        name='community_id'
-                        placeholder={'Choose a Community'}
-                        defaultValue={user?.community_admin}
-                        options={communities}
-                        getOptionLabel={(community) => community?.name}
+                        name='role_ids'
+                        placeholder={'Choose a Role'}
                         isMulti
-                        getOptionValue={(community) => community?.id?.toString() || ''}
-                        onChange={handleCommunityChange}
+                        defaultValue={user?.roles}
+                        options={roles}
+                        getOptionLabel={(role) => role?.name}
+                        getOptionValue={(role) => role?.id?.toString() || ''}
+                        onChange={handleRoleChange}
                       />
+                      <div className='text-danger mt-2'>
+                        <ErrorMessage name='role_ids' />
+                      </div>
                     </div>
                   </div>
-                )}
+
+                  {hasCommunityAdminRole && (
+                    <div className='row mb-6'>
+                      <label className='col-lg-4 col-form-label required fw-bold fs-6'>
+                        Community
+                      </label>
+                      <div className='col-lg-8 fv-row'>
+                        <Select
+                          name='community_id'
+                          placeholder={'Choose a Community'}
+                          defaultValue={user?.community_admin}
+                          options={communities}
+                          getOptionLabel={(community) => community?.name}
+                          isMulti
+                          getOptionValue={(community) => community?.id?.toString() || ''}
+                          onChange={handleCommunityChange}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </Restricted>
 
                 <div className='separator separator-dashed my-6'></div>
 

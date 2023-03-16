@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC} from 'react'
+import React, {FC} from 'react'
+import { Link } from 'react-router-dom'
 import {useAuth} from '../../../../app/modules/auth'
 
 const HeaderUserMenu: FC = () => {
@@ -25,6 +26,14 @@ const HeaderUserMenu: FC = () => {
             </a>
           </div>
         </div>
+      </div>
+
+      <div className='separator my-2'></div>
+
+      <div className='menu-item px-5'>
+        <Link to={'/profile'} className={'menu-link px-5'}>
+          Account Settings
+        </Link>
       </div>
 
       <div className='separator my-2'></div>

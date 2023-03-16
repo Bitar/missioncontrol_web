@@ -23,7 +23,7 @@ const CommunityPicker = () => {
   const setCommunity = (community: Community) => {
     setAdminCommunities(community.id).then(() => {
       setCommunityAdmin(community)
-      navigate('/dashboard/overview')
+      navigate('/dashboard')
     })
   }
 

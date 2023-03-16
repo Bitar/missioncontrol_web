@@ -22,3 +22,20 @@ export const calculateTeamScore = (match: any, team: any) => {
 
   return totalScore
 }
+
+export function getColor(index: number): string {
+  const colors = [
+    'mc-primary',
+    'mc-secondary',
+    'primary',
+    'info',
+    'success',
+    'warning',
+    'dark',
+    'danger',
+    'secondary',
+  ];
+
+  // const randomIndex = Math.floor(Math.random() * colors.length);
+  return `${colors[index]}`;
+}

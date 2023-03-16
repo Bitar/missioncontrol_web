@@ -62,8 +62,8 @@ const CommunityUsers: FC = () => {
               icon="fa-regular fa-list"
               icon_style="fs-3 text-primary"
               actions={[
-                new FilterCardAction("communities-users-list-filter", showFilter, setShowFilter),
-                new ExportCardAction(exportQuery, EXPORT_USERS_ENDPOINT)
+                new ExportCardAction(exportQuery, EXPORT_USERS_ENDPOINT),
+                new FilterCardAction("communities-users-list-filter", showFilter, setShowFilter)
               ]}
             />
             <KTCardBody>

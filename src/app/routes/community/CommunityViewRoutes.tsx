@@ -8,6 +8,8 @@ import { CommunityInfo } from "../../sections/community/partials/CommunityInfo";
 import { CommunitySettings } from "../../sections/community/pages/CommunitySettings";
 import { CommunityContext } from "../../sections/community/core/CommunityContext";
 import { User } from "../../sections/iam/user/core/User";
+import { StatisticsWidget5 } from "../../pages/dashboard/partials/StatisticsWidget5";
+import { Col, Row } from "react-bootstrap";
 
 type Props = {
   communityId?: number
@@ -111,7 +113,22 @@ const CommunityViewRoutes: FC<Props> = ({ communityId }) => {
             element={
               <>
                 <PageTitle breadcrumbs={communityViewBreadCrumbs}>Overview</PageTitle>
-                {/*<Overview />*/}
+                {community?.subscription?.plan?.max_members &&
+                  <Row>
+                    <Col lg={4}>
+                      <StatisticsWidget5
+                        className="card-xl-stretch mb-xl-8"
+                        faIcon="fas fa-users"
+                        color="dark"
+                        iconColor="white"
+                        titleColor="white"
+                        descriptionColor="white"
+                        title={`${community?.additional_data?.players_count} / ${community?.subscription?.plan?.max_members}`}
+                        description="Users"
+                      />
+                    </Col>
+                  </Row>
+                }
               </>
             }
           />
@@ -130,11 +147,6 @@ const CommunityViewRoutes: FC<Props> = ({ communityId }) => {
               <>
                 <PageTitle breadcrumbs={communityViewBreadCrumbs}>Settings</PageTitle>
                 <CommunitySettings />
-                {/*{params.communityId ? (*/}
-                {/*) : (*/}
-                {/*  <CommunitySettings />*/}
-                {/*  // <CommunityAdminSettings />*/}
-                {/*)}*/}
               </>
             }
           />
