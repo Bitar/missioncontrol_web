@@ -33,7 +33,7 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
   },
   {
     Header: (props) => <CustomHeader tableProps={props} title='Type' className='min-w-125px' />,
-    id: 'type',
+    id: 'type_id',
     defaultCanSort: true,
     Cell: ({...props}) => (
       <>
