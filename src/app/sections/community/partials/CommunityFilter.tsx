@@ -1,22 +1,12 @@
-import {useQueryRequest} from '../../../modules/table/QueryRequestProvider'
-import {Field, Form, Formik} from 'formik'
-import {updateData} from '../../../helpers/form/FormHelper'
+import { useQueryRequest } from "../../../modules/table/QueryRequestProvider";
+import { Field, Form, Formik } from "formik";
 import React, { FC, useState } from "react";
-import {initialQueryState} from '../../../helpers/crud-helper/models'
-import { Col, Collapse, Row, Button } from "react-bootstrap";
-import { defaultActivityFilterForm } from "../../activity/core/ActivityFilterForm";
+import { initialQueryState } from "../../../helpers/crud-helper/models";
+import { Col, Collapse, Row } from "react-bootstrap";
 import { createFilterQueryParam } from "../../../helpers/requests";
 import { genericOnChangeHandler } from "../../../helpers/form";
 import FilterFormFooter from "../../../components/form/FilterFormFooter";
-
-const initCommunityFilterObj = {
-  name: '',
-}
-
-type CommunityFilterObj = {
-  name: string
-}
-
+import { CommunityFilterForm, defaultCommunityFilterForm } from "../core/CommunityFilterForm";
 
 interface Props {
   showFilter: boolean;
@@ -24,9 +14,9 @@ interface Props {
 }
 
 const CommunityFilter: FC<Props> = ({ showFilter, setExportQuery }) => {
-  const {updateState} = useQueryRequest()
+  const { updateState } = useQueryRequest();
   const [communityFilters, setCommunityFilters] =
-    useState<CommunityFilterObj>(initCommunityFilterObj)
+    useState<CommunityFilterForm>(defaultCommunityFilterForm);
   const [reset, setReset] = useState<boolean>(false);
 
   const handleFilter = () => {
@@ -41,7 +31,7 @@ const CommunityFilter: FC<Props> = ({ showFilter, setExportQuery }) => {
   const handleOnChange = (e: any) => genericOnChangeHandler(e, communityFilters, setCommunityFilters);
 
   const resetFilter = () => {
-    setCommunityFilters(initCommunityFilterObj);
+    setCommunityFilters(defaultCommunityFilterForm);
     setReset(true);
   };
 
@@ -51,15 +41,15 @@ const CommunityFilter: FC<Props> = ({ showFilter, setExportQuery }) => {
         <Col>
           <div className="card-rounded bg-primary bg-opacity-5 p-10 mb-15">
             <Formik initialValues={communityFilters} onSubmit={handleFilter} enableReinitialize>
-              <Form onChange={handleOnChange} className='form'>
-                <div className='row'>
-                  <div className='col-lg-4 mb-5'>
+              <Form onChange={handleOnChange} className="form">
+                <div className="row">
+                  <div className="col-lg-4 mb-5">
                     <Field
-                      type='text'
-                      name='name'
-                      placeholder='Name'
-                      className={'form-control mb-3 mb-lg-0'}
-                      autoComplete='off'
+                      type="text"
+                      name="name"
+                      placeholder="Name"
+                      className={"form-control mb-3 mb-lg-0"}
+                      autoComplete="off"
                     />
                   </div>
                 </div>
@@ -71,7 +61,7 @@ const CommunityFilter: FC<Props> = ({ showFilter, setExportQuery }) => {
       </Row>
     </Collapse>
 
-  )
-}
+  );
+};
 
-export {CommunityFilter}
+export { CommunityFilter };

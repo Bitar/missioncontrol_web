@@ -1,19 +1,17 @@
-import {Field, Form, Formik} from 'formik'
-import {updateData} from '../../../helpers/form/FormHelper'
+import { Field, Form, Formik } from "formik";
 import React, { FC, useEffect, useState } from "react";
-import {initialQueryState} from '../../../helpers/crud-helper/models'
-import {useQueryRequest} from '../../../modules/table/QueryRequestProvider'
+import { initialQueryState } from "../../../helpers/crud-helper/models";
+import { useQueryRequest } from "../../../modules/table/QueryRequestProvider";
 import { Col, Collapse, Row } from "react-bootstrap";
-import { defaultActivityFilterForm } from "../../activity/core/ActivityFilterForm";
 import { createFilterQueryParam } from "../../../helpers/requests";
 import { genericOnChangeHandler } from "../../../helpers/form";
 import FilterFormFooter from "../../../components/form/FilterFormFooter";
 
 const initCommunityFilterObj = {
-  first_name: '',
-  last_name: '',
-  email: '',
-}
+  first_name: "",
+  last_name: "",
+  email: ""
+};
 
 type CommunityFilterObj = {
   first_name: string
@@ -27,9 +25,9 @@ interface Props {
 }
 
 const CommunityUserFilters: FC<Props> = ({ showFilter, setExportQuery }) => {
-  const {updateState} = useQueryRequest()
+  const { updateState } = useQueryRequest();
   const [communityFilters, setCommunityFilters] =
-    useState<CommunityFilterObj>(initCommunityFilterObj)
+    useState<CommunityFilterObj>(initCommunityFilterObj);
 
   const [reset, setReset] = useState<boolean>(false);
 
@@ -61,35 +59,35 @@ const CommunityUserFilters: FC<Props> = ({ showFilter, setExportQuery }) => {
         <Col>
           <div className="card-rounded bg-primary bg-opacity-5 p-10 mb-15">
             <Formik initialValues={communityFilters} onSubmit={handleFilter} enableReinitialize>
-              <Form onChange={handleOnChange} className='form'>
-                <div className='row'>
-                  <div className='col-lg-4 mb-5'>
+              <Form onChange={handleOnChange} className="form">
+                <div className="row">
+                  <div className="col-lg-4 mb-5">
                     <Field
-                      type='text'
-                      name='first_name'
-                      placeholder='First Name'
-                      className={'form-control mb-3 mb-lg-0'}
-                      autoComplete='off'
+                      type="text"
+                      name="first_name"
+                      placeholder="First Name"
+                      className={"form-control mb-3 mb-lg-0"}
+                      autoComplete="off"
                     />
                   </div>
 
-                  <div className='col-lg-4 mb-5'>
+                  <div className="col-lg-4 mb-5">
                     <Field
-                      type='text'
-                      name='last_name'
-                      placeholder='Last Name'
-                      className={'form-control mb-3 mb-lg-0'}
-                      autoComplete='off'
+                      type="text"
+                      name="last_name"
+                      placeholder="Last Name"
+                      className={"form-control mb-3 mb-lg-0"}
+                      autoComplete="off"
                     />
                   </div>
 
-                  <div className='col-lg-4 mb-5'>
+                  <div className="col-lg-4 mb-5">
                     <Field
-                      type='text'
-                      name='email'
-                      placeholder='Email'
-                      className={'form-control mb-3 mb-lg-0'}
-                      autoComplete='off'
+                      type="text"
+                      name="email"
+                      placeholder="Email"
+                      className={"form-control mb-3 mb-lg-0"}
+                      autoComplete="off"
                     />
                   </div>
                 </div>
@@ -101,7 +99,7 @@ const CommunityUserFilters: FC<Props> = ({ showFilter, setExportQuery }) => {
       </Row>
     </Collapse>
 
-  )
-}
+  );
+};
 
-export {CommunityUserFilters}
+export { CommunityUserFilters };

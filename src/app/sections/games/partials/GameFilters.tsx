@@ -1,66 +1,62 @@
-import {useQueryRequest} from '../../../modules/table/QueryRequestProvider'
-import React, {FC, useEffect, useState} from 'react'
-import {initialQueryState} from '../../../helpers/crud-helper/models'
-import {Field, Form, Formik} from 'formik'
-import {Col, Collapse, Row} from 'react-bootstrap'
-import {defaultGameFilterForm, GameFilterForm} from '../core/GameFilterForm'
-import {createFilterQueryParam} from '../../../helpers/requests'
-import {genericOnChangeHandler} from '../../../helpers/form'
-import FilterFormFooter from '../../../components/form/FilterFormFooter'
-
-const initGameFilterObj = {
-  title: '',
-}
+import { useQueryRequest } from "../../../modules/table/QueryRequestProvider";
+import React, { FC, useEffect, useState } from "react";
+import { initialQueryState } from "../../../helpers/crud-helper/models";
+import { Field, Form, Formik } from "formik";
+import { Col, Collapse, Row } from "react-bootstrap";
+import { defaultGameFilterForm, GameFilterForm } from "../core/GameFilterForm";
+import { createFilterQueryParam } from "../../../helpers/requests";
+import { genericOnChangeHandler } from "../../../helpers/form";
+import FilterFormFooter from "../../../components/form/FilterFormFooter";
 
 interface Props {
-  showFilter: boolean
-  setExportQuery: React.Dispatch<React.SetStateAction<string>>
+  showFilter: boolean;
+  setExportQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const GameFilters: FC<Props> = ({showFilter, setExportQuery}) => {
-  const {updateState} = useQueryRequest()
-  const [gameFilters, setGameFilters] = useState<GameFilterForm>(defaultGameFilterForm)
-  const [reset, setReset] = useState<boolean>(false)
+export const GameFilters: FC<Props> = ({ showFilter, setExportQuery }) => {
+  const { updateState } = useQueryRequest();
+  const [gameFilters, setGameFilters] = useState<GameFilterForm>(defaultGameFilterForm);
+  const [reset, setReset] = useState<boolean>(false);
 
   const resetFilter = () => {
-    setGameFilters(defaultGameFilterForm)
-    setReset(true)
-  }
+    setGameFilters(defaultGameFilterForm);
+    setReset(true);
+  };
 
   const handleFilter = () => {
-    setExportQuery(createFilterQueryParam(gameFilters))
+    setExportQuery(createFilterQueryParam(gameFilters));
 
     updateState({
       filter: reset ? undefined : gameFilters,
-      ...initialQueryState,
-    })
-  }
+      ...initialQueryState
+    });
+  };
 
   useEffect(() => {
-    handleFilter()
-    setReset(false)
+    handleFilter();
+    setReset(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reset])
+  }, [reset]);
 
   const handleOnChange = (e: any) => {
-    genericOnChangeHandler(e, gameFilters, setGameFilters)
-  }
+    genericOnChangeHandler(e, gameFilters, setGameFilters);
+  };
 
   return (
     <Collapse in={showFilter}>
-      <Row id='#users-list-filter'>
+      <Row id="#users-list-filter">
         <Col>
-          <div className='card-rounded bg-primary bg-opacity-5 p-10 mb-15'>
+          <div className="card-rounded bg-primary bg-opacity-5 p-10 mb-15">
             <Formik initialValues={gameFilters} onSubmit={handleFilter} enableReinitialize>
-              <Form onChange={handleOnChange} className='form'>
+              <Form onChange={handleOnChange} className="form">
                 <Row>
                   <Col lg={4}>
                     <Field
-                      type='text'
-                      name='title'
-                      placeholder='Title'
-                      className={'form-control mb-3 mb-lg-0'}
-                      autoComplete='off'
+                      type="text"
+                      name="title"
+                      placeholder="Title"
+                      className={"form-control mb-3 mb-lg-0"}
+                      autoComplete="off"
                     />
                   </Col>
                 </Row>
@@ -72,5 +68,5 @@ export const GameFilters: FC<Props> = ({showFilter, setExportQuery}) => {
         </Col>
       </Row>
     </Collapse>
-  )
-}
+  );
+};
