@@ -1,27 +1,37 @@
-import React, {useState} from 'react'
+import React, {useEffect, useMemo, useState} from 'react'
 import {KTCard, KTCardBody, QUERIES} from '../../../../../_metronic/helpers'
 import {QueryRequestProvider} from '../../../../modules/table/QueryRequestProvider'
-import {QueryResponseProvider} from '../../../../modules/table/QueryResponseProvider'
-import {getUsers} from '../core/UserRequests'
+import {
+  QueryResponseProvider,
+  useQueryResponseData,
+  useQueryResponseLoading,
+} from '../../../../modules/table/QueryResponseProvider'
+import {EXPORT_ENDPOINT, getUsers} from '../core/UserRequests'
 import {ListViewProvider} from '../../../../modules/table/ListViewProvider'
-import {UserTable} from './UserTable'
 import {KTCardHeader} from '../../../../helpers/components'
-import {Actions} from '../../../../helpers/variables'
-import {UserFilter} from '../UserFilter'
-import {Col, Collapse, Row} from 'react-bootstrap'
+import {PageTypes} from '../../../../helpers/variables'
+import {UserFilter} from '../partials/UserFilter'
+import {useMcApp} from '../../../../modules/general/McApp'
+import {generatePageTitle} from '../../../../helpers/pageTitleGenerator'
+import {Sections} from '../../../../helpers/sections'
+import {
+  CreateCardAction,
+  ExportCardAction,
+  FilterCardAction,
+} from '../../../../components/misc/CardAction'
+import {usersColumns} from '../core/UserColumns'
+import {McTable} from '../../../../components/McTable'
 
 const UserIndex = () => {
-  const [showFilter, setShowFilter] = useState<boolean>(false)
+  const mcApp = useMcApp()
 
-  const headerActions = [
-    {
-      type: Actions.FILTER,
-      target: 'users-list-filter',
-      showFilter: showFilter,
-      setShowFilter: setShowFilter,
-    },
-    {type: Actions.CREATE, url: '/iam/users'},
-  ]
+  useEffect(() => {
+    mcApp.setPageTitle(generatePageTitle(Sections.IAM_USERS, PageTypes.INDEX))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const [exportQuery, setExportQuery] = useState<string>('')
+  const [showFilter, setShowFilter] = useState<boolean>(false)
 
   return (
     <QueryRequestProvider>
@@ -32,18 +42,17 @@ const UserIndex = () => {
               text='All Users'
               icon='fa-regular fa-list'
               icon_style='fs-3 text-primary'
-              actions={headerActions}
+              actions={[
+                new ExportCardAction(exportQuery, EXPORT_ENDPOINT),
+                new FilterCardAction('users-list-filter', showFilter, setShowFilter),
+                new CreateCardAction('/iam/users', 'manage-iam'),
+              ]}
             />
             <KTCardBody>
-              <Collapse in={showFilter}>
-                <Row id='#users-list-filter'>
-                  <Col>
-                    <UserFilter />
-                  </Col>
-                </Row>
-              </Collapse>
+              <UserFilter showFilter={showFilter} setExportQuery={setExportQuery} />
+
+              <UserTable />
             </KTCardBody>
-            <UserTable />
           </KTCard>
         </ListViewProvider>
       </QueryResponseProvider>
@@ -51,4 +60,20 @@ const UserIndex = () => {
   )
 }
 
-export {UserIndex}
+const UserTable = () => {
+  const users = useQueryResponseData()
+  const isLoading = useQueryResponseLoading()
+  const data = useMemo(() => users, [users])
+  const columns = useMemo(() => usersColumns, [])
+
+  return (
+    <McTable
+      data={data}
+      columns={columns}
+      model={users.length > 0 ? users[0] : null}
+      isLoading={isLoading}
+    />
+  )
+}
+
+export default UserIndex

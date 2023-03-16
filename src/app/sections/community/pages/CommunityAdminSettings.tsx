@@ -5,10 +5,10 @@ import {
   initialCommunityFormTypeByCommunity,
 } from '../../../models/community/Community'
 import {KTCard, KTCardBody} from '../../../helpers/components'
-import {useCommunity} from '../CommunityContext'
+import {useCommunity} from '../core/CommunityContext'
 import {ErrorMessage, Field, Form, Formik} from 'formik'
-import {BannerImage} from '../partials/BannerImage'
-import {LogoImage} from '../partials/LogoImage'
+import {BannerImage} from '../components/BannerImage'
+import {LogoImage} from '../components/LogoImage'
 import Select from 'react-select'
 import {State} from '../../../models/misc/State'
 import {getStates} from '../../misc/core/_requests'

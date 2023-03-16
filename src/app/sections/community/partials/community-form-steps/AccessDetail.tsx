@@ -1,6 +1,6 @@
 import {communitySchema} from '../../../../models/community/Community'
 import React, {FC} from 'react'
-import {useCommunity} from '../../CommunityContext'
+import {useCommunity} from '../../core/CommunityContext'
 import {useParams} from 'react-router-dom'
 import {jsonToFormData, updateData} from '../../../../helpers/form/FormHelper'
 import {updateAdminCommunity, updateCommunity} from '../../core/CommunityRequests'

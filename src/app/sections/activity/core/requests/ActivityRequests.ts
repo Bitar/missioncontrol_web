@@ -4,32 +4,32 @@ import {Activity, ActivityQueryResponse} from '../../../../models/activity/Activ
 import {Announcement} from '../../../../models/announcement/Announcements'
 import {ChatMessage, ChatMessageQueryResponse} from '../../../../models/chat/ChatMessage'
 import {TeamQueryResponse} from '../../../../models/squad/Team'
-import {UserQueryResponse} from '../../../../models/iam/User'
+import {UserQueryResponse} from '../../../iam/user/core/User'
 
 const API_URL = process.env.REACT_APP_API_URL
-const ACTIVITIES_URL = `${API_URL}/activities`
+const ENDPOINT = `${API_URL}/activities`
+
+export const EXPORT_ENDPOINT = `${API_URL}/export/activities`
 
 export const getActivities = (query: string): Promise<ActivityQueryResponse> => {
-  return axios
-    .get(`${ACTIVITIES_URL}?${query}`)
-    .then((d: AxiosResponse<ActivityQueryResponse>) => d.data)
+  return axios.get(`${ENDPOINT}?${query}`).then((d: AxiosResponse<ActivityQueryResponse>) => d.data)
 }
 
 export const createActivity = (formData: FormData): Promise<Activity | undefined> => {
   return axios
-    .post(`${ACTIVITIES_URL}`, formData)
+    .post(`${ENDPOINT}`, formData)
     .then((response: AxiosResponse<Response<Activity>>) => response.data)
     .then((response: Response<Activity>) => response.data)
 }
 
 export const updateActivity = (id: any, formData: FormData): Promise<Activity | undefined> => {
   return axios
-    .post(`${ACTIVITIES_URL}/${id}`, formData)
+    .post(`${ENDPOINT}/${id}`, formData)
     .then((response: AxiosResponse<Response<Activity>>) => response.data)
     .then((response: Response<Activity>) => response.data)
 }
 export const getActivityById = (id: any, query?: String): Promise<Activity | undefined> => {
-  let url = `${ACTIVITIES_URL}/${id}`
+  let url = `${ENDPOINT}/${id}`
 
   if (query) {
     url += `?${query}`
@@ -41,7 +41,7 @@ export const getActivityById = (id: any, query?: String): Promise<Activity | und
     .then((response: Response<Activity>) => response.data)
 }
 export const getActivityTeams = (id: any, query?: string): Promise<TeamQueryResponse> => {
-  let url = `${ACTIVITIES_URL}/${id}/teams`
+  let url = `${ENDPOINT}/${id}/teams`
 
   if (query) {
     url += `?${query}`
@@ -50,7 +50,7 @@ export const getActivityTeams = (id: any, query?: string): Promise<TeamQueryResp
   return axios.get(url).then((response: AxiosResponse<TeamQueryResponse>) => response.data)
 }
 export const getActivityMembers = (id: any, query?: string): Promise<UserQueryResponse> => {
-  let url = `${ACTIVITIES_URL}/${id}/members`
+  let url = `${ENDPOINT}/${id}/members`
 
   if (query) {
     url += `?${query}`
@@ -59,7 +59,7 @@ export const getActivityMembers = (id: any, query?: string): Promise<UserQueryRe
   return axios.get(url).then((response: AxiosResponse<UserQueryResponse>) => response.data)
 }
 export const getActivityStandings = (id: any, query?: string): Promise<TeamQueryResponse> => {
-  let url = `${ACTIVITIES_URL}/${id}/standings`
+  let url = `${ENDPOINT}/${id}/standings`
 
   if (query) {
     url += `?${query}`
@@ -72,7 +72,7 @@ export const createActivityAnnouncement = (
   id: any,
   formData: FormData
 ): Promise<Announcement | undefined> => {
-  let url = `${ACTIVITIES_URL}/${id}/announcements`
+  let url = `${ENDPOINT}/${id}/announcements`
 
   return axios
     .post(url, formData)
@@ -81,13 +81,13 @@ export const createActivityAnnouncement = (
 }
 
 export const getActivityChat = (id: any): Promise<ChatMessageQueryResponse> => {
-  let url = `${ACTIVITIES_URL}/${id}/chat`
+  let url = `${ENDPOINT}/${id}/chat`
 
   return axios.get(url).then((response: AxiosResponse<ChatMessageQueryResponse>) => response.data)
 }
 
 export const sendActivityChat = (id: any, formData: FormData): Promise<ChatMessage | undefined> => {
-  let url = `${ACTIVITIES_URL}/${id}/chat`
+  let url = `${ENDPOINT}/${id}/chat`
 
   return axios
     .post(url, formData)
@@ -96,7 +96,7 @@ export const sendActivityChat = (id: any, formData: FormData): Promise<ChatMessa
 }
 
 export const validateCreatePlayoffs = (formData: FormData) => {
-  let url = `${ACTIVITIES_URL}/validate-playoffs`
+  let url = `${ENDPOINT}/validate-playoffs`
 
   return axios.post(url, formData)
 }

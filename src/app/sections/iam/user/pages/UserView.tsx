@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import {getUserById} from '../core/UserRequests'
 import {Outlet, Route, Routes, useParams} from 'react-router-dom'
-import {User} from '../../../../models/iam/User'
-import {UserInfo} from '../UserInfo'
+import {User} from '../core/User'
+import {UserInfo} from '../partials/UserInfo'
 import {PageLink, PageTitle} from '../../../../layout/core'
 import {UserSettings} from './UserSettings'
-import {UserActivities} from './UserActivities'
-import {UserTeams} from './UserTeams'
+import {UserActivities} from '../partials/UserActivities'
+import {UserTeams} from '../partials/UserTeams'
 import {SuspenseView} from '../../../../layout/SuspenseView'
 import {UserContext} from '../core/UserContext'
+import {Restricted} from '../../../../modules/auth/core/AuthPermission'
 
 const UserView: React.FC = () => {
   const [user, setUser] = useState<User | undefined>()
@@ -96,15 +97,16 @@ const UserView: React.FC = () => {
               </>
             }
           />
+
           <Route
             path='/settings'
             element={
-              <>
+              <Restricted to={'manage-iam'}>
                 <SuspenseView>
                   <PageTitle breadcrumbs={userViewBreadCrumbs}>Settings</PageTitle>
                   {user && <UserSettings />}
                 </SuspenseView>
-              </>
+              </Restricted>
             }
           />
         </Route>

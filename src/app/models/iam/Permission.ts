@@ -17,4 +17,4 @@ export const permissionInitial = (permission?: Permission) => {
   }
 }
 
-export type PermissionQueryResponse = Response<Array<Permission>>
+export type PermissionList = Response<Permission[]>

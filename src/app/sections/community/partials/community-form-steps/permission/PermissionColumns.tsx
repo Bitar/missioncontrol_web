@@ -4,7 +4,7 @@ import {TextImageCell} from '../../../../../modules/table/columns/TextImageCell'
 import {ActionsCell} from '../../../../../modules/table/columns/ActionsCell'
 import {QUERIES} from '../../../../../helpers/crud-helper/consts'
 import React from 'react'
-import {useCommunity} from '../../../CommunityContext'
+import {useCommunity} from '../../../core/CommunityContext'
 import {CommunityPermission} from '../../../../../models/community/CommunityPermission'
 
 const PermissionColumns: ReadonlyArray<Column<CommunityPermission>> = [

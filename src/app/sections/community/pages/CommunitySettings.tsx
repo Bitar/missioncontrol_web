@@ -4,7 +4,7 @@ import {
   initialCommunityFormTypeByCommunity,
 } from '../../../models/community/Community'
 import {QUERIES} from '../../../../_metronic/helpers'
-import {useCommunity} from '../CommunityContext'
+import {useCommunity} from '../core/CommunityContext'
 import {KTCard, KTCardBody, KTCardHeader} from '../../../helpers/components'
 import Tab from 'react-bootstrap/Tab'
 import Nav from 'react-bootstrap/Nav'

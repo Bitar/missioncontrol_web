@@ -1,8 +1,6 @@
 import React, {FC} from 'react'
 import clsx from 'clsx'
-import {Actions} from '../variables'
-import CreateButton from '../../components/buttons/Create'
-import FilterButton from '../../components/buttons/Filter'
+import {CardAction} from '../../components/misc/CardAction'
 
 type Props = {
   className?: string
@@ -16,15 +14,6 @@ type Props = {
   icon?: string
   icon_style?: string
 }
-
-type CardAction = {
-  type: Actions
-  url?: string
-  target?: string
-  showFilter?: boolean
-  setShowFilter?: React.Dispatch<React.SetStateAction<boolean>>
-}
-
 const KTCardHeader: FC<Props> = ({
   className,
   text,
@@ -63,21 +52,7 @@ const KTCardHeader: FC<Props> = ({
       {actions && actions.length > 0 ? (
         <div className='card-toolbar'>
           {actions.map((cardAction, index) => {
-            if (cardAction.type === Actions.CREATE) {
-              return <CreateButton url={cardAction.url} key={index} />
-            } else if (cardAction.type === Actions.FILTER) {
-              return (
-                <FilterButton
-                  key={index}
-                  target={cardAction.target}
-                  showFilter={cardAction.showFilter}
-                  setShowFilter={cardAction.setShowFilter}
-                  className='mx-2'
-                />
-              )
-            } else {
-              return <></>
-            }
+            return cardAction.getHtmlComponent(index)
           })}
         </div>
       ) : (

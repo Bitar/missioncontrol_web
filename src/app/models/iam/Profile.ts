@@ -1,4 +1,4 @@
-import {User} from './User'
+import {User} from '../../sections/iam/user/core/User'
 import {Community} from '../community/Community'
 
 export type Profile = {

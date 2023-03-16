@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
 import {useAuth} from '../../modules/auth'
-import {isCommunityAdmin, isSuperAdmin} from '../../models/iam/User'
-import {CommunityView} from '../../sections/community/pages/CommunityView'
+import {isCommunityAdmin, isSuperAdmin} from '../../sections/iam/user/core/User'
+import {CommunityViewRoutes} from '../../routes/community/CommunityViewRoutes'
 import {CreateCommunityWidget} from '../../layout/widgets/CreateCommunityWidget'
 import {SuperAdmin} from './partials/SuperAdmin'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
@@ -24,7 +24,7 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
     <>
       {currentUser &&
         (currentUser && isCommunityAdmin(currentUser) && communityAdmin ? (
-          <CommunityView communityId={communityAdmin?.id} links={communityLinks}></CommunityView>
+          <CommunityViewRoutes communityId={communityAdmin?.id} links={communityLinks}></CommunityViewRoutes>
         ) : (
           <div className='row gy-5 g-xl-8'>
             <div className='col-xl-12'>

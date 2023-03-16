@@ -1,6 +1,6 @@
 import {communitySchema} from '../../../../models/community/Community'
 import React, {FC, useEffect, useState} from 'react'
-import {useCommunity} from '../../CommunityContext'
+import {useCommunity} from '../../core/CommunityContext'
 import {ErrorMessage, Field, Form, Formik} from 'formik'
 import {KTCard, KTCardBody, KTCardHeader} from '../../../../helpers/components'
 import {useParams} from 'react-router-dom'

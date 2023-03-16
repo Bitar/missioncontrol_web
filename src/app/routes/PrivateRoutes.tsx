@@ -11,12 +11,12 @@ import {AdminCommunityCreate} from '../sections/community-admin/AdminCommunityCr
 import {ActivityCreate} from '../sections/activity/pages/ActivityCreate'
 
 const PrivateRoutes = () => {
-  const CommunityPage = lazy(() => import('../sections/community/pages/CommunityPage'))
-  const GamePage = lazy(() => import('../sections/games/pages/GamePage'))
+  const CommunityRoutes = lazy(() => import('./community/CommunityRoutes'))
+  const GameRoutes = lazy(() => import('./game/GameRoutes'))
   const PlansPage = lazy(() => import('../sections/billing/plan/pages/PlansPage'))
   const ActivityRoutes = lazy(() => import('./activity/ActivityRoutes'))
-  const RolePage = lazy(() => import('./iam/RoleRoutes'))
-  const UserPage = lazy(() => import('./iam/UserRoutes'))
+  const RoleRoutes = lazy(() => import('./iam/RoleRoutes'))
+  const UserRoutes = lazy(() => import('./iam/UserRoutes'))
 
   return (
     <Routes>
@@ -46,12 +46,13 @@ const PrivateRoutes = () => {
             </SuspenseView>
           }
         />
+
         <Route
           path='communities/*'
           element={
             <Restricted to='view-communities'>
               <SuspenseView>
-                <CommunityPage />
+                <CommunityRoutes />
               </SuspenseView>
             </Restricted>
           }
@@ -62,7 +63,7 @@ const PrivateRoutes = () => {
           element={
             <Restricted to='view-games'>
               <SuspenseView>
-                <GamePage />
+                <GameRoutes />
               </SuspenseView>
             </Restricted>
           }
@@ -71,9 +72,9 @@ const PrivateRoutes = () => {
         <Route
           path='iam/users/*'
           element={
-            <Restricted to='view-users'>
+            <Restricted to='view-iam'>
               <SuspenseView>
-                <UserPage />
+                <UserRoutes />
               </SuspenseView>
             </Restricted>
           }
@@ -81,9 +82,9 @@ const PrivateRoutes = () => {
         <Route
           path='iam/roles/*'
           element={
-            <Restricted to='view-users'>
+            <Restricted to='view-iam'>
               <SuspenseView>
-                <RolePage />
+                <RoleRoutes />
               </SuspenseView>
             </Restricted>
           }
@@ -91,7 +92,7 @@ const PrivateRoutes = () => {
         <Route
           path='iam/permissions/*'
           element={
-            <Restricted to='view-users'>
+            <Restricted to='view-iam'>
               <SuspenseView>
                 <PermissionRoutes />
               </SuspenseView>

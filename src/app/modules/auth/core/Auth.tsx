@@ -14,7 +14,7 @@ import * as authHelper from './AuthHelpers'
 import {getUserByToken} from './_requests'
 import {WithChildren} from '../../../../_metronic/helpers'
 import {Community} from '../../../models/community/Community'
-import {User} from '../../../models/iam/User'
+import {User} from '../../../sections/iam/user/core/User'
 
 type AuthContextProps = {
   auth: AuthModel | undefined

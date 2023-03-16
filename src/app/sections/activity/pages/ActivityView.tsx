@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from 'react'
 import {Activity} from '../../../models/activity/Activity'
-import {Navigate, Outlet, Route, Routes, useNavigate, useParams} from 'react-router-dom'
+import {Outlet, Route, Routes, useNavigate, useParams} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../layout/core'
 import {getActivityById, getActivityTeams} from '../core/requests/ActivityRequests'
 import {ActivityInfo} from '../partials/ActivityInfo'
@@ -37,7 +37,7 @@ const ActivityView: FC = () => {
   const activityViewBreadcrumbs: Array<PageLink> = [
     {
       title: 'Activities',
-      path: '/activities/overview',
+      path: '/activities',
       isSeparator: false,
       isActive: false,
     },
@@ -49,7 +49,7 @@ const ActivityView: FC = () => {
     },
     {
       title: activity?.title || '',
-      path: '/activities/' + params.id + '/overview',
+      path: '/activities/' + params.id,
       isSeparator: false,
       isActive: false,
     },
@@ -108,7 +108,7 @@ const ActivityView: FC = () => {
           }
         >
           <Route
-            path='/overview'
+            index
             element={
               <>
                 <SuspenseView>
@@ -197,7 +197,6 @@ const ActivityView: FC = () => {
               </>
             }
           />
-          <Route index element={<Navigate to={'/activities/' + params.id + '/overview'} />} />
         </Route>
       </Routes>
     </ActivityContext.Provider>

@@ -1,5 +1,5 @@
 import {Route, Routes} from 'react-router-dom'
-import {UserIndex} from '../../sections/iam/user/pages/UserIndex'
+import UserIndex from '../../sections/iam/user/pages/UserIndex'
 import {UserCreate} from '../../sections/iam/user/pages/UserCreate'
 import {PageLink, PageTitle} from '../../layout/core'
 import React from 'react'

@@ -1,5 +1,5 @@
 import {ColumnInstance, Row, useTable} from 'react-table'
-import {User} from '../../../models/iam/User'
+import {User} from '../../iam/user/core/User'
 import {CustomHeaderColumn} from '../../../modules/table/columns/CustomHeaderColumn'
 import {CustomRow} from '../../../modules/table/columns/CustomRow'
 import {TableListPagination} from '../../../modules/table/TableListPagination'

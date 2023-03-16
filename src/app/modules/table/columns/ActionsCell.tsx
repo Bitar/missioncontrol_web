@@ -7,8 +7,6 @@ import {useQueryClient} from 'react-query'
 import {deleteObject} from '../../../requests'
 import {useQueryRequest} from '../QueryRequestProvider'
 import clsx from 'clsx'
-import {useAuth} from '../../auth'
-import {isCommunityAdmin, isSuperAdmin} from '../../../models/iam/User'
 import Swal from 'sweetalert2'
 import {extractErrors} from '../../../requests/helpers'
 import axios from 'axios'
@@ -20,7 +18,7 @@ type Props = {
   showEdit?: boolean
   showDelete?: boolean
   showView?: boolean
-  canAdminDelete?: boolean
+  editPage?: boolean
   callBackFn?: any
   title?: string
   text?: string
@@ -33,12 +31,11 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
   showEdit,
   showDelete = true,
   showView,
-  canAdminDelete,
   callBackFn,
   title,
   text,
+  editPage,
 }) => {
-  const {currentUser} = useAuth()
   const queryClient = useQueryClient()
   const {state} = useQueryRequest()
   const [query, setQuery] = useState<string>(stringifyRequestQuery(state))
@@ -103,23 +100,21 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
 
       {showEdit && (
         <Link
-          to={'/' + path + '/' + id + '/edit'}
+          to={'/' + path + '/' + id + (editPage ? '/edit' : '/settings')}
           className='btn btn-icon btn-sm btn-active-light-warning'
         >
           <i className={clsx('fa-duotone fs-3 text-warning', 'fa-pencil')}></i>
         </Link>
       )}
 
-      {showDelete &&
-        currentUser &&
-        ((canAdminDelete && isCommunityAdmin(currentUser)) || isSuperAdmin(currentUser)) && (
-          <a
-            className='btn btn-icon btn-sm btn-active-light-danger'
-            onClick={async () => deleteItem()}
-          >
-            <i className={clsx('fa-duotone fs-3 text-danger', 'fa-trash')}></i>
-          </a>
-        )}
+      {showDelete && (
+        <a
+          className='btn btn-icon btn-sm btn-active-light-danger'
+          onClick={async () => deleteItem()}
+        >
+          <i className={clsx('fa-duotone fs-3 text-danger', 'fa-trash')}></i>
+        </a>
+      )}
     </>
   )
 }

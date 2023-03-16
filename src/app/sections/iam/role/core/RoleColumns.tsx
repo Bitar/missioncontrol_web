@@ -4,6 +4,7 @@ import {CustomHeader} from '../../../../modules/table/columns/CustomHeader'
 import {ActionsCell} from '../../../../modules/table/columns/ActionsCell'
 import {QUERIES} from '../../../../../_metronic/helpers'
 import {Role} from '../../../../models/iam/Role'
+import {useAccessControl} from '../../../../modules/auth/core/AuthPermission'
 
 const rolesColumns: ReadonlyArray<Column<Role>> = [
   {
@@ -16,14 +17,19 @@ const rolesColumns: ReadonlyArray<Column<Role>> = [
       <CustomHeader tableProps={props} title='Actions' className='text-end min-w-100px' />
     ),
     id: 'actions',
-    Cell: ({...props}) => (
-      <ActionsCell
-        id={props.data[props.row.index].id}
-        path={'roles'}
-        queryKey={QUERIES.ROLES_LIST}
-        showEdit={true}
-      />
-    ),
+    Cell: ({...props}) => {
+      const accessControl = useAccessControl()
+
+      return (
+        <ActionsCell
+          id={props.data[props.row.index].id}
+          path={'iam/roles'}
+          queryKey={QUERIES.ROLES_LIST}
+          showEdit={accessControl.userCan('manage-iam')}
+          editPage={true}
+        />
+      )
+    },
   },
 ]
 

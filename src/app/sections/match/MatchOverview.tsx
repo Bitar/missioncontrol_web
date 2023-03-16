@@ -6,7 +6,7 @@ import {Round} from '../../models/activity/matches/Round'
 import {TeamImage} from '../activity/components/TeamImage'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
-import {User} from '../../models/iam/User'
+import {User} from '../iam/user/core/User'
 import {Activity} from '../../models/activity/Activity'
 
 type Props = {

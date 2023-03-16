@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react'
 import {ErrorMessage, Field, Form, Formik} from 'formik'
-import {KTCard, KTCardBody} from '../../../../helpers/components'
+import {KTCard, KTCardBody, KTCardHeader} from '../../../../helpers/components'
 import {useNavigate} from 'react-router-dom'
 import {createUser} from '../core/UserRequests'
 import {jsonToFormData, updateData} from '../../../../helpers/form/FormHelper'
-import {formOnChange, UserDetailsSchema} from '../../../../models/iam/User'
-import {AvatarImage} from '../partials/AvatarImage'
+import {formOnChange, UserDetailsSchema} from '../core/User'
+import {AvatarImage} from '../components/AvatarImage'
 import {FormAction} from '../../../../helpers/form/FormAction'
-import {initUserForm, UserForm} from '../../../../models/iam/UserForm'
+import {initUserForm, UserForm} from '../core/UserForm'
 import {Role} from '../../../../models/iam/Role'
 import {Community} from '../../../../models/community/Community'
 import {getRoles} from '../../role/core/RoleRequests'
@@ -16,8 +16,14 @@ import Select from 'react-select'
 import {DatePicker} from 'rsuite'
 import FormErrors from '../../../../components/form/FormErrors'
 import {extractErrors} from '../../../../requests/helpers'
+import {useMcApp} from '../../../../modules/general/McApp'
+import {generatePageTitle} from '../../../../helpers/pageTitleGenerator'
+import {Sections} from '../../../../helpers/sections'
+import {Actions, PageTypes, ToastType} from '../../../../helpers/variables'
+import {AlertMessageGenerator} from '../../../../helpers/AlertMessageGenerator'
 
 const UserCreate = () => {
+  const mcApp = useMcApp()
   const [userForm, setUserForm] = useState<UserForm>(initUserForm())
   const [roles, setRoles] = useState<Role[]>()
 
@@ -33,6 +39,10 @@ const UserCreate = () => {
     let data = jsonToFormData(userForm)
     createUser(data)
       .then((response) => {
+        mcApp.setAlert({
+          message: new AlertMessageGenerator('user', Actions.CREATE, ToastType.SUCCESS).message,
+          type: ToastType.SUCCESS,
+        })
         navigate('/iam/users/' + response?.id)
         setFormErrors([])
         fns.setSubmitting(false)
@@ -63,6 +73,8 @@ const UserCreate = () => {
   }
 
   useEffect(() => {
+    mcApp.setPageTitle(generatePageTitle(Sections.IAM_USERS, PageTypes.CREATE))
+
     getRoles().then((response) => {
       setRoles(response.data)
     })
@@ -87,14 +99,11 @@ const UserCreate = () => {
 
   return (
     <KTCard>
-      <div className='card-header'>
-        <div className='card-title'>
-          <span className='card-icon'>
-            <i className='las la-plus fs-2' />
-          </span>
-          <h3 className='card-label'>Add User</h3>
-        </div>
-      </div>
+      <KTCardHeader
+        text='Create New User'
+        icon='fa-regular fa-plus'
+        icon_style='fs-3 text-success'
+      />
       <Formik
         initialValues={userForm}
         onSubmit={handleSubmit}

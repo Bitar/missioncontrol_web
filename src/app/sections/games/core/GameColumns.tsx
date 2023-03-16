@@ -6,6 +6,7 @@ import {QUERIES, toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {Game} from '../../../models/game/Game'
 import {Platform} from '../../../models/game/Platform'
 import {Link} from 'react-router-dom'
+import {useAccessControl} from '../../../modules/auth/core/AuthPermission'
 
 const gamesColumns: ReadonlyArray<Column<Game>> = [
   {
@@ -50,16 +51,20 @@ const gamesColumns: ReadonlyArray<Column<Game>> = [
       <CustomHeader tableProps={props} title='Actions' className='text-end min-w-100px' />
     ),
     id: 'actions',
-    Cell: ({...props}) => (
-      <ActionsCell
-        id={props.data[props.row.index].id}
-        path={'games'}
-        queryKey={QUERIES.GAMES_LIST}
-        showView={true}
-        showDelete={true}
-        canAdminDelete={false}
-      />
-    ),
+    Cell: ({...props}) => {
+      const accessControl = useAccessControl()
+
+      return (
+        <ActionsCell
+          id={props.data[props.row.index].id}
+          path={'games'}
+          queryKey={QUERIES.GAMES_LIST}
+          showView={true}
+          showEdit={accessControl.userCan('manage-games')}
+          showDelete={accessControl.userCan('manage-games')}
+        />
+      )
+    },
   },
 ]
 

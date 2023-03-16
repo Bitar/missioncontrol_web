@@ -2,11 +2,11 @@ import {Column} from 'react-table'
 import {CustomHeader} from '../../../modules/table/columns/CustomHeader'
 import {TextImageCell} from '../../../modules/table/columns/TextImageCell'
 import {TextCell} from '../../../modules/table/columns/TextCell'
-import {User} from '../../../models/iam/User'
+import {User} from '../../iam/user/core/User'
 import {ActionsCell} from '../../../modules/table/columns/ActionsCell'
 import {QUERIES} from '../../../helpers/crud-helper/consts'
 import React from 'react'
-import {useCommunity} from '../CommunityContext'
+import {useCommunity} from './CommunityContext'
 
 const CommunityUsersColumns: ReadonlyArray<Column<User>> = [
   {

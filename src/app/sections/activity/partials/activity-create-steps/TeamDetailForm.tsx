@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useState} from 'react'
+import {Button, ButtonGroup} from 'react-bootstrap'
 import {updateData} from '../../../../helpers/form/FormHelper'
-import {Button, ButtonGroup} from '@mui/material'
 import {useActivityForm} from '../../core/contexts/ActivityFormContext'
 
 export const TeamDetailForm = () => {
@@ -154,7 +154,7 @@ export const TeamDetailForm = () => {
           <p className='text-muted m-0'>The number of players per team for the chosen game mode.</p>
         </label>
         <div className='col-lg-8 fv-row'>
-          <ButtonGroup size='small' aria-label='small outlined button group'>
+          <ButtonGroup aria-label='small outlined button group'>
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
@@ -182,7 +182,7 @@ export const TeamDetailForm = () => {
           <p className='text-muted m-0'>Minimum of 2 teams is required</p>
         </label>
         <div className='col-lg-8 fv-row'>
-          <ButtonGroup size='small' aria-label='small outlined button group'>
+          <ButtonGroup aria-label='small outlined button group'>
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
@@ -207,7 +207,7 @@ export const TeamDetailForm = () => {
       <div className='row mb-6'>
         <label className='col-lg-4 col-form-label fw-bold fs-6'>Maximum Team</label>
         <div className='col-lg-8 fv-row'>
-          <ButtonGroup size='small' aria-label='small outlined button group'>
+          <ButtonGroup aria-label='small outlined button group'>
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'

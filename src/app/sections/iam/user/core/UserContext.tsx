@@ -1,5 +1,5 @@
 import {createContext, Dispatch, SetStateAction, useContext} from 'react'
-import {User} from '../../../../models/iam/User'
+import {User} from './User'
 
 type UserContextProps = {
   user: User | undefined

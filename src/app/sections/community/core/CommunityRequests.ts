@@ -2,26 +2,30 @@ import axios, {AxiosResponse} from 'axios'
 import {Response} from '../../../../_metronic/helpers'
 import {Community, CommunityQueryResponse} from '../../../models/community/Community'
 import {ActivityQueryResponse} from '../../../models/activity/Activity'
-import {UserQueryResponse} from '../../../models/iam/User'
+import {UserQueryResponse} from '../../iam/user/core/User'
 
 const API_URL = process.env.REACT_APP_API_URL
-const GET_COMMUNITIES_URL = `${API_URL}/communities`
-const GET_ADMIN_COMMUNITIES_URL = `${API_URL}/admin/communities`
+const ENDPOINT = `${API_URL}/communities`
+const ENDPOINT_ADMIN = `${API_URL}/admin/communities`
+
+export const EXPORT_ENDPOINT = `${API_URL}/export/communities`
+export const EXPORT_USERS_ENDPOINT = `${API_URL}/export/communities/users`
+
 
 const getCommunities = (query: String): Promise<CommunityQueryResponse> => {
   return axios
-    .get(`${GET_COMMUNITIES_URL}?${query}`)
+    .get(`${ENDPOINT}?${query}`)
     .then((response: AxiosResponse<CommunityQueryResponse>) => response.data)
 }
 
 const getAllCommunities = (): Promise<CommunityQueryResponse> => {
   return axios
-    .get(`${GET_COMMUNITIES_URL}/all`)
+    .get(`${ENDPOINT}/all`)
     .then((response: AxiosResponse<CommunityQueryResponse>) => response.data)
 }
 
 const getCommunityById = (id: any, query?: string): Promise<Community | undefined> => {
-  let url = `${GET_COMMUNITIES_URL}/${id}`
+  let url = `${ENDPOINT}/${id}`
 
   if (query) {
     url += `?${query}`
@@ -34,28 +38,28 @@ const getCommunityById = (id: any, query?: string): Promise<Community | undefine
 
 const createCommunity = (formData: FormData): Promise<Community | undefined> => {
   return axios
-    .post(`${GET_COMMUNITIES_URL}`, formData)
+    .post(`${ENDPOINT}`, formData)
     .then((response: AxiosResponse<Response<Community>>) => response.data)
     .then((response: Response<Community>) => response.data)
 }
 
 const createAdminCommunity = (formData: FormData): Promise<Community | undefined> => {
   return axios
-    .post(`${GET_ADMIN_COMMUNITIES_URL}/create`, formData)
+    .post(`${ENDPOINT_ADMIN}/create`, formData)
     .then((response: AxiosResponse<Response<Community>>) => response.data)
     .then((response: Response<Community>) => response.data)
 }
 
 const updateAdminCommunity = (formData: FormData): Promise<Community | undefined> => {
   return axios
-    .post(`${GET_ADMIN_COMMUNITIES_URL}/`, formData)
+    .post(`${ENDPOINT_ADMIN}/`, formData)
     .then((response: AxiosResponse<Response<Community>>) => response.data)
     .then((response: Response<Community>) => response.data)
 }
 
 const updateCommunity = (id: any, formData: FormData): Promise<Community | undefined> => {
   return axios
-    .post(`${GET_COMMUNITIES_URL}/${id}`, formData)
+    .post(`${ENDPOINT}/${id}`, formData)
     .then((response: AxiosResponse<Response<Community>>) => response.data)
     .then((response: Response<Community>) => response.data)
 }
@@ -65,19 +69,19 @@ export const updateCommunitySubscription = (
   formData: FormData
 ): Promise<Community | undefined> => {
   return axios
-    .post(`${GET_COMMUNITIES_URL}/${id}/subscriptions`, formData)
+    .post(`${ENDPOINT}/${id}/subscriptions`, formData)
     .then((response: AxiosResponse<Response<Community>>) => response.data)
     .then((response: Response<Community>) => response.data)
 }
 
 const getCommunityActivities = (id: any): Promise<ActivityQueryResponse> => {
   return axios
-    .get(`${GET_COMMUNITIES_URL}/${id}/activities`)
+    .get(`${ENDPOINT}/${id}/activities`)
     .then((response: AxiosResponse<ActivityQueryResponse>) => response.data)
 }
 
 const getCommunityUsers = (id: any, query?: string): Promise<UserQueryResponse> => {
-  let url = `${GET_COMMUNITIES_URL}/${id}/users?${query}`
+  let url = `${ENDPOINT}/${id}/users?${query}`
 
   return axios.get(url).then((response: AxiosResponse<UserQueryResponse>) => response.data)
 }

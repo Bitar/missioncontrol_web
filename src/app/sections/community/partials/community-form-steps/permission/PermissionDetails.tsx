@@ -4,14 +4,14 @@ import {PermissionDetailTableWrapper} from './PermissionDetailTable'
 import * as Yup from 'yup'
 import {ErrorMessage, Field, Form, Formik} from 'formik'
 import {FormAction} from '../../../../../helpers/form/FormAction'
-import {useCommunity} from '../../../CommunityContext'
+import {useCommunity} from '../../../core/CommunityContext'
 import {SwitchInput} from '../../../../../components/SwitchInput/SwitchInput'
 import {jsonToFormData, updateData} from '../../../../../helpers/form/FormHelper'
 import {FormErrorAlert} from '../../../../../modules/errors/partials/FormErrorAlert'
 import toast from 'react-hot-toast'
 import {addCommunityPermissions} from '../../../core/CommunityPermissionRequests'
 import {useAuth} from '../../../../../modules/auth'
-import {isCommunityAdmin, isSuperAdmin} from '../../../../../models/iam/User'
+import {isCommunityAdmin, isSuperAdmin} from '../../../../iam/user/core/User'
 
 export const communityPermissionSchema = Yup.object().shape({
   email: Yup.string().email().required('Email is required'),

@@ -5,7 +5,7 @@ import {SidebarMenuItem} from './SidebarMenuItem'
 import {useAuth} from '../../../../modules/auth'
 import {Restricted} from '../../../../modules/auth/core/AuthPermission'
 import {SidebarMenuItemWithSub} from './SidebarMenuItemWithSub'
-import {isCommunityAdmin} from '../../../../models/iam/User'
+import {isCommunityAdmin} from '../../../../sections/iam/user/core/User'
 
 const SidebarMenuMain = () => {
   const intl = useIntl()
@@ -38,7 +38,7 @@ const SidebarMenuMain = () => {
         <SidebarMenuItem to='/games' title='Games' fontIcon='fa-chess-pawn' />
       </Restricted>
 
-      <Restricted to='view-users'>
+      <Restricted to='view-iam'>
         <SidebarMenuItemWithSub
           to={['/iam/users', '/iam/roles', '/iam/permissions']}
           title='IAM'

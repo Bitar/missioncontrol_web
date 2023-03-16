@@ -1,5 +1,5 @@
 import * as Yup from 'yup'
-import {User} from '../iam/User'
+import {User} from '../../sections/iam/user/core/User'
 
 export const announcementSchema = Yup.object().shape({
   title: Yup.string().required('Title is required'),

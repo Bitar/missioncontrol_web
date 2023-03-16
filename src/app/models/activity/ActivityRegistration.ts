@@ -1,5 +1,5 @@
 import {Response} from '../../helpers/crud-helper/models'
-import {User} from '../iam/User'
+import {User} from '../../sections/iam/user/core/User'
 import {Team} from '../squad/Team'
 
 export type ActivityRegistration = {

@@ -2,7 +2,7 @@ import {ErrorMessage, Field, useFormikContext} from 'formik'
 import React, {FC, useEffect, useState} from 'react'
 import {Community} from '../../../../models/community/Community'
 import {useActivityForm} from '../../core/contexts/ActivityFormContext'
-import {isCommunityAdmin} from '../../../../models/iam/User'
+import {isCommunityAdmin} from '../../../iam/user/core/User'
 import Select from 'react-select'
 import {updateData} from '../../../../helpers/form/FormHelper'
 import {useAuth} from '../../../../modules/auth'
@@ -89,7 +89,6 @@ const GeneralDetail: FC = () => {
           <label className='col-lg-4 col-form-label required fw-bold fs-6'>Community</label>
           <div className='col-lg-8 fv-row'>
             <Select
-              required={true}
               name='community_id'
               placeholder={'Choose a Community'}
               options={communities}

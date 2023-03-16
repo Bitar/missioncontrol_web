@@ -3,7 +3,7 @@ import React, {FC, useEffect, useState} from 'react'
 import {KTCard, KTCardBody, KTCardHeader} from '../../../../helpers/components'
 import {Community} from '../../../../models/community/Community'
 import {useActivityForm} from '../../core/contexts/ActivityFormContext'
-import {isCommunityAdmin} from '../../../../models/iam/User'
+import {isCommunityAdmin} from '../../../iam/user/core/User'
 import Select from 'react-select'
 import {jsonToFormData, updateData} from '../../../../helpers/form/FormHelper'
 import {useAuth} from '../../../../modules/auth'
@@ -86,7 +86,9 @@ const GeneralDetail: FC = () => {
                 </div>
 
                 <div className='row mb-6'>
-                  <label className='col-lg-4 col-form-label required fw-bold fs-6'>Description</label>
+                  <label className='col-lg-4 col-form-label required fw-bold fs-6'>
+                    Description
+                  </label>
                   <div className='col-lg-8 fv-row'>
                     <Field
                       as='textarea'

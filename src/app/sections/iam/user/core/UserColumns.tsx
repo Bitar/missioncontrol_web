@@ -3,11 +3,12 @@ import {TextCell} from '../../../../modules/table/columns/TextCell'
 import {CustomHeader} from '../../../../modules/table/columns/CustomHeader'
 import {ActionsCell} from '../../../../modules/table/columns/ActionsCell'
 import {QUERIES} from '../../../../../_metronic/helpers'
-import {User} from '../../../../models/iam/User'
+import {User} from './User'
 import {Role} from '../../../../models/iam/Role'
 import {TextImageCell} from '../../../../modules/table/columns/TextImageCell'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
+import {useAccessControl} from '../../../../modules/auth/core/AuthPermission'
 
 dayjs.extend(localizedFormat)
 const usersColumns: ReadonlyArray<Column<User>> = [
@@ -36,31 +37,25 @@ const usersColumns: ReadonlyArray<Column<User>> = [
   },
   {
     Header: (props) => (
-      <CustomHeader tableProps={props} title='Last Login' className='min-w-125px' />
-    ),
-    id: 'last_login',
-    Cell: ({...props}) => (
-      <div className='badge badge-light fw-bolder'>
-        {dayjs(new Date(props.data[props.row.index].created_at * 1000)).format('lll')}
-      </div>
-    ),
-  },
-  {
-    Header: (props) => (
       <CustomHeader tableProps={props} title='Actions' className='text-end min-w-100px' />
     ),
     id: 'actions',
-    Cell: ({...props}) => (
-      <ActionsCell
-        id={props.data[props.row.index].id}
-        path={'iam/users'}
-        queryKey={QUERIES.USERS_LIST}
-        showView={true}
-        showEdit={false}
-        title='Delete User'
-        text={`Are you sure you want to delete the user '${props.data[props.row.index].name}'?`}
-      />
-    ),
+    Cell: ({...props}) => {
+      const accessControl = useAccessControl()
+
+      return (
+        <ActionsCell
+          id={props.data[props.row.index].id}
+          path={'iam/users'}
+          queryKey={QUERIES.USERS_LIST}
+          showView={true}
+          showEdit={accessControl.userCan('manage-iam')}
+          showDelete={accessControl.userCan('delete-iam')}
+          title='Delete User'
+          text={`Are you sure you want to delete the user '${props.data[props.row.index].name}'?`}
+        />
+      )
+    },
   },
 ]
 

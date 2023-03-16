@@ -1,5 +1,5 @@
 import {Response} from '../../../_metronic/helpers'
-import {User} from '../iam/User'
+import {User} from '../../sections/iam/user/core/User'
 import * as Yup from 'yup'
 
 export const chatSchema = Yup.object().shape({

@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
 import {PageLink, PageTitle} from '../../layout/core'
 import {Route, Routes} from 'react-router-dom'
-import {ActivityIndex} from '../../sections/activity/pages/ActivityIndex'
+import ActivityIndex from '../../sections/activity/pages/ActivityIndex'
 import {ActivityView} from '../../sections/activity/pages/ActivityView'
 import {SuspenseView} from '../../layout/SuspenseView'
 import {ActivityCreate} from '../../sections/activity/pages/ActivityCreate'
@@ -9,7 +9,7 @@ import {ActivityCreate} from '../../sections/activity/pages/ActivityCreate'
 const activityBreadCrumbs: Array<PageLink> = [
   {
     title: 'Activities',
-    path: '/activities/overview',
+    path: '/activities',
     isSeparator: false,
     isActive: false,
   },
@@ -27,34 +27,28 @@ const ActivityRoutes: FC = () => {
       <Route
         index
         element={
-          <>
-            <SuspenseView>
-              <PageTitle breadcrumbs={activityBreadCrumbs}>{'Overview'}</PageTitle>
-              <ActivityIndex />
-            </SuspenseView>
-          </>
+          <SuspenseView>
+            <PageTitle breadcrumbs={activityBreadCrumbs}>{'Overview'}</PageTitle>
+            <ActivityIndex />
+          </SuspenseView>
         }
       />
       <Route
         path='/create'
         element={
-          <>
-            <SuspenseView>
-              <PageTitle breadcrumbs={activityBreadCrumbs}>{'Add Activity'}</PageTitle>
-              <ActivityCreate />
-            </SuspenseView>
-          </>
+          <SuspenseView>
+            <PageTitle breadcrumbs={activityBreadCrumbs}>{'Add Activity'}</PageTitle>
+            <ActivityCreate />
+          </SuspenseView>
         }
       />
       <Route
         path='/:id/*'
         element={
-          <>
-            <SuspenseView>
-              <PageTitle breadcrumbs={activityBreadCrumbs}>{'View Community'}</PageTitle>
-              <ActivityView />
-            </SuspenseView>
-          </>
+          <SuspenseView>
+            <PageTitle breadcrumbs={activityBreadCrumbs}>{'View Community'}</PageTitle>
+            <ActivityView />
+          </SuspenseView>
         }
       />
     </Routes>

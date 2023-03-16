@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import {Game} from '../../../models/game/Game'
-import {Navigate, Outlet, Route, Routes, useParams} from 'react-router-dom'
+import {Outlet, Route, Routes, useParams} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../layout/core'
 import {getGameById} from '../core/GameRequests'
 import {GameSettings} from './GameSettings'
-import {GameInfo} from '../GameInfo'
+import {GameInfo} from '../partials/GameInfo'
 import {GameModes} from './GameModes'
 import {GameContext} from '../core/GameContext'
 import {Restricted} from '../../../modules/auth/core/AuthPermission'
@@ -16,7 +16,7 @@ const GameView: React.FC = () => {
   const gameViewBreadCrumbs: Array<PageLink> = [
     {
       title: 'Games',
-      path: '/games/overview',
+      path: '/games',
       isSeparator: false,
       isActive: false,
     },
@@ -28,7 +28,7 @@ const GameView: React.FC = () => {
     },
     {
       title: game?.title || '',
-      path: '/games/' + params.id + '/overview',
+      path: '/games/' + params.id,
       isSeparator: false,
       isActive: false,
     },
@@ -70,7 +70,7 @@ const GameView: React.FC = () => {
           }
         >
           <Route
-            path='overview'
+            index
             element={
               <>
                 <PageTitle breadcrumbs={gameViewBreadCrumbs}>Overview</PageTitle>
@@ -96,7 +96,6 @@ const GameView: React.FC = () => {
               </Restricted>
             }
           />
-          <Route index element={<Navigate to={'/games/' + params.id + '/overview'} />} />
         </Route>
       </Routes>
     </GameContext.Provider>

@@ -3,10 +3,7 @@ import clsx from 'clsx'
 import {ChatMessage, chatSchema, initialChat} from '../../../models/chat/ChatMessage'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import TextField from '@mui/material/TextField'
-import {IconButton} from '@mui/material'
-import SendIcon from '@mui/icons-material/Send'
-import {Form, Formik} from 'formik'
+import {ErrorMessage, Field, Form, Formik} from 'formik'
 import {jsonToFormData} from '../../../helpers/form/FormHelper'
 // import {sendActivityChat} from '../core/ActivityRequests'
 import {useParams} from 'react-router-dom'
@@ -119,35 +116,47 @@ const MatchChatInner: FC<Props> = ({chat, setChat, isDrawer = false}) => {
               className='card-footer d-flex justify-content-end py-6 px-9'
               id='kt_chat_messenger_footer'
             >
-              <TextField
-                multiline
-                id='message'
-                size='small'
-                name='message'
-                label='Message'
-                className='w-100'
-                variant='standard'
-                value={values.message}
-                onChange={(e) => setMessage({message: e.target.value})}
-                error={touched.message && Boolean(errors.message)}
-                helperText={touched.message && errors.message}
-              />
+              {/*<TextField*/}
+              {/*  multiline*/}
+              {/*  id='message'*/}
+              {/*  size='small'*/}
+              {/*  name='message'*/}
+              {/*  label='Message'*/}
+              {/*  className='w-100'*/}
+              {/*  variant='standard'*/}
+              {/*  value={values.message}*/}
+              {/*  onChange={(e) => setMessage({message: e.target.value})}*/}
+              {/*  error={touched.message && Boolean(errors.message)}*/}
+              {/*  helperText={touched.message && errors.message}*/}
+              {/*/>*/}
 
-              <IconButton
-                type='submit'
-                aria-label='send'
-                className='text-mc-secondary'
-                disabled={isSubmitting || !isValid || !touched}
-                sx={{
-                  p: '10px',
-                  ml: 1,
-                  '&.MuiButtonBase-root:hover': {
-                    bgcolor: 'transparent',
-                  },
-                }}
-              >
-                <SendIcon />
-              </IconButton>
+              <Field
+                as='textarea'
+                id='message'
+                name='message'
+                className='form-control mb-3 mb-lg-0'
+                autoComplete='off'
+                onChange={(e: any) => setMessage({message: e.target.value})}
+              />
+              <div className='text-danger mt-2'>
+                <ErrorMessage name='message' />
+              </div>
+
+              {/*<IconButton*/}
+              {/*  type='submit'*/}
+              {/*  aria-label='send'*/}
+              {/*  className='text-mc-secondary'*/}
+              {/*  disabled={isSubmitting || !isValid || !touched}*/}
+              {/*  sx={{*/}
+              {/*    p: '10px',*/}
+              {/*    ml: 1,*/}
+              {/*    '&.MuiButtonBase-root:hover': {*/}
+              {/*      bgcolor: 'transparent',*/}
+              {/*    },*/}
+              {/*  }}*/}
+              {/*>*/}
+              {/*  <SendIcon />*/}
+              {/*</IconButton>*/}
             </div>
           </Form>
         )}

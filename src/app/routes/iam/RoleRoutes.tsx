@@ -1,9 +1,9 @@
 import {Route, Routes} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../layout/core'
 import React from 'react'
-import {RoleIndex} from '../../sections/iam/role/RoleIndex'
-import {RoleCreate} from '../../sections/iam/role/RoleCreate'
-import {RoleEdit} from '../../sections/iam/role/RoleEdit'
+import RoleIndex from '../../sections/iam/role/pages/RoleIndex'
+import {RoleCreate} from '../../sections/iam/role/pages/RoleCreate'
+import {RoleEdit} from '../../sections/iam/role/pages/RoleEdit'
 import {SuspenseView} from '../../layout/SuspenseView'
 
 const rolesBreadCrumbs: Array<PageLink> = [

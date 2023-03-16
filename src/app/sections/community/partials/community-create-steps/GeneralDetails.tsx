@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
 import {ErrorMessage, Field} from 'formik'
-import {LogoImage} from '../LogoImage'
-import {BannerImage} from '../BannerImage'
+import {LogoImage} from '../../components/LogoImage'
+import {BannerImage} from '../../components/BannerImage'
 import {useCommunityForm} from '../../core/CommunityFormContext'
 
 const GeneralDetails: FC = () => {

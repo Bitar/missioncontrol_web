@@ -1,10 +1,10 @@
 import React, {FC} from 'react'
 import {ErrorMessage, Field, Form, Formik} from 'formik'
 import {communitySchema} from '../../../../models/community/Community'
-import {useCommunity} from '../../CommunityContext'
+import {useCommunity} from '../../core/CommunityContext'
 import {KTCard, KTCardBody, KTCardHeader} from '../../../../helpers/components'
-import {LogoImage} from '../LogoImage'
-import {BannerImage} from '../BannerImage'
+import {LogoImage} from '../../components/LogoImage'
+import {BannerImage} from '../../components/BannerImage'
 import {FormAction} from '../../../../helpers/form/FormAction'
 import {jsonToFormData, updateData} from '../../../../helpers/form/FormHelper'
 import {updateAdminCommunity, updateCommunity} from '../../core/CommunityRequests'
@@ -12,7 +12,7 @@ import toast from 'react-hot-toast'
 import {useParams} from 'react-router-dom'
 import {useCommunityForm} from '../../core/CommunityFormContext'
 import {useAuth} from '../../../../modules/auth'
-import {isSuperAdmin} from '../../../../models/iam/User'
+import {isSuperAdmin} from '../../../iam/user/core/User'
 import {SwitchInput} from '../../../../components/SwitchInput/SwitchInput'
 import Select from 'react-select'
 
@@ -101,7 +101,9 @@ const GeneralDetail: FC = () => {
                 </div>
 
                 <div className='row mb-6'>
-                  <label className='col-lg-4 col-form-label required fw-bold fs-6'>Description</label>
+                  <label className='col-lg-4 col-form-label required fw-bold fs-6'>
+                    Description
+                  </label>
                   <div className='col-lg-8 fv-row'>
                     <Field
                       as='textarea'

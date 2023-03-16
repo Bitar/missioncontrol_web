@@ -1,42 +1,43 @@
-import axios, {AxiosResponse} from 'axios'
+import axios, {AxiosError, AxiosResponse} from 'axios'
 
 import {Response} from '../../../../../_metronic/helpers'
-import {Permission, PermissionQueryResponse} from '../../../../models/iam/Permission'
+import {Permission, PermissionList} from '../../../../models/iam/Permission'
 
 const API_URL = process.env.REACT_APP_API_URL
-const GET_PERMISSIONS_URL = `${API_URL}/iam/permissions`
+const ENDPOINT = `${API_URL}/iam/permissions`
 
-const getPermissions = (query: string): Promise<PermissionQueryResponse> => {
-  return axios
-    .get(`${GET_PERMISSIONS_URL}?${query}`)
-    .then((d: AxiosResponse<PermissionQueryResponse>) => d.data)
+const getPermissions = (query: string): Promise<PermissionList> => {
+  return axios.get(`${ENDPOINT}?${query}`).then((d: AxiosResponse<PermissionList>) => d.data)
 }
 
 const getPermissionById = (id: any): Promise<Permission | undefined> => {
   return axios
-    .get(`${GET_PERMISSIONS_URL}/${id}`)
+    .get(`${ENDPOINT}/${id}`)
     .then((response: AxiosResponse<Response<Permission>>) => response.data)
     .then((response: Response<Permission>) => response.data)
 }
 
 const createPermission = (permission: Permission): Promise<Permission | undefined> => {
   return axios
-    .post(`${GET_PERMISSIONS_URL}`, permission)
+    .post(`${ENDPOINT}`, permission)
     .then((response: AxiosResponse<Response<Permission>>) => response.data)
     .then((response: Response<Permission>) => response.data)
 }
 
 const updatePermission = (id: any, permission: Permission): Promise<Permission | undefined> => {
   return axios
-    .put(`${GET_PERMISSIONS_URL}/${id}`, permission)
+    .put(`${ENDPOINT}/${id}`, permission)
     .then((response: AxiosResponse<Response<Permission>>) => response.data)
     .then((response: Response<Permission>) => response.data)
 }
 
-const getAllPermissions = (): Promise<PermissionQueryResponse> => {
+const getAllPermissions = (): Promise<PermissionList | AxiosError | undefined> => {
   return axios
-    .get(`${GET_PERMISSIONS_URL}/all`)
-    .then((response: AxiosResponse<PermissionQueryResponse>) => response.data)
+    .get(`${ENDPOINT}/all?sort[]=name`)
+    .then((response: AxiosResponse<PermissionList>) => response.data)
+    .catch((error) => {
+      return error
+    })
 }
 
 export {getPermissions, getPermissionById, createPermission, updatePermission, getAllPermissions}

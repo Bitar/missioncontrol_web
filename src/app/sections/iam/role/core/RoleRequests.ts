@@ -1,32 +1,38 @@
-import axios, {AxiosResponse} from 'axios'
+import axios, {AxiosError, AxiosResponse} from 'axios'
 import {Response} from '../../../../../_metronic/helpers'
-import {Role, RolesQueryResponse} from '../../../../models/iam/Role'
+import {Role, RoleList} from '../../../../models/iam/Role'
 
 const API_URL = process.env.REACT_APP_API_URL
 const GET_ROLES_URL = `${API_URL}/iam/roles`
 
-const getRoles = (query?: string): Promise<RolesQueryResponse> => {
+const getRoles = (query?: string): Promise<RoleList> => {
   let url = `${GET_ROLES_URL}`
 
   if (query) {
     url += `?${query}`
   }
 
-  return axios.get(url).then((d: AxiosResponse<RolesQueryResponse>) => d.data)
+  return axios.get(url).then((d: AxiosResponse<RoleList>) => d.data)
 }
 
-const getRoleById = (id: any): Promise<Role | undefined> => {
+const getRole = (id: any): Promise<Role | AxiosError | undefined> => {
   return axios
     .get(`${GET_ROLES_URL}/${id}`)
     .then((response: AxiosResponse<Response<Role>>) => response.data)
     .then((response: Response<Role>) => response.data)
+    .catch((error) => {
+      return error
+    })
 }
 
-const createRole = (formData: FormData): Promise<Role | undefined> => {
+const createRole = (formData: FormData): Promise<Role | AxiosError | undefined> => {
   return axios
     .post(`${GET_ROLES_URL}`, formData)
     .then((response: AxiosResponse<Response<Role>>) => response.data)
     .then((response: Response<Role>) => response.data)
+    .catch((error) => {
+      return error
+    })
 }
 
 const updateRole = (id: any, formData: FormData): Promise<Role | undefined> => {
@@ -36,4 +42,4 @@ const updateRole = (id: any, formData: FormData): Promise<Role | undefined> => {
     .then((response: Response<Role>) => response.data)
 }
 
-export {getRoles, getRoleById, createRole, updateRole}
+export {getRoles, getRole, createRole, updateRole}

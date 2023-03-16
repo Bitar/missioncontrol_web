@@ -8,9 +8,9 @@ import {GameMode} from '../../../models/game/GameMode'
 import {GameModeWrapper} from './GameModeWrapper'
 import {NewGameModeWrapper} from './NewGameModeWrapper'
 import {deleteObject} from '../../../requests'
-import {usePermissions} from '../../../modules/auth/core/AuthPermission'
+import {useAccessControl} from '../../../modules/auth/core/AuthPermission'
 import {useAuth} from '../../../modules/auth'
-import {isCommunityAdmin, isSuperAdmin} from '../../../models/iam/User'
+import {isCommunityAdmin, isSuperAdmin} from '../../iam/user/core/User'
 
 const GameModes: FC = () => {
   const [showManage, setShowManage] = useState<boolean>(false)
@@ -18,7 +18,7 @@ const GameModes: FC = () => {
   const params = useParams()
   const [gameMode, setGameMode] = useState<GameMode>()
   const [newGameMode, setNewGameMode] = useState<boolean>(false)
-  const {isAllowedTo} = usePermissions()
+  const {userCan} = useAccessControl()
   const {currentUser} = useAuth()
 
   useEffect(() => {
@@ -55,10 +55,7 @@ const GameModes: FC = () => {
 
   useEffect(() => {
     if (currentUser) {
-      if (
-        isSuperAdmin(currentUser) ||
-        (isCommunityAdmin(currentUser) && isAllowedTo('manage-games'))
-      ) {
+      if (isSuperAdmin(currentUser) || (isCommunityAdmin(currentUser) && userCan('manage-games'))) {
         setShowManage(true)
       }
     }
