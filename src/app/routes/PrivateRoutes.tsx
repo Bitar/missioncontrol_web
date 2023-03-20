@@ -71,7 +71,7 @@ const PrivateRoutes = () => {
         />
 
         <Route
-          path="/profile"
+          path="profile"
           element={
             <SuspenseView>
               <ProfilePage/>

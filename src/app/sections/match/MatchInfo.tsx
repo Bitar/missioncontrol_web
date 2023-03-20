@@ -22,7 +22,7 @@ const MatchInfo = () => {
   const links = [
     {
       text: 'Overview',
-      link: '/activities/' + match?.activity?.id + '/matches/' + match?.id + '/overview',
+      link: '/activities/' + match?.activity?.id + '/matches/' + match?.id,
     },
     {
       text: 'Chat',
