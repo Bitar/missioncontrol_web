@@ -45,7 +45,7 @@ const MatchInfo = () => {
 
     if (isConfirmed) {
       rejectMatchDispute(match?.id).then((response) => {
-        // setMatch(response)
+        setMatch(response)
         toast.error('Match dispute rejected!')
       })
     }
@@ -61,7 +61,7 @@ const MatchInfo = () => {
 
     if (isConfirmed) {
       approveMatchDispute(match?.id).then((response) => {
-        // setMatch(response)
+        setMatch(response)
         toast.success('Match dispute approved!')
       })
     }

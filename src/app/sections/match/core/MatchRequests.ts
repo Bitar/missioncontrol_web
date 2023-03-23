@@ -32,22 +32,22 @@ export const updateMatchResult = (id: any, formData: FormData): Promise<Match | 
     .then((response: Response<Match>) => response.data)
 }
 
-export const rejectMatchDispute = (id: any): Promise<Match | undefined> => {
+export const rejectMatchDispute = (id: any): Promise<NewMatch | undefined> => {
   let url = `${MATCHES_URL}/${id}/dispute/reject`
 
   return axios
     .post(url)
-    .then((response: AxiosResponse<Response<Match>>) => response.data)
-    .then((response: Response<Match>) => response.data)
+    .then((response: AxiosResponse<Response<NewMatch>>) => response.data)
+    .then((response: Response<NewMatch>) => response.data)
 }
 
-export const approveMatchDispute = (id: any): Promise<Match | undefined> => {
+export const approveMatchDispute = (id: any): Promise<NewMatch | undefined> => {
   let url = `${MATCHES_URL}/${id}/dispute/approve`
 
   return axios
     .post(url)
-    .then((response: AxiosResponse<Response<Match>>) => response.data)
-    .then((response: Response<Match>) => response.data)
+    .then((response: AxiosResponse<Response<NewMatch>>) => response.data)
+    .then((response: Response<NewMatch>) => response.data)
 }
 export const rescheduleMatch = (id: any, formData: FormData): Promise<NewMatch | undefined> => {
   let url = `${MATCHES_URL}/${id}/reschedule`
