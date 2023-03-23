@@ -20,6 +20,11 @@ export type NewMatch = {
     }
   }
   dynamic_link: string
+
+  dispute?: {
+    user: User
+    message: string
+  }
 }
 
 export type Match = {
