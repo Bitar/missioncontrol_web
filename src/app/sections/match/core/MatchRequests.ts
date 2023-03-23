@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from 'axios'
 import {ChatMessage, ChatMessageQueryResponse} from '../../../models/chat/ChatMessage'
 import {Response} from '../../../helpers/crud-helper/models'
-import { Match, NewMatch } from "../../../models/activity/matches/Match";
+import {Match, NewMatch} from '../../../models/activity/matches/Match'
 // import process from "process";
 
 const API_URL = process.env.REACT_APP_API_URL

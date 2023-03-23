@@ -12,7 +12,7 @@ import toast from 'react-hot-toast'
 import {addCommunityPermissions} from '../../../core/CommunityPermissionRequests'
 import {useAuth} from '../../../../../modules/auth'
 import {isCommunityAdmin, isSuperAdmin} from '../../../../iam/user/core/User'
-import { useQueryResponse } from "../../../../../modules/table/QueryResponseProvider";
+import {useQueryResponse} from '../../../../../modules/table/QueryResponseProvider'
 
 export const communityPermissionSchema = Yup.object().shape({
   email: Yup.string().email().required('Email is required'),
@@ -65,7 +65,7 @@ const PermissionDetails = () => {
         })
         setAlertMessage('')
         setHasErrors(false)
-        refetch();
+        refetch()
       })
       .catch(function (e) {
         if (e.response) {

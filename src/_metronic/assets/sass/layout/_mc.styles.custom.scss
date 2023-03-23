@@ -186,9 +186,8 @@
   position: relative;
   width: 100%;
   max-width: 1000px;
-  padding-bottom: calc(100% / 1.91); /* Set the padding-bottom to maintain the aspect ratio of 1.91 */
+  padding-bottom: calc(
+    100% / 1.91
+  ); /* Set the padding-bottom to maintain the aspect ratio of 1.91 */
   overflow: hidden;
-
 }
-
-

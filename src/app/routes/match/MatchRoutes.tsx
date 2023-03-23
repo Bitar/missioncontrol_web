@@ -1,6 +1,6 @@
 import {Outlet, Route, Routes, useParams} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../layout/core'
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, {FC, useEffect, useRef, useState} from 'react'
 import {MatchInfo} from '../../sections/match/MatchInfo'
 import {MatchOverview} from '../../sections/match/MatchOverview'
 import {getActivityMatch} from '../../sections/activity/core/requests/ActivityMatchRequests'

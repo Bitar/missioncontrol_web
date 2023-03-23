@@ -1,15 +1,19 @@
 import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvider'
 import {QUERIES} from '../../../helpers/crud-helper/consts'
-import { EXPORT_ENDPOINT, getActivityMembers } from "../core/requests/ActivityRequests";
+import {EXPORT_ENDPOINT, getActivityMembers} from '../core/requests/ActivityRequests'
 import {ListViewProvider} from '../../../modules/table/ListViewProvider'
-import { KTCard, KTCardBody, KTCardHeader } from "../../../helpers/components";
+import {KTCard, KTCardBody, KTCardHeader} from '../../../helpers/components'
 import {ActivityMembersFilter} from '../partials/ActivityMembersFilter'
 import {ActivityMembers} from './ActivityMembers'
 import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
-import React, { useState } from "react";
+import React, {useState} from 'react'
 import {useActivity} from '../core/contexts/ActivityContext'
-import { CreateCardAction, ExportCardAction, FilterCardAction } from "../../../components/misc/CardAction";
-import { UserFilter } from "../../iam/user/partials/UserFilter";
+import {
+  CreateCardAction,
+  ExportCardAction,
+  FilterCardAction,
+} from '../../../components/misc/CardAction'
+import {UserFilter} from '../../iam/user/partials/UserFilter'
 
 export const ActivityMembersSection = () => {
   const {activity} = useActivity()
@@ -38,7 +42,7 @@ export const ActivityMembersSection = () => {
               ]}
             />
             <KTCardBody>
-              <ActivityMembersFilter setExportQuery={setExportQuery} showFilter={showFilter}/>
+              <ActivityMembersFilter setExportQuery={setExportQuery} showFilter={showFilter} />
 
               <ActivityMembers />
             </KTCardBody>
