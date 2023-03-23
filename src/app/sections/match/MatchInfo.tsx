@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link, useLocation} from 'react-router-dom'
 import {createDateFrom, formatMatchStatus} from '../../helpers/ActivityHelper'
-import {KTCard, KTCardBody} from '../../helpers/components'
+import { KTCard, KTCardBody, KTSVG } from "../../helpers/components";
 import clsx from 'clsx'
 import {TeamImage} from '../activity/components/TeamImage'
 import {approveMatchDispute, rejectMatchDispute} from './core/MatchRequests'
@@ -148,43 +148,43 @@ const MatchInfo = () => {
           )}
         </div>
 
-        {/*{match?.dispute && (*/}
-        {/*  <div className='notice bg-light-warning rounded border-warning border border-dashed p-6'>*/}
-        {/*    <div className='d-flex'>*/}
-        {/*      <KTSVG*/}
-        {/*        path='/media/icons/duotune/gen044.svg'*/}
-        {/*        className='svg-icon-2tx svg-icon-warning me-4'*/}
-        {/*      />*/}
-        {/*      <div className='d-flex flex-grow-1'>*/}
-        {/*        <div className='fw-bold'>*/}
-        {/*          <h4 className='text-gray-800 fw-bolder'>*/}
-        {/*            {match?.dispute?.user?.name + ' has disputed!'}*/}
-        {/*          </h4>*/}
-        {/*          <div className='fs-6 text-gray-600'>*/}
-        {/*            <span className='text-gray-700'>Reason: </span>*/}
-        {/*            {match?.dispute?.message}*/}
-        {/*          </div>*/}
-        {/*        </div>*/}
-        {/*      </div>*/}
-        {/*    </div>*/}
-        {/*    {match?.status !== 6 && match?.status !== 7 && (*/}
-        {/*      <div className='d-flex justify-content-center mt-3'>*/}
-        {/*        <div>*/}
-        {/*          <button onClick={approveDispute} type='button' className='btn btn-sm btn-success'>*/}
-        {/*            Approve*/}
-        {/*          </button>*/}
-        {/*          <button*/}
-        {/*            onClick={rejectDispute}*/}
-        {/*            type='button'*/}
-        {/*            className='btn btn-sm btn-danger ms-3'*/}
-        {/*          >*/}
-        {/*            Reject*/}
-        {/*          </button>*/}
-        {/*        </div>*/}
-        {/*      </div>*/}
-        {/*    )}*/}
-        {/*  </div>*/}
-        {/*)}*/}
+        {match?.dispute && (
+          <div className='notice bg-light-warning rounded border-warning border border-dashed p-6'>
+            <div className='d-flex'>
+              <KTSVG
+                path='/media/icons/duotune/gen044.svg'
+                className='svg-icon-2tx svg-icon-warning me-4'
+              />
+              <div className='d-flex flex-grow-1'>
+                <div className='fw-bold'>
+                  <h4 className='text-gray-800 fw-bolder'>
+                    {match?.dispute?.user?.name + ' has disputed!'}
+                  </h4>
+                  <div className='fs-6 text-gray-600'>
+                    <span className='text-gray-700'>Reason: </span>
+                    {match?.dispute?.message}
+                  </div>
+                </div>
+              </div>
+            </div>
+            {match?.status !== 6 && match?.status !== 7 && (
+              <div className='d-flex justify-content-center mt-3'>
+                <div>
+                  <button onClick={approveDispute} type='button' className='btn btn-sm btn-success'>
+                    Approve
+                  </button>
+                  <button
+                    onClick={rejectDispute}
+                    type='button'
+                    className='btn btn-sm btn-danger ms-3'
+                  >
+                    Reject
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </KTCardBody>
       <div className='separator mt-10'></div>
       <KTCardBody className='p-0 rounded-3 rounded-bottom'>

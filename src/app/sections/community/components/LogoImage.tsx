@@ -57,7 +57,6 @@ const LogoImage: FC<Props> = ({community, setCommunity}) => {
   }
 
   return (
-    <>
       <div className='col-lg-4'>
         <div
           className={clsx('image-input image-input-outline', {
@@ -104,7 +103,6 @@ const LogoImage: FC<Props> = ({community, setCommunity}) => {
           <ErrorMessage name='logo' />
         </div>
       </div>
-    </>
   )
 }
 

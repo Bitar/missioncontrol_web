@@ -185,9 +185,15 @@
 .crop-container {
   position: relative;
   width: 100%;
+  height: 100%;
   max-width: 1000px;
   padding-bottom: calc(
     100% / 1.91
   ); /* Set the padding-bottom to maintain the aspect ratio of 1.91 */
   overflow: hidden;
+}
+
+.ratio-1-91x1 {
+  position: relative;
+  --bs-aspect-ratio:52.36%
 }

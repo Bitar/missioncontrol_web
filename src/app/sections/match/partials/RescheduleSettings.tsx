@@ -11,6 +11,9 @@ import moment from 'moment/moment'
 import * as Yup from 'yup'
 import {useActivity} from '../../activity/core/contexts/ActivityContext'
 import {rescheduleMatch} from '../core/MatchRequests'
+import { useMcApp } from "../../../modules/general/McApp";
+import { AlertMessageGenerator } from "../../../helpers/AlertMessageGenerator";
+import { Actions, ToastType } from "../../../helpers/variables";
 
 type matchForm = {
   start_date: number
@@ -23,6 +26,7 @@ export const matchDateSchema = Yup.object().shape({
 })
 
 export const RescheduleSettings = () => {
+  const mcApp = useMcApp()
   const [matchForm, setMatchForm] = useState<matchForm>({start_date: 0, time: 0})
   const {match, setMatch} = useMatch()
   const {activity} = useActivity()
@@ -34,6 +38,10 @@ export const RescheduleSettings = () => {
     let data = jsonToFormData(matchForm)
     rescheduleMatch(match?.id, data).then((response) => {
       setMatch(response)
+      mcApp.setAlert({
+        message: new AlertMessageGenerator('match schedule', Actions.EDIT, ToastType.SUCCESS).message,
+        type: ToastType.SUCCESS,
+      })
     })
   }
 

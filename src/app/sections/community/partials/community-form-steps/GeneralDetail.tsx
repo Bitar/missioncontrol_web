@@ -15,6 +15,7 @@ import {useAuth} from '../../../../modules/auth'
 import {isSuperAdmin} from '../../../iam/user/core/User'
 import {SwitchInput} from '../../../../components/SwitchInput/SwitchInput'
 import Select from 'react-select'
+import { ImageCrop } from "../../components/ImageCrop";
 
 const GeneralDetail: FC = () => {
   const {communityForm, setCommunityForm} = useCommunityForm()
@@ -77,9 +78,24 @@ const GeneralDetail: FC = () => {
 
                   <div className='col-lg-8'>
                     <div className='row'>
-                      <LogoImage community={communityForm} setCommunity={setCommunityForm} />
+                      <div className="col-lg-4">
+                        <ImageCrop isSquare={true}
+                                   community={communityForm}
+                                   setCommunity={setCommunityForm}
+                                   ratio={1}
+                                   name='logo'
+                        />
+                      </div>
+                      <div className="col-lg-8">
+                        <ImageCrop aspectRatioClass={"ratio ratio-1-91x1"} community={communityForm}
+                                   setCommunity={setCommunityForm}
+                                   ratio={1.91}
+                                   name='banner_image'
+                        />
+                      </div>
+                      {/*<LogoImage community={communityForm} setCommunity={setCommunityForm} />*/}
 
-                      <BannerImage community={communityForm} setCommunity={setCommunityForm} />
+                      {/*<BannerImage community={communityForm} setCommunity={setCommunityForm} />*/}
                     </div>
                   </div>
                 </div>
