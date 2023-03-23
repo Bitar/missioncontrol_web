@@ -40,11 +40,6 @@ const ActivityInfo: FC = () => {
       link: '/activities/' + activity?.id + '/members',
     },
     {
-      icon: 'fa-solid fa-rocket',
-      text: `Teams (${activity?.additional_data?.teams_count || 0})`,
-      link: '/activities/' + activity?.id + '/teams',
-    },
-    {
       text: 'Chat',
       link: '/activities/' + activity?.id + '/chat',
     },

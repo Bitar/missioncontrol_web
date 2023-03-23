@@ -9,7 +9,6 @@ const ENDPOINT = `${API_URL}/communities`
 const ENDPOINT_ADMIN = `${API_URL}/admin/communities`
 
 export const EXPORT_ENDPOINT = `${API_URL}/export/communities`
-export const EXPORT_USERS_ENDPOINT = `${API_URL}/export/communities/users`
 
 const getCommunities = (query: String): Promise<CommunityQueryResponse> => {
   return axios

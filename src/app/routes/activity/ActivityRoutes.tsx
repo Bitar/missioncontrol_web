@@ -2,7 +2,7 @@ import React, {FC} from 'react'
 import {PageLink, PageTitle} from '../../layout/core'
 import {Route, Routes} from 'react-router-dom'
 import ActivityIndex from '../../sections/activity/pages/ActivityIndex'
-import {ActivityView} from '../../sections/activity/pages/ActivityView'
+import {ActivityViewRoutes} from './ActivityViewRoutes'
 import {SuspenseView} from '../../layout/SuspenseView'
 import {ActivityCreate} from '../../sections/activity/pages/ActivityCreate'
 
@@ -47,7 +47,7 @@ const ActivityRoutes: FC = () => {
         element={
           <SuspenseView>
             <PageTitle breadcrumbs={activityBreadCrumbs}>{'View Community'}</PageTitle>
-            <ActivityView />
+            <ActivityViewRoutes />
           </SuspenseView>
         }
       />
