@@ -50,8 +50,7 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
 
   const deleteItem = async () => {
     const {isConfirmed} = await Swal.fire({
-      title: title && 'Delete',
-      text: text && 'Are you sure you want to delete this item?',
+      text: 'Are you sure you want to delete this item?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Confirm Delete',
@@ -67,12 +66,13 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
         })
         .catch((error) => {
           if (axios.isAxiosError(error)) {
-            const errorMessages = extractErrors(error).map(
-              (errorMessage) => `<li>${errorMessage}</li>`
-            )
+            // const errorMessages = extractErrors(error).map(
+            //   (errorMessage) => `<li>${errorMessage}</li>`
+            // );
 
+            // console.log(error?.response?.data?.errors);
             // we need to show the error
-            Swal.fire('Something Wrong Happened', '<p>' + errorMessages.join() + '</p>', 'error')
+            Swal.fire('Not Allowed', '<p>' + error?.response?.data?.errors + '</p>', 'error')
           } else if (error === undefined) {
             // we need to show a generic error
             Swal.fire(
@@ -91,9 +91,9 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
   }
 
   return (
-    <>
+    <div className='d-flex'>
       {showView && (
-        <Link to={'/' + path + '/' + id} className='btn btn-icon btn-active-light-info'>
+        <Link to={'/' + path + '/' + id} className='btn btn-icon btn-active-light-info btn-sm'>
           <i className={clsx('fa-duotone fs-3 text-info', 'fa-circle-info')}></i>
         </Link>
       )}
@@ -101,7 +101,7 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
       {showEdit && (
         <Link
           to={'/' + path + '/' + id + (editPage ? '/edit' : '/settings')}
-          className='btn btn-icon btn-sm btn-active-light-warning'
+          className='btn btn-icon btn-sm btn-active-light-warning btn-sm'
         >
           <i className={clsx('fa-duotone fs-3 text-warning', 'fa-pencil')}></i>
         </Link>
@@ -109,13 +109,13 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
 
       {showDelete && (
         <a
-          className='btn btn-icon btn-sm btn-active-light-danger'
+          className='btn btn-icon btn-active-light-danger btn-sm'
           onClick={async () => deleteItem()}
         >
           <i className={clsx('fa-duotone fs-3 text-danger', 'fa-trash')}></i>
         </a>
       )}
-    </>
+    </div>
   )
 }
 

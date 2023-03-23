@@ -52,16 +52,6 @@ export type ActivityFormSchedule = {
   }
 }
 
-export function addDays(date: Date, day: number) {
-  date.setDate(date.getDate() + day)
-  return date
-}
-
-export function addOneDay(date: Date) {
-  date.setDate(date.getDate() + 1)
-  return date
-}
-
 export function defaultTime(date: Date) {
   date.setHours(18, 0)
   return date
@@ -69,7 +59,7 @@ export function defaultTime(date: Date) {
 
 export const initialActivityForm = (activityForm?: ActivityForm) => {
   let initActivityFormObj: any = {
-    type_id: activityForm?.type_id || '',
+    // type_id: activityForm?.type_id || '',
     title: activityForm?.title || '',
     description: activityForm?.description || '',
     community_id: activityForm?.community_id || '',

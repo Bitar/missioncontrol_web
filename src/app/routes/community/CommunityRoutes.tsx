@@ -1,24 +1,24 @@
-import React, { FC } from "react";
-import { Route, Routes } from "react-router-dom";
-import { PageLink, PageTitle } from "../../layout/core";
-import CommunityIndex from "../../sections/community/pages/CommunityIndex";
-import { CommunityCreate } from "../../sections/community/pages/CommunityCreate";
-import { CommunityViewRoutes } from "./CommunityViewRoutes";
+import React, {FC} from 'react'
+import {Route, Routes} from 'react-router-dom'
+import {PageLink, PageTitle} from '../../layout/core'
+import CommunityIndex from '../../sections/community/pages/CommunityIndex'
+import {CommunityCreate} from '../../sections/community/pages/CommunityCreate'
+import {CommunityViewRoutes} from './CommunityViewRoutes'
 
 const communityBreadCrumbs: Array<PageLink> = [
   {
-    title: "Communities",
-    path: "/communities",
+    title: 'Communities',
+    path: '/communities',
     isSeparator: false,
-    isActive: false
+    isActive: false,
   },
   {
-    title: "",
-    path: "",
+    title: '',
+    path: '',
     isSeparator: true,
-    isActive: false
-  }
-];
+    isActive: false,
+  },
+]
 
 const CommunityRoutes: FC = () => {
   return (
@@ -27,31 +27,31 @@ const CommunityRoutes: FC = () => {
         index
         element={
           <>
-            <PageTitle breadcrumbs={communityBreadCrumbs}>{"Overview"}</PageTitle>
+            <PageTitle breadcrumbs={communityBreadCrumbs}>{'Overview'}</PageTitle>
             <CommunityIndex />
           </>
         }
       />
       <Route
-        path="/create"
+        path='/create'
         element={
           <>
-            <PageTitle breadcrumbs={communityBreadCrumbs}>{"Add Community"}</PageTitle>
+            <PageTitle breadcrumbs={communityBreadCrumbs}>{'Add Community'}</PageTitle>
             <CommunityCreate />
           </>
         }
       />
       <Route
-        path="/:communityId/*"
+        path='/:communityId/*'
         element={
           <>
-            <PageTitle breadcrumbs={communityBreadCrumbs}>{"View Community"}</PageTitle>
+            <PageTitle breadcrumbs={communityBreadCrumbs}>{'View Community'}</PageTitle>
             <CommunityViewRoutes />
           </>
         }
       />
     </Routes>
-  );
-};
+  )
+}
 
-export default CommunityRoutes;
+export default CommunityRoutes

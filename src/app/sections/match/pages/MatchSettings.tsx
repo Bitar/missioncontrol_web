@@ -3,9 +3,15 @@ import {Tab} from 'react-bootstrap'
 import Nav from 'react-bootstrap/Nav'
 import React, {FC} from 'react'
 import {ScoreSettings} from '../partials/ScoreSettings'
+import { RescheduleSettings } from "../partials/RescheduleSettings";
 
 export const MatchSettings: FC = () => {
   const settingsNav = [
+    {
+      title: 'Reschedule',
+      description: 'Change Match date',
+      icon: 'fa-duotone fa-file',
+    },
     {
       title: 'Scores',
       description: 'Update Scores',
@@ -39,7 +45,10 @@ export const MatchSettings: FC = () => {
             <div className='col-lg-8 col-xl-9'>
               <Tab.Content>
                 <Tab.Pane eventKey='settingsNav-0'>
-                  <ScoreSettings />
+                  <RescheduleSettings />
+                </Tab.Pane>
+                <Tab.Pane eventKey='settingsNav-1'>
+                  {/*<ScoreSettings />*/}
                 </Tab.Pane>
               </Tab.Content>
             </div>

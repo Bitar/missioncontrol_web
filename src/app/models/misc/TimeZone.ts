@@ -1,4 +1,4 @@
-import {ID, Response} from '../../../_metronic/helpers'
+import {Response} from '../../../_metronic/helpers'
 
 export type TimeZone = {
   id?: number

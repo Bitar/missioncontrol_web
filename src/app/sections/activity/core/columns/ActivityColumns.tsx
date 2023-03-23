@@ -9,6 +9,7 @@ import {Link} from 'react-router-dom'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import {BadgeCell} from '../../../../modules/table/columns/BadgeCell'
+import {useAccessControl} from '../../../../modules/auth/core/AuthPermission'
 
 dayjs.extend(localizedFormat)
 
@@ -42,7 +43,9 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
             <div className='d-flex flex-column'>
               <span className='text-gray-800 pe-none mb-1'>
                 {props.data[props.row.index]?.type?.name}
-                {props.data[props.row.index]?.type?.id === 1 && props.data[props.row.index]?.playoff?.is_enabled && ' w/ Playoffs'}
+                {props.data[props.row.index]?.type?.id === 1 &&
+                  props.data[props.row.index]?.playoff?.is_enabled &&
+                  ' w/ Playoffs'}
               </span>
             </div>
           </div>
@@ -175,15 +178,19 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
     ),
     id: 'actions',
     defaultCanSort: false,
-    Cell: ({...props}) => (
-      <ActionsCell
-        id={props.data[props.row.index].id}
-        path={'activities'}
-        queryKey={QUERIES.ACTIVITIES_LIST}
-        showView={true}
-        showDelete={true}
-      />
-    ),
+    Cell: ({...props}) => {
+      const accessControl = useAccessControl()
+
+      return (
+        <ActionsCell
+          id={props.data[props.row.index].id}
+          path={'activities'}
+          queryKey={QUERIES.ACTIVITIES_LIST}
+          showView={accessControl.userCan('manage-activities')}
+          showDelete={accessControl.userCan('manage-activities')}
+        />
+      )
+    },
   },
 ]
 

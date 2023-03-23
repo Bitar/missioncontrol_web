@@ -1,4 +1,4 @@
-import {Match, MatchQueryResponse} from '../../../../models/activity/matches/Match'
+import {Match, MatchQueryResponse, NewMatch} from '../../../../models/activity/matches/Match'
 import axios, {AxiosResponse} from 'axios'
 import {Response} from '../../../../helpers/crud-helper/models'
 
@@ -25,9 +25,13 @@ export const getUpcomingActivityMatches = (
 }
 
 export const getRecentActivityMatches = (id: any, query?: string): Promise<MatchQueryResponse> => {
-  let q = query + '&filter[status]=3,4,5,6,7'
+  let url = `${ACTIVITIES_URL}/${id}/matches/recent`
 
-  return getActivityMatches(id, q)
+  if (query) {
+    url += `?${query}`
+  }
+
+  return axios.get(url).then((response: AxiosResponse<MatchQueryResponse>) => response.data)
 }
 
 export const getDisputedActivityMatches = (
@@ -39,11 +43,11 @@ export const getDisputedActivityMatches = (
   return getActivityMatches(id, q)
 }
 
-export const getActivityMatch = (id: any, matchId: any): Promise<Match | undefined> => {
+export const getActivityMatch = (id: any, matchId: any): Promise<NewMatch | undefined> => {
   let url = `${ACTIVITIES_URL}/${id}/matches/${matchId}`
 
   return axios
     .get(url)
-    .then((response: AxiosResponse<Response<Match>>) => response.data)
-    .then((response: Response<Match>) => response.data)
+    .then((response: AxiosResponse<Response<NewMatch>>) => response.data)
+    .then((response: Response<NewMatch>) => response.data)
 }

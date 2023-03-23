@@ -1,7 +1,7 @@
 import axios, {AxiosResponse} from 'axios'
 import {ChatMessage, ChatMessageQueryResponse} from '../../../models/chat/ChatMessage'
 import {Response} from '../../../helpers/crud-helper/models'
-import {Match} from '../../../models/activity/matches/Match'
+import { Match, NewMatch } from "../../../models/activity/matches/Match";
 // import process from "process";
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -48,4 +48,12 @@ export const approveMatchDispute = (id: any): Promise<Match | undefined> => {
     .post(url)
     .then((response: AxiosResponse<Response<Match>>) => response.data)
     .then((response: Response<Match>) => response.data)
+}
+export const rescheduleMatch = (id: any, formData: FormData): Promise<NewMatch | undefined> => {
+  let url = `${MATCHES_URL}/${id}/reschedule`
+
+  return axios
+    .post(url, formData)
+    .then((response: AxiosResponse<Response<NewMatch>>) => response.data)
+    .then((response: Response<NewMatch>) => response.data)
 }

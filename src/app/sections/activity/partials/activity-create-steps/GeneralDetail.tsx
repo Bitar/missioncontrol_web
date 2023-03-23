@@ -39,10 +39,8 @@ const GeneralDetail: FC = () => {
             placeholder={'What type?'}
             getOptionLabel={(activityType) => activityType?.name}
             getOptionValue={(activityType) => activityType?.id?.toString() || ''}
-            defaultValue={activityTypes?.find((e) => e?.id === 1)}
             options={activityTypes}
             onChange={(e) => {
-              setFieldValue('type_id', e?.id?.toString())
               updateData({type_id: e?.id || ''}, setActivityForm, activityForm)
             }}
           />

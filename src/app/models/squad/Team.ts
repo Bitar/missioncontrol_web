@@ -7,7 +7,10 @@ export type Team = {
   image: string
   captain_id: number
   users: User[]
-  status: number
+
+  actions?: any[]
+  result?: any
+  status?: number
   is_home?: boolean
   share_link?: string
 }

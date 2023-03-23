@@ -3,7 +3,7 @@ import {Activity} from '../Activity'
 import {Round} from './Round'
 import {Team} from '../../squad/Team'
 import {ScoringSettings} from '../../game/scoring/ScoringSettings'
-import {Match} from './Match'
+import { Match, NewMatch } from "./Match";
 
 export type Score = {
   id?: number
@@ -159,7 +159,7 @@ export type RoundScoreObject = {
   scores: ScoresScoreObject[]
 }
 
-export const setUpScoringFields = (activity: Activity, match: Match) => {
+export const setUpScoringFields = (activity: Activity, match: NewMatch) => {
   let rounds = activity?.settings?.rounds
 
   let newRounds: RoundScoreObject[] = []

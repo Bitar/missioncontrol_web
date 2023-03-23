@@ -18,7 +18,7 @@ import Select from 'react-select'
 import {DatePicker} from 'rsuite'
 import {FormAction} from '../../../../helpers/form/FormAction'
 import {extractErrors} from '../../../../requests/helpers'
-import { Restricted } from "../../../../modules/auth/core/AuthPermission";
+import {Restricted} from '../../../../modules/auth/core/AuthPermission'
 
 const UserSettings: FC = () => {
   const {user, setUser} = useUser()

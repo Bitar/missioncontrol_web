@@ -79,7 +79,7 @@ export const PlatformDetail = () => {
           if (status === 422) {
             setAlertMessage('Please make sure you fill all the fields.')
           } else if (status === 400) {
-            setAlertMessage(e.response.data.error)
+            setAlertMessage(e.response.data.errors)
           } else {
             setAlertMessage(e.response.data.message)
           }

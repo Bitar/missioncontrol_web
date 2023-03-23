@@ -24,7 +24,10 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
     <>
       {currentUser &&
         (currentUser && isCommunityAdmin(currentUser) && communityAdmin ? (
-          <CommunityViewRoutes communityId={communityAdmin?.id} links={communityLinks}></CommunityViewRoutes>
+          <CommunityViewRoutes
+            communityId={communityAdmin?.id}
+            links={communityLinks}
+          ></CommunityViewRoutes>
         ) : (
           <div className='row gy-5 g-xl-8'>
             <div className='col-xl-12'>

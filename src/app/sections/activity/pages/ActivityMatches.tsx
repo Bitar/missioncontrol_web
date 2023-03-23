@@ -17,7 +17,7 @@ const ActivityMatches = () => {
 
   return (
     <div className='row g-5 g-xxl-8'>
-      <div className='col-lg-4 col-md-6'>
+      <div className='col-xl-4 col-lg-6'>
         <div className='mb-5'>
           <KTCard>
             <div className='card-header bg-info'>
@@ -40,7 +40,7 @@ const ActivityMatches = () => {
         </div>
       </div>
 
-      <div className='col-lg-4 col-md-6'>
+      <div className='col-xl-4 col-lg-6'>
         <div className='mb-5'>
           <KTCard>
             <div className='card-header bg-mc-secondary'>
@@ -55,7 +55,7 @@ const ActivityMatches = () => {
                   requestFunction={getRecentActivityMatches}
                   requestId={params?.id}
                 >
-                  <MatchesTable />
+                  <MatchesTable direction={'desc'} />
                 </QueryResponseProvider>
               </QueryRequestProvider>
             </KTCardBody>
@@ -63,7 +63,7 @@ const ActivityMatches = () => {
         </div>
       </div>
 
-      <div className='col-lg-4 col-md-6'>
+      <div className='col-xl-4 col-lg-6'>
         <div className='mb-5'>
           <KTCard>
             <div className='card-header bg-dark'>

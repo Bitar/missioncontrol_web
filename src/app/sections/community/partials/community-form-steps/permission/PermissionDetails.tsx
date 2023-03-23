@@ -69,7 +69,7 @@ const PermissionDetails = () => {
           let status = e.response.status
 
           if (status === 400) {
-            setAlertMessage(e.response.data.error)
+            setAlertMessage(e.response.data.errors)
             setHasErrors(true)
           } else if (status === 422) {
             let firstMessage = e.response.data.error.validation?.email[0]

@@ -1,33 +1,37 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { KTCard, KTCardBody, QUERIES } from "../../../../_metronic/helpers";
-import { QueryRequestProvider } from "../../../modules/table/QueryRequestProvider";
+import React, {useEffect, useMemo, useState} from 'react'
+import {KTCard, KTCardBody, QUERIES} from '../../../../_metronic/helpers'
+import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
 import {
   QueryResponseProvider,
   useQueryResponseData,
-  useQueryResponseLoading
-} from "../../../modules/table/QueryResponseProvider";
-import { EXPORT_ENDPOINT, getActivities } from "../core/requests/ActivityRequests";
-import { ListViewProvider } from "../../../modules/table/ListViewProvider";
-import { ActivityFilter } from "../partials/ActivityFilter";
-import { PageTypes } from "../../../helpers/variables";
-import { KTCardHeader } from "../../../helpers/components";
-import { CreateCardAction, ExportCardAction, FilterCardAction } from "../../../components/misc/CardAction";
-import { useMcApp } from "../../../modules/general/McApp";
-import { generatePageTitle } from "../../../helpers/pageTitleGenerator";
-import { Sections } from "../../../helpers/sections";
-import { ActivityColumns } from "../core/columns/ActivityColumns";
-import { McTable } from "../../../components/McTable";
+  useQueryResponseLoading,
+} from '../../../modules/table/QueryResponseProvider'
+import {EXPORT_ENDPOINT, getActivities} from '../core/requests/ActivityRequests'
+import {ListViewProvider} from '../../../modules/table/ListViewProvider'
+import {ActivityFilter} from '../partials/ActivityFilter'
+import {PageTypes} from '../../../helpers/variables'
+import {KTCardHeader} from '../../../helpers/components'
+import {
+  CreateCardAction,
+  ExportCardAction,
+  FilterCardAction,
+} from '../../../components/misc/CardAction'
+import {useMcApp} from '../../../modules/general/McApp'
+import {generatePageTitle} from '../../../helpers/pageTitleGenerator'
+import {Sections} from '../../../helpers/sections'
+import {ActivityColumns} from '../core/columns/ActivityColumns'
+import {McTable} from '../../../components/McTable'
 
 const ActivityIndex = () => {
-  const mcApp = useMcApp();
+  const mcApp = useMcApp()
 
   useEffect(() => {
-    mcApp.setPageTitle(generatePageTitle(Sections.ACTIVITIES, PageTypes.INDEX));
+    mcApp.setPageTitle(generatePageTitle(Sections.ACTIVITIES, PageTypes.INDEX))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
 
-  const [exportQuery, setExportQuery] = useState<string>("");
-  const [showFilter, setShowFilter] = useState<boolean>(false);
+  const [exportQuery, setExportQuery] = useState<string>('')
+  const [showFilter, setShowFilter] = useState<boolean>(false)
 
   return (
     <QueryRequestProvider>
@@ -35,13 +39,13 @@ const ActivityIndex = () => {
         <ListViewProvider>
           <KTCard>
             <KTCardHeader
-              text="All Activities"
-              icon="fa-regular fa-list"
-              icon_style="fs-3 text-primary"
+              text='All Activities'
+              icon='fa-regular fa-list'
+              icon_style='fs-3 text-primary'
               actions={[
                 new ExportCardAction(exportQuery, EXPORT_ENDPOINT),
-                new FilterCardAction("activities-list-filter", showFilter, setShowFilter),
-                new CreateCardAction("/activities", "manage-activities")
+                new FilterCardAction('activities-list-filter', showFilter, setShowFilter),
+                new CreateCardAction('/activities', 'manage-activities'),
               ]}
             />
             <KTCardBody>
@@ -53,16 +57,16 @@ const ActivityIndex = () => {
         </ListViewProvider>
       </QueryResponseProvider>
     </QueryRequestProvider>
-  );
-};
+  )
+}
 
-export default ActivityIndex;
+export default ActivityIndex
 
 const ActivityTable = () => {
-  const activities = useQueryResponseData();
-  const isLoading = useQueryResponseLoading();
-  const data = useMemo(() => activities, [activities]);
-  const columns = useMemo(() => ActivityColumns, []);
+  const activities = useQueryResponseData()
+  const isLoading = useQueryResponseLoading()
+  const data = useMemo(() => activities, [activities])
+  const columns = useMemo(() => ActivityColumns, [])
 
   return (
     <McTable
@@ -71,5 +75,5 @@ const ActivityTable = () => {
       model={activities.length > 0 ? activities[0] : null}
       isLoading={isLoading}
     />
-  );
-};
+  )
+}

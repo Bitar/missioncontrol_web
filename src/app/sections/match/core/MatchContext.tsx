@@ -1,10 +1,10 @@
 import {createContext, Dispatch, SetStateAction, useContext} from 'react'
-import {Match} from '../../../models/activity/matches/Match'
+import {NewMatch} from '../../../models/activity/matches/Match'
 import {Team} from '../../../models/squad/Team'
 
 type MatchContextProps = {
-  match: Match | undefined
-  setMatch: Dispatch<SetStateAction<Match | undefined>>
+  match: NewMatch | undefined
+  setMatch: Dispatch<SetStateAction<NewMatch | undefined>>
   teams: Team[] | undefined
   setTeams: Dispatch<SetStateAction<Team[] | undefined>>
 }

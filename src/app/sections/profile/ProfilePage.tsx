@@ -1,10 +1,10 @@
-import { UserContext } from "../iam/user/core/UserContext"
-import { useAuth } from "../../modules/auth";
-import { UserSettings } from "../iam/user/pages/UserSettings";
-import React from "react";
+import {UserContext} from '../iam/user/core/UserContext'
+import {useAuth} from '../../modules/auth'
+import {UserSettings} from '../iam/user/pages/UserSettings'
+import React from 'react'
 
 export const ProfilePage = () => {
-  const {currentUser, setCurrentUser} = useAuth();
+  const {currentUser, setCurrentUser} = useAuth()
 
   return (
     <UserContext.Provider

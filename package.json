@@ -39,6 +39,7 @@
     "react-countup": "^6.3.1",
     "react-currency-input-field": "^3.6.5",
     "react-dom": "latest",
+    "react-easy-crop": "^4.7.4",
     "react-hot-toast": "^2.3.0",
     "react-inlinesvg": "3.0.0",
     "react-input-mask": "^3.0.0-alpha.2",

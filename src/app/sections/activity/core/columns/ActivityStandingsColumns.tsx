@@ -4,18 +4,19 @@ import {CustomHeader} from '../../../../modules/table/columns/CustomHeader'
 import {ActivityStanding} from '../../../../models/activity/ActivityStanding'
 import {TeamImage} from '../../components/TeamImage'
 import React from 'react'
-import { TextImageCell } from "../../../../modules/table/columns/TextImageCell";
+import {TextImageCell} from '../../../../modules/table/columns/TextImageCell'
 
 const ActivityStandingsColumns: ReadonlyArray<Column<ActivityStanding>> = [
   {
     Header: (props) => <CustomHeader tableProps={props} title='Team' className='mw-200px' />,
     id: 'image',
-    Cell: ({...props}) =>
+    Cell: ({...props}) => (
       <TextImageCell
         dImage={props.data[props.row.index]?.image}
         dText={props.data[props.row.index]?.name}
         size={'20'}
       />
+    ),
   },
   {
     Header: (props) => <CustomHeader tableProps={props} title='P' />,
