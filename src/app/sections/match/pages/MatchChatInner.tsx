@@ -51,14 +51,12 @@ const MatchChatInner: FC<Props> = ({chat, setChat, isDrawer = false}) => {
             <div
               key={`message${index}`}
               className={clsx('d-flex', contentClass, 'mb-10')}
-              {...templateAttr}
-            >
+              {...templateAttr}>
               <div
                 className={clsx(
                   'd-flex flex-column align-items',
                   `align-items-${message?.user?.id !== currentUser?.id ? 'start' : 'end'}`
-                )}
-              >
+                )}>
                 <div className='d-flex align-items-center mb-2'>
                   {message?.user?.id !== currentUser?.id ? (
                     <>
@@ -95,8 +93,7 @@ const MatchChatInner: FC<Props> = ({chat, setChat, isDrawer = false}) => {
                     `text-${message?.user?.id !== currentUser?.id ? 'start' : 'end'}`
                   )}
                   data-kt-element='message-text'
-                  dangerouslySetInnerHTML={{__html: message.message}}
-                ></div>
+                  dangerouslySetInnerHTML={{__html: message.message}}></div>
               </div>
             </div>
           )
@@ -108,14 +105,12 @@ const MatchChatInner: FC<Props> = ({chat, setChat, isDrawer = false}) => {
         initialValues={initialChat(message)}
         onSubmit={handleSubmit}
         validationSchema={chatSchema}
-        enableReinitialize
-      >
+        enableReinitialize>
         {({isSubmitting, isValid, touched, errors, values}) => (
           <Form className='form'>
             <div
               className='card-footer d-flex justify-content-end py-6 px-9'
-              id='kt_chat_messenger_footer'
-            >
+              id='kt_chat_messenger_footer'>
               {/*<TextField*/}
               {/*  multiline*/}
               {/*  id='message'*/}

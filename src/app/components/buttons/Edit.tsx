@@ -12,8 +12,7 @@ const EditButton: React.FC<Props> = ({url, className}) => {
     <Link
       to={`${url}/edit`}
       className={clsx('btn btn-light-warning fs-6', className && className)}
-      title='Edit'
-    >
+      title='Edit'>
       <i className={clsx('fa fs-4', 'fa-pencil', 'pe-0')}></i>
     </Link>
   )

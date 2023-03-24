@@ -217,8 +217,7 @@ export const GameModeFormWrapper: FC<Props> = ({gameModeForm, setGameModeForm}) 
                 setGameModeForm,
                 gameModeForm
               )
-            }}
-          >
+            }}>
             <i className='fa fa-plus-circle me-3'></i> Add new settings
           </button>
         </div>
@@ -251,8 +250,7 @@ export const GameModeFormWrapper: FC<Props> = ({gameModeForm, setGameModeForm}) 
                 setGameModeForm,
                 gameModeForm
               )
-            }}
-          >
+            }}>
             <i className='fa fa-plus-circle me-3'></i> Add new scoring
           </button>
         </div>

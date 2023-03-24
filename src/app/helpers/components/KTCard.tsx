@@ -56,8 +56,7 @@ const KTCard: FC<Props & WithChildren> = (props) => {
         utilityPX && `px-${utilityPX}`,
         utilityPY && `py-${utilityPY}`,
         rounded && `card-${rounded}`
-      )}
-    >
+      )}>
       {children}
     </div>
   )

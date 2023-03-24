@@ -20,18 +20,15 @@ export function HeaderWrapper() {
           'app-container flex-lg-grow-1',
           classes.headerContainer.join(' '),
           config.app?.header?.default?.containerClass
-        )}
-      >
+        )}>
         {config.app.sidebar?.display && (
           <>
             <div
               className='d-flex align-items-center d-lg-none ms-n2 me-2'
-              title='Show sidebar menu'
-            >
+              title='Show sidebar menu'>
               <div
                 className='btn btn-icon btn-active-color-mc-secondary w-35px h-35px'
-                id='kt_app_sidebar_mobile_toggle'
-              >
+                id='kt_app_sidebar_mobile_toggle'>
                 <KTSVG path='/media/icons/duotune/abs015.svg' className=' svg-icon-1' />
               </div>
               <div className='d-flex align-items-center flex-grow-1 flex-lg-grow-0'>
@@ -76,8 +73,7 @@ export function HeaderWrapper() {
 
         <div
           id='kt_app_header_wrapper'
-          className='d-flex align-items-stretch justify-content-between flex-lg-grow-1'
-        >
+          className='d-flex align-items-stretch justify-content-between flex-lg-grow-1'>
           {config.app.header.default?.content === 'menu' &&
             config.app.header.default.menu?.display && (
               <div
@@ -91,8 +87,7 @@ export function HeaderWrapper() {
                 data-kt-drawer-toggle='#kt_app_header_menu_toggle'
                 data-kt-swapper='true'
                 data-kt-swapper-mode="{default: 'append', lg: 'prepend'}"
-                data-kt-swapper-parent="{default: '#kt_app_body', lg: '#kt_app_header_wrapper'}"
-              >
+                data-kt-swapper-parent="{default: '#kt_app_body', lg: '#kt_app_header_wrapper'}">
                 <Header />
               </div>
             )}

@@ -89,8 +89,7 @@ const RoleCreate = () => {
           initialValues={role}
           onSubmit={handleSubmit}
           validationSchema={roleSchema}
-          enableReinitialize
-        >
+          enableReinitialize>
           <Form onChange={handleOnChange} className='form'>
             <KTCardBody className='py-4'>
               <FormErrors errorMessages={formErrors} />

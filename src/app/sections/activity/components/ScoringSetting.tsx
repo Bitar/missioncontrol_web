@@ -28,8 +28,7 @@ const ScoringSetting: FC<Props> = ({settings}) => {
               overflow: 'auto',
               maxHeight: 300,
               fontSize: '12px',
-            }}
-          >
+            }}>
             <h6>{settings?.key?.key} Points</h6>
             <div className=''>
               {settings?.values?.map((value) => (

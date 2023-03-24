@@ -48,8 +48,7 @@ export function ForgotPassword() {
         className='form w-100 fv-plugins-bootstrap5 fv-plugins-framework'
         noValidate
         id='kt_login_password_reset_form'
-        onSubmit={formik.handleSubmit}
-      >
+        onSubmit={formik.handleSubmit}>
         <div className='text-center mb-10'>
           {/* begin::Title */}
           <h1 className='text-dark mb-3'>Forgot Password?</h1>
@@ -107,8 +106,7 @@ export function ForgotPassword() {
           <button
             type='submit'
             id='kt_password_reset_submit'
-            className='btn btn-lg btn-primary fw-bolder me-4'
-          >
+            className='btn btn-lg btn-primary fw-bolder me-4'>
             <span className='indicator-label'>Submit</span>
             {loading && (
               <span className='indicator-progress'>
@@ -122,8 +120,7 @@ export function ForgotPassword() {
               type='button'
               id='kt_login_password_reset_form_cancel_button'
               className='btn btn-lg btn-light-primary fw-bolder'
-              disabled={formik.isSubmitting || !formik.isValid}
-            >
+              disabled={formik.isSubmitting || !formik.isValid}>
               Cancel
             </button>
           </Link>

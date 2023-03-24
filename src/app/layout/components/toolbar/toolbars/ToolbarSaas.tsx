@@ -25,8 +25,7 @@ const ToolbarSaas: FC = () => {
           data-placeholder='Latest'
           data-hide-search='true'
           onChange={(e) => setProgress(e.target.value)}
-          value={progress}
-        >
+          value={progress}>
           <option value=''></option>
           <option value='1'>Latest</option>
           <option value='2'>In Progress</option>
@@ -50,16 +49,14 @@ const ToolbarSaas: FC = () => {
         <div className='d-flex align-items-center ps-4'>
           <div
             id='kt_app_toolbar_slider'
-            className='noUi-target noUi-target-success w-75px w-xxl-150px noUi-sm'
-          ></div>
+            className='noUi-target noUi-target-success w-75px w-xxl-150px noUi-sm'></div>
 
           <span
             id='kt_app_toolbar_slider_value'
             className='d-flex flex-center bg-light-success rounded-circle w-35px h-35px ms-4 fs-7 fw-bold text-success'
             data-bs-toggle='tooltip'
             data-bs-placement='top'
-            title='Set impact level'
-          ></span>
+            title='Set impact level'></span>
         </div>
         {/* end::NoUiSlider */}
 
@@ -84,8 +81,7 @@ const ToolbarSaas: FC = () => {
             data-bs-toggle='tooltip'
             data-bs-trigger='hover'
             data-bs-placement='top'
-            title='Add new page'
-          >
+            title='Add new page'>
             <KTSVG path='/media/icons/duotune/files/fil003.svg' className='svg-icon-2x' />
           </a>
           {/* end::Action */}
@@ -97,8 +93,7 @@ const ToolbarSaas: FC = () => {
             data-bs-toggle='tooltip'
             data-bs-trigger='hover'
             data-bs-placement='top'
-            title='Add new category'
-          >
+            title='Add new category'>
             <KTSVG path='/media/icons/duotune/files/fil005.svg' className='svg-icon-2x' />
           </a>
           {/* end::Action */}
@@ -110,8 +105,7 @@ const ToolbarSaas: FC = () => {
             data-bs-toggle='tooltip'
             data-bs-trigger='hover'
             data-bs-placement='top'
-            title='Add new section'
-          >
+            title='Add new section'>
             <KTSVG path='/media/icons/duotune/files/fil024.svg' className='svg-icon-2x' />
           </a>
           {/* end::Action */}

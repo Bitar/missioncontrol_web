@@ -38,8 +38,7 @@ const CommunityCreate = () => {
         <Formik
           initialValues={community}
           onSubmit={handleSubmit}
-          validationSchema={communitySchema}
-        >
+          validationSchema={communitySchema}>
           {({isSubmitting, isValid, touched}) => (
             <Form onChange={handleOnChange} className='form'>
               <KTCardBody className='py-4'>
@@ -57,7 +56,9 @@ const CommunityCreate = () => {
                             ratio={1}
                             name='logo'
                           />
-                          <div className='text-muted fw-semibold'>Recommended Image Size: Square</div>
+                          <div className='text-muted fw-semibold'>
+                            Recommended Image Size: Square
+                          </div>
                           <div className='text-danger mt-2'>
                             <ErrorMessage name='logo' />
                           </div>
@@ -70,7 +71,9 @@ const CommunityCreate = () => {
                             ratio={1.91}
                             name='banner_image'
                           />
-                          <div className='text-muted fw-semibold'>Recommended Image Ratio: 1.91:1 (1900px x 1000px)</div>
+                          <div className='text-muted fw-semibold'>
+                            Recommended Image Ratio: 1.91:1 (1900px x 1000px)
+                          </div>
                           <div className='text-danger mt-2'>
                             <ErrorMessage name='banner_image' />
                           </div>
@@ -90,8 +93,7 @@ const CommunityCreate = () => {
                 <button
                   type='submit'
                   className='btn btn-light-mc-secondary btn-active-mc-secondary btn-sm'
-                  disabled={isSubmitting || !isValid || !touched}
-                >
+                  disabled={isSubmitting || !isValid || !touched}>
                   <span className='indicator-label'>Add Community</span>
 
                   {isSubmitting && (

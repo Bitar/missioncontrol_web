@@ -27,8 +27,7 @@ const ListsWidget26 = ({className}: Props) => (
             </a>
             <button
               type='button'
-              className='btn btn-icon btn-sm h-auto btn-color-gray-400 btn-active-color-primary justify-content-end'
-            >
+              className='btn btn-icon btn-sm h-auto btn-color-gray-400 btn-active-color-primary justify-content-end'>
               <KTSVG path='media/icons/duotune/arrows/arr095.svg' className='svg-icon-2' />
             </button>
           </div>

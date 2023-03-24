@@ -29,8 +29,7 @@ const DownloadAppWidget: React.FC<Props> = ({className, bgHex = ''}) => {
                 href='https://missioncontrol.app.link/z7antLdv1qb'
                 target='_blank'
                 rel='noreferrer'
-                className='btn btn-mc-secondary fw-bold me-2'
-              >
+                className='btn btn-mc-secondary fw-bold me-2'>
                 Download App
               </a>
             </div>

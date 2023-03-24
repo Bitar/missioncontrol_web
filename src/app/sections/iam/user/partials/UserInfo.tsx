@@ -72,8 +72,7 @@ const UserInfo: FC = () => {
                     )}
                     <a
                       href='mailto:`{community.contact?.email}`'
-                      className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'
-                    >
+                      className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'>
                       <KTSVG
                         path='/media/icons/duotune/communication/com011.svg'
                         className='svg-icon-4 me-1'
@@ -108,8 +107,7 @@ const UserInfo: FC = () => {
                           active: location.pathname === link.link,
                         }
                       )}
-                      to={link.link}
-                    >
+                      to={link.link}>
                       {link.text}
                     </Link>
                   </li>

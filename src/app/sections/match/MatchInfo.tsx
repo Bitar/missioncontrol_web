@@ -176,8 +176,7 @@ const MatchInfo = () => {
                   <button
                     onClick={rejectDispute}
                     type='button'
-                    className='btn btn-sm btn-danger ms-3'
-                  >
+                    className='btn btn-sm btn-danger ms-3'>
                     Reject
                   </button>
                 </div>
@@ -198,8 +197,7 @@ const MatchInfo = () => {
                     active: location.pathname === link.link,
                   }
                 )}
-                to={link.link}
-              >
+                to={link.link}>
                 {link.text}
               </Link>
             </li>

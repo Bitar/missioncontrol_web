@@ -28,8 +28,7 @@ const PlansTable = () => {
         <div className='table-responsive'>
           <table
             className='table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer'
-            {...getTableProps()}
-          >
+            {...getTableProps()}>
             <thead>
               <tr className='text-start text-muted fw-bolder fs-7 text-uppercase gs-0'>
                 {headers.map((column: ColumnInstance<Plan>) => (

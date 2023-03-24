@@ -21,8 +21,7 @@ const TilesWidget2 = ({
         backgroundColor: bgColor,
         backgroundPosition: 'right',
         backgroundImage: `url("${toAbsoluteUrl('/media/svg/misc/taieri.svg')}")`,
-      }}
-    >
+      }}>
       <div className='card-body d-flex flex-column justify-content-between'>
         <h2 className='text-white fw-bold mb-5'>
           {title} <br /> {title2}{' '}
@@ -33,8 +32,7 @@ const TilesWidget2 = ({
             href='#'
             className='btn btn-danger fw-semibold px-6 py-3'
             data-bs-toggle='modal'
-            data-bs-target='#kt_modal_create_app'
-          >
+            data-bs-target='#kt_modal_create_app'>
             Create Campaign
           </a>
         </div>

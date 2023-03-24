@@ -16,8 +16,7 @@ const HelpDrawer = () => {
       data-kt-drawer-width="{default:'350px', 'md': '525px'}"
       data-kt-drawer-direction='end'
       data-kt-drawer-toggle='#kt_help_toggle'
-      data-kt-drawer-close='#kt_help_close'
-    >
+      data-kt-drawer-close='#kt_help_close'>
       {/* begin::Card */}
       <div className='card shadow-none rounded-0 w-100'>
         {/* begin::Header */}
@@ -28,8 +27,7 @@ const HelpDrawer = () => {
             <button
               type='button'
               className='btn btn-sm btn-icon explore-btn-dismiss me-n5'
-              id='kt_help_close'
-            >
+              id='kt_help_close'>
               <KTSVG path='/media/icons/duotune/arrows/arr061.svg' className='svg-icon-2' />
             </button>
           </div>
@@ -46,8 +44,7 @@ const HelpDrawer = () => {
             data-kt-scroll-height='auto'
             data-kt-scroll-wrappers='#kt_help_body'
             data-kt-scroll-dependencies='#kt_help_header'
-            data-kt-scroll-offset='5px'
-          >
+            data-kt-scroll-offset='5px'>
             {/* begin::Support */}
             <div className='rounded border border-dashed border-gray-300 p-6 p-lg-8 mb-10'>
               {/* begin::Heading */}
@@ -73,8 +70,7 @@ const HelpDrawer = () => {
               {/* begin::Link */}
               <a
                 href='https://devs.keenthemes.com'
-                className='btn btn-lg explore-btn-primary w-100'
-              >
+                className='btn btn-lg explore-btn-primary w-100'>
                 Get Support
               </a>
               {/* end::Link */}
@@ -98,8 +94,7 @@ const HelpDrawer = () => {
                   {/* begin::Title */}
                   <a
                     href='https://preview.keenthemes.com/metronic8/react/docs/docs/quick-start'
-                    className='text-dark text-hover-primary fw-bolder fs-6 fs-lg-4 mb-1'
-                  >
+                    className='text-dark text-hover-primary fw-bolder fs-6 fs-lg-4 mb-1'>
                     Documentation &amp; Videos
                   </a>
                   {/* end::Title */}
@@ -135,8 +130,7 @@ const HelpDrawer = () => {
                   {/* begin::Title */}
                   <a
                     href='https://preview.keenthemes.com/metronic8/react/docs/docs/utilities'
-                    className='text-dark text-hover-primary fw-bolder fs-6 fs-lg-4 mb-1'
-                  >
+                    className='text-dark text-hover-primary fw-bolder fs-6 fs-lg-4 mb-1'>
                     Plugins &amp; Components
                   </a>
                   {/* end::Title */}
@@ -172,8 +166,7 @@ const HelpDrawer = () => {
                   {/* begin::Title */}
                   <Link
                     to='/builder'
-                    className='text-dark text-hover-primary fw-bolder fs-6 fs-lg-4 mb-1'
-                  >
+                    className='text-dark text-hover-primary fw-bolder fs-6 fs-lg-4 mb-1'>
                     Layout Builder
                   </Link>
                   {/* end::Title */}
@@ -209,8 +202,7 @@ const HelpDrawer = () => {
                   {/* begin::Title */}
                   <a
                     href='https://preview.keenthemes.com/metronic8/react/docs/docs/changelog'
-                    className='text-dark text-hover-primary fw-bolder fs-6 fs-lg-4 mb-1'
-                  >
+                    className='text-dark text-hover-primary fw-bolder fs-6 fs-lg-4 mb-1'>
                     What's New
                   </a>
                   {/* end::Title */}

@@ -89,8 +89,7 @@ const CommunitySettings: FC = () => {
                   value={{
                     communityForm: communityForm,
                     setCommunityForm: setCommunityForm,
-                  }}
-                >
+                  }}>
                   <Tab.Content>
                     <Tab.Pane eventKey='settingsNav-0'>
                       <GeneralDetail />
@@ -111,8 +110,7 @@ const CommunitySettings: FC = () => {
                             <QueryResponseProvider
                               id={QUERIES.COMMUNITIES_PERMISSIONS_LIST}
                               requestFunction={getCommunityPermissions}
-                              requestId={community?.id}
-                            >
+                              requestId={community?.id}>
                               <ListViewProvider>
                                 <PermissionDetails />
                               </ListViewProvider>

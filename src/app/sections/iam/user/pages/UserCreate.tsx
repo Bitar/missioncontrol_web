@@ -109,16 +109,14 @@ const UserCreate = () => {
         initialValues={userForm}
         onSubmit={handleSubmit}
         validationSchema={UserDetailsSchema}
-        enableReinitialize
-      >
+        enableReinitialize>
         {({isSubmitting}) => {
           return (
             <Form
               onChange={handleOnChange}
               className='form'
               encType='multipart/form-data'
-              autoComplete='off'
-            >
+              autoComplete='off'>
               <KTCardBody className='py-4'>
                 <FormErrors errorMessages={formErrors} />
 

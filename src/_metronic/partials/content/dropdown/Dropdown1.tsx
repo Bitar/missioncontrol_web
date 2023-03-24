@@ -18,8 +18,7 @@ export function Dropdown1() {
               data-kt-select2='true'
               data-placeholder='Select option'
               data-allow-clear='true'
-              defaultValue={'1'}
-            >
+              defaultValue={'1'}>
               <option></option>
               <option value='1'>Approved</option>
               <option value='2'>Pending</option>
@@ -64,8 +63,7 @@ export function Dropdown1() {
           <button
             type='reset'
             className='btn btn-sm btn-light btn-active-light-primary me-2'
-            data-kt-menu-dismiss='true'
-          >
+            data-kt-menu-dismiss='true'>
             Reset
           </button>
 

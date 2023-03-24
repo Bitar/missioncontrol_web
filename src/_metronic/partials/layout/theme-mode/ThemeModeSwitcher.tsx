@@ -36,8 +36,7 @@ const ThemeModeSwitcher = ({
         className={clsx('btn btn-icon ', toggleBtnClass)}
         data-kt-menu-trigger={menuTrigger}
         data-kt-menu-attach='parent'
-        data-kt-menu-placement={menuPlacement}
-      >
+        data-kt-menu-placement={menuPlacement}>
         {calculatedMode === 'dark' && (
           <KTSVG
             path='/media/icons/duotune/gen061.svg'
@@ -55,14 +54,12 @@ const ThemeModeSwitcher = ({
 
       <div
         className='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-title-gray-700 menu-icon-muted menu-active-bg menu-state-primary fw-semibold py-4 fs-base w-175px'
-        data-kt-menu='true'
-      >
+        data-kt-menu='true'>
         <div className='menu-item px-3 my-0'>
           <a
             href='#'
             className={clsx('menu-link px-3 py-2', {active: mode === 'light'})}
-            onClick={() => switchMode('light')}
-          >
+            onClick={() => switchMode('light')}>
             <span className='menu-icon' data-kt-element='icon'>
               <KTSVG path='/media/icons/duotune/gen060.svg' className='svg-icon-3' />
             </span>
@@ -74,8 +71,7 @@ const ThemeModeSwitcher = ({
           <a
             href='#'
             className={clsx('menu-link px-3 py-2', {active: mode === 'dark'})}
-            onClick={() => switchMode('dark')}
-          >
+            onClick={() => switchMode('dark')}>
             <span className='menu-icon' data-kt-element='icon'>
               <KTSVG path='/media/icons/duotune/gen061.svg' className='svg-icon-3' />
             </span>

@@ -62,8 +62,7 @@ const CardsWidget17: FC<Props> = ({
             ref={chartRef}
             style={{minWidth: chartSize + 'px', minHeight: chartSize + 'px'}}
             data-kt-size={chartSize}
-            data-kt-line={chartLine}
-          ></div>
+            data-kt-line={chartLine}></div>
         </div>
 
         <div className='d-flex flex-column content-justify-center flex-row-fluid'>
@@ -80,8 +79,7 @@ const CardsWidget17: FC<Props> = ({
           <div className='d-flex fw-semibold align-items-center'>
             <div
               className='bullet w-8px h-3px rounded-2 me-3'
-              style={{backgroundColor: '#E4E6EF'}}
-            ></div>
+              style={{backgroundColor: '#E4E6EF'}}></div>
             <div className='text-gray-500 flex-grow-1 me-4'>Others</div>
             <div className=' fw-bolder text-gray-700 text-xxl-end'>$45,257</div>
           </div>

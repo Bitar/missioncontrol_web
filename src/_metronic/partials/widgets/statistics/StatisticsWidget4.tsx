@@ -69,8 +69,7 @@ const StatisticsWidget4: React.FC<Props> = ({className, svgIcon, color, change, 
         <div
           ref={chartRef}
           className='statistics-widget-4-chart card-rounded-bottom'
-          style={{height: '150px'}}
-        ></div>
+          style={{height: '150px'}}></div>
       </div>
       {/* end::Body */}
     </div>

@@ -25,8 +25,7 @@ const ToolbarReports = () => {
               <a
                 className='nav-link btn btn-sm btn-color-muted btn-active-color-primary btn-active-light active fw-semibold fs-7 px-4 me-1'
                 data-bs-toggle='tab'
-                href='src/app/layout/components/toolbar/toolbars/ToolbarReports#'
-              >
+                href='src/app/layout/components/toolbar/toolbars/ToolbarReports#'>
                 Today
               </a>
             </li>
@@ -35,8 +34,7 @@ const ToolbarReports = () => {
               <a
                 className='nav-link btn btn-sm btn-color-muted btn-active-color-primary btn-active-light fw-semibold fs-7 px-4 me-1'
                 data-bs-toggle='tab'
-                href='src/app/layout/components/toolbar/toolbars/ToolbarReports'
-              >
+                href='src/app/layout/components/toolbar/toolbars/ToolbarReports'>
                 Week
               </a>
             </li>
@@ -45,8 +43,7 @@ const ToolbarReports = () => {
               <a
                 className='nav-link btn btn-sm btn-color-muted btn-active-color-primary btn-active-light fw-semibold fs-7 px-4'
                 data-bs-toggle='tab'
-                href='src/app/layout/components/toolbar/toolbars/ToolbarReports#'
-              >
+                href='src/app/layout/components/toolbar/toolbars/ToolbarReports#'>
                 Day
               </a>
             </li>
@@ -74,8 +71,7 @@ const ToolbarReports = () => {
           data-placeholder='Latest'
           data-hide-search='true'
           value={progress}
-          onChange={(e) => setProgress(e.target.value)}
-        >
+          onChange={(e) => setProgress(e.target.value)}>
           <option value=''></option>
           <option value='1'>Latest</option>
           <option value='2'>In Progress</option>
@@ -90,8 +86,7 @@ const ToolbarReports = () => {
             className='btn btn-sm btn-icon btn-light-primary me-3'
             data-bs-toggle='tooltip'
             data-bs-placement='top'
-            title='Enable grid view'
-          >
+            title='Enable grid view'>
             <KTSVG
               path='/media/icons/duotune/general/gen025.svg'
               className='svg-icon-2 svg-icon-primary'
@@ -103,8 +98,7 @@ const ToolbarReports = () => {
             className='btn btn-sm btn-icon btn-light'
             data-bs-toggle='tooltip'
             data-bs-placement='top'
-            title='Enable row view'
-          >
+            title='Enable row view'>
             <KTSVG
               path='/media/icons/duotune/abstract/abs015.svg'
               className=' svg-icon-2 svg-icon-gray-400'

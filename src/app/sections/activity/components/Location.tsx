@@ -32,14 +32,12 @@ const Location: FC<Props> = ({activity, setActivity}) => {
           className={clsx('bg-active-mc-secondary cursor-pointer mb-5', {
             active: activity?.location?.type === 1,
           })}
-          onClick={(event) => handleLocationChange(event, 1)}
-        >
+          onClick={(event) => handleLocationChange(event, 1)}>
           <div
             className={clsx(
               'align-items-center p-5 text-center bg-secondary bg-active-mc-secondary text-mc-primary text-active-white',
               {active: activity?.location?.type === 1}
-            )}
-          >
+            )}>
             <span className='d-flex flex-column'>
               <span className='fw-bolder fs-6'>Online</span>
 
@@ -53,14 +51,12 @@ const Location: FC<Props> = ({activity, setActivity}) => {
           className={clsx('bg-active-mc-secondary cursor-pointer mb-5', {
             active: activity?.location?.type === 2,
           })}
-          onClick={(event) => handleLocationChange(event, 2)}
-        >
+          onClick={(event) => handleLocationChange(event, 2)}>
           <div
             className={clsx(
               'align-items-center p-5 text-center bg-secondary bg-active-mc-secondary text-mc-primary text-active-white',
               {active: activity?.location?.type === 2}
-            )}
-          >
+            )}>
             <span className='d-flex flex-column'>
               <span className='fw-bolder fs-6'>Local</span>
 

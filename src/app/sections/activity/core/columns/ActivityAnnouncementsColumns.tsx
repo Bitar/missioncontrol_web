@@ -9,8 +9,8 @@ import {QUERIES} from '../../../../helpers/crud-helper/consts'
 import {ActionsCell} from '../../../../modules/table/columns/ActionsCell'
 import {TextImageCell} from '../../../../modules/table/columns/TextImageCell'
 import {useActivity} from '../contexts/ActivityContext'
-import { Announcement } from "../../../../models/announcement/Announcements";
-import { useAccessControl } from "../../../../modules/auth/core/AuthPermission";
+import {Announcement} from '../../../../models/announcement/Announcements'
+import {useAccessControl} from '../../../../modules/auth/core/AuthPermission'
 
 const ActivityAnnouncementsColumns: ReadonlyArray<Column<Announcement>> = [
   {

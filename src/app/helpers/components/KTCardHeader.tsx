@@ -39,8 +39,7 @@ const KTCardHeader: FC<Props> = ({
     <div
       id={id}
       className={clsx(`card-header`, className && className, bg && `bg-${bg}`)}
-      {...opts}
-    >
+      {...opts}>
       <div className='card-title d-flex align-items'>
         {icon && icon_style && (
           <span className='me-2'>

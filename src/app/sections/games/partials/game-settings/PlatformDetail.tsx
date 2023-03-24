@@ -99,8 +99,7 @@ export const PlatformDetail = () => {
           validationSchema={platformSchema}
           initialValues={platformForm}
           onSubmit={handleSubmit}
-          enableReinitialize
-        >
+          enableReinitialize>
           {({isSubmitting}) => (
             <Form onChange={handleOnChange} className='form' autoComplete='off'>
               <KTCardBody className='py-4'>

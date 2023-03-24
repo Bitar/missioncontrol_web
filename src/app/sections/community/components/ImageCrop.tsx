@@ -80,14 +80,12 @@ export const ImageCrop: FC<Props> = ({
         className={clsx(
           `${aspectRatioClass ?? ''} image-input image-input-outline image-input-empty`
         )}
-        data-kt-image-input='true'
-      >
+        data-kt-image-input='true'>
         <div
           className={clsx('image-input-wrapper w-100 h-100 overflow-hidden', {
             'w-200px h-200px': isSquare,
           })}
-          style={{backgroundImage: `url(${previewImage})`}}
-        >
+          style={{backgroundImage: `url(${previewImage})`}}>
           {image && (
             <div className='crop-container'>
               <Cropper
@@ -111,8 +109,7 @@ export const ImageCrop: FC<Props> = ({
           className='btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow'
           data-kt-image-input-action='change'
           data-bs-toggle='tooltip'
-          title='Change Cover'
-        >
+          title='Change Cover'>
           <i className='bi bi-pencil-fill fs-7'></i>
           <input type='file' accept='.png, .jpg, .jpeg' onChange={onImageLoad} />
         </label>

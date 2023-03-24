@@ -50,22 +50,19 @@ const ChartsWidget2: React.FC<Props> = ({className}) => {
         <div className='card-toolbar' data-kt-buttons='true'>
           <a
             className='btn btn-sm btn-color-muted btn-active btn-active-primary active px-4 me-1'
-            id='kt_charts_widget_2_year_btn'
-          >
+            id='kt_charts_widget_2_year_btn'>
             Year
           </a>
 
           <a
             className='btn btn-sm btn-color-muted btn-active btn-active-primary px-4 me-1'
-            id='kt_charts_widget_2_month_btn'
-          >
+            id='kt_charts_widget_2_month_btn'>
             Month
           </a>
 
           <a
             className='btn btn-sm btn-color-muted btn-active btn-active-primary px-4'
-            id='kt_charts_widget_2_week_btn'
-          >
+            id='kt_charts_widget_2_week_btn'>
             Week
           </a>
         </div>

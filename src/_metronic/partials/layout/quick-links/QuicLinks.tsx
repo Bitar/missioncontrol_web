@@ -6,12 +6,10 @@ import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 const QuickLinks: FC = () => (
   <div
     className='menu menu-sub menu-sub-dropdown menu-column w-250px w-lg-325px'
-    data-kt-menu='true'
-  >
+    data-kt-menu='true'>
     <div
       className='d-flex flex-column flex-center bgi-no-repeat rounded-top px-9 py-10'
-      style={{backgroundImage: `url('${toAbsoluteUrl('/media/misc/pattern-1.jpg')}')`}}
-    >
+      style={{backgroundImage: `url('${toAbsoluteUrl('/media/misc/pattern-1.jpg')}')`}}>
       <h3 className='text-white fw-bold mb-3'>Quick Links</h3>
 
       <span className='badge bg-primary py-2 px-3'>25 pending tasks</span>
@@ -21,8 +19,7 @@ const QuickLinks: FC = () => (
       <div className='col-6'>
         <a
           href='#'
-          className='d-flex flex-column flex-center h-100 p-6 bg-hover-light border-end border-bottom'
-        >
+          className='d-flex flex-column flex-center h-100 p-6 bg-hover-light border-end border-bottom'>
           <KTSVG
             path='/media/icons/duotune/finance/fin009.svg'
             className='svg-icon-3x svg-icon-primary mb-2'
@@ -35,8 +32,7 @@ const QuickLinks: FC = () => (
       <div className='col-6'>
         <a
           href='#'
-          className='d-flex flex-column flex-center h-100 p-6 bg-hover-light border-bottom'
-        >
+          className='d-flex flex-column flex-center h-100 p-6 bg-hover-light border-bottom'>
           <KTSVG
             path='/media/icons/duotune/communication/com010.svg'
             className='svg-icon-3x svg-icon-primary mb-2'

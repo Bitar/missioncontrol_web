@@ -84,8 +84,7 @@ export const PlayoffDetail = () => {
         validationSchema={activityPlayoffSchema}
         initialValues={activityForm!}
         onSubmit={handleSubmit}
-        enableReinitialize
-      >
+        enableReinitialize>
         {({isSubmitting}) => (
           <Form className='form' autoComplete='off'>
             <KTCardBody className='py-4'>

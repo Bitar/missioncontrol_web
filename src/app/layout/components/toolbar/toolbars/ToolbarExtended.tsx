@@ -68,12 +68,10 @@ const ToolbarExtended: FC = () => {
           data-bs-toggle='tooltip'
           data-bs-placement='top'
           data-bs-trigger='hover'
-          title='Invite a team member'
-        >
+          title='Invite a team member'>
           <a
             href='src/app/layout/components/toolbar/toolbars/ToolbarExtended#'
-            className='btn btn-sm btn-icon'
-          >
+            className='btn btn-sm btn-icon'>
             <KTSVG
               path='/media/icons/duotune/general/gen035.svg'
               className='svg-icon-2hx svg-icon-success'
@@ -120,8 +118,7 @@ const ToolbarExtended: FC = () => {
           data-placeholder='Latest'
           data-hide-search='true'
           value={progress}
-          onChange={(e) => setProgress(e.target.value)}
-        >
+          onChange={(e) => setProgress(e.target.value)}>
           <option value=''></option>
           <option value='1'>Latest</option>
           <option value='2'>In Progress</option>
@@ -136,8 +133,7 @@ const ToolbarExtended: FC = () => {
             className='btn btn-sm btn-icon btn-light-primary me-3'
             data-bs-toggle='tooltip'
             data-bs-placement='top'
-            title='Enable grid view'
-          >
+            title='Enable grid view'>
             <KTSVG
               path='/media/icons/duotune/general/gen025.svg'
               className='svg-icon-3 svg-icon-primary'
@@ -149,8 +145,7 @@ const ToolbarExtended: FC = () => {
             className='btn btn-sm btn-icon btn-light'
             data-bs-toggle='tooltip'
             data-bs-placement='top'
-            title='Enable row view'
-          >
+            title='Enable row view'>
             <KTSVG
               path='/media/icons/duotune/general/gen010.svg'
               className='svg-icon-3 svg-icon-gray-400'

@@ -59,8 +59,7 @@ const MatchesTable: FC<Props> = ({direction = 'asc'}) => {
               <div className='match-results'>
                 <div
                   className='my-5 text-center badge-mc-secondary w-100 text-center fw-bold rounded py-1'
-                  style={{fontSize: '15px'}}
-                >
+                  style={{fontSize: '15px'}}>
                   {date.format('MMM DD - hh:mm a')}
                 </div>
                 {data[keyInt]?.map((match: Match, index: number) => {
@@ -70,8 +69,7 @@ const MatchesTable: FC<Props> = ({direction = 'asc'}) => {
                         <>
                           <Link
                             to={'/activities/' + activity?.id + '/matches/' + match?.id}
-                            className='d-flex align-content-center d-flex justify-content-center border-bottom py-2'
-                          >
+                            className='d-flex align-content-center d-flex justify-content-center border-bottom py-2'>
                             <div className='col-5 d-flex py-2 px-2 mw-250px justify-content-end'>
                               <TextImageCell
                                 dImage={match?.teams[0]?.image}

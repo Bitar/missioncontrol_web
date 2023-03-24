@@ -53,8 +53,7 @@ const CommunityUsers: FC = () => {
       <QueryResponseProvider
         id={QUERIES.COMMUNITIES_USERS_LIST}
         requestFunction={getCommunityUsers}
-        requestId={community?.id}
-      >
+        requestId={community?.id}>
         <ListViewProvider>
           <KTCard>
             <KTCardHeader

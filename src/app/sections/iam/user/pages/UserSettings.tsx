@@ -119,15 +119,13 @@ const UserSettings: FC = () => {
         initialValues={userForm}
         onSubmit={handleSubmit}
         validationSchema={UserEditSchema}
-        enableReinitialize
-      >
+        enableReinitialize>
         {({isSubmitting}) => (
           <Form
             onChange={handleOnChange}
             className='form'
             encType='multipart/form-data'
-            autoComplete='off'
-          >
+            autoComplete='off'>
             <KTCardBody className='py-4'>
               <FormErrors errorMessages={formErrors} />
 

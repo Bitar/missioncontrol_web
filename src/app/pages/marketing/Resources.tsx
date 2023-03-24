@@ -20,8 +20,7 @@ const Resources = () => {
                 target='_blank'
                 download
                 rel='noreferrer'
-                className='d-block opacity-75-hover hoverable'
-              >
+                className='d-block opacity-75-hover hoverable'>
                 <img className='card-img-top' src={market.avatar} alt='' />
                 <div className='card-body'>
                   <h5 className='card-title'>{market.title} - Media Kit</h5>

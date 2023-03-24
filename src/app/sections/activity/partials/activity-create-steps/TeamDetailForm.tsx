@@ -158,8 +158,7 @@ export const TeamDetailForm = () => {
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-              onClick={() => handlePlayersClick('sub')}
-            >
+              onClick={() => handlePlayersClick('sub')}>
               <i className='fa fa-minus'></i>
             </button>
             <Button disabled={true} className='text-dark fs-4 py-0'>
@@ -168,8 +167,7 @@ export const TeamDetailForm = () => {
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-              onClick={() => handlePlayersClick('add')}
-            >
+              onClick={() => handlePlayersClick('add')}>
               <i className='fa fa-plus'></i>
             </button>
           </ButtonGroup>
@@ -186,8 +184,7 @@ export const TeamDetailForm = () => {
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-              onClick={() => handleMinClick('sub')}
-            >
+              onClick={() => handleMinClick('sub')}>
               <i className='fa fa-minus'></i>
             </button>
             <Button disabled={true} className='text-dark fs-4 py-0'>
@@ -196,8 +193,7 @@ export const TeamDetailForm = () => {
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-              onClick={() => handleMinClick('add')}
-            >
+              onClick={() => handleMinClick('add')}>
               <i className='fa fa-plus'></i>
             </button>
           </ButtonGroup>
@@ -211,8 +207,7 @@ export const TeamDetailForm = () => {
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-              onClick={() => handleMaxClick('sub')}
-            >
+              onClick={() => handleMaxClick('sub')}>
               <i className='fa fa-minus'></i>
             </button>
             <Button disabled={true} className='text-dark fs-4 py-0'>
@@ -221,8 +216,7 @@ export const TeamDetailForm = () => {
             <button
               type={'button'}
               className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-              onClick={() => handleMaxClick('add')}
-            >
+              onClick={() => handleMaxClick('add')}>
               <i className='fa fa-plus'></i>
             </button>
           </ButtonGroup>

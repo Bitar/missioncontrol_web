@@ -19,15 +19,13 @@ const EngageWidget3: React.FC<Props> = ({
     <div className={`card card-custom ${className}`}>
       {/* begin::Card Body */}
       <div
-        className={`card-body d-flex p-12 flex-column flex-md-row flex-lg-column flex-xxl-row bg-${color}`}
-      >
+        className={`card-body d-flex p-12 flex-column flex-md-row flex-lg-column flex-xxl-row bg-${color}`}>
         {/*begin::Image*/}
         <div
           className='bgi-no-repeat bgi-position-center bgi-size-cover h-300px h-md-auto h-lg-300px h-xxl-auto mw-100 w-650px mx-auto'
           style={{
             backgroundImage: `url('${toAbsoluteUrl('/media/products/12.png')}'`,
-          }}
-        ></div>
+          }}></div>
         {/*end::Image*/}
 
         {/*begin::Card*/}

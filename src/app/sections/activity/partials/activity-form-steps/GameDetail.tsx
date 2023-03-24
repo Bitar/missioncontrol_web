@@ -94,8 +94,7 @@ export const GameDetail = () => {
         validationSchema={activityGameSchema}
         initialValues={activityForm!}
         onSubmit={handleSubmit}
-        enableReinitialize
-      >
+        enableReinitialize>
         {({isSubmitting}) => (
           <Form onChange={handleOnChange} className='form' autoComplete='off'>
             <KTCardBody className='py-4'>

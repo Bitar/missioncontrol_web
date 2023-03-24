@@ -8,8 +8,7 @@ const DemosToggleDrawer: FC = () => (
     data-bs-toggle='tooltip'
     data-bs-placement='left'
     data-bs-dismiss='click'
-    data-bs-trigger='hover'
-  >
+    data-bs-trigger='hover'>
     <span id='kt_engage_demos_label'>Demos</span>
   </button>
 )

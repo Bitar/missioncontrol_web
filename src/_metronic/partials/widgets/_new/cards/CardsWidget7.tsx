@@ -43,8 +43,7 @@ const CardsWidget7 = ({className, description, icon, stats, labelColor, textColo
             className='symbol symbol-35px symbol-circle'
             data-bs-toggle='tooltip'
             title={item.name}
-            key={`cw7-item-${index}`}
-          >
+            key={`cw7-item-${index}`}>
             {item.src && <img alt='Pic' src={item.src} />}
             {item.state && item.initials && (
               <span
@@ -52,8 +51,7 @@ const CardsWidget7 = ({className, description, icon, stats, labelColor, textColo
                   'symbol-label fw-bold',
                   'bg-' + item.state,
                   'text-inverse-' + item.state
-                )}
-              >
+                )}>
                 {item.initials}
               </span>
             )}
@@ -62,8 +60,7 @@ const CardsWidget7 = ({className, description, icon, stats, labelColor, textColo
 
         <a href='#' className='symbol symbol-35px symbol-circle'>
           <span
-            className={clsx('symbol-label fs-8 fw-bold', 'bg-' + labelColor, 'text-' + textColor)}
-          >
+            className={clsx('symbol-label fs-8 fw-bold', 'bg-' + labelColor, 'text-' + textColor)}>
             +42
           </span>
         </a>

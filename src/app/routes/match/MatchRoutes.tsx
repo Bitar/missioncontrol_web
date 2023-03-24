@@ -77,8 +77,7 @@ const MatchRoutes: FC = () => {
         setMatch,
         teams,
         setTeams,
-      }}
-    >
+      }}>
       <div ref={bottomRef} />
       <Routes>
         <Route
@@ -87,8 +86,7 @@ const MatchRoutes: FC = () => {
               <MatchInfo />
               <Outlet />
             </>
-          }
-        >
+          }>
           <Route
             index
             element={

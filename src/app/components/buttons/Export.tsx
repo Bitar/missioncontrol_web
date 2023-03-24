@@ -56,8 +56,7 @@ const ExportButton: React.FC<Props> = ({exportQuery, exportEndpoint, className})
     <Button
       className={clsx('btn btn-light-info fs-6', className)}
       title='Export'
-      onClick={exportHandler}
-    >
+      onClick={exportHandler}>
       <i className={clsx('fa fs-4', 'fa-arrow-down-to-line', 'pe-0')}></i>
     </Button>
   )

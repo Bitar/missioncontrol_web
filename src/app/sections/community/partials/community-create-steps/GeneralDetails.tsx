@@ -69,7 +69,9 @@ const GeneralDetails: FC = () => {
             ratio={1.91}
             name='banner_image'
           />
-          <div className='text-muted fw-semibold'>Recommended Image Ratio: 1.91:1 (1900px x 1000px)</div>
+          <div className='text-muted fw-semibold'>
+            Recommended Image Ratio: 1.91:1 (1900px x 1000px)
+          </div>
           <div className='text-danger mt-2'>
             <ErrorMessage name='banner_image' />
           </div>

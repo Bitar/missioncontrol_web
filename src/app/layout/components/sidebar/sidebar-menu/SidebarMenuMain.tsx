@@ -42,8 +42,7 @@ const SidebarMenuMain = () => {
         <SidebarMenuItemWithSub
           to={['/iam/users', '/iam/roles', '/iam/permissions']}
           title='IAM'
-          fontIcon='fa-users'
-        >
+          fontIcon='fa-users'>
           <SidebarMenuItem to='/iam/users' title='Users' hasBullet={true} />
           <SidebarMenuItem to='/iam/roles' title='Roles' hasBullet={true} />
           <SidebarMenuItem to='/iam/permissions' title='Permissions' hasBullet={true} />

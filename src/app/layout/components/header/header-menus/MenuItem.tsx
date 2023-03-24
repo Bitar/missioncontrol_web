@@ -22,8 +22,7 @@ const MenuItem: FC<Props> = ({to, title, icon, fontIcon, hasArrow = false, hasBu
         className={clsx('menu-link py-3', {
           'active menu-here': checkIsActive(pathname, to),
         })}
-        to={to}
-      >
+        to={to}>
         {hasBullet && (
           <span className='menu-bullet'>
             <span className='bullet bullet-dot'></span>

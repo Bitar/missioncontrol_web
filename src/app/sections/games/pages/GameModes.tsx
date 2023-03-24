@@ -75,8 +75,7 @@ const GameModes: FC = () => {
                   if (showManage) {
                     setGameMode(gameMode)
                   }
-                }}
-              >
+                }}>
                 <span className='text-gray-800 d-flex flex-column'>
                   <div className='fs-5 fw-bolder mb-2'>{gameMode?.name}</div>
                 </span>
@@ -100,8 +99,7 @@ const GameModes: FC = () => {
                 <div className='text-center py-5'>
                   <i
                     className='fas fa-trash text-danger cursor-pointer'
-                    onClick={() => deleteGameMode(gameMode?.id)}
-                  ></i>
+                    onClick={() => deleteGameMode(gameMode?.id)}></i>
                 </div>
               )}
             </div>
@@ -111,8 +109,7 @@ const GameModes: FC = () => {
           <div className='col-12 col-xl'>
             <div
               className='card h-100 cursor-pointer text-center bg-success'
-              onClick={() => addGameMode()}
-            >
+              onClick={() => addGameMode()}>
               <KTCardBody className='d-flex justify-content-center flex-column p-8'>
                 <span className='text-light-success d-flex flex-column'>
                   <div className='mb-5'>

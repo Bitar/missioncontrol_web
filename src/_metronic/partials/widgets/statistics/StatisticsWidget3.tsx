@@ -59,8 +59,7 @@ const StatisticsWidget3: React.FC<Props> = ({className, title, description, chan
 
             <span
               className='text-muted fw-semibold mt-1'
-              dangerouslySetInnerHTML={{__html: description}}
-            ></span>
+              dangerouslySetInnerHTML={{__html: description}}></span>
           </div>
 
           <span className='symbol symbol-50px'>
@@ -72,8 +71,7 @@ const StatisticsWidget3: React.FC<Props> = ({className, title, description, chan
         <div
           ref={chartRef}
           className='statistics-widget-3-chart card-rounded-bottom'
-          style={{height: '150px'}}
-        ></div>
+          style={{height: '150px'}}></div>
       </div>
       {/* end::Body */}
     </div>

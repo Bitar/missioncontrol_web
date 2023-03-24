@@ -57,8 +57,7 @@ const MixedWidget3: React.FC<Props> = ({className, chartColor, chartHeight}) => 
             )}
             data-kt-menu-trigger='click'
             data-kt-menu-placement='bottom-end'
-            data-kt-menu-flip='top-end'
-          >
+            data-kt-menu-flip='top-end'>
             <KTSVG path='/media/icons/duotune/general/gen024.svg' className='svg-icon-2' />
           </button>
           <Dropdown1 />
@@ -72,8 +71,7 @@ const MixedWidget3: React.FC<Props> = ({className, chartColor, chartHeight}) => 
         {/* begin::Chart  */}
         <div
           ref={chartRef}
-          className={`mixed-widget-12-chart card-rounded-bottom bg-${chartColor}`}
-        ></div>
+          className={`mixed-widget-12-chart card-rounded-bottom bg-${chartColor}`}></div>
         {/* end::Chart  */}
 
         {/* begin::Stats  */}

@@ -32,8 +32,7 @@ const EngageWidget2: React.FC<Props> = ({
             style={{
               transform: 'translateX(10%) rotate(-26deg)',
               backgroundImage: `url('${imagePath}')`,
-            }}
-          ></div>
+            }}></div>
         )}
       </div>
     </div>

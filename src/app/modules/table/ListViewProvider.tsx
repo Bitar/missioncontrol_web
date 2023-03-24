@@ -37,8 +37,7 @@ const ListViewProvider: FC<React.PropsWithChildren<unknown>> = ({children}) => {
         clearSelected: () => {
           setSelected([])
         },
-      }}
-    >
+      }}>
       {children}
     </ListViewContext.Provider>
   )

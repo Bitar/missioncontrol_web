@@ -58,8 +58,7 @@ const GameView: React.FC = () => {
         game,
         setGame,
         updateGame,
-      }}
-    >
+      }}>
       <Routes>
         <Route
           element={
@@ -67,8 +66,7 @@ const GameView: React.FC = () => {
               <GameInfo />
               <Outlet />
             </>
-          }
-        >
+          }>
           <Route
             index
             element={

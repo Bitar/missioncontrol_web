@@ -24,8 +24,7 @@ const Navbar = () => {
           className={clsx('cursor-pointer symbol', userAvatarClass)}
           data-kt-menu-trigger="{default: 'click'}"
           data-kt-menu-attach='parent'
-          data-kt-menu-placement='bottom-end'
-        >
+          data-kt-menu-placement='bottom-end'>
           <img src={currentUser?.meta?.image} alt={currentUser?.name} />
         </div>
         <HeaderUserMenu />

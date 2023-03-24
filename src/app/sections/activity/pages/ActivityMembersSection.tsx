@@ -28,8 +28,7 @@ export const ActivityMembersSection = () => {
       <QueryResponseProvider
         id={QUERIES.ACTIVITIES_MEMBER_LIST}
         requestFunction={getActivityMembers}
-        requestId={activity?.id}
-      >
+        requestId={activity?.id}>
         <ListViewProvider>
           <KTCard>
             <KTCardHeader

@@ -23,8 +23,7 @@ const ListsWidget7: React.FC<Props> = ({className}) => {
             className='btn btn-sm btn-icon btn-color-primary btn-active-light-primary'
             data-kt-menu-trigger='click'
             data-kt-menu-placement='bottom-end'
-            data-kt-menu-flip='top-end'
-          >
+            data-kt-menu-flip='top-end'>
             <KTSVG path='/media/icons/duotune/general/gen024.svg' className='svg-icon-2' />
           </button>
           <Dropdown1 />
@@ -40,8 +39,9 @@ const ListsWidget7: React.FC<Props> = ({className}) => {
           <div className='symbol symbol-60px symbol-2by3 me-4'>
             <div
               className='symbol-label'
-              style={{backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-20.jpg')})`}}
-            ></div>
+              style={{
+                backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-20.jpg')})`,
+              }}></div>
           </div>
           {/* end::Symbol */}
           {/* begin::Title */}
@@ -63,8 +63,9 @@ const ListsWidget7: React.FC<Props> = ({className}) => {
           <div className='symbol symbol-60px symbol-2by3 me-4'>
             <div
               className='symbol-label'
-              style={{backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-19.jpg')})`}}
-            ></div>
+              style={{
+                backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-19.jpg')})`,
+              }}></div>
           </div>
           {/* end::Symbol */}
           {/* begin::Title */}
@@ -86,8 +87,9 @@ const ListsWidget7: React.FC<Props> = ({className}) => {
           <div className='symbol symbol-60px symbol-2by3 me-4'>
             <div
               className='symbol-label'
-              style={{backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-25.jpg')})`}}
-            ></div>
+              style={{
+                backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-25.jpg')})`,
+              }}></div>
           </div>
           {/* end::Symbol */}
           {/* begin::Title */}
@@ -109,8 +111,9 @@ const ListsWidget7: React.FC<Props> = ({className}) => {
           <div className='symbol symbol-60px symbol-2by3 me-4'>
             <div
               className='symbol-label'
-              style={{backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-24.jpg')}`}}
-            ></div>
+              style={{
+                backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x400/img-24.jpg')}`,
+              }}></div>
           </div>
           {/* end::Symbol */}
           {/* begin::Title */}

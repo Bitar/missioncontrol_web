@@ -102,8 +102,7 @@ const PlanCard: FC<React.PropsWithChildren<Props>> = ({plan, selectPlan, communi
               onClick={(e) => {
                 e.preventDefault()
                 selectPlan(plan)
-              }}
-            >
+              }}>
               Select
             </a>
           </div>

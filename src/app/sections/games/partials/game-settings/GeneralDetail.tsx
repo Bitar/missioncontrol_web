@@ -40,8 +40,7 @@ const GeneralDetail: FC<Props> = ({gameForm, setGameForm}) => {
           initialValues={gameForm}
           onSubmit={handleSubmit}
           validationSchema={gameSchema}
-          enableReinitialize
-        >
+          enableReinitialize>
           {({isSubmitting}) => (
             <Form onChange={handleOnChange} className='form' autoComplete='off'>
               <KTCardBody className='py-4'>

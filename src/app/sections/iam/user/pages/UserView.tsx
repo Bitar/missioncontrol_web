@@ -54,8 +54,7 @@ const UserView: React.FC = () => {
       value={{
         user,
         setUser,
-      }}
-    >
+      }}>
       <Routes>
         <Route
           element={
@@ -63,8 +62,7 @@ const UserView: React.FC = () => {
               <UserInfo />
               <Outlet />
             </>
-          }
-        >
+          }>
           <Route
             index
             element={

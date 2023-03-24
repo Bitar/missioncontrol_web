@@ -16,8 +16,7 @@ const Footer = () => {
         <a
           href='https://www.missioncontrol.gg/'
           target='_blank'
-          className='text-gray-800 text-hover-mc-primary'
-        >
+          className='text-gray-800 text-hover-mc-primary'>
           Mission Control
         </a>
       </div>

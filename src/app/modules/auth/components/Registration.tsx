@@ -74,8 +74,7 @@ const Registration = () => {
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
-        validationSchema={registrationSchema}
-      >
+        validationSchema={registrationSchema}>
         {({isSubmitting}) => (
           <Form className='form w-100 fv-plugins-bootstrap5 fv-plugins-framework'>
             <div className='mb-10 text-center'>
@@ -86,8 +85,7 @@ const Registration = () => {
                 <Link
                   to='/auth/login'
                   className='link-primary fw-bolder'
-                  style={{marginLeft: '5px'}}
-                >
+                  style={{marginLeft: '5px'}}>
                   Login
                 </Link>
               </div>
@@ -155,8 +153,7 @@ const Registration = () => {
                 </div>
                 <div
                   className='d-flex align-items-center mb-3'
-                  data-kt-password-meter-control='highlight'
-                >
+                  data-kt-password-meter-control='highlight'>
                   <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
                   <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
                   <div className='flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2'></div>
@@ -190,8 +187,7 @@ const Registration = () => {
                     rel={'noreferrer'}
                     href='https://app.termly.io/document/terms-of-use-for-website/15087e11-678e-49c8-9fb9-feff372268de'
                     target='_blank'
-                    className='ms-1 link-primary'
-                  >
+                    className='ms-1 link-primary'>
                     Terms of Service
                   </a>{' '}
                   and
@@ -199,8 +195,7 @@ const Registration = () => {
                     rel={'noreferrer'}
                     href='https://app.termly.io/document/privacy-policy/61d2c399-55ab-4ba8-b7bf-9c704dd6330c'
                     target='_blank'
-                    className='ms-1 link-primary'
-                  >
+                    className='ms-1 link-primary'>
                     Private Policy
                   </a>
                   .
@@ -212,8 +207,7 @@ const Registration = () => {
               <button
                 type='submit'
                 className='btn btn-lg btn-mc-secondary w-100 mb-5'
-                disabled={isSubmitting}
-              >
+                disabled={isSubmitting}>
                 <span className='indicator-label'>Register</span>
                 {isSubmitting && (
                   <span className='indicator-progress float-end' style={{display: 'inline-block'}}>
@@ -225,8 +219,7 @@ const Registration = () => {
                 <button
                   type='button'
                   id='kt_login_signup_form_cancel_button'
-                  className='btn btn-lg btn-light-primary w-100 mb-5'
-                >
+                  className='btn btn-lg btn-light-primary w-100 mb-5'>
                   Cancel
                 </button>
               </Link>

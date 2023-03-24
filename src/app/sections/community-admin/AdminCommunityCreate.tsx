@@ -279,13 +279,11 @@ const AdminCommunityCreate = () => {
             states: states,
             paymentTerm: paymentTerm,
             setPaymentTerm: setPaymentTerm,
-          }}
-        >
+          }}>
           <Formik
             validationSchema={currentSchema}
             initialValues={communityForm}
-            onSubmit={submitStep}
-          >
+            onSubmit={submitStep}>
             {() => (
               <Form onChange={handleOnChange}>
                 <KTCardBody>
@@ -319,16 +317,14 @@ const AdminCommunityCreate = () => {
                     onClick={prevStep}
                     type='button'
                     className='btn btn-sm btn-light-mc-secondary me-3'
-                    data-kt-stepper-action='previous'
-                  >
+                    data-kt-stepper-action='previous'>
                     Back
                   </button>
 
                   <button
                     type='submit'
                     className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'
-                    disabled={isSubmitting}
-                  >
+                    disabled={isSubmitting}>
                     <span className='indicator-label'>
                       {isSubmitting ? 'Submitting' : isSubmitButton ? 'Submit' : 'Continue'}
                     </span>

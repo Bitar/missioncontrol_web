@@ -253,22 +253,19 @@ export const ReviewDetails: FC = () => {
                             style={{
                               color: '#110055',
                               fontSize: '2rem',
-                            }}
-                          ></i>
+                            }}></i>
                           <i
                             className='ms-2 fab fa-cc-visa'
                             style={{
                               color: '#110055',
                               fontSize: '2rem',
-                            }}
-                          ></i>
+                            }}></i>
                           <i
                             className='ms-2 fab fa-cc-mastercard'
                             style={{
                               color: '#110055',
                               fontSize: '2rem',
-                            }}
-                          ></i>
+                            }}></i>
                         </div>
                       </div>
 

@@ -21,8 +21,7 @@ export const KTCardFooter: FC<Props & WithChildren> = (props) => {
           'card-scroll': scroll,
         },
         height && `h-${height}px`
-      )}
-    >
+      )}>
       {children}
     </div>
   )

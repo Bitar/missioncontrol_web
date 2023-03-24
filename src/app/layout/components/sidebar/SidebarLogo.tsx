@@ -57,8 +57,7 @@ const SidebarLogo = () => {
           data-kt-toggle='true'
           data-kt-toggle-state={toggleState}
           data-kt-toggle-target='body'
-          data-kt-toggle-name={`app-sidebar-${toggleType}`}
-        >
+          data-kt-toggle-name={`app-sidebar-${toggleType}`}>
           <KTSVG path='/media/icons/duotune/arr079.svg' className='svg-icon-2 rotate-180' />
         </div>
       )}

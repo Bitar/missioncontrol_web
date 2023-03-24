@@ -11,8 +11,7 @@ export const ProfilePage = () => {
       value={{
         user: currentUser,
         setUser: setCurrentUser,
-      }}
-    >
+      }}>
       <UserSettings />
     </UserContext.Provider>
   )

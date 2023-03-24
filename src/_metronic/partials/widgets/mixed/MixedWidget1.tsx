@@ -25,8 +25,7 @@ const MixedWidget1: React.FC<Props> = ({className, color}) => {
                 className={`btn btn-sm btn-icon btn-color-white btn-active-white btn-active-color-${color} border-0 me-n3`}
                 data-kt-menu-trigger='click'
                 data-kt-menu-placement='bottom-end'
-                data-kt-menu-flip='top-end'
-              >
+                data-kt-menu-flip='top-end'>
                 <KTSVG path='/media/icons/duotune/general/gen024.svg' className='svg-icon-2' />
               </button>
               <Dropdown1 />
@@ -45,8 +44,7 @@ const MixedWidget1: React.FC<Props> = ({className, color}) => {
         {/* begin::Items */}
         <div
           className='shadow-xs card-rounded mx-9 mb-9 px-6 py-9 position-relative z-index-1 bg-body'
-          style={{marginTop: '-100px'}}
-        >
+          style={{marginTop: '-100px'}}>
           {/* begin::Item */}
           <div className='d-flex align-items-center mb-6'>
             {/* begin::Symbol */}

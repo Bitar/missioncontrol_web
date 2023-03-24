@@ -30,8 +30,7 @@ const Item3: FC = () => {
               data-bs-toggle='tooltip'
               data-bs-boundary='window'
               data-bs-placement='top'
-              title='Jan Hummer'
-            >
+              title='Jan Hummer'>
               <img src={toAbsoluteUrl('/media/avatars/300-23.jpg')} alt='img' />
             </div>
           </div>

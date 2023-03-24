@@ -8,8 +8,7 @@ const ToggleHelpDrawer: FC = () => (
     data-bs-toggle='tooltip'
     data-bs-placement='left'
     data-bs-dismiss='click'
-    data-bs-trigger='hover'
-  >
+    data-bs-trigger='hover'>
     Help
   </button>
 )

@@ -11,8 +11,7 @@ const CardsWidget20 = ({className, description, color, img}: Props) => (
     style={{
       backgroundColor: color,
       backgroundImage: `url('${img}')`,
-    }}
-  >
+    }}>
     <div className='card-header pt-5'>
       <div className='card-title d-flex flex-column'>
         <span className='fs-2hx fw-bold text-white me-2 lh-1 ls-n2'>69</span>
@@ -34,8 +33,7 @@ const CardsWidget20 = ({className, description, color, img}: Props) => (
             style={{width: '72%'}}
             aria-valuenow={50}
             aria-valuemin={0}
-            aria-valuemax={100}
-          ></div>
+            aria-valuemax={100}></div>
         </div>
       </div>
     </div>

@@ -39,8 +39,7 @@ const PermissionCreate = () => {
           <Formik
             initialValues={permission}
             onSubmit={handleSubmit}
-            validationSchema={permissionSchema}
-          >
+            validationSchema={permissionSchema}>
             {({isSubmitting, isValid, touched, errors}) => (
               <Form onChange={handleOnChange} className='form'>
                 <div className='d-flex flex-column pt-5'>
@@ -69,8 +68,7 @@ const PermissionCreate = () => {
                     onClick={() => toIndex()}
                     className='btn btn-light me-3'
                     data-kt-users-modal-action='cancel'
-                    disabled={isSubmitting}
-                  >
+                    disabled={isSubmitting}>
                     Cancel
                   </button>
 
@@ -78,8 +76,7 @@ const PermissionCreate = () => {
                     type='submit'
                     className='btn btn-primary'
                     data-kt-users-modal-action='submit'
-                    disabled={isSubmitting || !isValid || !touched}
-                  >
+                    disabled={isSubmitting || !isValid || !touched}>
                     <span className='indicator-label'>Submit</span>
                     {isSubmitting && (
                       <span className='indicator-progress'>

@@ -83,8 +83,7 @@ const AuthProvider: FC<WithChildren> = ({children}) => {
         communityAdmin,
         setCommunityAdmin,
         logout,
-      }}
-    >
+      }}>
       {children}
     </AuthContext.Provider>
   )

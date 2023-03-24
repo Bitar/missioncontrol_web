@@ -20,14 +20,12 @@ const TablesWidget9: React.FC<Props> = ({className}) => {
           data-bs-toggle='tooltip'
           data-bs-placement='top'
           data-bs-trigger='hover'
-          title='Click to add a user'
-        >
+          title='Click to add a user'>
           <a
             href='#'
             className='btn btn-sm btn-light-primary'
             data-bs-toggle='modal'
-            data-bs-target='#kt_modal_invite_friends'
-          >
+            data-bs-target='#kt_modal_invite_friends'>
             <KTSVG path='/media/icons/duotune/arrows/arr075.svg' className='svg-icon-3' />
             New Member
           </a>
@@ -101,8 +99,7 @@ const TablesWidget9: React.FC<Props> = ({className}) => {
                       <div
                         className='progress-bar bg-primary'
                         role='progressbar'
-                        style={{width: '50%'}}
-                      ></div>
+                        style={{width: '50%'}}></div>
                     </div>
                   </div>
                 </td>
@@ -110,8 +107,7 @@ const TablesWidget9: React.FC<Props> = ({className}) => {
                   <div className='d-flex justify-content-end flex-shrink-0'>
                     <a
                       href='#'
-                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
-                    >
+                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'>
                       <KTSVG
                         path='/media/icons/duotune/general/gen019.svg'
                         className='svg-icon-3'
@@ -119,14 +115,12 @@ const TablesWidget9: React.FC<Props> = ({className}) => {
                     </a>
                     <a
                       href='#'
-                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
-                    >
+                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'>
                       <KTSVG path='/media/icons/duotune/art/art005.svg' className='svg-icon-3' />
                     </a>
                     <a
                       href='#'
-                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'
-                    >
+                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'>
                       <KTSVG
                         path='/media/icons/duotune/general/gen027.svg'
                         className='svg-icon-3'
@@ -173,8 +167,7 @@ const TablesWidget9: React.FC<Props> = ({className}) => {
                       <div
                         className='progress-bar bg-danger'
                         role='progressbar'
-                        style={{width: '70%'}}
-                      ></div>
+                        style={{width: '70%'}}></div>
                     </div>
                   </div>
                 </td>
@@ -182,8 +175,7 @@ const TablesWidget9: React.FC<Props> = ({className}) => {
                   <div className='d-flex justify-content-end flex-shrink-0'>
                     <a
                       href='#'
-                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
-                    >
+                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'>
                       <KTSVG
                         path='/media/icons/duotune/general/gen019.svg'
                         className='svg-icon-3'
@@ -191,14 +183,12 @@ const TablesWidget9: React.FC<Props> = ({className}) => {
                     </a>
                     <a
                       href='#'
-                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
-                    >
+                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'>
                       <KTSVG path='/media/icons/duotune/art/art005.svg' className='svg-icon-3' />
                     </a>
                     <a
                       href='#'
-                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'
-                    >
+                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'>
                       <KTSVG
                         path='/media/icons/duotune/general/gen027.svg'
                         className='svg-icon-3'
@@ -245,8 +235,7 @@ const TablesWidget9: React.FC<Props> = ({className}) => {
                       <div
                         className='progress-bar bg-success'
                         role='progressbar'
-                        style={{width: '60%'}}
-                      ></div>
+                        style={{width: '60%'}}></div>
                     </div>
                   </div>
                 </td>
@@ -254,8 +243,7 @@ const TablesWidget9: React.FC<Props> = ({className}) => {
                   <div className='d-flex justify-content-end flex-shrink-0'>
                     <a
                       href='#'
-                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
-                    >
+                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'>
                       <KTSVG
                         path='/media/icons/duotune/general/gen019.svg'
                         className='svg-icon-3'
@@ -263,14 +251,12 @@ const TablesWidget9: React.FC<Props> = ({className}) => {
                     </a>
                     <a
                       href='#'
-                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
-                    >
+                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'>
                       <KTSVG path='/media/icons/duotune/art/art005.svg' className='svg-icon-3' />
                     </a>
                     <a
                       href='#'
-                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'
-                    >
+                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'>
                       <KTSVG
                         path='/media/icons/duotune/general/gen027.svg'
                         className='svg-icon-3'
@@ -315,8 +301,7 @@ const TablesWidget9: React.FC<Props> = ({className}) => {
                       <div
                         className='progress-bar bg-warning'
                         role='progressbar'
-                        style={{width: '50%'}}
-                      ></div>
+                        style={{width: '50%'}}></div>
                     </div>
                   </div>
                 </td>
@@ -324,8 +309,7 @@ const TablesWidget9: React.FC<Props> = ({className}) => {
                   <div className='d-flex justify-content-end flex-shrink-0'>
                     <a
                       href='#'
-                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
-                    >
+                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'>
                       <KTSVG
                         path='/media/icons/duotune/general/gen019.svg'
                         className='svg-icon-3'
@@ -333,14 +317,12 @@ const TablesWidget9: React.FC<Props> = ({className}) => {
                     </a>
                     <a
                       href='#'
-                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
-                    >
+                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'>
                       <KTSVG path='/media/icons/duotune/art/art005.svg' className='svg-icon-3' />
                     </a>
                     <a
                       href='#'
-                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'
-                    >
+                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'>
                       <KTSVG
                         path='/media/icons/duotune/general/gen027.svg'
                         className='svg-icon-3'
@@ -387,8 +369,7 @@ const TablesWidget9: React.FC<Props> = ({className}) => {
                       <div
                         className='progress-bar bg-info'
                         role='progressbar'
-                        style={{width: '90%'}}
-                      ></div>
+                        style={{width: '90%'}}></div>
                     </div>
                   </div>
                 </td>
@@ -396,8 +377,7 @@ const TablesWidget9: React.FC<Props> = ({className}) => {
                   <div className='d-flex justify-content-end flex-shrink-0'>
                     <a
                       href='#'
-                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
-                    >
+                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'>
                       <KTSVG
                         path='/media/icons/duotune/general/gen019.svg'
                         className='svg-icon-3'
@@ -405,14 +385,12 @@ const TablesWidget9: React.FC<Props> = ({className}) => {
                     </a>
                     <a
                       href='#'
-                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'
-                    >
+                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1'>
                       <KTSVG path='/media/icons/duotune/art/art005.svg' className='svg-icon-3' />
                     </a>
                     <a
                       href='#'
-                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'
-                    >
+                      className='btn btn-icon btn-bg-light btn-active-color-primary btn-sm'>
                       <KTSVG
                         path='/media/icons/duotune/general/gen027.svg'
                         className='svg-icon-3'

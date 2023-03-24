@@ -24,11 +24,9 @@ const TextImageCell: FC<React.PropsWithChildren<Props>> = ({
     <div
       className={clsx('d-flex align-items-center', {
         'flex-row-reverse': flip,
-      })}
-    >
+      })}>
       <div
-        className={`symbol symbol-circle symbol-${size}px overflow-hidden m${!flip ? 'e' : 's'}-3`}
-      >
+        className={`symbol symbol-circle symbol-${size}px overflow-hidden m${!flip ? 'e' : 's'}-3`}>
         {dImage &&
           (link ? (
             <Link to={`${link}`}>
@@ -46,8 +44,7 @@ const TextImageCell: FC<React.PropsWithChildren<Props>> = ({
       <div
         className={clsx('d-flex flex-column', {
           'text-end': flip,
-        })}
-      >
+        })}>
         {link ? (
           <Link to={`${link}`} className='text-gray-800 text-hover-mc-secondary mb-1'>
             {dText}

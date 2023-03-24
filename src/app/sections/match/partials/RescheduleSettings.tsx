@@ -88,8 +88,7 @@ export const RescheduleSettings = () => {
         validationSchema={matchDateSchema}
         initialValues={matchForm!}
         onSubmit={handleSubmit}
-        enableReinitialize
-      >
+        enableReinitialize>
         {({isSubmitting}) => (
           <Form className='form' autoComplete='off'>
             <KTCardBody className='py-4'>

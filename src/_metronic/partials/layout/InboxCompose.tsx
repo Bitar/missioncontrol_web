@@ -24,8 +24,7 @@ const InboxCompose: React.FC<Props> = ({show, handleClose}) => {
       aria-hidden='true'
       tabIndex='-1'
       show={show}
-      animation={false}
-    >
+      animation={false}>
       <div className='modal-content'>
         {/* begin::Form */}
         <form ref={formRef} id='kt_inbox_compose_form' onSubmit={() => console.log('submit')}>
@@ -37,8 +36,7 @@ const InboxCompose: React.FC<Props> = ({show, handleClose}) => {
               <div
                 className='btn btn-icon btn-sm btn-light-primary ms-2'
                 data-bs-dismiss='modal'
-                onClick={handleClose}
-              >
+                onClick={handleClose}>
                 <KTSVG className='svg-icon-1' path='/media/icons/duotune/arrows/arr061.svg' />
               </div>
               {/*end::Close*/}
@@ -62,14 +60,12 @@ const InboxCompose: React.FC<Props> = ({show, handleClose}) => {
               <div className='ms-2'>
                 <span
                   className='text-muted fw-bold cursor-pointer text-hover-primary me-2'
-                  data-inbox='cc-show'
-                >
+                  data-inbox='cc-show'>
                   Cc
                 </span>
                 <span
                   className='text-muted fw-bold cursor-pointer text-hover-primary'
-                  data-inbox='bcc-show'
-                >
+                  data-inbox='bcc-show'>
                   Bcc
                 </span>
               </div>
@@ -149,8 +145,7 @@ const InboxCompose: React.FC<Props> = ({show, handleClose}) => {
                         aria-valuemin={0}
                         aria-valuemax={100}
                         aria-valuenow={0}
-                        data-dz-uploadprogress
-                      ></div>
+                        data-dz-uploadprogress></div>
                     </div>
                   </div>
                   <div className='dropzone-toolbar'>
@@ -158,8 +153,7 @@ const InboxCompose: React.FC<Props> = ({show, handleClose}) => {
                       {/*begin::Close*/}
                       <span
                         className='btn btn-icon btn-sm btn-active-light-primary ms-2'
-                        data-bs-dismiss='modal'
-                      >
+                        data-bs-dismiss='modal'>
                         <KTSVG
                           className='svg-icon-1'
                           path='/media/icons/duotune/arrows/arr061.svg'
@@ -187,8 +181,7 @@ const InboxCompose: React.FC<Props> = ({show, handleClose}) => {
               <a
                 href='#'
                 className='btn btn-icon btn-active-light-primary me-2'
-                id='kt_inbox_compose_attachments_select'
-              >
+                id='kt_inbox_compose_attachments_select'>
                 <KTSVG className='svg-icon-1' path='/media/icons/duotune/files/fil022.svg' />
               </a>
               <a href='#' className='btn btn-icon btn-active-light-primary'>
@@ -203,8 +196,7 @@ const InboxCompose: React.FC<Props> = ({show, handleClose}) => {
               <button
                 className='btn btn-icon btn-active-light-primary me-2'
                 data-bs-toggle='tooltip'
-                title='More actions'
-              >
+                title='More actions'>
                 <KTSVG className='svg-icon-1' path='/media/icons/duotune/coding/cod001.svg' />
               </button>
             </div>

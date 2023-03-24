@@ -12,8 +12,7 @@ const CreateButton: React.FC<Props> = ({url, className}) => {
     <Link
       to={`${url}/create`}
       className={clsx('btn btn-light-success fs-6', className && className)}
-      title='Create'
-    >
+      title='Create'>
       <i className={clsx('fa fs-4', 'fa-plus', 'pe-0')}></i>
     </Link>
   )

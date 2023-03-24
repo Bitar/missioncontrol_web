@@ -13,8 +13,7 @@ const EngageWidget10 = ({className}: Props) => (
       style={{
         backgroundPosition: '100% 50%',
         backgroundImage: `url('${toAbsoluteUrl('/media/stock/900x600/42.png')}')`,
-      }}
-    >
+      }}>
       <div className='mb-10'>
         <div className='fs-2hx fw-bold text-gray-800 text-center mb-13'>
           <span className='me-2'>
@@ -24,8 +23,7 @@ const EngageWidget10 = ({className}: Props) => (
               <Link
                 to='/crafted/pages/profile/overview'
                 className='text-danger
-              opacity-75-hover'
-              >
+              opacity-75-hover'>
                 Pro Plan
               </Link>
 

@@ -26,8 +26,7 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
         (currentUser && isCommunityAdmin(currentUser) && communityAdmin ? (
           <CommunityViewRoutes
             communityId={communityAdmin?.id}
-            links={communityLinks}
-          ></CommunityViewRoutes>
+            links={communityLinks}></CommunityViewRoutes>
         ) : (
           <div className='row gy-5 g-xl-8'>
             <div className='col-xl-12'>
@@ -40,8 +39,7 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
                     <div className='col-xl-6'>
                       <div className={`card bg-mc-secondary text-white`}>
                         <div
-                          className={`content d-flex flex-column flex-column-fluid" id="kt_content`}
-                        >
+                          className={`content d-flex flex-column flex-column-fluid" id="kt_content`}>
                           <div className='post d-flex flex-column-fluid' id='kt_post'>
                             <div id='kt_content_container' className='container-xxl'>
                               <div className='card-body pt-0'>
@@ -63,8 +61,7 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
                                     href='https://apps.apple.com/us/app/mission-control-gg/id1477441476'
                                     target='_blank'
                                     className='btn btn-mc-primary fw-semibold'
-                                    rel='noreferrer'
-                                  >
+                                    rel='noreferrer'>
                                     <i className='fab fa-apple'></i> Download on App Store
                                   </a>
                                 </div>

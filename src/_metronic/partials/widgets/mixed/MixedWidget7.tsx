@@ -55,8 +55,7 @@ const MixedWidget7: React.FC<Props> = ({className, chartColor, chartHeight}) => 
             className='btn btn-sm btn-icon btn-color-primary btn-active-light-primary'
             data-kt-menu-trigger='click'
             data-kt-menu-placement='bottom-end'
-            data-kt-menu-flip='top-end'
-          >
+            data-kt-menu-flip='top-end'>
             <KTSVG path='/media/icons/duotune/general/gen024.svg' className='svg-icon-2' />
           </button>
           <Dropdown1 />

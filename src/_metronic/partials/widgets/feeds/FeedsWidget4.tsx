@@ -40,8 +40,7 @@ const FeedsWidget4: React.FC<Props> = ({className}) => {
               className='btn btn-sm btn-icon btn-color-primary btn-active-light-primary'
               data-kt-menu-trigger='click'
               data-kt-menu-placement='bottom-end'
-              data-kt-menu-flip='top-end'
-            >
+              data-kt-menu-flip='top-end'>
               <KTSVG path='/media/icons/duotune/general/gen024.svg' className='svg-icon-2' />
             </button>
             <Dropdown1 />
@@ -63,16 +62,14 @@ const FeedsWidget4: React.FC<Props> = ({className}) => {
           <div className='d-flex align-items-center mb-5'>
             <a
               href='#'
-              className='btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4'
-            >
+              className='btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4'>
               <KTSVG path='/media/icons/duotune/communication/com012.svg' className='svg-icon-3' />
               22
             </a>
 
             <a
               href='#'
-              className='btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2'
-            >
+              className='btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2'>
               <KTSVG path='/media/icons/duotune/general/gen030.svg' className='svg-icon-2' />
               59
             </a>
@@ -90,8 +87,7 @@ const FeedsWidget4: React.FC<Props> = ({className}) => {
           <textarea
             className='form-control border-0 p-0 pe-10 resize-none min-h-25px'
             rows={1}
-            placeholder='Reply..'
-          ></textarea>
+            placeholder='Reply..'></textarea>
 
           <div className='position-absolute top-0 end-0 me-n5'>
             <span className='btn btn-icon btn-sm btn-active-color-primary pe-0 me-2'>

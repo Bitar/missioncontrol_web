@@ -16,8 +16,7 @@ const SearchModal: React.FC<Props> = ({show, handleClose}) => {
       id='kt_header_search_modal'
       aria-hidden='true'
       dialogClassName='modal-fullscreen h-auto'
-      show={show}
-    >
+      show={show}>
       <div className='modal-content shadow-none'>
         <div className='container-xxl w-lg-800px'>
           <div className='modal-header d-flex justify-content-end border-0'>
@@ -114,8 +113,7 @@ const SearchModal: React.FC<Props> = ({show, handleClose}) => {
                           backgroundImage: `url('${toAbsoluteUrl(
                             '/media/stock/600x400/img-11.jpg'
                           )}')`,
-                        }}
-                      ></div>
+                        }}></div>
                       <div className='overlay-layer bg-body bg-opacity-50'>
                         <a href='#' className='btn btn-sm fw-bold btn-primary'>
                           Explore

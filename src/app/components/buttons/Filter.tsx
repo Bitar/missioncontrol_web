@@ -16,8 +16,7 @@ const FilterButton: React.FC<Props> = ({target, showFilter, setShowFilter, class
       title='Filter'
       onClick={() => setShowFilter && setShowFilter(!showFilter)}
       aria-controls={target}
-      aria-expanded={showFilter}
-    >
+      aria-expanded={showFilter}>
       {showFilter ? (
         <i className={clsx('fa fs-4', 'fa-solid fa-filter-slash', 'pe-0')}></i>
       ) : (

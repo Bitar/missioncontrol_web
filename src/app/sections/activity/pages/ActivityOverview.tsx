@@ -1,6 +1,6 @@
 import React, {FC} from 'react'
 import {ActivityStandings} from '../partials/ActivityStandings'
-import {ActivityAnnouncement} from '../partials/ActivityAnnouncement'
+import {ActivityAnnouncement} from './ActivityAnnouncement'
 import {ActivityDetails} from './ActivityDetails'
 import {QUERIES} from '../../../helpers/crud-helper/consts'
 import {getActivityStandings} from '../core/requests/ActivityRequests'
@@ -28,8 +28,7 @@ const ActivityOverview: FC = () => {
               <QueryResponseProvider
                 id={QUERIES.STANDINGS_LIST}
                 requestFunction={getActivityStandings}
-                requestId={activity.id}
-              >
+                requestId={activity.id}>
                 <ListViewProvider>
                   <ActivityStandings scroll={true} />
                 </ListViewProvider>

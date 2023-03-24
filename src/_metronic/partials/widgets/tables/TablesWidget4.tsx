@@ -21,8 +21,7 @@ const TablesWidget4: React.FC<Props> = ({className}) => {
               <a
                 className='nav-link btn btn-sm btn-color-muted btn-active btn-active-light-primary active fw-bold px-4 me-1'
                 data-bs-toggle='tab'
-                href='#kt_table_widget_4_tab_1'
-              >
+                href='#kt_table_widget_4_tab_1'>
                 Month
               </a>
             </li>
@@ -30,8 +29,7 @@ const TablesWidget4: React.FC<Props> = ({className}) => {
               <a
                 className='nav-link btn btn-sm btn-color-muted btn-active btn-active-light-primary fw-bold px-4 me-1'
                 data-bs-toggle='tab'
-                href='#kt_table_widget_4_tab_2'
-              >
+                href='#kt_table_widget_4_tab_2'>
                 Week
               </a>
             </li>
@@ -39,8 +37,7 @@ const TablesWidget4: React.FC<Props> = ({className}) => {
               <a
                 className='nav-link btn btn-sm btn-color-muted btn-active btn-active-light-primary fw-bold px-4'
                 data-bs-toggle='tab'
-                href='#kt_table_widget_4_tab_3'
-              >
+                href='#kt_table_widget_4_tab_3'>
                 Day
               </a>
             </li>

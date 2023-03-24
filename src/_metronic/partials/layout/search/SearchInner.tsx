@@ -7,14 +7,12 @@ const SearchInner = () => {
     <div
       data-kt-search-element='content'
       data-kt-menu='true'
-      className='menu menu-sub menu-sub-dropdown p-7 w-325px w-md-375px'
-    >
+      className='menu menu-sub menu-sub-dropdown p-7 w-325px w-md-375px'>
       <div data-kt-search-element='wrapper'>
         <form
           data-kt-search-element='form'
           className='w-100 position-relative mb-3'
-          autoComplete='off'
-        >
+          autoComplete='off'>
           <KTSVG
             path='/media/icons/duotune/general/gen021.svg'
             className='svg-icon-2 svg-icon-lg-1 svg-icon-gray-500 position-absolute top-50 translate-middle-y ms-0'

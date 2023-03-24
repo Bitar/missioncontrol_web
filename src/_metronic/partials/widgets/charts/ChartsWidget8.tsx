@@ -50,22 +50,19 @@ const ChartsWidget8: React.FC<Props> = ({className}) => {
         <div className='card-toolbar' data-kt-buttons='true'>
           <a
             className='btn btn-sm btn-color-muted btn-active btn-active-primary active px-4 me-1'
-            id='kt_charts_widget_8_year_btn'
-          >
+            id='kt_charts_widget_8_year_btn'>
             Year
           </a>
 
           <a
             className='btn btn-sm btn-color-muted btn-active btn-active-primary px-4 me-1'
-            id='kt_charts_widget_8_month_btn'
-          >
+            id='kt_charts_widget_8_month_btn'>
             Month
           </a>
 
           <a
             className='btn btn-sm btn-color-muted btn-active btn-active-primary px-4'
-            id='kt_charts_widget_8_week_btn'
-          >
+            id='kt_charts_widget_8_week_btn'>
             Week
           </a>
         </div>
@@ -80,8 +77,7 @@ const ChartsWidget8: React.FC<Props> = ({className}) => {
           ref={chartRef}
           id='kt_charts_widget_8_chart'
           style={{height: '350px'}}
-          className='card-rounded-bottom'
-        ></div>
+          className='card-rounded-bottom'></div>
         {/* end::Chart */}
       </div>
       {/* end::Body */}

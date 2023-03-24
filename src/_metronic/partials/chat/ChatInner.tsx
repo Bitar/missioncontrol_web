@@ -51,8 +51,7 @@ const ChatInner: FC<Props> = ({isDrawer = false}) => {
   return (
     <div
       className='card-body'
-      id={isDrawer ? 'kt_drawer_chat_messenger_body' : 'kt_chat_messenger_body'}
-    >
+      id={isDrawer ? 'kt_drawer_chat_messenger_body' : 'kt_chat_messenger_body'}>
       <div
         className={clsx('scroll-y me-n5 pe-5', {'h-300px h-lg-auto': !isDrawer})}
         data-kt-element='messages'
@@ -67,8 +66,7 @@ const ChatInner: FC<Props> = ({isDrawer = false}) => {
         data-kt-scroll-wrappers={
           isDrawer ? '#kt_drawer_chat_messenger_body' : '#kt_content, #kt_chat_messenger_body'
         }
-        data-kt-scroll-offset={isDrawer ? '0px' : '-2px'}
-      >
+        data-kt-scroll-offset={isDrawer ? '0px' : '-2px'}>
         {messages.map((message, index) => {
           const userInfo = userInfos[message.user]
           const state = message.type === 'in' ? 'info' : 'primary'
@@ -85,14 +83,12 @@ const ChatInner: FC<Props> = ({isDrawer = false}) => {
             <div
               key={`message${index}`}
               className={clsx('d-flex', contentClass, 'mb-10', {'d-none': message.template})}
-              {...templateAttr}
-            >
+              {...templateAttr}>
               <div
                 className={clsx(
                   'd-flex flex-column align-items',
                   `align-items-${message.type === 'in' ? 'start' : 'end'}`
-                )}
-              >
+                )}>
                 <div className='d-flex align-items-center mb-2'>
                   {message.type === 'in' ? (
                     <>
@@ -102,8 +98,7 @@ const ChatInner: FC<Props> = ({isDrawer = false}) => {
                       <div className='ms-3'>
                         <a
                           href='#'
-                          className='fs-5 fw-bolder text-gray-900 text-hover-primary me-1'
-                        >
+                          className='fs-5 fw-bolder text-gray-900 text-hover-primary me-1'>
                           {userInfo.name}
                         </a>
                         <span className='text-muted fs-7 mb-1'>{message.time}</span>
@@ -115,8 +110,7 @@ const ChatInner: FC<Props> = ({isDrawer = false}) => {
                         <span className='text-muted fs-7 mb-1'>{message.time}</span>
                         <a
                           href='#'
-                          className='fs-5 fw-bolder text-gray-900 text-hover-primary ms-1'
-                        >
+                          className='fs-5 fw-bolder text-gray-900 text-hover-primary ms-1'>
                           You
                         </a>
                       </div>
@@ -135,8 +129,7 @@ const ChatInner: FC<Props> = ({isDrawer = false}) => {
                     `text-${message.type === 'in' ? 'start' : 'end'}`
                   )}
                   data-kt-element='message-text'
-                  dangerouslySetInnerHTML={{__html: message.text}}
-                ></div>
+                  dangerouslySetInnerHTML={{__html: message.text}}></div>
               </div>
             </div>
           )
@@ -145,8 +138,7 @@ const ChatInner: FC<Props> = ({isDrawer = false}) => {
 
       <div
         className='card-footer pt-4'
-        id={isDrawer ? 'kt_drawer_chat_messenger_footer' : 'kt_chat_messenger_footer'}
-      >
+        id={isDrawer ? 'kt_drawer_chat_messenger_footer' : 'kt_chat_messenger_footer'}>
         <textarea
           className='form-control form-control-flush mb-3'
           rows={1}
@@ -154,8 +146,7 @@ const ChatInner: FC<Props> = ({isDrawer = false}) => {
           placeholder='Type a message'
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={onEnterPress}
-        ></textarea>
+          onKeyDown={onEnterPress}></textarea>
 
         <div className='d-flex flex-stack'>
           <div className='d-flex align-items-center me-2'>
@@ -163,16 +154,14 @@ const ChatInner: FC<Props> = ({isDrawer = false}) => {
               className='btn btn-sm btn-icon btn-active-light-primary me-1'
               type='button'
               data-bs-toggle='tooltip'
-              title='Coming soon'
-            >
+              title='Coming soon'>
               <i className='bi bi-paperclip fs-3'></i>
             </button>
             <button
               className='btn btn-sm btn-icon btn-active-light-primary me-1'
               type='button'
               data-bs-toggle='tooltip'
-              title='Coming soon'
-            >
+              title='Coming soon'>
               <i className='bi bi-upload fs-3'></i>
             </button>
           </div>
@@ -180,8 +169,7 @@ const ChatInner: FC<Props> = ({isDrawer = false}) => {
             className='btn btn-primary'
             type='button'
             data-kt-element='send'
-            onClick={sendMessage}
-          >
+            onClick={sendMessage}>
             Send
           </button>
         </div>

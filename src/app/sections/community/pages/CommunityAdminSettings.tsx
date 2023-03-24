@@ -116,8 +116,7 @@ const CommunityAdminSettings: FC = () => {
           initialValues={communityForm}
           onSubmit={handleSubmit}
           validationSchema={communitySchema}
-          enableReinitialize
-        >
+          enableReinitialize>
           {({isSubmitting, isValid, touched}) => (
             <Form onChange={handleOnChange} className='form'>
               <KTCardBody className='py-4'>
@@ -449,8 +448,7 @@ const CommunityAdminSettings: FC = () => {
                   type='submit'
                   className='btn btn-light-mc-secondary btn-active-mc-secondary btn-sm'
                   data-kt-users-modal-action='submit'
-                  disabled={isSubmitting || !isValid || !touched}
-                >
+                  disabled={isSubmitting || !isValid || !touched}>
                   <span className='indicator-label'>Save Changes</span>
                   {isSubmitting && (
                     <span className='indicator-progress' style={{display: 'inline-block'}}>

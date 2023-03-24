@@ -16,8 +16,7 @@ const TeamCard: FC<Props> = ({standing, team}) => {
           className='bgi-no-repeat bgi-size-cover rounded min-h-150px'
           style={{
             backgroundImage: `url('${team.image}')`,
-          }}
-        ></div>
+          }}></div>
         <KTCardBody className='px-5 py-2'>
           <div className='fs-3 fw-bolder text-dark mb-7'>{team.name}</div>
           <div className='d-flex mb-5'>
@@ -39,13 +38,11 @@ const TeamCard: FC<Props> = ({standing, team}) => {
                   className='symbol symbol-35px symbol-circle'
                   data-bs-toggle='tooltip'
                   title={user.name}
-                  key={user.id}
-                >
+                  key={user.id}>
                   {team.captain_id === user.id && (
                     <span
                       className='position-absolute w-100 text-center fs-6'
-                      style={{top: '-15px'}}
-                    >
+                      style={{top: '-15px'}}>
                       <i className='fas fa-crown text-warning'></i>
                     </span>
                   )}

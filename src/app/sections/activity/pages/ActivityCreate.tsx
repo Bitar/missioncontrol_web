@@ -159,8 +159,7 @@ export const ActivityCreate = () => {
               <div
                 key={`activity-create-stepper-${index}`}
                 className={clsx('stepper-item', {current: index === 0})}
-                data-kt-stepper-element='nav'
-              >
+                data-kt-stepper-element='nav'>
                 <div className='stepper-label'>
                   <div className='stepper-icon'>
                     <i className={`${stepper?.icon} fs-2x`}></i>
@@ -183,14 +182,12 @@ export const ActivityCreate = () => {
             setActivityForm,
             gameModes,
             setGameModes,
-          }}
-        >
+          }}>
           <Formik
             validationSchema={currentSchema}
             initialValues={activityForm}
             onSubmit={submitStep}
-            enableReinitialize
-          >
+            enableReinitialize>
             {() => (
               <Form onChange={handleOnChange} className='form' autoComplete='off'>
                 <KTCardBody>
@@ -219,16 +216,14 @@ export const ActivityCreate = () => {
                     onClick={prevStep}
                     type='button'
                     className='btn btn-sm btn-light-mc-secondary me-3'
-                    data-kt-stepper-action='previous'
-                  >
+                    data-kt-stepper-action='previous'>
                     Back
                   </button>
 
                   <button
                     type='submit'
                     className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'
-                    disabled={isSubmitting}
-                  >
+                    disabled={isSubmitting}>
                     <span className='indicator-label'>
                       {isSubmitting ? 'Submitting' : isSubmitButton ? 'Submit' : 'Continue'}
                     </span>

@@ -42,8 +42,7 @@ const MixedWidget14: React.FC<Props> = ({className, backGroundColor, chartHeight
   return (
     <div
       className={`card ${className} theme-dark-bg-body`}
-      style={{backgroundColor: backGroundColor}}
-    >
+      style={{backgroundColor: backGroundColor}}>
       {/* begin::Body */}
       <div className='card-body d-flex flex-column'>
         {/* begin::Wrapper */}
@@ -58,8 +57,7 @@ const MixedWidget14: React.FC<Props> = ({className, backGroundColor, chartHeight
           <div
             ref={chartRef}
             className='mixed-widget-14-chart'
-            style={{height: chartHeight, minHeight: chartHeight}}
-          ></div>
+            style={{height: chartHeight, minHeight: chartHeight}}></div>
         </div>
         {/* end::Wrapper */}
 

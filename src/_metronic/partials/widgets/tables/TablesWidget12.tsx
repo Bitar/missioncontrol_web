@@ -22,15 +22,13 @@ const TablesWidget12: React.FC<Props> = ({className}) => {
             className='btn btn-sm btn-icon btn-color-primary btn-active-light-primary'
             data-kt-menu-trigger='click'
             data-kt-menu-placement='bottom-end'
-            data-kt-menu-flip='top-end'
-          >
+            data-kt-menu-flip='top-end'>
             <KTSVG path='/media/icons/duotune/general/gen024.svg' className='svg-icon-2' />
           </button>
           {/* begin::Menu 2 */}
           <div
             className='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold w-200px'
-            data-kt-menu='true'
-          >
+            data-kt-menu='true'>
             {/* begin::Menu item */}
             <div className='menu-item px-3'>
               <div className='menu-content fs-6 text-dark fw-bold px-3 py-4'>Quick Actions</div>
@@ -58,8 +56,7 @@ const TablesWidget12: React.FC<Props> = ({className}) => {
               className='menu-item px-3'
               data-kt-menu-trigger='hover'
               data-kt-menu-placement='right-start'
-              data-kt-menu-flip='left-start, top'
-            >
+              data-kt-menu-flip='left-start, top'>
               {/* begin::Menu item */}
               <a href='#' className='menu-link px-3'>
                 <span className='menu-title'>New Group</span>
@@ -205,14 +202,12 @@ const TablesWidget12: React.FC<Props> = ({className}) => {
                 <td className='text-end'>
                   <a
                     href='#'
-                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4 me-2'
-                  >
+                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4 me-2'>
                     View
                   </a>
                   <a
                     href='#'
-                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4'
-                  >
+                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4'>
                     Edit
                   </a>
                 </td>
@@ -284,14 +279,12 @@ const TablesWidget12: React.FC<Props> = ({className}) => {
                 <td className='text-end'>
                   <a
                     href='#'
-                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4 me-2'
-                  >
+                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4 me-2'>
                     View
                   </a>
                   <a
                     href='#'
-                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4'
-                  >
+                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4'>
                     Edit
                   </a>
                 </td>
@@ -363,14 +356,12 @@ const TablesWidget12: React.FC<Props> = ({className}) => {
                 <td className='text-end'>
                   <a
                     href='#'
-                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4 me-2'
-                  >
+                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4 me-2'>
                     View
                   </a>
                   <a
                     href='#'
-                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4'
-                  >
+                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4'>
                     Edit
                   </a>
                 </td>
@@ -440,14 +431,12 @@ const TablesWidget12: React.FC<Props> = ({className}) => {
                 <td className='text-end'>
                   <a
                     href='#'
-                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4 me-2'
-                  >
+                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4 me-2'>
                     View
                   </a>
                   <a
                     href='#'
-                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4'
-                  >
+                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4'>
                     Edit
                   </a>
                 </td>
@@ -519,14 +508,12 @@ const TablesWidget12: React.FC<Props> = ({className}) => {
                 <td className='text-end'>
                   <a
                     href='#'
-                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4 me-2'
-                  >
+                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4 me-2'>
                     View
                   </a>
                   <a
                     href='#'
-                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4'
-                  >
+                    className='btn btn-bg-light btn-color-muted btn-active-color-primary btn-sm px-4'>
                     Edit
                   </a>
                 </td>

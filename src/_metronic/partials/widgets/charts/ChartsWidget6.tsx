@@ -50,15 +50,13 @@ const ChartsWidget6: React.FC<Props> = ({className}) => {
         <div className='card-toolbar' data-kt-buttons='true'>
           <a
             className='btn btn-sm btn-color-muted btn-active btn-active-primary active px-4 me-1'
-            id='kt_charts_widget_6_sales_btn'
-          >
+            id='kt_charts_widget_6_sales_btn'>
             Sales
           </a>
 
           <a
             className='btn btn-sm btn-color-muted btn-active btn-active-primary px-4 me-1'
-            id='kt_charts_widget_6_expenses_btn'
-          >
+            id='kt_charts_widget_6_expenses_btn'>
             Expenses
           </a>
         </div>

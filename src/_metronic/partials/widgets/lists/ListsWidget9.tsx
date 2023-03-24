@@ -24,8 +24,7 @@ const ListsWidget9: React.FC<Props> = ({className}) => {
             className='btn btn-clean btn-sm btn-icon btn-icon-primary btn-active-light-primary me-n3'
             data-kt-menu-trigger='click'
             data-kt-menu-placement='bottom-end'
-            data-kt-menu-flip='top-end'
-          >
+            data-kt-menu-flip='top-end'>
             <KTSVG path='/media/icons/duotune/general/gen024.svg' className='svg-icon-2' />
           </button>
           <Dropdown1 />

@@ -42,8 +42,7 @@ const CodeBlock: React.FC<Props> = ({code, language}) => {
         <OverlayTrigger
           key='copy-to-clipboard'
           placement='top'
-          overlay={<Tooltip id='tooltip-copy-to-clipboard'>Copy Code</Tooltip>}
-        >
+          overlay={<Tooltip id='tooltip-copy-to-clipboard'>Copy Code</Tooltip>}>
           <CopyToClipboard text={code} onCopy={() => setCopied(true)}>
             <a className='highlight-copy btn'>{copied ? 'copied' : 'copy'}</a>
           </CopyToClipboard>

@@ -52,8 +52,7 @@ const BillingPlan: FC<Props> = ({plans, setPlan}) => {
                   communityForm
                 )
               }}
-              data-kt-plan='month'
-            >
+              data-kt-plan='month'>
               Monthly
             </button>
             <button
@@ -71,8 +70,7 @@ const BillingPlan: FC<Props> = ({plans, setPlan}) => {
                   communityForm
                 )
               }}
-              data-kt-plan='annual'
-            >
+              data-kt-plan='annual'>
               Annual
             </button>
           </div>
@@ -126,8 +124,7 @@ const BillingPlanWrapper: FC = () => {
                   {plans?.map((plan) => (
                     <th
                       key={`plan-table-header-${plan?.id}`}
-                      className='fs-4 fw-bolder text-center'
-                    >
+                      className='fs-4 fw-bolder text-center'>
                       {plan.name}
                     </th>
                   ))}
@@ -189,8 +186,7 @@ const BillingPlanWrapper: FC = () => {
                   {plans?.map((plan) => (
                     <th
                       key={`plan-table-header-${plan?.id}`}
-                      className='fs-4 fw-bolder text-center'
-                    >
+                      className='fs-4 fw-bolder text-center'>
                       {plan.name}
                     </th>
                   ))}

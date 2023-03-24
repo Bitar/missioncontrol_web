@@ -79,8 +79,7 @@ const Login = () => {
                 <Link
                   to='/auth/forgot-password'
                   className='link-primary fs-6 fw-bolder'
-                  style={{marginLeft: '5px'}}
-                >
+                  style={{marginLeft: '5px'}}>
                   Forgot Password?
                 </Link>
               </div>

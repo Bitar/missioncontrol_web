@@ -63,8 +63,7 @@ const ResetPassword = () => {
         initialValues={initialValues}
         onSubmit={handleSubmit}
         validationSchema={resetPasswordSchema}
-        enableReinitialize
-      >
+        enableReinitialize>
         {/*{({isSubmitting, isValid, touched}) => (*/}
         <Form className='form w-100'>
           <div className='text-center mb-10'>
@@ -138,8 +137,7 @@ const ResetPassword = () => {
             <button
               type='submit'
               id='kt_password_reset_submit'
-              className='btn btn-lg btn-primary fw-bolder'
-            >
+              className='btn btn-lg btn-primary fw-bolder'>
               <span className='indicator-label'>Submit</span>
               {/*{loading && (*/}
               {/*  <span className='indicator-progress'>*/}

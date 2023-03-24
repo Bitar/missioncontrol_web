@@ -16,8 +16,7 @@ const ToolbarWrapper = () => {
   return (
     <div
       id='kt_app_toolbar'
-      className={clsx('app-toolbar', classes.toolbar.join(' '), config?.app?.toolbar?.class)}
-    >
+      className={clsx('app-toolbar', classes.toolbar.join(' '), config?.app?.toolbar?.class)}>
       <div
         id='kt_app_toolbar_container'
         className={clsx(
@@ -29,8 +28,7 @@ const ToolbarWrapper = () => {
             'container-fluid': config.app?.toolbar?.container === 'fluid',
             'container-xxl': config.app?.toolbar?.container === 'fixed',
           }
-        )}
-      >
+        )}>
         {isPageTitleVisible && <PageTitleWrapper />}
         {/*<Toolbar />*/}
       </div>

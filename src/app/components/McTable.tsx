@@ -27,8 +27,7 @@ export const McTable: FC<Props> = ({data, columns, model, isLoading}) => {
       <div className='table-responsive border rounded'>
         <Table
           className='align-middle table-row-bordered fs-6 gy-5 gs-7 dataTable table-striped no-footer'
-          {...getTableProps()}
-        >
+          {...getTableProps()}>
           <thead>
             <tr className='text-start text-muted fw-bolder fs-7 text-uppercase gs-0'>
               {headers.map((column: ColumnInstance<typeof model>) => (

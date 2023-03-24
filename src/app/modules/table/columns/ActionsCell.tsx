@@ -101,8 +101,7 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
       {showEdit && (
         <Link
           to={'/' + path + '/' + id + (editPage ? '/edit' : '/settings')}
-          className='btn btn-icon btn-sm btn-active-light-warning btn-sm'
-        >
+          className='btn btn-icon btn-sm btn-active-light-warning btn-sm'>
           <i className={clsx('fa-duotone fs-3 text-warning', 'fa-pencil')}></i>
         </Link>
       )}
@@ -110,8 +109,7 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
       {showDelete && (
         <a
           className='btn btn-icon btn-active-light-danger btn-sm'
-          onClick={async () => deleteItem()}
-        >
+          onClick={async () => deleteItem()}>
           <i className={clsx('fa-duotone fs-3 text-danger', 'fa-trash')}></i>
         </a>
       )}

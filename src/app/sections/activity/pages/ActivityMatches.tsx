@@ -30,8 +30,7 @@ const ActivityMatches = () => {
                 <QueryResponseProvider
                   id={QUERIES.UPCOMING_MATCH_LIST}
                   requestFunction={getUpcomingActivityMatches}
-                  requestId={params?.id}
-                >
+                  requestId={params?.id}>
                   <MatchesTable />
                 </QueryResponseProvider>
               </QueryRequestProvider>
@@ -53,8 +52,7 @@ const ActivityMatches = () => {
                 <QueryResponseProvider
                   id={QUERIES.PAST_MATCH_LIST}
                   requestFunction={getRecentActivityMatches}
-                  requestId={params?.id}
-                >
+                  requestId={params?.id}>
                   <MatchesTable direction={'desc'} />
                 </QueryResponseProvider>
               </QueryRequestProvider>
@@ -76,8 +74,7 @@ const ActivityMatches = () => {
                 <QueryResponseProvider
                   id={QUERIES.DISPUTED_MATCH_LIST}
                   requestFunction={getDisputedActivityMatches}
-                  requestId={params?.id}
-                >
+                  requestId={params?.id}>
                   <ListViewProvider>
                     <MatchesTable />
                   </ListViewProvider>

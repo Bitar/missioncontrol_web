@@ -7,12 +7,10 @@ import {KTSVG, toAbsoluteUrl, defaultAlerts, defaultLogs} from '../../../helpers
 const HeaderNotificationsMenu: FC = () => (
   <div
     className='menu menu-sub menu-sub-dropdown menu-column w-350px w-lg-375px'
-    data-kt-menu='true'
-  >
+    data-kt-menu='true'>
     <div
       className='d-flex flex-column bgi-no-repeat rounded-top'
-      style={{backgroundImage: `url('${toAbsoluteUrl('/media/misc/pattern-1.jpg')}')`}}
-    >
+      style={{backgroundImage: `url('${toAbsoluteUrl('/media/misc/pattern-1.jpg')}')`}}>
       <h3 className='text-white fw-bold px-9 mt-10 mb-6'>
         Notifications <span className='fs-8 opacity-75 ps-3'>24 reports</span>
       </h3>
@@ -22,8 +20,7 @@ const HeaderNotificationsMenu: FC = () => (
           <a
             className='nav-link text-white opacity-75 opacity-state-100 pb-4'
             data-bs-toggle='tab'
-            href='#kt_topbar_notifications_1'
-          >
+            href='#kt_topbar_notifications_1'>
             Alerts
           </a>
         </li>
@@ -32,8 +29,7 @@ const HeaderNotificationsMenu: FC = () => (
           <a
             className='nav-link text-white opacity-75 opacity-state-100 pb-4 active'
             data-bs-toggle='tab'
-            href='#kt_topbar_notifications_2'
-          >
+            href='#kt_topbar_notifications_2'>
             Updates
           </a>
         </li>
@@ -42,8 +38,7 @@ const HeaderNotificationsMenu: FC = () => (
           <a
             className='nav-link text-white opacity-75 opacity-state-100 pb-4'
             data-bs-toggle='tab'
-            href='#kt_topbar_notifications_3'
-          >
+            href='#kt_topbar_notifications_3'>
             Logs
           </a>
         </li>
@@ -82,8 +77,7 @@ const HeaderNotificationsMenu: FC = () => (
         <div className='py-3 text-center border-top'>
           <Link
             to='/crafted/pages/profile'
-            className='btn btn-color-gray-600 btn-active-color-primary'
-          >
+            className='btn btn-color-gray-600 btn-active-color-primary'>
             View All <KTSVG path='/media/icons/duotune/arrows/arr064.svg' className='svg-icon-5' />
           </Link>
         </div>
@@ -103,8 +97,7 @@ const HeaderNotificationsMenu: FC = () => (
                 href='#'
                 className='btn btn-sm btn-primary px-6'
                 data-bs-toggle='modal'
-                data-bs-target='#kt_modal_upgrade_plan'
-              >
+                data-bs-target='#kt_modal_upgrade_plan'>
                 Upgrade
               </a>
             </div>
@@ -141,8 +134,7 @@ const HeaderNotificationsMenu: FC = () => (
         <div className='py-3 text-center border-top'>
           <Link
             to='/crafted/pages/profile'
-            className='btn btn-color-gray-600 btn-active-color-primary'
-          >
+            className='btn btn-color-gray-600 btn-active-color-primary'>
             View All <KTSVG path='/media/icons/duotune/arrows/arr064.svg' className='svg-icon-5' />
           </Link>
         </div>

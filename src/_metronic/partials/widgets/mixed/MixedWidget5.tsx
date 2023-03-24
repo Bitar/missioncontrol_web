@@ -45,8 +45,7 @@ const MixedWidget5: React.FC<Props> = ({className, time, image, title, descripti
             href='#'
             className='symbol symbol-35px me-2'
             data-bs-toggle='tooltip'
-            title='Ana Stone'
-          >
+            title='Ana Stone'>
             <img src={toAbsoluteUrl('/media/avatars/300-6.jpg')} alt='' />
           </a>
 
@@ -54,8 +53,7 @@ const MixedWidget5: React.FC<Props> = ({className, time, image, title, descripti
             href='#'
             className='symbol symbol-35px me-2'
             data-bs-toggle='tooltip'
-            title='Mark Larson'
-          >
+            title='Mark Larson'>
             <img src={toAbsoluteUrl('/media/avatars/300-5.jpg')} alt='' />
           </a>
 
@@ -63,8 +61,7 @@ const MixedWidget5: React.FC<Props> = ({className, time, image, title, descripti
             href='#'
             className='symbol symbol-35px me-2'
             data-bs-toggle='tooltip'
-            title='Sam Harris'
-          >
+            title='Sam Harris'>
             <img src={toAbsoluteUrl('/media/avatars/300-9.jpg')} alt='' />
           </a>
         </div>

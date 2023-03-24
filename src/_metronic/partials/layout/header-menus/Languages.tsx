@@ -45,8 +45,7 @@ const Languages: FC = () => {
       className='menu-item px-5'
       data-kt-menu-trigger='hover'
       data-kt-menu-placement='left-start'
-      data-kt-menu-flip='bottom'
-    >
+      data-kt-menu-flip='bottom'>
       <a href='#' className='menu-link px-5'>
         <span className='menu-title position-relative'>
           Language
@@ -68,12 +67,10 @@ const Languages: FC = () => {
             key={l.lang}
             onClick={() => {
               setLanguage(l.lang)
-            }}
-          >
+            }}>
             <a
               href='#'
-              className={clsx('menu-link d-flex px-5', {active: l.lang === currentLanguage?.lang})}
-            >
+              className={clsx('menu-link d-flex px-5', {active: l.lang === currentLanguage?.lang})}>
               <span className='symbol symbol-20px me-4'>
                 <img className='rounded-1' src={l.flag} alt='metronic' />
               </span>

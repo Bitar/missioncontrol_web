@@ -102,61 +102,60 @@ const RoleEdit: FC = () => {
   }
 
   return (
-      <KTCard>
-        <KTCardHeader text='Edit Role' icon='fa-regular fa-pencil' icon_style='fs-3 text-warning' />
+    <KTCard>
+      <KTCardHeader text='Edit Role' icon='fa-regular fa-pencil' icon_style='fs-3 text-warning' />
 
-        <Formik
-          initialValues={roleForm}
-          onSubmit={handleSubmit}
-          validationSchema={roleSchema}
-          enableReinitialize
-        >
-          <Form onChange={handleOnChange} className='form'>
-            <KTCardBody className='py-4'>
-              <FormErrors errorMessages={formErrors} />
+      <Formik
+        initialValues={roleForm}
+        onSubmit={handleSubmit}
+        validationSchema={roleSchema}
+        enableReinitialize>
+        <Form onChange={handleOnChange} className='form'>
+          <KTCardBody className='py-4'>
+            <FormErrors errorMessages={formErrors} />
 
-              <Row className={'mb-7'}>
-                <Col>
-                  <McFormLabel text={'Name'} isRequired={true} />
+            <Row className={'mb-7'}>
+              <Col>
+                <McFormLabel text={'Name'} isRequired={true} />
 
-                  <Field
-                    type='text'
-                    name='name'
-                    placeholder='Name'
-                    className='form-control mb-3 mb-lg-0'
-                    autoComplete='off'
-                  />
+                <Field
+                  type='text'
+                  name='name'
+                  placeholder='Name'
+                  className='form-control mb-3 mb-lg-0'
+                  autoComplete='off'
+                />
 
-                  <div className='text-danger mt-2'>
-                    <ErrorMessage name='name' />
-                  </div>
-                </Col>
-              </Row>
-              <Row className={'mb-7'}>
-                <Col>
-                  <McFormLabel text={'Permissions'} isRequired={true} />
+                <div className='text-danger mt-2'>
+                  <ErrorMessage name='name' />
+                </div>
+              </Col>
+            </Row>
+            <Row className={'mb-7'}>
+              <Col>
+                <McFormLabel text={'Permissions'} isRequired={true} />
 
-                  <MultiSelect
-                    isResourceLoaded={isResourceLoaded}
-                    options={permissions}
-                    defaultValue={role?.permissions}
-                    form={roleForm}
-                    setForm={setRoleForm}
-                    name={'permissions'}
-                  />
+                <MultiSelect
+                  isResourceLoaded={isResourceLoaded}
+                  options={permissions}
+                  defaultValue={role?.permissions}
+                  form={roleForm}
+                  setForm={setRoleForm}
+                  name={'permissions'}
+                />
 
-                  <div className='text-danger mt-2'>
-                    <ErrorMessage name='permissions' />
-                  </div>
-                </Col>
-              </Row>
-            </KTCardBody>
-            <KTCardFooter>
-              <McFormFooter cancelUrl={'/iam/roles'} />
-            </KTCardFooter>
-          </Form>
-        </Formik>
-      </KTCard>
+                <div className='text-danger mt-2'>
+                  <ErrorMessage name='permissions' />
+                </div>
+              </Col>
+            </Row>
+          </KTCardBody>
+          <KTCardFooter>
+            <McFormFooter cancelUrl={'/iam/roles'} />
+          </KTCardFooter>
+        </Form>
+      </Formik>
+    </KTCard>
   )
 }
 

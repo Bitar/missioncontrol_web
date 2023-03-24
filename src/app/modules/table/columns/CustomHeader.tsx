@@ -52,8 +52,7 @@ const CustomHeader: FC<React.PropsWithChildren<Props>> = ({className, title, tab
         isSelectedForSorting && order !== undefined && `table-sort-${order}`
       )}
       style={{cursor: 'pointer'}}
-      onClick={sortColumn}
-    >
+      onClick={sortColumn}>
       {title}
     </th>
   )

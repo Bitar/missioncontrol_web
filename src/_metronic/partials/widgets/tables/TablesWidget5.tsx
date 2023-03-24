@@ -21,8 +21,7 @@ const TablesWidget5: React.FC<Props> = ({className}) => {
               <a
                 className='nav-link btn btn-sm btn-color-muted btn-active btn-active-light-primary active fw-bold px-4 me-1'
                 data-bs-toggle='tab'
-                href='#kt_table_widget_5_tab_1'
-              >
+                href='#kt_table_widget_5_tab_1'>
                 Month
               </a>
             </li>
@@ -30,8 +29,7 @@ const TablesWidget5: React.FC<Props> = ({className}) => {
               <a
                 className='nav-link btn btn-sm btn-color-muted btn-active btn-active-light-primary fw-bold px-4 me-1'
                 data-bs-toggle='tab'
-                href='#kt_table_widget_5_tab_2'
-              >
+                href='#kt_table_widget_5_tab_2'>
                 Week
               </a>
             </li>
@@ -39,8 +37,7 @@ const TablesWidget5: React.FC<Props> = ({className}) => {
               <a
                 className='nav-link btn btn-sm btn-color-muted btn-active btn-active-light-primary fw-bold px-4'
                 data-bs-toggle='tab'
-                href='#kt_table_widget_5_tab_3'
-              >
+                href='#kt_table_widget_5_tab_3'>
                 Day
               </a>
             </li>
@@ -95,8 +92,7 @@ const TablesWidget5: React.FC<Props> = ({className}) => {
                     <td className='text-end'>
                       <a
                         href='#'
-                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
-                      >
+                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'>
                         <KTSVG
                           path='/media/icons/duotune/arrows/arr064.svg'
                           className='svg-icon-2'
@@ -129,8 +125,7 @@ const TablesWidget5: React.FC<Props> = ({className}) => {
                     <td className='text-end'>
                       <a
                         href='#'
-                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
-                      >
+                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'>
                         <KTSVG
                           path='/media/icons/duotune/arrows/arr064.svg'
                           className='svg-icon-2'
@@ -163,8 +158,7 @@ const TablesWidget5: React.FC<Props> = ({className}) => {
                     <td className='text-end'>
                       <a
                         href='#'
-                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
-                      >
+                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'>
                         <KTSVG
                           path='/media/icons/duotune/arrows/arr064.svg'
                           className='svg-icon-2'
@@ -197,8 +191,7 @@ const TablesWidget5: React.FC<Props> = ({className}) => {
                     <td className='text-end'>
                       <a
                         href='#'
-                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
-                      >
+                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'>
                         <KTSVG
                           path='/media/icons/duotune/arrows/arr064.svg'
                           className='svg-icon-2'
@@ -231,8 +224,7 @@ const TablesWidget5: React.FC<Props> = ({className}) => {
                     <td className='text-end'>
                       <a
                         href='#'
-                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
-                      >
+                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'>
                         <KTSVG
                           path='/media/icons/duotune/arrows/arr064.svg'
                           className='svg-icon-2'
@@ -291,8 +283,7 @@ const TablesWidget5: React.FC<Props> = ({className}) => {
                     <td className='text-end'>
                       <a
                         href='#'
-                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
-                      >
+                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'>
                         <KTSVG
                           path='/media/icons/duotune/arrows/arr064.svg'
                           className='svg-icon-2'
@@ -325,8 +316,7 @@ const TablesWidget5: React.FC<Props> = ({className}) => {
                     <td className='text-end'>
                       <a
                         href='#'
-                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
-                      >
+                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'>
                         <KTSVG
                           path='/media/icons/duotune/arrows/arr064.svg'
                           className='svg-icon-2'
@@ -359,8 +349,7 @@ const TablesWidget5: React.FC<Props> = ({className}) => {
                     <td className='text-end'>
                       <a
                         href='#'
-                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
-                      >
+                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'>
                         <KTSVG
                           path='/media/icons/duotune/arrows/arr064.svg'
                           className='svg-icon-2'
@@ -419,8 +408,7 @@ const TablesWidget5: React.FC<Props> = ({className}) => {
                     <td className='text-end'>
                       <a
                         href='#'
-                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
-                      >
+                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'>
                         <KTSVG
                           path='/media/icons/duotune/arrows/arr064.svg'
                           className='svg-icon-2'
@@ -453,8 +441,7 @@ const TablesWidget5: React.FC<Props> = ({className}) => {
                     <td className='text-end'>
                       <a
                         href='#'
-                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
-                      >
+                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'>
                         <KTSVG
                           path='/media/icons/duotune/arrows/arr064.svg'
                           className='svg-icon-2'
@@ -487,8 +474,7 @@ const TablesWidget5: React.FC<Props> = ({className}) => {
                     <td className='text-end'>
                       <a
                         href='#'
-                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
-                      >
+                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'>
                         <KTSVG
                           path='/media/icons/duotune/arrows/arr064.svg'
                           className='svg-icon-2'
@@ -521,8 +507,7 @@ const TablesWidget5: React.FC<Props> = ({className}) => {
                     <td className='text-end'>
                       <a
                         href='#'
-                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
-                      >
+                        className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'>
                         <KTSVG
                           path='/media/icons/duotune/arrows/arr064.svg'
                           className='svg-icon-2'

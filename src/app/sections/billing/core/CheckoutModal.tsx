@@ -20,8 +20,7 @@ const CheckoutModalProvider: FC<React.PropsWithChildren<unknown>> = ({children})
       value={{
         showCheckout,
         setShowCheckout,
-      }}
-    >
+      }}>
       {children}
     </CheckoutModalContext.Provider>
   )

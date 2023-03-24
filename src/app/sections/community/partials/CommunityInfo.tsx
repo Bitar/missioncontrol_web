@@ -16,8 +16,6 @@ const CommunityInfo: FC<Props> = ({links}) => {
   const [image, setImage] = useState<string>('')
 
   const notify = async () => {
-    // let text = `${community?.dynamic_link}`;
-
     const REACT_APP_MOBILE_APP_URL = process.env.REACT_APP_MOBILE_APP_URL
     let text = `${REACT_APP_MOBILE_APP_URL}/communities/${community?.id}`
 
@@ -76,10 +74,6 @@ const CommunityInfo: FC<Props> = ({links}) => {
                   />
                 </div>
 
-                {/*<Link to='/crafted/account/settings' className='btn btn-primary align-self-center'>*/}
-                {/*  Edit Profile*/}
-                {/*</Link>*/}
-
                 <div className='d-flex flex-wrap fw-bold fs-6 mb-4 pe-2'>
                   {community?.contact && (
                     <>
@@ -90,8 +84,7 @@ const CommunityInfo: FC<Props> = ({links}) => {
 
                       <a
                         href={`mailto:${community.contact?.email}`}
-                        className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'
-                      >
+                        className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'>
                         <KTSVG path='/media/icons/duotune/com011.svg' className='svg-icon-4 me-1' />
                         {community?.contact?.email}
                       </a>
@@ -112,12 +105,6 @@ const CommunityInfo: FC<Props> = ({links}) => {
                   </button>
                 </div>
               </div>
-              {/*<div className='card-toolbar'>*/}
-              {/*  <Link className='btn btn-sm btn-primary' to='/activity/create'>*/}
-              {/*    <KTSVG path='/media/icons/duotune/arr075.svg' className='svg-icon-2' />*/}
-              {/*    New Activity*/}
-              {/*  </Link>*/}
-              {/*</div>*/}
             </div>
 
             <div className='d-flex flex-wrap flex-stack'>
@@ -129,21 +116,13 @@ const CommunityInfo: FC<Props> = ({links}) => {
             </div>
           </div>
         </div>
-      </KTCardBody>
-      <div className='separator mt-10'></div>
-      <KTCardBody className='p-0 rounded-3 rounded-bottom'>
-        <ul className='nav nav-fill nav-line-tabs nav-line-tabs-2x fs-5 fw-bolder flex-nowrap text-center border-transparent'>
+        <div className='separator mt-10'></div>
+        <ul className='mc-nav nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder'>
           {links?.map((link, index) => (
             <li className='nav-item' key={index}>
               <Link
-                className={clsx(
-                  `m-0 nav-link bg-active-mc-secondary text-active-white border-active-mc-secondary border-hover-mc-secondary py-5 `,
-                  {
-                    active: location.pathname === link.link,
-                  }
-                )}
-                to={link.link}
-              >
+                className={clsx(`nav-link py-5 me-6`, {active: location.pathname === link.link})}
+                to={link.link}>
                 {link.text}
               </Link>
             </li>

@@ -27,8 +27,7 @@ export const GameModeSettings: FC<Props> = ({gameModeSettings, removeSetting, in
         <button
           type='button'
           className='btn btn-icon btn-sm btn-light-danger'
-          onClick={() => removeSetting(index)}
-        >
+          onClick={() => removeSetting(index)}>
           <i className='fa fa-trash'></i>
         </button>
       </div>

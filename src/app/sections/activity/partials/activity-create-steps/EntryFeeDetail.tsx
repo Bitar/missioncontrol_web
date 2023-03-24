@@ -32,14 +32,12 @@ export const EntryFeeDetail = () => {
             className={clsx('bg-active-mc-secondary cursor-pointer mb-5', {
               active: activityForm?.entry_fee?.type === 1,
             })}
-            onClick={(event) => handleEntryFeeChange(event, 1)}
-          >
+            onClick={(event) => handleEntryFeeChange(event, 1)}>
             <div
               className={clsx(
                 'align-items-center p-5 text-center bg-secondary bg-active-mc-secondary text-mc-primary text-active-white',
                 {active: activityForm?.entry_fee?.type === 1}
-              )}
-            >
+              )}>
               <span className='d-flex flex-column'>
                 <span className='fw-bolder fs-6'>Free</span>
 
@@ -53,14 +51,12 @@ export const EntryFeeDetail = () => {
             className={clsx('bg-active-mc-secondary cursor-pointer mb-5', {
               active: activityForm?.entry_fee?.type === 2,
             })}
-            onClick={(event) => handleEntryFeeChange(event, 2)}
-          >
+            onClick={(event) => handleEntryFeeChange(event, 2)}>
             <div
               className={clsx(
                 'align-items-center p-5 text-center bg-secondary bg-active-mc-secondary text-mc-primary text-active-white',
                 {active: activityForm?.entry_fee?.type === 2}
-              )}
-            >
+              )}>
               <span className='d-flex flex-column'>
                 <span className='fw-bolder fs-6'>Paid</span>
 

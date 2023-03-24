@@ -70,8 +70,7 @@ const GameSettings: FC = () => {
                           <QueryResponseProvider
                             id={QUERIES.GAMES_PLATFORMS_LIST}
                             requestFunction={getGamePlatforms}
-                            requestId={game?.id}
-                          >
+                            requestId={game?.id}>
                             <ListViewProvider>
                               <PlatformDetail />
                             </ListViewProvider>

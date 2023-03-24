@@ -1,10 +1,10 @@
-import * as Yup from "yup";
-import { User } from "../../sections/iam/user/core/User";
+import * as Yup from 'yup'
+import {User} from '../../sections/iam/user/core/User'
 
 export const announcementSchema = Yup.object().shape({
-  title: Yup.string().required("Title is required"),
-  body: Yup.string().required("Body is required")
-});
+  title: Yup.string().required('Title is required'),
+  body: Yup.string().required('Body is required'),
+})
 
 export type Announcement = {
   id?: number
@@ -15,6 +15,6 @@ export type Announcement = {
 }
 
 export const defaultAnnouncement = {
-  title: "",
-  body: ""
-};
+  title: '',
+  body: '',
+}

@@ -74,16 +74,14 @@ const PaginationItem: FC<{link: any}> = ({link}) => {
         disabled: isLoading,
         previous: link.label === 'Previous',
         next: link.label === 'Next',
-      })}
-    >
+      })}>
       <a
         className={clsx('page-link', {
           'page-text': link.label === 'Previous' || link.label === 'Next',
           'me-5': link.label === 'Previous',
         })}
         onClick={() => updatePage(currentPage(link))}
-        style={{cursor: 'pointer'}}
-      >
+        style={{cursor: 'pointer'}}>
         {mappedLabel(link.label)}
       </a>
     </li>

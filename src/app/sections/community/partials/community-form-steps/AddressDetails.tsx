@@ -67,8 +67,7 @@ const AddressDetails: FC = () => {
         validationSchema={communitySchema}
         initialValues={communityForm!}
         onSubmit={handleSubmit}
-        enableReinitialize
-      >
+        enableReinitialize>
         {({isSubmitting, setFieldValue}) => (
           <Form onChange={handleOnChange} className='form' autoComplete='off'>
             <KTCardBody className='py-4'>

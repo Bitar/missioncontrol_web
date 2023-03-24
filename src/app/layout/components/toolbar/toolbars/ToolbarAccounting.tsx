@@ -26,12 +26,10 @@ const ToolbarAccounting: FC = () => {
               data-bs-toggle='tooltip'
               data-bs-placement='top'
               data-bs-trigger='hover'
-              title='Add a team member'
-            >
+              title='Add a team member'>
               <a
                 href='src/app/layout/components/toolbar/toolbars/ToolbarAccounting#'
-                className='btn btn-sm btn-icon btn-active-color-success'
-              >
+                className='btn btn-sm btn-icon btn-active-color-success'>
                 <KTSVG path='/media/icons/duotune/general/gen035.svg' className='svg-icon-2x' />
               </a>
             </div>
@@ -42,12 +40,10 @@ const ToolbarAccounting: FC = () => {
               data-bs-toggle='tooltip'
               data-bs-placement='top'
               data-bs-trigger='hover'
-              title='Create new account'
-            >
+              title='Create new account'>
               <a
                 href='src/app/layout/components/toolbar/toolbars/ToolbarAccounting#'
-                className='btn btn-sm btn-icon btn-active-color-success'
-              >
+                className='btn btn-sm btn-icon btn-active-color-success'>
                 <KTSVG path='/media/icons/duotune/general/gen037.svg' className='svg-icon-2x' />
               </a>
             </div>
@@ -58,12 +54,10 @@ const ToolbarAccounting: FC = () => {
               data-bs-toggle='tooltip'
               data-bs-placement='top'
               data-bs-trigger='hover'
-              title='Invite friends'
-            >
+              title='Invite friends'>
               <a
                 href='src/app/layout/components/toolbar/toolbars/ToolbarAccounting#'
-                className='btn btn-sm btn-icon btn-active-color-success'
-              >
+                className='btn btn-sm btn-icon btn-active-color-success'>
                 <KTSVG path='/media/icons/duotune/general/gen023.svg' className='svg-icon-2x' />
               </a>
             </div>
@@ -90,8 +84,7 @@ const ToolbarAccounting: FC = () => {
               style={{width: '72%'}}
               aria-valuenow={72}
               aria-valuemin={0}
-              aria-valuemax={100}
-            >
+              aria-valuemax={100}>
               72%
             </div>
           </div>
@@ -110,8 +103,7 @@ const ToolbarAccounting: FC = () => {
             data-placeholder='Latest'
             data-hide-search='true'
             value={progress}
-            onChange={(e) => setProgress(e.target.value)}
-          >
+            onChange={(e) => setProgress(e.target.value)}>
             <option value=''></option>
             <option value='1'>Today 16 Feb</option>
             <option value='2'>In Progress</option>
@@ -130,8 +122,7 @@ const ToolbarAccounting: FC = () => {
             data-placeholder='Filters'
             data-hide-search='true'
             value={filter}
-            onChange={(e) => setFilter(e.target.value)}
-          >
+            onChange={(e) => setFilter(e.target.value)}>
             <option value=''></option>
             <option value='1'>Filters</option>
             <option value='2'>In Progress</option>

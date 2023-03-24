@@ -98,8 +98,7 @@ const ActivityMembersFilter: FC<Props> = ({showFilter, setExportQuery}) => {
                 <div className='card-footer d-flex justify-content-end py-6 px-9'>
                   <button
                     type='submit'
-                    className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'
-                  >
+                    className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'>
                     <span className='indicator-label'>Filter</span>
                   </button>
                 </div>

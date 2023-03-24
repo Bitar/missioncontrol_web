@@ -66,15 +66,13 @@ export const ScoreSettings: FC = () => {
         initialValues={{rounds: rounds}}
         validationSchema={scoreUpdateValidation}
         onSubmit={handleSubmit}
-        enableReinitialize
-      >
+        enableReinitialize>
         {() => (
           <Form
             onChange={handleOnChange}
             className='form collapse show'
             autoComplete='off'
-            id='update-scores-wrapper'
-          >
+            id='update-scores-wrapper'>
             <KTCardBody className='pb-0 pt-5'>
               {rounds?.map((round, roundIndex) => (
                 <RoundBlock

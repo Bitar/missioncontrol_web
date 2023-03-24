@@ -26,8 +26,7 @@ const NumberCounter: FC<Props> = ({min = 1, handleChange}) => {
       <button
         type={'button'}
         className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-        onClick={decrease}
-      >
+        onClick={decrease}>
         <i className='fa fa-minus'></i>
       </button>
       {visible && (
@@ -61,8 +60,7 @@ const NumberCounter: FC<Props> = ({min = 1, handleChange}) => {
       <button
         type={'button'}
         className='btn btn-icon btn-sm btn-mc-secondary rounded-0'
-        onClick={increase}
-      >
+        onClick={increase}>
         <i className='fa fa-plus'></i>
       </button>
     </>

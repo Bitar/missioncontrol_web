@@ -178,8 +178,7 @@ const ActivityInfo: FC = () => {
                           width: `${Math.round(
                             (activity?.teams?.length / activity?.team_setting?.max) * 100
                           )}%`,
-                        }}
-                      ></div>
+                        }}></div>
                     </div>
                   </div>
                 </div>
@@ -194,10 +193,8 @@ const ActivityInfo: FC = () => {
               <li className='nav-item' key={index}>
                 <Link
                   className={clsx(`nav-link py-5 me-6`, {active: location.pathname === link.link})}
-                  to={link.link}
-                >
+                  to={link.link}>
                   {link.icon && <i className={clsx('fs-4 me-2', link.icon)}></i>}
-
                   {link.text}
                 </Link>
               </li>

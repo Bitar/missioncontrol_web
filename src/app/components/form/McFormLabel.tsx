@@ -13,8 +13,7 @@ const McFormLabel: React.FC<Props> = ({text, isRequired = false}) => {
       <FormLabel
         className={clsx('fs-6 fw-semibold form-label mt-3', {
           required: isRequired,
-        })}
-      >
+        })}>
         {text}
       </FormLabel>
     </div>

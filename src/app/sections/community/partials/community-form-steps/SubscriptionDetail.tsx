@@ -82,8 +82,7 @@ export const SubscriptionDetail = () => {
         validationSchema={subscriptionUpdateSchema}
         initialValues={subscriptionForm}
         onSubmit={handleSubmit}
-        enableReinitialize
-      >
+        enableReinitialize>
         {({isSubmitting}) => (
           <Form className='form' autoComplete='off'>
             <KTCardBody className='py-4'>

@@ -80,8 +80,7 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
               data-bs-toggle='tooltip'
               data-bs-placement='top'
               data-bs-trigger='hover'
-              title={scoringKey?.key.key}
-            >
+              title={scoringKey?.key.key}>
               <i className={`fa ${scoringKeyIcon} fs-2 text-mc-secondary`}></i>
             </div>
             {returnValue}
@@ -97,8 +96,7 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
             data-bs-toggle='tooltip'
             data-bs-placement='top'
             data-bs-trigger='hover'
-            title={scoringKey?.key.key}
-          >
+            title={scoringKey?.key.key}>
             <i className={`fa ${scoringKeyIcon} fs-2 text-mc-secondary`}></i>
           </div>
         </div>
@@ -212,8 +210,7 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
                             {getImages(round).map((image: any, index: any) => (
                               <li
                                 key={`score-image-list-item-${index}`}
-                                className='rounded score-image-item'
-                              >
+                                className='rounded score-image-item'>
                                 <Zoom>
                                   <div
                                     aria-label='Score Screenshot'

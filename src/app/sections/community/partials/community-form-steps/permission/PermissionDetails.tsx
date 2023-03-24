@@ -93,8 +93,7 @@ const PermissionDetails = () => {
           validationSchema={communityPermissionSchema}
           initialValues={permissionUserForm}
           onSubmit={handleSubmit}
-          enableReinitialize
-        >
+          enableReinitialize>
           {({isSubmitting}) => (
             <Form onChange={handleOnChange} className='form' autoComplete='off'>
               <KTCardBody className='py-4'>

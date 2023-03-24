@@ -93,8 +93,7 @@ const GameModeWrapper: FC<Props> = ({gameMode, setGameMode}) => {
         initialValues={gameModeForm}
         onSubmit={handleSubmit}
         validationSchema={gameModeSchema}
-        enableReinitialize
-      >
+        enableReinitialize>
         {({isSubmitting}) => (
           <Form onChange={handleOnChange} className='form' encType='multipart/form-data'>
             <KTCardBody>

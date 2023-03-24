@@ -5,8 +5,7 @@ const Dropdown2: FC = () => {
   return (
     <div
       className='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold w-200px'
-      data-kt-menu='true'
-    >
+      data-kt-menu='true'>
       <div className='menu-item px-3'>
         <div className='menu-content fs-6 text-dark fw-bolder px-3 py-4'>Quick Actions</div>
       </div>
@@ -29,8 +28,7 @@ const Dropdown2: FC = () => {
         className='menu-item px-3'
         data-kt-menu-trigger='hover'
         data-kt-menu-placement='right-start'
-        data-kt-menu-flip='left-start, top'
-      >
+        data-kt-menu-flip='left-start, top'>
         <a href='#' className='menu-link px-3'>
           <span className='menu-title'>New Group</span>
           <span className='menu-arrow'></span>

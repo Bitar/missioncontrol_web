@@ -57,8 +57,7 @@ const PlansCreate = () => {
               data-kt-scroll-max-height='auto'
               data-kt-scroll-dependencies='#kt_modal_add_user_header'
               data-kt-scroll-wrappers='#kt_modal_add_user_scroll'
-              data-kt-scroll-offset='300px'
-            >
+              data-kt-scroll-offset='300px'>
               {/* begin::Input group */}
               <div className='fv-row mb-7'>
                 {/* begin::Label */}
@@ -202,8 +201,7 @@ const PlansCreate = () => {
                 onClick={() => cancel()}
                 className='btn btn-light me-3'
                 data-kt-users-modal-action='cancel'
-                disabled={formik.isSubmitting}
-              >
+                disabled={formik.isSubmitting}>
                 Cancel
               </button>
 
@@ -211,8 +209,7 @@ const PlansCreate = () => {
                 type='submit'
                 className='btn btn-primary'
                 data-kt-users-modal-action='submit'
-                disabled={formik.isSubmitting || !formik.isValid || !formik.touched}
-              >
+                disabled={formik.isSubmitting || !formik.isValid || !formik.touched}>
                 <span className='indicator-label'>Submit</span>
                 {formik.isSubmitting && (
                   <span className='indicator-progress'>

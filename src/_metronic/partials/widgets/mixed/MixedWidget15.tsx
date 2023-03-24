@@ -11,8 +11,7 @@ type Props = {
 const MixedWidget15: FC<Props> = ({className, backGroundColor}) => (
   <div
     className={`card ${className} theme-dark-bg-body`}
-    style={{backgroundColor: backGroundColor}}
-  >
+    style={{backgroundColor: backGroundColor}}>
     {/* begin::Body */}
     <div className='card-body d-flex flex-column'>
       {/* begin::Wrapper */}

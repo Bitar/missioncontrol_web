@@ -19,8 +19,7 @@ const ToolbarClassic = () => {
             href='src/app/layout/components/toolbar/toolbars/ToolbarClassic#'
             className={clsx('btn btn-sm btn-flex fw-bold', daterangepickerButtonClass)}
             data-kt-menu-trigger='click'
-            data-kt-menu-placement='bottom-end'
-          >
+            data-kt-menu-placement='bottom-end'>
             <KTSVG
               path='/media/icons/duotune/gen031.svg'
               className='svg-icon-6 svg-icon-muted me-1'
@@ -38,8 +37,7 @@ const ToolbarClassic = () => {
           className={clsx(
             'btn btn-sm fw-bold  d-flex align-items-center px-4',
             daterangepickerButtonClass
-          )}
-        >
+          )}>
           <div className='text-gray-600 fw-bold'>Loading date range...</div>
           <KTSVG path='/media/icons/duotune/general/gen014.svg' className='svg-icon-1 ms-2 me-0' />
         </div>
@@ -48,8 +46,7 @@ const ToolbarClassic = () => {
       {config.app?.toolbar?.secondaryButton && (
         <a
           href='src/app/layout/components/toolbar/toolbars/ToolbarClassic#'
-          className='btn btn-sm btn-flex btn-light fw-bold'
-        >
+          className='btn btn-sm btn-flex btn-light fw-bold'>
           Filter
         </a>
       )}

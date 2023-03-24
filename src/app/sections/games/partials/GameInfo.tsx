@@ -76,8 +76,7 @@ const GameInfo: FC = () => {
                           active: location.pathname === link.link,
                         }
                       )}
-                      to={link.link}
-                    >
+                      to={link.link}>
                       {link.text}
                     </Link>
                   </li>
