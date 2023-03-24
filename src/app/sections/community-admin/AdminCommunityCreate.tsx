@@ -172,11 +172,14 @@ const AdminCommunityCreate = () => {
         setIsSubmitting(false)
 
         toast.success('Community created Successfully')
-        toast.custom('Sales team will be in touch!', {
-          className: 'bg-warning',
-          icon: '📧',
-          position: 'top-center',
-        })
+
+        if (communityForm?.payment_method && communityForm?.payment_method === '2') {
+          toast.custom('Sales team will be in touch!', {
+            className: 'bg-warning',
+            icon: '📧',
+            position: 'top-center',
+          })
+        }
 
         updateAuth()
 

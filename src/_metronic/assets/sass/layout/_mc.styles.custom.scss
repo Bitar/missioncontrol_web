@@ -182,6 +182,21 @@
 
 //@import 'react-image-crop/dist/ReactCrop.css';
 
+.mc-nav {
+  &.nav-line-tabs .nav-item .nav-link {
+    &.active {
+      color: $mc-secondary;
+      border-bottom-color: $mc-secondary;
+      //border-bottom: 1px solid var(--kt-mc-secondary);
+    }
+
+    &:hover:not(.disabled) {
+      //border-bottom: 1px solid var(--kt-mc-secondary);
+      border-bottom-color: $mc-secondary;
+    }
+  }
+}
+
 .crop-container {
   position: relative;
   width: 100%;
@@ -195,5 +210,5 @@
 
 .ratio-1-91x1 {
   position: relative;
-  --bs-aspect-ratio:52.36%
+  --bs-aspect-ratio: 52.36%;
 }

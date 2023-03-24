@@ -102,7 +102,6 @@ const RoleEdit: FC = () => {
   }
 
   return (
-    <>
       <KTCard>
         <KTCardHeader text='Edit Role' icon='fa-regular fa-pencil' icon_style='fs-3 text-warning' />
 
@@ -158,7 +157,6 @@ const RoleEdit: FC = () => {
           </Form>
         </Formik>
       </KTCard>
-    </>
   )
 }
 

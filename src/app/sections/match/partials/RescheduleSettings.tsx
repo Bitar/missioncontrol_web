@@ -11,9 +11,9 @@ import moment from 'moment/moment'
 import * as Yup from 'yup'
 import {useActivity} from '../../activity/core/contexts/ActivityContext'
 import {rescheduleMatch} from '../core/MatchRequests'
-import { useMcApp } from "../../../modules/general/McApp";
-import { AlertMessageGenerator } from "../../../helpers/AlertMessageGenerator";
-import { Actions, ToastType } from "../../../helpers/variables";
+import {useMcApp} from '../../../modules/general/McApp'
+import {AlertMessageGenerator} from '../../../helpers/AlertMessageGenerator'
+import {Actions, ToastType} from '../../../helpers/variables'
 
 type matchForm = {
   start_date: number
@@ -39,7 +39,8 @@ export const RescheduleSettings = () => {
     rescheduleMatch(match?.id, data).then((response) => {
       setMatch(response)
       mcApp.setAlert({
-        message: new AlertMessageGenerator('match schedule', Actions.EDIT, ToastType.SUCCESS).message,
+        message: new AlertMessageGenerator('match schedule', Actions.EDIT, ToastType.SUCCESS)
+          .message,
         type: ToastType.SUCCESS,
       })
     })

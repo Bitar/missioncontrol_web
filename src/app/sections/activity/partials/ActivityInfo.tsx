@@ -44,6 +44,10 @@ const ActivityInfo: FC = () => {
       link: '/activities/' + activity?.id + '/chat',
     },
     {
+      text: 'Announcements',
+      link: '/activities/' + activity?.id + '/announcements',
+    },
+    {
       text: 'Settings',
       link: '/activities/' + activity?.id + '/settings',
     },
@@ -51,8 +55,8 @@ const ActivityInfo: FC = () => {
 
   return (
     <KTCard className='mb-5 mb-xl-10 overflow-hidden'>
-      <KTCardBody>
-        <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
+      <KTCardBody className={'pb-0'}>
+        <div className='d-flex flex-wrap flex-sm-nowrap mb-6'>
           <div className='me-7 mb-4'>
             <div className='w-150px'>
               <img src={activity?.game?.image} alt={activity?.title} className='w-100' />
@@ -183,31 +187,22 @@ const ActivityInfo: FC = () => {
             </div>
           </div>
         </div>
-      </KTCardBody>
-      <div className='separator mt-10'></div>
-      <KTCardBody className='p-0 rounded-3 rounded-bottom'>
-        <ul className='nav nav-fill nav-line-tabs nav-line-tabs-2x fs-5 fw-bolder flex-nowrap text-center border-transparent'>
-          {links.map((link, index) => (
-            <li className='nav-item' key={index}>
-              <Link
-                className={clsx(
-                  `m-0 nav-link bg-active-mc-secondary text-active-white border-active-mc-secondary border-hover-mc-secondary py-5 `,
-                  {
-                    active: location.pathname === link.link,
-                  }
-                )}
-                to={link.link}
-              >
-                {link.icon && (
-                  <span>
-                    {' '}
-                    <i className={clsx('fs-4 me-2', link.icon)}></i>{' '}
-                  </span>
-                )}
-                {link.text}
-              </Link>
-            </li>
-          ))}
+        <div className='separator'></div>
+        <ul className='mc-nav nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder'>
+          {links.map((link, index) => {
+            return (
+              <li className='nav-item' key={index}>
+                <Link
+                  className={clsx(`nav-link py-5 me-6`, {active: location.pathname === link.link})}
+                  to={link.link}
+                >
+                  {link.icon && <i className={clsx('fs-4 me-2', link.icon)}></i>}
+
+                  {link.text}
+                </Link>
+              </li>
+            )
+          })}
         </ul>
       </KTCardBody>
     </KTCard>

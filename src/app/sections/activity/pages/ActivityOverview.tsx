@@ -37,9 +37,6 @@ const ActivityOverview: FC = () => {
             </QueryRequestProvider>
           )}
         </div>
-        <div className='mt-5'>
-          <ActivityAnnouncement />
-        </div>
       </div>
     </div>
   )

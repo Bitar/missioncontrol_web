@@ -36,8 +36,8 @@ const CommunityUsersTable = () => {
 }
 
 const CommunityUsers: FC = () => {
-  const mcApp = useMcApp()
   const {community} = useCommunity()
+  const mcApp = useMcApp()
   const [exportQuery, setExportQuery] = useState<string>('')
   const [showFilter, setShowFilter] = useState<boolean>(false)
 

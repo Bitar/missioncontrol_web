@@ -57,52 +57,52 @@ const LogoImage: FC<Props> = ({community, setCommunity}) => {
   }
 
   return (
-      <div className='col-lg-4'>
+    <div className='col-lg-4'>
+      <div
+        className={clsx('image-input image-input-outline', {
+          'image-input-empty': image === '' || image === 'none',
+        })}
+        style={{backgroundImage: `url(${defaultImage})`}}
+        data-kt-image-input='true'
+      >
         <div
-          className={clsx('image-input image-input-outline', {
-            'image-input-empty': image === '' || image === 'none',
-          })}
-          style={{backgroundImage: `url(${defaultImage})`}}
-          data-kt-image-input='true'
+          className='image-input-wrapper w-125px h-125px'
+          style={{backgroundImage: `${image}`}}
+        />
+
+        <label
+          className='btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow'
+          data-kt-image-input-action='change'
+          data-bs-toggle='tooltip'
+          title='Change avatar'
         >
-          <div
-            className='image-input-wrapper w-125px h-125px'
-            style={{backgroundImage: `${image}`}}
+          <i className='bi bi-pencil-fill fs-7'></i>
+          <input
+            key={imageInput}
+            type='file'
+            name='logo'
+            accept='.png, .jpg, .jpeg'
+            onChange={handleOnChange}
           />
+          <input type='hidden' name='avatar_remove' />
+        </label>
 
-          <label
+        {image && image !== '' && (
+          <span
             className='btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow'
-            data-kt-image-input-action='change'
+            data-kt-image-input-action='remove'
             data-bs-toggle='tooltip'
-            title='Change avatar'
+            title='Remove avatar'
+            onClick={cancelImageChange}
           >
-            <i className='bi bi-pencil-fill fs-7'></i>
-            <input
-              key={imageInput}
-              type='file'
-              name='logo'
-              accept='.png, .jpg, .jpeg'
-              onChange={handleOnChange}
-            />
-            <input type='hidden' name='avatar_remove' />
-          </label>
-
-          {image && image !== '' && (
-            <span
-              className='btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow'
-              data-kt-image-input-action='remove'
-              data-bs-toggle='tooltip'
-              title='Remove avatar'
-              onClick={cancelImageChange}
-            >
-              <i className='bi bi-x fs-2'></i>
-            </span>
-          )}
-        </div>
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='logo' />
-        </div>
+            <i className='bi bi-x fs-2'></i>
+          </span>
+        )}
       </div>
+      <div className='text-danger mt-2'>
+        <ErrorMessage name='logo' />
+      </div>
+    </div>
   )
 }
 

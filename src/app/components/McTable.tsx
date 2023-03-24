@@ -44,7 +44,7 @@ export const McTable: FC<Props> = ({data, columns, model, isLoading}) => {
               })
             ) : (
               <tr>
-                <td colSpan={7}>
+                <td colSpan={columns.length}>
                   <div className='d-flex text-center w-100 align-content-center justify-content-center'>
                     No matching records found
                   </div>

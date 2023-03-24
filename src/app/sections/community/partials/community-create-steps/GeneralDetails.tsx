@@ -3,6 +3,7 @@ import {ErrorMessage, Field} from 'formik'
 import {LogoImage} from '../../components/LogoImage'
 import {BannerImage} from '../../components/BannerImage'
 import {useCommunityForm} from '../../core/CommunityFormContext'
+import {ImageCrop} from '../../components/ImageCrop'
 
 const GeneralDetails: FC = () => {
   const {communityForm, setCommunityForm} = useCommunityForm()
@@ -12,7 +13,17 @@ const GeneralDetails: FC = () => {
       <div className='row mb-6'>
         <label className='col-lg-4 col-form-label required fw-bold fs-6'>Logo</label>
         <div className='col-lg-8 fv-row'>
-          <LogoImage community={communityForm} setCommunity={setCommunityForm} />
+          <ImageCrop
+            isSquare={true}
+            community={communityForm}
+            setCommunity={setCommunityForm}
+            ratio={1}
+            name='logo'
+          />
+          <div className='text-muted fw-semibold'>Recommended Image Size: Square</div>
+          <div className='text-danger mt-2'>
+            <ErrorMessage name='logo' />
+          </div>
         </div>
       </div>
 
@@ -50,8 +61,18 @@ const GeneralDetails: FC = () => {
 
       <div className='row mb-6'>
         <label className='col-lg-4 col-form-label required fw-bold fs-6'>Banner Image</label>
-        <div className='col-lg-8 fv-row'>
-          <BannerImage community={communityForm} setCommunity={setCommunityForm} />
+        <div className='col-lg-6 fv-row'>
+          <ImageCrop
+            aspectRatioClass={'ratio ratio-1-91x1'}
+            community={communityForm}
+            setCommunity={setCommunityForm}
+            ratio={1.91}
+            name='banner_image'
+          />
+          <div className='text-muted fw-semibold'>Recommended Image Ratio: 1.91:1 (1900px x 1000px)</div>
+          <div className='text-danger mt-2'>
+            <ErrorMessage name='banner_image' />
+          </div>
         </div>
       </div>
     </div>

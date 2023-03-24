@@ -11,8 +11,8 @@ import {Subscription} from '../billing/Subscription'
 
 export const communityCreateWizardSchema = [
   Yup.object().shape({
-    logo: Yup.mixed().required('Logo is required'),
-    banner_image: Yup.mixed().required('Banner Image is required'),
+    logo: Yup.string().required('Logo is required'),
+    banner_image: Yup.string().required('Banner Image is required'),
     name: Yup.string().required('Name is required'),
     description: Yup.string().required('Description is required'),
   }),
