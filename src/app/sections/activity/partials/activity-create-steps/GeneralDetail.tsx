@@ -1,4 +1,4 @@
-import {ErrorMessage, Field, useFormikContext} from 'formik'
+import {ErrorMessage, Field} from 'formik'
 import React, {FC, useEffect, useState} from 'react'
 import {Community} from '../../../../models/community/Community'
 import {useActivityForm} from '../../core/contexts/ActivityFormContext'
@@ -15,7 +15,6 @@ const GeneralDetail: FC = () => {
   const {currentUser} = useAuth()
   const [communities, setCommunities] = useState<Community[]>()
   const [activityTypes, setActivityTypes] = useState<ActivityType[]>()
-  const {setFieldValue} = useFormikContext()
 
   useEffect(() => {
     if (currentUser && !isCommunityAdmin(currentUser)) {

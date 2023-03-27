@@ -8,6 +8,7 @@ type CommunityContextProps = {
   updateCommunity: () => void
   members: User[] | undefined
   setMembers: Dispatch<SetStateAction<User[] | undefined>>
+  link?: string
 }
 
 const initCommunityContextPropsState = {
@@ -16,6 +17,7 @@ const initCommunityContextPropsState = {
   updateCommunity: () => {},
   members: undefined,
   setMembers: () => {},
+  link: ""
 }
 
 export const CommunityContext = createContext<CommunityContextProps>(initCommunityContextPropsState)

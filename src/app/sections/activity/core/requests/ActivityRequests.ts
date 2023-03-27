@@ -68,18 +68,6 @@ export const getActivityStandings = (id: any, query?: string): Promise<TeamQuery
   return axios.get(url).then((response: AxiosResponse<TeamQueryResponse>) => response.data)
 }
 
-export const createActivityAnnouncement = (
-  id: any,
-  formData: FormData
-): Promise<Announcement | undefined> => {
-  let url = `${ENDPOINT}/${id}/announcements`
-
-  return axios
-    .post(url, formData)
-    .then((response: AxiosResponse<Response<Announcement>>) => response.data)
-    .then((response: Response<Announcement>) => response.data)
-}
-
 export const getActivityChat = (id: any): Promise<ChatMessageQueryResponse> => {
   let url = `${ENDPOINT}/${id}/chat`
 
@@ -103,6 +91,18 @@ export const getActivityAnnouncements = (id: any, query?: string): Promise<Annou
   }
 
   return axios.get(url).then((response: AxiosResponse<Announcement[]>) => response.data)
+}
+
+export const createActivityAnnouncement = (
+  id: any,
+  formData: FormData
+): Promise<Announcement | undefined> => {
+  let url = `${ENDPOINT}/${id}/announcements`
+
+  return axios
+    .post(url, formData)
+    .then((response: AxiosResponse<Response<Announcement>>) => response.data)
+    .then((response: Response<Announcement>) => response.data)
 }
 
 export const getSingleActivityAnnouncements = (

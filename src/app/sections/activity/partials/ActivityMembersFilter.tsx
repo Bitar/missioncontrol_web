@@ -1,18 +1,25 @@
 import {useQueryRequest} from '../../../modules/table/QueryRequestProvider'
-import React, {FC, useState} from 'react'
+import React, { FC, useEffect, useState } from "react";
 import {initialQueryState} from '../../../helpers/crud-helper/models'
 import {updateData} from '../../../helpers/form/FormHelper'
 import {KTCardBody} from '../../../helpers/components'
 import {Field, Form, Formik} from 'formik'
 import {Col, Collapse, Row} from 'react-bootstrap'
 import {createFilterQueryParam} from '../../../helpers/requests'
+import FilterFormFooter from "../../../components/form/FilterFormFooter";
 
 const initActivityMembersFilter = {
-  name: '',
+  team_name: '',
+  first_name: '',
+  last_name: '',
+  email: ''
 }
 
 type ActivityMembersFilterObj = {
-  name: string
+  team_name: string
+  first_name: string
+  last_name: string
+  email: string
 }
 
 interface Props {
@@ -30,6 +37,12 @@ const ActivityMembersFilter: FC<Props> = ({showFilter, setExportQuery}) => {
     setActivityTeamFilters(initActivityMembersFilter)
     setReset(true)
   }
+
+  useEffect(() => {
+    handleFilter()
+    setReset(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reset])
 
   const handleFilter = () => {
     setExportQuery(createFilterQueryParam(activityTeamFilters))
@@ -58,7 +71,7 @@ const ActivityMembersFilter: FC<Props> = ({showFilter, setExportQuery}) => {
                     <div className='col-lg-4'>
                       <Field
                         type='text'
-                        name='teams.name'
+                        name='team_name'
                         placeholder='Team Name'
                         className={'form-control mb-3 mb-lg-0'}
                         autoComplete='off'
@@ -94,14 +107,8 @@ const ActivityMembersFilter: FC<Props> = ({showFilter, setExportQuery}) => {
                       />
                     </div>
                   </div>
+                  <FilterFormFooter resetFilter={resetFilter} />
                 </KTCardBody>
-                <div className='card-footer d-flex justify-content-end py-6 px-9'>
-                  <button
-                    type='submit'
-                    className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'>
-                    <span className='indicator-label'>Filter</span>
-                  </button>
-                </div>
               </Form>
             </Formik>
           </div>

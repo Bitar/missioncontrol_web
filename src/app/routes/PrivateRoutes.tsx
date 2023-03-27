@@ -26,6 +26,7 @@ const PrivateRoutes = () => {
 
         {/* Pages */}
         <Route path='dashboard/*' element={<DashboardWrapper />} />
+
         <Route
           path='resources'
           element={

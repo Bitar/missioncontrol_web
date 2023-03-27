@@ -10,10 +10,14 @@ import { CommunityContext } from "../../sections/community/core/CommunityContext
 import { User } from "../../sections/iam/user/core/User";
 import { StatisticsWidget5 } from "../../pages/dashboard/partials/StatisticsWidget5";
 import { Col, Row } from "react-bootstrap";
+import { SuspenseView } from "../../layout/SuspenseView";
+import {
+  CommunityAnnouncement,
+  CommunityAnnouncementEdit
+} from "../../sections/community/components/CommunityAnnouncement";
 
 type Props = {
   communityId?: number
-  links?: { text: string; link: string }[]
 }
 
 const CommunityViewRoutes: FC<Props> = ({ communityId }) => {
@@ -98,7 +102,8 @@ const CommunityViewRoutes: FC<Props> = ({ communityId }) => {
         setCommunity,
         updateCommunity,
         members,
-        setMembers
+        setMembers,
+        link: link.current
       }}>
       <Routes>
         <Route
@@ -148,8 +153,17 @@ const CommunityViewRoutes: FC<Props> = ({ communityId }) => {
             element={
               <>
                 <PageTitle breadcrumbs={communityViewBreadCrumbs}>Announcements</PageTitle>
-                <CommunityUsers />
+                <CommunityAnnouncement />
               </>
+            }
+          />
+          <Route
+            path="/announcements/:announcementId/edit"
+            element={
+              <SuspenseView>
+                <PageTitle breadcrumbs={communityViewBreadCrumbs}>Edit Announcement</PageTitle>
+                <CommunityAnnouncementEdit />
+              </SuspenseView>
             }
           />
           <Route
