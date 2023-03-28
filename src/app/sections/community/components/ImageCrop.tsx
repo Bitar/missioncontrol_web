@@ -7,23 +7,25 @@ import getCroppedImg, { GetCroppedImgProps } from "./ImageHandling";
 import { updateData } from "../../../helpers/form/FormHelper";
 
 type Props = {
-  community: any
-  setCommunity: any
+  model: any
+  setModel: any
   aspectRatioClass?: string
   ratio: number
   isSquare?: boolean
   name: any
   defaultImage?: string
+  updateStuff?: any
 }
 
 export const ImageCrop: FC<Props> = ({
-                                       community,
-                                       setCommunity,
+                                       model,
+                                       setModel,
                                        aspectRatioClass,
                                        ratio,
                                        isSquare = false,
                                        name,
-                                       defaultImage
+                                       defaultImage,
+                                       updateStuff
                                      }) => {
   const [image, setImage] = useState<File | undefined>(undefined);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -63,13 +65,17 @@ export const ImageCrop: FC<Props> = ({
     setPreviewImage(imageToSave);
     setImage(undefined);
 
-    updateData(
-      {
-        [name]: imageToSave
-      },
-      setCommunity,
-      community
-    );
+    if(updateStuff) {
+      updateStuff(imageToSave);
+    } else {
+      updateData(
+        {
+          [name]: imageToSave
+        },
+        setModel,
+        model
+      );
+    }
 
     setFieldValue(name, imageToSave);
   };
@@ -77,14 +83,10 @@ export const ImageCrop: FC<Props> = ({
   return (
     <>
       <div
-        className={clsx(
-          `${aspectRatioClass ?? ""} image-input image-input-outline image-input-empty`
-        )}
+        className={clsx(`${aspectRatioClass ?? ""} image-input image-input-outline image-input-empty`)}
         data-kt-image-input="true">
         <div
-          className={clsx("image-input-wrapper w-100 h-100 overflow-hidden", {
-            "w-200px h-200px": isSquare
-          })}
+          className={clsx("image-input-wrapper w-100 h-100 overflow-hidden", { "w-200px h-200px": isSquare })}
           style={{ backgroundImage: `url(${previewImage})` }}>
           {image && (
             <div className="crop-container">

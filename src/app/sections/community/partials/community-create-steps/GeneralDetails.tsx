@@ -13,8 +13,8 @@ const GeneralDetails: FC = () => {
         <div className="col-lg-8 fv-row">
           <ImageCrop
             isSquare={true}
-            community={communityForm}
-            setCommunity={setCommunityForm}
+            model={communityForm}
+            setModel={setCommunityForm}
             ratio={1}
             name="logo"
           />
@@ -62,8 +62,8 @@ const GeneralDetails: FC = () => {
         <div className="col-lg-6 fv-row">
           <ImageCrop
             aspectRatioClass={"ratio ratio-1-91x1"}
-            community={communityForm}
-            setCommunity={setCommunityForm}
+            model={communityForm}
+            setModel={setCommunityForm}
             ratio={1.91}
             name="banner_image"
           />

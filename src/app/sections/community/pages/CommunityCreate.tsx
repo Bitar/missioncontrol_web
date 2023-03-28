@@ -51,8 +51,8 @@ const CommunityCreate = () => {
                         <div className='col-lg-4'>
                           <ImageCrop
                             isSquare={true}
-                            community={community}
-                            setCommunity={setCommunity}
+                            model={community}
+                            setModel={setCommunity}
                             ratio={1}
                             name='logo'
                           />
@@ -66,8 +66,8 @@ const CommunityCreate = () => {
                         <div className='col-lg-8'>
                           <ImageCrop
                             aspectRatioClass={'ratio ratio-1-91x1'}
-                            community={community}
-                            setCommunity={setCommunity}
+                            model={community}
+                            setModel={setCommunity}
                             ratio={1.91}
                             name='banner_image'
                           />

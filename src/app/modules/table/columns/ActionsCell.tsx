@@ -41,8 +41,6 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
   const { state } = useQueryRequest();
   const [query, setQuery] = useState<string>(stringifyRequestQuery(state));
 
-  console.log((deletePath ?? path) + "/" + id);
-
   useEffect(() => {
     setQuery(stringifyRequestQuery(state));
   }, [state]);
