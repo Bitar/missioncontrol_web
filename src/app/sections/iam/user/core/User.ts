@@ -163,6 +163,6 @@ export const isCommunityAdmin = (user: User) => {
 
 export const isSuperAdmin = (user: User) => {
   return !!user.roles.find(function (role) {
-    return role.id === 1
+    return role.id === 1 || role.id === 2
   })
 }

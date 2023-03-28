@@ -73,9 +73,11 @@ export const updateCommunitySubscription = (
     .then((response: Response<Community>) => response.data)
 }
 
-export const getCommunityActivities = (id: any): Promise<ActivityQueryResponse> => {
+export const getCommunityActivities = (id: any, query?: string): Promise<ActivityQueryResponse> => {
+  let url = `${ENDPOINT}/${id}/activities?${query}`
+
   return axios
-    .get(`${ENDPOINT}/${id}/activities`)
+    .get(url)
     .then((response: AxiosResponse<ActivityQueryResponse>) => response.data)
 }
 

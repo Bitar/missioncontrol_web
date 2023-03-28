@@ -14,7 +14,8 @@ import { SuspenseView } from "../../layout/SuspenseView";
 import {
   CommunityAnnouncement,
   CommunityAnnouncementEdit
-} from "../../sections/community/components/CommunityAnnouncement";
+} from "../../sections/community/partials/community-view/CommunityAnnouncement";
+import CommunityActivities from "../../sections/community/partials/community-view/CommunityActivities";
 
 type Props = {
   communityId?: number
@@ -30,6 +31,10 @@ const CommunityViewRoutes: FC<Props> = ({ communityId }) => {
     {
       text: "Overview",
       link: link.current
+    },
+    {
+      text: "Activities",
+      link: link.current + "/activities"
     },
     {
       text: "Members",
@@ -136,6 +141,15 @@ const CommunityViewRoutes: FC<Props> = ({ communityId }) => {
                     </Col>
                   </Row>
                 )}
+              </>
+            }
+          />
+          <Route
+            path="activities"
+            element={
+              <>
+                <PageTitle breadcrumbs={communityViewBreadCrumbs}>Activities</PageTitle>
+                <CommunityActivities />
               </>
             }
           />

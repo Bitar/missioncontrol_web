@@ -25,7 +25,6 @@ const App = () => {
           <AuthInit>
             <AccessControlProvider>
               <McApp>
-                {/*<MCToaster />*/}
                 <Outlet />
                 <MasterInit />
               </McApp>

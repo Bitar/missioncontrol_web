@@ -10,7 +10,6 @@ function isNotEmpty(obj: unknown) {
   return obj !== undefined && obj !== null && obj !== ''
 }
 
-// Example: page=1&items_per_page=10&sort=id&order=desc&search=a&filter_name=a&filter_online=false
 function stringifyRequestQuery(state: QueryState): string {
   const pagination = qs.stringify(state, {filter: ['page', 'per_page'], skipNulls: true})
   const sort = qs.stringify(state, {filter: ['sort', 'order'], skipNulls: true})

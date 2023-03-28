@@ -8,6 +8,7 @@ const QUERIES = {
   STANDINGS_LIST: 'standings-list',
   COMMUNITIES_LIST: 'communities-list',
   COMMUNITIES_USERS_LIST: 'communities-list-users',
+  COMMUNITIES_ACTIVITIES_LIST: 'communities-list-activities',
   COMMUNITIES_PERMISSIONS_LIST: 'communities-list-permissions',
   USERS_LIST: 'users-list',
   USER_ACTIVITIES_LIST: 'users-activity-list',

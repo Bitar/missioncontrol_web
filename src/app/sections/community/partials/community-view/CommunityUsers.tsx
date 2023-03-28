@@ -48,7 +48,7 @@ const CommunityUsers: FC = () => {
 
   const EXPORT_USERS_ENDPOINT = EXPORT_ENDPOINT + '/' + community?.id + '/users'
 
-  return (
+  return community ? (
     <QueryRequestProvider>
       <QueryResponseProvider
         id={QUERIES.COMMUNITIES_USERS_LIST}
@@ -74,7 +74,9 @@ const CommunityUsers: FC = () => {
         </ListViewProvider>
       </QueryResponseProvider>
     </QueryRequestProvider>
-  )
+  ) : (
+    <div></div>
+  );
 }
 
 export {CommunityUsers}

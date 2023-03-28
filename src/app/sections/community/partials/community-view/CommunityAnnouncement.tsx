@@ -1,32 +1,32 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { KTCard, KTCardBody, KTCardHeader } from "../../../helpers/components";
-import { Announcement, announcementSchema, defaultAnnouncement } from "../../../models/announcement/Announcements";
-import { jsonToFormData, updateData } from "../../../helpers/form/FormHelper";
+import { KTCard, KTCardBody, KTCardHeader } from "../../../../helpers/components";
+import { Announcement, announcementSchema, defaultAnnouncement } from "../../../../models/announcement/Announcements";
+import { jsonToFormData, updateData } from "../../../../helpers/form/FormHelper";
 import toast from "react-hot-toast";
 import {
   QueryResponseProvider,
   useQueryResponse,
   useQueryResponseData,
   useQueryResponseLoading
-} from "../../../modules/table/QueryResponseProvider";
-import { McTable } from "../../../components/McTable";
-import { QUERIES } from "../../../helpers/crud-helper/consts";
-import { ListViewProvider } from "../../../modules/table/ListViewProvider";
-import { ExportCardAction } from "../../../components/misc/CardAction";
-import { QueryRequestProvider } from "../../../modules/table/QueryRequestProvider";
+} from "../../../../modules/table/QueryResponseProvider";
+import { McTable } from "../../../../components/McTable";
+import { QUERIES } from "../../../../helpers/crud-helper/consts";
+import { ListViewProvider } from "../../../../modules/table/ListViewProvider";
+import { ExportCardAction } from "../../../../components/misc/CardAction";
+import { QueryRequestProvider } from "../../../../modules/table/QueryRequestProvider";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { FormAction } from "../../../helpers/form/FormAction";
-import AutoResizableTextarea from "../../../components/form/AutoResizableTextarea";
+import { FormAction } from "../../../../helpers/form/FormAction";
+import AutoResizableTextarea from "../../../../components/form/AutoResizableTextarea";
 import { useNavigate, useParams } from "react-router-dom";
-import CommunityAnnouncementsColumns from "../core/CommunityAnnouncementsColumns";
-import { useCommunity } from "../core/CommunityContext";
+import CommunityAnnouncementsColumns from "../../core/CommunityAnnouncementsColumns";
+import { useCommunity } from "../../core/CommunityContext";
 import {
   createCommunityAnnouncement,
   EXPORT_ENDPOINT,
   getCommunityAnnouncements,
   getSingleCommunityAnnouncements,
   updateCommunityAnnouncement
-} from "../core/CommunityRequests";
+} from "../../core/CommunityRequests";
 
 const CommunityAnnouncementsTable = () => {
   const communityAnnouncements = useQueryResponseData();
