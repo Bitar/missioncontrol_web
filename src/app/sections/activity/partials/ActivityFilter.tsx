@@ -6,7 +6,7 @@ import {updateData} from '../../../helpers/form/FormHelper'
 import {Community} from '../../../models/community/Community'
 import {getAllCommunities} from '../../community/core/CommunityRequests'
 import Select from 'react-select'
-import {isCommunityAdmin} from '../../iam/user/core/User'
+import {isCommunityAdmin, isSuperAdmin} from '../../iam/user/core/User'
 import {useAuth} from '../../../modules/auth'
 import {Col, Collapse, Row} from 'react-bootstrap'
 import {ActivityFilterForm, defaultActivityFilterForm} from '../core/ActivityFilterForm'
@@ -106,7 +106,7 @@ const ActivityFilter: FC<Props> = ({showFilter, setExportQuery}) => {
                       autoComplete='off'
                     />
                   </Col>
-                  {currentUser && !isCommunityAdmin(currentUser) && (
+                  {currentUser && isSuperAdmin(currentUser) && (
                     <Col md={4} className='mb-5'>
                       <Select
                         ref={selectCommunityRef}

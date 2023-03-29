@@ -7,7 +7,7 @@ import { QUERIES } from "../../../../helpers/crud-helper/consts";
 import { EXPORT_ENDPOINT, getCommunityActivities, getCommunityUsers } from "../../core/CommunityRequests";
 import { ListViewProvider } from "../../../../modules/table/ListViewProvider";
 import { KTCard, KTCardBody, KTCardHeader } from "../../../../helpers/components";
-import { ExportCardAction, FilterCardAction } from "../../../../components/misc/CardAction";
+import {CreateCardAction, ExportCardAction, FilterCardAction} from "../../../../components/misc/CardAction";
 import { CommunityUserFilters } from "../CommunityUserFilters";
 import { QueryRequestProvider } from "../../../../modules/table/QueryRequestProvider";
 import React, { useEffect, useMemo, useState } from "react";
@@ -63,7 +63,8 @@ const CommunityActivities = () => {
               icon_style="fs-3 text-primary"
               actions={[
                 new ExportCardAction(exportQuery, EXPORT_USERS_ENDPOINT),
-                new FilterCardAction("communities-activities-list-filter", showFilter, setShowFilter)
+                new FilterCardAction("communities-activities-list-filter", showFilter, setShowFilter),
+                new CreateCardAction('/activities', 'manage-activities'),
               ]}
             />
             <KTCardBody>

@@ -18,6 +18,7 @@ export const getCommunities = (query: String): Promise<CommunityQueryResponse> =
 }
 
 export const getAllCommunities = (): Promise<CommunityQueryResponse> => {
+  console.log('yo?');
   return axios
     .get(`${ENDPOINT}/all`)
     .then((response: AxiosResponse<CommunityQueryResponse>) => response.data)
