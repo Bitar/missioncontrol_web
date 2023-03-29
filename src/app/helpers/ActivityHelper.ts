@@ -36,8 +36,11 @@ export const formatActivityStatus = (statusId: number) => {
   } else if (statusId === 9) {
     status = 'Generating Playoff'
     color = 'info'
-  } else {
+  } else if (statusId === 4) {
     status = 'Closed'
+    color = 'danger'
+  } else {
+    status = 'Cancelled'
     color = 'danger'
   }
 
@@ -76,27 +79,27 @@ export const formatMatchStatus = (statusId: number) => {
 export const createDateFrom = (timestamp: number) => {
   let UTCRegStartDate = moment(timestamp * 1000).utc(false)
   return moment()
-    .year(UTCRegStartDate.year())
-    .month(UTCRegStartDate.month())
-    .date(UTCRegStartDate.date())
-    .hour(UTCRegStartDate.hour())
-    .minute(UTCRegStartDate.minute())
-    .second(UTCRegStartDate.second())
+      .year(UTCRegStartDate.year())
+      .month(UTCRegStartDate.month())
+      .date(UTCRegStartDate.date())
+      .hour(UTCRegStartDate.hour())
+      .minute(UTCRegStartDate.minute())
+      .second(UTCRegStartDate.second())
 }
 
 export const getDateInUTC = (timestamp: number, tz?: string) => {
   return dayjs(new Date(timestamp * 1000))
-    .utc(false)
-    .tz(tz, true)
+      .utc(false)
+      .tz(tz, true)
 }
 
 export const activityRegistrationOnChange = (
-  e: any,
-  activityForm: ActivityForm | undefined,
-  setActivityForm: Dispatch<SetStateAction<ActivityForm>>,
-  setRegistrationValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
-  setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
-  setMatchPlayDisabledDate: Dispatch<SetStateAction<Date>>
+    e: any,
+    activityForm: ActivityForm | undefined,
+    setActivityForm: Dispatch<SetStateAction<ActivityForm>>,
+    setRegistrationValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
+    setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
+    setMatchPlayDisabledDate: Dispatch<SetStateAction<Date>>
 ) => {
   if (e) {
     const today = new Date()
@@ -109,23 +112,23 @@ export const activityRegistrationOnChange = (
       let endDate = dayjs(new Date(e[1]).setHours(0, 0)).utc(true).tz('utc').unix()
 
       updateData(
-        {
-          schedule: {
-            ...activityForm?.schedule,
-            ...{
-              registration_dates: {
-                ...activityForm?.schedule.registration_dates,
-                ...{start_date: startDate, end_date: endDate},
-              },
-              matchplay_dates: {
-                ...activityForm?.schedule.matchplay_dates,
-                ...{start_date: 0, end_date: 0},
+          {
+            schedule: {
+              ...activityForm?.schedule,
+              ...{
+                registration_dates: {
+                  ...activityForm?.schedule.registration_dates,
+                  ...{start_date: startDate, end_date: endDate},
+                },
+                matchplay_dates: {
+                  ...activityForm?.schedule.matchplay_dates,
+                  ...{start_date: 0, end_date: 0},
+                },
               },
             },
           },
-        },
-        setActivityForm,
-        activityForm
+          setActivityForm,
+          activityForm
       )
 
       let endDateDate = new Date(e[1])
@@ -140,14 +143,14 @@ export const activityRegistrationOnChange = (
 }
 
 export const updateActivityMatchPlayDates = (
-  activityForm: ActivityForm | undefined,
-  setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>
+    activityForm: ActivityForm | undefined,
+    setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>
 ) => {
   if (
-    activityForm?.schedule?.matchplay_dates?.start_date &&
-    activityForm?.schedule?.matchplay_dates?.end_date &&
-    activityForm?.schedule?.matchplay_dates?.start_date > 0 &&
-    activityForm?.schedule?.matchplay_dates?.end_date > 0
+      activityForm?.schedule?.matchplay_dates?.start_date &&
+      activityForm?.schedule?.matchplay_dates?.end_date &&
+      activityForm?.schedule?.matchplay_dates?.start_date > 0 &&
+      activityForm?.schedule?.matchplay_dates?.end_date > 0
   ) {
     let startDate = createDateFrom(activityForm?.schedule?.matchplay_dates?.start_date).toDate()
     let endDate = createDateFrom(activityForm?.schedule?.matchplay_dates?.end_date).toDate()
@@ -158,15 +161,15 @@ export const updateActivityMatchPlayDates = (
 }
 
 export const updateActivityRegistrationDates = (
-  activityForm: ActivityForm | undefined,
-  setRegistrationValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
-  setMatchPlayDisabledDate: Dispatch<SetStateAction<Date>>
+    activityForm: ActivityForm | undefined,
+    setRegistrationValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
+    setMatchPlayDisabledDate: Dispatch<SetStateAction<Date>>
 ) => {
   if (
-    activityForm?.schedule?.registration_dates?.start_date &&
-    activityForm?.schedule?.registration_dates?.end_date &&
-    activityForm?.schedule?.registration_dates?.start_date > 0 &&
-    activityForm?.schedule?.registration_dates?.end_date > 0
+      activityForm?.schedule?.registration_dates?.start_date &&
+      activityForm?.schedule?.registration_dates?.end_date &&
+      activityForm?.schedule?.registration_dates?.start_date > 0 &&
+      activityForm?.schedule?.registration_dates?.end_date > 0
   ) {
     let startDate = createDateFrom(activityForm?.schedule?.registration_dates?.start_date).toDate()
     let endDate = createDateFrom(activityForm?.schedule?.registration_dates?.end_date).toDate()
@@ -182,9 +185,9 @@ export const updateActivityRegistrationDates = (
 }
 
 export const getLeagueUpdateObj = (
-  startDate: Date,
-  endDate: Date,
-  activityForm: ActivityForm | undefined
+    startDate: Date,
+    endDate: Date,
+    activityForm: ActivityForm | undefined
 ) => {
   let updateObject
 
@@ -230,10 +233,10 @@ export const getLeagueUpdateObj = (
 }
 
 export const getDaysNeedRanged = (
-  startDate: Date,
-  endDate: Date,
-  activityForm: ActivityForm | undefined,
-  teamCount: number
+    startDate: Date,
+    endDate: Date,
+    activityForm: ActivityForm | undefined,
+    teamCount: number
 ) => {
   let daysOfRange
   let daysNeeded
@@ -253,18 +256,18 @@ export const getDaysNeedRanged = (
 }
 
 export const getTournamentUpdateObj = (
-  startDate: Date,
-  endDate: Date,
-  activityForm: ActivityForm | undefined
+    startDate: Date,
+    endDate: Date,
+    activityForm: ActivityForm | undefined
 ) => {
   let updateObject
   let errors = false
 
   let {daysNeeded, daysOfRange} = getDaysNeedRanged(
-    startDate,
-    endDate,
-    activityForm,
-    activityForm?.team?.max!
+      startDate,
+      endDate,
+      activityForm,
+      activityForm?.team?.max!
   )
 
   let startDateTimestamp = Math.floor(startDate.getTime() / 1000)
@@ -318,11 +321,11 @@ export function getDaysBetweenDates(startDate: Date, endDate: Date): number {
 }
 
 export const activityMatchPlayOnChange = (
-  e: any,
-  activityForm: ActivityForm | undefined,
-  setActivityForm: Dispatch<SetStateAction<ActivityForm>>,
-  setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
-  setShowErrors: Dispatch<SetStateAction<boolean>>
+    e: any,
+    activityForm: ActivityForm | undefined,
+    setActivityForm: Dispatch<SetStateAction<ActivityForm>>,
+    setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
+    setShowErrors: Dispatch<SetStateAction<boolean>>
 ) => {
   if (e) {
     let startDate = new Date(e[0])
@@ -347,9 +350,9 @@ export const activityMatchPlayOnChange = (
 }
 
 export const isValidTournament = (
-  e: any,
-  activityForm: ActivityForm | undefined,
-  setShowErrors: Dispatch<SetStateAction<boolean>>
+    e: any,
+    activityForm: ActivityForm | undefined,
+    setShowErrors: Dispatch<SetStateAction<boolean>>
 ) => {
   if (activityForm?.type_id === 2 && activityForm?.team?.max) {
     let startDate = new Date(e[0])

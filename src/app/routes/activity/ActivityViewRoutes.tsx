@@ -1,6 +1,6 @@
 import React, {FC, lazy, useEffect, useState} from 'react'
 import {Activity} from '../../models/activity/Activity'
-import {Outlet, Route, Routes, useNavigate, useParams} from 'react-router-dom'
+import {Navigate, Outlet, Route, Routes, useNavigate, useParams} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../layout/core'
 import {
   getActivityById,
@@ -162,7 +162,7 @@ const ActivityViewRoutes: FC = () => {
             element={
               <SuspenseView>
                 <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>
-                {activity && <ActivitySettings />}
+                {activity && activity?.status !== 4 && activity?.status !== 10 ? <ActivitySettings /> : <Navigate to={'/error/404'}/>}
               </SuspenseView>
             }
           />
