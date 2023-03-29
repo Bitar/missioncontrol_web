@@ -3,6 +3,7 @@ import {Tab} from 'react-bootstrap'
 import Nav from 'react-bootstrap/Nav'
 import React, {FC} from 'react'
 import {RescheduleSettings} from '../partials/RescheduleSettings'
+import { ScoreSettings } from '../partials/ScoreSettings'
 
 export const MatchSettings: FC = () => {
   const settingsNav = [
@@ -46,7 +47,9 @@ export const MatchSettings: FC = () => {
                 <Tab.Pane eventKey='settingsNav-0'>
                   <RescheduleSettings />
                 </Tab.Pane>
-                <Tab.Pane eventKey='settingsNav-1'>{/*<ScoreSettings />*/}</Tab.Pane>
+                <Tab.Pane eventKey='settingsNav-1'>
+                  <ScoreSettings />
+                </Tab.Pane>
               </Tab.Content>
             </div>
           </div>

@@ -11,3 +11,14 @@ export const getHome = (query?: string): Promise<DashboardStuff | undefined> => 
     .then((response: AxiosResponse<Response<DashboardStuff>>) => response.data)
     .then((response: Response<DashboardStuff>) => response.data)
 }
+
+
+
+export const getCommunityDashboard = (id: number, query?: string): Promise<DashboardStuff | undefined> => {
+  let url = `${API_URL}/communities/${id}/dashboard`;
+
+  return axios
+      .get(url)
+      .then((response: AxiosResponse<Response<DashboardStuff>>) => response.data)
+      .then((response: Response<DashboardStuff>) => response.data)
+}

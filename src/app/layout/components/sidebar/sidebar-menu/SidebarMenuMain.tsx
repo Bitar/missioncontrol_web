@@ -5,9 +5,11 @@ import { SidebarMenuItem } from "./SidebarMenuItem";
 import { useAuth } from "../../../../modules/auth";
 import { Restricted } from "../../../../modules/auth/core/AuthPermission";
 import { SidebarMenuItemWithSub } from "./SidebarMenuItemWithSub";
+import { isSuperAdmin } from "../../../../sections/iam/user/core/User";
 
 const SidebarMenuMain = () => {
   const intl = useIntl();
+  const { currentUser } = useAuth();
 
   return (
     <>
@@ -21,9 +23,11 @@ const SidebarMenuMain = () => {
         <SidebarMenuItem to="/communities" title="Communities" fontIcon="fa-people-group" />
       </Restricted>
 
-      <Restricted to="view-activities">
-        <SidebarMenuItem to="/activities" title="Activities" fontIcon="fa-gamepad" />
-      </Restricted>
+      {currentUser && isSuperAdmin(currentUser) &&
+        <Restricted to="view-activities">
+          <SidebarMenuItem to="/activities" title="Activities" fontIcon="fa-gamepad" />
+        </Restricted>
+      }
 
       <Restricted to="view-games">
         <SidebarMenuItem to="/games" title="Games" fontIcon="fa-chess-pawn" />

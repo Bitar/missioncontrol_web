@@ -44,7 +44,7 @@ const UsersByDay: React.FC<Props> = ({className, values, dates}) => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [chartRef, mode])
+  }, [chartRef, mode, values])
 
   return (
     <div className={`card ${className}`}>
