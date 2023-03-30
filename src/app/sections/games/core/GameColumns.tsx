@@ -8,7 +8,7 @@ import {Platform} from '../../../models/game/Platform'
 import {Link} from 'react-router-dom'
 import {useAccessControl} from '../../../modules/auth/core/AuthPermission'
 
-const gamesColumns: ReadonlyArray<Column<Game>> = [
+const GamesColumns: ReadonlyArray<Column<Game>> = [
   {
     Header: (props) => <CustomHeader tableProps={props} title='Title' className='min-w-125px' />,
     id: 'title',
@@ -68,4 +68,4 @@ const gamesColumns: ReadonlyArray<Column<Game>> = [
   },
 ]
 
-export {gamesColumns}
+export default GamesColumns

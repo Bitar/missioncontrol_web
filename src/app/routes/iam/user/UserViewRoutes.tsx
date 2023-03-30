@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react'
-import {getUserById} from '../core/UserRequests'
+import {getUserById} from '../../../sections/iam/user/core/Requests'
 import {Outlet, Route, Routes, useParams} from 'react-router-dom'
-import {User} from '../core/User'
-import {UserInfo} from '../partials/UserInfo'
-import {PageLink, PageTitle} from '../../../../layout/core'
-import {UserSettings} from './UserSettings'
-import {UserActivities} from '../partials/UserActivities'
-import {UserTeams} from '../partials/UserTeams'
-import {SuspenseView} from '../../../../layout/SuspenseView'
-import {UserContext} from '../core/UserContext'
-import {Restricted} from '../../../../modules/auth/core/AuthPermission'
+import {User} from '../../../models/iam/User'
+import {UserInfo} from '../../../sections/iam/user/partials/UserInfo'
+import {PageLink, PageTitle} from '../../../layout/core'
+import {UserActivities} from '../../../sections/iam/user/partials/UserActivities'
+import {UserTeams} from '../../../sections/iam/user/partials/UserTeams'
+import {SuspenseView} from '../../../layout/SuspenseView'
+import {UserContext} from '../../../sections/iam/user/core/UserContext'
+import {Restricted} from '../../../modules/auth/core/AuthPermission'
+import UserSettings from '../../../sections/iam/user/pages/Settings'
 
-const UserView: React.FC = () => {
+const UserViewRoutes: React.FC = () => {
   const [user, setUser] = useState<User | undefined>()
   const params = useParams()
 
@@ -113,4 +113,4 @@ const UserView: React.FC = () => {
   )
 }
 
-export {UserView}
+export {UserViewRoutes}

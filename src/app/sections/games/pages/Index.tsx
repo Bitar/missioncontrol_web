@@ -10,7 +10,7 @@ import {EXPORT_ENDPOINT, getGames} from '../core/GameRequests'
 import {ListViewProvider} from '../../../modules/table/ListViewProvider'
 import {GameFilters} from '../partials/GameFilters'
 import {KTCardHeader} from '../../../helpers/components'
-import {gamesColumns} from '../core/GameColumns'
+import GamesColumns from '../core/GameColumns'
 import {McTable} from '../../../components/McTable'
 import {
   CreateCardAction,
@@ -55,7 +55,7 @@ const GameTable = () => {
   const games = useQueryResponseData()
   const isLoading = useQueryResponseLoading()
   const data = useMemo(() => games, [games])
-  const columns = useMemo(() => gamesColumns, [])
+  const columns = useMemo(() => GamesColumns, [])
 
   return (
     <McTable

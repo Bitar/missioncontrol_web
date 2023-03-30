@@ -1,5 +1,5 @@
 import {createContext, Dispatch, SetStateAction, useContext} from 'react'
-import {User} from '../../iam/user/core/User'
+import {User} from '../../../models/iam/User'
 import {Community} from '../../../models/community/Community'
 
 type CommunityContextProps = {
@@ -17,7 +17,7 @@ const initCommunityContextPropsState = {
   updateCommunity: () => {},
   members: undefined,
   setMembers: () => {},
-  link: ""
+  link: '',
 }
 
 export const CommunityContext = createContext<CommunityContextProps>(initCommunityContextPropsState)

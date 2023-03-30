@@ -5,7 +5,7 @@ import {ActionsCell} from '../../../../modules/table/columns/ActionsCell'
 import {QUERIES} from '../../../../../_metronic/helpers'
 import {Permission} from '../../../../models/iam/Permission'
 
-const permissionColumns: ReadonlyArray<Column<Permission>> = [
+const PermissionColumns: ReadonlyArray<Column<Permission>> = [
   {
     Header: (props) => <CustomHeader tableProps={props} title='Name' className='min-w-125px' />,
     id: 'name',
@@ -27,4 +27,4 @@ const permissionColumns: ReadonlyArray<Column<Permission>> = [
   },
 ]
 
-export {permissionColumns}
+export default PermissionColumns

@@ -27,7 +27,9 @@ const BillingPlan: FC<Props> = ({plans, setPlan}) => {
           <div className='mb-13 text-center'>
             <h1 className='fs-2hx fw-bolder mb-5'>Choose Your Tier</h1>
             <div className='text-gray-400 fw-bold fs-5'>
-              Pick the plan that suits your community's needs. Each plan includes a recurring software fee, a one-time launch fee, and a transaction fee on any paid activities that your community hosts
+              Pick the plan that suits your community's needs. Each plan includes a recurring
+              software fee, a one-time launch fee, and a transaction fee on any paid activities that
+              your community hosts
             </div>
           </div>
 

@@ -10,7 +10,7 @@ import {NewGameModeWrapper} from './NewGameModeWrapper'
 import {deleteObject} from '../../../requests'
 import {useAccessControl} from '../../../modules/auth/core/AuthPermission'
 import {useAuth} from '../../../modules/auth'
-import {isCommunityAdmin, isSuperAdmin} from '../../iam/user/core/User'
+import {isCommunityAdmin, isSuperAdmin} from '../../../models/iam/User'
 
 const GameModes: FC = () => {
   const [showManage, setShowManage] = useState<boolean>(false)
@@ -115,7 +115,7 @@ const GameModes: FC = () => {
                   <div className='mb-5'>
                     <i className='fa fa-plus-circle text-light-success fs-3x'></i>
                   </div>
-                  <div className='fs-5 fw-bolder mb-2'> Add a new Game Mode</div>
+                  <div className='fs-5 fw-bolder mb-2'>Add a new Game Mode</div>
                 </span>
               </KTCardBody>
             </div>

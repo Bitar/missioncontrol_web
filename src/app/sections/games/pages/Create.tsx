@@ -95,4 +95,4 @@ const GameCreate = () => {
   )
 }
 
-export {GameCreate}
+export default GameCreate

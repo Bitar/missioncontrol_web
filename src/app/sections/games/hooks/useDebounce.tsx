@@ -9,7 +9,6 @@ function useDebounce(value: any, delay: number) {
       setDebouncedValue(value) //setDebouncedValue to value
     }, delay) //setTimeout to delay
 
-    //return function
     //will clear timeout if value changes
     //when we get to end of the delay and if val not changed we will set value
     return () => {

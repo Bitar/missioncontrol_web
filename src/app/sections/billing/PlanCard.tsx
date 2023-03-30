@@ -45,8 +45,9 @@ const PlanCard: FC<React.PropsWithChildren<Props>> = ({plan, selectPlan, communi
                       <span className='fs-7 fw-bold opacity-50'>
                         / <span data-kt-element='period'>year</span>
                       </span>
-                      {plan?.id && plan?.id > 1 && <span className='text-danger ms-2 fs-2'>-10%</span>}
-
+                      {plan?.id && plan?.id > 1 && (
+                        <span className='text-danger ms-2 fs-2'>-10%</span>
+                      )}
                     </span>
                   )}
                 </div>

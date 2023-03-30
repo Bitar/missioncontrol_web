@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from 'axios'
 import {Response} from '../../../../../_metronic/helpers'
-import {User, UserQueryResponse} from './User'
+import {User, UserQueryResponse} from '../../../../models/iam/User'
 import {ActivityQueryResponse} from '../../../../models/activity/Activity'
 import {TeamQueryResponse} from '../../../../models/squad/Team'
 
@@ -9,7 +9,7 @@ const ENDPOINT = `${API_URL}/iam/users`
 
 export const EXPORT_ENDPOINT = `${API_URL}/export/users`
 
-const getUsers = (query: string): Promise<UserQueryResponse> => {
+export const getUsers = (query: string): Promise<UserQueryResponse> => {
   let url = `${ENDPOINT}`
 
   if (query) {
@@ -19,7 +19,7 @@ const getUsers = (query: string): Promise<UserQueryResponse> => {
   return axios.get(`${url}`).then((d: AxiosResponse<UserQueryResponse>) => d.data)
 }
 
-const getUserById = (id: any, query?: string): Promise<User | undefined> => {
+export const getUserById = (id: any, query?: string): Promise<User | undefined> => {
   let url = `${ENDPOINT}/${id}`
 
   if (query) {
@@ -31,21 +31,21 @@ const getUserById = (id: any, query?: string): Promise<User | undefined> => {
     .then((response: Response<User>) => response.data)
 }
 
-const createUser = (formData: FormData): Promise<User | undefined> => {
+export const createUser = (formData: FormData): Promise<User | undefined> => {
   return axios
     .post(`${ENDPOINT}`, formData)
     .then((response: AxiosResponse<Response<User>>) => response.data)
     .then((response: Response<User>) => response.data)
 }
 
-const updateUser = (id: any, formData: FormData): Promise<User | undefined> => {
+export const updateUser = (id: any, formData: FormData): Promise<User | undefined> => {
   return axios
     .post(`${ENDPOINT}/${id}`, formData)
     .then((response: AxiosResponse<Response<User>>) => response.data)
     .then((response: Response<User>) => response.data)
 }
 
-const getUserActivities = (id: any, query?: string): Promise<ActivityQueryResponse> => {
+export const getUserActivities = (id: any, query?: string): Promise<ActivityQueryResponse> => {
   let url = `${ENDPOINT}/${id}/activities`
 
   if (query) {
@@ -55,7 +55,7 @@ const getUserActivities = (id: any, query?: string): Promise<ActivityQueryRespon
   return axios.get(`${url}`).then((d: AxiosResponse<ActivityQueryResponse>) => d.data)
 }
 
-const getUserTeams = (id: any, query?: string): Promise<TeamQueryResponse> => {
+export const getUserTeams = (id: any, query?: string): Promise<TeamQueryResponse> => {
   let url = `${ENDPOINT}/${id}/teams`
 
   if (query) {
@@ -64,5 +64,3 @@ const getUserTeams = (id: any, query?: string): Promise<TeamQueryResponse> => {
 
   return axios.get(`${url}`).then((d: AxiosResponse<TeamQueryResponse>) => d.data)
 }
-
-export {getUsers, getUserById, createUser, updateUser, getUserActivities, getUserTeams}

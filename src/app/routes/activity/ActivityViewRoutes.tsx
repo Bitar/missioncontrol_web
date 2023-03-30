@@ -162,7 +162,11 @@ const ActivityViewRoutes: FC = () => {
             element={
               <SuspenseView>
                 <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>
-                {activity && activity?.status !== 4 && activity?.status !== 10 ? <ActivitySettings /> : <Navigate to={'/error/404'}/>}
+                {activity && activity?.status !== 4 && activity?.status !== 10 ? (
+                  <ActivitySettings />
+                ) : (
+                  <Navigate to={'/error/404'} />
+                )}
               </SuspenseView>
             }
           />

@@ -45,7 +45,7 @@ const UserInfo: FC = () => {
   return (
     <>
       <KTCard className='mb-5 mb-xl-10 overflow-hidden'>
-        <KTCardBody>
+        <KTCardBody className='pt-9 pb-0'>
           <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
             <div className='me-7 mb-4'>
               <div className='symbol symbol-100px symbol-lg-160px symbol-fixed position-relative'>
@@ -93,26 +93,17 @@ const UserInfo: FC = () => {
               </div>
             </div>
           </div>
-        </KTCardBody>
-        <KTCardBody className='p-0 rounded-3 rounded-bottom'>
-          <ul className='nav nav-fill nav-line-tabs nav-line-tabs-2x fs-5 fw-bolder flex-nowrap text-center border-transparent'>
-            {links.map(
-              (link, index) =>
-                ((link?.isManage && userCan(managePermission)) || !link?.isManage) && (
-                  <li className='nav-item' key={index}>
-                    <Link
-                      className={clsx(
-                        `m-0 nav-link bg-active-mc-secondary text-active-white border-active-mc-secondary border-hover-mc-secondary py-5 `,
-                        {
-                          active: location.pathname === link.link,
-                        }
-                      )}
-                      to={link.link}>
-                      {link.text}
-                    </Link>
-                  </li>
-                )
-            )}
+          <div className='separator mt-10' />
+          <ul className='mc-nav nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder'>
+            {links?.map((link, index) => (
+              <li className='nav-item' key={index}>
+                <Link
+                  className={clsx(`nav-link py-5 me-6`, {active: location.pathname === link.link})}
+                  to={link.link}>
+                  {link.text}
+                </Link>
+              </li>
+            ))}
           </ul>
         </KTCardBody>
       </KTCard>

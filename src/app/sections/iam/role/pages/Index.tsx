@@ -6,7 +6,7 @@ import {
   useQueryResponseData,
   useQueryResponseLoading,
 } from '../../../../modules/table/QueryResponseProvider'
-import {getRoles} from '../core/RoleRequests'
+import {getRoles} from '../core/Requests'
 import {ListViewProvider} from '../../../../modules/table/ListViewProvider'
 import {KTCardHeader} from '../../../../helpers/components'
 import {useMcApp} from '../../../../modules/general/McApp'
@@ -14,7 +14,7 @@ import {generatePageTitle} from '../../../../helpers/pageTitleGenerator'
 import {Sections} from '../../../../helpers/sections'
 import {PageTypes} from '../../../../helpers/variables'
 import {CreateCardAction} from '../../../../components/misc/CardAction'
-import {rolesColumns} from '../core/RoleColumns'
+import RolesColumns from '../core/RolesColumns'
 import {McTable} from '../../../../components/McTable'
 
 const RoleIndex = () => {
@@ -52,7 +52,7 @@ const RoleTable = () => {
   const roles = useQueryResponseData()
   const isLoading = useQueryResponseLoading()
   const data = useMemo(() => roles, [roles])
-  const columns = useMemo(() => rolesColumns, [])
+  const columns = useMemo(() => RolesColumns, [])
 
   return (
     <McTable

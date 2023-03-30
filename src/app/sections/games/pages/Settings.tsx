@@ -89,4 +89,4 @@ const GameSettings: FC = () => {
   )
 }
 
-export {GameSettings}
+export default GameSettings

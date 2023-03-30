@@ -6,7 +6,7 @@ import {Game} from '../game/Game'
 import * as Yup from 'yup'
 import {updateData} from '../../helpers/form/FormHelper'
 import {Dispatch, SetStateAction} from 'react'
-import {User} from '../../sections/iam/user/core/User'
+import {User} from '../iam/User'
 import {Subscription} from '../billing/Subscription'
 
 export const communityCreateWizardSchema = [

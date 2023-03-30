@@ -1,9 +1,9 @@
 import {Route, Routes} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../layout/core'
 import React from 'react'
-import PermissionIndex from '../../sections/iam/permission/pages/PermissionIndex'
-import {PermissionCreate} from '../../sections/iam/permission/pages/PermissionCreate'
-import {PermissionEdit} from '../../sections/iam/permission/pages/PermissionEdit'
+import PermissionIndex from '../../sections/iam/permission/pages/Index'
+import PermissionCreate from '../../sections/iam/permission/pages/Create'
+import PermissionEdit from '../../sections/iam/permission/pages/Edit'
 import {SuspenseView} from '../../layout/SuspenseView'
 
 const permissionsBreadCrumbs: Array<PageLink> = [

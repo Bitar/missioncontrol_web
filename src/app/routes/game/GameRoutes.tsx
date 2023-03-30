@@ -1,9 +1,9 @@
 import React, {FC} from 'react'
 import {PageLink, PageTitle} from '../../layout/core'
 import {Route, Routes} from 'react-router-dom'
-import GameIndex from '../../sections/games/pages/GameIndex'
-import {GameCreate} from '../../sections/games/pages/GameCreate'
-import {GameView} from '../../sections/games/pages/GameView'
+import GameIndex from '../../sections/games/pages/Index'
+import GameCreate from '../../sections/games/pages/Create'
+import {GameViewRoutes} from '../../models/game/GameViewRoutes'
 import {SuspenseView} from '../../components/misc/SuspenseView'
 
 const gameBreadCrumbs: Array<PageLink> = [
@@ -47,7 +47,7 @@ const GameRoutes: FC = () => {
         element={
           <SuspenseView>
             <PageTitle breadcrumbs={gameBreadCrumbs}>{'View Game'}</PageTitle>
-            <GameView />
+            <GameViewRoutes />
           </SuspenseView>
         }
       />

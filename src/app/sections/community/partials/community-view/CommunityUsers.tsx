@@ -76,7 +76,7 @@ const CommunityUsers: FC = () => {
     </QueryRequestProvider>
   ) : (
     <div></div>
-  );
+  )
 }
 
 export {CommunityUsers}

@@ -2,7 +2,7 @@ import {ID, Response} from '../../../helpers/crud-helper/models'
 import {Round} from './Round'
 import {Team} from '../../squad/Team'
 import {Activity} from '../Activity'
-import {User} from '../../../sections/iam/user/core/User'
+import {User} from '../../iam/User'
 import {TimeZone} from '../../misc/TimeZone'
 
 export type NewMatch = {

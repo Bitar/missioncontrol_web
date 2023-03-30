@@ -1,18 +1,18 @@
 import {useQueryRequest} from '../../../modules/table/QueryRequestProvider'
-import React, { FC, useEffect, useState } from "react";
+import React, {FC, useEffect, useState} from 'react'
 import {initialQueryState} from '../../../helpers/crud-helper/models'
 import {updateData} from '../../../helpers/form/FormHelper'
 import {KTCardBody} from '../../../helpers/components'
 import {Field, Form, Formik} from 'formik'
 import {Col, Collapse, Row} from 'react-bootstrap'
 import {createFilterQueryParam} from '../../../helpers/requests'
-import FilterFormFooter from "../../../components/form/FilterFormFooter";
+import FilterFormFooter from '../../../components/form/FilterFormFooter'
 
 const initActivityMembersFilter = {
   team_name: '',
   first_name: '',
   last_name: '',
-  email: ''
+  email: '',
 }
 
 type ActivityMembersFilterObj = {

@@ -1,5 +1,5 @@
 import {Response} from '../../../_metronic/helpers'
-import {User} from '../../sections/iam/user/core/User'
+import {User} from '../iam/User'
 
 export type Team = {
   id?: number

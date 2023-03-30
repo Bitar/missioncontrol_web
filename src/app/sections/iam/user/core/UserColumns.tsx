@@ -3,7 +3,7 @@ import {TextCell} from '../../../../modules/table/columns/TextCell'
 import {CustomHeader} from '../../../../modules/table/columns/CustomHeader'
 import {ActionsCell} from '../../../../modules/table/columns/ActionsCell'
 import {QUERIES} from '../../../../../_metronic/helpers'
-import {User} from './User'
+import {User} from '../../../../models/iam/User'
 import {Role} from '../../../../models/iam/Role'
 import {TextImageCell} from '../../../../modules/table/columns/TextImageCell'
 import dayjs from 'dayjs'
@@ -11,7 +11,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat'
 import {useAccessControl} from '../../../../modules/auth/core/AuthPermission'
 
 dayjs.extend(localizedFormat)
-const usersColumns: ReadonlyArray<Column<User>> = [
+const UsersColumns: ReadonlyArray<Column<User>> = [
   {
     Header: (props) => <CustomHeader tableProps={props} title='Name' className='min-w-125px' />,
     id: 'name',
@@ -59,4 +59,4 @@ const usersColumns: ReadonlyArray<Column<User>> = [
   },
 ]
 
-export {usersColumns}
+export default UsersColumns

@@ -2,11 +2,11 @@ import React, {FC, useEffect, useState} from 'react'
 import {Role, RoleForm, roleFormInitial, roleSchema} from '../../../../models/iam/Role'
 import {useNavigate, useParams} from 'react-router-dom'
 import {ErrorMessage, Field, Form, Formik} from 'formik'
-import {getRole, updateRole} from '../core/RoleRequests'
+import {getRole, updateRole} from '../core/Requests'
 import {KTCard, KTCardBody, KTCardFooter, KTCardHeader} from '../../../../helpers/components'
 import {jsonToFormData} from '../../../../helpers/form/FormHelper'
 import {Permission} from '../../../../models/iam/Permission'
-import {getAllPermissions} from '../../permission/core/PermissionRequests'
+import {getAllPermissions} from '../../permission/core/Requests'
 import axios from 'axios'
 import {extractErrors} from '../../../../helpers/requests'
 import {GenericErrorMessage, genericOnChangeHandler} from '../../../../helpers/form'
@@ -159,4 +159,4 @@ const RoleEdit: FC = () => {
   )
 }
 
-export {RoleEdit}
+export default RoleEdit

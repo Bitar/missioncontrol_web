@@ -4,7 +4,7 @@ import {Activity, ActivityQueryResponse} from '../../../../models/activity/Activ
 import {Announcement} from '../../../../models/announcement/Announcements'
 import {ChatMessage, ChatMessageQueryResponse} from '../../../../models/chat/ChatMessage'
 import {TeamQueryResponse} from '../../../../models/squad/Team'
-import {UserQueryResponse} from '../../../iam/user/core/User'
+import {UserQueryResponse} from '../../../../models/iam/User'
 
 const API_URL = process.env.REACT_APP_API_URL
 const ENDPOINT = `${API_URL}/activities`

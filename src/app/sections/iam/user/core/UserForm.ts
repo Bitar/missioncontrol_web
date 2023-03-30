@@ -1,5 +1,5 @@
-import {initialUserMeta, UserMeta} from './UserMeta'
-import {User} from './User'
+import {initialUserMeta, UserMeta} from '../../../../models/iam/UserMeta'
+import {User} from '../../../../models/iam/User'
 
 export type UserForm = {
   first_name: string
@@ -10,6 +10,17 @@ export type UserForm = {
   role_ids: number[]
   meta?: UserMeta
   community_admin?: number[]
+}
+
+export const defaultUserForm = {
+  first_name: '',
+  last_name: '',
+  password: '',
+  password_confirmation: '',
+  email: '',
+  role_ids: [],
+  meta: initialUserMeta(),
+  community_admin: [],
 }
 
 export const initUserForm = (user?: User) => {

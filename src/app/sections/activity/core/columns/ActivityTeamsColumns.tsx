@@ -3,7 +3,7 @@ import {CustomHeader} from '../../../../modules/table/columns/CustomHeader'
 import React from 'react'
 import {BadgeCell} from '../../../../modules/table/columns/BadgeCell'
 import {getTeamStatus, Team} from '../../../../models/squad/Team'
-import {User} from '../../../iam/user/core/User'
+import {User} from '../../../../models/iam/User'
 
 const ActivityTeamsColumns: ReadonlyArray<Column<Team>> = [
   {

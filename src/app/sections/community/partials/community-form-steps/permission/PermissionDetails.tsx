@@ -11,7 +11,7 @@ import {FormErrorAlert} from '../../../../../modules/errors/partials/FormErrorAl
 import toast from 'react-hot-toast'
 import {addCommunityPermissions} from '../../../core/CommunityPermissionRequests'
 import {useAuth} from '../../../../../modules/auth'
-import {isCommunityAdmin, isSuperAdmin} from '../../../../iam/user/core/User'
+import {isCommunityAdmin, isSuperAdmin} from '../../../../../models/iam/User'
 import {useQueryResponse} from '../../../../../modules/table/QueryResponseProvider'
 
 export const communityPermissionSchema = Yup.object().shape({

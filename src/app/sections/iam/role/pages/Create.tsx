@@ -3,9 +3,9 @@ import {ErrorMessage, Field, Form, Formik} from 'formik'
 import {KTCard, KTCardBody, KTCardFooter, KTCardHeader} from '../../../../helpers/components'
 import {useNavigate} from 'react-router-dom'
 import {Role, roleInitial, roleSchema} from '../../../../models/iam/Role'
-import {createRole} from '../core/RoleRequests'
+import {createRole} from '../core/Requests'
 import {jsonToFormData} from '../../../../helpers/form/FormHelper'
-import {getAllPermissions} from '../../permission/core/PermissionRequests'
+import {getAllPermissions} from '../../permission/core/Requests'
 import {Permission} from '../../../../models/iam/Permission'
 import Select from 'react-select'
 import {
@@ -18,7 +18,6 @@ import {generatePageTitle} from '../../../../helpers/pageTitleGenerator'
 import {Sections} from '../../../../helpers/sections'
 import {Actions, PageTypes, ToastType} from '../../../../helpers/variables'
 import McFormLabel from '../../../../components/form/McFormLabel'
-import {Col, Row} from 'react-bootstrap'
 import McFormFooter from '../../../../components/form/McFormFooter'
 import axios from 'axios'
 import {extractErrors} from '../../../../helpers/requests'
@@ -94,42 +93,38 @@ const RoleCreate = () => {
             <KTCardBody className='py-4'>
               <FormErrors errorMessages={formErrors} />
 
-              <Row className={'mb-7'}>
-                <Col>
-                  <McFormLabel text={'Name'} isRequired={true} />
+              <div className={'mb-7'}>
+                <McFormLabel text={'Name'} isRequired={true} />
 
-                  <Field
-                    type='text'
-                    name='name'
-                    placeholder='Name'
-                    className='form-control mb-3 mb-lg-0'
-                    autoComplete='off'
-                  />
+                <Field
+                  type='text'
+                  name='name'
+                  placeholder='Name'
+                  className='form-control mb-3 mb-lg-0'
+                  autoComplete='off'
+                />
 
-                  <div className='text-danger mt-2'>
-                    <ErrorMessage name='name' />
-                  </div>
-                </Col>
-              </Row>
-              <Row className={'mb-7'}>
-                <Col>
-                  <McFormLabel text={'Permissions'} isRequired={true} />
+                <div className='text-danger mt-2'>
+                  <ErrorMessage name='name' />
+                </div>
+              </div>
+              <div className={'mb-7'}>
+                <McFormLabel text={'Permissions'} isRequired={true} />
 
-                  <Select
-                    isMulti
-                    name='permissions'
-                    options={permissions}
-                    getOptionLabel={(permission) => permission.name}
-                    getOptionValue={(permission) => permission.id.toString()}
-                    onChange={multiSelectChangeHandler}
-                    placeholder='Select one or more permissions'
-                  />
+                <Select
+                  isMulti
+                  name='permissions'
+                  options={permissions}
+                  getOptionLabel={(permission) => permission.name}
+                  getOptionValue={(permission) => permission.id.toString()}
+                  onChange={multiSelectChangeHandler}
+                  placeholder='Select one or more permissions'
+                />
 
-                  <div className='text-danger mt-2'>
-                    <ErrorMessage name='permissions' />
-                  </div>
-                </Col>
-              </Row>
+                <div className='text-danger mt-2'>
+                  <ErrorMessage name='permissions' />
+                </div>
+              </div>
             </KTCardBody>
             <KTCardFooter>
               <McFormFooter cancelUrl={'/iam/roles'} />
@@ -141,4 +136,4 @@ const RoleCreate = () => {
   )
 }
 
-export {RoleCreate}
+export default RoleCreate

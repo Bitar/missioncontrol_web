@@ -2,15 +2,14 @@ import React, {useEffect, useState} from 'react'
 import {ErrorMessage, Field, Form, Formik} from 'formik'
 import {KTCard, KTCardBody, KTCardHeader} from '../../../../helpers/components'
 import {useNavigate} from 'react-router-dom'
-import {createUser} from '../core/UserRequests'
+import {createUser} from '../core/Requests'
 import {jsonToFormData, updateData} from '../../../../helpers/form/FormHelper'
-import {formOnChange, UserDetailsSchema} from '../core/User'
-import {AvatarImage} from '../components/AvatarImage'
+import {formOnChange, UserDetailsSchema} from '../../../../models/iam/User'
 import {FormAction} from '../../../../helpers/form/FormAction'
-import {initUserForm, UserForm} from '../core/UserForm'
+import {defaultUserForm, UserForm} from '../core/UserForm'
 import {Role} from '../../../../models/iam/Role'
 import {Community} from '../../../../models/community/Community'
-import {getRoles} from '../../role/core/RoleRequests'
+import {getAllRoles} from '../../role/core/Requests'
 import {getAllCommunities} from '../../../community/core/CommunityRequests'
 import Select from 'react-select'
 import {DatePicker} from 'rsuite'
@@ -21,12 +20,15 @@ import {generatePageTitle} from '../../../../helpers/pageTitleGenerator'
 import {Sections} from '../../../../helpers/sections'
 import {Actions, PageTypes, ToastType} from '../../../../helpers/variables'
 import {AlertMessageGenerator} from '../../../../helpers/AlertMessageGenerator'
+import {ImageCrop} from '../../../community/components/ImageCrop'
+import {toAbsoluteUrl} from '../../../../../_metronic/helpers'
 
 const UserCreate = () => {
   const mcApp = useMcApp()
-  const [userForm, setUserForm] = useState<UserForm>(initUserForm())
-  const [roles, setRoles] = useState<Role[]>()
 
+  const [userForm, setUserForm] = useState<UserForm>(defaultUserForm)
+
+  const [roles, setRoles] = useState<Role[]>()
   const [communities, setCommunities] = useState<Community[]>()
   const [dateOfBirthValue, setDateOfBirthValue] = useState<Date | null>()
 
@@ -45,10 +47,11 @@ const UserCreate = () => {
         })
         navigate('/iam/users/' + response?.id)
         setFormErrors([])
-        fns.setSubmitting(false)
       })
       .catch((error) => {
         setFormErrors(extractErrors(error))
+      })
+      .finally(() => {
         fns.setSubmitting(false)
       })
   }
@@ -75,7 +78,7 @@ const UserCreate = () => {
   useEffect(() => {
     mcApp.setPageTitle(generatePageTitle(Sections.IAM_USERS, PageTypes.CREATE))
 
-    getRoles().then((response) => {
+    getAllRoles().then((response) => {
       setRoles(response.data)
     })
 
@@ -97,6 +100,16 @@ const UserCreate = () => {
       setDateOfBirthValue(actualDate)
     }
   }, [userForm?.meta?.date_of_birth])
+
+  const updateImageStuff = (imageToSave?: any) => {
+    updateData(
+      {
+        meta: {...userForm?.meta, ...{image: imageToSave}},
+      },
+      setUserForm,
+      userForm
+    )
+  }
 
   return (
     <KTCard>
@@ -121,7 +134,24 @@ const UserCreate = () => {
                 <FormErrors errorMessages={formErrors} />
 
                 <div className='d-flex flex-column pt-5'>
-                  <AvatarImage user={userForm} setUser={setUserForm} />
+                  <div className='row mb-6'>
+                    <label className='col-lg-4 col-form-label required fw-bold fs-6'>Logo</label>
+                    <div className='col-lg-8 fv-row'>
+                      <ImageCrop
+                        defaultImage={toAbsoluteUrl('/media/svg/avatars/blank.svg')}
+                        isSquare={true}
+                        model={userForm}
+                        setModel={setUserForm}
+                        ratio={1}
+                        name='logo'
+                        updateStuff={updateImageStuff}
+                      />
+                      <div className='text-muted fw-semibold'>Recommended Image Size: Square</div>
+                      <div className='text-danger mt-2'>
+                        <ErrorMessage name='logo' />
+                      </div>
+                    </div>
+                  </div>
 
                   <div className='row mb-6'>
                     <label className='col-lg-4 col-form-label required fw-bold fs-6'>
@@ -283,7 +313,7 @@ const UserCreate = () => {
                         ranges={[]}
                         placement='topStart'
                         className='w-100'
-                        placeholder='Select Time'
+                        placeholder='Select Date'
                         showMeridian={true}
                         onChange={(value) => {
                           if (value) {
@@ -330,4 +360,4 @@ const UserCreate = () => {
   )
 }
 
-export {UserCreate}
+export default UserCreate

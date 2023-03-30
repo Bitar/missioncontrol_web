@@ -1,10 +1,10 @@
 import {Route, Routes} from 'react-router-dom'
-import UserIndex from '../../sections/iam/user/pages/UserIndex'
-import {UserCreate} from '../../sections/iam/user/pages/UserCreate'
-import {PageLink, PageTitle} from '../../layout/core'
+import UserCreate from '../../../sections/iam/user/pages/Create'
+import {PageLink, PageTitle} from '../../../layout/core'
 import React from 'react'
-import {UserView} from '../../sections/iam/user/pages/UserView'
-import {SuspenseView} from '../../layout/SuspenseView'
+import {UserViewRoutes} from './UserViewRoutes'
+import {SuspenseView} from '../../../layout/SuspenseView'
+import UserIndex from '../../../sections/iam/user/pages/Index'
 
 const usersBreadCrumbs: Array<PageLink> = [
   {
@@ -47,7 +47,7 @@ const UserRoutes: React.FC = () => {
         element={
           <SuspenseView>
             <PageTitle breadcrumbs={usersBreadCrumbs}>{'View User'}</PageTitle>
-            <UserView />
+            <UserViewRoutes />
           </SuspenseView>
         }
       />

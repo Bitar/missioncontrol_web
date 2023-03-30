@@ -1,6 +1,6 @@
 import {UserContext} from '../iam/user/core/UserContext'
 import {useAuth} from '../../modules/auth'
-import {UserSettings} from '../iam/user/pages/UserSettings'
+import UserSettings from '../iam/user/pages/Settings'
 import React from 'react'
 
 export const ProfilePage = () => {

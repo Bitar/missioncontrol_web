@@ -2,8 +2,8 @@ import axios, {AxiosResponse} from 'axios'
 import {Response} from '../../../../_metronic/helpers'
 import {Community, CommunityQueryResponse} from '../../../models/community/Community'
 import {ActivityQueryResponse} from '../../../models/activity/Activity'
-import {UserQueryResponse} from '../../iam/user/core/User'
-import { Announcement } from "../../../models/announcement/Announcements";
+import {UserQueryResponse} from '../../../models/iam/User'
+import {Announcement} from '../../../models/announcement/Announcements'
 
 const API_URL = process.env.REACT_APP_API_URL
 const ENDPOINT = `${API_URL}/communities`
@@ -76,9 +76,7 @@ export const updateCommunitySubscription = (
 export const getCommunityActivities = (id: any, query?: string): Promise<ActivityQueryResponse> => {
   let url = `${ENDPOINT}/${id}/activities?${query}`
 
-  return axios
-    .get(url)
-    .then((response: AxiosResponse<ActivityQueryResponse>) => response.data)
+  return axios.get(url).then((response: AxiosResponse<ActivityQueryResponse>) => response.data)
 }
 
 export const getCommunityUsers = (id: any, query?: string): Promise<UserQueryResponse> => {

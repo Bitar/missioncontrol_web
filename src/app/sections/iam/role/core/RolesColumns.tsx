@@ -6,7 +6,7 @@ import {QUERIES} from '../../../../../_metronic/helpers'
 import {Role} from '../../../../models/iam/Role'
 import {useAccessControl} from '../../../../modules/auth/core/AuthPermission'
 
-const rolesColumns: ReadonlyArray<Column<Role>> = [
+const RolesColumns: ReadonlyArray<Column<Role>> = [
   {
     Header: (props) => <CustomHeader tableProps={props} title='Name' className='min-w-125px' />,
     id: 'name',
@@ -33,4 +33,4 @@ const rolesColumns: ReadonlyArray<Column<Role>> = [
   },
 ]
 
-export {rolesColumns}
+export default RolesColumns

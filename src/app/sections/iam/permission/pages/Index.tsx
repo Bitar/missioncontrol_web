@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react'
 import {KTCard, KTCardBody, QUERIES} from '../../../../../_metronic/helpers'
 import {QueryRequestProvider} from '../../../../modules/table/QueryRequestProvider'
-import {getPermissions} from '../core/PermissionRequests'
+import {getPermissions} from '../core/Requests'
 import {
   QueryResponseProvider,
   useQueryResponseData,
@@ -9,7 +9,7 @@ import {
 } from '../../../../modules/table/QueryResponseProvider'
 import {ListViewProvider} from '../../../../modules/table/ListViewProvider'
 import {KTCardHeader} from '../../../../helpers/components'
-import {permissionColumns} from '../core/PermissionColumns'
+import PermissionColumns from '../core/PermissionColumns'
 import {McTable} from '../../../../components/McTable'
 
 const PermissionIndex = () => (
@@ -37,7 +37,7 @@ const PermissionTable = () => {
   const permissions = useQueryResponseData()
   const isLoading = useQueryResponseLoading()
   const data = useMemo(() => permissions, [permissions])
-  const columns = useMemo(() => permissionColumns, [])
+  const columns = useMemo(() => PermissionColumns, [])
 
   return (
     <McTable

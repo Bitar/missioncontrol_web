@@ -6,7 +6,7 @@ import {
   useQueryResponseData,
   useQueryResponseLoading,
 } from '../../../../modules/table/QueryResponseProvider'
-import {EXPORT_ENDPOINT, getUsers} from '../core/UserRequests'
+import {EXPORT_ENDPOINT, getUsers} from '../core/Requests'
 import {ListViewProvider} from '../../../../modules/table/ListViewProvider'
 import {KTCardHeader} from '../../../../helpers/components'
 import {PageTypes} from '../../../../helpers/variables'
@@ -19,7 +19,7 @@ import {
   ExportCardAction,
   FilterCardAction,
 } from '../../../../components/misc/CardAction'
-import {usersColumns} from '../core/UserColumns'
+import UsersColumns from '../core/UserColumns'
 import {McTable} from '../../../../components/McTable'
 
 const UserIndex = () => {
@@ -60,11 +60,12 @@ const UserIndex = () => {
   )
 }
 
+export default UserIndex
 const UserTable = () => {
   const users = useQueryResponseData()
   const isLoading = useQueryResponseLoading()
   const data = useMemo(() => users, [users])
-  const columns = useMemo(() => usersColumns, [])
+  const columns = useMemo(() => UsersColumns, [])
 
   return (
     <McTable
@@ -75,5 +76,3 @@ const UserTable = () => {
     />
   )
 }
-
-export default UserIndex

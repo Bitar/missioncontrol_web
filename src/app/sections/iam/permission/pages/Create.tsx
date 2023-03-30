@@ -3,7 +3,7 @@ import {Field, Form, Formik} from 'formik'
 import {Permission, permissionInitial, permissionSchema} from '../../../../models/iam/Permission'
 import {KTCard, KTCardBody} from '../../../../helpers/components'
 import clsx from 'clsx'
-import {createPermission} from '../core/PermissionRequests'
+import {createPermission} from '../core/Requests'
 import {useNavigate} from 'react-router-dom'
 import {submitForm, updateData} from '../../../../helpers/form/FormHelper'
 
@@ -95,4 +95,4 @@ const PermissionCreate = () => {
   )
 }
 
-export {PermissionCreate}
+export default PermissionCreate
