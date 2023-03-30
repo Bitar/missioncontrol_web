@@ -45,6 +45,8 @@ const PlanCard: FC<React.PropsWithChildren<Props>> = ({plan, selectPlan, communi
                       <span className='fs-7 fw-bold opacity-50'>
                         / <span data-kt-element='period'>year</span>
                       </span>
+                      {plan?.id && plan?.id > 1 && <span className='text-danger ms-2 fs-2'>-10%</span>}
+
                     </span>
                   )}
                 </div>
@@ -62,7 +64,7 @@ const PlanCard: FC<React.PropsWithChildren<Props>> = ({plan, selectPlan, communi
                   </thead>
                   <tbody className='fs-4'>
                     <tr>
-                      <td className='fw-bold'>Members</td>
+                      <td className='fw-bold'>Max Members</td>
                       <td className='text-end'>
                         {plan.max_members.toLocaleString()}
                         {plan.contact_type === 2 && '+'}

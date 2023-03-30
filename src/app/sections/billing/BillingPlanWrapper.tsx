@@ -18,11 +18,6 @@ const BillingPlan: FC<Props> = ({plans, setPlan}) => {
 
   const selectPlan = (plan: Plan) => {
     setPlan(plan)
-    if (plan.contact_type === 1) {
-      // setShowCheckout(true)
-    } else {
-      // Navigate to Contact Sales Page and set stuff in DB.
-    }
   }
 
   return (
@@ -30,9 +25,9 @@ const BillingPlan: FC<Props> = ({plans, setPlan}) => {
       <KTCardBody className='p-lg-17'>
         <div className='d-flex flex-column'>
           <div className='mb-13 text-center'>
-            <h1 className='fs-2hx fw-bolder mb-5'>Choose Your Plan</h1>
+            <h1 className='fs-2hx fw-bolder mb-5'>Choose Your Tier</h1>
             <div className='text-gray-400 fw-bold fs-5'>
-              Pick the plan that best fits your community
+              Pick the plan that suits your community's needs. Each plan includes a recurring software fee, a one-time launch fee, and a transaction fee on any paid activities that your community hosts
             </div>
           </div>
 
@@ -80,7 +75,7 @@ const BillingPlan: FC<Props> = ({plans, setPlan}) => {
               <PlanCard
                 key={plan.id}
                 plan={plan}
-                selectPlan={selectPlan}
+                selectPlan={setPlan}
                 communityForm={communityForm}
               />
             ))}
@@ -114,7 +109,7 @@ const BillingPlanWrapper: FC = () => {
 
         <KTCardBody>
           <div className='text-center mw-650px mx-auto'>
-            <h1 className='display-6'>Features</h1>
+            <h1 className='display-6'>Tier Features</h1>
           </div>
           <div className='table-responsive mt-20'>
             <table className='table table-rounded table-striped align-middle gy-7'>

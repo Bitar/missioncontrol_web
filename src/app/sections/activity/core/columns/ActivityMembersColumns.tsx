@@ -30,7 +30,11 @@ const ActivityMembersColumns: ReadonlyArray<Column<ActivityRegistration>> = [
   {
     Header: (props) => <CustomHeader tableProps={props} title='Team' />,
     id: 'team',
-    Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].team?.name} />,
+    Cell: ({...props}) => <TextImageCell
+        dImage={props.data[props.row.index].team?.image}
+        dText={props.data[props.row.index].team?.name}
+        size={'30'}
+    />,
   },
   {
     Header: (props) => <CustomHeader tableProps={props} title='Team Status' />,

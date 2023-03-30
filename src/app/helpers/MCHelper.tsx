@@ -1,9 +1,7 @@
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
-// import timezone from 'dayjs/plugin/timezone'
 
 dayjs.extend(utc)
-// dayjs.extend(timezone)
 
 export const calculateTeamScore = (match: any, team: any) => {
   let totalScore = 0
@@ -36,6 +34,5 @@ export function getColor(index: number): string {
     'secondary',
   ]
 
-  // const randomIndex = Math.floor(Math.random() * colors.length);
   return `${colors[index]}`
 }
