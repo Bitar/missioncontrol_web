@@ -42,7 +42,7 @@ const ChatInner: FC<Props> = ({isDrawer = false}) => {
   }
 
   const onEnterPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.keyCode === 13 && e.shiftKey === false) {
+    if (e.keyCode === 13 && !e.shiftKey) {
       e.preventDefault()
       sendMessage()
     }
