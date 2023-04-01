@@ -9,11 +9,11 @@ const ActivityChat: FC = () => {
 
   const [chat, setChat] = useState<ChatMessage[] | undefined>([])
 
-  // useEffect(() => {
-  //   getActivityChat(params.id).then((response) => {
-  //     setChat(response?.data?.reverse())
-  //   })
-  // }, [params.id])
+  useEffect(() => {
+    getActivityChat(params.id).then((response) => {
+      setChat(response?.data?.reverse())
+    })
+  }, [params.id])
 
   return (
     <div className='d-flex flex-column flex-lg-row'>

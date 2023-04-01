@@ -69,10 +69,9 @@ export function useChannels() {
 export function usePrivateChannels (authUserId: any) {
   const channels = useChannels()
   return useMemo(() => {
-    console.log(channels && channels.private("users." + authUserId))
     console.log(channels?.channel(`activity-${42}-chat`))
-    // return channels && channels.private("users." + authUserId)
-    return channels && channels.channel(`activity-${42}-chat`)
+    return channels && channels.private("users." + authUserId)
+    // return channels && channels.channel(`activity-${42}-chat`)
   }, [channels, authUserId])
 }
 
