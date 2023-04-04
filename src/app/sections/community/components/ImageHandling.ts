@@ -16,6 +16,7 @@ const createImage = (url: string): Promise<HTMLImageElement> => {
 }
 
 const getCroppedImg = async ({image, crop}: GetCroppedImgProps): Promise<string> => {
+  let imageType = image.type
   const reader = new FileReader()
   reader.readAsDataURL(image)
   return new Promise((resolve) => {
@@ -33,7 +34,7 @@ const getCroppedImg = async ({image, crop}: GetCroppedImgProps): Promise<string>
         ctx.drawImage(image, crop.x, crop.y, crop.width, crop.height, 0, 0, crop.width, crop.height)
       }
 
-      resolve(canvas.toDataURL('image/jpeg'))
+      resolve(canvas.toDataURL(`${imageType}`))
     }
   })
 }
