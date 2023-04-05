@@ -21,20 +21,22 @@ const ActivityStandingsColumns: ReadonlyArray<Column<ActivityStanding>> = [
     Header: (props) => <CustomHeader tableProps={props} title='P' />,
     id: 'matches',
     Cell: ({...props}) => (
-      <TextCell
-        dObject={props.data[props.row.index].score?.win + props.data[props.row.index].score?.lose}
-      />
+      <></>
+      // <TextCell
+      //   dObject={props.data[props.row.index].score?.win + props.data[props.row.index].score?.lose}
+      // />
     ),
   },
   {
     Header: (props) => <CustomHeader tableProps={props} title='W - L' />,
     id: 'record',
     Cell: ({...props}) => (
-      <TextCell
-        dObject={
-          props.data[props.row.index].score?.win + ' - ' + props.data[props.row.index].score?.lose
-        }
-      />
+      <></>
+      // <TextCell
+      //   dObject={
+      //     props.data[props.row.index].score?.win + ' - ' + props.data[props.row.index].score?.lose
+      //   }
+      // />
     ),
   },
 ]

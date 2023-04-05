@@ -20,7 +20,7 @@ const ActivityChatInner: FC = () => {
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
 
   useEffect(() => {
-    if(activity?.id) {
+    if (activity?.id) {
       getActivityChat(activity?.id).then((response) => {
         if (response.data) {
           setChatMessages(response?.data?.reverse());
@@ -40,7 +40,6 @@ const ActivityChatInner: FC = () => {
     let data = jsonToFormData(message);
     sendActivityChat(params.id, data).then((response) => {
       setMessage(initialChat());
-
     });
   };
 
@@ -56,23 +55,11 @@ const ActivityChatInner: FC = () => {
     if (channels) {
 
       channels.private("activity-36-chat").listen(".MessageSent", (e: any) => {
-        addMessage(e)
+        setChatMessages([...chatMessages, e]);
       });
 
-      // return () => {
-      //   channels.disconnect();
-      // };
     }
-  }, [channels]);
-
-  const addMessage = (chatMessage: ChatMessage) => {
-    console.log(chatMessages)
-    console.log(chatMessage)
-  }
-
-  useEffect(() => {
-    console.log(chatMessages)
-  }, [chatMessages])
+  }, [channels, chatMessages]);
 
   return (
     <div className="card-body" id={"kt_chat_messenger_body"}>
