@@ -103,11 +103,13 @@ const CommunityInfo: FC<Props> = ({ links }) => {
                     </div>
                   )}
 
-                  <div className="d-flex align-items-center text-gray-400 mb-2">
-                    <i className="fa-duotone fa-money-check-dollar me-1 fs-2"></i>
-                    <span className="me-1">Payment Status:</span>{" "}
-                    {getStatus(community?.subscription?.status)}
-                  </div>
+                  {community?.subscription?.plan?.id && community?.subscription?.plan?.id > 1 &&
+                    <div className="d-flex align-items-center text-gray-400 mb-2">
+                      <i className="fa-duotone fa-money-check-dollar me-1 fs-2"></i>
+                      <span className="me-1">Payment Status:</span>{" "}
+                      {getStatus(community?.subscription?.status)}
+                    </div>
+                  }
                 </div>
 
                 {community?.dynamic_link &&
