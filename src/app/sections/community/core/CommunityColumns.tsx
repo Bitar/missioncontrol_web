@@ -7,6 +7,7 @@ import {ActionsCell} from '../../../modules/table/columns/ActionsCell'
 import {TextImageCell} from '../../../modules/table/columns/TextImageCell'
 import React from 'react'
 import {communityStatus} from '../../../helpers/CommunityHelper'
+import {useAccessControl} from '../../../modules/auth/core/AuthPermission'
 
 const communitiesColumns: ReadonlyArray<Column<Community>> = [
   {
@@ -56,20 +57,21 @@ const communitiesColumns: ReadonlyArray<Column<Community>> = [
     ),
   },
   {
-    Header: (props) => (
-      <CustomHeader tableProps={props} title='Actions' className='text-end min-w-125px' />
-    ),
+    Header: (props) => <CustomHeader tableProps={props} title='Actions' className='min-w-125px' />,
     id: 'actions',
-    Cell: ({...props}) => (
-      <ActionsCell
-        id={props.data[props.row.index].id}
-        path={'communities'}
-        showView={true}
-        showEdit={false}
-        showDelete={false}
-        queryKey={QUERIES.COMMUNITIES_LIST}
-      />
-    ),
+    Cell: ({...props}) => {
+      const accessControl = useAccessControl()
+
+      return (
+        <ActionsCell
+          id={props.data[props.row.index].id}
+          path={'communities'}
+          showView={accessControl.userCan('view-communities')}
+          showDelete={accessControl.userCan('manage-communities')}
+          queryKey={QUERIES.COMMUNITIES_LIST}
+        />
+      )
+    },
   },
 ]
 

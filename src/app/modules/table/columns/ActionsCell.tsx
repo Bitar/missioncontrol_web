@@ -9,6 +9,8 @@ import {useQueryRequest} from '../QueryRequestProvider'
 import clsx from 'clsx'
 import Swal from 'sweetalert2'
 import axios from 'axios'
+import {useMcApp} from '../../general/McApp'
+import toast from 'react-hot-toast'
 
 type Props = {
   id: ID
@@ -38,6 +40,7 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
   deletePath,
 }) => {
   const queryClient = useQueryClient()
+  const mcApp = useMcApp()
   const {state} = useQueryRequest()
   const [query, setQuery] = useState<string>(stringifyRequestQuery(state))
 
@@ -64,14 +67,10 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
       deleteObject((deletePath ?? path) + '/' + id)
         .then(() => {
           queryClient.invalidateQueries(`${queryKey}-${query}`)
+          toast.success('Deleted Successfully')
         })
         .catch((error) => {
           if (axios.isAxiosError(error)) {
-            // const errorMessages = extractErrors(error).map(
-            //   (errorMessage) => `<li>${errorMessage}</li>`
-            // );
-
-            // console.log(error?.response?.data?.errors);
             // we need to show the error
             Swal.fire('Not Allowed', '<p>' + error?.response?.data?.errors + '</p>', 'error')
           } else if (error === undefined) {

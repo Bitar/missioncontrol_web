@@ -34,9 +34,7 @@ const plansColumns: ReadonlyArray<Column<Plan>> = [
     Cell: ({...props}) => <TextCell dObject={'$' + props.data[props.row.index].launch} />,
   },
   {
-    Header: (props) => (
-      <CustomHeader tableProps={props} title='Actions' className='text-end min-w-100px' />
-    ),
+    Header: (props) => <CustomHeader tableProps={props} title='Actions' className='min-w-100px' />,
     id: 'actions',
     Cell: ({...props}) => (
       <ActionsCell

@@ -68,8 +68,12 @@ export const getActivityStandings = (id: any, query?: string): Promise<TeamQuery
   return axios.get(url).then((response: AxiosResponse<TeamQueryResponse>) => response.data)
 }
 
-export const getActivityChat = (id: any): Promise<ChatMessageQueryResponse> => {
+export const getActivityChat = (id: any, query?: string): Promise<ChatMessageQueryResponse> => {
   let url = `${ENDPOINT}/${id}/chat`
+
+  if (query) {
+    url += `?${query}`
+  }
 
   return axios.get(url).then((response: AxiosResponse<ChatMessageQueryResponse>) => response.data)
 }

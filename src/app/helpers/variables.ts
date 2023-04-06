@@ -3,6 +3,7 @@ export enum Actions {
   EDIT,
   FILTER,
   EXPORT,
+  DELETE,
 }
 
 export enum PageTypes {

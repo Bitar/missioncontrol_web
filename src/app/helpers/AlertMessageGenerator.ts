@@ -10,6 +10,7 @@ const ActionTexts: {[key in Actions]: string} = {
   [Actions.EDIT]: 'edit',
   [Actions.FILTER]: 'filter',
   [Actions.EXPORT]: 'export',
+  [Actions.DELETE]: 'delete',
 }
 
 export class AlertMessageGenerator {
@@ -39,6 +40,14 @@ export const messages: {[alert: string]: AlertFunctionType} = {
   edit: {
     success: (module) => {
       return `Success! The ${module} was updated.`
+    },
+    error: (module) => {
+      return GenericErrorMessage
+    },
+  },
+  delete: {
+    success: (module) => {
+      return `Success! The ${module} was deleted.`
     },
     error: (module) => {
       return GenericErrorMessage

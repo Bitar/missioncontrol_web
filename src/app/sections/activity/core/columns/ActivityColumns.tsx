@@ -173,9 +173,7 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
     ),
   },
   {
-    Header: (props) => (
-      <CustomHeader tableProps={props} title='Actions' className='text-end min-w-100px' />
-    ),
+    Header: (props) => <CustomHeader tableProps={props} title='Actions' className='min-w-100px' />,
     id: 'actions',
     defaultCanSort: false,
     Cell: ({...props}) => {
@@ -186,7 +184,7 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
           id={props.data[props.row.index].id}
           path={'activities'}
           queryKey={QUERIES.ACTIVITIES_LIST}
-          showView={accessControl.userCan('manage-activities')}
+          showView={accessControl.userCan('view-activities')}
           showDelete={accessControl.userCan('manage-activities')}
         />
       )

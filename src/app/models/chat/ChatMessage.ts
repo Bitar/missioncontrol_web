@@ -20,4 +20,4 @@ export const initialChat = (chatMessage?: ChatMessage) => {
   }
 }
 
-export type ChatMessageQueryResponse = Response<Array<ChatMessage>>
+export type ChatMessageQueryResponse = Response<ChatMessage[]>

@@ -161,7 +161,7 @@ export const TeamDetailForm = () => {
               onClick={() => handlePlayersClick('sub')}>
               <i className='fa fa-minus'></i>
             </button>
-            <Button disabled={true} className='text-dark fs-4 py-0' variant={"light"}>
+            <Button disabled={true} className='text-dark fs-4 py-0' variant={'light'}>
               {players}
             </Button>
             <button
@@ -187,7 +187,7 @@ export const TeamDetailForm = () => {
               onClick={() => handleMinClick('sub')}>
               <i className='fa fa-minus'></i>
             </button>
-            <Button disabled={true} className='text-dark fs-4 py-0' variant={"light"}>
+            <Button disabled={true} className='text-dark fs-4 py-0' variant={'light'}>
               {minTeam}
             </Button>
             <button
@@ -210,7 +210,7 @@ export const TeamDetailForm = () => {
               onClick={() => handleMaxClick('sub')}>
               <i className='fa fa-minus'></i>
             </button>
-            <Button disabled={true} className='text-dark fs-4 py-0' variant={"light"}>
+            <Button disabled={true} className='text-dark fs-4 py-0' variant={'light'}>
               {maxTeam}
             </Button>
             <button

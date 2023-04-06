@@ -22,9 +22,7 @@ const subscriptionColumns: ReadonlyArray<Column<Subscription>> = [
     Cell: ({...props}) => <TextCell dObject={props.data[props.row.index].plan.name} />,
   },
   {
-    Header: (props) => (
-      <CustomHeader tableProps={props} title='Actions' className='text-end min-w-100px' />
-    ),
+    Header: (props) => <CustomHeader tableProps={props} title='Actions' className='min-w-100px' />,
     id: 'actions',
     Cell: ({...props}) => (
       <ActionsCell

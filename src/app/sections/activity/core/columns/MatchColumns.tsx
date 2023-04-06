@@ -28,9 +28,7 @@ const MatchColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] = [
     Cell: ({...props}) => props.data[props.row.index].id,
   },
   {
-    Header: (props) => (
-      <CustomHeader tableProps={props} title='Actions' className='text-end min-w-100px' />
-    ),
+    Header: (props) => <CustomHeader tableProps={props} title='Actions' className='min-w-100px' />,
     id: 'actions',
     defaultCanSort: false,
     Cell: ({...props}) => (
