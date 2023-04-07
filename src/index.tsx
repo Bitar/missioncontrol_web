@@ -1,20 +1,21 @@
-import {createRoot} from 'react-dom/client'
+import { createRoot } from "react-dom/client";
 // Axios
-import axios from 'axios'
-import {Chart, registerables} from 'chart.js'
-import {QueryClient, QueryClientProvider} from 'react-query'
+import axios from "axios";
+import { Chart, registerables } from "chart.js";
+import { QueryClient, QueryClientProvider } from "react-query";
 // Apps
-import {MetronicI18nProvider} from './_metronic/i18n/Metronici18n'
+import { MetronicI18nProvider } from "./_metronic/i18n/Metronici18n";
 /**
  * TIP: Replace this style import with rtl styles to enable rtl mode
  *
  * import './_metronic/assets/css/style.rtl.css'
  **/
-import './_metronic/assets/sass/style.scss'
-import './_metronic/assets/sass/plugins.scss'
-import './_metronic/assets/sass/style.react.scss'
-import {AppRoutes} from './app/routes/AppRoutes'
-import {AuthProvider, setupAxios} from './app/modules/auth'
+import "./_metronic/assets/sass/style.scss";
+import "./_metronic/assets/sass/plugins.scss";
+import "./_metronic/assets/sass/style.react.scss";
+import { AppRoutes } from "./app/routes/AppRoutes";
+import { AuthProvider, setupAxios } from "./app/modules/auth";
+import { initializeGTM } from "./GTM";
 /**
  * Creates `axios-mock-adapter` instance for provided `axios` instance, add
  * basic Metronic mocks and returns it.
@@ -26,11 +27,17 @@ import {AuthProvider, setupAxios} from './app/modules/auth'
  *
  * @see https://github.com/axios/axios#interceptors
  */
-setupAxios(axios)
-Chart.register(...registerables)
+setupAxios(axios);
+Chart.register(...registerables);
 
-const queryClient = new QueryClient()
-const container = document.getElementById('root')
+const env = process.env.REACT_APP_ENV;
+
+if (env === "production") {
+  initializeGTM();
+}
+
+const queryClient = new QueryClient();
+const container = document.getElementById("root");
 if (container) {
   createRoot(container).render(
     <QueryClientProvider client={queryClient}>
@@ -41,5 +48,5 @@ if (container) {
       </MetronicI18nProvider>
       {/*<ReactQueryDevtools initialIsOpen={false} position={'bottom-right'} />*/}
     </QueryClientProvider>
-  )
+  );
 }

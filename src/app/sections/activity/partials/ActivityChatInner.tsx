@@ -74,6 +74,7 @@ const ActivityChatInner: FC = () => {
           const userInfo = message?.user
           const state = message?.user?.id !== currentUser?.id ? 'info' : 'primary'
           const alignmentClass = message?.user?.id !== currentUser?.id ? 'start' : 'end'
+          const teamInfo = message?.team
           return (
             <div
               key={`message${index}`}
@@ -87,18 +88,26 @@ const ActivityChatInner: FC = () => {
                       </div>
                       <div className='ms-3'>
                         <span className='fs-5 fw-bolder text-gray-900 me-1'>{userInfo?.name}</span>
-                        {message?.created_at &&
-                          dayjs(new Date(message?.created_at * 1000)).fromNow()}
+                        <span className='text-muted fs-7 mb-1'>
+                          {message?.created_at &&
+                            dayjs(new Date(message?.created_at * 1000)).fromNow()}
+                        </span>
+                        <div className={'text-mc-secondary fs-7'}>
+                          {teamInfo?.name}
+                        </div>
                       </div>
                     </>
                   ) : (
                     <>
-                      <div className='me-3'>
+                      <div className='me-3 text-end'>
                         <span className='text-muted fs-7 mb-1'>
                           {message?.created_at &&
                             dayjs(new Date(message?.created_at * 1000)).fromNow()}
                         </span>
                         <span className='fs-5 fw-bolder text-gray-900 ms-1'>You</span>
+                        <div className='text-mc-secondary fs-7'>
+                          {teamInfo?.name}
+                        </div>
                       </div>
                       <div className='symbol  symbol-35px symbol-circle '>
                         <img alt='Pic' src={`${userInfo?.meta?.image}`} />

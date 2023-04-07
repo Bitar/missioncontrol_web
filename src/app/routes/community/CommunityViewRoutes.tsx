@@ -15,12 +15,17 @@ import {
 } from '../../sections/community/partials/community-view/CommunityAnnouncement'
 import CommunityActivities from '../../sections/community/partials/community-view/CommunityActivities'
 import CommunityOverview from '../../sections/community/partials/community-view/CommunityOverview'
+import { useMcApp } from "../../modules/general/McApp";
+import { generatePageTitle } from "../../helpers/pageTitleGenerator";
+import { Sections } from "../../helpers/sections";
+import { PageTypes } from "../../helpers/variables";
 
 type Props = {
   communityId?: number
 }
 
 const CommunityViewRoutes: FC<Props> = ({communityId}) => {
+  const mcApp = useMcApp();
   const [community, setCommunity] = useState<Community | undefined>()
   const [members, setMembers] = useState<User[] | undefined>([])
   const params = useParams()
@@ -75,6 +80,12 @@ const CommunityViewRoutes: FC<Props> = ({communityId}) => {
       isActive: false,
     },
   ]
+
+  useEffect(() => {
+    if(!community) return;
+
+    mcApp.setPageTitle(generatePageTitle(Sections.COMMUNITIES, PageTypes.SHOW, community?.name))
+  }, [community])
 
   useEffect(() => {
     updateCommunity()
