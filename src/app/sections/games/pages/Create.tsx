@@ -6,12 +6,17 @@ import {Igdb} from '../../../models/game/Igdb'
 import {createGame, getIgdb} from '../core/GameRequests'
 import Swal from 'sweetalert2'
 import {KTCard, KTCardBody, KTCardHeader} from '../../../helpers/components'
+import { useMcApp } from "../../../modules/general/McApp";
+import { generatePageTitle } from "../../../helpers/pageTitleGenerator";
+import { Sections } from "../../../helpers/sections";
+import { PageTypes } from "../../../helpers/variables";
 
 const GameCreate = () => {
   const [games, setGames] = useState<Igdb[] | undefined>([])
   const [search, setSearch] = useState<string>('')
   const debouncedSearch = useDebounce(search, 400)
   const navigate = useNavigate()
+  const mcApp = useMcApp()
 
   useEffect(() => {
     if (debouncedSearch !== undefined && debouncedSearch !== '') {
@@ -38,6 +43,11 @@ const GameCreate = () => {
       }
     })
   }
+
+  useEffect(() => {
+    mcApp.setPageTitle(generatePageTitle(Sections.GAMES, PageTypes.CREATE))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <KTCard>

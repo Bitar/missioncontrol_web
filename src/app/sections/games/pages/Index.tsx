@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react'
+import React, { useEffect, useMemo, useState } from "react";
 import {KTCard, KTCardBody, QUERIES} from '../../../../_metronic/helpers'
 import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
 import {
@@ -17,10 +17,21 @@ import {
   ExportCardAction,
   FilterCardAction,
 } from '../../../components/misc/CardAction'
+import { useMcApp } from "../../../modules/general/McApp";
+import { generatePageTitle } from "../../../helpers/pageTitleGenerator";
+import { Sections } from "../../../helpers/sections";
+import { PageTypes } from "../../../helpers/variables";
 
 const GameIndex = () => {
   const [exportQuery, setExportQuery] = useState<string>('')
   const [showFilter, setShowFilter] = useState<boolean>(false)
+
+  const mcApp = useMcApp()
+
+  useEffect(() => {
+    mcApp.setPageTitle(generatePageTitle(Sections.GAMES, PageTypes.INDEX))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <QueryRequestProvider>

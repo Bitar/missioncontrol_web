@@ -6,4 +6,5 @@ export enum Sections {
   GAMES = 'Games',
   ACTIVITIES = 'Activities',
   COMMUNITIES = 'Communities',
+  RESOURCES = 'Resources',
 }

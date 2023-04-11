@@ -1,10 +1,17 @@
 import React, {useEffect} from 'react'
 import {PageTitle} from '../../layout/core'
 import {marketingData} from './data/MarketingData'
+import { useMcApp } from "../../modules/general/McApp";
+import { generatePageTitle } from "../../helpers/pageTitleGenerator";
+import { Sections } from "../../helpers/sections";
+import { PageTypes } from "../../helpers/variables";
 
 const Resources = () => {
+  const mcApp = useMcApp()
+
   useEffect(() => {
-    window.scrollTo(0, 0)
+    mcApp.setPageTitle(generatePageTitle(Sections.RESOURCES, PageTypes.INDEX))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
