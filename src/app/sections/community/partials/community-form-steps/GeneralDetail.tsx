@@ -24,6 +24,7 @@ const GeneralDetail: FC = () => {
   const statuses = [
     {value: 1, label: 'Pending'},
     {value: 2, label: 'Active'},
+    {value: 3, label: 'Closed'},
   ]
 
   const handleSubmit = async () => {

@@ -8,10 +8,15 @@ import {GameModes} from '../../sections/games/pages/GameModes'
 import {GameContext} from '../../sections/games/core/GameContext'
 import {Restricted} from '../../modules/auth/core/AuthPermission'
 import GameSettings from '../../sections/games/pages/Settings'
+import { generatePageTitle } from "../../helpers/pageTitleGenerator";
+import { Sections } from "../../helpers/sections";
+import { PageTypes } from "../../helpers/variables";
+import { useMcApp } from "../../modules/general/McApp";
 
 const GameViewRoutes: React.FC = () => {
   const [game, setGame] = useState<Game | undefined>()
   const params = useParams()
+  const mcApp = useMcApp()
 
   const gameViewBreadCrumbs: Array<PageLink> = [
     {
@@ -51,6 +56,12 @@ const GameViewRoutes: React.FC = () => {
       setGame(response)
     })
   }
+
+  useEffect(() => {
+    if(!game) return;
+
+    mcApp.setPageTitle(generatePageTitle(Sections.GAMES, PageTypes.SHOW, game?.title))
+  }, [game])
 
   return (
     <GameContext.Provider

@@ -10,10 +10,15 @@ import {SuspenseView} from '../../../layout/SuspenseView'
 import {UserContext} from '../../../sections/iam/user/core/UserContext'
 import {Restricted} from '../../../modules/auth/core/AuthPermission'
 import UserSettings from '../../../sections/iam/user/pages/Settings'
+import { generatePageTitle } from "../../../helpers/pageTitleGenerator";
+import { Sections } from "../../../helpers/sections";
+import { PageTypes } from "../../../helpers/variables";
+import { useMcApp } from "../../../modules/general/McApp";
 
 const UserViewRoutes: React.FC = () => {
   const [user, setUser] = useState<User | undefined>()
   const params = useParams()
+  const mcApp = useMcApp()
 
   const userViewBreadCrumbs: Array<PageLink> = [
     {
@@ -48,6 +53,12 @@ const UserViewRoutes: React.FC = () => {
       setUser(response)
     })
   }, [params.id])
+
+  useEffect(() => {
+    if(!user) return;
+
+    mcApp.setPageTitle(generatePageTitle(Sections.IAM_USERS, PageTypes.SHOW, user?.name))
+  }, [user])
 
   return (
     <UserContext.Provider
