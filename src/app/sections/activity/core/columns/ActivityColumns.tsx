@@ -143,6 +143,18 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
     },
   },
   {
+    Header: (props) => <CustomHeader tableProps={props} title='Fee' className='min-w-125px' />,
+    id: 'fee',
+    defaultCanSort: false,
+    Cell: ({...props}) => {
+      if(props.data[props.row.index].entry_fee.type === 1) {
+        return <BadgeCell status={'Free'} color={'success'} align={'left'} />
+      } else {
+        return <BadgeCell status={'Paid'} color={'info'} align={'left'} />
+      }
+    },
+  },
+  {
     Header: (props) => (
       <CustomHeader tableProps={props} title='Created On' className='min-w-125px' />
     ),
