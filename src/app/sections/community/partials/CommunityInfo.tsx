@@ -5,7 +5,6 @@ import clsx from 'clsx'
 import toast from 'react-hot-toast'
 import {useCommunity} from '../core/CommunityContext'
 import {BadgeCell} from '../../../modules/table/columns/BadgeCell'
-import {formatCommunitySubscriptionStatus} from '../../../helpers/CommunityHelper'
 
 type Props = {
   links?: {text: string; link: string}[]
@@ -22,11 +21,6 @@ const CommunityInfo: FC<Props> = ({links}) => {
       await navigator.clipboard.writeText(community?.dynamic_link)
       toast.success(toastText)
     }
-  }
-
-  const getStatus = (activityStatus: any) => {
-    const {status, color} = formatCommunitySubscriptionStatus(activityStatus)
-    return <BadgeCell status={status} color={color} />
   }
 
   useEffect(() => {

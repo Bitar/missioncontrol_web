@@ -147,10 +147,12 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
     id: 'fee',
     defaultCanSort: false,
     Cell: ({...props}) => {
-      if (props.data[props.row.index].entry_fee.type === 1) {
+      if (props.data[props.row.index]?.entry_fee?.type === 1) {
+        return <BadgeCell status={'Free'} color={'success'} align={'left'} />
+      } else if (props.data[props.row.index]?.entry_fee?.type === 2) {
         return <BadgeCell status={'Free'} color={'success'} align={'left'} />
       } else {
-        return <BadgeCell status={'Paid'} color={'info'} align={'left'} />
+        return <></>
       }
     },
   },

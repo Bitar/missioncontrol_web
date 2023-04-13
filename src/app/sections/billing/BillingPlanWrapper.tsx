@@ -16,10 +16,6 @@ type Props = {
 const BillingPlan: FC<Props> = ({plans, setPlan}) => {
   const {communityForm, setCommunityForm} = useCommunityForm()
 
-  const selectPlan = (plan: Plan) => {
-    setPlan(plan)
-  }
-
   return (
     <>
       <KTCardBody className='p-lg-17'>

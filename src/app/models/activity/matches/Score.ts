@@ -3,7 +3,7 @@ import {Activity} from '../Activity'
 import {Round} from './Round'
 import {Team} from '../../squad/Team'
 import {ScoringSettings} from '../../game/scoring/ScoringSettings'
-import {Match, NewMatch} from './Match'
+import {NewMatch} from './Match'
 
 export type Score = {
   id?: number

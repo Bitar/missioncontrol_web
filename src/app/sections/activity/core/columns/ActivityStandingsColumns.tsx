@@ -1,5 +1,4 @@
 import {Column} from 'react-table'
-import {TextCell} from '../../../../modules/table/columns/TextCell'
 import {CustomHeader} from '../../../../modules/table/columns/CustomHeader'
 import {ActivityStanding} from '../../../../models/activity/ActivityStanding'
 import React from 'react'

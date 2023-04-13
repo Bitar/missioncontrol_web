@@ -69,6 +69,7 @@ const ActivityInfo: FC = () => {
 
       setMenuLinks(links)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activity])
 
   return (

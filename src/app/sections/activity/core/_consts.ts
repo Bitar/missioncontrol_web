@@ -148,11 +148,11 @@ export const ACTIVITY_CREATE_STEPPER_NAV = [
   {
     title: 'Location',
     icon: 'fa-duotone fa-location-dot',
-    has_next: true,
-  },
-  {
-    title: 'Prizes',
-    icon: 'fa-duotone fa-gift',
     has_next: false,
   },
+  // {
+  //   title: 'Prizes',
+  //   icon: 'fa-duotone fa-gift',
+  //   has_next: false,
+  // },
 ]

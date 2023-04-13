@@ -9,7 +9,6 @@ import {useQueryRequest} from '../QueryRequestProvider'
 import clsx from 'clsx'
 import Swal from 'sweetalert2'
 import axios from 'axios'
-import {useMcApp} from '../../general/McApp'
 import toast from 'react-hot-toast'
 
 type Props = {
@@ -34,13 +33,10 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
   showDelete = true,
   showView,
   callBackFn,
-  title,
-  text,
   editPage,
   deletePath,
 }) => {
   const queryClient = useQueryClient()
-  const mcApp = useMcApp()
   const {state} = useQueryRequest()
   const [query, setQuery] = useState<string>(stringifyRequestQuery(state))
 

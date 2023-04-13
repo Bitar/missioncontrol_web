@@ -4,11 +4,7 @@ import {
   useQueryResponseLoading,
 } from '../../../../modules/table/QueryResponseProvider'
 import {QUERIES} from '../../../../helpers/crud-helper/consts'
-import {
-  EXPORT_ENDPOINT,
-  getCommunityActivities,
-  getCommunityUsers,
-} from '../../core/CommunityRequests'
+import {EXPORT_ENDPOINT, getCommunityActivities} from '../../core/CommunityRequests'
 import {ListViewProvider} from '../../../../modules/table/ListViewProvider'
 import {KTCard, KTCardBody, KTCardHeader} from '../../../../helpers/components'
 import {
@@ -16,7 +12,6 @@ import {
   ExportCardAction,
   FilterCardAction,
 } from '../../../../components/misc/CardAction'
-import {CommunityUserFilters} from '../CommunityUserFilters'
 import {QueryRequestProvider} from '../../../../modules/table/QueryRequestProvider'
 import React, {useEffect, useMemo, useState} from 'react'
 import {useCommunity} from '../../core/CommunityContext'
