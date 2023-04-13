@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react'
 import {PageTitle} from '../../layout/core'
 import {marketingData} from './data/MarketingData'
-import { useMcApp } from "../../modules/general/McApp";
-import { generatePageTitle } from "../../helpers/pageTitleGenerator";
-import { Sections } from "../../helpers/sections";
-import { PageTypes } from "../../helpers/variables";
+import {useMcApp} from '../../modules/general/McApp'
+import {generatePageTitle} from '../../helpers/pageTitleGenerator'
+import {Sections} from '../../helpers/sections'
+import {PageTypes} from '../../helpers/variables'
 
 const Resources = () => {
   const mcApp = useMcApp()

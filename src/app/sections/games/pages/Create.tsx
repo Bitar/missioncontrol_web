@@ -6,10 +6,10 @@ import {Igdb} from '../../../models/game/Igdb'
 import {createGame, getIgdb} from '../core/GameRequests'
 import Swal from 'sweetalert2'
 import {KTCard, KTCardBody, KTCardHeader} from '../../../helpers/components'
-import { useMcApp } from "../../../modules/general/McApp";
-import { generatePageTitle } from "../../../helpers/pageTitleGenerator";
-import { Sections } from "../../../helpers/sections";
-import { PageTypes } from "../../../helpers/variables";
+import {useMcApp} from '../../../modules/general/McApp'
+import {generatePageTitle} from '../../../helpers/pageTitleGenerator'
+import {Sections} from '../../../helpers/sections'
+import {PageTypes} from '../../../helpers/variables'
 
 const GameCreate = () => {
   const [games, setGames] = useState<Igdb[] | undefined>([])

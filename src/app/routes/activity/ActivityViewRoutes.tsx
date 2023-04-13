@@ -1,90 +1,97 @@
-import React, { FC, lazy, useEffect, useState } from "react";
-import { Activity } from "../../models/activity/Activity";
-import { Navigate, Outlet, Route, Routes, useNavigate, useParams } from "react-router-dom";
-import { PageLink, PageTitle } from "../../layout/core";
-import { getActivityById, getActivityTeams } from "../../sections/activity/core/requests/ActivityRequests";
-import { ActivityInfo } from "../../sections/activity/partials/ActivityInfo";
-import { ActivityOverview } from "../../sections/activity/pages/ActivityOverview";
-import { ActivityChat } from "../../sections/activity/partials/ActivityChat";
-import { Match } from "../../models/activity/matches/Match";
-import { ActivityContext } from "../../sections/activity/core/contexts/ActivityContext";
-import { SuspenseView } from "../../layout/SuspenseView";
-import { ActivitySettings } from "../../sections/activity/pages/ActivitySettings";
-import { ActivityMatches } from "../../sections/activity/pages/ActivityMatches";
-import { Team } from "../../models/squad/Team";
-import { ActivityRegistration } from "../../models/activity/ActivityRegistration";
-import toast from "react-hot-toast";
-import { ActivityMembersSection } from "../../sections/activity/pages/ActivityMembersSection";
-import { ActivityAnnouncement, ActivityAnnouncementEdit } from "../../sections/activity/pages/ActivityAnnouncement";
-import { generatePageTitle } from "../../helpers/pageTitleGenerator";
-import { Sections } from "../../helpers/sections";
-import { PageTypes } from "../../helpers/variables";
-import { useMcApp } from "../../modules/general/McApp";
+import React, {FC, lazy, useEffect, useState} from 'react'
+import {Activity} from '../../models/activity/Activity'
+import {Navigate, Outlet, Route, Routes, useNavigate, useParams} from 'react-router-dom'
+import {PageLink, PageTitle} from '../../layout/core'
+import {
+  getActivityById,
+  getActivityTeams,
+} from '../../sections/activity/core/requests/ActivityRequests'
+import {ActivityInfo} from '../../sections/activity/partials/ActivityInfo'
+import {ActivityOverview} from '../../sections/activity/pages/ActivityOverview'
+import {ActivityChat} from '../../sections/activity/partials/ActivityChat'
+import {Match} from '../../models/activity/matches/Match'
+import {ActivityContext} from '../../sections/activity/core/contexts/ActivityContext'
+import {SuspenseView} from '../../layout/SuspenseView'
+import {ActivitySettings} from '../../sections/activity/pages/ActivitySettings'
+import {ActivityMatches} from '../../sections/activity/pages/ActivityMatches'
+import {Team} from '../../models/squad/Team'
+import {ActivityRegistration} from '../../models/activity/ActivityRegistration'
+import toast from 'react-hot-toast'
+import {ActivityMembersSection} from '../../sections/activity/pages/ActivityMembersSection'
+import {
+  ActivityAnnouncement,
+  ActivityAnnouncementEdit,
+} from '../../sections/activity/pages/ActivityAnnouncement'
+import {generatePageTitle} from '../../helpers/pageTitleGenerator'
+import {Sections} from '../../helpers/sections'
+import {PageTypes} from '../../helpers/variables'
+import {useMcApp} from '../../modules/general/McApp'
 
 const ActivityViewRoutes: FC = () => {
-  const mcApp = useMcApp();
-  const [activity, setActivity] = useState<Activity | undefined>();
-  const [matches, setMatches] = useState<Match[] | undefined>([]);
-  const [match, setMatch] = useState<Match | undefined>();
-  const [registrations, setRegistrations] = useState<ActivityRegistration[] | undefined>();
-  const [teams, setTeams] = useState<Team[] | undefined>();
-  const navigate = useNavigate();
-  const MatchRoutes = lazy(() => import("../match/MatchRoutes"));
+  const mcApp = useMcApp()
+  const [activity, setActivity] = useState<Activity | undefined>()
+  const [matches, setMatches] = useState<Match[] | undefined>([])
+  const [match, setMatch] = useState<Match | undefined>()
+  const [registrations, setRegistrations] = useState<ActivityRegistration[] | undefined>()
+  const [teams, setTeams] = useState<Team[] | undefined>()
+  const navigate = useNavigate()
+  const MatchRoutes = lazy(() => import('../match/MatchRoutes'))
 
-  const params = useParams();
+  const params = useParams()
 
   const activityViewBreadcrumbs: Array<PageLink> = [
     {
-      title: "Activities",
-      path: "/activities",
+      title: 'Activities',
+      path: '/activities',
       isSeparator: false,
-      isActive: false
+      isActive: false,
     },
     {
-      title: "",
-      path: "",
+      title: '',
+      path: '',
       isSeparator: true,
-      isActive: false
+      isActive: false,
     },
     {
-      title: activity?.title || "",
-      path: "/activities/" + params.id,
+      title: activity?.title || '',
+      path: '/activities/' + params.id,
       isSeparator: false,
-      isActive: false
+      isActive: false,
     },
     {
-      title: "",
-      path: "",
+      title: '',
+      path: '',
       isSeparator: true,
-      isActive: false
-    }
-  ];
+      isActive: false,
+    },
+  ]
 
   useEffect(() => {
     getActivityById(params.id)
       .then((response) => {
-        setActivity(response);
+        setActivity(response)
 
         getActivityTeams(params.id).then((response) => {
-          setTeams(response.data);
-        });
+          setTeams(response.data)
+        })
       })
       .catch((error) => {
         if (error.response) {
           if (error.response.status === 404) {
-            toast.error("Activity not found!");
-            navigate("/activities");
+            toast.error('Activity not found!')
+            navigate('/activities')
           }
         }
-      });
+      })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params.id]);
+  }, [params.id])
 
   useEffect(() => {
-    if (!activity) return;
+    if (!activity) return
 
-    mcApp.setPageTitle(generatePageTitle(Sections.ACTIVITIES, PageTypes.SHOW, activity?.title));
-  }, [activity]);
+    mcApp.setPageTitle(generatePageTitle(Sections.ACTIVITIES, PageTypes.SHOW, activity?.title))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activity])
 
   return (
     <ActivityContext.Provider
@@ -98,7 +105,7 @@ const ActivityViewRoutes: FC = () => {
         registrations,
         setRegistrations,
         teams,
-        setTeams
+        setTeams,
       }}>
       <Routes>
         <Route
@@ -118,7 +125,7 @@ const ActivityViewRoutes: FC = () => {
             }
           />
           <Route
-            path="/matches"
+            path='/matches'
             element={
               <SuspenseView>
                 <PageTitle breadcrumbs={activityViewBreadcrumbs}>Matches</PageTitle>
@@ -127,7 +134,7 @@ const ActivityViewRoutes: FC = () => {
             }
           />
           <Route
-            path="/members"
+            path='/members'
             element={
               <SuspenseView>
                 <PageTitle breadcrumbs={activityViewBreadcrumbs}>Members</PageTitle>
@@ -136,7 +143,7 @@ const ActivityViewRoutes: FC = () => {
             }
           />
           <Route
-            path="/chat"
+            path='/chat'
             element={
               <SuspenseView>
                 <PageTitle breadcrumbs={activityViewBreadcrumbs}>Chat</PageTitle>
@@ -145,7 +152,7 @@ const ActivityViewRoutes: FC = () => {
             }
           />
           <Route
-            path="/announcements"
+            path='/announcements'
             element={
               <SuspenseView>
                 <PageTitle breadcrumbs={activityViewBreadcrumbs}>Announcement</PageTitle>
@@ -154,7 +161,7 @@ const ActivityViewRoutes: FC = () => {
             }
           />
           <Route
-            path="/announcements/:announcementId/edit"
+            path='/announcements/:announcementId/edit'
             element={
               <SuspenseView>
                 <PageTitle breadcrumbs={activityViewBreadcrumbs}>Edit Announcement</PageTitle>
@@ -163,20 +170,20 @@ const ActivityViewRoutes: FC = () => {
             }
           />
           <Route
-            path="/settings"
+            path='/settings'
             element={
               <SuspenseView>
                 <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>
                 {activity && activity?.status !== 4 && activity?.status !== 10 ? (
                   <ActivitySettings />
                 ) : (
-                  <Navigate to={"/error/404"} />
+                  <Navigate to={'/error/404'} />
                 )}
               </SuspenseView>
             }
           />
           <Route
-            path="/matches/:matchId/*"
+            path='/matches/:matchId/*'
             element={
               <SuspenseView>
                 <PageTitle breadcrumbs={activityViewBreadcrumbs}>Settings</PageTitle>
@@ -187,7 +194,7 @@ const ActivityViewRoutes: FC = () => {
         </Route>
       </Routes>
     </ActivityContext.Provider>
-  );
-};
+  )
+}
 
-export { ActivityViewRoutes };
+export {ActivityViewRoutes}

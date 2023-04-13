@@ -8,17 +8,17 @@ import {
 } from '../../../models/community/Community'
 import {createCommunity} from '../core/CommunityRequests'
 import {useNavigate} from 'react-router-dom'
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from 'react'
 import {jsonToFormData} from '../../../helpers/form/FormHelper'
 import {CommunityForm} from '../partials/CommunityForm'
 import {ImageCrop} from '../components/ImageCrop'
-import { generatePageTitle } from "../../../helpers/pageTitleGenerator";
-import { Sections } from "../../../helpers/sections";
-import { PageTypes } from "../../../helpers/variables";
-import { useMcApp } from "../../../modules/general/McApp";
+import {generatePageTitle} from '../../../helpers/pageTitleGenerator'
+import {Sections} from '../../../helpers/sections'
+import {PageTypes} from '../../../helpers/variables'
+import {useMcApp} from '../../../modules/general/McApp'
 
 const CommunityCreate = () => {
-  const mcApp = useMcApp();
+  const mcApp = useMcApp()
   const [community, setCommunity] = useState<Community>(initialCommunity)
   const navigate = useNavigate()
 

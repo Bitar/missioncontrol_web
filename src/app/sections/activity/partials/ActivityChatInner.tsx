@@ -92,9 +92,7 @@ const ActivityChatInner: FC = () => {
                           {message?.created_at &&
                             dayjs(new Date(message?.created_at * 1000)).fromNow()}
                         </span>
-                        <div className={'text-mc-secondary fs-7'}>
-                          {teamInfo?.name}
-                        </div>
+                        <div className={'text-mc-secondary fs-7'}>{teamInfo?.name}</div>
                       </div>
                     </>
                   ) : (
@@ -105,9 +103,7 @@ const ActivityChatInner: FC = () => {
                             dayjs(new Date(message?.created_at * 1000)).fromNow()}
                         </span>
                         <span className='fs-5 fw-bolder text-gray-900 ms-1'>You</span>
-                        <div className='text-mc-secondary fs-7'>
-                          {teamInfo?.name}
-                        </div>
+                        <div className='text-mc-secondary fs-7'>{teamInfo?.name}</div>
                       </div>
                       <div className='symbol  symbol-35px symbol-circle '>
                         <img alt='Pic' src={`${userInfo?.meta?.image}`} />

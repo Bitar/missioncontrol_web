@@ -10,10 +10,10 @@ import {SuspenseView} from '../../../layout/SuspenseView'
 import {UserContext} from '../../../sections/iam/user/core/UserContext'
 import {Restricted} from '../../../modules/auth/core/AuthPermission'
 import UserSettings from '../../../sections/iam/user/pages/Settings'
-import { generatePageTitle } from "../../../helpers/pageTitleGenerator";
-import { Sections } from "../../../helpers/sections";
-import { PageTypes } from "../../../helpers/variables";
-import { useMcApp } from "../../../modules/general/McApp";
+import {generatePageTitle} from '../../../helpers/pageTitleGenerator'
+import {Sections} from '../../../helpers/sections'
+import {PageTypes} from '../../../helpers/variables'
+import {useMcApp} from '../../../modules/general/McApp'
 
 const UserViewRoutes: React.FC = () => {
   const [user, setUser] = useState<User | undefined>()
@@ -55,9 +55,10 @@ const UserViewRoutes: React.FC = () => {
   }, [params.id])
 
   useEffect(() => {
-    if(!user) return;
+    if (!user) return
 
     mcApp.setPageTitle(generatePageTitle(Sections.IAM_USERS, PageTypes.SHOW, user?.name))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
 
   return (
