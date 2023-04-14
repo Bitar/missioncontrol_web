@@ -15,12 +15,13 @@ import {
   activityMatchPlayOnChange,
   activityRegistrationOnChange,
   isValidTournament,
-  updateActivityMatchPlayDates,
-} from '../../../../helpers/ActivityHelper'
+  updateActivityMatchPlayDates, updateActivityRegistrationDates
+} from "../../../../helpers/ActivityHelper";
 import moment from 'moment/moment'
 import {PlayoffDetail} from './PlayoffDetail'
 import {handleDayChange, handleFrequencyChange} from '../../../../helpers/PlayoffHelper'
 import {TournamentTeamCountText} from '../TournamentTeamCountText'
+import { useAuth } from "../../../../modules/auth";
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
@@ -35,6 +36,9 @@ export const ScheduleDetailForm = () => {
   const [showErrors, setShowErrors] = useState<boolean>(false)
   const [timeValue, setTimeValue] = useState<Date | null>()
   const [timeZones, setTimeZones] = useState<TimeZone[]>()
+  const {communityAdmin} = useAuth()
+
+  console.log(communityAdmin)
 
   useEffect(() => {
     getTimeZones().then((response) => {
@@ -91,7 +95,7 @@ export const ScheduleDetailForm = () => {
   }, [activityForm?.team?.max])
 
   useEffect(() => {
-    updateActivityMatchPlayDates(activityForm, setMatchPlayValue)
+    updateActivityRegistrationDates(activityForm, setRegistrationValue, setMatchPlayDisabledDate)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activityForm?.schedule?.registration_dates])
 
@@ -214,7 +218,7 @@ export const ScheduleDetailForm = () => {
                 setShowErrors
               )
             }}
-            disabledDate={before && before(matchPlayDisabledDate)}
+            shouldDisableDate={before && before(matchPlayDisabledDate)}
           />
           <div className='text-danger mt-2'>{showErrors && 'Invalid Playoff dates'}</div>
           {activityForm?.type_id === 2 && (
