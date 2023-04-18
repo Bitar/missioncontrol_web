@@ -212,3 +212,16 @@
   position: relative;
   --bs-aspect-ratio: 52.36%;
 }
+
+.chat-message {
+  .chat-message-delete {
+    display: none;
+    cursor: pointer;
+  }
+
+  &:hover {
+    .chat-message-delete {
+      display: inline-block;
+    }
+  }
+}

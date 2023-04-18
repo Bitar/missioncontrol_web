@@ -8,7 +8,6 @@ import { TextImageCell } from "../../../modules/table/columns/TextImageCell";
 import React from "react";
 import { communityStatus } from "../../../helpers/CommunityHelper";
 import { useAccessControl } from "../../../modules/auth/core/AuthPermission";
-import dayjs from "dayjs";
 
 const communitiesColumns: ReadonlyArray<Column<Community>> = [
   {
@@ -65,7 +64,11 @@ const communitiesColumns: ReadonlyArray<Column<Community>> = [
     defaultCanSort: true,
     Cell: ({ ...props }) => (
       <span className="text-gray-800 pe-none mb-1">
-        {new Date(props.data[props.row.index].created_at * 1000).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
+        {new Date(props.data[props.row.index].created_at * 1000).toLocaleDateString("en-US", {
+          day: "numeric",
+          month: "short",
+          year: "numeric"
+        })}
       </span>
     )
   },

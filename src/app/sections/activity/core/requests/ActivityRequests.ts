@@ -87,6 +87,11 @@ export const sendActivityChat = (id: any, formData: FormData): Promise<ChatMessa
     .then((response: Response<ChatMessage>) => response.data)
 }
 
+export const deleteActivityChat = (activityId: number, messageId: number): Promise<void> => {
+  let url = `${ENDPOINT}/${activityId}/chat/${messageId}`
+  return axios.delete(`${url}`)
+}
+
 export const getActivityAnnouncements = (id: any, query?: string): Promise<Announcement[]> => {
   let url = `${ENDPOINT}/${id}/announcements`
 
