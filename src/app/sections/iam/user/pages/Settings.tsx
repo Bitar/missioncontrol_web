@@ -324,7 +324,7 @@ const UserSettings: FC = () => {
                       ranges={[]}
                       placement='topStart'
                       className='w-100'
-                      placeholder='Select Time'
+                      placeholder='Select Date'
                       showMeridian={true}
                       onChange={(value) => {
                         if (value) {
