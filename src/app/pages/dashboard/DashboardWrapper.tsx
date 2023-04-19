@@ -20,13 +20,6 @@ const DashboardWrapper: FC<React.PropsWithChildren<unknown>> = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    if (!currentUser) return;
-
-    console.log(isSuperAdmin(currentUser));
-    console.log(isCommunityAdmin(currentUser));
-  }, [currentUser]);
-
   return (
     <>
       {currentUser &&
