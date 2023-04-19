@@ -218,7 +218,7 @@ export const ScheduleDetailForm = () => {
                 setShowErrors
               )
             }}
-            shouldDisableDate={before && before(matchPlayDisabledDate)}
+            disabledDate={before && before(matchPlayDisabledDate)}
           />
           <div className='text-danger mt-2'>{showErrors && 'Invalid Playoff dates'}</div>
           {activityForm?.type_id === 2 && (
