@@ -155,7 +155,7 @@ export const PlayoffDetail = () => {
                           character={' - '}
                           ranges={[]}
                           onChange={onPlayoffsChange}
-                          disabledDate={before && before(playoffDisabledDate)}
+                          shouldDisableDate={before && before(playoffDisabledDate)}
                         />
                         <div className='text-danger mt-2'>
                           {showErrors && 'Invalid Playoff dates'}

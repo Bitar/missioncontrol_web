@@ -38,8 +38,6 @@ export const ScheduleDetailForm = () => {
   const [timeZones, setTimeZones] = useState<TimeZone[]>()
   const {communityAdmin} = useAuth()
 
-  console.log(communityAdmin)
-
   useEffect(() => {
     getTimeZones().then((response) => {
       setTimeZones(response.data)
@@ -218,7 +216,7 @@ export const ScheduleDetailForm = () => {
                 setShowErrors
               )
             }}
-            disabledDate={before && before(matchPlayDisabledDate)}
+            shouldDisableDate={before && before(matchPlayDisabledDate)}
           />
           <div className='text-danger mt-2'>{showErrors && 'Invalid Playoff dates'}</div>
           {activityForm?.type_id === 2 && (

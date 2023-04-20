@@ -213,7 +213,7 @@ export const ScheduleDetail = () => {
                             setShowErrors
                           )
                         }}
-                        disabledDate={before && before(matchPlayDisabledDate)}
+                        shouldDisableDate={before && before(matchPlayDisabledDate)}
                       />
                       <div className='text-danger mt-2'>
                         {showErrors && 'Invalid Playoff dates'}

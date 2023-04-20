@@ -107,7 +107,7 @@ export const RescheduleSettings = () => {
                       className='w-100'
                       ranges={[]}
                       onChange={handleDateChange}
-                      disabledDate={(date) =>
+                      shouldDisableDate={(date) =>
                         !(date && date.valueOf() < startDateDisabledDate.valueOf())
                       }
                     />
