@@ -8,7 +8,7 @@ interface Props {
 const FormErrors: React.FC<Props> = ({errorMessages}) => {
   return errorMessages.length > 0 ? (
     <Alert variant='danger'>
-      <ul className='mb-0'>
+      <ul className='m-0 p-0' style={{listStyleType: "none"}}>
         {errorMessages.map((errorMessage, index) => {
           return <li key={index}>{errorMessage}</li>
         })}

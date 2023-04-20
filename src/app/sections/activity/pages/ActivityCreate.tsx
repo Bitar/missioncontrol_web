@@ -19,14 +19,15 @@ import {LocationDetail} from '../partials/activity-create-steps/LocationDetail'
 import {createActivity} from '../core/requests/ActivityRequests'
 import toast from 'react-hot-toast'
 import {useNavigate} from 'react-router-dom'
+import { extractErrors } from "../../../requests/helpers";
+import FormErrors from "../../../components/form/FormErrors";
 
 export const ActivityCreate = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)
 
   const [activityForm, setActivityForm] = useState<ActivityForm>(initialActivityForm())
   const [gameModes, setGameModes] = useState<GameMode[]>()
-  const [hasErrors, setHasErrors] = useState<boolean | undefined>(undefined)
-  const [alertMessage, setAlertMessage] = useState<string | undefined>(undefined)
+  const [formErrors, setFormErrors] = useState<string[]>([])
   const [isSubmitButton, setSubmitButton] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
   const stepper = useRef<StepperComponent | null>(null)
@@ -143,8 +144,7 @@ export const ActivityCreate = () => {
         setIsSubmitting(false)
         if (error.response) {
           // let obj = error.response.data.error.validation;
-          setAlertMessage('Error occurred!')
-          setHasErrors(true)
+          setFormErrors(extractErrors(error))
         }
       })
   }
@@ -191,7 +191,7 @@ export const ActivityCreate = () => {
             {() => (
               <Form onChange={handleOnChange} className='form' autoComplete='off'>
                 <KTCardBody>
-                  <FormErrorAlert hasErrors={hasErrors} message={alertMessage} />
+                  <FormErrors errorMessages={formErrors} />
                   <div className='current' data-kt-stepper-element='content'>
                     <GeneralDetail />
                   </div>
