@@ -182,6 +182,7 @@ export const ActivityCreate = () => {
             setActivityForm,
             gameModes,
             setGameModes,
+            method: 'create'
           }}>
           <Formik
             validationSchema={currentSchema}

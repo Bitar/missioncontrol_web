@@ -53,7 +53,6 @@ export const PlayoffDetail = () => {
   }, [activityForm?.schedule?.matchplay_dates])
 
   const onPlayoffsChange = (e: any) => {
-    console.log('i get called?')
     handlePlayoffsChange(e, activityForm, setActivityForm, setShowErrors, setPlayoffsRange)
   }
 

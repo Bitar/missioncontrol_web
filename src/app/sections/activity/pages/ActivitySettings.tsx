@@ -99,6 +99,7 @@ const ActivitySettings = () => {
                   setActivityForm,
                   gameModes,
                   setGameModes,
+                  method: 'edit'
                 }}>
                 <Tab.Content>
                   {activityForm && (

@@ -7,6 +7,7 @@ type ActivityFormContextProps = {
   setActivityForm: Dispatch<SetStateAction<ActivityForm>>
   gameModes: GameMode[] | undefined
   setGameModes: Dispatch<SetStateAction<GameMode[] | undefined>>
+  method: string
 }
 
 const initActivityFormContext = {
@@ -14,6 +15,7 @@ const initActivityFormContext = {
   setActivityForm: () => {},
   gameModes: undefined,
   setGameModes: () => {},
+  method: ''
 }
 
 export const ActivityFormContext = createContext<ActivityFormContextProps>(initActivityFormContext)

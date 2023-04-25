@@ -14,8 +14,6 @@ export const TeamDetail = () => {
   const {activity, setActivity} = useActivity()
   const {activityForm} = useActivityForm()
 
-  const handleOnChange = async () => {}
-
   const handleSubmit = async () => {
     let data = jsonToFormData(activityForm)
 
@@ -45,7 +43,7 @@ export const TeamDetail = () => {
         onSubmit={handleSubmit}
         enableReinitialize>
         {({isSubmitting}) => (
-          <Form onChange={handleOnChange} className='form' autoComplete='off'>
+          <Form className='form' autoComplete='off'>
             <KTCardBody>
               <TeamDetailForm />
             </KTCardBody>

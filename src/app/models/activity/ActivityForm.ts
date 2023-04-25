@@ -58,6 +58,7 @@ export function defaultTime(date: Date) {
 }
 
 export const initialActivityForm = (activityForm?: ActivityForm) => {
+
   let initActivityFormObj: any = {
     type_id: activityForm?.type_id || '',
     title: activityForm?.title || '',
