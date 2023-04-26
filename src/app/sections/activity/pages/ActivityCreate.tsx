@@ -27,7 +27,7 @@ export const ActivityCreate = () => {
   const [activityForm, setActivityForm] = useState<ActivityForm>(initialActivityForm())
   const [gameModes, setGameModes] = useState<GameMode[]>()
   const [formErrors, setFormErrors] = useState<string[]>([])
-  const [isSubmitButton, setSubmitButton] = useState(false)
+  const [submitButton, setSubmitButton] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
   const stepper = useRef<StepperComponent | null>(null)
   const [currentSchema, setCurrentSchema] = useState(activityCreateWizardSchema[0])
@@ -42,19 +42,9 @@ export const ActivityCreate = () => {
       return
     }
 
-    console.log('------------')
-    console.log('Before Previous')
-    console.log('current: ' + stepper.current.currentStepIndex)
-    console.log('total: ' + stepper.current.totalStepsNumber)
-
     stepper.current.goPrev()
     setCurrentSchema(activityCreateWizardSchema[stepper.current.currentStepIndex - 1])
-    setSubmitButton(stepper.current.currentStepIndex === stepper.current.totalStepsNumber - 1)
-
-    console.log('------------')
-    console.log('After Previous')
-    console.log('current: ' + stepper.current.currentStepIndex)
-    console.log('total: ' + stepper.current.totalStepsNumber)
+    setSubmitButton(stepper.current.currentStepIndex === stepper.current.totalStepsNumber)
   }
 
   const submitStep = () => {
@@ -69,15 +59,10 @@ export const ActivityCreate = () => {
     if (stepper.current.currentStepIndex < stepper.current.totalStepsNumber) {
       stepper.current.goNext()
       setCurrentSchema(activityCreateWizardSchema[stepper.current.currentStepIndex - 1])
-      setSubmitButton(stepper.current.currentStepIndex === stepper.current.totalStepsNumber - 1)
+      setSubmitButton(stepper.current.currentStepIndex === stepper.current.totalStepsNumber)
     } else {
       handleSubmit()
     }
-
-    console.log('------------')
-    console.log('Next')
-    console.log('current: ' + stepper.current.currentStepIndex)
-    console.log('total: ' + stepper.current.totalStepsNumber)
   }
 
   useEffect(() => {
@@ -163,18 +148,22 @@ export const ActivityCreate = () => {
       <div ref={stepperRef} className='stepper stepper-links d-flex flex-column'>
         <KTCardBody className='border-bottom'>
           <div className='stepper-nav'>
-            {ACTIVITY_CREATE_STEPPER_NAV.map((stepper, index) => (
+            {ACTIVITY_CREATE_STEPPER_NAV.map((singleStep, index) => (
               <div
                 key={`activity-create-stepper-${index}`}
                 className={clsx('stepper-item', {current: index === 0})}
-                data-kt-stepper-element='nav'>
+                data-kt-stepper-element='nav'
+                onClick={() => {
+                  if (!stepper.current) return
+                  stepper.current.goto(index + 1)
+                }}>
                 <div className='stepper-label'>
                   <div className='stepper-icon'>
-                    <i className={`${stepper?.icon} fs-2x`}></i>
+                    <i className={`${singleStep?.icon} fs-2x`}></i>
                   </div>
-                  <h3 className='stepper-title'>{stepper?.title}</h3>
+                  <h3 className='stepper-title'>{singleStep?.title}</h3>
                 </div>
-                {stepper?.has_next && (
+                {singleStep?.has_next && (
                   <div className='stepper-arrow'>
                     <KTSVG path='/media/icons/duotune/arr064.svg' className='svg-icon-2x' />
                   </div>
@@ -236,7 +225,7 @@ export const ActivityCreate = () => {
                     className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'
                     disabled={isSubmitting}>
                     <span className='indicator-label'>
-                      {isSubmitting ? 'Submitting' : isSubmitButton ? 'Submit' : 'Continue'}
+                      {isSubmitting ? 'Submitting' : submitButton ? 'Submit' : 'Continue'}
                     </span>
                     {isSubmitting && (
                       <span className='indicator-progress' style={{display: 'inline-block'}}>
