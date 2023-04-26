@@ -1,9 +1,9 @@
 import {
-  getElementIndex,
-  getUniqueIdWithPrefix,
-  EventHandlerUtil,
   DataUtil,
   DOMEventHandlerUtil,
+  EventHandlerUtil,
+  getElementIndex,
+  getUniqueIdWithPrefix,
 } from '../_utils'
 
 export interface IStepperOptions {

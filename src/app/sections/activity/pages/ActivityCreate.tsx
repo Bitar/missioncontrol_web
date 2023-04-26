@@ -42,11 +42,19 @@ export const ActivityCreate = () => {
       return
     }
 
-    setSubmitButton(stepper.current.currentStepIndex === stepper.current.totalStepsNumber! - 1)
+    console.log('------------')
+    console.log('Before Previous')
+    console.log('current: ' + stepper.current.currentStepIndex)
+    console.log('total: ' + stepper.current.totalStepsNumber)
 
     stepper.current.goPrev()
-
     setCurrentSchema(activityCreateWizardSchema[stepper.current.currentStepIndex - 1])
+    setSubmitButton(stepper.current.currentStepIndex === stepper.current.totalStepsNumber - 1)
+
+    console.log('------------')
+    console.log('After Previous')
+    console.log('current: ' + stepper.current.currentStepIndex)
+    console.log('total: ' + stepper.current.totalStepsNumber)
   }
 
   const submitStep = () => {
@@ -59,18 +67,17 @@ export const ActivityCreate = () => {
 
   const nextStep = (stepper: any) => {
     if (stepper.current.currentStepIndex < stepper.current.totalStepsNumber) {
-      setSubmitButton(stepper.current.currentStepIndex === stepper.current.totalStepsNumber! - 1)
-
-      setCurrentSchema(activityCreateWizardSchema[stepper.current.currentStepIndex])
-
-      if (stepper.current.currentStepIndex !== stepper.current.totalStepsNumber) {
-        stepper.current.goNext()
-      } else {
-        handleSubmit()
-      }
+      stepper.current.goNext()
+      setCurrentSchema(activityCreateWizardSchema[stepper.current.currentStepIndex - 1])
+      setSubmitButton(stepper.current.currentStepIndex === stepper.current.totalStepsNumber - 1)
     } else {
       handleSubmit()
     }
+
+    console.log('------------')
+    console.log('Next')
+    console.log('current: ' + stepper.current.currentStepIndex)
+    console.log('total: ' + stepper.current.totalStepsNumber)
   }
 
   useEffect(() => {
@@ -140,6 +147,8 @@ export const ActivityCreate = () => {
         }
       })
       .catch((error) => {
+        console.log(stepper.current?.currentStepIndex)
+
         setIsSubmitting(false)
         if (error.response) {
           // let obj = error.response.data.error.validation;
@@ -190,8 +199,10 @@ export const ActivityCreate = () => {
             enableReinitialize>
             {() => (
               <Form onChange={handleOnChange} className='form' autoComplete='off'>
-                <KTCardBody>
+                <KTCardBody className='pb-0'>
                   <FormErrors errorMessages={formErrors} />
+                </KTCardBody>
+                <KTCardBody>
                   <div className='current' data-kt-stepper-element='content'>
                     <GeneralDetail />
                   </div>
