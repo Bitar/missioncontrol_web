@@ -26,8 +26,8 @@ import {generatePageTitle} from '../../helpers/pageTitleGenerator'
 import {Sections} from '../../helpers/sections'
 import {PageTypes} from '../../helpers/variables'
 import {useMcApp} from '../../modules/general/McApp'
-import { useAuth } from "../../modules/auth";
-import { isSuperAdmin } from "../../models/iam/User";
+import {useAuth} from '../../modules/auth'
+import {isSuperAdmin} from '../../models/iam/User'
 
 const ActivityViewRoutes: FC = () => {
   const mcApp = useMcApp()
@@ -38,7 +38,7 @@ const ActivityViewRoutes: FC = () => {
   const [teams, setTeams] = useState<Team[] | undefined>()
   const navigate = useNavigate()
   const MatchRoutes = lazy(() => import('../match/MatchRoutes'))
-const {currentUser} = useAuth()
+  const {currentUser} = useAuth()
 
   const params = useParams()
 
@@ -69,8 +69,8 @@ const {currentUser} = useAuth()
     },
   ]
 
-  if(currentUser && !isSuperAdmin(currentUser)) {
-    activityViewBreadcrumbs = [];
+  if (currentUser && !isSuperAdmin(currentUser)) {
+    activityViewBreadcrumbs = []
   }
 
   useEffect(() => {

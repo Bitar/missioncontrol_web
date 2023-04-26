@@ -3,13 +3,14 @@ import React, {useEffect, useState} from 'react'
 import {getHome} from '../core/DashboardRequests'
 import {ActivitiesByDay, ActivitiesCreation} from './ActivitiesByDay'
 import {UserRegistrations} from './UsersRegistrations'
-import {UsersByDay} from './UsersByDay'
+import {UsersRegistrationsCohort} from './UsersRegistrationsCohort'
 import {Game} from '../../../models/game/Game'
 import {PopularGames} from './PopularGames'
 import {CommunitiesByBillingPlan, CommunitiesSubscriptions} from './CommunitiesByBillingPlan'
 import {Col, Row} from 'react-bootstrap'
 import {StatisticsWidget5} from './StatisticsWidget5'
 import {getColor} from '../../../helpers/MCHelper'
+import {MixedWidget1} from './MixedWidget1'
 
 export type PopularGamesType = {
   total: number
@@ -25,7 +26,12 @@ export type DashboardStuff = {
   commissioner_communities: number
   popular_games: PopularGamesType[]
   communities_billing_plan: CommunitiesSubscriptions[]
-  statistics: any[]
+  statistics: any
+  active_users: any
+  communities: any
+  users_daily: any[]
+  users_weekly: any[]
+  users_monthly: any[]
 }
 
 export const SuperAdmin = () => {
@@ -48,16 +54,31 @@ export const SuperAdmin = () => {
 
   const [statistics, setStatistics] = useState<any[]>([])
 
+  const [activeUsers, setActiveUsers] = useState<any>()
+  const [communityData, setCommunityData] = useState<any>()
+
+  const [userRegistrationDaily, setUserRegistrationDaily] = useState<any>()
+  const [userRegistrationWeekly, setUserRegistrationWeekly] = useState<any>()
+  const [userRegistrationMonthly, setUserRegistrationMonthly] = useState<any>()
+
   const getDashboardData = () => {
     getHome().then((response) => {
       if (response) {
         handleCommunitiesData(response.communities_creation)
         handleActivitiesData(response.activities_creation)
+
         handleUsersData(response.user_registrations)
+
+        setUserRegistrationDaily(response.users_daily)
+        setUserRegistrationWeekly(response.users_weekly)
+        setUserRegistrationMonthly(response.users_monthly)
+
         handlePopularGamesData(response.popular_games)
         handleCommunityBySubscription(response.communities_billing_plan)
         handleStatistics(response.statistics)
         handleStatistics(response.statistics)
+        setActiveUsers(response.active_users)
+        setCommunityData(response.communities)
       }
     })
   }
@@ -131,11 +152,14 @@ export const SuperAdmin = () => {
     setUsersByDayValues(values)
   }
 
-  const handleStatistics = (statistics: any[]) => {
+  const handleStatistics = (statistics: any) => {
     const keys = Object.keys(statistics)
 
     keys.forEach((key: any, index) => {
       statistics[key].color = getColor(index)
+      statistics[key].value = statistics[key].value.toLocaleString('en-us', {
+        minimumFractionDigits: 0,
+      })
     })
 
     setStatistics(statistics)
@@ -149,9 +173,29 @@ export const SuperAdmin = () => {
   return (
     <>
       <Row>
+        <Col lg={6}>
+          {activeUsers && (
+            <MixedWidget1
+              title={'Active Users'}
+              className='card-xl-stretch mb-xl-8'
+              color='danger'
+              data={activeUsers}
+            />
+          )}
+        </Col>
+        <Col lg={6}>
+          {activeUsers && (
+            <MixedWidget1
+              title={'Community'}
+              className='card-xl-stretch mb-xl-8'
+              color='info'
+              data={communityData}
+            />
+          )}
+        </Col>
         {Object.entries(statistics).map(([key, {label, value, color}]) => {
           return (
-            <Col lg={3} key={key}>
+            <Col lg={4} key={key}>
               <StatisticsWidget5
                 className='card-xl-stretch mb-xl-8'
                 faIcon='fas fa-users'
@@ -166,8 +210,18 @@ export const SuperAdmin = () => {
           )
         })}
       </Row>
-      <div className='row'>
-        <div className='col-xl-6'>
+      <Row>
+        <Col xl={12}>
+          {usersByDayDates.length > 0 && usersByDayValues.length > 0 && (
+            <UsersRegistrationsCohort
+              className='mb-xl-8'
+              daily={userRegistrationDaily}
+              weekly={userRegistrationWeekly}
+              monthly={userRegistrationMonthly}
+            />
+          )}
+        </Col>
+        <Col xl={6}>
           {communitiesSubscriptions.length > 0 && communitiesSubscriptionsValue.length > 0 && (
             <CommunitiesByBillingPlan
               className='mb-xl-8'
@@ -175,8 +229,8 @@ export const SuperAdmin = () => {
               dates={communitiesSubscriptions}
             />
           )}
-        </div>
-        <div className='col-xl-6'>
+        </Col>
+        <Col xl={6}>
           {activitiesByDayValues.length > 0 && activitiesByDayDates.length > 0 && (
             <ActivitiesByDay
               className='mb-xl-8'
@@ -185,8 +239,8 @@ export const SuperAdmin = () => {
               dates={activitiesByDayDates}
             />
           )}
-        </div>
-        <div className='col-xl-4'>
+        </Col>
+        <Col xl={6}>
           {communitySubscriptions.length > 0 && popularGamesActivities.length > 0 && (
             <PopularGames
               className={'mb-xl-8'}
@@ -194,13 +248,8 @@ export const SuperAdmin = () => {
               values={popularGamesActivities}
             />
           )}
-        </div>
-        <div className='col-xl-4'>
-          {usersByDayDates.length > 0 && usersByDayValues.length > 0 && (
-            <UsersByDay className='mb-xl-8' values={usersByDayValues} dates={usersByDayDates} />
-          )}
-        </div>
-        <div className='col-xl-4'>
+        </Col>
+        <Col xl={6}>
           {communityByDayValues.length > 0 && communityByDayDates.length > 0 && (
             <CommunitiesByDay
               className='mb-xl-8'
@@ -209,8 +258,8 @@ export const SuperAdmin = () => {
               dates={communityByDayDates}
             />
           )}
-        </div>
-      </div>
+        </Col>
+      </Row>
     </>
   )
 }

@@ -15,7 +15,7 @@ const initActivityFormContext = {
   setActivityForm: () => {},
   gameModes: undefined,
   setGameModes: () => {},
-  method: ''
+  method: '',
 }
 
 export const ActivityFormContext = createContext<ActivityFormContextProps>(initActivityFormContext)

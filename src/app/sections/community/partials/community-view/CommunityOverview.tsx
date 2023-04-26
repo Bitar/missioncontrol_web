@@ -6,7 +6,7 @@ import {getCommunityDashboard} from '../../../../pages/dashboard/core/DashboardR
 import {UserRegistrations} from '../../../../pages/dashboard/partials/UsersRegistrations'
 import {PopularGamesType} from '../../../../pages/dashboard/partials/SuperAdmin'
 import {PopularGames} from '../../../../pages/dashboard/partials/PopularGames'
-import {UsersByDay} from '../../../../pages/dashboard/partials/UsersByDay'
+import {UsersRegistrationsCohort} from '../../../../pages/dashboard/partials/UsersRegistrationsCohort'
 
 const CommunityOverview = () => {
   const {community} = useCommunity()
@@ -81,7 +81,11 @@ const CommunityOverview = () => {
         </Col>
         <Col xl={4}>
           {usersByDayDates.length > 0 && usersByDayValues.length > 0 && (
-            <UsersByDay className='mb-xl-8' values={usersByDayValues} dates={usersByDayDates} />
+            <UsersRegistrationsCohort
+              className='mb-xl-8'
+              values={usersByDayValues}
+              dates={usersByDayDates}
+            />
           )}
         </Col>
       </Row>

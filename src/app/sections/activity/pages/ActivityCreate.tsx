@@ -3,7 +3,6 @@ import React, {useEffect, useRef, useState} from 'react'
 import clsx from 'clsx'
 import {ActivityFormContext} from '../core/contexts/ActivityFormContext'
 import {Form, Formik} from 'formik'
-import {FormErrorAlert} from '../../../modules/errors/partials/FormErrorAlert'
 import {GeneralDetail} from '../partials/activity-create-steps/GeneralDetail'
 import {StepperComponent} from '../../../../_metronic/assets/ts/components'
 import {activityCreateWizardSchema} from '../core/validation/ActivitySchema'
@@ -19,8 +18,8 @@ import {LocationDetail} from '../partials/activity-create-steps/LocationDetail'
 import {createActivity} from '../core/requests/ActivityRequests'
 import toast from 'react-hot-toast'
 import {useNavigate} from 'react-router-dom'
-import { extractErrors } from "../../../requests/helpers";
-import FormErrors from "../../../components/form/FormErrors";
+import {extractErrors} from '../../../requests/helpers'
+import FormErrors from '../../../components/form/FormErrors'
 
 export const ActivityCreate = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)
@@ -182,7 +181,7 @@ export const ActivityCreate = () => {
             setActivityForm,
             gameModes,
             setGameModes,
-            method: 'create'
+            method: 'create',
           }}>
           <Formik
             validationSchema={currentSchema}

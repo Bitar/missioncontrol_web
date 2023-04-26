@@ -87,51 +87,20 @@ function getChartOptions(height: number, values?: number[], dates?: string[]): A
         horizontal: true,
       },
     },
-    // legend: {
-    //   show: false
-    // },
     dataLabels: {
       enabled: false,
     },
     fill: {
       colors: [baseColor],
     },
-    // stroke: {
-    //   curve: "smooth",
-    //   show: true,
-    //   width: 3,
-    //   colors: [baseColor]
-    // },
     xaxis: {
       categories: dates || [],
-      // axisBorder: {
-      //   show: false
-      // },
-      // axisTicks: {
-      //   show: false
-      // },
       labels: {
         style: {
           colors: labelColor,
           fontSize: '12px',
         },
       },
-      // crosshairs: {
-      //   position: "front",
-      //   stroke: {
-      //     color: baseColor,
-      //     width: 1,
-      //     dashArray: 3
-      //   }
-      // },
-      // tooltip: {
-      //   enabled: true,
-      //   formatter: undefined,
-      //   offsetY: 0,
-      //   style: {
-      //     fontSize: "12px"
-      //   }
-      // }
     },
     yaxis: {
       labels: {
@@ -141,27 +110,6 @@ function getChartOptions(height: number, values?: number[], dates?: string[]): A
         },
       },
     },
-    // states: {
-    //   normal: {
-    //     filter: {
-    //       type: "none",
-    //       value: 0
-    //     }
-    //   },
-    //   hover: {
-    //     filter: {
-    //       type: "none",
-    //       value: 0
-    //     }
-    //   },
-    //   active: {
-    //     allowMultipleDataPointsSelection: false,
-    //     filter: {
-    //       type: "none",
-    //       value: 0
-    //     }
-    //   }
-    // },
     tooltip: {
       style: {
         fontSize: '12px',
@@ -172,19 +120,5 @@ function getChartOptions(height: number, values?: number[], dates?: string[]): A
         },
       },
     },
-    // colors: [lightColor],
-    // grid: {
-    //   borderColor: borderColor,
-    //   strokeDashArray: 4,
-    //   yaxis: {
-    //     lines: {
-    //       show: true
-    //     }
-    //   }
-    // },
-    // markers: {
-    //   strokeColors: baseColor,
-    //   strokeWidth: 3
-    // }
   }
 }

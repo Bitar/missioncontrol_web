@@ -15,13 +15,13 @@ import {
   activityMatchPlayOnChange,
   activityRegistrationOnChange,
   isValidTournament,
-  updateActivityMatchPlayDates, updateActivityRegistrationDates
-} from "../../../../helpers/ActivityHelper";
+  updateActivityMatchPlayDates,
+  updateActivityRegistrationDates,
+} from '../../../../helpers/ActivityHelper'
 import moment from 'moment/moment'
 import {PlayoffDetail} from './PlayoffDetail'
 import {handleDayChange, handleFrequencyChange} from '../../../../helpers/PlayoffHelper'
 import {TournamentTeamCountText} from '../TournamentTeamCountText'
-import { useAuth } from "../../../../modules/auth";
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
@@ -36,7 +36,6 @@ export const ScheduleDetailForm = () => {
   const [showErrors, setShowErrors] = useState<boolean>(false)
   const [timeValue, setTimeValue] = useState<Date | null>()
   const [timeZones, setTimeZones] = useState<TimeZone[]>()
-  const {communityAdmin} = useAuth()
 
   useEffect(() => {
     getTimeZones().then((response) => {

@@ -89,11 +89,7 @@ function getChartOptions(height: number, values?: number[], dates?: string[]): A
       fontFamily: 'inherit',
       type: 'area',
       height: 350,
-      toolbar: {
-        show: false,
-      },
     },
-    plotOptions: {},
     legend: {
       show: false,
     },
