@@ -54,7 +54,7 @@ const UsersRegistrationsCohort: React.FC<Props> = ({
         break
       case 'week':
         setSubText('User registrations in the last 13 weeks.')
-        extractValues(weeklyData)
+        extractValues(weeklyData, "MMM DD, 'YY")
         break
       case 'month':
         setSubText('User registrations in the last 6 months.')

@@ -16,6 +16,7 @@ const AppRoutes: FC<React.PropsWithChildren<unknown>> = () => {
         <Route element={<App />}>
           <Route path='error/*' element={<ErrorsPage />} />
           <Route path='logout' element={<Logout />} />
+          <Route path='email-verify' element={<VerifyEmail />} />
           {currentUser ? (
             <>
               <Route path='/*' element={<PrivateRoutes />} />
@@ -23,7 +24,6 @@ const AppRoutes: FC<React.PropsWithChildren<unknown>> = () => {
             </>
           ) : (
             <>
-              <Route path='email-verify' element={<VerifyEmail />} />
               <Route path='auth/*' element={<AuthPage />} />
               <Route path='*' element={<Navigate to='/auth' />} />
             </>
