@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@main
+        uses: actions/checkout@dev
 
       - name: Setup Node.js (NPM)
         uses: actions/setup-node@master
@@ -41,7 +41,7 @@ jobs:
         run: yarn build
 
       - name: Archive Production Artifact
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@dev
         with:
           name: build
           path: build
@@ -53,10 +53,10 @@ jobs:
 
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@main
+        uses: actions/checkout@dev
 
       - name: Download Artifact
-        uses: actions/download-artifact@main
+        uses: actions/download-artifact@dev
         with:
           name: build
           path: .docker/build
