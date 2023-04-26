@@ -55,7 +55,7 @@ const CommunityActivities = () => {
   return community ? (
     <QueryRequestProvider>
       <QueryResponseProvider
-        id={QUERIES.COMMUNITIES_ACTIVITIES_LIST}
+        id={QUERIES.ACTIVITIES_LIST}
         requestFunction={getCommunityActivities}
         requestId={community?.id}>
         <ListViewProvider>
