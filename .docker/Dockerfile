@@ -17,6 +17,8 @@
 
 FROM node:16.15.1 as build
 WORKDIR /app
+RUN npm run install
+RUN npm run build
 
 COPY . ./
 
