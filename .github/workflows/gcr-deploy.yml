@@ -8,7 +8,7 @@ on:
 env:
   PROJECT_ID: ${{ secrets.GCR_PROJECT }}
   RUN_REGION: us-central1
-  SERVICE_NAME: mission-control-staging-2022
+  SERVICE_NAME: dev
 
 jobs:
   build:
