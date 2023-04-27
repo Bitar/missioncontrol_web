@@ -75,9 +75,7 @@ jobs:
       # Build and push image to Google Container Registry
       - name: Build & Push
         run: |-
-          gcloud builds submit \
-            --quiet \
-            --tag "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"
+          gcloud builds submit --quiet --tag "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"
         working-directory: .docker
 
       # Deploy image to Cloud Run
