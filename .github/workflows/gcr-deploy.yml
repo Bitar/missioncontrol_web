@@ -23,6 +23,8 @@ jobs:
         uses: actions/setup-node@master
         with:
           node-version: '12.x'
+        env:
+          FONTAWESOME_NPM_AUTH_TOKEN: ${{ inputs.FONTAWESOME_NPM_AUTH_TOKEN }}
 
       - name: Use cached node_modules
         uses: actions/cache@master
