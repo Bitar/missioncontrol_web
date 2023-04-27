@@ -18,9 +18,9 @@
 FROM node:16.15.1 as build
 WORKDIR /missioncontrol_web
 
-COPY --from=build /missioncontrol_web/package*.json .
-RUN npm install
-COPY . .
+#COPY --from=build /missioncontrol_web/package*.json .
+#RUN npm install
+COPY . ./
 
 RUN npm run build
 FROM nginx:1.19
