@@ -22,11 +22,13 @@ import {
   updateActivityRegistrationDates,
 } from '../../../../helpers/ActivityHelper'
 import {updateSchedule} from '../../core/requests/ActivitySettingsRequests'
-import moment from 'moment'
+import moment from 'moment-timezone'
 import {PlayoffDetail} from './PlayoffDetail'
 import {handleDayChange, handleFrequencyChange} from '../../../../helpers/PlayoffHelper'
 import {TournamentTeamCountText} from '../TournamentTeamCountText'
 import {activityScheduleSchema} from '../../core/validation/ActivitySchema'
+import {DateTime} from 'luxon'
+// import {DateTime} from 'luxon'
 
 const {before} = DateRangePicker
 
@@ -47,9 +49,25 @@ export const ScheduleDetail = () => {
   }, [])
 
   useEffect(() => {
-    if (activityForm?.schedule?.settings?.time) {
-      let time = createDateFrom(activityForm?.schedule?.settings?.time).toDate()
-      setTimeValue(time)
+    if (
+      activityForm?.schedule?.settings?.time &&
+      activityForm?.schedule?.settings?.timezone?.value
+    ) {
+      let time = moment(activityForm?.schedule?.settings?.time * 1000).tz(
+        activityForm?.schedule?.settings?.timezone?.value
+      )
+
+      let luxonTime = DateTime.fromObject({
+        year: time?.year(),
+        month: time?.month(),
+        day: time?.date(),
+        hour: time?.hour(),
+        minute: 0,
+        second: 0,
+      }).toJSDate()
+
+      // setTimeValue(time.toDate())
+      setTimeValue(luxonTime)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activityForm?.schedule?.settings?.time])

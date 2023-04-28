@@ -4,6 +4,7 @@ import {ActivityFee} from './ActivityFee'
 import {ActivityPrize} from './ActivityPrize'
 import {Activity} from './Activity'
 import {Platform} from '../game/Platform'
+import {TimeZone} from '../misc/TimeZone'
 
 export type ActivityForm = {
   id?: number
@@ -47,7 +48,7 @@ export type ActivityFormSchedule = {
   settings: {
     frequency: string | number
     time: number
-    timezone: string | number
+    timezone: TimeZone
     day: number
   }
 }
@@ -149,7 +150,7 @@ export const initialActivityFormByActivity = (activity?: Activity) => {
       settings: {
         frequency: activity?.settings.frequency || '',
         time: activity?.settings.time || 0,
-        timezone: activity?.settings.timezone_id || '',
+        timezone: activity?.settings.timezone || '',
         day: activity?.settings.day || '',
       },
     },

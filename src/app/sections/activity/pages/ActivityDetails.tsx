@@ -3,7 +3,6 @@ import {PlatformObject} from '../components/PlatformObject'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import CountUp from 'react-countup'
-import {createDateFrom} from '../../../helpers/ActivityHelper'
 import moment from 'moment'
 import momentTz from 'moment-timezone'
 
