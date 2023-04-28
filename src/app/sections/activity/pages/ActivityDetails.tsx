@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import CountUp from 'react-countup'
 import {createDateFrom} from '../../../helpers/ActivityHelper'
+import moment from 'moment'
 
 const ActivityDetails = () => {
   const {activity} = useActivity()
@@ -96,7 +97,7 @@ const ActivityDetails = () => {
 
             <div className='col-lg-8 d-flex align-items-center'>
               <span className='fw-bolder fs-6 me-2'>
-                {createDateFrom(activity?.settings?.time).format('hh:mm a')}{' '}
+                {moment(activity?.settings?.time * 1000).format('hh:mm a ')}
                 <span className='text-muted' style={{fontSize: '12px'}}>
                   ({activity?.settings?.timezone?.value})
                 </span>

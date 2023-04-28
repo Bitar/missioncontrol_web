@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react'
 import {Link, useLocation} from 'react-router-dom'
 import {BadgeCell} from '../../../modules/table/columns/BadgeCell'
-import {createDateFrom, formatActivityStatus} from '../../../helpers/ActivityHelper'
+import {formatActivityStatus} from '../../../helpers/ActivityHelper'
 import {KTCard, KTCardBody} from '../../../helpers/components'
 import clsx from 'clsx'
 import {useActivity} from '../core/contexts/ActivityContext'
@@ -9,6 +9,7 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import tz from 'dayjs/plugin/timezone'
 import AdvancedFormat from 'dayjs/plugin/advancedFormat'
+import moment from 'moment/moment'
 
 dayjs.extend(utc)
 dayjs.extend(AdvancedFormat)
@@ -124,14 +125,14 @@ const ActivityInfo: FC = () => {
                       </div>
                       <div className='fs-4 fw-bold'>
                         <span>
-                          {createDateFrom(activity?.registration_dates?.start_date).format(
-                            'DD MMM YY - hh:mm a'
+                          {moment(activity?.registration_dates?.start_date * 1000).format(
+                            "DD MMM 'YY - hh:mm a"
                           )}
                           <span className='mx-1'>
                             <i className='fa fa-arrow-circle-right text-mc-secondary'></i>
                           </span>
-                          {createDateFrom(activity?.registration_dates?.end_date).format(
-                            'DD MMM YY - hh:mm a'
+                          {moment(activity?.registration_dates?.end_date * 1000).format(
+                            "DD MMM 'YY - hh:mm a"
                           )}
                         </span>
                       </div>
@@ -144,14 +145,14 @@ const ActivityInfo: FC = () => {
                       </div>
                       <div className='fs-4 fw-bold'>
                         <span>
-                          {createDateFrom(activity?.matchplay_dates?.start_date).format(
-                            'DD MMM YY - hh:mm a'
+                          {moment(activity?.matchplay_dates?.start_date * 1000).format(
+                            "DD MMM 'YY - hh:mm a"
                           )}
                           <span className='mx-1'>
                             <i className='fa fa-arrow-circle-right text-mc-secondary'></i>
                           </span>
-                          {createDateFrom(activity?.matchplay_dates?.end_date).format(
-                            'DD MMM YY - hh:mm a'
+                          {moment(activity?.matchplay_dates?.end_date * 1000).format(
+                            "DD MMM 'YY - hh:mm a"
                           )}
                         </span>
                       </div>
@@ -164,14 +165,14 @@ const ActivityInfo: FC = () => {
                       </div>
                       <div className='fs-4 fw-bold'>
                         <span>
-                          {createDateFrom(activity?.playoff?.playoff_dates.start_date).format(
-                            'DD MMM YY - hh:mm a'
+                          {moment(activity?.playoff?.playoff_dates.start_date * 1000).format(
+                            "DD MMM 'YY - hh:mm a"
                           )}
                           <span className='mx-1'>
                             <i className='fa fa-arrow-circle-right text-mc-secondary'></i>
                           </span>
-                          {createDateFrom(activity?.playoff?.playoff_dates.end_date).format(
-                            'DD MMM YY - hh:mm a'
+                          {moment(activity?.playoff?.playoff_dates.end_date * 1000).format(
+                            "DD MMM 'YY - hh:mm a"
                           )}
                         </span>
                       </div>

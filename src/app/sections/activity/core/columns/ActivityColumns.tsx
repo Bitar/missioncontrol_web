@@ -10,6 +10,7 @@ import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import {BadgeCell} from '../../../../modules/table/columns/BadgeCell'
 import {useAccessControl} from '../../../../modules/auth/core/AuthPermission'
+import moment from 'moment'
 
 dayjs.extend(localizedFormat)
 
@@ -100,15 +101,17 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
           <div className='d-flex flex-column text-center'>
             <span className='text-gray-800 pe-none'>
               <div>
-                {createDateFrom(props.data[props.row.index]?.registration_dates?.start_date).format(
-                  'DD MMM YY hh:mm A'
+                {moment(props.data[props.row.index]?.registration_dates?.start_date * 1000).format(
+                  "DD MMM 'YY - hh:mm a"
                 )}
+                {props.data[props.row.index]?.settings?.timezone?.abbreviation}
               </div>
               <i className='fa fa-arrow-circle-right text-mc-secondary ps-2 pe-2'></i>
               <div>
-                {createDateFrom(props.data[props.row.index]?.registration_dates?.end_date).format(
-                  'DD MMM YY hh:mm A'
+                {moment(props.data[props.row.index]?.registration_dates?.end_date * 1000).format(
+                  "DD MMM 'YY - hh:mm a"
                 )}
+                {props.data[props.row.index]?.settings?.timezone?.abbreviation}
               </div>
             </span>
           </div>
@@ -126,15 +129,17 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
           <div className='d-flex flex-column text-center'>
             <span className='text-gray-800'>
               <div>
-                {createDateFrom(props.data[props.row.index]?.matchplay_dates?.start_date).format(
-                  'DD MMM YY hh:mm A'
+                {moment(props.data[props.row.index]?.matchplay_dates?.start_date * 1000).format(
+                  "DD MMM 'YY - hh:mm a"
                 )}
+                {props.data[props.row.index]?.settings?.timezone?.abbreviation}
               </div>
               <i className='fa fa-arrow-circle-right text-mc-secondary ps-2 pe-2'></i>
               <div>
-                {createDateFrom(props.data[props.row.index]?.matchplay_dates?.end_date).format(
-                  'DD MMM YY hh:mm A'
+                {moment(props.data[props.row.index]?.matchplay_dates?.end_date * 1000).format(
+                  "DD MMM 'YY - hh:mm a"
                 )}
+                {props.data[props.row.index]?.settings?.timezone?.abbreviation}
               </div>
             </span>
           </div>
@@ -142,6 +147,22 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
       )
     },
   },
+  // {
+  //   Header: (props) => <CustomHeader tableProps={props} title='Timezone' className='min-w-200px' />,
+  //   id: 'timezone',
+  //   defaultCanSort: false,
+  //   Cell: ({...props}) => {
+  //     return (
+  //       <div className='d-flex align-items-center'>
+  //         <div className='d-flex flex-column text-center'>
+  //           <span className='text-gray-800'>
+  //             {props.data[props.row.index]?.settings?.timezone?.abbreviation}
+  //           </span>
+  //         </div>
+  //       </div>
+  //     )
+  //   },
+  // },
   {
     Header: (props) => <CustomHeader tableProps={props} title='Fee' className='min-w-125px' />,
     id: 'fee',
