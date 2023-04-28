@@ -10,6 +10,7 @@ import utc from 'dayjs/plugin/utc'
 import tz from 'dayjs/plugin/timezone'
 import AdvancedFormat from 'dayjs/plugin/advancedFormat'
 import moment from 'moment/moment'
+import momentTz from 'moment-timezone'
 
 dayjs.extend(utc)
 dayjs.extend(AdvancedFormat)
@@ -22,11 +23,10 @@ type MenuLinkType = {
 }
 
 const ActivityInfo: FC = () => {
-  dayjs.extend(utc)
-
   const {activity} = useActivity()
   const location = useLocation()
   const [menuLinks, setMenuLinks] = useState<MenuLinkType[]>()
+  const timeZoneAbbr = moment.tz(momentTz.tz.guess()).zoneAbbr()
 
   const getStatus = (activityStatus: any) => {
     const {status, color} = formatActivityStatus(activityStatus)
@@ -126,14 +126,16 @@ const ActivityInfo: FC = () => {
                       <div className='fs-4 fw-bold'>
                         <span>
                           {moment(activity?.registration_dates?.start_date * 1000).format(
-                            "DD MMM 'YY - hh:mm a"
+                            "DD MMM 'YY - hh:mm a "
                           )}
+                          {timeZoneAbbr}
                           <span className='mx-1'>
                             <i className='fa fa-arrow-circle-right text-mc-secondary'></i>
                           </span>
                           {moment(activity?.registration_dates?.end_date * 1000).format(
-                            "DD MMM 'YY - hh:mm a"
+                            "DD MMM 'YY - hh:mm a "
                           )}
+                          {timeZoneAbbr}
                         </span>
                       </div>
                     </div>
@@ -146,14 +148,16 @@ const ActivityInfo: FC = () => {
                       <div className='fs-4 fw-bold'>
                         <span>
                           {moment(activity?.matchplay_dates?.start_date * 1000).format(
-                            "DD MMM 'YY - hh:mm a"
+                            "DD MMM 'YY - hh:mm a "
                           )}
+                          {timeZoneAbbr}
                           <span className='mx-1'>
                             <i className='fa fa-arrow-circle-right text-mc-secondary'></i>
                           </span>
                           {moment(activity?.matchplay_dates?.end_date * 1000).format(
-                            "DD MMM 'YY - hh:mm a"
+                            "DD MMM 'YY - hh:mm a "
                           )}
+                          {timeZoneAbbr}
                         </span>
                       </div>
                     </div>
@@ -166,14 +170,16 @@ const ActivityInfo: FC = () => {
                       <div className='fs-4 fw-bold'>
                         <span>
                           {moment(activity?.playoff?.playoff_dates.start_date * 1000).format(
-                            "DD MMM 'YY - hh:mm a"
+                            "DD MMM 'YY - hh:mm a "
                           )}
+                          {timeZoneAbbr}
                           <span className='mx-1'>
                             <i className='fa fa-arrow-circle-right text-mc-secondary'></i>
                           </span>
                           {moment(activity?.playoff?.playoff_dates.end_date * 1000).format(
-                            "DD MMM 'YY - hh:mm a"
+                            "DD MMM 'YY - hh:mm a "
                           )}
+                          {timeZoneAbbr}
                         </span>
                       </div>
                     </div>

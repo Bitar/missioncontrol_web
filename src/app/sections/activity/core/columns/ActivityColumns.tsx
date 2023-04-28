@@ -4,15 +4,12 @@ import {CustomHeader} from '../../../../modules/table/columns/CustomHeader'
 import {ActionsCell} from '../../../../modules/table/columns/ActionsCell'
 import {QUERIES, toAbsoluteUrl} from '../../../../../_metronic/helpers'
 import {Activity} from '../../../../models/activity/Activity'
-import {createDateFrom, formatActivityStatus} from '../../../../helpers/ActivityHelper'
+import {formatActivityStatus} from '../../../../helpers/ActivityHelper'
 import {Link} from 'react-router-dom'
-import dayjs from 'dayjs'
-import localizedFormat from 'dayjs/plugin/localizedFormat'
 import {BadgeCell} from '../../../../modules/table/columns/BadgeCell'
 import {useAccessControl} from '../../../../modules/auth/core/AuthPermission'
 import moment from 'moment'
-
-dayjs.extend(localizedFormat)
+import momentTz from 'moment-timezone'
 
 const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] = [
   {
@@ -96,22 +93,24 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
     id: 'registrationDates',
     defaultCanSort: false,
     Cell: ({...props}) => {
+      const timeZoneAbbr = moment.tz(momentTz.tz.guess()).zoneAbbr()
+
       return (
         <div className='d-flex align-items-center'>
           <div className='d-flex flex-column text-center'>
             <span className='text-gray-800 pe-none'>
               <div>
                 {moment(props.data[props.row.index]?.registration_dates?.start_date * 1000).format(
-                  "DD MMM 'YY - hh:mm a"
+                  "DD MMM 'YY - hh:mm a "
                 )}
-                {props.data[props.row.index]?.settings?.timezone?.abbreviation}
+                {timeZoneAbbr}
               </div>
               <i className='fa fa-arrow-circle-right text-mc-secondary ps-2 pe-2'></i>
               <div>
                 {moment(props.data[props.row.index]?.registration_dates?.end_date * 1000).format(
-                  "DD MMM 'YY - hh:mm a"
+                  "DD MMM 'YY - hh:mm a "
                 )}
-                {props.data[props.row.index]?.settings?.timezone?.abbreviation}
+                {timeZoneAbbr}
               </div>
             </span>
           </div>
@@ -124,22 +123,24 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
     id: 'matchPlayDates',
     defaultCanSort: false,
     Cell: ({...props}) => {
+      const timeZoneAbbr = moment.tz(momentTz.tz.guess()).zoneAbbr()
+
       return (
         <div className='d-flex align-items-center'>
           <div className='d-flex flex-column text-center'>
             <span className='text-gray-800'>
               <div>
                 {moment(props.data[props.row.index]?.matchplay_dates?.start_date * 1000).format(
-                  "DD MMM 'YY - hh:mm a"
+                  "DD MMM 'YY - hh:mm a "
                 )}
-                {props.data[props.row.index]?.settings?.timezone?.abbreviation}
+                {timeZoneAbbr}
               </div>
               <i className='fa fa-arrow-circle-right text-mc-secondary ps-2 pe-2'></i>
               <div>
                 {moment(props.data[props.row.index]?.matchplay_dates?.end_date * 1000).format(
-                  "DD MMM 'YY - hh:mm a"
+                  "DD MMM 'YY - hh:mm a "
                 )}
-                {props.data[props.row.index]?.settings?.timezone?.abbreviation}
+                {timeZoneAbbr}
               </div>
             </span>
           </div>
@@ -186,7 +187,7 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
     Cell: ({...props}) => (
       <div className='text-center'>
         <span className='text-gray-800 pe-none mb-1'>
-          {dayjs(new Date(props.data[props.row.index].created_at * 1000)).format('D MMM, YYYY')}
+          {moment(props.data[props.row.index].created_at * 1000).format('D MMM, YYYY')}
         </span>
       </div>
     ),
@@ -200,9 +201,7 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
     Cell: ({...props}) => (
       <div className='text-center'>
         <span className='text-gray-800 pe-none mb-1'>
-          {dayjs(new Date(props.data[props.row.index].updated_at * 1000)).format(
-            'D MMM, YYYY [at] h:mm A'
-          )}
+          {moment(props.data[props.row.index].created_at * 1000).format('D MMM, YYYY [at] h:mm A')}
         </span>
       </div>
     ),

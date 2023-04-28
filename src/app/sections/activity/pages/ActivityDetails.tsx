@@ -5,6 +5,7 @@ import utc from 'dayjs/plugin/utc'
 import CountUp from 'react-countup'
 import {createDateFrom} from '../../../helpers/ActivityHelper'
 import moment from 'moment'
+import momentTz from 'moment-timezone'
 
 const ActivityDetails = () => {
   const {activity} = useActivity()
@@ -99,7 +100,7 @@ const ActivityDetails = () => {
               <span className='fw-bolder fs-6 me-2'>
                 {moment(activity?.settings?.time * 1000).format('hh:mm a ')}
                 <span className='text-muted' style={{fontSize: '12px'}}>
-                  ({activity?.settings?.timezone?.value})
+                  ({moment.tz(momentTz.tz.guess()).zoneAbbr()})
                 </span>
               </span>
             </div>
