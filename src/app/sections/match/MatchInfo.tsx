@@ -10,6 +10,7 @@ import Swal from 'sweetalert2'
 import {useMatch} from './core/MatchContext'
 import {useActivity} from '../activity/core/contexts/ActivityContext'
 import {MatchActions} from './partials/MatchActions'
+import {DateTime} from 'luxon'
 
 const MatchInfo = () => {
   const {activity} = useActivity()
@@ -104,9 +105,11 @@ const MatchInfo = () => {
                   {match?.teams[0]?.result?.total_score}
                 </div>
                 <div className='fs-6 fw-semibold text-gray-600 px-5'>
-                  <p className='m-0'>{createDateFrom(match?.start_date).format('hh:mm a')}</p>
+                  <p className='m-0'>
+                    {DateTime.fromSeconds(match?.start_date).toFormat('hh:mm a ZZZZ')}
+                  </p>
                   <p className='mb-1'>
-                    {createDateFrom(match?.start_date).format('ddd, MMM DD, YYYY')}
+                    {DateTime.fromSeconds(match?.start_date).toFormat('ccc, DD')}
                   </p>
                   <p className='m-0'>
                     <span className={'badge badge-' + getStatus(match?.status)['color']}>
