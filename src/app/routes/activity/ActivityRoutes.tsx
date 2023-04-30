@@ -46,7 +46,7 @@ const ActivityRoutes: FC = () => {
         path='/:id/*'
         element={
           <SuspenseView>
-            <PageTitle breadcrumbs={activityBreadCrumbs}>{'View Community'}</PageTitle>
+            <PageTitle breadcrumbs={activityBreadCrumbs}>{'View Activity'}</PageTitle>
             <ActivityViewRoutes />
           </SuspenseView>
         }

@@ -11,6 +11,7 @@ import tz from 'dayjs/plugin/timezone'
 import AdvancedFormat from 'dayjs/plugin/advancedFormat'
 import moment from 'moment/moment'
 import momentTz from 'moment-timezone'
+import {DateTime} from 'luxon'
 
 dayjs.extend(utc)
 dayjs.extend(AdvancedFormat)
@@ -125,17 +126,17 @@ const ActivityInfo: FC = () => {
                       </div>
                       <div className='fs-4 fw-bold'>
                         <span>
-                          {moment(activity?.registration_dates?.start_date * 1000).format(
-                            "DD MMM 'YY - hh:mm a "
-                          )}
-                          {timeZoneAbbr}
-                          <span className='mx-1'>
+                          {DateTime.fromSeconds(
+                            activity?.registration_dates?.start_date
+                          ).toLocaleString(DateTime.DATETIME_MED)}
+                          {' ' + timeZoneAbbr}
+                          <span className='mx-3'>
                             <i className='fa fa-arrow-circle-right text-mc-secondary'></i>
                           </span>
-                          {moment(activity?.registration_dates?.end_date * 1000).format(
-                            "DD MMM 'YY - hh:mm a "
-                          )}
-                          {timeZoneAbbr}
+                          {DateTime.fromSeconds(
+                            activity?.registration_dates?.end_date
+                          ).toLocaleString(DateTime.DATETIME_MED)}
+                          {' ' + timeZoneAbbr}
                         </span>
                       </div>
                     </div>
@@ -147,17 +148,17 @@ const ActivityInfo: FC = () => {
                       </div>
                       <div className='fs-4 fw-bold'>
                         <span>
-                          {moment(activity?.matchplay_dates?.start_date * 1000).format(
-                            "DD MMM 'YY - hh:mm a "
-                          )}
-                          {timeZoneAbbr}
-                          <span className='mx-1'>
+                          {DateTime.fromSeconds(
+                            activity?.matchplay_dates?.start_date
+                          ).toLocaleString(DateTime.DATETIME_MED)}
+                          {' ' + timeZoneAbbr}
+                          <span className='mx-3'>
                             <i className='fa fa-arrow-circle-right text-mc-secondary'></i>
                           </span>
-                          {moment(activity?.matchplay_dates?.end_date * 1000).format(
-                            "DD MMM 'YY - hh:mm a "
+                          {DateTime.fromSeconds(activity?.matchplay_dates?.end_date).toLocaleString(
+                            DateTime.DATETIME_MED
                           )}
-                          {timeZoneAbbr}
+                          {' ' + timeZoneAbbr}
                         </span>
                       </div>
                     </div>
@@ -169,17 +170,17 @@ const ActivityInfo: FC = () => {
                       </div>
                       <div className='fs-4 fw-bold'>
                         <span>
-                          {moment(activity?.playoff?.playoff_dates.start_date * 1000).format(
-                            "DD MMM 'YY - hh:mm a "
-                          )}
-                          {timeZoneAbbr}
-                          <span className='mx-1'>
+                          {DateTime.fromSeconds(
+                            activity?.playoff?.playoff_dates.start_date
+                          ).toLocaleString(DateTime.DATETIME_MED)}
+                          {' ' + timeZoneAbbr}
+                          <span className='mx-3'>
                             <i className='fa fa-arrow-circle-right text-mc-secondary'></i>
                           </span>
-                          {moment(activity?.playoff?.playoff_dates.end_date * 1000).format(
-                            "DD MMM 'YY - hh:mm a "
-                          )}
-                          {timeZoneAbbr}
+                          {DateTime.fromSeconds(
+                            activity?.playoff?.playoff_dates.end_date
+                          ).toLocaleString(DateTime.DATETIME_MED)}
+                          {' ' + timeZoneAbbr}
                         </span>
                       </div>
                     </div>

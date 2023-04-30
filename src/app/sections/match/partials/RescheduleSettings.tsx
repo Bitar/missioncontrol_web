@@ -5,7 +5,7 @@ import {FormAction} from '../../../helpers/form/FormAction'
 import React, {useEffect, useState} from 'react'
 import {useMatch} from '../core/MatchContext'
 import {DatePicker} from 'rsuite'
-import {createDateFrom} from '../../../helpers/ActivityHelper'
+import {shiftDateToUtc} from '../../../helpers/ActivityHelper'
 import {defaultTime} from '../../../models/activity/ActivityForm'
 import moment from 'moment/moment'
 import * as Yup from 'yup'
@@ -62,8 +62,9 @@ export const RescheduleSettings = () => {
   }
 
   useEffect(() => {
-    if (match?.start_date) {
-      let startDate = createDateFrom(match?.start_date).toDate()
+    if (match?.start_date && activity?.settings?.timezone?.value) {
+      let startDate = shiftDateToUtc(match?.start_date, activity?.settings?.timezone?.value)
+
       setTimeValue(startDate)
       setStartDate(startDate)
       updateData({start_date: match?.start_date, time: match?.start_date}, setMatchForm, matchForm)
@@ -73,7 +74,10 @@ export const RescheduleSettings = () => {
 
   useEffect(() => {
     if (activity?.matchplay_dates?.end_date) {
-      let endDate = createDateFrom(activity?.matchplay_dates?.end_date).toDate()
+      let endDate = shiftDateToUtc(
+        activity?.matchplay_dates?.end_date,
+        activity?.settings?.timezone?.value
+      )
       let disabledEndDate = new Date(endDate)
       disabledEndDate.setDate(endDate.getDate() + 1)
 

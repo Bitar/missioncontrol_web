@@ -2,7 +2,7 @@ import {updateData} from './form/FormHelper'
 import {ActivityForm} from '../models/activity/ActivityForm'
 import React, {Dispatch, SetStateAction} from 'react'
 import {DateRange} from 'rsuite/esm/DateRangePicker/types'
-import {countDaysOfWeekJS, createDateFrom, getDaysBetweenDates} from './ActivityHelper'
+import {countDaysOfWeekJS, getDaysBetweenDates, shiftDateToUtc} from './ActivityHelper'
 
 export const onInputMaskChange = ({nextState}: any, activityForm: ActivityForm | undefined) => {
   // Get the input value without the formatting characters
@@ -138,9 +138,16 @@ export const updatePlayoffDates = (
     activityForm?.playoff?.playoff_dates?.start_date > 0 &&
     activityForm?.playoff?.playoff_dates?.end_date > 0
   ) {
-    let playoffStartDate = createDateFrom(activityForm?.playoff?.playoff_dates?.start_date).toDate()
-    let playEndDate = createDateFrom(activityForm?.playoff?.playoff_dates?.end_date).toDate()
-    setPlayoffsRange([playoffStartDate, playEndDate])
+    let startDate = shiftDateToUtc(
+      activityForm?.playoff?.playoff_dates?.start_date,
+      activityForm?.schedule?.settings?.timezone?.value
+    )
+    let endDate = shiftDateToUtc(
+      activityForm?.playoff?.playoff_dates?.end_date,
+      activityForm?.schedule?.settings?.timezone?.value
+    )
+
+    setPlayoffsRange([startDate, endDate])
   } else {
     setPlayoffsRange(null)
   }

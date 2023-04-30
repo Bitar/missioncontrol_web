@@ -16,8 +16,8 @@ import {getTimeZones} from '../../../misc/core/_requests'
 import {
   activityMatchPlayOnChange,
   activityRegistrationOnChange,
-  createDateFrom,
   isValidTournament,
+  shiftDateToUtc,
   updateActivityMatchPlayDates,
   updateActivityRegistrationDates,
 } from '../../../../helpers/ActivityHelper'
@@ -27,8 +27,6 @@ import {PlayoffDetail} from './PlayoffDetail'
 import {handleDayChange, handleFrequencyChange} from '../../../../helpers/PlayoffHelper'
 import {TournamentTeamCountText} from '../TournamentTeamCountText'
 import {activityScheduleSchema} from '../../core/validation/ActivitySchema'
-import {DateTime} from 'luxon'
-// import {DateTime} from 'luxon'
 
 const {before} = DateRangePicker
 
@@ -53,21 +51,12 @@ export const ScheduleDetail = () => {
       activityForm?.schedule?.settings?.time &&
       activityForm?.schedule?.settings?.timezone?.value
     ) {
-      let time = moment(activityForm?.schedule?.settings?.time * 1000).tz(
+      let time = shiftDateToUtc(
+        activityForm?.schedule?.settings?.time,
         activityForm?.schedule?.settings?.timezone?.value
       )
 
-      let luxonTime = DateTime.fromObject({
-        year: time?.year(),
-        month: time?.month(),
-        day: time?.date(),
-        hour: time?.hour(),
-        minute: 0,
-        second: 0,
-      }).toJSDate()
-
-      // setTimeValue(time.toDate())
-      setTimeValue(luxonTime)
+      setTimeValue(time)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activityForm?.schedule?.settings?.time])
@@ -300,7 +289,8 @@ export const ScheduleDetail = () => {
                         placeholder={'Choose a Timezone'}
                         value={
                           timeZones?.filter(
-                            (timezone) => timezone.id === activityForm?.schedule?.settings?.timezone
+                            (timezone) =>
+                              timezone.id === activityForm?.schedule?.settings?.timezone?.id
                           )[0]
                         }
                         options={timeZones}

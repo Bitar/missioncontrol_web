@@ -7,6 +7,7 @@ import {updateData} from './form/FormHelper'
 import {ActivityForm} from '../models/activity/ActivityForm'
 import {Dispatch, SetStateAction} from 'react'
 import {DateRange} from 'rsuite/esm/DateRangePicker/types'
+import {DateTime} from 'luxon'
 
 dayjs.extend(utc)
 dayjs.extend(tz)
@@ -75,6 +76,18 @@ export const formatMatchStatus = (statusId: number) => {
   }
 
   return {status, color}
+}
+export const shiftDateToUtc = (timestamp: number, timeZone: string) => {
+  let luxonDate = DateTime.fromSeconds(timestamp).setZone(timeZone)
+
+  return DateTime.fromObject({
+    year: luxonDate?.year,
+    month: luxonDate?.month,
+    day: luxonDate?.day,
+    hour: luxonDate?.hour,
+    minute: luxonDate?.minute,
+    second: luxonDate?.second,
+  }).toJSDate()
 }
 export const createDateFrom = (timestamp: number) => {
   let UTCRegStartDate = moment(timestamp * 1000).utc(false)
@@ -152,8 +165,15 @@ export const updateActivityMatchPlayDates = (
     activityForm?.schedule?.matchplay_dates?.start_date > 0 &&
     activityForm?.schedule?.matchplay_dates?.end_date > 0
   ) {
-    let startDate = createDateFrom(activityForm?.schedule?.matchplay_dates?.start_date).toDate()
-    let endDate = createDateFrom(activityForm?.schedule?.matchplay_dates?.end_date).toDate()
+    let startDate = shiftDateToUtc(
+      activityForm?.schedule?.matchplay_dates?.start_date,
+      activityForm?.schedule?.settings?.timezone?.value
+    )
+    let endDate = shiftDateToUtc(
+      activityForm?.schedule?.matchplay_dates?.end_date,
+      activityForm?.schedule?.settings?.timezone?.value
+    )
+
     setMatchPlayValue([startDate, endDate])
   } else {
     setMatchPlayValue(null)
@@ -171,8 +191,15 @@ export const updateActivityRegistrationDates = (
     activityForm?.schedule?.registration_dates?.start_date > 0 &&
     activityForm?.schedule?.registration_dates?.end_date > 0
   ) {
-    let startDate = createDateFrom(activityForm?.schedule?.registration_dates?.start_date).toDate()
-    let endDate = createDateFrom(activityForm?.schedule?.registration_dates?.end_date).toDate()
+    let startDate = shiftDateToUtc(
+      activityForm?.schedule?.registration_dates?.start_date,
+      activityForm?.schedule?.settings?.timezone?.value
+    )
+    let endDate = shiftDateToUtc(
+      activityForm?.schedule?.registration_dates?.end_date,
+      activityForm?.schedule?.settings?.timezone?.value
+    )
+
     setRegistrationValue([startDate, endDate])
 
     let disabledEndDate = new Date(endDate)
