@@ -213,6 +213,14 @@
   --bs-aspect-ratio: 52.36%;
 }
 
+.ratio-528x704 {
+  position: relative;
+  aspect-ratio: 528 / 704;
+  //--bs-aspect-ratio: .75%;
+}
+
+
+
 .chat-message {
   .chat-message-delete {
     display: none;

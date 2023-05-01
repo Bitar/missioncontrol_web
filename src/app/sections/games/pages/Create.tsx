@@ -3,46 +3,22 @@ import useDebounce from '../hooks/useDebounce'
 import {useNavigate} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {Igdb} from '../../../models/game/Igdb'
-import {createGame, getIgdb} from '../core/GameRequests'
+import {createGameIgdb, getIgdb} from '../core/GameRequests'
 import Swal from 'sweetalert2'
 import {KTCard, KTCardBody, KTCardHeader} from '../../../helpers/components'
 import {useMcApp} from '../../../modules/general/McApp'
 import {generatePageTitle} from '../../../helpers/pageTitleGenerator'
 import {Sections} from '../../../helpers/sections'
 import {PageTypes} from '../../../helpers/variables'
+import {Col, Row} from 'react-bootstrap'
+import clsx from 'clsx'
+import GameCreateIgdb from './GameCreateIgdb'
+import GameCreateTraditional from './GameCreateTraditional'
 
 const GameCreate = () => {
-  const [games, setGames] = useState<Igdb[] | undefined>([])
-  const [search, setSearch] = useState<string>('')
-  const debouncedSearch = useDebounce(search, 400)
-  const navigate = useNavigate()
+  const [gameCreateType, setGameCreateType] = useState<number>(1)
+
   const mcApp = useMcApp()
-
-  useEffect(() => {
-    if (debouncedSearch !== undefined && debouncedSearch !== '') {
-      getIgdb(search).then((response) => {
-        setGames(response.data)
-      })
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedSearch])
-
-  const sendRequest = (igdb_id: any) => {
-    Swal.fire({
-      title: 'Are you sure you want to add this Game?',
-      icon: 'info',
-      showCancelButton: true,
-      confirmButtonColor: '#009ef7',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, Add it!',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        createGame(igdb_id).then((response) => navigate('/games/' + response?.id))
-      } else if (result.isDenied) {
-        Swal.fire('Game not added', '', 'error')
-      }
-    })
-  }
 
   useEffect(() => {
     mcApp.setPageTitle(generatePageTitle(Sections.GAMES, PageTypes.CREATE))
@@ -59,46 +35,48 @@ const GameCreate = () => {
 
       <KTCardBody className='py-4'>
         <div className='d-flex flex-column pt-5'>
-          <div className='row'>
-            <label className='col-lg-4 col-form-label required fw-bold fs-6'>Game</label>
-            <div className='col-lg-8 fv-row'>
-              <input
-                type='text'
-                name='title'
-                className='form-control mb-3 mb-lg-0'
-                placeholder={'Title'}
-                onChange={(e: any) => setSearch(e.target.value)}
-              />
-            </div>
-          </div>
+          <Row>
+            <Col lg={6}>
+              <div
+                className={clsx('bg-active-mc-secondary cursor-pointer mb-5', {
+                  active: gameCreateType === 1,
+                })}
+                onClick={(event) => setGameCreateType(1)}>
+                <div
+                  className={clsx(
+                    'align-items-center p-5 text-center bg-secondary bg-active-mc-secondary text-mc-primary text-active-white',
+                    {active: gameCreateType === 1}
+                  )}>
+                  <span className='d-flex flex-column'>
+                    <span className='fw-bolder fs-6'>Twitch Game Search</span>
 
-          <div className='row mt-6 g-6 g-xl-9'>
-            {games?.map((game) => (
-              <div className='col-md-6 col-lg-4 col-xl-3' key={game.id}>
-                <div className='card card-stretch card-bordered mb-5'>
-                  <div
-                    className='card-header rounded bgi-no-repeat bgi-size-cover bgi-position-y-top bgi-position-x-center align-items-start h-350px'
-                    style={{
-                      backgroundImage: `url(${
-                        game.image ? game.image : toAbsoluteUrl('/media/svg/AstroLearn.svg')
-                      })`,
-                    }}
-                    data-theme='light'
-                  />
-
-                  <div className='card-body cursor-pointer' onClick={() => sendRequest(game.id)}>
-                    <div className='game-container'>
-                      <div className='game-title'>
-                        <div className='text-center fs-5 fw-bold text-black mt-auto '>
-                          {game.title}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                    <span className='fs-7'>Search igdb database for games.</span>
+                  </span>
                 </div>
               </div>
-            ))}
-          </div>
+            </Col>
+            <Col lg={6}>
+              <div
+                className={clsx('bg-active-mc-secondary cursor-pointer mb-5', {
+                  active: gameCreateType === 2,
+                })}
+                onClick={(event) => setGameCreateType(2)}>
+                <div
+                  className={clsx(
+                    'align-items-center p-5 text-center bg-secondary bg-active-mc-secondary text-mc-primary text-active-white',
+                    {active: gameCreateType === 2}
+                  )}>
+                  <span className='d-flex flex-column'>
+                    <span className='fw-bolder fs-6'>Traditional Games??</span>
+
+                    <span className='fs-7'>Any game that can't be find on igdb maybe?.</span>
+                  </span>
+                </div>
+              </div>
+            </Col>
+          </Row>
+
+          {gameCreateType === 1 ? <GameCreateIgdb /> : <GameCreateTraditional />}
         </div>
       </KTCardBody>
     </KTCard>

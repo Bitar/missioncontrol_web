@@ -12,7 +12,7 @@ export const EXPORT_ENDPOINT = `${API_URL}/export/games`
 
 const getIgdb = (query: string): Promise<IgdbQueryResponse> => {
   return axios
-    .get(`${ENDPOINT}/igdb/search?filter[name]=${query}`)
+    .get(`${ENDPOINT}/igdb?filter[name]=${query}`)
     .then((response: AxiosResponse<IgdbQueryResponse>) => response.data)
 }
 
@@ -43,7 +43,14 @@ const getGameById = (id: any, query?: string): Promise<Game | undefined> => {
     .then((response: Response<Game>) => response.data)
 }
 
-const createGame = (igdb_id: number): Promise<Game | undefined> => {
+export const createGame = (formData: FormData): Promise<Game | undefined> => {
+  return axios
+    .post(`${ENDPOINT}`, formData)
+    .then((response: AxiosResponse<Response<Game>>) => response.data)
+    .then((response: Response<Game>) => response.data)
+}
+
+const createGameIgdb = (igdb_id: number): Promise<Game | undefined> => {
   let formData = new FormData()
   formData.append('igdb_id', igdb_id + '')
 
@@ -75,7 +82,7 @@ const getAllGamePlatforms = (gameId: any): Promise<PlatformQueryResponse> => {
 export {
   getGames,
   getGameById,
-  createGame,
+  createGameIgdb,
   updateGame,
   getIgdb,
   getAllGames,
