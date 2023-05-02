@@ -31,7 +31,7 @@ export const RescheduleSettings = () => {
   const {match, setMatch} = useMatch()
   const {activity} = useActivity()
   const [startDate, setStartDate] = useState<Date>(new Date())
-  const [timeValue, setTimeValue] = useState<Date | null>(defaultTime(new Date()))
+  const [timeValue, setTimeValue] = useState<Date | null>(new Date())
   const [startDateDisabledDate, setStartDateDisabledDate] = useState<Date>(new Date())
 
   const handleSubmit = async () => {
@@ -55,15 +55,17 @@ export const RescheduleSettings = () => {
   }
 
   useEffect(() => {
-    if (match?.start_date && activity?.settings?.timezone?.value) {
-      let startDate = shiftDateToUtc(match?.start_date, activity?.settings?.timezone?.value)
+    if (match?.start_date && activity?.settings?.timezone?.value && activity?.settings?.time) {
+      let startDate = shiftDateToUtc(match?.start_date)
 
-      setTimeValue(startDate)
+      let time = shiftDateToUtc(match?.start_date, activity?.settings?.timezone?.value)
+
+      setTimeValue(time)
       setStartDate(startDate)
-      updateData({start_date: match?.start_date, time: match?.start_date}, setMatchForm, matchForm)
+      updateData({start_date: match?.start_date}, setMatchForm, matchForm)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [match?.start_date])
+  }, [match?.start_date, activity?.settings?.time, activity?.settings?.timezone?.value])
 
   useEffect(() => {
     if (activity?.matchplay_dates?.end_date) {
@@ -121,12 +123,12 @@ export const RescheduleSettings = () => {
                       cleanable={false}
                       value={timeValue}
                       format='hh:mm aa'
-                      placement={'topStart'}
                       ranges={[]}
                       hideMinutes={(minute) => minute % 5 !== 0}
                       className='w-100'
                       placeholder='Select Time'
                       showMeridian={true}
+                      placement={'topStart'}
                       onChange={(value) => {
                         if (value?.getTime()) {
                           let time = moment(value.getTime()).utc(true).unix()
