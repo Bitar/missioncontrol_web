@@ -69,7 +69,7 @@ export const activityScheduleSchema = Yup.object().shape({
         is: '2',
         then: Yup.string().required('Day required'),
       }),
-      timezone: Yup.string().required('Timezone is required'),
+      timezone: Yup.mixed().required('Timezone is required'),
     }),
   }),
 })

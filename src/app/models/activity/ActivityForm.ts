@@ -150,7 +150,7 @@ export const initialActivityFormByActivity = (activity?: Activity) => {
       settings: {
         frequency: activity?.settings.frequency || '',
         time: activity?.settings.time || 0,
-        timezone: activity?.settings.timezone || '',
+        timezone: activity?.settings.timezone.id || '',
         day: activity?.settings.day || '',
       },
     },
