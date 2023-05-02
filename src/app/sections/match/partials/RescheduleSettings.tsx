@@ -48,15 +48,8 @@ export const RescheduleSettings = () => {
 
   const handleDateChange = (value: Date | null) => {
     if (value?.getTime()) {
-      let start_date = moment(value.getTime())
-        .set({
-          hour: 0,
-          minute: 0,
-          second: 0,
-        })
-        .utc(true)
-        .unix()
-      updateData({start_date: start_date}, setMatchForm, matchForm)
+      let startDate: any = shiftDateToUtc(value.getTime() / 1000)
+      updateData({start_date: startDate.getTime() / 1000}, setMatchForm, matchForm)
       setStartDate(value)
     }
   }

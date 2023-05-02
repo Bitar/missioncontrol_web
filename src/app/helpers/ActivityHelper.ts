@@ -145,18 +145,7 @@ export const activityRegistrationOnChange = (
       setRegistrationValue(null)
     } else {
       let startDate = shiftDateToUtc(new Date(e[0]).getTime() / 1000)
-      let startDateNew = shiftDateToUtcStartDate(new Date(e[0]).getTime() / 1000)
       let endDate = shiftDateToUtc(new Date(e[1]).getTime() / 1000)
-
-      console.log(dayjs(new Date(e[0]).setHours(0, 0)).utc(true).tz('utc').unix())
-
-      console.log(e[0])
-      console.log(new Date(e[0]))
-      console.log(new Date(e[0]).getTime())
-      console.log(startDate)
-      console.log(startDateNew)
-      console.log(startDateNew.getTime())
-      console.log(startDate.setHours(0, 0, 0))
 
       updateData(
         {
@@ -185,6 +174,37 @@ export const activityRegistrationOnChange = (
       setRegistrationValue(e)
       setMatchPlayValue(null)
       setMatchPlayDisabledDate(disabledEndDate)
+    }
+  }
+}
+
+export const activityMatchPlayOnChange = (
+  e: any,
+  activityForm: ActivityForm | undefined,
+  setActivityForm: Dispatch<SetStateAction<ActivityForm>>,
+  setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
+  setShowErrors: Dispatch<SetStateAction<boolean>>
+) => {
+  if (e) {
+    let startDate = shiftDateToUtc(new Date(e[0]).getTime() / 1000)
+    let endDate = shiftDateToUtc(new Date(e[1]).getTime() / 1000)
+    // let startDate = new Date(e[0])
+    // let endDate = new Date(e[1])
+
+    if (activityForm?.type_id === 1) {
+      let updateObject = getLeagueUpdateObj(startDate, endDate, activityForm)
+      updateData(updateObject, setActivityForm, activityForm)
+    } else {
+      let {updateObject, errors} = getTournamentUpdateObj(startDate, endDate, activityForm)
+
+      if (errors) {
+        setMatchPlayValue(e)
+      } else {
+        setMatchPlayValue(null)
+      }
+
+      setShowErrors(errors)
+      updateData(updateObject, setActivityForm, activityForm)
     }
   }
 }
@@ -379,35 +399,6 @@ export function getDaysBetweenDates(startDate: Date, endDate: Date): number {
   }
 
   return 0
-}
-
-export const activityMatchPlayOnChange = (
-  e: any,
-  activityForm: ActivityForm | undefined,
-  setActivityForm: Dispatch<SetStateAction<ActivityForm>>,
-  setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
-  setShowErrors: Dispatch<SetStateAction<boolean>>
-) => {
-  if (e) {
-    let startDate = new Date(e[0])
-    let endDate = new Date(e[1])
-
-    if (activityForm?.type_id === 1) {
-      let updateObject = getLeagueUpdateObj(startDate, endDate, activityForm)
-      updateData(updateObject, setActivityForm, activityForm)
-    } else {
-      let {updateObject, errors} = getTournamentUpdateObj(startDate, endDate, activityForm)
-
-      if (errors) {
-        setMatchPlayValue(e)
-      } else {
-        setMatchPlayValue(null)
-      }
-
-      setShowErrors(errors)
-      updateData(updateObject, setActivityForm, activityForm)
-    }
-  }
 }
 
 export const isValidTournament = (

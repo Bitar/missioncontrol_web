@@ -289,8 +289,7 @@ export const ScheduleDetail = () => {
                         placeholder={'Choose a Timezone'}
                         value={
                           timeZones?.filter(
-                            (timezone) =>
-                              timezone.id === activityForm?.schedule?.settings?.timezone?.id
+                            (timezone) => timezone.id === activityForm?.schedule?.settings?.timezone
                           )[0]
                         }
                         options={timeZones}
