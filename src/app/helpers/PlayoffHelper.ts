@@ -80,8 +80,10 @@ export const handlePlayoffsChange = (
   setPlayoffsRange: Dispatch<SetStateAction<DateRange | null | undefined>>
 ) => {
   if (e) {
-    let startDate = getDateInUTC(e[0])
-    let endDate = getDateInUTC(e[1])
+    // let startDate = getDateInUTC(e[0])
+    // let endDate = getDateInUTC(e[1])
+    let startDate = shiftDateToUtc(new Date(e[0]).getTime() / 1000)
+    let endDate = shiftDateToUtc(new Date(e[1]).getTime() / 1000)
 
     if (activityForm?.playoff?.teams) {
       let daysOfRange
