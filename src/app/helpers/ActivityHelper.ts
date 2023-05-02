@@ -77,8 +77,12 @@ export const formatMatchStatus = (statusId: number) => {
 
   return {status, color}
 }
-export const shiftDateToUtc = (timestamp: number, timeZone: string) => {
-  let luxonDate = DateTime.fromSeconds(timestamp).setZone(timeZone)
+export const shiftDateToUtc = (timestamp: number, timeZone?: string) => {
+  let luxonDate = DateTime.fromSeconds(timestamp)
+
+  if (timeZone) {
+    luxonDate.setZone(timeZone)
+  }
 
   return DateTime.fromObject({
     year: luxonDate?.year,
@@ -87,6 +91,25 @@ export const shiftDateToUtc = (timestamp: number, timeZone: string) => {
     hour: luxonDate?.hour,
     minute: luxonDate?.minute,
     second: luxonDate?.second,
+  }).toJSDate()
+}
+
+export const shiftDateToUtcStartDate = (timestamp: number, timeZone?: string) => {
+  let luxonDate = DateTime.fromSeconds(timestamp).toLocal()
+  console.log(luxonDate)
+  console.log(DateTime.fromSeconds(timestamp).toUTC())
+
+  if (timeZone) {
+    luxonDate.setZone(timeZone)
+  }
+
+  return DateTime.fromObject({
+    year: luxonDate?.year,
+    month: luxonDate?.month,
+    day: luxonDate?.day,
+    hour: 0,
+    minute: 0,
+    second: 0,
   }).toJSDate()
 }
 export const createDateFrom = (timestamp: number) => {
@@ -121,8 +144,19 @@ export const activityRegistrationOnChange = (
       toast.error('Registration end date needs to be in the future.')
       setRegistrationValue(null)
     } else {
-      let startDate = dayjs(new Date(e[0]).setHours(0, 0)).utc(true).tz('utc').unix()
-      let endDate = dayjs(new Date(e[1]).setHours(0, 0)).utc(true).tz('utc').unix()
+      let startDate = shiftDateToUtc(new Date(e[0]).getTime() / 1000)
+      let startDateNew = shiftDateToUtcStartDate(new Date(e[0]).getTime() / 1000)
+      let endDate = shiftDateToUtc(new Date(e[1]).getTime() / 1000)
+
+      console.log(dayjs(new Date(e[0]).setHours(0, 0)).utc(true).tz('utc').unix())
+
+      console.log(e[0])
+      console.log(new Date(e[0]))
+      console.log(new Date(e[0]).getTime())
+      console.log(startDate)
+      console.log(startDateNew)
+      console.log(startDateNew.getTime())
+      console.log(startDate.setHours(0, 0, 0))
 
       updateData(
         {
@@ -131,7 +165,7 @@ export const activityRegistrationOnChange = (
             ...{
               registration_dates: {
                 ...activityForm?.schedule.registration_dates,
-                ...{start_date: startDate, end_date: endDate},
+                ...{start_date: startDate.getTime() / 1000, end_date: endDate.getTime() / 1000},
               },
               matchplay_dates: {
                 ...activityForm?.schedule.matchplay_dates,

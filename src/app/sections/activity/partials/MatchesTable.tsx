@@ -6,12 +6,12 @@ import {
   useQueryResponseLoading,
 } from '../../../modules/table/QueryResponseProvider'
 import {Match} from '../../../models/activity/matches/Match'
-import {getDateInUTC} from '../../../helpers/ActivityHelper'
 import {TextImageCell} from '../../../modules/table/columns/TextImageCell'
 import {calculateTeamScore} from '../../../helpers/MCHelper'
 import {useActivity} from '../core/contexts/ActivityContext'
 import {Link} from 'react-router-dom'
 import dayjs from 'dayjs'
+import {DateTime} from 'luxon'
 
 type GroupedMatches = Record<number, Match[]>
 
@@ -49,10 +49,7 @@ const MatchesTable: FC<Props> = ({direction = 'asc'}) => {
       <div className='mb-5'>
         {Object.keys(data).map((key, index) => {
           let keyInt = parseInt(key)
-          let time = dayjs(
-            getDateInUTC(activity?.settings?.time!, activity?.settings?.timezone?.value)
-          )
-          let date = dayjs(new Date(keyInt).setHours(time.hour(), time.minute(), 0))
+          let date = DateTime.fromSeconds(keyInt / 1000)
 
           return (
             <React.Fragment key={`yo-${index}`}>
@@ -60,7 +57,7 @@ const MatchesTable: FC<Props> = ({direction = 'asc'}) => {
                 <div
                   className='my-5 text-center badge-mc-secondary w-100 text-center fw-bold rounded py-1'
                   style={{fontSize: '15px'}}>
-                  {date.format('MMM DD - hh:mm a')}
+                  {date.toFormat('DD - hh:mm a')}
                 </div>
                 {data[keyInt]?.map((match: Match, index: number) => {
                   return (

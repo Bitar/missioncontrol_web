@@ -132,8 +132,6 @@ export const ActivityCreate = () => {
         }
       })
       .catch((error) => {
-        console.log(stepper.current?.currentStepIndex)
-
         setIsSubmitting(false)
         if (error.response) {
           // let obj = error.response.data.error.validation;
