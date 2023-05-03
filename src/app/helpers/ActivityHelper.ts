@@ -191,21 +191,25 @@ export const activityMatchPlayOnChange = (
     // let startDate = new Date(e[0])
     // let endDate = new Date(e[1])
 
-    if (activityForm?.type_id === 1) {
-      let updateObject = getLeagueUpdateObj(startDate, endDate, activityForm)
-      updateData(updateObject, setActivityForm, activityForm)
-    } else {
-      let {updateObject, errors} = getTournamentUpdateObj(startDate, endDate, activityForm)
-
-      if (errors) {
-        setMatchPlayValue(e)
-      } else {
-        setMatchPlayValue(null)
-      }
-
-      setShowErrors(errors)
-      updateData(updateObject, setActivityForm, activityForm)
+    let result: {updateObject: any; errors: boolean} = {
+      updateObject: {},
+      errors: false,
     }
+
+    if (activityForm?.type_id === 1) {
+      result = getLeagueUpdateObj(startDate, endDate, activityForm)
+    } else {
+      result = getTournamentUpdateObj(startDate, endDate, activityForm)
+    }
+
+    if (result.errors) {
+      setMatchPlayValue(e)
+    } else {
+      setMatchPlayValue(null)
+    }
+
+    setShowErrors(result.errors)
+    updateData(result.updateObject, setActivityForm, activityForm)
   }
 }
 
@@ -271,20 +275,53 @@ export const getLeagueUpdateObj = (
   activityForm: ActivityForm | undefined
 ) => {
   let updateObject
+  let errors = false
 
   let startDateTimestamp = Math.floor(startDate.getTime() / 1000)
   let endDateTimestamp = Math.floor(endDate.getTime() / 1000)
 
-  updateObject = {
-    schedule: {
-      ...activityForm?.schedule,
-      ...{
-        matchplay_dates: {
-          ...activityForm?.schedule.matchplay_dates,
-          ...{start_date: startDateTimestamp, end_date: endDateTimestamp},
+  if (activityForm?.schedule?.settings?.frequency === 2) {
+    let dayExist = countDaysOfWeekJS(startDate, endDate, activityForm?.schedule?.settings?.day)
+
+    if (dayExist >= 1) {
+      updateObject = {
+        schedule: {
+          ...activityForm?.schedule,
+          ...{
+            matchplay_dates: {
+              ...activityForm?.schedule.matchplay_dates,
+              ...{start_date: startDateTimestamp, end_date: endDateTimestamp},
+            },
+          },
+        },
+      }
+    } else {
+      updateObject = {
+        schedule: {
+          ...activityForm?.schedule,
+          ...{
+            matchplay_dates: {
+              ...activityForm?.schedule.matchplay_dates,
+              ...{start_date: 0, end_date: 0},
+            },
+          },
+        },
+      }
+
+      errors = true
+    }
+  } else {
+    updateObject = {
+      schedule: {
+        ...activityForm?.schedule,
+        ...{
+          matchplay_dates: {
+            ...activityForm?.schedule.matchplay_dates,
+            ...{start_date: startDateTimestamp, end_date: endDateTimestamp},
+          },
         },
       },
-    },
+    }
   }
 
   if (activityForm?.playoff?.is_enabled) {
@@ -310,7 +347,7 @@ export const getLeagueUpdateObj = (
     }
   }
 
-  return updateObject
+  return {updateObject, errors}
 }
 
 export const getDaysNeedRanged = (
@@ -350,9 +387,6 @@ export const getTournamentUpdateObj = (
     activityForm,
     activityForm?.team?.max!
   )
-
-  console.log(daysNeeded)
-  console.log(daysOfRange)
 
   let startDateTimestamp = Math.floor(startDate.getTime() / 1000)
   let endDateTimestamp = Math.floor(endDate.getTime() / 1000)
