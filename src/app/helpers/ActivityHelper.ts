@@ -351,6 +351,9 @@ export const getTournamentUpdateObj = (
     activityForm?.team?.max!
   )
 
+  console.log(daysNeeded)
+  console.log(daysOfRange)
+
   let startDateTimestamp = Math.floor(startDate.getTime() / 1000)
   let endDateTimestamp = Math.floor(endDate.getTime() / 1000)
 
@@ -422,7 +425,7 @@ export const countDaysOfWeekJS = (startDate: Date, endDate: Date, dayOfWeek: any
   let count = 0
 
   while (currentDate <= endDate) {
-    if (currentDate.getDay() === dayOfWeek) {
+    if (currentDate.getDay() === dayOfWeek || (currentDate.getDay() === 0 && dayOfWeek === 7)) {
       count++
     }
 
