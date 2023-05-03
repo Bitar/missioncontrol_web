@@ -11,12 +11,9 @@ import {updatePlayoffs} from '../../core/requests/ActivitySettingsRequests'
 import toast from 'react-hot-toast'
 import {useActivity} from '../../core/contexts/ActivityContext'
 import {activityPlayoffSchema} from '../../core/validation/ActivitySchema'
-import {
-  handlePlayoffsChange,
-  handleTeamChange,
-  updatePlayoffDates,
-} from '../../../../helpers/PlayoffHelper'
+import {handlePlayoffsChange, handleTeamChange} from '../../../../helpers/PlayoffHelper'
 import {TournamentTeamCountText} from '../TournamentTeamCountText'
+import {shiftDateToUtc} from '../../../../helpers/ActivityHelper'
 
 const {before} = DateRangePicker
 
@@ -36,9 +33,28 @@ export const PlayoffDetail = () => {
   }, [activityForm?.playoff?.teams])
 
   useEffect(() => {
-    updatePlayoffDates(activityForm, setPlayoffsRange)
+    if (
+      activity?.playoff?.playoff_dates?.start_date &&
+      activity?.playoff?.playoff_dates?.end_date &&
+      activity?.playoff?.playoff_dates?.start_date > 0 &&
+      activity?.playoff?.playoff_dates?.end_date > 0 &&
+      activity?.settings?.timezone?.value
+    ) {
+      let startDate = shiftDateToUtc(
+        activity?.playoff?.playoff_dates?.start_date,
+        activity?.settings?.timezone?.value
+      )
+      let endDate = shiftDateToUtc(
+        activity?.playoff?.playoff_dates?.end_date,
+        activity?.settings?.timezone?.value
+      )
+
+      setPlayoffsRange([startDate, endDate])
+    } else {
+      setPlayoffsRange(null)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activityForm?.playoff?.playoff_dates])
+  }, [activity?.playoff?.playoff_dates, activity?.settings?.timezone?.value])
 
   useEffect(() => {
     if (activityForm?.schedule?.matchplay_dates?.end_date) {

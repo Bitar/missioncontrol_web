@@ -9,7 +9,6 @@ import {
   handlePlayoffsChange,
   handleTeamChange,
   resetPlayoffDates,
-  updatePlayoffDates,
 } from '../../../../helpers/PlayoffHelper'
 import {TournamentTeamCountText} from '../TournamentTeamCountText'
 
@@ -28,11 +27,6 @@ export const PlayoffDetail = () => {
       setTeams(activityForm?.playoff?.teams?.toString())
     }
   }, [activityForm?.playoff?.teams])
-
-  useEffect(() => {
-    updatePlayoffDates(activityForm, setPlayoffsRange)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activityForm?.playoff?.playoff_dates])
 
   useEffect(() => {
     if (activityForm?.schedule?.matchplay_dates?.end_date) {

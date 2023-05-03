@@ -2,7 +2,13 @@ import {updateData} from './form/FormHelper'
 import {ActivityForm} from '../models/activity/ActivityForm'
 import React, {Dispatch, SetStateAction} from 'react'
 import {DateRange} from 'rsuite/esm/DateRangePicker/types'
-import {countDaysOfWeekJS, getDaysBetweenDates, shiftDateToUtc} from './ActivityHelper'
+import {
+  countDaysOfWeekJS,
+  getDaysBetweenDates,
+  shiftDateToUtc,
+  shiftToUTCEndDate,
+  shiftToUTCStartDate,
+} from './ActivityHelper'
 
 export const onInputMaskChange = ({nextState}: any, activityForm: ActivityForm | undefined) => {
   // Get the input value without the formatting characters
@@ -80,8 +86,8 @@ export const handlePlayoffsChange = (
   setPlayoffsRange: Dispatch<SetStateAction<DateRange | null | undefined>>
 ) => {
   if (e) {
-    let startDate = shiftDateToUtc(new Date(e[0]).getTime() / 1000)
-    let endDate = shiftDateToUtc(new Date(e[1]).getTime() / 1000)
+    let startDate = shiftToUTCStartDate(new Date(e[0]).getTime() / 1000)
+    let endDate = shiftToUTCEndDate(new Date(e[1]).getTime() / 1000)
 
     if (activityForm?.playoff?.teams) {
       let daysOfRange
@@ -125,31 +131,6 @@ export const handlePlayoffsChange = (
         setShowErrors(true)
       }
     }
-  }
-}
-
-export const updatePlayoffDates = (
-  activityForm: ActivityForm | undefined,
-  setPlayoffsRange: Dispatch<SetStateAction<DateRange | null | undefined>>
-) => {
-  if (
-    activityForm?.playoff?.playoff_dates?.start_date &&
-    activityForm?.playoff?.playoff_dates?.end_date &&
-    activityForm?.playoff?.playoff_dates?.start_date > 0 &&
-    activityForm?.playoff?.playoff_dates?.end_date > 0
-  ) {
-    let startDate = shiftDateToUtc(
-      activityForm?.playoff?.playoff_dates?.start_date,
-      activityForm?.schedule?.settings?.timezone?.value
-    )
-    let endDate = shiftDateToUtc(
-      activityForm?.playoff?.playoff_dates?.end_date,
-      activityForm?.schedule?.settings?.timezone?.value
-    )
-
-    setPlayoffsRange([startDate, endDate])
-  } else {
-    setPlayoffsRange(null)
   }
 }
 
