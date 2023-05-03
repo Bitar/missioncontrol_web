@@ -5,6 +5,7 @@ import utc from 'dayjs/plugin/utc'
 import CountUp from 'react-countup'
 import moment from 'moment'
 import momentTz from 'moment-timezone'
+import {getWeekdayByInteger} from '../../../helpers/ActivityHelper'
 
 const ActivityDetails = () => {
   const {activity} = useActivity()
@@ -122,13 +123,13 @@ const ActivityDetails = () => {
           </>
         )}
 
-        {activity?.settings?.day && (
+        {(activity?.settings?.day || activity?.settings?.day === 0) && (
           <div className='row mb-5'>
             <label className='col-lg-4 fw-bold text-muted'>Day</label>
 
             <div className='col-lg-8 d-flex align-items-center'>
               <span className='fw-bolder fs-6 me-2'>
-                {dayjs(new Date()).day(activity?.settings?.day).format('dddd')}
+                {getWeekdayByInteger(activity?.settings?.day)}
               </span>
             </div>
           </div>

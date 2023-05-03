@@ -94,179 +94,57 @@ export const shiftDateToUtc = (timestamp: number, timeZone?: string) => {
   }).toJSDate()
 }
 
-export const shiftDateToUtcStartDate = (timestamp: number, timeZone?: string) => {
-  let luxonDate = DateTime.fromSeconds(timestamp).toLocal()
-  console.log(luxonDate)
-  console.log(DateTime.fromSeconds(timestamp).toUTC())
+export const shiftToUtc = (timestamp: number, timezone: string) => {
+  const localDateTime = DateTime.fromSeconds(timestamp)
 
-  if (timeZone) {
-    luxonDate.setZone(timeZone)
-  }
+  // Convert to another timezone (EST)
+  const estDateTime = localDateTime.setZone(timezone)
 
-  return DateTime.fromObject({
-    year: luxonDate?.year,
-    month: luxonDate?.month,
-    day: luxonDate?.day,
-    hour: 0,
-    minute: 0,
-    second: 0,
-  }).toJSDate()
-}
-export const createDateFrom = (timestamp: number) => {
-  let UTCRegStartDate = moment(timestamp * 1000).utc(false)
-  return moment()
-    .year(UTCRegStartDate.year())
-    .month(UTCRegStartDate.month())
-    .date(UTCRegStartDate.date())
-    .hour(UTCRegStartDate.hour())
-    .minute(UTCRegStartDate.minute())
-    .second(UTCRegStartDate.second())
+  // Create a new timestamp in your local timezone keeping the time of the converted timezone
+  const localDateTimeWithEstTime = DateTime.local().set({
+    year: estDateTime.year,
+    month: estDateTime.month,
+    day: estDateTime.day,
+    hour: estDateTime.hour,
+    minute: estDateTime.minute,
+    second: estDateTime.second,
+  })
+
+  // Convert the new local DateTime object to a timestamp
+  return DateTime.fromSeconds(localDateTimeWithEstTime.toSeconds(), {zone: 'utc'}).toJSDate()
 }
 
-export const getDateInUTC = (timestamp: number, tz?: string) => {
-  return dayjs(new Date(timestamp * 1000))
-    .utc(false)
-    .tz(tz, true)
+export const shiftToUTCStartDate = (timestamp: number) => {
+  // Create a DateTime object from the timestamp
+  const localDateTime = DateTime.fromSeconds(timestamp)
+
+  // Set the time to 00:00:00
+  const localDateTimeMidnight = localDateTime.set({hour: 0, minute: 0, second: 0}).startOf('hour')
+
+  // Get the timezone offset in minutes
+  const timezoneOffset = localDateTimeMidnight.offset
+
+  // Add the offset to the timestamp to get the same local time in GMT
+  const gmtTimestamp = localDateTimeMidnight.toSeconds() + timezoneOffset * 60
+
+  // Create a new DateTime object in GMT timezone
+  return DateTime.fromSeconds(gmtTimestamp, {zone: 'utc'}).toJSDate()
 }
+export const shiftToUTCEndDate = (timestamp: number) => {
+  // Create a DateTime object from the timestamp
+  const localDateTime = DateTime.fromSeconds(timestamp)
 
-export const activityRegistrationOnChange = (
-  e: any,
-  activityForm: ActivityForm | undefined,
-  setActivityForm: Dispatch<SetStateAction<ActivityForm>>,
-  setRegistrationValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
-  setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
-  setMatchPlayDisabledDate: Dispatch<SetStateAction<Date>>
-) => {
-  if (e) {
-    const today = new Date()
+  // Set the time to 00:00:00
+  const localDateTimeMidnight = localDateTime.set({hour: 23, minute: 59, second: 59}).endOf('hour')
 
-    if (new Date(e[1]) < today) {
-      toast.error('Registration end date needs to be in the future.')
-      setRegistrationValue(null)
-    } else {
-      let startDate = shiftDateToUtc(new Date(e[0]).getTime() / 1000)
-      let endDate = shiftDateToUtc(new Date(e[1]).getTime() / 1000)
+  // Get the timezone offset in minutes
+  const timezoneOffset = localDateTimeMidnight.offset
 
-      updateData(
-        {
-          schedule: {
-            ...activityForm?.schedule,
-            ...{
-              registration_dates: {
-                ...activityForm?.schedule.registration_dates,
-                ...{start_date: startDate.getTime() / 1000, end_date: endDate.getTime() / 1000},
-              },
-              matchplay_dates: {
-                ...activityForm?.schedule.matchplay_dates,
-                ...{start_date: 0, end_date: 0},
-              },
-            },
-          },
-        },
-        setActivityForm,
-        activityForm
-      )
+  // Add the offset to the timestamp to get the same local time in GMT
+  const gmtTimestamp = localDateTimeMidnight.toSeconds() + timezoneOffset * 60
 
-      let endDateDate = new Date(e[1])
-      let disabledEndDate = new Date(endDateDate)
-      disabledEndDate.setDate(endDateDate.getDate() + 1)
-
-      setRegistrationValue(e)
-      setMatchPlayValue(null)
-      setMatchPlayDisabledDate(disabledEndDate)
-    }
-  }
-}
-
-export const activityMatchPlayOnChange = (
-  e: any,
-  activityForm: ActivityForm | undefined,
-  setActivityForm: Dispatch<SetStateAction<ActivityForm>>,
-  setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
-  setShowErrors: Dispatch<SetStateAction<boolean>>
-) => {
-  if (e) {
-    let startDate = shiftDateToUtc(new Date(e[0]).getTime() / 1000)
-    let endDate = shiftDateToUtc(new Date(e[1]).getTime() / 1000)
-    // let startDate = new Date(e[0])
-    // let endDate = new Date(e[1])
-
-    let result: {updateObject: any; errors: boolean} = {
-      updateObject: {},
-      errors: false,
-    }
-
-    if (activityForm?.type_id === 1) {
-      result = getLeagueUpdateObj(startDate, endDate, activityForm)
-    } else {
-      result = getTournamentUpdateObj(startDate, endDate, activityForm)
-    }
-
-    if (result.errors) {
-      setMatchPlayValue(e)
-    } else {
-      setMatchPlayValue(null)
-    }
-
-    setShowErrors(result.errors)
-    updateData(result.updateObject, setActivityForm, activityForm)
-  }
-}
-
-export const updateActivityMatchPlayDates = (
-  activityForm: ActivityForm | undefined,
-  setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>
-) => {
-  if (
-    activityForm?.schedule?.matchplay_dates?.start_date &&
-    activityForm?.schedule?.matchplay_dates?.end_date &&
-    activityForm?.schedule?.matchplay_dates?.start_date > 0 &&
-    activityForm?.schedule?.matchplay_dates?.end_date > 0
-  ) {
-    let startDate = shiftDateToUtc(
-      activityForm?.schedule?.matchplay_dates?.start_date,
-      activityForm?.schedule?.settings?.timezone?.value
-    )
-    let endDate = shiftDateToUtc(
-      activityForm?.schedule?.matchplay_dates?.end_date,
-      activityForm?.schedule?.settings?.timezone?.value
-    )
-
-    setMatchPlayValue([startDate, endDate])
-  } else {
-    setMatchPlayValue(null)
-  }
-}
-
-export const updateActivityRegistrationDates = (
-  activityForm: ActivityForm | undefined,
-  setRegistrationValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
-  setMatchPlayDisabledDate: Dispatch<SetStateAction<Date>>
-) => {
-  if (
-    activityForm?.schedule?.registration_dates?.start_date &&
-    activityForm?.schedule?.registration_dates?.end_date &&
-    activityForm?.schedule?.registration_dates?.start_date > 0 &&
-    activityForm?.schedule?.registration_dates?.end_date > 0
-  ) {
-    let startDate = shiftDateToUtc(
-      activityForm?.schedule?.registration_dates?.start_date,
-      activityForm?.schedule?.settings?.timezone?.value
-    )
-    let endDate = shiftDateToUtc(
-      activityForm?.schedule?.registration_dates?.end_date,
-      activityForm?.schedule?.settings?.timezone?.value
-    )
-
-    setRegistrationValue([startDate, endDate])
-
-    let disabledEndDate = new Date(endDate)
-    disabledEndDate.setDate(endDate.getDate() + 1)
-
-    setMatchPlayDisabledDate(disabledEndDate)
-  } else {
-    setRegistrationValue(null)
-  }
+  // Create a new DateTime object in GMT timezone
+  return DateTime.fromSeconds(gmtTimestamp, {zone: 'utc'}).toJSDate()
 }
 
 export const getLeagueUpdateObj = (
@@ -459,7 +337,7 @@ export const countDaysOfWeekJS = (startDate: Date, endDate: Date, dayOfWeek: any
   let count = 0
 
   while (currentDate <= endDate) {
-    if (currentDate.getDay() === dayOfWeek || (currentDate.getDay() === 0 && dayOfWeek === 7)) {
+    if (currentDate.getDay() === dayOfWeek) {
       count++
     }
 
@@ -467,4 +345,20 @@ export const countDaysOfWeekJS = (startDate: Date, endDate: Date, dayOfWeek: any
   }
 
   return count
+}
+
+export const getWeekdayByInteger = (dayNumber: number): string => {
+  let luxonDayNumber = dayNumber + 1
+  const date = DateTime.fromObject({weekday: luxonDayNumber})
+  return date.toFormat('cccc')
+}
+
+export const getDayNumberFromTimestamp = (timestamp: number): number => {
+  const date = DateTime.fromMillis(timestamp)
+  return date.weekday
+}
+
+export const getDayNumberFromJsDate = (date: Date): number => {
+  const luxonDate = DateTime.fromJSDate(date)
+  return luxonDate.weekday
 }

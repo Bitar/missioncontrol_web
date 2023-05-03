@@ -14,12 +14,13 @@ import {defaultTime} from '../../../../models/activity/ActivityForm'
 import {TimeZone} from '../../../../models/misc/TimeZone'
 import {getTimeZones} from '../../../misc/core/_requests'
 import {
-  activityMatchPlayOnChange,
-  activityRegistrationOnChange,
+  getLeagueUpdateObj,
+  getTournamentUpdateObj,
   isValidTournament,
   shiftDateToUtc,
-  updateActivityMatchPlayDates,
-  updateActivityRegistrationDates,
+  shiftToUtc,
+  shiftToUTCEndDate,
+  shiftToUTCStartDate,
 } from '../../../../helpers/ActivityHelper'
 import {updateSchedule} from '../../core/requests/ActivitySettingsRequests'
 import moment from 'moment-timezone'
@@ -47,29 +48,67 @@ export const ScheduleDetail = () => {
   }, [])
 
   useEffect(() => {
-    if (
-      activityForm?.schedule?.settings?.time &&
-      activityForm?.schedule?.settings?.timezone?.value
-    ) {
-      let time = shiftDateToUtc(
-        activityForm?.schedule?.settings?.time,
-        activityForm?.schedule?.settings?.timezone?.value
-      )
+    if (activity?.settings?.time && activity?.settings?.timezone?.value) {
+      let time = shiftDateToUtc(activity?.settings?.time, activity?.settings?.timezone?.value)
 
       setTimeValue(time)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activityForm?.schedule?.settings?.time])
+  }, [activity?.settings?.time, activity?.settings?.timezone?.value])
 
   useEffect(() => {
-    updateActivityMatchPlayDates(activityForm, setMatchPlayValue)
+    if (
+      activity?.matchplay_dates?.start_date &&
+      activity?.matchplay_dates?.end_date &&
+      activity?.matchplay_dates?.start_date > 0 &&
+      activity?.matchplay_dates?.end_date > 0 &&
+      activity?.settings?.timezone?.value
+    ) {
+      let startDate = shiftToUtc(
+        activity?.matchplay_dates?.start_date,
+        activity?.settings?.timezone?.value
+      )
+      let endDate = shiftToUtc(
+        activity?.matchplay_dates?.end_date,
+        activity?.settings?.timezone?.value
+      )
+
+      setMatchPlayValue([startDate, endDate])
+    } else {
+      setMatchPlayValue(null)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activityForm?.schedule?.matchplay_dates])
+  }, [activity?.matchplay_dates, activity?.settings?.timezone?.value])
 
   useEffect(() => {
-    updateActivityRegistrationDates(activityForm, setRegistrationValue, setMatchPlayDisabledDate)
+    if (
+      activity?.registration_dates?.start_date &&
+      activity?.registration_dates?.end_date &&
+      activity?.registration_dates?.start_date > 0 &&
+      activity?.registration_dates?.end_date > 0 &&
+      activity?.settings?.timezone?.value
+    ) {
+      let startDate = shiftToUtc(
+        activity?.registration_dates?.start_date,
+        activity?.settings?.timezone?.value
+      )
+      let endDate = shiftToUtc(
+        activity?.registration_dates?.end_date,
+        activity?.settings?.timezone?.value
+      )
+
+      setRegistrationValue([startDate, endDate])
+
+      let disabledEndDate = new Date(endDate)
+      disabledEndDate.setDate(endDate.getDate() + 1)
+
+      setMatchPlayDisabledDate(disabledEndDate)
+    } else {
+      setRegistrationValue(null)
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activityForm?.schedule?.registration_dates])
+  }, [activity?.registration_dates, activity?.settings?.timezone?.value])
 
   const handleSubmit = async () => {
     let data = jsonToFormData(activityForm)
@@ -91,18 +130,6 @@ export const ScheduleDetail = () => {
   }
 
   const handleOnChange = () => {}
-
-  const handleRegistrationChange = (e: any) => {
-    activityRegistrationOnChange(
-      e,
-      activityForm,
-      setActivityForm,
-      setRegistrationValue,
-      setMatchPlayValue,
-      setMatchPlayDisabledDate
-    )
-  }
-
   const onFrequencyChange = (e: any) => {
     handleFrequencyChange(e, activityForm, setActivityForm)
     if (activityForm?.type_id === 2) {
@@ -111,10 +138,7 @@ export const ScheduleDetail = () => {
   }
 
   const onDayChange = (e: any) => {
-    handleDayChange(e, activityForm, setActivityForm)
-    if (activityForm?.type_id === 2) {
-      setMatchPlayValue(null)
-    }
+    handleDayChange(e, activityForm, setActivityForm, setRegistrationValue, setMatchPlayValue)
   }
 
   return (
@@ -158,13 +182,17 @@ export const ScheduleDetail = () => {
                         <Select
                           placeholder={'Choose Day of Week'}
                           value={
-                            ACTIVITY_DAY_OF_WEEK.filter(
-                              (dayOfWeek) =>
+                            ACTIVITY_DAY_OF_WEEK.filter((dayOfWeek) => {
+                              console.log(dayOfWeek)
+                              console.log(activityForm?.schedule?.settings?.day)
+
+                              return (
                                 dayOfWeek.value ===
                                 (Number.isInteger(activityForm?.schedule?.settings?.day)
                                   ? activityForm?.schedule?.settings?.day
                                   : parseInt(activityForm?.schedule?.settings?.day + ''))
-                            )[0]
+                              )
+                            })[0]
                           }
                           options={ACTIVITY_DAY_OF_WEEK}
                           onChange={onDayChange}
@@ -190,7 +218,50 @@ export const ScheduleDetail = () => {
                         className='w-100'
                         character={' - '}
                         ranges={[]}
-                        onChange={handleRegistrationChange}
+                        onChange={(e) => {
+                          const today = new Date()
+
+                          if (e) {
+                            if (new Date(e[1]) < today) {
+                              toast.error('Registration end date needs to be in the future.')
+                              setRegistrationValue(null)
+                            } else {
+                              let startDate = shiftToUTCStartDate(new Date(e[0]).getTime() / 1000)
+                              let endDate = shiftToUTCEndDate(new Date(e[1]).getTime() / 1000)
+
+                              updateData(
+                                {
+                                  schedule: {
+                                    ...activityForm?.schedule,
+                                    ...{
+                                      registration_dates: {
+                                        ...activityForm?.schedule.registration_dates,
+                                        ...{
+                                          start_date: Math.floor(startDate.getTime() / 1000),
+                                          end_date: Math.floor(endDate.getTime() / 1000),
+                                        },
+                                      },
+                                      matchplay_dates: {
+                                        ...activityForm?.schedule.matchplay_dates,
+                                        ...{start_date: 0, end_date: 0},
+                                      },
+                                    },
+                                  },
+                                },
+                                setActivityForm,
+                                activityForm
+                              )
+
+                              let endDateDate = new Date(e[1])
+                              let disabledEndDate = new Date(endDateDate)
+                              disabledEndDate.setDate(endDateDate.getDate() + 1)
+
+                              setRegistrationValue(e)
+                              setMatchPlayValue(null)
+                              setMatchPlayDisabledDate(disabledEndDate)
+                            }
+                          }
+                        }}
                       />
                       <div className='text-danger mt-2'>
                         <ErrorMessage name='schedule.registration_dates' />
@@ -212,13 +283,27 @@ export const ScheduleDetail = () => {
                         ranges={[]}
                         onChange={(e) => {
                           isValidTournament(e, activityForm, setShowErrors)
-                          activityMatchPlayOnChange(
-                            e,
-                            activityForm,
-                            setActivityForm,
-                            setMatchPlayValue,
-                            setShowErrors
-                          )
+                          if (e) {
+                            let startDate = shiftToUTCStartDate(new Date(e[0]).getTime() / 1000)
+                            let endDate = shiftToUTCEndDate(new Date(e[1]).getTime() / 1000)
+
+                            let result: {updateObject: any; errors: boolean}
+
+                            if (activityForm?.type_id === 1) {
+                              result = getLeagueUpdateObj(startDate, endDate, activityForm)
+                            } else {
+                              result = getTournamentUpdateObj(startDate, endDate, activityForm)
+                            }
+
+                            if (!result.errors) {
+                              setMatchPlayValue(e)
+                            } else {
+                              setMatchPlayValue(null)
+                            }
+
+                            setShowErrors(result.errors)
+                            updateData(result.updateObject, setActivityForm, activityForm)
+                          }
                         }}
                         shouldDisableDate={before && before(matchPlayDisabledDate)}
                       />

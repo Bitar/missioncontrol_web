@@ -80,8 +80,6 @@ export const handlePlayoffsChange = (
   setPlayoffsRange: Dispatch<SetStateAction<DateRange | null | undefined>>
 ) => {
   if (e) {
-    // let startDate = getDateInUTC(e[0])
-    // let endDate = getDateInUTC(e[1])
     let startDate = shiftDateToUtc(new Date(e[0]).getTime() / 1000)
     let endDate = shiftDateToUtc(new Date(e[1]).getTime() / 1000)
 
@@ -221,7 +219,9 @@ export const handleFrequencyChange = (
 export const handleDayChange = (
   e: any,
   activityForm: ActivityForm | undefined,
-  setActivityForm: Dispatch<SetStateAction<ActivityForm>>
+  setActivityForm: Dispatch<SetStateAction<ActivityForm>>,
+  setRegistrationValue: Dispatch<SetStateAction<DateRange | null | undefined>>,
+  setMatchPlayValue: Dispatch<SetStateAction<DateRange | null | undefined>>
 ) => {
   if (activityForm?.playoff?.is_enabled) {
     updateData(
@@ -232,6 +232,14 @@ export const handleDayChange = (
             settings: {
               ...activityForm?.schedule.settings,
               ...{day: e?.value},
+            },
+            matchplay_dates: {
+              ...activityForm?.schedule.matchplay_dates,
+              ...{start_date: 0, end_date: 0},
+            },
+            registration_dates: {
+              ...activityForm?.schedule.registration_dates,
+              ...{start_date: 0, end_date: 0},
             },
           },
         },
@@ -250,6 +258,14 @@ export const handleDayChange = (
               ...activityForm?.schedule.settings,
               ...{day: e?.value},
             },
+            matchplay_dates: {
+              ...activityForm?.schedule.matchplay_dates,
+              ...{start_date: 0, end_date: 0},
+            },
+            registration_dates: {
+              ...activityForm?.schedule.registration_dates,
+              ...{start_date: 0, end_date: 0},
+            },
           },
         },
       },
@@ -257,6 +273,9 @@ export const handleDayChange = (
       activityForm
     )
   }
+
+  setRegistrationValue(null)
+  setMatchPlayValue(null)
 }
 
 const updateActivityFormTeams = (

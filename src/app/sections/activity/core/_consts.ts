@@ -11,31 +11,31 @@ const ACTIVITY_STATUS = {
 
 export const ACTIVITY_DAY_OF_WEEK = [
   {
-    value: 1,
+    value: 0,
     label: 'Monday',
   },
   {
-    value: 2,
+    value: 1,
     label: 'Tuesday',
   },
   {
-    value: 3,
+    value: 2,
     label: 'Wednesday',
   },
   {
-    value: 4,
+    value: 3,
     label: 'Thursday',
   },
   {
-    value: 5,
+    value: 4,
     label: 'Friday',
   },
   {
-    value: 6,
+    value: 5,
     label: 'Saturday',
   },
   {
-    value: 7,
+    value: 6,
     label: 'Sunday',
   },
 ]

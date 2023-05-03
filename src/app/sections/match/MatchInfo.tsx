@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link, useLocation} from 'react-router-dom'
-import {createDateFrom, formatMatchStatus} from '../../helpers/ActivityHelper'
+import {formatMatchStatus} from '../../helpers/ActivityHelper'
 import {KTCard, KTCardBody, KTSVG} from '../../helpers/components'
 import clsx from 'clsx'
 import {TeamImage} from '../activity/components/TeamImage'
