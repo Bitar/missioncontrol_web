@@ -18,6 +18,8 @@ import toast from 'react-hot-toast'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import Timezone from 'dayjs/plugin/timezone'
+import {ActivityQueryResponse} from '../../../../models/activity/Activity'
+import axios, {AxiosResponse} from 'axios'
 
 dayjs.extend(utc)
 dayjs.extend(Timezone)
@@ -33,6 +35,14 @@ const subscriptionUpdateSchema = Yup.object().shape({
   status: Yup.string().required('Status is required'),
   end_date: Yup.string().required('End Date is required'),
 })
+
+export const getCustomerPortal = (currentLink: string): Promise<any> => {
+  const API_URL = process.env.REACT_APP_API_URL
+  const ENDPOINT = `${API_URL}/billing/customer-portal`
+  let url = `${ENDPOINT}`
+
+  return axios.get(url).then((response: AxiosResponse<any>) => response.data)
+}
 
 export const SubscriptionDetail = () => {
   const {communityForm} = useCommunityForm()
@@ -75,6 +85,14 @@ export const SubscriptionDetail = () => {
     }
   }
 
+  const manageSubscription = () => {
+    getCustomerPortal(window.location.href).then((response) => {
+      if (response?.data?.customer_portal) {
+        window.location.href = response?.data?.customer_portal
+      }
+    })
+  }
+
   return (
     <KTCard border={true}>
       <KTCardHeader text={'Subscription'} bg='mc-primary' text_color='white' />
@@ -91,18 +109,16 @@ export const SubscriptionDetail = () => {
                   <div className='col-12'>
                     <p>Current Plan: {community?.subscription?.plan?.name}</p>
                     {community?.subscription?.plan?.id !== 1 && (
-                      <>
-                        <p>
-                          Payment Status:{' '}
-                          {community?.subscription?.status === 2 ? (
-                            <span className={'badge badge-success'}>Paid</span>
-                          ) : (
-                            <span className={'badge badge-danger'}>Unpaid</span>
-                          )}
-                        </p>
-                        <p>End Date: {endDate.toDateString()}</p>
-                      </>
+                      <p>End Date: {endDate.toDateString()}</p>
                     )}
+                  </div>
+                  <div className='col-12'>
+                    <button
+                      onClick={manageSubscription}
+                      type='submit'
+                      className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'>
+                      <span className='indicator-label'>{'Manage Subscription'}</span>
+                    </button>
                   </div>
                 </div>
 
@@ -130,32 +146,6 @@ export const SubscriptionDetail = () => {
                         />
                         <div className='text-danger mt-2'>
                           <ErrorMessage name='plan_id' />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className='row mb-6'>
-                      <label className='col-lg-4 col-form-label fw-bold fs-6'>Payment Status</label>
-                      <div className='col-lg-8 fv-row'>
-                        <Select
-                          name='status'
-                          placeholder={'Choose a State'}
-                          options={[
-                            {value: '2', label: 'Paid'},
-                            {value: '7', label: 'Unpaid'},
-                          ]}
-                          onChange={(e) => {
-                            updateData(
-                              {
-                                status: e?.value,
-                              },
-                              setSubscriptionForm,
-                              subscriptionForm
-                            )
-                          }}
-                        />
-                        <div className='text-danger mt-2'>
-                          <ErrorMessage name='status' />
                         </div>
                       </div>
                     </div>
