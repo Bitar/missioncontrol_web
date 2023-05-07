@@ -1,24 +1,19 @@
 import {useCommunityForm} from '../../core/CommunityFormContext'
 import {KTCard, KTCardBody, KTCardHeader} from '../../../../helpers/components'
-import {ErrorMessage, Form, Formik} from 'formik'
-import {FormAction} from '../../../../helpers/form/FormAction'
+import {Form, Formik} from 'formik'
 import React, {useEffect, useState} from 'react'
-import {isSuperAdmin} from '../../../../models/iam/User'
 import {useAuth} from '../../../../modules/auth'
-import Select from 'react-select'
 import {getPlans} from '../../../billing/plan/core/_requests'
 import {Plan} from '../../../../models/billing/Plan'
-import {jsonToFormData, updateData} from '../../../../helpers/form/FormHelper'
+import {jsonToFormData} from '../../../../helpers/form/FormHelper'
 import {useParams} from 'react-router-dom'
 import {useCommunity} from '../../core/CommunityContext'
-import {DatePicker} from 'rsuite'
 import * as Yup from 'yup'
 import {updateCommunitySubscription} from '../../core/CommunityRequests'
 import toast from 'react-hot-toast'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import Timezone from 'dayjs/plugin/timezone'
-import {ActivityQueryResponse} from '../../../../models/activity/Activity'
 import axios, {AxiosResponse} from 'axios'
 
 dayjs.extend(utc)
@@ -54,6 +49,7 @@ export const SubscriptionDetail = () => {
     plan_id: communityForm?.plan_id,
     status: communityForm?.status,
   })
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const [endDate, setEndDate] = useState<Date>(new Date())
 
@@ -86,11 +82,16 @@ export const SubscriptionDetail = () => {
   }
 
   const manageSubscription = () => {
-    getCustomerPortal(window.location.href).then((response) => {
-      if (response?.data?.customer_portal) {
-        window.location.href = response?.data?.customer_portal
-      }
-    })
+    setIsLoading(true)
+    getCustomerPortal(window.location.href)
+      .then((response) => {
+        if (response?.data?.customer_portal) {
+          window.location.href = response?.data?.customer_portal
+        }
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   return (
@@ -101,89 +102,93 @@ export const SubscriptionDetail = () => {
         initialValues={subscriptionForm}
         onSubmit={handleSubmit}
         enableReinitialize>
-        {({isSubmitting}) => (
-          <Form className='form' autoComplete='off'>
-            <KTCardBody className='py-4'>
-              <div className='d-flex flex-column pt-5'>
-                <div className='row mb-6'>
-                  <div className='col-12'>
-                    <p>Current Plan: {community?.subscription?.plan?.name}</p>
-                    {community?.subscription?.plan?.id !== 1 && (
-                      <p>End Date: {endDate.toDateString()}</p>
-                    )}
-                  </div>
-                  <div className='col-12'>
-                    <button
-                      onClick={manageSubscription}
-                      type='submit'
-                      className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'>
-                      <span className='indicator-label'>{'Manage Subscription'}</span>
-                    </button>
-                  </div>
+        <Form className='form' autoComplete='off'>
+          <KTCardBody className='py-4'>
+            <div className='d-flex flex-column pt-5'>
+              <div className='row mb-6'>
+                <div className='col-12'>
+                  <p>Current Plan: {community?.subscription?.plan?.name}</p>
+                  {community?.subscription?.plan?.id !== 1 && (
+                    <p>End Date: {endDate.toDateString()}</p>
+                  )}
                 </div>
-
-                {currentUser && isSuperAdmin(currentUser) && (
-                  <>
-                    <div className='row mb-6'>
-                      <label className='col-lg-4 col-form-label fw-bold fs-6'>Subscription</label>
-                      <div className='col-lg-8 fv-row'>
-                        <Select
-                          placeholder={'Choose a Plan'}
-                          name='plan_id'
-                          options={plans}
-                          defaultValue={community?.subscription?.plan}
-                          getOptionLabel={(plan) => plan?.name}
-                          getOptionValue={(plan) => plan?.id?.toString() || ''}
-                          onChange={(e) => {
-                            updateData(
-                              {
-                                plan_id: e?.id,
-                              },
-                              setSubscriptionForm,
-                              subscriptionForm
-                            )
-                          }}
-                        />
-                        <div className='text-danger mt-2'>
-                          <ErrorMessage name='plan_id' />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className='row mb-6'>
-                      <label className='col-lg-4 col-form-label fw-bold fs-6'>Ends On</label>
-                      <div className='col-lg-8 fv-row'>
-                        <DatePicker
-                          format='MM-dd-yyyy'
-                          className='w-100'
-                          name='end_date'
-                          placeholder='Select End Date'
-                          placement={'topStart'}
-                          onChange={(value) => {
-                            updateData(
-                              {
-                                end_date: value?.valueOf(),
-                              },
-                              setSubscriptionForm,
-                              subscriptionForm
-                            )
-                            // setTimeValue(value);
-                          }}
-                        />
-                        <div className='text-danger mt-2'>
-                          <ErrorMessage name='end_date' />
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                )}
+                <div className='col-12'>
+                  <button
+                    onClick={manageSubscription}
+                    type='submit'
+                    disabled={isLoading}
+                    className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'>
+                    <span className='indicator-label'>{'Manage Subscription'}</span>
+                    {isLoading && (
+                      <span className='indicator-progress' style={{display: 'inline-block'}}>
+                        <span className='spinner-border spinner-border-sm align-middle ms-2' />
+                      </span>
+                    )}
+                  </button>
+                </div>
               </div>
-            </KTCardBody>
-            {currentUser && isSuperAdmin(currentUser) && (
-              <FormAction text={'Update Subscription'} isSubmitting={isSubmitting} />
-            )}
-          </Form>
-        )}
+
+              {/*{currentUser && isSuperAdmin(currentUser) && (*/}
+              {/*  <>*/}
+              {/*    <div className='row mb-6'>*/}
+              {/*      <label className='col-lg-4 col-form-label fw-bold fs-6'>Subscription</label>*/}
+              {/*      <div className='col-lg-8 fv-row'>*/}
+              {/*        <Select*/}
+              {/*          placeholder={'Choose a Plan'}*/}
+              {/*          name='plan_id'*/}
+              {/*          options={plans}*/}
+              {/*          defaultValue={community?.subscription?.plan}*/}
+              {/*          getOptionLabel={(plan) => plan?.name}*/}
+              {/*          getOptionValue={(plan) => plan?.id?.toString() || ''}*/}
+              {/*          onChange={(e) => {*/}
+              {/*            updateData(*/}
+              {/*              {*/}
+              {/*                plan_id: e?.id,*/}
+              {/*              },*/}
+              {/*              setSubscriptionForm,*/}
+              {/*              subscriptionForm*/}
+              {/*            )*/}
+              {/*          }}*/}
+              {/*        />*/}
+              {/*        <div className='text-danger mt-2'>*/}
+              {/*          <ErrorMessage name='plan_id' />*/}
+              {/*        </div>*/}
+              {/*      </div>*/}
+              {/*    </div>*/}
+
+              {/*    <div className='row mb-6'>*/}
+              {/*      <label className='col-lg-4 col-form-label fw-bold fs-6'>Ends On</label>*/}
+              {/*      <div className='col-lg-8 fv-row'>*/}
+              {/*        <DatePicker*/}
+              {/*          format='MM-dd-yyyy'*/}
+              {/*          className='w-100'*/}
+              {/*          name='end_date'*/}
+              {/*          placeholder='Select End Date'*/}
+              {/*          placement={'topStart'}*/}
+              {/*          onChange={(value) => {*/}
+              {/*            updateData(*/}
+              {/*              {*/}
+              {/*                end_date: value?.valueOf(),*/}
+              {/*              },*/}
+              {/*              setSubscriptionForm,*/}
+              {/*              subscriptionForm*/}
+              {/*            )*/}
+              {/*            // setTimeValue(value);*/}
+              {/*          }}*/}
+              {/*        />*/}
+              {/*        <div className='text-danger mt-2'>*/}
+              {/*          <ErrorMessage name='end_date' />*/}
+              {/*        </div>*/}
+              {/*      </div>*/}
+              {/*    </div>*/}
+              {/*  </>*/}
+              {/*)}*/}
+            </div>
+          </KTCardBody>
+          {/*{currentUser && isSuperAdmin(currentUser) && (*/}
+          {/*  <FormAction text={'Update Subscription'} isSubmitting={isSubmitting} />*/}
+          {/*)}*/}
+        </Form>
       </Formik>
     </KTCard>
   )
