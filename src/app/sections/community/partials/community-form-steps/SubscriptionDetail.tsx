@@ -41,7 +41,7 @@ export const getCustomerPortal = (currentLink: string): Promise<any> => {
 
 export const SubscriptionDetail = () => {
   const {communityForm} = useCommunityForm()
-  const {currentUser} = useAuth()
+  const {currentUser, communityAdmin} = useAuth()
   const {community, updateCommunity} = useCommunity()
   const [plans, setPlans] = useState<Plan[] | undefined>()
   const params = useParams()
@@ -109,23 +109,28 @@ export const SubscriptionDetail = () => {
                 <div className='col-12'>
                   <p>Current Plan: {community?.subscription?.plan?.name}</p>
                   {community?.subscription?.plan?.id !== 1 && (
-                    <p>End Date: {endDate.toDateString()}</p>
+                    <p>Ends On: {endDate.toDateString()}</p>
                   )}
                 </div>
-                <div className='col-12'>
-                  <button
-                    onClick={manageSubscription}
-                    type='submit'
-                    disabled={isLoading}
-                    className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'>
-                    <span className='indicator-label'>{'Manage Subscription'}</span>
-                    {isLoading && (
-                      <span className='indicator-progress' style={{display: 'inline-block'}}>
-                        <span className='spinner-border spinner-border-sm align-middle ms-2' />
-                      </span>
-                    )}
-                  </button>
-                </div>
+                {currentUser &&
+                  communityAdmin &&
+                  communityAdmin?.id === community?.id &&
+                  communityAdmin?.is_owner && (
+                    <div className='col-12'>
+                      <button
+                        onClick={manageSubscription}
+                        type='submit'
+                        disabled={isLoading}
+                        className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'>
+                        <span className='indicator-label'>{'Manage Subscription'}</span>
+                        {isLoading && (
+                          <span className='indicator-progress' style={{display: 'inline-block'}}>
+                            <span className='spinner-border spinner-border-sm align-middle ms-2' />
+                          </span>
+                        )}
+                      </button>
+                    </div>
+                  )}
               </div>
 
               {/*{currentUser && isSuperAdmin(currentUser) && (*/}
