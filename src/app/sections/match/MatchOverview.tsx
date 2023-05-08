@@ -169,7 +169,6 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
 
                           <div className='flex-grow-1'>
                             <div className='d-flex flex-stack'>
-                              efawfwaefweafwea
                               {getTeam(round.scores[0]?.team_id) && (
                                 <div className='fs-1 text-mc-primary'>
                                   {round?.scores[0]?.score_sheet.map((scoreSheet, index) => (
