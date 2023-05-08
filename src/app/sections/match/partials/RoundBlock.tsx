@@ -26,7 +26,7 @@ export const RoundBlock: FC<{roundIndex: number; round: RoundScoreObject}> = ({
   return (
     <div key={`round-block-inner-${roundIndex}`}>
       <div className='round-scores rounded border-warning border border-dashed p-6'>
-        <h4 className='text-center'>Round {roundIndex}</h4>
+        <h4 className='text-center'>Round {roundIndex + 1}</h4>
 
         <div className='mt-6 d-flex justify-content-around'>
           {round?.scores?.map((scoreObject, teamScoreIndex) => {

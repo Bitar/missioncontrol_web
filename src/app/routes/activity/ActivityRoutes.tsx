@@ -5,6 +5,7 @@ import ActivityIndex from '../../sections/activity/pages/ActivityIndex'
 import {ActivityViewRoutes} from './ActivityViewRoutes'
 import {SuspenseView} from '../../layout/SuspenseView'
 import {ActivityCreate} from '../../sections/activity/pages/ActivityCreate'
+import {Restricted} from '../../modules/auth/core/AuthPermission'
 
 const activityBreadCrumbs: Array<PageLink> = [
   {
@@ -29,7 +30,9 @@ const ActivityRoutes: FC = () => {
         element={
           <SuspenseView>
             <PageTitle breadcrumbs={activityBreadCrumbs}>{'Overview'}</PageTitle>
-            <ActivityIndex />
+            <Restricted to='view-activities'>
+              <ActivityIndex />
+            </Restricted>
           </SuspenseView>
         }
       />
