@@ -33,6 +33,10 @@ const SidebarMenuMain = () => {
         <SidebarMenuItem to='/games' title='Games' fontIcon='fa-chess-pawn' />
       </Restricted>
 
+      {/*<Restricted to='view-plans'>*/}
+      {/*  <SidebarMenuItem to='/plans' title='Billing Plans' fontIcon='fa-credit-card' />*/}
+      {/*</Restricted>*/}
+
       <Restricted to='view-iam'>
         <SidebarMenuItemWithSub
           to={['/iam/users', '/iam/roles', '/iam/permissions']}

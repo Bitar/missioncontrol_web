@@ -24,7 +24,7 @@ export const initialPlan: Plan = {
 export type Plan = {
   id?: number
   name: string
-  description?: string
+  description: string
   contact_type: number
   price_per_member: number
   cm_service_percentage?: number

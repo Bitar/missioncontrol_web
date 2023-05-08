@@ -7,4 +7,5 @@ export enum Sections {
   ACTIVITIES = 'Activities',
   COMMUNITIES = 'Communities',
   RESOURCES = 'Resources',
+  BILLING_PLANS = 'Billing Plans',
 }

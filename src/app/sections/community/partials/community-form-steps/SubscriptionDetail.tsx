@@ -3,7 +3,6 @@ import {KTCard, KTCardBody, KTCardHeader} from '../../../../helpers/components'
 import {Form, Formik} from 'formik'
 import React, {useEffect, useState} from 'react'
 import {useAuth} from '../../../../modules/auth'
-import {getPlans} from '../../../billing/plan/core/_requests'
 import {Plan} from '../../../../models/billing/Plan'
 import {jsonToFormData} from '../../../../helpers/form/FormHelper'
 import {useParams} from 'react-router-dom'
@@ -15,6 +14,7 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import Timezone from 'dayjs/plugin/timezone'
 import axios, {AxiosResponse} from 'axios'
+import {getPlans} from '../../../billing/plan/core/BillingPlanRequest'
 
 dayjs.extend(utc)
 dayjs.extend(Timezone)

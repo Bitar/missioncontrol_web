@@ -17,7 +17,6 @@ import {ReviewDetails} from '../community/partials/community-create-steps/Review
 import {CommunityFormContext} from '../community/core/CommunityFormContext'
 import {State} from '../../models/misc/State'
 import {getStates} from '../misc/core/_requests'
-import {getPlans} from '../billing/plan/core/_requests'
 import {Plan} from '../../models/billing/Plan'
 import {createSubscription} from '../billing/core/BillingRequests'
 import {jsonToFormData} from '../../helpers/form/FormHelper'
@@ -26,6 +25,7 @@ import {useNavigate} from 'react-router-dom'
 import toast from 'react-hot-toast'
 import {useAuth} from '../../modules/auth'
 import {createAdminCommunity} from '../community/core/CommunityRequests'
+import {getPlans} from '../billing/plan/core/BillingPlanRequest'
 
 const AdminCommunityCreate = () => {
   const {updateAuth} = useAuth()

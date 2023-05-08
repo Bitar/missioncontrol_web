@@ -1,7 +1,7 @@
 import {Navigate, Route, Routes} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../../layout/core'
 import React from 'react'
-import {PlansIndex} from '../PlansIndex'
+import {BillingPlanIndex} from '../BillingPlanIndex'
 import {PlansCreate} from '../PlansCreate'
 // import {PlansEdit} from '../PlansEdit'
 
@@ -28,7 +28,7 @@ const PlansPage: React.FC = () => {
         element={
           <>
             <PageTitle breadcrumbs={plansBreadCrumbs}>{'Overview'}</PageTitle>
-            <PlansIndex />
+            <BillingPlanIndex />
           </>
         }
       />

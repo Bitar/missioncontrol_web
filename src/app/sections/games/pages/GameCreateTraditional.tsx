@@ -1,12 +1,10 @@
-import {communitySchema} from '../../../models/community/Community'
 import React, {useState} from 'react'
 import {ErrorMessage, Field, Form, Formik} from 'formik'
 import AutoResizableTextarea from '../../../components/form/AutoResizableTextarea'
 import {jsonToFormData, updateData} from '../../../helpers/form/FormHelper'
-import gameCreateIgdb from './GameCreateIgdb'
 import {ImageCrop} from '../../community/components/ImageCrop'
 import {FormAction} from '../../../helpers/form/FormAction'
-import {createGame, createGameIgdb} from '../core/GameRequests'
+import {createGame} from '../core/GameRequests'
 import {useNavigate} from 'react-router-dom'
 import {SwitchInput} from '../../../components/SwitchInput/SwitchInput'
 
@@ -53,7 +51,7 @@ const GameCreateTraditional = () => {
         <Form onChange={handleOnChange} className='form' autoComplete='off'>
           <div className='py-4'>
             <div className='row mb-6'>
-              <label className='col-lg-4 col-form-label required fw-bold fs-6'>Name</label>
+              <label className='col-lg-4 col-form-label required fw-bold fs-6'>Title</label>
               <div className='col-lg-8 fv-row'>
                 <Field
                   type='text'

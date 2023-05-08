@@ -11,6 +11,7 @@ import {ListViewProvider} from '../../../../modules/table/ListViewProvider'
 import {KTCardHeader} from '../../../../helpers/components'
 import PermissionColumns from '../core/PermissionColumns'
 import {McTable} from '../../../../components/McTable'
+import {CreateCardAction} from '../../../../components/misc/CardAction'
 
 const PermissionIndex = () => (
   <QueryRequestProvider>
@@ -21,6 +22,7 @@ const PermissionIndex = () => (
             text='All Permissions'
             icon='fa-regular fa-list'
             icon_style='fs-3 text-primary'
+            actions={[new CreateCardAction('/iam/permissions', 'manage-iam')]}
           />
           <KTCardBody>
             <PermissionTable />

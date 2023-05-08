@@ -14,8 +14,8 @@ import {ProfilePage} from '../sections/profile/ProfilePage'
 const PrivateRoutes = () => {
   const CommunityRoutes = lazy(() => import('./community/CommunityRoutes'))
   const GameRoutes = lazy(() => import('./game/GameRoutes'))
-  const PlansPage = lazy(() => import('../sections/billing/plan/pages/PlansPage'))
   const ActivityRoutes = lazy(() => import('./activity/ActivityRoutes'))
+  // const BillingPlanRoutes = lazy(() => import('./billing/BillingPlanRoutes'))
   const RoleRoutes = lazy(() => import('./iam/RoleRoutes'))
   const UserRoutes = lazy(() => import('./iam/user/UserRoutes'))
 
@@ -131,7 +131,16 @@ const PrivateRoutes = () => {
           }
         />
 
-        <Route path='plans/*' element={<PlansPage />} />
+        {/*<Route*/}
+        {/*  path='plans/*'*/}
+        {/*  element={*/}
+        {/*    <Restricted to='view-plans'>*/}
+        {/*      <SuspenseView>*/}
+        {/*        <BillingPlanRoutes />*/}
+        {/*      </SuspenseView>*/}
+        {/*    </Restricted>*/}
+        {/*  }*/}
+        {/*/>*/}
         {/* Sections */}
 
         {/*<Route path='billing/plan' element={<BillingPlanWrapper />} />*/}

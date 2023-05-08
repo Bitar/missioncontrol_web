@@ -1,11 +1,11 @@
 import {Column} from 'react-table'
-import {TextCell} from '../../../modules/table/columns/TextCell'
-import {CustomHeader} from '../../../modules/table/columns/CustomHeader'
-import {ActionsCell} from '../../../modules/table/columns/ActionsCell'
-import {QUERIES} from '../../../../_metronic/helpers'
-import {Plan} from '../../../models/billing/Plan'
+import {TextCell} from '../../../../modules/table/columns/TextCell'
+import {CustomHeader} from '../../../../modules/table/columns/CustomHeader'
+import {ActionsCell} from '../../../../modules/table/columns/ActionsCell'
+import {QUERIES} from '../../../../../_metronic/helpers'
+import {Plan} from '../../../../models/billing/Plan'
 
-const plansColumns: ReadonlyArray<Column<Plan>> = [
+const BillingPlanColumns: ReadonlyArray<Column<Plan>> = [
   {
     Header: (props) => <CustomHeader tableProps={props} title='Name' className='min-w-125px' />,
     id: 'name',
@@ -46,4 +46,4 @@ const plansColumns: ReadonlyArray<Column<Plan>> = [
   },
 ]
 
-export {plansColumns}
+export {BillingPlanColumns}
