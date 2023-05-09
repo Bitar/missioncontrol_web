@@ -128,7 +128,7 @@ export const ActivityCreate = () => {
         toast.success('Activity Created Successfully')
 
         if (response) {
-          // navigate(`/activities/${response.id}`)
+          navigate(`/activities/${response.id}`)
         }
       })
       .catch((error) => {
