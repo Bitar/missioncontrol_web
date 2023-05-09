@@ -100,62 +100,6 @@ const MatchChatInner: FC<Props> = ({chat, setChat, isDrawer = false}) => {
         })}
         <div ref={bottomRef} />
       </div>
-
-      <Formik
-        initialValues={initialChat(message)}
-        onSubmit={handleSubmit}
-        validationSchema={chatSchema}
-        enableReinitialize>
-        {({isSubmitting, isValid, touched, errors, values}) => (
-          <Form className='form'>
-            <div
-              className='card-footer d-flex justify-content-end py-6 px-9'
-              id='kt_chat_messenger_footer'>
-              {/*<TextField*/}
-              {/*  multiline*/}
-              {/*  id='message'*/}
-              {/*  size='small'*/}
-              {/*  name='message'*/}
-              {/*  label='Message'*/}
-              {/*  className='w-100'*/}
-              {/*  variant='standard'*/}
-              {/*  value={values.message}*/}
-              {/*  onChange={(e) => setMessage({message: e.target.value})}*/}
-              {/*  error={touched.message && Boolean(errors.message)}*/}
-              {/*  helperText={touched.message && errors.message}*/}
-              {/*/>*/}
-
-              <Field
-                as='textarea'
-                id='message'
-                name='message'
-                className='form-control mb-3 mb-lg-0'
-                autoComplete='off'
-                onChange={(e: any) => setMessage({message: e.target.value})}
-              />
-              <div className='text-danger mt-2'>
-                <ErrorMessage name='message' />
-              </div>
-
-              {/*<IconButton*/}
-              {/*  type='submit'*/}
-              {/*  aria-label='send'*/}
-              {/*  className='text-mc-secondary'*/}
-              {/*  disabled={isSubmitting || !isValid || !touched}*/}
-              {/*  sx={{*/}
-              {/*    p: '10px',*/}
-              {/*    ml: 1,*/}
-              {/*    '&.MuiButtonBase-root:hover': {*/}
-              {/*      bgcolor: 'transparent',*/}
-              {/*    },*/}
-              {/*  }}*/}
-              {/*>*/}
-              {/*  <SendIcon />*/}
-              {/*</IconButton>*/}
-            </div>
-          </Form>
-        )}
-      </Formik>
     </div>
   )
 }

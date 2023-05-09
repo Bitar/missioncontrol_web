@@ -6,6 +6,7 @@ import {ActivityViewRoutes} from './ActivityViewRoutes'
 import {SuspenseView} from '../../layout/SuspenseView'
 import {ActivityCreate} from '../../sections/activity/pages/ActivityCreate'
 import {Restricted} from '../../modules/auth/core/AuthPermission'
+import ActivityArchive from '../../sections/activity/pages/ActivityArchive'
 
 const activityBreadCrumbs: Array<PageLink> = [
   {
@@ -41,7 +42,18 @@ const ActivityRoutes: FC = () => {
         element={
           <SuspenseView>
             <PageTitle breadcrumbs={activityBreadCrumbs}>{'Add Activity'}</PageTitle>
-            <ActivityCreate />
+            <Restricted to='manage-activities'>
+              <ActivityCreate />
+            </Restricted>
+          </SuspenseView>
+        }
+      />
+      <Route
+        path='/archived'
+        element={
+          <SuspenseView>
+            <PageTitle breadcrumbs={activityBreadCrumbs}>{'Archived Activities'}</PageTitle>
+            <ActivityArchive />
           </SuspenseView>
         }
       />

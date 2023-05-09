@@ -38,7 +38,7 @@ export const formatActivityStatus = (statusId: number) => {
     status = 'Generating Playoff'
     color = 'info'
   } else if (statusId === 4) {
-    status = 'Closed'
+    status = 'Completed'
     color = 'danger'
   } else {
     status = 'Cancelled'

@@ -1,4 +1,4 @@
-import {useMemo} from 'react'
+import React, {useMemo} from 'react'
 import {ActivityColumns} from '../core/columns/ActivityColumns'
 import {
   useQueryResponseData,
@@ -22,4 +22,4 @@ const ActivityTable = () => {
   )
 }
 
-export {ActivityTable}
+export default ActivityTable

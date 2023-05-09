@@ -17,9 +17,14 @@ import FilterFormFooter from '../../../components/form/FilterFormFooter'
 interface Props {
   showFilter: boolean
   setExportQuery: React.Dispatch<React.SetStateAction<string>>
+  targetFilter?: string
 }
 
-const ActivityFilter: FC<Props> = ({showFilter, setExportQuery}) => {
+const ActivityFilter: FC<Props> = ({
+  showFilter,
+  setExportQuery,
+  targetFilter = 'activities-list-filter',
+}) => {
   const {currentUser} = useAuth()
   const {updateState} = useQueryRequest()
   const [activityFilters, setActivityFilters] =
@@ -91,7 +96,7 @@ const ActivityFilter: FC<Props> = ({showFilter, setExportQuery}) => {
 
   return (
     <Collapse in={showFilter}>
-      <Row id='#activities-list-filter'>
+      <Row id={`#${targetFilter}`}>
         <Col>
           <div className='card-rounded bg-primary bg-opacity-5 p-10 mb-15'>
             <Formik initialValues={activityFilters} onSubmit={handleFilter} enableReinitialize>

@@ -89,7 +89,11 @@ const ActionsCell: FC<React.PropsWithChildren<Props>> = ({
   return (
     <div className='d-flex'>
       {showView && (
-        <Link to={'/' + path + '/' + id} className='btn btn-icon btn-active-light-info btn-sm'>
+        <Link
+          to={'/' + path + '/' + id}
+          className='btn btn-icon btn-active-light-info btn-sm'
+          data-bs-toggle='tooltip'
+          title={'Show Activity'}>
           <i className={clsx('fa-duotone fs-3 text-info', 'fa-circle-info')}></i>
         </Link>
       )}

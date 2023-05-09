@@ -14,6 +14,11 @@ export const EXPORT_ENDPOINT = `${API_URL}/export/activities`
 export const getActivities = (query: string): Promise<ActivityQueryResponse> => {
   return axios.get(`${ENDPOINT}?${query}`).then((d: AxiosResponse<ActivityQueryResponse>) => d.data)
 }
+export const getArchivedActivities = (query: string): Promise<ActivityQueryResponse> => {
+  return axios
+    .get(`${ENDPOINT}/archived?${query}`)
+    .then((d: AxiosResponse<ActivityQueryResponse>) => d.data)
+}
 
 export const createActivity = (formData: FormData): Promise<Activity | undefined> => {
   return axios
