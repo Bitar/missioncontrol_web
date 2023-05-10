@@ -20,22 +20,24 @@ const ActivityOverview: FC = () => {
         </div>
       </div>
 
-      <div className='col-lg-6 col-md-12'>
-        <div className='mb-5'>
-          {activity && (
-            <QueryRequestProvider>
-              <QueryResponseProvider
-                id={QUERIES.STANDINGS_LIST}
-                requestFunction={getActivityStandings}
-                requestId={activity.id}>
-                <ListViewProvider>
-                  <ActivityStandings scroll={true} />
-                </ListViewProvider>
-              </QueryResponseProvider>
-            </QueryRequestProvider>
-          )}
+      {activity?.type?.id !== 2 && (
+        <div className='col-lg-6 col-md-12'>
+          <div className='mb-5'>
+            {activity && (
+              <QueryRequestProvider>
+                <QueryResponseProvider
+                  id={QUERIES.STANDINGS_LIST}
+                  requestFunction={getActivityStandings}
+                  requestId={activity.id}>
+                  <ListViewProvider>
+                    <ActivityStandings scroll={true} />
+                  </ListViewProvider>
+                </QueryResponseProvider>
+              </QueryRequestProvider>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }
