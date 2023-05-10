@@ -16,7 +16,6 @@ const AutoResizableTextarea = ({className, value, ...restProps}: AutoResizableTe
       const target = event.target as HTMLTextAreaElement
       target.style.height = 'auto'
       target.style.height = `${target.scrollHeight}px`
-      // setValue(target.value);
     }
   }, [])
 

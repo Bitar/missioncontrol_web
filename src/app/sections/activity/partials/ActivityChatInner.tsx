@@ -13,7 +13,6 @@ import {
 import {useParams} from 'react-router-dom'
 import {useAuth} from '../../../modules/auth'
 import AutoResizableTextarea from '../../../components/form/AutoResizableTextarea'
-import {FormAction} from '../../../helpers/form/FormAction'
 import {useChannels} from '../ChatChannelProvider'
 import {useActivity} from '../core/contexts/ActivityContext'
 import Swal from 'sweetalert2'
@@ -23,7 +22,7 @@ import axios from 'axios'
 dayjs.extend(relativeTime)
 
 const ActivityChatInner: FC = () => {
-  const containerRef = useRef<HTMLDivElement | null>(null)
+  const chatMessagesRef = useRef<HTMLDivElement | null>(null)
   const [page, setPage] = useState<number>(1)
   const {activity} = useActivity()
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([])
@@ -31,12 +30,21 @@ const ActivityChatInner: FC = () => {
   const {currentUser} = useAuth()
   const [message, setMessage] = useState<ChatMessage>(initialChat())
   const channels = useChannels()
+  const hasUserScrolledUp = useRef(false)
+  const scrollPositionPreLoad = useRef(0)
 
   useEffect(() => {
-    if (containerRef.current) {
-      containerRef.current.scrollTop =
-        containerRef.current.scrollHeight - containerRef.current.clientHeight
+    const chatMessagesDiv = chatMessagesRef.current
+    if (chatMessagesDiv && !hasUserScrolledUp.current) {
+      chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight - chatMessagesDiv.clientHeight
     }
+
+    if (chatMessagesDiv && scrollPositionPreLoad.current && scrollPositionPreLoad.current > 0) {
+      chatMessagesDiv.scrollTop = scrollPositionPreLoad.current
+    }
+
+    console.log('post', chatMessagesRef?.current?.scrollHeight)
+    console.log('post client', chatMessagesRef?.current?.clientHeight)
   }, [chatMessages])
 
   const handleSubmit = () => {
@@ -91,12 +99,7 @@ const ActivityChatInner: FC = () => {
       return
     }
 
-    getActivityChat(activity?.id, `page=${page}`).then((response) => {
-      if (response.data) {
-        setChatMessages(response?.data?.reverse())
-        setPage((page) => page + 1)
-      }
-    })
+    loadChat(page)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activity?.id])
 
@@ -110,9 +113,35 @@ const ActivityChatInner: FC = () => {
     })
   }, [activity?.id, channels, chatMessages])
 
+  useEffect(() => {
+    console.log('my Ref', scrollPositionPreLoad.current)
+  }, [scrollPositionPreLoad.current])
+
+  const loadChat = (page: number) => {
+    getActivityChat(activity?.id, `page=${page}`).then((response) => {
+      if (response.data) {
+        response?.data?.reverse()
+
+        if (scrollPositionPreLoad) {
+          scrollPositionPreLoad.current = chatMessagesRef?.current?.scrollHeight ?? 0
+        }
+
+        setChatMessages([...response?.data, ...chatMessages])
+        setPage((page) => page + 1)
+      }
+    })
+  }
+
+  const handleScroll = (e: React.UIEvent<HTMLElement>) => {
+    if (e.currentTarget.scrollTop === 0) {
+      hasUserScrolledUp.current = true
+      loadChat(page)
+    }
+  }
+
   return (
     <div className='card-body' id={'kt_chat_messenger_body'}>
-      <div className='scroll-y mh-600px' ref={containerRef}>
+      <div className='scroll-y mh-600px' ref={chatMessagesRef} onScroll={handleScroll}>
         {chatMessages?.map((message, index) => {
           const userInfo = message?.user
           const state = message?.user?.id !== currentUser?.id ? 'info' : 'primary'
@@ -196,15 +225,29 @@ const ActivityChatInner: FC = () => {
           <Form onChange={handleOnChange} className='form'>
             <div className='row mb-6'>
               <div className='fv-row'>
-                <AutoResizableTextarea name='message' value={message.message} />
+                <AutoResizableTextarea
+                  name='message'
+                  value={message.message}
+                  placeholder='Message'
+                />
                 <div className='text-danger mt-2'>
                   <ErrorMessage name='message' />
                 </div>
-              </div>
-            </div>
 
-            <div className='row'>
-              <FormAction text={'Submit'} isSubmitting={isSubmitting} />
+                <div className='text-end'>
+                  <button
+                    type='submit'
+                    className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'
+                    disabled={isSubmitting}>
+                    <span className='indicator-label'>{'Send'}</span>
+                    {isSubmitting && (
+                      <span className='indicator-progress' style={{display: 'inline-block'}}>
+                        <span className='spinner-border spinner-border-sm align-middle ms-2' />
+                      </span>
+                    )}
+                  </button>
+                </div>
+              </div>
             </div>
 
             <div

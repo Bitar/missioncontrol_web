@@ -7,7 +7,6 @@ import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
 import {useActivity} from '../core/contexts/ActivityContext'
 import {ListViewProvider} from '../../../modules/table/ListViewProvider'
 import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvider'
-// import {ActivityAnnouncement} from '../partials/ActivityAnnouncement'
 
 const ActivityOverview: FC = () => {
   const {activity} = useActivity()
