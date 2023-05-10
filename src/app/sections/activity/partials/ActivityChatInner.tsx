@@ -147,6 +147,7 @@ const ActivityChatInner: FC = () => {
           const state = message?.user?.id !== currentUser?.id ? 'info' : 'primary'
           const alignmentClass = message?.user?.id !== currentUser?.id ? 'start' : 'end'
           const teamInfo = message?.team
+
           return (
             <div
               key={`message${index}`}
@@ -208,6 +209,7 @@ const ActivityChatInner: FC = () => {
                     'text-dark fw-bold mw-lg-400px',
                     `text-${message?.user?.id !== currentUser?.id ? 'start' : 'end'}`
                   )}
+                  style={{whiteSpace: 'pre-wrap'}}
                   data-kt-element='message-text'
                   dangerouslySetInnerHTML={{__html: message.message}}></div>
               </div>
