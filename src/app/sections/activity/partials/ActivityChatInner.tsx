@@ -32,6 +32,7 @@ const ActivityChatInner: FC = () => {
   const channels = useChannels()
   const hasUserScrolledUp = useRef(false)
   const scrollPositionPreLoad = useRef(0)
+  const hasMoreLoad = useRef(true)
 
   useEffect(() => {
     const chatMessagesDiv = chatMessagesRef.current
@@ -42,9 +43,6 @@ const ActivityChatInner: FC = () => {
     if (chatMessagesDiv && scrollPositionPreLoad.current && scrollPositionPreLoad.current > 0) {
       chatMessagesDiv.scrollTop = scrollPositionPreLoad.current
     }
-
-    console.log('post', chatMessagesRef?.current?.scrollHeight)
-    console.log('post client', chatMessagesRef?.current?.clientHeight)
   }, [chatMessages])
 
   const handleSubmit = () => {
@@ -113,29 +111,31 @@ const ActivityChatInner: FC = () => {
     })
   }, [activity?.id, channels, chatMessages])
 
-  useEffect(() => {
-    console.log('my Ref', scrollPositionPreLoad.current)
-  }, [scrollPositionPreLoad.current])
-
   const loadChat = (page: number) => {
     getActivityChat(activity?.id, `page=${page}`).then((response) => {
       if (response.data) {
         response?.data?.reverse()
 
-        if (scrollPositionPreLoad) {
-          scrollPositionPreLoad.current = chatMessagesRef?.current?.scrollHeight ?? 0
-        }
-
         setChatMessages([...response?.data, ...chatMessages])
         setPage((page) => page + 1)
+
+        if (response.meta && response.meta.last_page === response.meta?.current_page) {
+          hasMoreLoad.current = false
+        } else {
+          if (scrollPositionPreLoad) {
+            scrollPositionPreLoad.current = chatMessagesRef?.current?.scrollHeight ?? 0
+          }
+        }
       }
     })
   }
 
   const handleScroll = (e: React.UIEvent<HTMLElement>) => {
     if (e.currentTarget.scrollTop === 0) {
-      hasUserScrolledUp.current = true
-      loadChat(page)
+      if (hasMoreLoad.current) {
+        hasUserScrolledUp.current = true
+        loadChat(page)
+      }
     }
   }
 

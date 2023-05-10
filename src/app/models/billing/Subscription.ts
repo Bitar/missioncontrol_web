@@ -7,6 +7,8 @@ export type Subscription = {
   plan: Plan
   status: number
   ends_at: number
+  notes: string
+  is_stripe: false
 }
 
 export type SubscriptionQueryResponse = Response<Array<Subscription>>

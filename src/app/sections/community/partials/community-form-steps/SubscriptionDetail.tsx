@@ -18,6 +18,8 @@ import {getPlans} from '../../../billing/plan/core/BillingPlanRequest'
 import {isSuperAdmin} from '../../../../models/iam/User'
 import Select from 'react-select'
 import {DatePicker} from 'rsuite'
+import AutoResizableTextarea from '../../../../components/form/AutoResizableTextarea'
+import {FormAction} from '../../../../helpers/form/FormAction'
 
 dayjs.extend(utc)
 dayjs.extend(Timezone)
@@ -26,6 +28,7 @@ type SubscriptionObject = {
   plan_id: string | number | undefined
   status: string | number | undefined
   end_date?: string | undefined
+  notes: string
 }
 
 const subscriptionUpdateSchema = Yup.object().shape({
@@ -51,6 +54,7 @@ export const SubscriptionDetail = () => {
   const [subscriptionForm, setSubscriptionForm] = useState<SubscriptionObject>({
     plan_id: communityForm?.plan_id,
     status: communityForm?.status,
+    notes: '',
   })
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -101,48 +105,44 @@ export const SubscriptionDetail = () => {
     <>
       <KTCard border={true}>
         <KTCardHeader text={'Subscription'} bg='mc-primary' text_color='white' />
-        <Formik
-          validationSchema={subscriptionUpdateSchema}
-          initialValues={subscriptionForm}
-          onSubmit={handleSubmit}
-          enableReinitialize>
-          <Form className='form' autoComplete='off'>
-            <KTCardBody className='py-4'>
-              <div className='d-flex flex-column pt-5'>
-                <div className='row mb-6'>
-                  <div className='col-12'>
-                    <p>Current Plan: {community?.subscription?.plan?.name}</p>
-                    {community?.subscription?.plan?.id !== 1 && (
-                      <p>Ends On: {endDate.toDateString()}</p>
-                    )}
-                  </div>
-                  {currentUser &&
-                    communityAdmin &&
-                    communityAdmin?.id === community?.id &&
-                    communityAdmin?.is_owner && (
-                      <div className='col-12'>
-                        <button
-                          onClick={manageSubscription}
-                          type='submit'
-                          disabled={isLoading}
-                          className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'>
-                          <span className='indicator-label'>{'Manage Subscription'}</span>
-                          {isLoading && (
-                            <span className='indicator-progress' style={{display: 'inline-block'}}>
-                              <span className='spinner-border spinner-border-sm align-middle ms-2' />
-                            </span>
-                          )}
-                        </button>
-                      </div>
-                    )}
-                </div>
+        <KTCardBody className='py-4'>
+          <div className='d-flex flex-column pt-5'>
+            <div className='row mb-6'>
+              <div className='col-12'>
+                <p>Current Plan: {community?.subscription?.plan?.name}</p>
+                {community?.subscription?.plan?.id !== 1 && (
+                  <p>Ends On: {endDate.toDateString()}</p>
+                )}
               </div>
-            </KTCardBody>
-            {/*{currentUser && isSuperAdmin(currentUser) && (*/}
-            {/*  <FormAction text={'Update Subscription'} isSubmitting={isSubmitting} />*/}
-            {/*)}*/}
-          </Form>
-        </Formik>
+              {currentUser &&
+                communityAdmin &&
+                communityAdmin?.id === community?.id &&
+                communityAdmin?.is_owner &&
+                community?.subscription?.is_stripe && (
+                  <div className='col-12 mb-5'>
+                    <button
+                      onClick={manageSubscription}
+                      type='submit'
+                      disabled={isLoading}
+                      className='btn btn-mc-secondary btn-active-mc-secondary btn-sm'>
+                      <span className='indicator-label'>{'Manage Subscription'}</span>
+                      {isLoading && (
+                        <span className='indicator-progress' style={{display: 'inline-block'}}>
+                          <span className='spinner-border spinner-border-sm align-middle ms-2' />
+                        </span>
+                      )}
+                    </button>
+                  </div>
+                )}
+              {currentUser && isSuperAdmin(currentUser) && (
+                <div className='col-12'>
+                  <h3>Notes</h3>
+                  <p>{community?.subscription?.notes}</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </KTCardBody>
       </KTCard>
 
       {currentUser && isSuperAdmin(currentUser) && (
@@ -153,62 +153,85 @@ export const SubscriptionDetail = () => {
             initialValues={subscriptionForm}
             onSubmit={handleSubmit}
             enableReinitialize>
-            <Form className='form' autoComplete='off'>
-              <KTCardBody className='py-4'>
-                <div className='d-flex flex-column pt-5'>
-                  <>
-                    <div className='row mb-6'>
-                      <label className='col-lg-4 col-form-label fw-bold fs-6'>Subscription</label>
-                      <div className='col-lg-8 fv-row'>
-                        <Select
-                          name='plan_id'
-                          placeholder={'Choose a Community'}
-                          options={plans}
-                          getOptionLabel={(plan) => plan?.name}
-                          getOptionValue={(plan) => plan?.id?.toString() || ''}
-                          onChange={(e) => {
-                            updateData(
-                              {plan_id: e?.id || ''},
-                              setSubscriptionForm,
-                              subscriptionForm
-                            )
-                          }}
-                        />
-                        <div className='text-danger mt-2'>
-                          <ErrorMessage name='plan_id' />
+            {({isSubmitting}) => (
+              <Form className='form' autoComplete='off'>
+                <KTCardBody className='py-4'>
+                  <div className='d-flex flex-column pt-5'>
+                    <>
+                      <div className='row mb-6'>
+                        <label className='col-lg-4 col-form-label fw-bold fs-6'>Subscription</label>
+                        <div className='col-lg-8 fv-row'>
+                          <Select
+                            name='plan_id'
+                            placeholder={'Choose a Community'}
+                            options={plans}
+                            getOptionLabel={(plan) => plan?.name}
+                            getOptionValue={(plan) => plan?.id?.toString() || ''}
+                            onChange={(e) => {
+                              updateData(
+                                {plan_id: e?.id || ''},
+                                setSubscriptionForm,
+                                subscriptionForm
+                              )
+                            }}
+                          />
+                          <div className='text-danger mt-2'>
+                            <ErrorMessage name='plan_id' />
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div className='row mb-6'>
-                      <label className='col-lg-4 col-form-label fw-bold fs-6'>Ends On</label>
-                      <div className='col-lg-8 fv-row'>
-                        <DatePicker
-                          format='MM-dd-yyyy'
-                          className='w-100'
-                          name='end_date'
-                          placeholder='Select End Date'
-                          placement={'topStart'}
-                          onChange={(value) => {
-                            updateData(
-                              {
-                                end_date: value?.valueOf(),
-                              },
-                              setSubscriptionForm,
-                              subscriptionForm
-                            )
-                            // setTimeValue(value);
-                          }}
-                        />
-                        <div className='text-danger mt-2'>
-                          <ErrorMessage name='end_date' />
+                      <div className='row mb-6'>
+                        <label className='col-lg-4 col-form-label fw-bold fs-6'>Ends On</label>
+                        <div className='col-lg-8 fv-row'>
+                          <DatePicker
+                            format='MM-dd-yyyy'
+                            className='w-100'
+                            name='end_date'
+                            placeholder='Select End Date'
+                            placement={'topStart'}
+                            onChange={(value) => {
+                              updateData(
+                                {
+                                  end_date: value?.valueOf(),
+                                },
+                                setSubscriptionForm,
+                                subscriptionForm
+                              )
+                            }}
+                          />
+                          <div className='text-danger mt-2'>
+                            <ErrorMessage name='end_date' />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </>
-                </div>
-              </KTCardBody>
-            </Form>
+
+                      <div className='row mb-6'>
+                        <label className='col-lg-4 col-form-label fw-bold fs-6'>Notes</label>
+                        <div className='col-lg-8 fv-row'>
+                          <AutoResizableTextarea
+                            name='notes'
+                            value={subscriptionForm.notes}
+                            placeholder='Notes'
+                            onChange={(e: any) => {
+                              updateData(
+                                {notes: e.target.value},
+                                setSubscriptionForm,
+                                subscriptionForm
+                              )
+                            }}
+                          />
+                          <div className='text-danger mt-2'>
+                            <ErrorMessage name='notes' />
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  </div>
+                </KTCardBody>
+                <FormAction text={'Update Subscription'} isSubmitting={isSubmitting} />
+              </Form>
+            )}
           </Formik>
         </KTCard>
       )}
