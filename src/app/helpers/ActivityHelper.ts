@@ -1,12 +1,8 @@
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import tz from 'dayjs/plugin/timezone'
-import moment from 'moment/moment'
-import toast from 'react-hot-toast'
-import {updateData} from './form/FormHelper'
 import {ActivityForm} from '../models/activity/ActivityForm'
 import {Dispatch, SetStateAction} from 'react'
-import {DateRange} from 'rsuite/esm/DateRangePicker/types'
 import {DateTime} from 'luxon'
 
 dayjs.extend(utc)
@@ -355,14 +351,4 @@ export const getWeekdayByInteger = (dayNumber: number): string => {
   let luxonDayNumber = dayNumber + 1
   const date = DateTime.fromObject({weekday: luxonDayNumber})
   return date.toFormat('cccc')
-}
-
-export const getDayNumberFromTimestamp = (timestamp: number): number => {
-  const date = DateTime.fromMillis(timestamp)
-  return date.weekday
-}
-
-export const getDayNumberFromJsDate = (date: Date): number => {
-  const luxonDate = DateTime.fromJSDate(date)
-  return luxonDate.weekday
 }

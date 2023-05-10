@@ -5,18 +5,10 @@ import {Sections} from '../../../helpers/sections'
 import {PageTypes} from '../../../helpers/variables'
 import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvider'
 import {QUERIES} from '../../../helpers/crud-helper/consts'
-import {
-  EXPORT_ENDPOINT,
-  getActivities,
-  getArchivedActivities,
-} from '../core/requests/ActivityRequests'
+import {EXPORT_ENDPOINT, getArchivedActivities} from '../core/requests/ActivityRequests'
 import {ListViewProvider} from '../../../modules/table/ListViewProvider'
 import {KTCard, KTCardBody, KTCardHeader} from '../../../helpers/components'
-import {
-  CreateCardAction,
-  ExportCardAction,
-  FilterCardAction,
-} from '../../../components/misc/CardAction'
+import {ExportCardAction, FilterCardAction} from '../../../components/misc/CardAction'
 import {ActivityFilter} from '../partials/ActivityFilter'
 import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
 import ActivityTable from '../partials/ActivityTable'

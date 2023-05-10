@@ -1,11 +1,7 @@
-import React, {useEffect, useMemo, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {KTCard, KTCardBody, QUERIES} from '../../../../_metronic/helpers'
 import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
-import {
-  QueryResponseProvider,
-  useQueryResponseData,
-  useQueryResponseLoading,
-} from '../../../modules/table/QueryResponseProvider'
+import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvider'
 import {EXPORT_ENDPOINT, getActivities} from '../core/requests/ActivityRequests'
 import {ListViewProvider} from '../../../modules/table/ListViewProvider'
 import {ActivityFilter} from '../partials/ActivityFilter'
@@ -19,8 +15,6 @@ import {
 import {useMcApp} from '../../../modules/general/McApp'
 import {generatePageTitle} from '../../../helpers/pageTitleGenerator'
 import {Sections} from '../../../helpers/sections'
-import {ActivityColumns} from '../core/columns/ActivityColumns'
-import {McTable} from '../../../components/McTable'
 import {Link} from 'react-router-dom'
 import ActivityTable from '../partials/ActivityTable'
 

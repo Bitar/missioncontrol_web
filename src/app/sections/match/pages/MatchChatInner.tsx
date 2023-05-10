@@ -1,14 +1,9 @@
-import React, {Dispatch, FC, SetStateAction, useEffect, useRef, useState} from 'react'
+import React, {Dispatch, FC, SetStateAction, useEffect, useRef} from 'react'
 import clsx from 'clsx'
-import {ChatMessage, chatSchema, initialChat} from '../../../models/chat/ChatMessage'
+import {ChatMessage} from '../../../models/chat/ChatMessage'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import {ErrorMessage, Field, Form, Formik} from 'formik'
-import {jsonToFormData} from '../../../helpers/form/FormHelper'
-// import {sendActivityChat} from '../core/ActivityRequests'
-import {useParams} from 'react-router-dom'
 import {useAuth} from '../../../modules/auth'
-import {sendMatchChat} from '../core/MatchRequests'
 
 type Props = {
   chat: ChatMessage[] | undefined
@@ -16,22 +11,10 @@ type Props = {
   isDrawer?: boolean
 }
 
-const MatchChatInner: FC<Props> = ({chat, setChat, isDrawer = false}) => {
+const MatchChatInner: FC<Props> = ({chat, isDrawer = false}) => {
   dayjs.extend(relativeTime)
   const bottomRef = useRef<null | HTMLDivElement>(null)
-  const params = useParams()
   const {currentUser} = useAuth()
-  const [message, setMessage] = useState<ChatMessage>(initialChat())
-
-  const handleSubmit = async () => {
-    let data = jsonToFormData(message)
-    await sendMatchChat(params.id, data).then((response) => {
-      if (response && chat) {
-        setChat([...chat, response])
-      }
-      setMessage(initialChat())
-    })
-  }
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({behavior: 'smooth'})

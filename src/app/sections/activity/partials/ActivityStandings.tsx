@@ -5,15 +5,8 @@ import {
   useQueryResponseData,
   useQueryResponseLoading,
 } from '../../../modules/table/QueryResponseProvider'
-import {ColumnInstance, Row, useTable} from 'react-table'
 import {ActivityStandingsColumns} from '../core/columns/ActivityStandingsColumns'
-import {Team} from '../../../models/squad/Team'
-import {CustomHeaderColumn} from '../../../modules/table/columns/CustomHeaderColumn'
-import {CustomRow} from '../../../modules/table/columns/CustomRow'
-import {TableListPagination} from '../../../modules/table/TableListPagination'
-import {TableListLoading} from '../../../modules/table/TableListLoading'
 import {McTable} from '../../../components/McTable'
-import {ActivityColumns} from '../core/columns/ActivityColumns'
 
 type Props = {
   minimal?: boolean

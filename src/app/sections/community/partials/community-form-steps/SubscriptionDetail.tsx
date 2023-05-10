@@ -134,10 +134,10 @@ export const SubscriptionDetail = () => {
                     </button>
                   </div>
                 )}
-              {currentUser && isSuperAdmin(currentUser) && (
+              {currentUser && isSuperAdmin(currentUser) && community?.subscription?.notes && (
                 <div className='col-12'>
                   <h3>Notes</h3>
-                  <p>{community?.subscription?.notes}</p>
+                  <p>{community.subscription.notes}</p>
                 </div>
               )}
             </div>
