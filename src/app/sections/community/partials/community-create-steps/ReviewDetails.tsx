@@ -1,6 +1,5 @@
 import React, {FC, useMemo} from 'react'
-import {KTCard, KTCardBody} from '../../../../../_metronic/helpers'
-import {KTCardHeader} from '../../../../helpers/components/KTCardHeader'
+import {KTCard, KTCardBody, KTCardHeader} from '../../../../helpers/components'
 import {useCommunityForm} from '../../core/CommunityFormContext'
 import {getOption} from '../../../../models/billing/Plan'
 import {Field} from 'formik'
@@ -226,7 +225,7 @@ export const ReviewDetails: FC = () => {
                               <td className='text-end'>{plan?.transaction_fee}%</td>
                             </tr>
                             <tr>
-                              <td className='fw-bold'>Technical Support</td>
+                              <td className='fw-bold'>Business Reviews</td>
                               <td className='text-end'>{getOption(plan!, 1)?.value}</td>
                             </tr>
                           </tbody>

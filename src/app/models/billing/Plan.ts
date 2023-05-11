@@ -18,7 +18,7 @@ export const initialPlan: Plan = {
   max_members: 0,
   can_quarter: false,
   launch_percentage: 0,
-  options: [],
+  plan_options: [],
 }
 
 export type Plan = {
@@ -32,7 +32,7 @@ export type Plan = {
   max_members: number
   can_quarter: boolean
   launch_percentage: number
-  options: PlanOption[]
+  plan_options: PlanOption[]
   // categories: $this->getCategories($this->options),
   // options: BillingPlanOptionResource::collection($this->options),
 }
@@ -40,7 +40,7 @@ export type Plan = {
 export type PlanQueryResponse = Response<Array<Plan>>
 
 export const getOption = (plan: Plan, optionId?: number) => {
-  return plan?.options?.find(function (element: any) {
+  return plan?.plan_options?.find(function (element: any) {
     return element.id === optionId
   })
 }

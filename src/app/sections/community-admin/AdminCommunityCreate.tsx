@@ -24,7 +24,10 @@ import {FormErrorAlert} from '../../modules/errors/partials/FormErrorAlert'
 import {useNavigate} from 'react-router-dom'
 import toast from 'react-hot-toast'
 import {useAuth} from '../../modules/auth'
-import {createAdminCommunity} from '../community/core/CommunityRequests'
+import {
+  createAdminCommunity,
+  createAdminCommunityCommissioner,
+} from '../community/core/CommunityRequests'
 import {getPlans} from '../billing/plan/core/BillingPlanRequest'
 
 const AdminCommunityCreate = () => {
@@ -137,10 +140,45 @@ const AdminCommunityCreate = () => {
       if (communityForm?.payment_method === '1') {
         createSubscriptionApi(data)
       } else if (communityForm?.payment_method === '2') {
-        createAdminCommunityApi(data)
+        createAdminCommunity(data)
+          .then(() => {
+            setIsSubmitting(false)
+
+            toast.success('Community created Successfully')
+
+            toast.success('Sales team will be in touch!', {
+              className: 'bg-warning',
+              icon: '📧',
+              position: 'top-right',
+            })
+
+            updateAuth()
+
+            navigate('/')
+          })
+          .catch(function (e) {
+            setIsSubmitting(false)
+            if (e.response) {
+              setAlertMessage(e.response.data.message)
+              setHasErrors(true)
+            }
+          })
       }
     } else {
-      createAdminCommunityApi(data)
+      createAdminCommunityCommissioner(data)
+        .then(() => {
+          setIsSubmitting(false)
+          toast.success('Community created Successfully')
+          updateAuth()
+          navigate('/')
+        })
+        .catch(function (e) {
+          setIsSubmitting(false)
+          if (e.response) {
+            setAlertMessage(e.response.data.message)
+            setHasErrors(true)
+          }
+        })
     }
   }
 
@@ -156,34 +194,6 @@ const AdminCommunityCreate = () => {
           navigate('/')
           setIsSubmitting(false)
         }
-      })
-      .catch(function (e) {
-        setIsSubmitting(false)
-        if (e.response) {
-          setAlertMessage(e.response.data.message)
-          setHasErrors(true)
-        }
-      })
-  }
-
-  function createAdminCommunityApi(data: any) {
-    createAdminCommunity(data)
-      .then(() => {
-        setIsSubmitting(false)
-
-        toast.success('Community created Successfully')
-
-        if (communityForm?.payment_method && communityForm?.payment_method === '2') {
-          toast.custom('Sales team will be in touch!', {
-            className: 'bg-warning',
-            icon: '📧',
-            position: 'top-center',
-          })
-        }
-
-        updateAuth()
-
-        navigate('/')
       })
       .catch(function (e) {
         setIsSubmitting(false)

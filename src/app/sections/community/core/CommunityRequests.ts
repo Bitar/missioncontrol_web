@@ -49,6 +49,15 @@ export const createAdminCommunity = (formData: FormData): Promise<Community | un
     .then((response: Response<Community>) => response.data)
 }
 
+export const createAdminCommunityCommissioner = (
+  formData: FormData
+): Promise<Community | undefined> => {
+  return axios
+    .post(`${ENDPOINT_ADMIN}/commissioner`, formData)
+    .then((response: AxiosResponse<Response<Community>>) => response.data)
+    .then((response: Response<Community>) => response.data)
+}
+
 export const updateAdminCommunity = (formData: FormData): Promise<Community | undefined> => {
   return axios
     .post(`${ENDPOINT_ADMIN}/`, formData)

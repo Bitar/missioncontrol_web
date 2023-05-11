@@ -110,7 +110,7 @@ export type CommunityFormType = {
     postal_code: string
   }
   access?: CommunityAccess
-  plan_id?: string | number
+  plan_id?: number
   payment_term?: string | number
   subscription_id?: string | number
   payment_method?: string | number
@@ -135,7 +135,7 @@ export const initialCommunityFormTypeByCommunity = (community?: Community) => {
     access: initialCommunityAccess(community?.access),
     payment_term: 1,
     subscription_id: community?.subscription?.id || '',
-    plan_id: (community?.subscription?.plan?.id && community?.subscription?.plan?.id + '') || '',
+    plan_id: community?.subscription?.plan?.id || 0,
   }
 }
 export function formOnChange(

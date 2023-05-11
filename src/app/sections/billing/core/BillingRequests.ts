@@ -9,7 +9,7 @@ const GET_SUBSCRIPTION_URL = `${API_URL}/subscriptions`
 
 export const createSubscription = (formData: FormData): Promise<any> => {
   return axios
-    .post(`${GET_SUBSCRIPTION_URL}`, formData)
+    .post(`${GET_SUBSCRIPTION_URL}/stripe`, formData)
     .then((response: AxiosResponse<Response<any>>) => response.data)
     .then((response: Response<any>) => response.data)
 }

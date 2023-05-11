@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {KTCard, KTCardBody, QUERIES} from '../../../../_metronic/helpers'
-import {QueryRequestProvider} from '../../../modules/table/QueryRequestProvider'
+import {QueryRequestProvider, useQueryRequest} from '../../../modules/table/QueryRequestProvider'
 import {QueryResponseProvider} from '../../../modules/table/QueryResponseProvider'
 import {EXPORT_ENDPOINT, getActivities} from '../core/requests/ActivityRequests'
 import {ListViewProvider} from '../../../modules/table/ListViewProvider'
