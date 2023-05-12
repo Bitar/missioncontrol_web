@@ -11,7 +11,6 @@ import {Plan} from '../../../../models/billing/Plan'
 import {updateCommunitySubscription} from '../../../community/core/CommunityRequests'
 import toast from 'react-hot-toast'
 import {useCommunityForm} from '../../../community/core/CommunityFormContext'
-import {useAuth} from '../../../../modules/auth'
 import {useCommunity} from '../../../community/core/CommunityContext'
 import {useParams} from 'react-router-dom'
 

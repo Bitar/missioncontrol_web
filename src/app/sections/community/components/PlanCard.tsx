@@ -1,6 +1,5 @@
 import {getOption, Plan} from '../../../models/billing/Plan'
 import React, {FC, useEffect, useState} from 'react'
-import clsx from 'clsx'
 import {KTCardBody} from '../../../helpers/components'
 import {PlanOption} from '../../../models/billing/PlanOption'
 
