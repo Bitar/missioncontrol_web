@@ -4,7 +4,7 @@ import {Field, Form, Formik} from 'formik'
 import React, {useEffect, useState} from 'react'
 import {useAuth} from '../../../../modules/auth'
 import {Plan} from '../../../../models/billing/Plan'
-import {updateData} from '../../../../helpers/form/FormHelper'
+import {jsonToFormData, updateData} from '../../../../helpers/form/FormHelper'
 import {useCommunity} from '../../core/CommunityContext'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
@@ -17,6 +17,11 @@ import {PlanOption} from '../../../../models/billing/PlanOption'
 import PlanCard from '../../components/PlanCard'
 import {getBillingPlanOptions} from '../../../misc/core/_requests'
 import ScheduleDetailSuperAdmin from '../../../activity/partials/activity-form-steps/ScheduleDetailSuperAdmin'
+import {
+  createSubscriptionSalesRequest,
+  updateSubscription,
+} from '../../../billing/core/BillingRequests'
+import toast from 'react-hot-toast'
 
 dayjs.extend(utc)
 dayjs.extend(Timezone)
@@ -75,7 +80,37 @@ export const SubscriptionDetail = () => {
     })
   }, [])
 
-  const handleUpdateSubscription = () => {}
+  const handleUpdateSubscription = () => {
+    let data = jsonToFormData(subscriptionForm)
+
+    if (subscriptionForm?.plan_id !== 1) {
+      if (subscriptionForm?.payment_method === 1) {
+        // Stripe
+        data.append('_method', 'PUT')
+        updateSubscription(data).then((response) => {
+          if (response?.url) {
+            window.location.href = response?.url
+          }
+        })
+      } else {
+        // Contact Sales
+        createSubscriptionSalesRequest(data).then(() => {
+          setShowPlans(false)
+
+          toast.success('Sales team will be in touch!', {
+            className: 'bg-warning',
+            icon: '📧',
+            position: 'top-right',
+          })
+
+          setSubscriptionForm({
+            plan_id: communityForm?.plan_id,
+          })
+          setActivePlan(plans?.filter((plan) => plan?.id === 1)[0])
+        })
+      }
+    }
+  }
 
   const manageSubscription = () => {
     setIsLoading(true)
@@ -93,9 +128,6 @@ export const SubscriptionDetail = () => {
   const handleOnChange = (e: any) => {
     let targetName = e.target.name
     let targetValue = e.target.value
-
-    console.log(targetName)
-    console.log(targetValue)
 
     updateData({[targetName]: parseInt(targetValue)}, setSubscriptionForm, subscriptionForm)
   }

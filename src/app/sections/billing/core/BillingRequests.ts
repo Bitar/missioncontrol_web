@@ -14,6 +14,13 @@ export const createSubscription = (formData: FormData): Promise<any> => {
     .then((response: Response<any>) => response.data)
 }
 
+export const updateSubscription = (formData: FormData): Promise<any> => {
+  return axios
+    .post(`${GET_SUBSCRIPTION_URL}/stripe`, formData)
+    .then((response: AxiosResponse<Response<any>>) => response.data)
+    .then((response: Response<any>) => response.data)
+}
+
 export const subscriptionRequest = (
   plan: Plan,
   paymentTerms: number = 1
@@ -22,4 +29,11 @@ export const subscriptionRequest = (
     .post(`${GET_SUBSCRIPTION_BILLING_URL}/${plan.id}/subscribe`, {payment_term: paymentTerms})
     .then((response: AxiosResponse<Response<SubscriptionRequest>>) => response.data)
     .then((response: Response<SubscriptionRequest>) => response.data)
+}
+
+export const createSubscriptionSalesRequest = (formData: FormData): Promise<any> => {
+  return axios
+    .post(`${API_URL}/admin/communities/subscriptions`, formData)
+    .then((response: AxiosResponse<Response<any>>) => response.data)
+    .then((response: Response<any>) => response.data)
 }

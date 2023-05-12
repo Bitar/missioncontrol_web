@@ -32,37 +32,41 @@ const PlanCard: FC<Props> = ({plan, planOptions, paymentTerm}) => {
               <div className='text-gray-400 fw-bold mb-5'>{plan.description}</div>
             )}
 
-            {paymentTerm === 1 && (
-              <div className='text-center'>
-                <span className='mb-2 text-mc-secondary'>USD </span>
-                <span>
-                  <span className='fs-3x fw-bolder text-mc-secondary'>
-                    {monthlyPrice.toLocaleString()}
-                  </span>
-                  <span className='fs-7 fw-bold opacity-50'>
-                    / <span data-kt-element='period'>month</span>
-                  </span>
-                </span>
-              </div>
-            )}
-
-            {paymentTerm === 2 && (
-              <div className='text-center'>
-                <span>
-                  <span className='mb-2 text-mc-secondary'>USD </span>
-                  <span className='fs-3x fw-bolder text-mc-secondary'>
-                    {annualPrice.toLocaleString()}
-                  </span>
-                  <span className='fs-7 fw-bold opacity-50'>
-                    / <span data-kt-element='period'>year</span>
-                  </span>
-                </span>
-                {plan?.id && plan?.id > 1 && (
-                  <div>
-                    <span className='text-danger ms-2'>You will be saving 10%</span>
+            {plan?.id && plan?.id !== 1 && plan?.id < 4 && (
+              <>
+                {paymentTerm === 1 && (
+                  <div className='text-center'>
+                    <span className='mb-2 text-mc-secondary'>USD </span>
+                    <span>
+                      <span className='fs-3x fw-bolder text-mc-secondary'>
+                        {monthlyPrice.toLocaleString()}
+                      </span>
+                      <span className='fs-7 fw-bold opacity-50'>
+                        / <span data-kt-element='period'>month</span>
+                      </span>
+                    </span>
                   </div>
                 )}
-              </div>
+
+                {paymentTerm === 2 && (
+                  <div className='text-center'>
+                    <span>
+                      <span className='mb-2 text-mc-secondary'>USD </span>
+                      <span className='fs-3x fw-bolder text-mc-secondary'>
+                        {annualPrice.toLocaleString()}
+                      </span>
+                      <span className='fs-7 fw-bold opacity-50'>
+                        / <span data-kt-element='period'>year</span>
+                      </span>
+                    </span>
+                    {plan?.id && plan?.id > 1 && (
+                      <div>
+                        <span className='text-danger ms-2'>You will be saving 10%</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </>
             )}
 
             <div className='table-responsive'>
