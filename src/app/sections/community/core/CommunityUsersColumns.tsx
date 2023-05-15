@@ -7,6 +7,7 @@ import {ActionsCell} from '../../../modules/table/columns/ActionsCell'
 import {QUERIES} from '../../../helpers/crud-helper/consts'
 import React from 'react'
 import {useCommunity} from './CommunityContext'
+import {text} from 'stream/consumers'
 
 const CommunityUsersColumns: ReadonlyArray<Column<User>> = [
   {
@@ -25,13 +26,17 @@ const CommunityUsersColumns: ReadonlyArray<Column<User>> = [
   {
     Header: (props) => <CustomHeader tableProps={props} title='Username' className='min-w-125px' />,
     id: 'username',
-    Cell: ({...props}) => (
-      <TextCell
-        dObject={
+    Cell: ({...props}) => {
+      let textObject
+      if (props.data[props.row.index]?.meta?.username) {
+        textObject =
           props.data[props.row.index]?.meta?.username + '#' + props.data[props.row.index]?.meta?.rng
-        }
-      />
-    ),
+      } else {
+        textObject = '-'
+      }
+
+      return <TextCell dObject={textObject} />
+    },
   },
   {
     Header: (props) => <CustomHeader tableProps={props} title='Actions' />,

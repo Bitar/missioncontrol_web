@@ -41,7 +41,7 @@ const ScheduleDetailSuperAdmin: FC<Props> = ({plans}) => {
     plan_id: communityForm?.plan_id,
     notes: '',
   })
-  const handleSubmit = () => {
+  const handleSubmit = (e: any, {setSubmitting}: any) => {
     let data = jsonToFormData(subscriptionForm)
     data.append('_method', 'PUT')
 
@@ -49,6 +49,7 @@ const ScheduleDetailSuperAdmin: FC<Props> = ({plans}) => {
       updateCommunitySubscription(params.communityId, data).then(() => {
         toast.success('Community Subscription Updated Successfully')
         updateCommunity()
+        setSubmitting(false)
       })
     }
   }
