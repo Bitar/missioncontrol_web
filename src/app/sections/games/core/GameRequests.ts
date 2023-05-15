@@ -55,7 +55,7 @@ const createGameIgdb = (igdb_id: number): Promise<Game | undefined> => {
   formData.append('igdb_id', igdb_id + '')
 
   return axios
-    .post(`${ENDPOINT}`, formData)
+    .post(`${ENDPOINT}/igdb`, formData)
     .then((response: AxiosResponse<Response<Game>>) => response.data)
     .then((response: Response<Game>) => response.data)
 }
