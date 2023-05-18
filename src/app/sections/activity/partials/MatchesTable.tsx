@@ -10,7 +10,6 @@ import {TextImageCell} from '../../../modules/table/columns/TextImageCell'
 import {calculateTeamScore} from '../../../helpers/MCHelper'
 import {useActivity} from '../core/contexts/ActivityContext'
 import {Link} from 'react-router-dom'
-import dayjs from 'dayjs'
 import {DateTime} from 'luxon'
 
 type GroupedMatches = Record<number, Match[]>

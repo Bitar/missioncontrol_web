@@ -7,7 +7,6 @@ import {ActionsCell} from '../../../modules/table/columns/ActionsCell'
 import {QUERIES} from '../../../helpers/crud-helper/consts'
 import React from 'react'
 import {useCommunity} from './CommunityContext'
-import {text} from 'stream/consumers'
 
 const CommunityUsersColumns: ReadonlyArray<Column<User>> = [
   {

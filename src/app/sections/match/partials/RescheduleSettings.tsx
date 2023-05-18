@@ -6,7 +6,6 @@ import React, {useEffect, useState} from 'react'
 import {useMatch} from '../core/MatchContext'
 import {DatePicker} from 'rsuite'
 import {shiftDateToUtc} from '../../../helpers/ActivityHelper'
-import {defaultTime} from '../../../models/activity/ActivityForm'
 import moment from 'moment/moment'
 import * as Yup from 'yup'
 import {useActivity} from '../../activity/core/contexts/ActivityContext'
@@ -78,6 +77,7 @@ export const RescheduleSettings = () => {
 
       setStartDateDisabledDate(disabledEndDate)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activity?.matchplay_dates?.end_date])
 
   return (

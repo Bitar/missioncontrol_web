@@ -5,47 +5,9 @@ import {DateRange} from 'rsuite/esm/DateRangePicker/types'
 import {
   countDaysOfWeekJS,
   getDaysBetweenDates,
-  shiftDateToUtc,
   shiftToUTCEndDate,
   shiftToUTCStartDate,
 } from './ActivityHelper'
-
-export const onInputMaskChange = ({nextState}: any, activityForm: ActivityForm | undefined) => {
-  // Get the input value without the formatting characters
-  // const {value} = nextState;
-  // const newValue = nextState.value.replace(/[^\d]/g, '');
-
-  if (activityForm?.team?.max) {
-    const inputValue = nextState.value.replace(/[^\d]/g, '')
-
-    if (/^\d+$/.test(inputValue)) {
-      // Check if input is digits only
-      const numValue = parseInt(inputValue)
-
-      if (
-        !isNaN(numValue) &&
-        numValue >= 2 &&
-        activityForm?.team?.max &&
-        numValue > activityForm?.team?.max
-      ) {
-        return {
-          ...nextState,
-          value: activityForm?.team?.max,
-        }
-      } else {
-        return {
-          ...nextState,
-          value: `2${inputValue.slice(1)}`,
-        }
-      }
-    }
-
-    return {
-      ...nextState,
-      inputValue,
-    }
-  }
-}
 
 export const resetPlayoffDates = (
   activityForm: ActivityForm | undefined,
@@ -69,13 +31,6 @@ export const defaultPlayoff = (activityForm: ActivityForm | undefined) => {
       is_valid: false,
     },
   }
-}
-
-export function getDateInUTC(date: Date) {
-  const newDate = new Date(date)
-  newDate.setHours(0, 0, 0, 0) // Set time to midnight
-  const timestamp = Math.floor(newDate.getTime() / 1000) - newDate.getTimezoneOffset() * 60 // Convert to UTC timestamp and subtract timezone offset
-  return new Date(timestamp * 1000)
 }
 
 export const handlePlayoffsChange = (
