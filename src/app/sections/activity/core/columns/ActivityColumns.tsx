@@ -172,7 +172,7 @@ const ActivityColumns: (Column<Activity> & UseSortByColumnOptions<Activity>)[] =
       if (props.data[props.row.index]?.entry_fee?.type === 1) {
         return <BadgeCell status={'Free'} color={'success'} align={'left'} />
       } else if (props.data[props.row.index]?.entry_fee?.type === 2) {
-        return <BadgeCell status={'Free'} color={'success'} align={'left'} />
+        return <BadgeCell status={'Paid'} color={'info'} align={'left'} />
       } else {
         return <></>
       }
