@@ -12,6 +12,7 @@ import * as Yup from 'yup'
 import Select from 'react-select'
 import {addGamePlatform} from '../../core/GamePlatformRequests'
 import toast from 'react-hot-toast'
+import {useQueryResponse} from '../../../../modules/table/QueryResponseProvider'
 
 export const platformSchema = Yup.object().shape({
   platform_id: Yup.string().required('Platform is required'),
@@ -23,6 +24,7 @@ type PlatformForm = {
 
 export const PlatformDetail = () => {
   const {game, updateGame} = useGame()
+  const {refetch} = useQueryResponse()
 
   const platformSelectRef = useRef<any>()
   const [platforms, setPlatforms] = useState<Platform[]>()
@@ -71,6 +73,7 @@ export const PlatformDetail = () => {
         })
         setAlertMessage('')
         setHasErrors(false)
+        refetch()
       })
       .catch(function (e) {
         if (e.response) {
