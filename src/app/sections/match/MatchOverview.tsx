@@ -106,7 +106,6 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
 
   const getImages = (round: Round) => {
     let imagesIds: any = []
-    let imagesShown: any = []
     let imageObject: any = []
 
     let teamAScoreImages = round?.scores[0]?.images
@@ -115,7 +114,6 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
     teamAScoreImages?.forEach((image) => {
       if (imagesIds.indexOf(image.id) === -1) {
         imagesIds.push(image.id)
-        imagesShown.push(image)
         imageObject.push({
           image: image,
           team_id: round?.scores[0]?.team_id,
@@ -127,7 +125,6 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
     teamBScoreImages?.forEach((image) => {
       if (imagesIds.indexOf(image.id) === -1) {
         imagesIds.push(image.id)
-        imagesShown.push(image)
         imageObject.push({
           image: image,
           team_id: round?.scores[1]?.team_id,
@@ -227,12 +224,12 @@ const MatchOverview: FC<Props> = ({match, activity}) => {
                                   />
                                 </Zoom>
                                 <div className='score-image-detail text-white fw-bold'>
-                                  {getTeam(round?.scores[1]?.team_id) && (
+                                  {getTeam(image?.team_id) && (
                                     <>
                                       <span className='d-block'>
                                         User: {getUser(image?.user_id)?.name}
                                       </span>
-                                      <span>Team: {getTeam(round?.scores[1]?.team_id)?.name}</span>
+                                      <span>Team: {getTeam(image?.team_id)?.name}</span>
                                     </>
                                   )}
                                 </div>
