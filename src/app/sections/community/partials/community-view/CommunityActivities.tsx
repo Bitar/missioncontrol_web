@@ -50,7 +50,7 @@ const CommunityActivities = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const EXPORT_USERS_ENDPOINT = EXPORT_ENDPOINT + '/' + community?.id + '/users'
+  const EXPORT_ACTIVITIES_ENDPOINT = EXPORT_ENDPOINT + '/' + community?.id + '/activities'
 
   return community ? (
     <QueryRequestProvider>
@@ -65,7 +65,7 @@ const CommunityActivities = () => {
               icon='fa-regular fa-list'
               icon_style='fs-3 text-primary'
               actions={[
-                new ExportCardAction(exportQuery, EXPORT_USERS_ENDPOINT),
+                new ExportCardAction(exportQuery, EXPORT_ACTIVITIES_ENDPOINT),
                 new FilterCardAction(
                   'communities-activities-list-filter',
                   showFilter,
