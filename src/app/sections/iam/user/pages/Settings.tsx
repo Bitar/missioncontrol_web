@@ -137,9 +137,10 @@ const UserSettings: FC = () => {
             className='form'
             encType='multipart/form-data'
             autoComplete='off'>
-            <KTCardBody className='py-4'>
+            <KTCardBody className='pb-0'>
               <FormErrors errorMessages={formErrors} />
-
+            </KTCardBody>
+            <KTCardBody className='py-4'>
               <div className='d-flex flex-column pt-5'>
                 <div className='row mb-6'>
                   <label className='col-lg-4 col-form-label required fw-bold fs-6'>Logo</label>
@@ -362,7 +363,7 @@ const UserSettings: FC = () => {
                 </div>
               </div>
             </KTCardBody>
-            <FormAction text={'Update User'} isSubmitting={isSubmitting} />
+            <FormAction text={'Update User'} />
           </Form>
         )}
       </Formik>

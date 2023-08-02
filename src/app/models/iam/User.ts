@@ -34,9 +34,9 @@ export const UserEditSchema = Yup.object().shape({
   first_name: Yup.string().required('First name is required'),
   last_name: Yup.string().required('Last name is required'),
   email: Yup.string().email().required('Email is required'),
-  role_ids: Yup.array()
-    .min(1, 'At least 1 role is required')
-    .required('At least 1 role is required'),
+  // role_ids: Yup.array()
+  //   .min(1, 'At least 1 role is required')
+  //   .required('At least 1 role is required'),
   community_ids: Yup.array().min(1),
   password: Yup.string().min(8, 'Minimum 8 symbols').max(50, 'Maximum 50 symbols'),
   password_confirmation: Yup.string().when('password', {
